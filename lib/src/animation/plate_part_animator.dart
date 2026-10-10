@@ -189,7 +189,11 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
       motion: motion,
     );
     _chain = widget.selfPainted ? _Chain.identity : _Chain.of(_frame);
-    ticker.forward(from: 0);
+    if (cue.instant) {
+      ticker.value = 1;
+    } else {
+      ticker.forward(from: 0);
+    }
   }
 
   void _onStatus(AnimationStatus status) {

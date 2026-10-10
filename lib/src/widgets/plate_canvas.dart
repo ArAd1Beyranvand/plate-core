@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../animation/plate_animation.dart';
@@ -19,6 +21,7 @@ import 'plate_divider.dart';
 import 'plate_frame.dart';
 import 'plate_selector.dart';
 import 'plate_slot_item.dart';
+import 'plate_text_row.dart';
 
 /// The editable plate for a [PlateSpec], holding characters in a
 /// [PlateController] (its own or passed via [controller]). Provides its own
@@ -39,6 +42,7 @@ class PlateCanvas extends StatefulWidget {
     this.autoValidate = false,
     this.onSpecChange = PlateValuePreservation.byGroupKey,
     this.animation,
+    this.specTransition,
   });
 
   final PlateSpec spec;
@@ -73,6 +77,11 @@ class PlateCanvas extends StatefulWidget {
   /// [PlateAnimationScope]'s; with neither, every part stays settled.
   final PlateAnimationController? animation;
 
+  /// When set (and an [animation] controller is in reach), a [spec] change
+  /// takes the old plate out part by part and brings the new one in, keeping
+  /// the parts it names. Null swaps instantly.
+  final PlateSpecTransition? specTransition;
+
   @override
   State<PlateCanvas> createState() => _PlateCanvasState();
 }
@@ -94,6 +103,62 @@ class _PlateCanvasState extends State<PlateCanvas> {
 
   /// Cached face clip.
   _PlateFaceClipper? _faceClipper;
+
+  /// The characters last shown for [PlateCanvas.spec] — what the outgoing
+  /// plate keeps showing while it leaves, since the controller has already
+  /// moved on to the next spec by the time the canvas hears of it.
+  List<String?> _shownValues = const <String?>[];
+
+  /// The outgoing plate, while it goes out.
+  _Ghost? _ghost;
+  int _ghostSerial = 0;
+
+  void _recordValues() {
+    if (_controller.spec.id == widget.spec.id) {
+      _shownValues = _controller.values;
+    }
+  }
+
+  void _startTransition(PlateSpec from, PlateSpec to) {
+    final transition = widget.specTransition;
+    final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
+    if (transition == null || anim == null) return;
+    final outDelays = PlateStagger.sequence(
+      from,
+      step: transition.step,
+      reverse: true,
+    )..removeWhere((id, _) => transition.keeps(id, from, to));
+    final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
+    _ghost = _Ghost(
+      serial: ++_ghostSerial,
+      spec: from,
+      values: _shownValues,
+      outDelays: outDelays,
+      kept: {
+        for (final id in PlatePartId.allOf(from))
+          if (transition.keeps(id, from, to)) id,
+      },
+      length: outLength,
+      style: anim.style,
+    );
+    anim.comeInAll(
+      delays: {
+        for (final e in PlateStagger.sequence(
+          to,
+          step: transition.step,
+        ).entries)
+          e.key: e.value + outLength,
+      },
+    );
+    for (final id in PlatePartId.allOf(to)) {
+      if (transition.keeps(id, from, to)) anim.settle(id);
+    }
+  }
+
+  void _ghostDone(int serial) {
+    if (!mounted || _ghost?.serial != serial) return;
+    setState(() => _ghost = null);
+  }
 
   ThemeData _selectionThemeFor(Color active) {
     final cached = _selectionTheme;
@@ -132,6 +197,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // an ordinary thing for a host to do — and the machine then holds the
     // previous plate's nodes: wrong slot, or off the end of the list outright.
     if (widget.spec.id != oldWidget.spec.id) {
+      _startTransition(oldWidget.spec, widget.spec);
       // The controller holds the previous plate's values — a different slot
       // count — and migrates itself to the new spec, carrying the characters
       // across as [PlateCanvas.onSpecChange] directs.
@@ -151,6 +217,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
 
   @override
   void dispose() {
+    _controller.removeListener(_recordValues);
     widget.controller?.installValidation(null);
     widget.controller?.detach(_machine);
     _machine.dispose();
@@ -166,6 +233,13 @@ class _PlateCanvasState extends State<PlateCanvas> {
   /// controller is disposed; the host's own never is — it outlives us, and is
   /// routinely handed straight back on the next build.
   void _adoptController({bool replacing = false}) {
+    if (replacing) _controller.removeListener(_recordValues);
+    _adoptControllerOnly(replacing: replacing);
+    _controller.addListener(_recordValues);
+    _recordValues();
+  }
+
+  void _adoptControllerOnly({required bool replacing}) {
     final host = widget.controller;
     if (host == null) {
       if (replacing && _ownsController) return;
@@ -408,9 +482,23 @@ class _PlateCanvasState extends State<PlateCanvas> {
             clipper: clipper,
           );
 
+    final ghost = _ghost;
     final Widget face = Stack(
       fit: StackFit.passthrough,
-      children: [artwork, inputs],
+      children: [
+        artwork,
+        inputs,
+        if (ghost != null)
+          Positioned.fill(
+            child: _SpecGhost(
+              key: ValueKey<int>(ghost.serial),
+              ghost: ghost,
+              theme: widget.theme,
+              country: widget.country,
+              onDone: _ghostDone,
+            ),
+          ),
+      ],
     );
 
     // Wrap in a Material so the typed slots' TextFields have the Material
@@ -1029,4 +1117,90 @@ class _Band extends StatelessWidget {
       ),
     );
   }
+}
+
+/// An outgoing plate: what it showed, and how it leaves.
+class _Ghost {
+  const _Ghost({
+    required this.serial,
+    required this.spec,
+    required this.values,
+    required this.outDelays,
+    required this.kept,
+    required this.length,
+    required this.style,
+  });
+
+  final int serial;
+  final PlateSpec spec;
+  final List<String?> values;
+  final Map<PlatePartId, Duration> outDelays;
+
+  /// Parts the incoming plate shows in place; gone from the ghost at once.
+  final Set<PlatePartId> kept;
+  final Duration length;
+  final PlateAnimationStyle style;
+}
+
+/// The outgoing plate as an inert display canvas over the incoming one,
+/// taking itself apart; reports [onDone] when the last part has gone.
+class _SpecGhost extends StatefulWidget {
+  const _SpecGhost({
+    super.key,
+    required this.ghost,
+    required this.theme,
+    required this.country,
+    required this.onDone,
+  });
+
+  final _Ghost ghost;
+  final PlateTheme? theme;
+  final PlateCountry? country;
+  final void Function(int serial) onDone;
+
+  @override
+  State<_SpecGhost> createState() => _SpecGhostState();
+}
+
+class _SpecGhostState extends State<_SpecGhost> {
+  late final PlateController _controller;
+  late final PlateAnimationController _anim;
+  Timer? _done;
+
+  @override
+  void initState() {
+    super.initState();
+    final g = widget.ghost;
+    _controller = PlateController(spec: g.spec);
+    if (g.values.length == g.spec.slotCount) _controller.setValues(g.values);
+    _anim = PlateAnimationController(style: g.style)
+      ..goOutAll(delays: g.outDelays);
+    for (final id in g.kept) {
+      _anim.hide(id);
+    }
+    _done = Timer(g.length, () => widget.onDone(g.serial));
+  }
+
+  @override
+  void dispose() {
+    _done?.cancel();
+    _anim.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => IgnorePointer(
+    child: ExcludeFocus(
+      child: PlateCanvas(
+        spec: widget.ghost.spec,
+        mode: PlateMode.display,
+        theme: widget.theme,
+        country: widget.country,
+        controller: _controller,
+        animation: _anim,
+        onChooseCharacter: noCharacterChooser,
+      ),
+    ),
+  );
 }

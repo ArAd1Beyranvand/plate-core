@@ -266,13 +266,21 @@ class PlateAnimationStyle {
 /// repeated instruction from a stale one, so cueing `comingIn` twice replays.
 @immutable
 class PlatePartCue {
-  const PlatePartCue(this.phase, {this.delay = Duration.zero, this.serial = 0});
+  const PlatePartCue(
+    this.phase, {
+    this.delay = Duration.zero,
+    this.serial = 0,
+    this.instant = false,
+  });
 
   static const PlatePartCue settled = PlatePartCue(PlatePartPhase.settled);
 
   final PlatePartPhase phase;
   final Duration delay;
   final int serial;
+
+  /// Jump to the end of [phase] with no transition.
+  final bool instant;
 }
 
 /// Drives the phases of a plate's parts, all at once or one at a time. Hand
@@ -327,6 +335,15 @@ class PlateAnimationController extends ChangeNotifier {
 
   void settle(PlatePartId id) => cue(id, PlatePartPhase.settled);
 
+  /// Takes [id] straight to gone, with no transition.
+  void hide(PlatePartId id) {
+    (cueOf(id) as ValueNotifier<PlatePartCue>).value = PlatePartCue(
+      PlatePartPhase.goingOut,
+      serial: ++_serial,
+      instant: true,
+    );
+  }
+
   /// Cues every part — including ones not mounted yet — to [phase]. A part
   /// named in [delays] waits that long first; see [PlateStagger].
   void cueAll(
@@ -375,6 +392,54 @@ abstract final class PlateStagger {
     final ids = PlatePartId.allOf(spec);
     final ordered = reverse ? ids.reversed.toList() : ids;
     return {for (var i = 0; i < ordered.length; i++) ordered[i]: step * i};
+  }
+}
+
+/// How long a [PlateAnimationController.cueAll] with [delays] runs under
+/// [style], for the parts in [ids].
+Duration plateCueLength(
+  PlateAnimationStyle style,
+  Iterable<PlatePartId> ids,
+  Map<PlatePartId, Duration> delays,
+) {
+  var longest = Duration.zero;
+  for (final id in ids) {
+    final m = style.motionFor(id);
+    final end = (delays[id] ?? Duration.zero) + m.delay + m.duration;
+    if (end > longest) longest = end;
+  }
+  return longest;
+}
+
+/// What a [PlateCanvas] does when its spec changes: the old plate goes out
+/// part by part, then the new one comes in, except the parts [keeps] — those
+/// swap in place with no transition.
+///
+/// A part is kept when its kind is in [keepKinds] and both plates have it,
+/// or when [keep] says so. The default keeps nothing.
+@immutable
+class PlateSpecTransition {
+  const PlateSpecTransition({
+    this.keepKinds = const <PlatePartKind>{},
+    this.keep,
+    this.step = const Duration(milliseconds: 60),
+  });
+
+  final Set<PlatePartKind> keepKinds;
+
+  /// Per-part decision from the outgoing and incoming plates; overrides
+  /// [keepKinds] when it returns non-null.
+  final bool? Function(PlatePartId id, PlateSpec from, PlateSpec to)? keep;
+
+  /// The stagger between consecutive parts, as in [PlateStagger.sequence].
+  final Duration step;
+
+  bool keeps(PlatePartId id, PlateSpec from, PlateSpec to) {
+    final decided = keep?.call(id, from, to);
+    if (decided != null) return decided;
+    return keepKinds.contains(id.kind) &&
+        PlatePartId.allOf(from).contains(id) &&
+        PlatePartId.allOf(to).contains(id);
   }
 }
 
