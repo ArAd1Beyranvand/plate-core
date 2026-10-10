@@ -450,7 +450,7 @@ class PlateSpecTransition {
 
   /// True when [from] and [to] would paint [id] identically, as far as the
   /// specs say: same canvas, and the part's own data equal. Covers the panel
-  /// (block, flag, caption), the border, bands, rules and labels; the
+  /// (block, flag, caption), bands, rules and labels; the
   /// background and slots are never judged identical.
   static bool samePart(PlatePartId id, PlateSpec from, PlateSpec to) {
     if (from.canvasWidth != to.canvasWidth ||
@@ -459,8 +459,6 @@ class PlateSpecTransition {
     }
     final i = id.index;
     switch (id.kind) {
-      case PlatePartKind.border:
-        return from.borderWidthRatioOverride == to.borderWidthRatioOverride;
       case PlatePartKind.panel:
       case PlatePartKind.flag:
       case PlatePartKind.caption:

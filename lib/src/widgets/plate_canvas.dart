@@ -135,6 +135,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
       spec: from,
       theme: old.theme,
       country: old.country,
+      mode: old.mode,
+      inputSource: old.inputSource,
       values: _shownValues,
       outDelays: outDelays,
       kept: {
@@ -1127,6 +1129,8 @@ class _Ghost {
     required this.spec,
     required this.theme,
     required this.country,
+    required this.mode,
+    required this.inputSource,
     required this.values,
     required this.outDelays,
     required this.kept,
@@ -1140,6 +1144,10 @@ class _Ghost {
   /// The outgoing widget's look — the host has usually moved on already.
   final PlateTheme? theme;
   final PlateCountry? country;
+
+  /// Rendered as the live plate was, so empty slots keep their underlines.
+  final PlateMode mode;
+  final PlateInputSource? inputSource;
   final List<String?> values;
   final Map<PlatePartId, Duration> outDelays;
 
@@ -1197,7 +1205,8 @@ class _SpecGhostState extends State<_SpecGhost> {
     child: ExcludeFocus(
       child: PlateCanvas(
         spec: widget.ghost.spec,
-        mode: PlateMode.display,
+        mode: widget.ghost.mode,
+        inputSource: widget.ghost.inputSource,
         theme: widget.ghost.theme,
         country: widget.ghost.country,
         controller: _controller,
