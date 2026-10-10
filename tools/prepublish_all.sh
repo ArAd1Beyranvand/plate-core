@@ -3,7 +3,7 @@
 # last run, re-verified with gh). For each: `flutter pub publish --dry-run` and
 # pana's pub-points score. Everything goes into one file, summary on top.
 # Nothing is published.
-# Usage: tools/prepublish_all.sh [pkg ...]   (default: public ones from push_all.log)
+# Usage: tools/prepublish_all.sh [pkg ...]   (default: all packages, alphabetical)
 cd "$(dirname "$0")/.." || exit 1
 OUT=tools/prepublish_report.txt
 LOG=tools/push_all.log
@@ -12,8 +12,9 @@ SKIP=" kazakhstan_plate turkmenistan_plate uzbekistan_plate plate_number_holder 
 
 pkgs=("$@")
 if [ ${#pkgs[@]} -eq 0 ]; then
-  [ -f "$LOG" ] || { echo "no $LOG; run tools/push_all.sh first"; exit 1; }
-  pkgs=($(sed -n '/^=== SUMMARY/,$p' "$LOG" | awk '$2 ~ /^pushed/ {print $1}'))
+  # Every package directory, alphabetical; publish_to: none and non-public
+  # repos are filtered out below.
+  for f in */pubspec.yaml; do pkgs+=("${f%/pubspec.yaml}"); done
 fi
 
 if command -v pana >/dev/null 2>&1; then PANA=(pana)
