@@ -119,7 +119,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
     }
   }
 
-  void _startTransition(PlateSpec from, PlateSpec to) {
+  void _startTransition(PlateCanvas old) {
+    final from = old.spec, to = widget.spec;
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
     if (transition == null || anim == null) return;
@@ -132,6 +133,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
     _ghost = _Ghost(
       serial: ++_ghostSerial,
       spec: from,
+      theme: old.theme,
+      country: old.country,
       values: _shownValues,
       outDelays: outDelays,
       kept: {
@@ -197,7 +200,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // an ordinary thing for a host to do — and the machine then holds the
     // previous plate's nodes: wrong slot, or off the end of the list outright.
     if (widget.spec.id != oldWidget.spec.id) {
-      _startTransition(oldWidget.spec, widget.spec);
+      _startTransition(oldWidget);
       // The controller holds the previous plate's values — a different slot
       // count — and migrates itself to the new spec, carrying the characters
       // across as [PlateCanvas.onSpecChange] directs.
@@ -493,8 +496,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
             child: _SpecGhost(
               key: ValueKey<int>(ghost.serial),
               ghost: ghost,
-              theme: widget.theme,
-              country: widget.country,
               onDone: _ghostDone,
             ),
           ),
@@ -1124,6 +1125,8 @@ class _Ghost {
   const _Ghost({
     required this.serial,
     required this.spec,
+    required this.theme,
+    required this.country,
     required this.values,
     required this.outDelays,
     required this.kept,
@@ -1133,6 +1136,10 @@ class _Ghost {
 
   final int serial;
   final PlateSpec spec;
+
+  /// The outgoing widget's look — the host has usually moved on already.
+  final PlateTheme? theme;
+  final PlateCountry? country;
   final List<String?> values;
   final Map<PlatePartId, Duration> outDelays;
 
@@ -1148,14 +1155,10 @@ class _SpecGhost extends StatefulWidget {
   const _SpecGhost({
     super.key,
     required this.ghost,
-    required this.theme,
-    required this.country,
     required this.onDone,
   });
 
   final _Ghost ghost;
-  final PlateTheme? theme;
-  final PlateCountry? country;
   final void Function(int serial) onDone;
 
   @override
@@ -1195,8 +1198,8 @@ class _SpecGhostState extends State<_SpecGhost> {
       child: PlateCanvas(
         spec: widget.ghost.spec,
         mode: PlateMode.display,
-        theme: widget.theme,
-        country: widget.country,
+        theme: widget.ghost.theme,
+        country: widget.ghost.country,
         controller: _controller,
         animation: _anim,
         onChooseCharacter: noCharacterChooser,

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import '../model/plate_box.dart';
 import '../model/plate_spec.dart';
 
 /// Where a plate part is in its lifecycle. [settled] is the default and paints
@@ -422,8 +423,12 @@ class PlateSpecTransition {
   const PlateSpecTransition({
     this.keepKinds = const <PlatePartKind>{},
     this.keep,
+    this.keepIdentical = false,
     this.step = const Duration(milliseconds: 60),
   });
+
+  /// Also keep every part both plates draw the same way — see [samePart].
+  final bool keepIdentical;
 
   final Set<PlatePartKind> keepKinds;
 
@@ -437,10 +442,71 @@ class PlateSpecTransition {
   bool keeps(PlatePartId id, PlateSpec from, PlateSpec to) {
     final decided = keep?.call(id, from, to);
     if (decided != null) return decided;
+    if (keepIdentical && samePart(id, from, to)) return true;
     return keepKinds.contains(id.kind) &&
         PlatePartId.allOf(from).contains(id) &&
         PlatePartId.allOf(to).contains(id);
   }
+
+  /// True when [from] and [to] would paint [id] identically, as far as the
+  /// specs say: same canvas, and the part's own data equal. Covers the panel
+  /// (block, flag, caption), the border, bands, rules and labels; the
+  /// background and slots are never judged identical.
+  static bool samePart(PlatePartId id, PlateSpec from, PlateSpec to) {
+    if (from.canvasWidth != to.canvasWidth ||
+        from.canvasHeight != to.canvasHeight) {
+      return false;
+    }
+    final i = id.index;
+    switch (id.kind) {
+      case PlatePartKind.border:
+        return from.borderWidthRatioOverride == to.borderWidthRatioOverride;
+      case PlatePartKind.panel:
+      case PlatePartKind.flag:
+      case PlatePartKind.caption:
+        final a = from.panel, b = to.panel;
+        return !from.noPanel &&
+            !to.noPanel &&
+            from.country == to.country &&
+            from.country.panelColor == to.country.panelColor &&
+            _sameBox(a.box, b.box) &&
+            a.flagScale == b.flagScale &&
+            a.captionScale == b.captionScale &&
+            a.padding == b.padding &&
+            a.direction == b.direction &&
+            identical(a.shape, b.shape);
+      case PlatePartKind.band:
+        if (i >= from.bands.length || i >= to.bands.length) return false;
+        final a = from.bands[i], b = to.bands[i];
+        return _sameBox(a.box, b.box) &&
+            a.color == b.color &&
+            a.topCornerRadius == b.topCornerRadius &&
+            a.bottomCornerRadius == b.bottomCornerRadius;
+      case PlatePartKind.rule:
+        if (i >= from.rules.length || i >= to.rules.length) return false;
+        return _sameBox(from.rules[i].box, to.rules[i].box) &&
+            from.inkOverride == to.inkOverride;
+      case PlatePartKind.label:
+        if (i >= from.labels.length || i >= to.labels.length) return false;
+        final a = from.labels[i], b = to.labels[i];
+        return _sameBox(a.box, b.box) &&
+            a.text == b.text &&
+            a.glyphHeight == b.glyphHeight &&
+            a.color == b.color &&
+            a.rotated == b.rotated &&
+            a.lineHeight == b.lineHeight &&
+            a.fontFamily == b.fontFamily &&
+            a.fontPackage == b.fontPackage;
+      default:
+        return false;
+    }
+  }
+
+  static bool _sameBox(PlateBox a, PlateBox b) =>
+      a.left == b.left &&
+      a.top == b.top &&
+      a.width == b.width &&
+      a.height == b.height;
 }
 
 /// Puts a [PlateAnimationController] above the plate parts beneath it. With
