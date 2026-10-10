@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../animation/plate_animation.dart';
+import '../animation/plate_part_animator.dart';
 import '../input/plate_controller.dart';
 import '../input/plate_input_machine.dart';
 import '../model/plate_alphabet.dart';
@@ -13,6 +15,7 @@ import '../model/slot_behavior.dart';
 import '../theme/plate_theme.dart';
 import '../validators/plate_validator.dart';
 import 'country_panel.dart';
+import 'plate_divider.dart';
 import 'plate_frame.dart';
 import 'plate_selector.dart';
 import 'plate_slot_item.dart';
@@ -35,6 +38,7 @@ class PlateCanvas extends StatefulWidget {
     this.validator,
     this.autoValidate = false,
     this.onSpecChange = PlateValuePreservation.byGroupKey,
+    this.animation,
   });
 
   final PlateSpec spec;
@@ -64,6 +68,10 @@ class PlateCanvas extends StatefulWidget {
   /// What becomes of entered characters when [spec] is swapped. Defaults to
   /// [PlateValuePreservation.byGroupKey] (keeps matching registers).
   final PlateValuePreservation onSpecChange;
+
+  /// Drives each part's come-in / go-out. Null takes the nearest
+  /// [PlateAnimationScope]'s; with neither, every part stays settled.
+  final PlateAnimationController? animation;
 
   @override
   State<PlateCanvas> createState() => _PlateCanvasState();
@@ -410,9 +418,14 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // under a Scaffold (or their own Material) or it throws on first build.
     // `type: transparency` adds no ink or surface colour — the plate paints
     // its own white face.
-    return Theme(
-      data: selectionTheme,
-      child: Material(type: MaterialType.transparency, child: face),
+    // Always in the tree, so supplying or dropping a controller never
+    // remounts the slots beneath it.
+    return PlateAnimationScope(
+      controller: widget.animation ?? PlateAnimationScope.maybeOf(context),
+      child: Theme(
+        data: selectionTheme,
+        child: Material(type: MaterialType.transparency, child: face),
+      ),
     );
   }
 }
@@ -475,55 +488,83 @@ class _PlateArtwork extends StatelessWidget {
                         ),
                       // Under the rules, labels and decals: a band is the field
                       // the ink is printed on, not something printed over them.
-                      for (final band in spec.bands)
+                      for (var i = 0; i < spec.bands.length; i++)
                         _Placed(
-                          box: band.box,
-                          child: _Band(band: band),
-                        ),
-                      for (final r in spec.rules)
-                        _Placed(
-                          box: r.box,
-                          child: ColoredBox(color: theme.dividerColor),
-                        ),
-                      for (final l in spec.labels)
-                        _Placed(
-                          box: l.box,
-                          child: Center(
-                            child: RotatedBox(
-                              quarterTurns: l.rotated ? 3 : 0,
-                              child: Text(
-                                l.text,
-                                textAlign: TextAlign.center,
-                                // A label is placed by its box, not laid out
-                                // by it: a caption too long for its box must
-                                // overflow, never reflow onto a second line.
-                                maxLines: '\n'.allMatches(l.text).length + 1,
-                                softWrap: false,
-                                overflow: TextOverflow.visible,
-                                style: theme
-                                    .glyphStyle(
-                                      l.glyphHeight,
-                                      l.color ?? theme.ink,
-                                    )
-                                    .copyWith(
-                                      height: l.lineHeight,
-                                      fontFamily: l.fontFamily,
-                                      package: l.fontPackage,
-                                    ),
-                              ),
-                            ),
+                          box: spec.bands[i].box,
+                          child: PlatePartAnimator(
+                            id: PlatePartId.band(i),
+                            child: _Band(band: spec.bands[i]),
                           ),
                         ),
-                      for (final d in spec.decals)
+                      for (var i = 0; i < spec.rules.length; i++)
                         _Placed(
-                          box: d.box,
-                          child: Image(image: d.image, fit: BoxFit.contain),
+                          box: spec.rules[i].box,
+                          child: PlatePartAnimator(
+                            id: PlatePartId.rule(i),
+                            selfPainted: true,
+                            child: PlateDivider(color: theme.dividerColor),
+                          ),
+                        ),
+                      for (var i = 0; i < spec.labels.length; i++)
+                        _Label(index: i, label: spec.labels[i], theme: theme),
+                      for (var i = 0; i < spec.decals.length; i++)
+                        _Placed(
+                          box: spec.decals[i].box,
+                          child: PlatePartAnimator(
+                            id: PlatePartId.decal(i),
+                            child: Image(
+                              image: spec.decals[i].image,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                     ],
                   ),
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// One [PlateLabel], its own animated part.
+class _Label extends StatelessWidget {
+  const _Label({required this.index, required this.label, required this.theme});
+
+  final int index;
+  final PlateLabel label;
+  final PlateTheme theme;
+
+  @override
+  Widget build(BuildContext context) {
+    final l = label;
+    return _Placed(
+      box: l.box,
+      child: PlatePartAnimator(
+        id: PlatePartId.label(index),
+        child: Center(
+          child: RotatedBox(
+            quarterTurns: l.rotated ? 3 : 0,
+            child: Text(
+              l.text,
+              textAlign: TextAlign.center,
+              // A label is placed by its box, not laid out
+              // by it: a caption too long for its box must
+              // overflow, never reflow onto a second line.
+              maxLines: '\n'.allMatches(l.text).length + 1,
+              softWrap: false,
+              overflow: TextOverflow.visible,
+              style: theme
+                  .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
+                  .copyWith(
+                    height: l.lineHeight,
+                    fontFamily: l.fontFamily,
+                    package: l.fontPackage,
+                  ),
+            ),
           ),
         ),
       ),
@@ -572,55 +613,63 @@ class _PlateInputs extends StatelessWidget {
                 for (var mi = 0; mi < spec.mirrors.length; mi++)
                   _Placed(
                     box: spec.mirrors[mi].box,
-                    child:
-                        mode == PlateMode.input &&
-                            spec.mirrors[mi].editable &&
-                            machine.mirrorControllerAt(mi) != null
-                        ? Center(
-                            child: _EditableMirrorBinding(
-                              mirrorIndex: mi,
+                    child: PlatePartAnimator(
+                      id: PlatePartId.mirror(mi),
+                      child:
+                          mode == PlateMode.input &&
+                              spec.mirrors[mi].editable &&
+                              machine.mirrorControllerAt(mi) != null
+                          ? Center(
+                              child: _EditableMirrorBinding(
+                                mirrorIndex: mi,
+                                mirror: spec.mirrors[mi],
+                                alphabet:
+                                    spec.mirrors[mi].alphabet ??
+                                    spec
+                                        .slots[spec.mirrors[mi].source]
+                                        .alphabet,
+                                behavior: behaviors[spec.mirrors[mi].source],
+                                theme: theme,
+                                machine: machine,
+                                controller: controller,
+                                onCompleted: mode == PlateMode.input
+                                    ? () => machine.advanceFrom(
+                                        spec.mirrors[mi].source,
+                                      )
+                                    : null,
+                              ),
+                            )
+                          : _MirrorBinding(
                               mirror: spec.mirrors[mi],
                               alphabet:
                                   spec.mirrors[mi].alphabet ??
                                   spec.slots[spec.mirrors[mi].source].alphabet,
-                              behavior: behaviors[spec.mirrors[mi].source],
                               theme: theme,
-                              machine: machine,
                               controller: controller,
-                              onCompleted: mode == PlateMode.input
-                                  ? () => machine.advanceFrom(
-                                      spec.mirrors[mi].source,
-                                    )
-                                  : null,
                             ),
-                          )
-                        : _MirrorBinding(
-                            mirror: spec.mirrors[mi],
-                            alphabet:
-                                spec.mirrors[mi].alphabet ??
-                                spec.slots[spec.mirrors[mi].source].alphabet,
-                            theme: theme,
-                            controller: controller,
-                          ),
+                    ),
                   ),
                 for (var i = 0; i < spec.slots.length; i++)
                   _Placed(
                     box: spec.slots[i].box,
-                    child: Center(
-                      child: _SlotBinding(
-                        index: i,
-                        slot: spec.slots[i],
-                        behavior: behaviors[i],
-                        theme: theme,
-                        machine: machine,
-                        controller: controller,
-                        commit: commit,
-                        onCompleted: mode == PlateMode.input
-                            ? () => machine.advanceFrom(i)
-                            : null,
-                        onPressed: behaviors[i] == SlotBehavior.sheet
-                            ? () => onPick(i)
-                            : null,
+                    child: PlatePartAnimator(
+                      id: PlatePartId.slot(i),
+                      child: Center(
+                        child: _SlotBinding(
+                          index: i,
+                          slot: spec.slots[i],
+                          behavior: behaviors[i],
+                          theme: theme,
+                          machine: machine,
+                          controller: controller,
+                          commit: commit,
+                          onCompleted: mode == PlateMode.input
+                              ? () => machine.advanceFrom(i)
+                              : null,
+                          onPressed: behaviors[i] == SlotBehavior.sheet
+                              ? () => onPick(i)
+                              : null,
+                        ),
                       ),
                     ),
                   ),

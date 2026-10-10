@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 
+import '../animation/plate_animation.dart';
+import '../animation/plate_part_animator.dart';
 import '../model/plate_country.dart';
 import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
@@ -69,79 +71,140 @@ class _Block extends StatelessWidget {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.ltr,
-      child: ColoredBox(
-        color: paintBlock ? country.panelColor : const Color(0x00000000),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final uniformPad = constraints.maxHeight * 0.10;
-            final resolvedPadding = panel.padding ?? EdgeInsets.all(uniformPad);
-            final innerW = constraints.maxWidth - resolvedPadding.horizontal;
-            final innerH = constraints.maxHeight - resolvedPadding.vertical;
-            final flag = _flagSize(
-              panel: panel,
-              country: country,
-              innerW: innerW,
-              innerH: innerH,
-            );
-            final horizontal = panel.direction == Axis.horizontal;
-            // The room the flag leaves, and how many pieces of wording have to
-            // share it. A heading and a caption split it evenly; either one
-            // alone takes the lot, which is the layout this widget has always
-            // had.
-            final hasHeading = country.headingLines.isNotEmpty;
-            final slackW = horizontal
-                ? (innerW - flag.width).clamp(0.0, innerW)
-                : null;
-            final slackH = horizontal
-                ? null
-                : (innerH - flag.height).clamp(0.0, innerH);
-            final share = hasHeading ? 0.5 : 1.0;
+      child: PlatePartAnimator(
+        id: PlatePartId.panel,
+        selfPainted: true,
+        child: _BlockFill(
+          color: paintBlock ? country.panelColor : const Color(0x00000000),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final uniformPad = constraints.maxHeight * 0.10;
+              final resolvedPadding =
+                  panel.padding ?? EdgeInsets.all(uniformPad);
+              final innerW = constraints.maxWidth - resolvedPadding.horizontal;
+              final innerH = constraints.maxHeight - resolvedPadding.vertical;
+              final flag = _flagSize(
+                panel: panel,
+                country: country,
+                innerW: innerW,
+                innerH: innerH,
+              );
+              final horizontal = panel.direction == Axis.horizontal;
+              // The room the flag leaves, and how many pieces of wording have to
+              // share it. A heading and a caption split it evenly; either one
+              // alone takes the lot, which is the layout this widget has always
+              // had.
+              final hasHeading = country.headingLines.isNotEmpty;
+              final slackW = horizontal
+                  ? (innerW - flag.width).clamp(0.0, innerW)
+                  : null;
+              final slackH = horizontal
+                  ? null
+                  : (innerH - flag.height).clamp(0.0, innerH);
+              final share = hasHeading ? 0.5 : 1.0;
 
-            final flagBox = SizedBox(
-              width: flag.width,
-              height: flag.height,
-              child: PlateFlag(country: country),
-            );
-            final children = <Widget>[
-              if (hasHeading)
-                _PanelWording(
-                  lines: country.headingLines,
-                  color: country.panelTextColor,
-                  scale: panel.captionScale,
-                  alignment: Alignment.centerLeft,
-                  width: slackW == null ? null : slackW * share,
-                  height: slackH == null ? null : slackH * share,
+              final flagBox = SizedBox(
+                width: flag.width,
+                height: flag.height,
+                child: PlatePartAnimator(
+                  id: PlatePartId.flag,
+                  child: PlateFlag(country: country),
                 ),
-              horizontal ? flagBox : Center(child: flagBox),
-              _PanelWording(
-                lines: country.captionLines,
-                color: country.panelTextColor,
-                scale: panel.captionScale,
-                alignment: horizontal
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
-                width: slackW == null ? null : slackW * share,
-                height: slackH == null ? null : slackH * share,
-              ),
-            ];
-            return Padding(
-              padding: resolvedPadding,
-              child: horizontal
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: children,
-                    )
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: children,
+              );
+              final children = <Widget>[
+                if (hasHeading)
+                  PlatePartAnimator(
+                    id: PlatePartId.caption,
+                    child: _PanelWording(
+                      lines: country.headingLines,
+                      color: country.panelTextColor,
+                      scale: panel.captionScale,
+                      alignment: Alignment.centerLeft,
+                      width: slackW == null ? null : slackW * share,
+                      height: slackH == null ? null : slackH * share,
                     ),
-            );
-          },
+                  ),
+                horizontal ? flagBox : Center(child: flagBox),
+                PlatePartAnimator(
+                  id: PlatePartId.caption,
+                  child: _PanelWording(
+                    lines: country.captionLines,
+                    color: country.panelTextColor,
+                    scale: panel.captionScale,
+                    alignment: horizontal
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
+                    width: slackW == null ? null : slackW * share,
+                    height: slackH == null ? null : slackH * share,
+                  ),
+                ),
+              ];
+              return Padding(
+                padding: resolvedPadding,
+                child: horizontal
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: children,
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: children,
+                      ),
+              );
+            },
+          ),
         ),
       ),
     );
   }
+}
+
+/// The block's colour, revealed by the panel part; settled it paints what a
+/// `ColoredBox` does.
+class _BlockFill extends StatelessWidget {
+  const _BlockFill({required this.color, required this.child});
+
+  final Color color;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _BlockPainter(frame: PlatePartAnimator.of(context), color: color),
+    child: child,
+  );
+}
+
+class _BlockPainter extends CustomPainter {
+  _BlockPainter({required this.frame, required this.color})
+    : super(repaint: frame.progress);
+
+  final PlatePartFrame frame;
+  final Color color;
+  final Paint _paint = Paint();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (color.a == 0 || frame.hidden) return;
+    final bounds = Offset.zero & size;
+    _paint.color = color;
+    switch (frame.motion.effect) {
+      case PlatePartEffect.fade ||
+          PlatePartEffect.fadeScale ||
+          PlatePartEffect.fadeSlide:
+        _paint.color = color.withValues(alpha: color.a * frame.shown);
+        canvas.drawRect(bounds, _paint);
+      case PlatePartEffect.wipe || PlatePartEffect.draw:
+        canvas.drawRect(
+          plateRevealRect(bounds, frame.motion.origin, frame),
+          _paint,
+        );
+    }
+  }
+
+  @override
+  bool shouldRepaint(_BlockPainter old) =>
+      !identical(old.frame, frame) || old.color != color;
 }
 
 Size _flagSize({

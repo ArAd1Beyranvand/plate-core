@@ -57,6 +57,21 @@ export 'src/widgets/plate_text_row.dart';
 export 'src/widgets/country_panel.dart';
 export 'src/widgets/plate_flag.dart';
 
+/// Come-in / go-out for every part of a plate. A [PlateAnimationController]
+/// cues parts by [PlatePartId] — one, or all with an optional
+/// [PlateStagger] — and each part follows its cue on its own, styled by a
+/// [PlateAnimationStyle]. Every part defaults to settled, which paints the
+/// plate exactly as without animation.
+export 'src/animation/plate_animation.dart';
+
+/// [PlatePartAnimator] is the primitive behind every animated part; a host
+/// can wrap its own plate furniture in one to join the same cues.
+export 'src/animation/plate_part_animator.dart'
+    show PlatePartAnimator, PlatePartFrame, plateRevealRect;
+
+/// The line every rule and divider is drawn with.
+export 'src/widgets/plate_divider.dart' show PlateDivider, DividerOrigin;
+
 // The keypad and the `chosen`-slot character picker live in `plate_keypad`; a
 // host that wants either passes `PlateCharacterPicker.show` as
 // `PlateCanvas.onChooseCharacter`.

@@ -1,17 +1,23 @@
 import 'dart:math' as math;
+import 'dart:ui' show PathMetric;
 
 import 'package:flutter/widgets.dart';
 
+import '../animation/plate_animation.dart';
+import '../animation/plate_part_animator.dart';
 import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
+import 'plate_divider.dart';
 
 /// The plate's background: the face divided into [PlateSection] regions, the
 /// dividers between them, and the border drawn last over all of it.
 ///
-/// One [CustomPainter] in that order is what keeps a coloured region flush
-/// with the border. A region runs out under the border rather than stopping
-/// at its inner edge, so the only edge between them is the border's own, and
-/// there is no second anti-aliased edge for the field to show through.
+/// Each of those is its own animated part, but they stay painters on one
+/// picture, in that order, each clipped to the same face — which is what
+/// keeps a coloured region flush with the border. A region runs out under the
+/// border rather than stopping at its inner edge, so the only edge between
+/// them is the border's own, and there is no second anti-aliased edge for the
+/// field to show through.
 class PlateFrame extends StatelessWidget {
   const PlateFrame({
     super.key,
@@ -29,118 +35,271 @@ class PlateFrame extends StatelessWidget {
   final Color panelColor;
 
   @override
-  Widget build(BuildContext context) => CustomPaint(
-    painter: _PlateFramePainter(
-      theme: theme ?? PlateTheme.of(context),
-      isCompleted: isCompleted,
-      background: background,
-      panelColor: panelColor,
-    ),
-    child: const SizedBox.expand(),
-  );
+  Widget build(BuildContext context) {
+    final theme = this.theme ?? PlateTheme.of(context);
+    final regions = plateRegionCount(background);
+    final dividers = plateDividerCount(background);
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        PlatePartAnimator(
+          id: PlatePartId.background,
+          selfPainted: true,
+          child: _FacePaint(theme: theme),
+        ),
+        for (var i = 0; i < regions; i++)
+          PlatePartAnimator(
+            id: PlatePartId.region(i),
+            selfPainted: true,
+            child: _RegionPaint(
+              index: i,
+              theme: theme,
+              background: background,
+              panelColor: panelColor,
+            ),
+          ),
+        for (var i = 0; i < dividers; i++)
+          PlatePartAnimator(
+            id: PlatePartId.divider(i),
+            selfPainted: true,
+            child: _SectionDividerPaint(
+              index: i,
+              theme: theme,
+              background: background,
+            ),
+          ),
+        PlatePartAnimator(
+          id: PlatePartId.border,
+          selfPainted: true,
+          child: _BorderPaint(theme: theme, isCompleted: isCompleted),
+        ),
+      ],
+    );
+  }
 }
 
-class _PlateFramePainter extends CustomPainter {
-  _PlateFramePainter({
-    required this.theme,
-    required this.isCompleted,
-    required this.background,
-    required this.panelColor,
-  });
-
-  final PlateTheme theme;
-  final bool isCompleted;
-  final PlateSection background;
-  final Color panelColor;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final h = size.height;
-    final border = theme.borderWidthRatio * h;
-    final outerRadius = theme.plateRadiusRatio * h;
+/// The outer rim, its inner edge, and the face the regions are clipped to.
+class _Geometry {
+  _Geometry(PlateTheme theme, Size size)
+    : border = theme.borderWidthRatio * size.height,
+      outerRadius = theme.plateRadiusRatio * size.height {
     final innerRadius = (outerRadius - border).clamp(0.0, outerRadius);
-
     final outerRect = Offset.zero & size;
-    final outer = RRect.fromRectAndRadius(
-      outerRect,
-      Radius.circular(outerRadius),
-    );
-    final inner = RRect.fromRectAndRadius(
+    outer = RRect.fromRectAndRadius(outerRect, Radius.circular(outerRadius));
+    inner = RRect.fromRectAndRadius(
       outerRect.deflate(border),
       Radius.circular(innerRadius),
     );
-
     // Halfway into the border: far enough out that the border's inner edge
     // lies over a region, not past one; far enough in that a region's edge
     // never reaches the plate's outer anti-aliased rim.
-    final face = outer.deflate(border / 2);
-    canvas.save();
-    canvas.clipRRect(face);
-    canvas.drawRRect(face, Paint()..color = theme.plateBackground);
-    final dividers = <Rect>[];
-    _paintSection(canvas, background, outerRect, dividers);
-    final dividerPaint = Paint()..color = theme.dividerColor;
-    for (final d in dividers) {
-      canvas.drawRect(d, dividerPaint);
-    }
-    canvas.restore();
-
-    canvas.drawDRRect(outer, inner, Paint()..color = _borderColor());
+    face = outer.deflate(border / 2);
   }
 
-  void _paintSection(
-    Canvas canvas,
-    PlateSection section,
-    Rect r,
-    List<Rect> dividers,
-  ) {
-    if (section.isLeaf) {
-      final fill = section.fill!;
-      // The field is already down; painting it again would only add a second
-      // anti-aliased edge along each neighbour's boundary.
-      if (fill.isField) return;
-      if (fill.isStripes) {
-        _paintStripes(canvas, fill, r, section.shape);
-        return;
-      }
-      final paint = Paint()
-        ..color = fill.resolve(
-          field: theme.plateBackground,
-          panel: panelColor,
-          divider: theme.dividerColor,
-        );
-      final shape = section.shape;
-      if (shape == null) {
-        canvas.drawRect(r, paint);
-      } else {
-        canvas.save();
-        canvas.translate(r.left, r.top);
-        canvas.drawPath(shape.getClip(r.size), paint);
-        canvas.restore();
-      }
-      return;
-    }
-    final across = section.axis == Axis.horizontal;
+  final double border;
+  final double outerRadius;
+  late final RRect outer;
+  late final RRect inner;
+  late final RRect face;
+}
+
+/// Leaf [index] of [section] laid over [r], depth-first, or null.
+(PlateSection, Rect)? _leafAt(PlateSection section, Rect r, int index) {
+  var seen = 0;
+  (PlateSection, Rect)? walk(PlateSection s, Rect r) {
+    if (s.isLeaf) return seen++ == index ? (s, r) : null;
+    final across = s.axis == Axis.horizontal;
     var start = across ? r.left : r.top;
-    final last = section.parts.length - 1;
+    final last = s.parts.length - 1;
     for (var i = 0; i <= last; i++) {
-      final part = section.parts[i];
+      final part = s.parts[i];
       final end = i == last ? (across ? r.right : r.bottom) : part.end!;
       final child = across
           ? Rect.fromLTRB(start, r.top, end, r.bottom)
           : Rect.fromLTRB(r.left, start, r.right, end);
-      _paintSection(canvas, part.section, child, dividers);
-      if (part.divider > 0 && i != last) {
+      final hit = walk(part.section, child);
+      if (hit != null) return hit;
+      start = end;
+    }
+    return null;
+  }
+
+  return walk(section, r);
+}
+
+/// Divider [index] of [section] laid over [r], depth-first, or null.
+Rect? _dividerAt(PlateSection section, Rect r, int index) {
+  var seen = 0;
+  Rect? walk(PlateSection s, Rect r) {
+    if (s.isLeaf) return null;
+    final across = s.axis == Axis.horizontal;
+    var start = across ? r.left : r.top;
+    final last = s.parts.length - 1;
+    for (var i = 0; i <= last; i++) {
+      final part = s.parts[i];
+      final end = i == last ? (across ? r.right : r.bottom) : part.end!;
+      final child = across
+          ? Rect.fromLTRB(start, r.top, end, r.bottom)
+          : Rect.fromLTRB(r.left, start, r.right, end);
+      final hit = walk(part.section, child);
+      if (hit != null) return hit;
+      if (part.divider > 0 && i != last && seen++ == index) {
         final half = part.divider / 2;
-        dividers.add(
-          across
-              ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
-              : Rect.fromLTRB(r.left, end - half, r.right, end + half),
-        );
+        return across
+            ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
+            : Rect.fromLTRB(r.left, end - half, r.right, end + half);
       }
       start = end;
     }
+    return null;
   }
+
+  return walk(section, r);
+}
+
+bool _fades(PlatePartFrame frame) => switch (frame.motion.effect) {
+  PlatePartEffect.fade ||
+  PlatePartEffect.fadeScale ||
+  PlatePartEffect.fadeSlide => true,
+  PlatePartEffect.wipe || PlatePartEffect.draw => false,
+};
+
+class _FacePaint extends StatelessWidget {
+  const _FacePaint({required this.theme});
+
+  final PlateTheme theme;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _FacePainter(frame: PlatePartAnimator.of(context), theme: theme),
+  );
+}
+
+class _FacePainter extends CustomPainter {
+  _FacePainter({required this.frame, required this.theme})
+    : super(repaint: frame.progress);
+
+  final PlatePartFrame frame;
+  final PlateTheme theme;
+  final Paint _paint = Paint();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (frame.hidden) return;
+    final g = _Geometry(theme, size);
+    final color = theme.plateBackground;
+    canvas.save();
+    if (frame.phase != PlatePartPhase.settled && !_fades(frame)) {
+      canvas.clipRect(
+        plateRevealRect(Offset.zero & size, frame.motion.origin, frame),
+      );
+    }
+    canvas.clipRRect(g.face);
+    _paint.color = _fades(frame)
+        ? color.withValues(alpha: color.a * frame.shown)
+        : color;
+    canvas.drawRRect(g.face, _paint);
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_FacePainter old) =>
+      !identical(old.frame, frame) || old.theme != theme;
+}
+
+class _RegionPaint extends StatelessWidget {
+  const _RegionPaint({
+    required this.index,
+    required this.theme,
+    required this.background,
+    required this.panelColor,
+  });
+
+  final int index;
+  final PlateTheme theme;
+  final PlateSection background;
+  final Color panelColor;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _RegionPainter(
+      frame: PlatePartAnimator.of(context),
+      index: index,
+      theme: theme,
+      background: background,
+      panelColor: panelColor,
+    ),
+  );
+}
+
+class _RegionPainter extends CustomPainter {
+  _RegionPainter({
+    required this.frame,
+    required this.index,
+    required this.theme,
+    required this.background,
+    required this.panelColor,
+  }) : super(repaint: frame.progress);
+
+  final PlatePartFrame frame;
+  final int index;
+  final PlateTheme theme;
+  final PlateSection background;
+  final Color panelColor;
+
+  final Paint _paint = Paint();
+  Size? _laidOutFor;
+  (PlateSection, Rect)? _leaf;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (frame.hidden) return;
+    if (_laidOutFor != size) {
+      _laidOutFor = size;
+      _leaf = _leafAt(background, Offset.zero & size, index);
+    }
+    final leaf = _leaf;
+    if (leaf == null) return;
+    final (section, r) = leaf;
+    final fill = section.fill!;
+    // The field is already down; painting it again would only add a second
+    // anti-aliased edge along each neighbour's boundary.
+    if (fill.isField) return;
+
+    final g = _Geometry(theme, size);
+    final fades = _fades(frame);
+    canvas.save();
+    canvas.clipRRect(g.face);
+    if (frame.phase != PlatePartPhase.settled && !fades) {
+      canvas.clipRect(plateRevealRect(r, frame.motion.origin, frame));
+    }
+    final opacity = fades ? frame.shown : 1.0;
+    if (fill.isStripes) {
+      _paintStripes(canvas, fill, r, section.shape, opacity);
+    } else {
+      _paint
+        ..shader = null
+        ..color = _alpha(
+          fill.resolve(
+            field: theme.plateBackground,
+            panel: panelColor,
+            divider: theme.dividerColor,
+          ),
+          opacity,
+        );
+      final shape = section.shape;
+      if (shape == null) {
+        canvas.drawRect(r, _paint);
+      } else {
+        canvas.translate(r.left, r.top);
+        canvas.drawPath(shape.getClip(r.size), _paint);
+      }
+    }
+    canvas.restore();
+  }
+
+  static Color _alpha(Color c, double opacity) =>
+      opacity >= 1 ? c : c.withValues(alpha: c.a * opacity);
 
   /// Each stripe is a rect in a frame turned about [r]'s centre, long enough
   /// to cover [r] at any angle, and clipped back to [r] (or its [shape]).
@@ -149,6 +308,7 @@ class _PlateFramePainter extends CustomPainter {
     PlateFill fill,
     Rect r,
     CustomClipper<Path>? shape,
+    double opacity,
   ) {
     final stripes = fill.stripes!;
     final c = r.center;
@@ -163,6 +323,7 @@ class _PlateFramePainter extends CustomPainter {
     canvas.translate(c.dx, c.dy);
     canvas.rotate(-fill.angle);
     var top = -reach;
+    _paint.shader = null;
     for (var i = 0; i < stripes.length; i++) {
       // A stop is where the boundary meets the centreline; in the turned frame
       // that is its perpendicular distance from the centre.
@@ -171,15 +332,15 @@ class _PlateFramePainter extends CustomPainter {
           : reach;
       final stripe = stripes[i];
       if (!stripe.isField) {
-        final color = stripe.resolve(
-          field: theme.plateBackground,
-          panel: panelColor,
-          divider: theme.dividerColor,
+        _paint.color = _alpha(
+          stripe.resolve(
+            field: theme.plateBackground,
+            panel: panelColor,
+            divider: theme.dividerColor,
+          ),
+          opacity,
         );
-        canvas.drawRect(
-          Rect.fromLTRB(-reach, top, reach, bottom),
-          Paint()..color = color,
-        );
+        canvas.drawRect(Rect.fromLTRB(-reach, top, reach, bottom), _paint);
       }
       top = bottom;
     }
@@ -187,25 +348,242 @@ class _PlateFramePainter extends CustomPainter {
     final fog = fill.fog;
     if (fog != null) {
       final field = theme.plateBackground;
+      final a = fog.opacity * opacity;
       canvas.save();
       canvas.clipRect(r);
       canvas.translate(fog.center.dx, fog.center.dy);
       canvas.scale(fog.radii.width, fog.radii.height);
-      canvas.drawCircle(
-        Offset.zero,
-        1,
-        Paint()
-          ..shader = RadialGradient(
-            colors: <Color>[
-              field.withValues(alpha: fog.opacity),
-              field.withValues(alpha: fog.opacity),
-              field.withValues(alpha: 0),
-            ],
-            stops: <double>[0, fog.plateau, 1],
-          ).createShader(Rect.fromCircle(center: Offset.zero, radius: 1)),
-      );
+      _paint.shader = RadialGradient(
+        colors: <Color>[
+          field.withValues(alpha: a),
+          field.withValues(alpha: a),
+          field.withValues(alpha: 0),
+        ],
+        stops: <double>[0, fog.plateau, 1],
+      ).createShader(Rect.fromCircle(center: Offset.zero, radius: 1));
+      canvas.drawCircle(Offset.zero, 1, _paint);
+      _paint.shader = null;
       canvas.restore();
     }
+  }
+
+  @override
+  bool shouldRepaint(_RegionPainter old) =>
+      !identical(old.frame, frame) ||
+      old.index != index ||
+      old.theme != theme ||
+      old.background != background ||
+      old.panelColor != panelColor;
+}
+
+class _SectionDividerPaint extends StatelessWidget {
+  const _SectionDividerPaint({
+    required this.index,
+    required this.theme,
+    required this.background,
+  });
+
+  final int index;
+  final PlateTheme theme;
+  final PlateSection background;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _SectionDividerPainter(
+      frame: PlatePartAnimator.of(context),
+      color: theme.dividerColor,
+      index: index,
+      theme: theme,
+      background: background,
+    ),
+  );
+}
+
+class _SectionDividerPainter extends PlateDividerPainter {
+  _SectionDividerPainter({
+    required super.frame,
+    required super.color,
+    required this.index,
+    required this.theme,
+    required this.background,
+  });
+
+  final int index;
+  final PlateTheme theme;
+  final PlateSection background;
+
+  Size? _laidOutFor;
+  Rect? _rect;
+  RRect? _clip;
+
+  void _layout(Size size) {
+    if (_laidOutFor == size) return;
+    _laidOutFor = size;
+    _rect = _dividerAt(background, Offset.zero & size, index);
+    _clip = _Geometry(theme, size).face;
+  }
+
+  @override
+  Rect? rectOf(Size size) {
+    _layout(size);
+    return _rect;
+  }
+
+  @override
+  RRect? clipOf(Size size) {
+    _layout(size);
+    return _clip;
+  }
+
+  @override
+  bool shouldRepaint(PlateDividerPainter old) =>
+      super.shouldRepaint(old) ||
+      old is! _SectionDividerPainter ||
+      old.index != index ||
+      old.theme != theme ||
+      old.background != background;
+}
+
+class _BorderPaint extends StatelessWidget {
+  const _BorderPaint({required this.theme, required this.isCompleted});
+
+  final PlateTheme theme;
+  final bool isCompleted;
+
+  @override
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _BorderPainter(
+      frame: PlatePartAnimator.of(context),
+      theme: theme,
+      isCompleted: isCompleted,
+    ),
+  );
+}
+
+/// Settled: the rim as a filled ring between the outer and inner rounded
+/// rects. Drawing: a stroke along the ring's centreline, grown from
+/// [PlateMotion.startPoint] and erased from it in the same direction.
+class _BorderPainter extends CustomPainter {
+  _BorderPainter({
+    required this.frame,
+    required this.theme,
+    required this.isCompleted,
+  }) : super(repaint: frame.progress);
+
+  final PlatePartFrame frame;
+  final PlateTheme theme;
+  final bool isCompleted;
+
+  final Paint _fill = Paint();
+  final Paint _stroke = Paint()
+    ..style = PaintingStyle.stroke
+    ..strokeCap = StrokeCap.butt;
+  final Path _segment = Path();
+  Size? _measuredFor;
+  PathMetric? _metric;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (frame.hidden) return;
+    final g = _Geometry(theme, size);
+    final color = _borderColor();
+    final motion = frame.motion;
+    final (a, b) = frame.span;
+    final whole = a <= 0 && b >= 1;
+    if (whole || motion.effect != PlatePartEffect.draw) {
+      _fill.color = whole || !_fades(frame)
+          ? color
+          : color.withValues(alpha: color.a * frame.shown);
+      if (whole || _fades(frame)) {
+        canvas.drawDRRect(g.outer, g.inner, _fill);
+      } else {
+        canvas.save();
+        canvas.clipRect(
+          plateRevealRect(Offset.zero & size, motion.origin, frame),
+        );
+        canvas.drawDRRect(g.outer, g.inner, _fill);
+        canvas.restore();
+      }
+      return;
+    }
+
+    final metric = _metricFor(size, g);
+    final length = metric.length;
+    final s = (motion.startPoint % 1) * length;
+    _segment.reset();
+    if (motion.clockwise) {
+      _addSpan(metric, s + a * length, s + b * length);
+    } else {
+      _addSpan(metric, s - b * length, s - a * length);
+    }
+    _stroke
+      ..color = color
+      ..strokeWidth = g.border;
+    canvas.drawPath(_segment, _stroke);
+  }
+
+  /// [from]..[to] along the closed ring, either end allowed past the seam.
+  void _addSpan(PathMetric metric, double from, double to) {
+    final length = metric.length;
+    var lo = from % length;
+    final span = to - from;
+    if (lo + span <= length) {
+      _segment.addPath(metric.extractPath(lo, lo + span), Offset.zero);
+    } else {
+      _segment.addPath(metric.extractPath(lo, length), Offset.zero);
+      _segment.addPath(metric.extractPath(0, lo + span - length), Offset.zero);
+    }
+  }
+
+  /// The ring's centreline, clockwise from the top-left corner.
+  PathMetric _metricFor(Size size, _Geometry g) {
+    final cached = _metric;
+    if (cached != null && _measuredFor == size) return cached;
+    final half = g.border / 2;
+    final rect = (Offset.zero & size).deflate(half);
+    final r = math.max(0.0, g.outerRadius - half);
+    final path = Path()
+      ..moveTo(rect.left + r, rect.top)
+      ..lineTo(rect.right - r, rect.top)
+      ..arcTo(
+        Rect.fromCircle(
+          center: Offset(rect.right - r, rect.top + r),
+          radius: r,
+        ),
+        -math.pi / 2,
+        math.pi / 2,
+        false,
+      )
+      ..lineTo(rect.right, rect.bottom - r)
+      ..arcTo(
+        Rect.fromCircle(
+          center: Offset(rect.right - r, rect.bottom - r),
+          radius: r,
+        ),
+        0,
+        math.pi / 2,
+        false,
+      )
+      ..lineTo(rect.left + r, rect.bottom)
+      ..arcTo(
+        Rect.fromCircle(
+          center: Offset(rect.left + r, rect.bottom - r),
+          radius: r,
+        ),
+        math.pi / 2,
+        math.pi / 2,
+        false,
+      )
+      ..lineTo(rect.left, rect.top + r)
+      ..arcTo(
+        Rect.fromCircle(center: Offset(rect.left + r, rect.top + r), radius: r),
+        math.pi,
+        math.pi / 2,
+        false,
+      )
+      ..close();
+    _measuredFor = size;
+    return _metric = path.computeMetrics().first;
   }
 
   Color _borderColor() {
@@ -215,9 +593,8 @@ class _PlateFramePainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(_PlateFramePainter old) =>
+  bool shouldRepaint(_BorderPainter old) =>
+      !identical(old.frame, frame) ||
       old.theme != theme ||
-      old.isCompleted != isCompleted ||
-      old.background != background ||
-      old.panelColor != panelColor;
+      old.isCompleted != isCompleted;
 }
