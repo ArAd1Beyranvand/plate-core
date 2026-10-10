@@ -21,20 +21,31 @@ if command -v pana >/dev/null 2>&1; then PANA=(pana)
 elif dart pub global list 2>/dev/null | grep -q '^pana '; then PANA=(dart pub global run pana)
 else PANA=(); echo "pana not found (dart pub global activate pana): scores will be n/a"; fi
 
+# 0 = public or unknown, 1 = private/missing. A network hiccup must not read as
+# "private": retry gh, fall back to plain HTTP, and when both fail run the check.
 is_public(){
-  local slug
+  local slug v code i
   slug=$(git -C "$1" remote get-url origin 2>/dev/null | sed -E 's#(\.git)?/?$##; s#.*github.com[:/]##')
-  [ -n "$slug" ] && [ "$(gh repo view "$slug" --json isPrivate -q .isPrivate 2>/dev/null)" = false ]
+  [ -n "$slug" ] || return 1
+  for i in 1 2 3; do
+    v=$(gh repo view "$slug" --json isPrivate -q .isPrivate 2>/dev/null)
+    case "$v" in false) return 0;; true) return 1;; esac
+  done
+  for i in 1 2 3; do
+    code=$(curl -s -o /dev/null -w '%{http_code}' "https://github.com/$slug")
+    case "$code" in 200) return 0;; 404) return 1;; esac
+  done
+  return 0
 }
 
 body=$(mktemp); sum=$(mktemp)
 for d in "${pkgs[@]}"; do
   case "$SKIP" in *" $d "*) continue;; esac
   [ -f "$d/pubspec.yaml" ] || continue
-  if ! is_public "$d"; then printf '%-40s %s\n' "$d" "not public on GitHub, skipped" >> "$sum"; continue; fi
   if grep -qE '^publish_to:[[:space:]]*.?none' "$d/pubspec.yaml"; then
     printf '%-40s %s\n' "$d" "publish_to: none, skipped" >> "$sum"; continue
   fi
+  if ! is_public "$d"; then printf '%-40s %s\n' "$d" "not public on GitHub, skipped" >> "$sum"; continue; fi
   echo "running: $d"
   { echo; echo "################ $d ################"; echo "--- flutter pub publish --dry-run"; } >> "$body"
   (cd "$d" && flutter pub publish --dry-run >> "$body" 2>&1)
