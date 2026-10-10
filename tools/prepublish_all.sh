@@ -45,10 +45,11 @@ for d in "${pkgs[@]}"; do
   if grep -qE '^publish_to:[[:space:]]*.?none' "$d/pubspec.yaml"; then
     printf '%-40s %s\n' "$d" "publish_to: none, skipped" >> "$sum"; continue
   fi
+  echo "[$d] checking GitHub visibility..."
   if ! is_public "$d"; then printf '%-40s %s\n' "$d" "not public on GitHub, skipped" >> "$sum"; continue; fi
-  echo "running: $d"
+  echo "[$d] flutter pub publish --dry-run"
   { echo; echo "################ $d ################"; echo "--- flutter pub publish --dry-run"; } >> "$body"
-  (cd "$d" && flutter pub publish --dry-run >> "$body" 2>&1)
+  (set -o pipefail; cd "$d" && flutter pub publish --dry-run 2>&1 | tee -a "$body" | sed "s/^/    /")
   rc=$?
   case $rc in 0) s="OK";; 65) s="WARNINGS";; *) s="ERRORS(exit $rc)";; esac
 
@@ -56,7 +57,8 @@ for d in "${pkgs[@]}"; do
   if [ ${#PANA[@]} -gt 0 ]; then
     echo "--- pana" >> "$body"
     rep=$(mktemp)
-    "${PANA[@]}" --no-warning "$d" > "$rep" 2>>"$body"
+    echo "[$d] pana (slow, ~1-2 min)..."
+    "${PANA[@]}" --no-warning "$d" > "$rep" 2> >(tee -a "$body" >&2)
     cat "$rep" >> "$body"
     score=$(sed -n 's/^Points: \([0-9]*\/[0-9]*\)\..*/\1/p' "$rep" | tail -1)
     [ -n "$score" ] || score="n/a (pana failed, see report)"
