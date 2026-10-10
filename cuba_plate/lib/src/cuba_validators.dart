@@ -23,8 +23,9 @@ class CubaValidator extends GatedPlateValidator {
   @override
   PlateValidation judge(PlateEntry entry) {
     final String letter = entry.group('letter');
-    if (letter.isEmpty)
+    if (letter.isEmpty) {
       return const PlateValidation.invalid(reasonLetterMissing);
+    }
     if (!CubaAlphabets.letters.accepts(letter)) {
       return const PlateValidation.invalid(reasonLetterUnissued);
     }
@@ -32,8 +33,9 @@ class CubaValidator extends GatedPlateValidator {
     if (serial.length != entry.spec.slotCount - 1) {
       return const PlateValidation.invalid(reasonSerialLength);
     }
-    if (!isDigits(serial))
+    if (!isDigits(serial)) {
       return const PlateValidation.invalid(reasonSerialNotNumeric);
+    }
     return const PlateValidation.valid();
   }
 }

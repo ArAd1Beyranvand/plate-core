@@ -13,7 +13,7 @@ SKIP=" kazakhstan_plate turkmenistan_plate uzbekistan_plate plate_number_holder 
 pkgs=("$@")
 if [ ${#pkgs[@]} -eq 0 ]; then
   [ -f "$LOG" ] || { echo "no $LOG; run tools/push_all.sh first"; exit 1; }
-  pkgs=($(sed -n '/^=== SUMMARY/,$p' "$LOG" | awk '$2=="pushed"{print $1}'))
+  pkgs=($(sed -n '/^=== SUMMARY/,$p' "$LOG" | awk '$2 ~ /^pushed/ {print $1}'))
 fi
 
 if command -v pana >/dev/null 2>&1; then PANA=(pana)

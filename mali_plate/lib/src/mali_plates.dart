@@ -145,7 +145,5 @@ PlateSpec maliStandardPlate() {
 /// All Mali plate specs, keyed by a simple name.
 abstract final class MaliPlates {
   static final Map<String, PlateSpec Function()> all =
-      <String, PlateSpec Function()>{
-    'standard': maliStandardPlate,
-  };
+      <String, PlateSpec Function()>{'standard': maliStandardPlate};
 }

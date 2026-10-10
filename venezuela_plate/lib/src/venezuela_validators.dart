@@ -81,13 +81,15 @@ class VenezuelaValidator extends GatedPlateValidator {
   @override
   PlateValidation judge(PlateEntry entry) {
     final String serial = entry.group('serial');
-    if (serial.length != 6)
+    if (serial.length != 6) {
       return const PlateValidation.invalid(reasonSerialLength);
+    }
     if (!VenezuelaAlphabets.stateNames.containsKey(entry.group('state'))) {
       return const PlateValidation.invalid(reasonState);
     }
-    if (categoryOf(serial) == null)
+    if (categoryOf(serial) == null) {
       return const PlateValidation.invalid(reasonNoCategory);
+    }
     return const PlateValidation.valid();
   }
 }
