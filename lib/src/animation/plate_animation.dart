@@ -439,10 +439,21 @@ class PlateSpecTransition {
   /// The stagger between consecutive parts, as in [PlateStagger.sequence].
   final Duration step;
 
-  bool keeps(PlatePartId id, PlateSpec from, PlateSpec to) {
+  /// [fromValues] and [toValues] are the characters each plate shows, for
+  /// judging slots; without them no slot is identical.
+  bool keeps(
+    PlatePartId id,
+    PlateSpec from,
+    PlateSpec to, {
+    List<String?>? fromValues,
+    List<String?>? toValues,
+  }) {
     final decided = keep?.call(id, from, to);
     if (decided != null) return decided;
-    if (keepIdentical && samePart(id, from, to)) return true;
+    if (keepIdentical &&
+        samePart(id, from, to, fromValues: fromValues, toValues: toValues)) {
+      return true;
+    }
     return keepKinds.contains(id.kind) &&
         PlatePartId.allOf(from).contains(id) &&
         PlatePartId.allOf(to).contains(id);
@@ -450,9 +461,16 @@ class PlateSpecTransition {
 
   /// True when [from] and [to] would paint [id] identically, as far as the
   /// specs say: same canvas, and the part's own data equal. Covers the panel
-  /// (block, flag, caption), bands, rules and labels; the
-  /// background and slots are never judged identical.
-  static bool samePart(PlatePartId id, PlateSpec from, PlateSpec to) {
+  /// (block, flag, caption), background regions and dividers, bands, rules,
+  /// labels, and slots showing the same character (or none) in the same box.
+  /// The border and the face behind the regions always redraw.
+  static bool samePart(
+    PlatePartId id,
+    PlateSpec from,
+    PlateSpec to, {
+    List<String?>? fromValues,
+    List<String?>? toValues,
+  }) {
     if (from.canvasWidth != to.canvasWidth ||
         from.canvasHeight != to.canvasHeight) {
       return false;
@@ -473,6 +491,27 @@ class PlateSpecTransition {
             a.padding == b.padding &&
             a.direction == b.direction &&
             identical(a.shape, b.shape);
+      case PlatePartKind.region:
+        final a = _leafAt(from, i), b = _leafAt(to, i);
+        if (a == null || b == null) return false;
+        return a.$2 == b.$2 &&
+            identical(a.$1.shape, b.$1.shape) &&
+            _sameFill(a.$1.fill!, b.$1.fill!) &&
+            (!a.$1.paintsPanel ||
+                from.country.panelColor == to.country.panelColor);
+      case PlatePartKind.divider:
+        final a = _dividerAt(from, i), b = _dividerAt(to, i);
+        return a != null && a == b && from.inkOverride == to.inkOverride;
+      case PlatePartKind.slot:
+        if (fromValues == null || toValues == null) return false;
+        if (i >= from.slots.length || i >= to.slots.length) return false;
+        if (i >= fromValues.length || i >= toValues.length) return false;
+        final a = from.slots[i], b = to.slots[i];
+        final va = fromValues[i] ?? '', vb = toValues[i] ?? '';
+        return va == vb &&
+            _sameBox(a.box, b.box) &&
+            a.color == b.color &&
+            from.inkOverride == to.inkOverride;
       case PlatePartKind.band:
         if (i >= from.bands.length || i >= to.bands.length) return false;
         final a = from.bands[i], b = to.bands[i];
@@ -498,6 +537,76 @@ class PlateSpecTransition {
       default:
         return false;
     }
+  }
+
+  static bool _sameFill(PlateFill a, PlateFill b) {
+    if (identical(a, b)) return true;
+    if (a.isStripes || b.isStripes) return false;
+    return a.isField == b.isField &&
+        a.isPanel == b.isPanel &&
+        a.color == b.color &&
+        a.fog == null &&
+        b.fog == null;
+  }
+
+  /// Leaf [index] of [spec]'s background and its rect, depth-first.
+  static (PlateSection, Rect)? _leafAt(PlateSpec spec, int index) {
+    (PlateSection, Rect)? hit;
+    var seen = 0;
+    _walk(spec, (s, r) {
+      if (hit == null && seen++ == index) hit = (s, r);
+    }, null);
+    return hit;
+  }
+
+  /// Divider [index] of [spec]'s background as a rect, depth-first.
+  static Rect? _dividerAt(PlateSpec spec, int index) {
+    Rect? hit;
+    var seen = 0;
+    _walk(spec, null, (r) {
+      if (hit == null && seen++ == index) hit = r;
+    });
+    return hit;
+  }
+
+  static void _walk(
+    PlateSpec spec,
+    void Function(PlateSection leaf, Rect r)? onLeaf,
+    void Function(Rect divider)? onDivider,
+  ) {
+    void walk(PlateSection s, Rect r) {
+      if (s.isLeaf) {
+        onLeaf?.call(s, r);
+        return;
+      }
+      final across = s.axis == Axis.horizontal;
+      var start = across ? r.left : r.top;
+      final last = s.parts.length - 1;
+      for (var i = 0; i <= last; i++) {
+        final part = s.parts[i];
+        final end = i == last ? (across ? r.right : r.bottom) : part.end!;
+        walk(
+          part.section,
+          across
+              ? Rect.fromLTRB(start, r.top, end, r.bottom)
+              : Rect.fromLTRB(r.left, start, r.right, end),
+        );
+        if (part.divider > 0 && i != last) {
+          final half = part.divider / 2;
+          onDivider?.call(
+            across
+                ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
+                : Rect.fromLTRB(r.left, end - half, r.right, end + half),
+          );
+        }
+        start = end;
+      }
+    }
+
+    walk(
+      spec.background,
+      Rect.fromLTWH(0, 0, spec.canvasWidth, spec.canvasHeight),
+    );
   }
 
   static bool _sameBox(PlateBox a, PlateBox b) =>

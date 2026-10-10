@@ -119,8 +119,16 @@ class _PlateCanvasState extends State<PlateCanvas> {
     }
   }
 
-  void _startTransition(PlateCanvas old) {
+  void _startTransition(PlateCanvas old, List<String?> shown) {
     final from = old.spec, to = widget.spec;
+    final toValues = _controller.values;
+    bool keeps(PlatePartId id) => widget.specTransition!.keeps(
+      id,
+      from,
+      to,
+      fromValues: shown,
+      toValues: toValues,
+    );
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
     if (transition == null || anim == null) return;
@@ -128,7 +136,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       from,
       step: transition.step,
       reverse: true,
-    )..removeWhere((id, _) => transition.keeps(id, from, to));
+    )..removeWhere((id, _) => keeps(id));
     final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
     _ghost = _Ghost(
       serial: ++_ghostSerial,
@@ -137,11 +145,11 @@ class _PlateCanvasState extends State<PlateCanvas> {
       country: old.country,
       mode: old.mode,
       inputSource: old.inputSource,
-      values: _shownValues,
+      values: shown,
       outDelays: outDelays,
       kept: {
         for (final id in PlatePartId.allOf(from))
-          if (transition.keeps(id, from, to)) id,
+          if (keeps(id)) id,
       },
       length: outLength,
       style: anim.style,
@@ -155,13 +163,20 @@ class _PlateCanvasState extends State<PlateCanvas> {
           e.key: e.value + outLength,
       },
     );
+    // Kept parts show in the ghost, above its leaving background, and hand
+    // over here when it goes.
     for (final id in PlatePartId.allOf(to)) {
-      if (transition.keeps(id, from, to)) anim.settle(id);
+      if (keeps(id)) anim.hide(id);
     }
   }
 
   void _ghostDone(int serial) {
-    if (!mounted || _ghost?.serial != serial) return;
+    final ghost = _ghost;
+    if (!mounted || ghost?.serial != serial) return;
+    final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
+    for (final id in ghost!.kept) {
+      anim?.settle(id);
+    }
     setState(() => _ghost = null);
   }
 
@@ -202,11 +217,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // an ordinary thing for a host to do — and the machine then holds the
     // previous plate's nodes: wrong slot, or off the end of the list outright.
     if (widget.spec.id != oldWidget.spec.id) {
-      _startTransition(oldWidget);
+      final shown = _shownValues;
       // The controller holds the previous plate's values — a different slot
       // count — and migrates itself to the new spec, carrying the characters
       // across as [PlateCanvas.onSpecChange] directs.
       _controller.adoptSpec(widget.spec, preserve: widget.onSpecChange);
+      _startTransition(oldWidget, shown);
       oldWidget.controller?.detach(_machine);
       widget.controller?.detach(_machine);
       _machine.dispose();
@@ -1151,7 +1167,8 @@ class _Ghost {
   final List<String?> values;
   final Map<PlatePartId, Duration> outDelays;
 
-  /// Parts the incoming plate shows in place; gone from the ghost at once.
+  /// Parts both plates share: held in the ghost, then handed to the
+  /// incoming plate when it goes.
   final Set<PlatePartId> kept;
   final Duration length;
   final PlateAnimationStyle style;
@@ -1160,11 +1177,7 @@ class _Ghost {
 /// The outgoing plate as an inert display canvas over the incoming one,
 /// taking itself apart; reports [onDone] when the last part has gone.
 class _SpecGhost extends StatefulWidget {
-  const _SpecGhost({
-    super.key,
-    required this.ghost,
-    required this.onDone,
-  });
+  const _SpecGhost({super.key, required this.ghost, required this.onDone});
 
   final _Ghost ghost;
   final void Function(int serial) onDone;
@@ -1187,7 +1200,7 @@ class _SpecGhostState extends State<_SpecGhost> {
     _anim = PlateAnimationController(style: g.style)
       ..goOutAll(delays: g.outDelays);
     for (final id in g.kept) {
-      _anim.hide(id);
+      _anim.settle(id);
     }
     _done = Timer(g.length, () => widget.onDone(g.serial));
   }
