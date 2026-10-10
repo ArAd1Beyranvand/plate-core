@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Mali to view examples:
+From the mighty people of Iran to the proud people of Mali to view examples:
 
 https://platexample.ir/#/discover/mali
 

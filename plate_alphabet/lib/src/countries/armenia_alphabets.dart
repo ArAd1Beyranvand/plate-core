@@ -31,7 +31,7 @@ abstract final class ArmeniaAlphabets {
   /// ones exist, and it is a validator's to answer, not an alphabet's — see
   /// [stateVehiclesOnly] and `ArmeniaPlateValidator`. An alphabet that barred
   /// `G` would make the rule un-typeable rather than reportable, which is the
-  /// one thing `core_plate` asks validation never to do.
+  /// one thing `plate_core` asks validation never to do.
   static const PlateAlphabet letters = PlateAlphabet(
     id: 'am.letters',
     characters: <String>[

@@ -1,4 +1,4 @@
-/// Yemen's licence plates for the `core_plate` library.
+/// Yemen's licence plates for the `plate_core` library.
 ///
 /// **Yemen has two current plate systems, not one current and one legacy.**
 /// System A is the 2026 unified white plate (light blue side panel, 4–6 digit number,

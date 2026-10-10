@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Colombia to view examples:
+From the mighty people of Iran to the warm people of Colombia to view examples:
 
 https://platexample.ir/#/discover/colombia
 

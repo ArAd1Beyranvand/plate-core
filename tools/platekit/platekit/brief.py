@@ -11,9 +11,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
+from . import icons as icon_stage
+from .fetch import safe_name
 from .scaffold import snake
 
-TEMPLATE = Path(__file__).resolve().parent.parent / 'prompts' / 'llm_brief.md'
+PROMPTS = Path(__file__).resolve().parent.parent / 'prompts'
+TEMPLATE = PROMPTS / 'llm_brief.md'
 
 
 def _table(t: dict, limit: int = 40) -> str:
@@ -46,12 +49,47 @@ def facts_section(facts: dict) -> str:
     return '\n'.join(lines)
 
 
+def _captions(facts: dict) -> dict[str, str]:
+    """safe photo stem -> the caption (or table row) the article puts on it."""
+    out = {}
+    for n, c in facts.get('image_context', {}).items():
+        bits = dict(line.split(': ', 1) for line in c.splitlines() if ': ' in line)
+        out[safe_name(Path(n).stem)] = bits.get('caption') or bits.get('row') or ''
+    return out
+
+
+def categories_section(facts: dict, photos: dict) -> str:
+    """Every captioned picture, with what happened to it. A caption is the
+    article naming a category; one that ends up nowhere is a category
+    silently lost, so it is listed whatever its fit."""
+    caps = _captions(facts)
+    if not caps:
+        return ''
+    lines = ['## Pictures and their captions', '',
+             'Each caption naming a current plate is a category to implement; '
+             'say explicitly why any is not.', '']
+    for name, cap in caps.items():
+        p = photos.get(name, {})
+        if p.get('rejected'):
+            state = f"SKIPPED ({p['rejected']})"
+        elif not p.get('measure'):
+            state = 'NOT MEASURED — open orig_' + name
+        elif not p.get('found', {}).get('confident'):
+            state = 'CHECK'
+        else:
+            state = 'measured'
+        lines.append(f'- {name}: "{cap}" — {state}')
+    return '\n'.join(lines)
+
+
 def photo_section(photos: dict) -> str:
     """photos: name -> {found, measure, colours, ask} as the CLI saves them."""
     lines = ['## Photos', '', '| photo | fit | aspect | field | ink | rows (y: x-span, runs) | local model |',
              '|---|---|---|---|---|---|---|']
     flagged = []
     for name, p in photos.items():
+        if p.get('rejected'):
+            continue
         f = p.get('found', {})
         fit = 'ok' if f.get('confident') else 'CHECK'
         if not f.get('confident'):
@@ -80,8 +118,15 @@ def write(work: Path) -> Path:
     facts = json.loads((work / 'facts.json').read_text())
     photos = json.loads((work / 'photos.json').read_text()) if (work / 'photos.json').exists() else {}
     parts = [facts_section(facts)]
+    cats = categories_section(facts, photos)
+    if cats:
+        parts.append(cats)
     if photos:
         parts.append(photo_section(photos))
+    pkg = snake(facts['country']) + '_plate'
+    icons = icon_stage.section(work)
+    if icons:
+        parts.append(icons + '\n\n' + (PROMPTS / 'icons.md').read_text().replace('{package}', pkg))
     parts.append(TEMPLATE.read_text().replace('{country}', snake(facts['country'])))
     out = work / 'brief.md'
     out.write_text('\n\n'.join(parts) + '\n')

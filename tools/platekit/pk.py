@@ -5,7 +5,9 @@
     pk.py photos   .plateref/la         find, flatten, measure, colour every photo
     pk.py ask      .plateref/la         local-model layout questions per photo
     pk.py sheet    out.png  a.png b.png contact sheet (one Read for many images)
-    pk.py brief    .plateref/la         facts + photos → brief.md for the LLM
+    pk.py archive  .plateref/la         copy the before data to $PLATEKIT_ARCHIVE (default ~/platekit-archive)
+    pk.py icons    .plateref/la         flags/crests on the plates and the page → icons/
+    pk.py brief    .plateref/la         facts + photos + icons → brief.md for the LLM
     pk.py scaffold Laos la              package boilerplate + registrations
     pk.py goldens  laos_plate targets.json   render-free check of goldens vs targets
     pk.py calibrate GLYPH MEASURED TARGET
@@ -23,13 +25,27 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
 import cv2
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from platekit import brief, fetch, github, gitplan, logfilter, scaffold, vision  # noqa: E402
+from platekit import archive, brief, fetch, github, gitplan, icons, logfilter, progress, scaffold, vision  # noqa: E402
+
+_imwrite = cv2.imwrite
+
+
+def _imwrite_shown(path, img, *args):
+    """Every picture pk writes goes to the GUI the moment it exists."""
+    ok = _imwrite(path, img, *args)
+    if ok and not str(path).startswith('/tmp/'):
+        progress.image(path)
+    return ok
+
+
+cv2.imwrite = _imwrite_shown
 
 ROOT = Path.cwd()
 
@@ -58,6 +74,9 @@ def _used_size(work: Path) -> tuple[float, float]:
     return tuple(json.loads(c.read_text())['used']) if c.exists() else _plate_size(work)
 
 
+MIN_ASPECT = 0.8
+
+
 def cmd_photos(a):
     """Two passes: fit every photo, then flatten all of them to one aspect.
 
@@ -72,23 +91,66 @@ def cmd_photos(a):
     cw, ch = _plate_size(work, getattr(a, 'size', None))
     photos_path = work / 'photos.json'
     photos = json.loads(photos_path.read_text()) if photos_path.exists() else {}
+    facts = json.loads((work / 'facts.json').read_text()) if (work / 'facts.json').exists() else {}
+    drawings = {fetch.safe_name(Path(n).stem) for n, i in facts.get('images', {}).items() if i.get('drawing')}
+    origs = [p for p in sorted(work.glob('orig_*'))
+             if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp')]
+    # the user ticks which pictures go on (cars, maps and old designs are
+    # left out here) and drags same-layout plates into groups
+    was_dropped = {n for n, e in photos.items() if e.get('rejected') == 'unticked'}
+    old_groups: dict[int, list[str]] = {}
+    for p in origs:
+        g = photos.get(p.stem[5:], {}).get('group')
+        if g is not None:
+            old_groups.setdefault(g, []).append(str(p))
+    keep, groups = progress.pick([str(p) for p in origs],
+                                 [str(p) for p in origs if p.stem[5:] not in was_dropped],
+                                 'Which pictures should continue? Drag plates onto each other to group them',
+                                 list(old_groups.values()))
+    keep = set(keep)
+    group_of = {Path(p).stem[5:]: i for i, g in enumerate(g for g in groups if len(g) > 1) for p in g}
     images = {}
-    for p in sorted(work.glob('orig_*')):
-        if p.suffix.lower() not in ('.jpg', '.jpeg', '.png', '.webp'):
-            continue
-        im = cv2.imread(str(p))
-        if im is None:
-            continue
+    for p in progress.items(origs, 'fit'):
         name = p.stem[5:]
         entry = photos.setdefault(name, {})
+        entry.pop('rejected', None)
+        entry.pop('group', None)
+        if name in group_of:
+            entry['group'] = group_of[name]
+        if str(p) not in keep:
+            entry['rejected'] = 'unticked'
+            (work / f'flat_{name}.png').unlink(missing_ok=True)
+            (work / f'corners_{name}.png').unlink(missing_ok=True)
+            print(f'{name}: unticked, skipped', flush=True)
+            continue
+        im = cv2.imread(str(p), cv2.IMREAD_UNCHANGED)
+        if im is None:
+            continue
+        im = vision.on_white(im)
+        if name in drawings:
+            # already flat: the whole render is the plate
+            h, w = im.shape[:2]
+            entry['found'] = {'corners': [[0, 0], [w - 1, 0], [w - 1, h - 1], [0, h - 1]],
+                              'aspect': w / h, 'confident': True, 'drawing': True}
+            images[name] = im
+            continue
         try:
             entry['found'] = vision.found_dict(vision.find(im))
-            images[name] = im
         except RuntimeError as e:
             entry['found'] = {'confident': False, 'error': str(e)}
-            print(f'{name}: {e}')
+        if 'error' in entry['found']:
+            print(f"{name}: {entry['found']['error']}")
+        else:
+            images[name] = im
 
-    aspects = sorted(photos[n]['found']['aspect'] for n in images if photos[n]['found']['confident'])
+    # no plate is taller than wide by much: narrower fits are crops such as
+    # Italy's EU band strip (0.45), which once overrode the infobox size
+    aspects = sorted(photos[n]['found']['aspect'] for n in images
+                     if photos[n]['found']['confident'] and photos[n]['found']['aspect'] >= MIN_ASPECT)
+    drawn = sorted(photos[n]['found']['aspect'] for n in drawings & set(images)
+                   if photos[n]['found']['aspect'] >= MIN_ASPECT)
+    if drawn:  # a drawing's aspect is the designed one
+        aspects = drawn
     if aspects:
         median = aspects[len(aspects) // 2]
         if not getattr(a, 'size', None) and abs(median - cw / ch) / median > 0.25:
@@ -103,7 +165,7 @@ def cmd_photos(a):
                 f['confident'] = False
                 f['why'] = f'aspect {f["aspect"]:.2f} vs median {median:.2f}'
 
-    for n, (name, im) in enumerate(images.items(), 1):
+    for n, (name, im) in enumerate(progress.items(images.items(), 'flatten'), 1):
         print(f'[{n}/{len(images)}] {name}', flush=True)
         entry = photos[name]
         found = entry['found']
@@ -128,6 +190,12 @@ def cmd_photos(a):
         print(f'{work}/sheet_flat.png')
 
 
+def _small_zone(z: dict, pw: float, ph: float) -> bool:
+    """Sticker-sized: under a third of the plate height and 2% of its area."""
+    w, h = z['x'][1] - z['x'][0], z['y'][1] - z['y'][0]
+    return h < ph / 3 and w * h < 0.02 * pw * ph
+
+
 def cmd_ask(a):
     from platekit import local_llm
     if not local_llm.available():
@@ -136,32 +204,74 @@ def cmd_ask(a):
     work = Path(a.work)
     photos_path = work / 'photos.json'
     photos = json.loads(photos_path.read_text())
-    for n, (name, entry) in enumerate(photos.items(), 1):
-        print(f'[{n}/{len(photos)}] asking about {name}', flush=True)
+    # photos of one design in different colours get the whole-plate
+    # questions once; the rest copy the answers from the first of their group
+    asked: list[tuple] = []   # (signature, name)
+    for n, (name, entry) in enumerate(progress.items(photos.items(), 'ask'), 1):
         img = work / f'flat_{name}.png'
         if not img.exists():
             continue
-        if 'ask' in entry and not a.again:
-            continue
-        entry['ask'] = local_llm.ask_named('layout', [img])
-        entry['ask'].update(local_llm.ask_named('structure', [img]))
-        print(name, entry['ask'], flush=True)
-        # each pixel-found zone, cropped with a margin, labelled by the model
         flat = cv2.imread(str(img))
+        sig = vision.layout_signature(flat)
+        # a group the user made is asked once: its first answered member is the
+        # twin of the rest; otherwise a twin is a photo with the same layout
+        grouped = entry.get('group') is not None
+        twin = next((t for t, e in photos.items() if t != name and grouped and e.get('group') == entry['group']
+                     and 'ask' in e), None) if grouped else None
+        twin = twin or next((t for s, t in asked if float(s @ sig) >= vision.SAME_LAYOUT), None)
+        user_twin = bool(twin) and grouped and photos[twin].get('group') == entry['group']
+        if 'ask' in entry and not a.again:
+            asked.append((sig, name))
+            continue
+        if twin and 'ask' in photos[twin]:
+            why = 'in a group with' if user_twin else 'same layout as'
+            print(f'[{n}/{len(photos)}] {name}: {why} {twin}, reusing its answers', flush=True)
+            entry['ask'] = {**photos[twin]['ask'], 'from': twin}
+        else:
+            print(f'[{n}/{len(photos)}] asking about {name}', flush=True)
+            entry['ask'] = local_llm.ask_named('layout', [img])
+            entry['ask'].update(local_llm.ask_named('structure', [img]))
+            asked.append((sig, name))
+        print(name, entry['ask'], flush=True)
+        # each pixel-found zone, cropped with a margin, labelled by the model;
+        # a zone at the same place on the twin plate keeps the twin's label
         H, W = flat.shape[:2]
         pw, ph = _used_size(work)
         sx, sy = W / pw, H / ph
         for i, z in enumerate(entry.get('zones', [])):
+            same = twin and next((t for t in photos[twin].get('zones', []) if 'kind' in t
+                                  and abs(t['x'][0] - z['x'][0]) < 4 and abs(t['y'][0] - z['y'][0]) < 4
+                                  and abs(t['x'][1] - z['x'][1]) < 4 and abs(t['y'][1] - z['y'][1]) < 4), None)
+            if not same and user_twin:
+                # same structure, other photo: the twin's zone nearest this one
+                labelled = [t for t in photos[twin].get('zones', []) if 'kind' in t]
+                same = min(labelled, default=None, key=lambda t: abs(sum(t['x']) - sum(z['x']))
+                           + abs(sum(t['y']) - sum(z['y'])))
+            if same:
+                z.update(kind=same['kind'], has_text=same.get('has_text'))
+                print(f'  zone {i} {z["colour"]}: {z["kind"]} (from {twin})', flush=True)
+                continue
             x0, x1 = int(z['x'][0] * sx), int(z['x'][1] * sx)
             y0, y1 = int(z['y'][0] * sy), int(z['y'][1] * sy)
-            m = 6
+            m = max(6, (x1 - x0) // 2, (y1 - y0) // 2)  # small zones need context
             crop = flat[max(0, y0 - m):y1 + m, max(0, x0 - m):x1 + m]
             if crop.size == 0:
                 continue
+            if max(crop.shape[:2]) < 256:  # tiny crops are unreadable to the model
+                k = 256 / max(crop.shape[:2])
+                crop = cv2.resize(crop, None, fx=k, fy=k, interpolation=cv2.INTER_CUBIC)
             path = work / f'zone_{name}_{i}.png'
             cv2.imwrite(str(path), crop)
             z.update(local_llm.ask_named('zone', [path]))
+            if z.get('kind') == 'sticker' and not _small_zone(z, pw, ph):
+                # a full-height badge is never a sticker: the small model
+                # guessed, so the big one decides
+                z.update(local_llm.ask_named('zone', [path], model=local_llm.model_for('layout')))
             print(f'  zone {i} {z["colour"]}: {z.get("kind")}', flush=True)
+        # the whole-plate view is too coarse for a sticker; a zone found by
+        # pixels and named a sticker is the stronger evidence
+        if any(z.get('kind') == 'sticker' and _small_zone(z, pw, ph) for z in entry.get('zones', [])):
+            entry['ask']['sticker'] = True
         # saved per photo: a killed run keeps what it already paid for
         photos_path.write_text(json.dumps(photos, ensure_ascii=False, indent=1))
 
@@ -171,7 +281,18 @@ def cmd_sheet(a):
     print(a.out)
 
 
+def cmd_archive(a):
+    print(archive.save(Path(a.work)))
+
+
+def cmd_icons(a):
+    found = icons.collect(Path(a.work))
+    print(f"{len(found)} icons in {Path(a.work) / 'icons'}")
+
+
 def cmd_brief(a):
+    if (Path(a.work) / 'facts.json').exists():
+        cmd_icons(a)
     out = brief.write(Path(a.work))
     print(f'{out} ({out.stat().st_size} bytes)')
 
@@ -253,6 +374,10 @@ def _saved_code(country: str) -> str | None:
 
 def _step(title: str) -> None:
     print(f'\n== {title}', flush=True)
+    progress.done()
+    m = re.match(r'(\d+)/(\d+)\s*(.*)', title)
+    if m:
+        progress.step(int(m.group(1)), int(m.group(2)), m.group(3))
 
 
 def cmd_before(a):
@@ -299,6 +424,8 @@ def cmd_before(a):
               f'registration, goldens, tests and the commit plan are done afterwards '
               f'by `pk.py after`.')
     (work / 'claude_prompt.txt').write_text(prompt + '\n')
+    if not a.no_archive:
+        print(f'archived to {archive.save(work)}')
     print(f'\nDone. Now start Claude Code in {ROOT} and paste '
           f'.plateref/{code}/claude_prompt.txt:\n\n{prompt}\n')
 
@@ -397,6 +524,8 @@ def main():
     s.set_defaults(f=cmd_ask)
     s = sub.add_parser('sheet'); s.add_argument('out'); s.add_argument('images', nargs='+')
     s.add_argument('--crop', action='store_true'); s.set_defaults(f=cmd_sheet)
+    s = sub.add_parser('archive'); s.add_argument('work'); s.set_defaults(f=cmd_archive)
+    s = sub.add_parser('icons'); s.add_argument('work'); s.set_defaults(f=cmd_icons)
     s = sub.add_parser('brief'); s.add_argument('work'); s.set_defaults(f=cmd_brief)
     s = sub.add_parser('scaffold'); s.add_argument('country'); s.add_argument('code')
     s.add_argument('--epithet', default=''); s.add_argument('--summary', default='')
@@ -416,6 +545,7 @@ def main():
     s.add_argument('url'); s.add_argument('--code', help='two-letter code (default: Wikidata ISO code)')
     s.add_argument('--size', nargs=2, type=float, help='plate width height, overrides the infobox')
     s.add_argument('--no-ask', action='store_true', help='skip the local model')
+    s.add_argument('--no-archive', action='store_true', help='do not copy the before data to the archive')
     s.add_argument('--epithet', default='', help='README: "the <epithet> people of …"')
     s.add_argument('--summary', default='', help='one sentence for README, pubspec, library doc')
     s.add_argument('--font', action='append', help='extra font for the goldens (repeatable)')

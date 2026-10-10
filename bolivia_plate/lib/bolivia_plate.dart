@@ -1,4 +1,4 @@
-/// Bolivia's licence plates for the `core_plate` library.
+/// Bolivia's licence plates for the `plate_core` library.
 ///
 /// The ordinary plate is the PTA number `1234ABC` in blue on white under
 /// BOLIVIA, with the flag at the left and the department's letter in a box

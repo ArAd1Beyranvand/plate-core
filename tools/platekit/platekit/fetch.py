@@ -19,20 +19,31 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+from platekit import progress
+
 UA = {'User-Agent': 'platekit/0.1 (licence-plate research; offline tooling)'}
 WIKI = 'https://en.wikipedia.org'
 
 
-def _get(url: str, tries: int = 5) -> bytes:
+def _get(url: str, tries: int = 5, label: str = '') -> bytes:
     """upload.wikimedia.org answers 429 to bursts; back off and retry."""
+    label = label or urllib.parse.unquote(url.rsplit('/', 1)[-1])[:60]
     for i in range(tries):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60) as r:
-                return r.read()
+                total = int(r.headers.get('Content-Length') or 0) or None
+                buf = bytearray()
+                while chunk := r.read(64 * 1024):
+                    buf += chunk
+                    progress.task(label, len(buf), total, 'B')
+                progress.task(label, len(buf), total or len(buf), 'B', force=True)
+                return bytes(buf)
         except urllib.error.HTTPError as e:
             if e.code != 429 or i == tries - 1:
                 raise
-            time.sleep(float(e.headers.get('Retry-After') or 0) or 2 ** (i + 1))
+            wait = 2 ** (i + 1)
+            progress.task(f'{label}: 429, retry in {wait:.0f}s', 0, None, force=True)
+            time.sleep(wait)
 
 
 def country_from_url(url: str) -> str:
@@ -59,6 +70,21 @@ def iso2(country: str) -> str | None:
     return None
 
 
+JUNK_SVG = re.compile(r'flag|coat_of_arms|logo|icon|map|seal|emblem|symbol|locator|wiki|question_book|'
+                      r'edit-clear|ambox|crystal|nuvola', re.I)
+
+
+# wiki chrome, never on a plate
+NOT_ICON = re.compile(r'commons-logo|wiki|question_book|edit-clear|ambox|crystal|nuvola|locator|map', re.I)
+
+
+def icon_files(body) -> list[str]:
+    """The flags, coats of arms, emblems and seals the page shows: dropped
+    as plate images, kept as candidates for what a plate carries."""
+    return [n for n in _files(body) if n.lower().endswith('.svg')
+            and JUNK_SVG.search(n) and not NOT_ICON.search(n)]
+
+
 def article_url(country: str) -> str:
     return f'{WIKI}/wiki/Vehicle_registration_plates_of_{country.replace(" ", "_")}'
 
@@ -67,10 +93,14 @@ def fetch_article(country: str, out: Path) -> Path:
     """Downloads the article; falls back to the index's `Main article:` link."""
     out.mkdir(parents=True, exist_ok=True)
     dest = out / 'art.html'
-    try:
-        dest.write_bytes(_get(article_url(country)))
-        return dest
-    except Exception as e:  # 404 or a redirect title that differs
+    e: Exception | None = None
+    for name in (country, f'the {country}'):  # country_from_url drops a leading "the"
+        try:
+            dest.write_bytes(_get(article_url(name)))
+            return dest
+        except urllib.error.HTTPError as err:
+            e = err
+    if e is not None:  # 404 or a redirect title that differs
         index = _get(f'{WIKI}/wiki/Vehicle_registration_plate').decode()
         soup = BeautifulSoup(index, 'lxml')
         for a in soup.select('div.hatnote a'):
@@ -86,8 +116,10 @@ def _text(node) -> str:
 
 def _files(node) -> list[str]:
     names = []
-    for a in node.select('a[href*="/wiki/File:"]'):
-        n = urllib.parse.unquote(a['href'].split('File:', 1)[1])
+    # a flag icon is an <img resource=…File:…> with no link around it
+    for el in node.select('a[href*="/wiki/File:"], img[resource*="/wiki/File:"]'):
+        ref = el.get('href') or el['resource']
+        n = urllib.parse.unquote(ref.split('File:', 1)[1])
         if n not in names:
             names.append(n)
     return names
@@ -102,7 +134,12 @@ def parse(html: str) -> dict:
     for junk in body.select('style, script, sup.reference, .mw-editsection, .navbox, .reflist, '
                             '.metadata, .ambox, .asbox, .sistersitebox, .side-box, .hatnote'):
         junk.decompose()
-    all_images = [n for n in _files(body) if not n.lower().endswith('.svg')]
+    # plate drawings are often SVG (Ireland has no plate photo at all);
+    # flags, logos, maps and coats of arms are SVG too and are dropped
+    all_images = [n for n in _files(body) if not n.lower().endswith('.svg') or not JUNK_SVG.search(n)]
+    icons = icon_files(body)
+    context = image_context(body)
+    all_images = [n for n in all_images if not _is_old(n, context.get(n, ''))]
     israel = bool(re.search(r'\bIsrael', body.get_text(' ')))
 
     infobox = {}
@@ -151,8 +188,58 @@ def parse(html: str) -> dict:
         'sections': sections,
         'tables': tables,
         'all_images': all_images,
+        'icon_files': icons,
+        'image_context': {n: context[n] for n in all_images if n in context},
         'mentions_israel': israel,
     }
+
+
+OLD = re.compile(r'\b(old|previous)\b', re.I)
+
+
+def _is_old(name: str, ctx: str) -> bool:
+    """Pictures filed under an "Old"/"Previous" section, caption or name are
+    skipped. The row text is not checked: it may say "old" about a new plate."""
+    if OLD.search(re.sub(r'[_.]', ' ', name)):
+        return True
+    return any(OLD.search(l) for l in ctx.split('\n')
+               if l.startswith(('section:', 'caption:', 'table:', 'title:')))
+
+
+def image_context(body) -> dict[str, str]:
+    """The words around each image: its section heading, caption, and the
+    table row and caption it sits in. Old designs are marked there, often
+    only by a year range ("2000–2016"), which is why the model reads it."""
+    out = {}
+    for a in body.select('a[href*="/wiki/File:"]'):
+        name = urllib.parse.unquote(a['href'].split('File:', 1)[1])
+        if name in out:
+            continue
+        bits = []
+        h = a.find_previous(lambda t: t.name in ('h2', 'h3') and not t.find_parent(id='toc')
+                            and _text(t) != 'Contents')
+        if h:
+            bits.append('section: ' + _text(h))
+        cap = (a.find_parent('figure') or a.find_parent(class_='gallerybox')
+               or a.find_parent(class_='thumb'))
+        if cap:
+            c = cap.select_one('figcaption, .gallerytext, .thumbcaption')
+            if c and _text(c):
+                bits.append('caption: ' + _text(c))
+        tr = a.find_parent('tr')
+        if tr:
+            t = tr.find_parent('table')
+            tc = t.find('caption') if t else None
+            if tc and _text(tc):
+                bits.append('table: ' + _text(tc))
+            head = t.find('tr') if t else None
+            if head and head is not tr:
+                bits.append('columns: ' + ' | '.join(_text(c) for c in head.find_all(['th', 'td'])))
+            bits.append('row: ' + ' | '.join(_text(c) for c in tr.find_all(['th', 'td'])))
+        if a.get('title') and a['title'] != 'File:' + name:
+            bits.append('title: ' + a['title'])
+        out[name] = '\n'.join(b[:400] for b in bits)
+    return out
 
 
 def _size(infobox: dict) -> list[float] | None:
@@ -171,7 +258,7 @@ def resolve_images(names: list[str]) -> dict[str, dict]:
         titles = '|'.join('File:' + n for n in names[i:i + 50])
         q = urllib.parse.urlencode({
             'action': 'query', 'format': 'json', 'prop': 'imageinfo',
-            'iiprop': 'url|size|mime', 'titles': titles,
+            'iiprop': 'url|size|mime', 'iiurlwidth': 1600, 'titles': titles,
         })
         data = json.loads(_get(f'{WIKI}/w/api.php?{q}'))
         norm = {n['to']: n['from'] for n in data['query'].get('normalized', [])}
@@ -181,6 +268,7 @@ def resolve_images(names: list[str]) -> dict[str, dict]:
             out[title.split(':', 1)[1]] = {
                 'url': info.get('url'), 'width': info.get('width'),
                 'height': info.get('height'), 'mime': info.get('mime'),
+                'thumb': info.get('thumburl'),
             }
     return out
 
@@ -191,13 +279,34 @@ def safe_name(name: str) -> str:
 
 def download(names: list[str], out: Path) -> dict[str, dict]:
     meta = resolve_images(names)
-    for name, info in meta.items():
+    for n, (name, info) in enumerate(meta.items(), 1):
+        progress.step_items(n, len(meta))
         if not info['url']:
             continue
         dest = out / ('orig_' + safe_name(name))
+        url = info['url']
+        if name.lower().endswith('.svg'):  # Wikimedia's PNG render of the drawing
+            dest, url, info['drawing'] = dest.with_suffix('.png'), info['thumb'] or url, True
+        if name.lower().endswith('.gif'):  # OpenCV cannot read GIF; keep the first frame as PNG
+            dest, info['drawing'] = dest.with_suffix('.png'), True
         if not dest.exists():
-            dest.write_bytes(_get(info['url']))
+            try:
+                data = _get(url, label=f'[{n}/{len(meta)}] {name[:50]}')
+            except urllib.error.HTTPError as e:
+                if e.code != 429 or not progress.paste(dest, f'{WIKI}/wiki/File:{urllib.parse.quote(name)}',
+                                                       f'429 on {name}: paste the picture'):
+                    raise
+                progress.image(dest)
+                info['file'] = dest.name
+                continue
+            if name.lower().endswith('.gif'):
+                import io
+                from PIL import Image
+                Image.open(io.BytesIO(data)).convert('RGB').save(dest)
+            else:
+                dest.write_bytes(data)
             time.sleep(1)
+        progress.image(dest)
         info['file'] = dest.name
     return meta
 

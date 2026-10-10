@@ -33,7 +33,7 @@ import 'bolivia_country.dart';
 /// face — a 32 mm wide digit 80 mm tall. A slot scales its glyph down to fit
 /// its cell, and DejaVu Bold's digits are far wider than that, so the serial
 /// is width-limited at about half the reference height. Labels are sized to
-/// the measured ink *width* for the same reason. `core_plate` is unchanged.
+/// the measured ink *width* for the same reason. `plate_core` is unchanged.
 ///
 /// **Not drawn.** The wiphala printed beside the diplomatic plate's
 /// `BOLIVIA`, the

@@ -1,4 +1,4 @@
-/// Niger's licence plates for the `core_plate` library.
+/// Niger's licence plates for the `plate_core` library.
 ///
 /// The 2005 series: a region digit and series letter, a hologram mark, a
 /// four-digit serial, and the country's map over `RN` at the right. Private

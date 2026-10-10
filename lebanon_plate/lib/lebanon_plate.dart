@@ -1,4 +1,4 @@
-/// Lebanon's licence plates for the `core_plate` library.
+/// Lebanon's licence plates for the `plate_core` library.
 ///
 /// Two geometries (one-line and two-line) and eight colour fields (one per
 /// `LebanonUsage`). `LebanonLetter` is the town or class code; those two axes

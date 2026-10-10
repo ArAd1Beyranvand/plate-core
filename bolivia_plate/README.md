@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Bolivia to view examples:
+From the mighty people of Iran to the resilient people of Bolivia to view examples:
 
 https://platexample.ir/#/discover/bolivia
 

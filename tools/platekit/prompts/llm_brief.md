@@ -5,13 +5,18 @@ each photo fitted, flattened to plate units, measured and colour-balanced.
 Trust the numbers over your own reading of a photo; open a photo only when
 its fit says CHECK or the numbers contradict the article.
 
+0. Take the categories from "Pictures and their captions" and the
+   tables, not from which photos happened to measure: a SKIPPED or NOT
+   MEASURED picture whose caption names a current plate is still a
+   category — open its original and measure it by hand.
 1. Group the categories into designs (one builder per design). Use the
    rows column: same row count and spans means one design.
 2. Write `lib/src/{country}_plates.dart` — `_Layout` from the measured rows,
    one builder per design, glyph sizes from ink heights (glyph ≈ ink / 0.72).
 3. Write the validators' rules from the table's format column.
 4. Write the gallery labels and section notes.
-5. Write the gallery source `plate_number_holder/lib/screens/gallery/sources/{country}.dart`
+5. Place the icons as "Icons — what to do with them" says.
+6. Write the gallery source `plate_number_holder/lib/screens/gallery/sources/{country}.dart`
    and fill the cases map in `test/golden_test.dart` (one line per category).
 
 Already done, do not redo: pubspec, LICENSE, analysis_options, README

@@ -41,7 +41,7 @@ import 'colombia_country.dart';
 /// width-limited below the reference height (~49 of 83 mm). Captions are
 /// sized to the measured ink *width* for the same reason, so they come out
 /// shorter than the reference too. A narrow glyph (`I`, `1`) is not width-
-/// limited and stands taller than its neighbours. `core_plate` is unchanged.
+/// limited and stands taller than its neighbours. `plate_core` is unchanged.
 ///
 /// **Not drawn.** The ministry roundel's artwork (a fisheye `◉` stands in
 /// for it), the antique plate's car graphic, the diplomatic plate's crest,

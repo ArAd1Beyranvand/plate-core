@@ -19,4 +19,4 @@ this repo attests. Treat the letterforms, the two lines' relative size and the
 12% figure as `// CALIBRATE`.
 
 A raster rather than the `.svg` this package's layout would suggest: `PlateDecal`
-cannot take an `SvgPlateAsset` today. Closing that gap is a `core_plate` change.
+cannot take an `SvgPlateAsset` today. Closing that gap is a `plate_core` change.

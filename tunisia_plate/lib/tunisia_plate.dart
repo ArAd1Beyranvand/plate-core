@@ -1,4 +1,4 @@
-/// Tunisia's licence plates for the `core_plate` library.
+/// Tunisia's licence plates for the `plate_core` library.
 ///
 /// The ordinary plate is `NNN تونس NNNN` — series, the word "Tunisia",
 /// registration — on one line or, at the rear, on two. Rental, government,

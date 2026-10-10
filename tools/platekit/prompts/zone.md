@@ -4,7 +4,8 @@ that differs from the plate's background. What is it? Pick one.
 - "flag": a national flag
 - "text_badge": a box with letters in it (country code, "EV", region code)
 - "emblem": coat of arms, seal, round logo
-- "sticker": a stuck-on label or inspection sticker
+- "sticker": a stuck-on label, inspection sticker or holographic/security
+  strip (often small, grey or shimmering, with a faint pattern)
 - "band": a plain coloured strip
 - "character": part of the plate's own letters or digits
 - "noise": a screw, reflection, dirt, the edge or the mount

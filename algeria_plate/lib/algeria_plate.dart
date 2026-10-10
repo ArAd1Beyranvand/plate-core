@@ -1,4 +1,4 @@
-/// Algeria's licence plates for the `core_plate` library.
+/// Algeria's licence plates for the `plate_core` library.
 ///
 /// Every Algerian plate is digits only: `NNNNN NNN NN` — serial, vehicle
 /// class and year of manufacture, wilaya. One single-line geometry carries

@@ -24,7 +24,7 @@ import 'malaysia_country.dart';
 /// 98 mm plate (`glyphStyle` sets 0.72 of the slot, and a bold cap is ~0.73 of
 /// that). Slots here are as tall as the plate allows, and the glyph is then
 /// width-limited by the 40 mm cell, because DejaVu Bold is wider than Arial
-/// Bold. The serial reads ~70% of reference height; `core_plate` is unchanged.
+/// Bold. The serial reads ~70% of reference height; `plate_core` is unchanged.
 abstract final class _Layout {
   // Single row.
   static const double height = 98;

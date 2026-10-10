@@ -1,4 +1,4 @@
-# Deep Code Analysis: core_plate و iran_plate
+# Deep Code Analysis: plate_core و iran_plate
 
 **نویسنده:** Claude Haiku 4.5  
 **تاریخ:** 2026-09-30  
@@ -22,7 +22,7 @@
 
 ## PlateController
 
-**فایل:** `core_plate/lib/src/input/plate_controller.dart`
+**فایل:** `plate_core/lib/src/input/plate_controller.dart`
 
 ### نقش کلی
 
@@ -383,7 +383,7 @@ return _values.isNotEmpty && !_values.any((v) => v == null || v.isEmpty)
 
 ## PlateCanvas
 
-**فایل:** `core_plate/lib/src/widgets/plate_canvas.dart`
+**فایل:** `plate_core/lib/src/widgets/plate_canvas.dart`
 
 ### نقش کلی
 
@@ -614,7 +614,7 @@ PlateSelector<PlateValidation>(
 
 ## PlateSpec
 
-**فایل:** `core_plate/lib/src/model/plate_spec.dart`
+**فایل:** `plate_core/lib/src/model/plate_spec.dart`
 
 ### نقش کلی
 
@@ -794,7 +794,7 @@ for (final a in <PlateAlphabet>[
 
 ## PlateValidator
 
-**فایل:** `core_plate/lib/src/validators/plate_validator.dart`
+**فایل:** `plate_core/lib/src/validators/plate_validator.dart`
 
 ### PlateValidation
 
@@ -874,7 +874,7 @@ abstract class GatedPlateValidator extends PlateValidator {
 
 ## PlateInputMachine
 
-**فایل:** `core_plate/lib/src/input/plate_input_machine.dart`
+**فایل:** `plate_core/lib/src/input/plate_input_machine.dart`
 
 ### نقش کلی
 
@@ -1053,7 +1053,7 @@ _focusNodes.first.requestFocus()  // اگر تمام پر: first
 
 ## PlateAlphabet
 
-**فایل:** `core_plate/lib/src/model/plate_alphabet.dart`
+**فایل:** `plate_core/lib/src/model/plate_alphabet.dart`
 
 ### نقش کلی
 
@@ -1650,7 +1650,7 @@ bool operator ==(Object other) => other is PlateValidation && other.reason == re
 
 **اختتام**
 
-یہ تجزیہ توضیح دیتا ہے کہ `core_plate` اور `iran_plate` کیسے کام کرتے ہیں — مکمل loop:
+یہ تجزیہ توضیح دیتا ہے کہ `plate_core` اور `iran_plate` کیسے کام کرتے ہیں — مکمل loop:
 - **Data**: PlateSpec + PlateAlphabet
 - **State**: PlateController
 - **Interaction**: PlateInputMachine

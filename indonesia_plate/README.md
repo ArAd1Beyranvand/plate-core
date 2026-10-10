@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Indonesia to view examples:
+From the mighty people of Iran to the friendly people of Indonesia to view examples:
 
 https://platexample.ir/#/discover/indonesia
 

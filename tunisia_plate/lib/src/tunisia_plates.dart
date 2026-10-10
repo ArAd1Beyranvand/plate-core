@@ -40,7 +40,7 @@ import 'tunisia_country.dart';
 /// ~0.73 of that, so 66 mm would need a 126 mm slot on a 110 mm plate; and
 /// DejaVu Bold's digits are wider than the plate's, so a slot's glyph is
 /// width-limited by its 45.6 mm cell before it is height-limited. Labels are
-/// sized to the measured ink *width* for the same reason. `core_plate` is
+/// sized to the measured ink *width* for the same reason. `plate_core` is
 /// unchanged.
 ///
 /// **Fixed cells.** The plates are lettered by hand on a proportional face —

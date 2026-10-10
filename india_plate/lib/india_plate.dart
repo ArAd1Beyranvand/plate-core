@@ -1,4 +1,4 @@
-/// India's licence plates for the `core_plate` library.
+/// India's licence plates for the `plate_core` library.
 ///
 /// One 500×120 layout for every current format; the colour class (private,
 /// transport, rental, electric, diplomatic, ...) is a theme, never a spec.

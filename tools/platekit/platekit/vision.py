@@ -347,6 +347,35 @@ def found_dict(f: Found) -> dict:
 
 # ------------------------------------------------------------ structure --
 
+def on_white(im: np.ndarray) -> np.ndarray:
+    """BGR; a transparent render (an SVG plate) composited onto white."""
+    if im.ndim == 2:
+        return cv2.cvtColor(im, cv2.COLOR_GRAY2BGR)
+    if im.shape[2] == 4:
+        a = im[:, :, 3:4].astype(np.float32) / 255
+        return (im[:, :, :3] * a + 255 * (1 - a)).astype(np.uint8)
+    return im
+
+
+def thumbnail(im: np.ndarray, side: int) -> np.ndarray:
+    k = side / max(im.shape[:2])
+    return cv2.resize(im, None, fx=k, fy=k, interpolation=cv2.INTER_AREA) if k < 1 else im
+
+
+def layout_signature(im: np.ndarray) -> np.ndarray:
+    """Colour-blind fingerprint of a flat plate: edges, blurred to blocks
+    and sampled 52x11. Same design in another colour scores >= 0.92 against
+    it (dot product); a different layout scored <= 0.64 on the Saudi set."""
+    g = cv2.resize(cv2.cvtColor(im, cv2.COLOR_BGR2GRAY), (520, 110), interpolation=cv2.INTER_AREA)
+    e = cv2.GaussianBlur(cv2.Canny(g, 60, 160).astype(np.float32), (0, 0), 4)
+    e = cv2.resize(e, (52, 11), interpolation=cv2.INTER_AREA).ravel()
+    e -= e.mean()
+    return e / (np.linalg.norm(e) + 1e-9)
+
+
+SAME_LAYOUT = 0.85
+
+
 def zones(im: np.ndarray, cw: float, ch: float, min_frac: float = 0.004, far: float = 35) -> list[dict]:
     """Coloured regions that are neither field nor ink: bands, badges,
     flags, a differently coloured section. Solid blocks only. Plate units."""

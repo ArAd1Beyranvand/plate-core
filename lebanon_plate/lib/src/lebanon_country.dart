@@ -3,7 +3,7 @@ import 'package:plate_core/plate_core.dart';
 import 'lebanon_colors.dart';
 import 'lebanon_usage.dart';
 
-/// Lebanon's blue band, as `core_plate`'s [PlateCountry].
+/// Lebanon's blue band, as `plate_core`'s [PlateCountry].
 ///
 /// All have `code: 'lb'` so they compare equal by [PlateCountry] semantics —
 /// distinguish by [PlateSpec.id]. The band carries the usage word;

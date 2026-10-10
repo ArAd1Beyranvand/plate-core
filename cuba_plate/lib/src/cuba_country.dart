@@ -2,7 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'cuba_colors.dart';
 
-/// Cuba as `core_plate`'s [PlateCountry].
+/// Cuba as `plate_core`'s [PlateCountry].
 ///
 /// No flag and no caption: the word CUBA is a stacked [PlateLabel] on each
 /// spec, positioned to the measured ink, and every spec sets `noPanel`. The

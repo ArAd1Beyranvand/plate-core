@@ -1,4 +1,4 @@
-/// Cuba's 2013 licence plates for the `core_plate` library.
+/// Cuba's 2013 licence plates for the `plate_core` library.
 ///
 /// Three specs, one theme: a car for natural persons (white CUBA strip), a car
 /// for legal entities (blue strip), and a motorcycle. Every plate is black on

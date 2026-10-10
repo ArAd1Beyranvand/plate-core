@@ -57,7 +57,7 @@ abstract final class YemenUnifiedPlates {
   ];
 
   // Zone C1 — stippled strip left of blue panel (x 0.818 .. 0.827). Not a primitive
-  // in core_plate; built as a column of short
+  // in plate_core; built as a column of short
   /// rules, one per dot. This one wins because it is *data*: the dots are where
   // Stipple strip x 0.818 .. 0.827 (838 wide 9), measured. Pitch 12 units is not measured;
   // 24 dots at that pitch reproduce the photograph's near-solid reading. Built with [plateStipple].

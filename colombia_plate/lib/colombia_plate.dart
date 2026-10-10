@@ -1,4 +1,4 @@
-/// Colombia's licence plates for the `core_plate` library.
+/// Colombia's licence plates for the `plate_core` library.
 ///
 /// The ordinary plate is `ABC·123` split by the transport ministry's
 /// roundel, the municipality of issue under it; its liveries and series

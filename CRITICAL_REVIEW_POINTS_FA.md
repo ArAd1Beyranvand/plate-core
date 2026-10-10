@@ -7,7 +7,7 @@
 ## 1. Migration Logic: The Most Dangerous Code
 
 ### Location
-`core_plate/lib/src/input/plate_controller.dart`, lines 270-308
+`plate_core/lib/src/input/plate_controller.dart`, lines 270-308
 
 ### The Problem
 هنگام تغییر spec (مثلا user switch می‌کند از taxi plate به private plate):
@@ -173,7 +173,7 @@ final shortSerial = /* hypothetical shorter spec */.groupAt('serial')!.indices.l
 ## 2. Compositing Strategy: The Subtle Rendering Issue
 
 ### Location
-`core_plate/lib/src/widgets/plate_canvas.dart`, lines 311-336 (THE BIG COMMENT BLOCK)
+`plate_core/lib/src/widgets/plate_canvas.dart`, lines 311-336 (THE BIG COMMENT BLOCK)
 
 ### The Problem
 
@@ -341,7 +341,7 @@ final canvas = PlateCanvas(
 ## 3. Storage vs Display Split: The Encoding Issue
 
 ### Location
-`core_plate/lib/src/model/plate_alphabet.dart` (line 47-56)  
+`plate_core/lib/src/model/plate_alphabet.dart` (line 47-56)  
 `iran_plate/lib/src/iran_usage.dart` (line 86-99)
 
 ### The Problem
@@ -511,7 +511,7 @@ glyphs: {'ع': '؛ع'}  // Prefix semicolon
 ## 4. Text Group Validation: The Gate Pattern
 
 ### Location
-`core_plate/lib/src/validators/plate_validator.dart` (line 62-74)
+`plate_core/lib/src/validators/plate_validator.dart` (line 62-74)
 
 ### The Problem
 
@@ -634,7 +634,7 @@ Validator should: Become quiet again
 ## 5. spec.debugValidateSpec(): The Silent Killer
 
 ### Location
-`core_plate/lib/src/model/plate_spec.dart` (line 363-415)
+`plate_core/lib/src/model/plate_spec.dart` (line 363-415)
 
 ### The Problem
 

@@ -25,7 +25,7 @@ import 'algeria_country.dart';
 /// (`glyphStyle` sets 0.72 of the slot, a bold digit is ~0.73 of that). The
 /// slots are as tall as the plate allows, and the glyph is then
 /// width-limited by its 45.6 mm cell, since DejaVu Bold's digits are far
-/// wider than the plate's condensed face. `core_plate` is unchanged.
+/// wider than the plate's condensed face. `plate_core` is unchanged.
 ///
 /// **Fixed cells.** The regulation makes `1` 20 mm wide and every other digit
 /// 30, with an even 10 mm between them; a `PlateSlot` is a fixed cell, so a

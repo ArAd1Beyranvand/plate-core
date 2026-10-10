@@ -1,4 +1,4 @@
-/// Malaysia's licence plates for the `core_plate` library.
+/// Malaysia's licence plates for the `plate_core` library.
 ///
 /// Four geometries: the single-row plate (width follows the registration, as
 /// a Malaysian plate is made to fit its number), the two-row plate, the

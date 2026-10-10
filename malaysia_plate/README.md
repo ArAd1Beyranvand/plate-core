@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Malaysia to view examples:
+From the mighty people of Iran to the harmonious people of Malaysia to view examples:
 
 https://platexample.ir/#/discover/malaysia
 

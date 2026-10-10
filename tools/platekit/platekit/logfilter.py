@@ -20,8 +20,16 @@ _ANALYZE = re.compile(r'^\s*(error|warning|info) • (.+?) • (\S+?):(\d+):(\d+
 
 
 def run(cmd: list[str], cwd: Path) -> str:
-    p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True)
-    return p.stdout + p.stderr
+    """Run, keep the whole output; the GUI sees the latest line as it comes."""
+    from platekit import progress
+    label = ' '.join(cmd[:3])
+    p = subprocess.Popen(cmd, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    out = []
+    for line in p.stdout:
+        out.append(line)
+        progress.task(f'{label} · {line.strip()[:90]}', len(out), None, 'line')
+    p.wait()
+    return ''.join(out)
 
 
 def tests(log: str) -> dict:

@@ -1,4 +1,4 @@
-/// Indonesia's licence plates for the `core_plate` library.
+/// Indonesia's licence plates for the `plate_core` library.
 ///
 /// Three geometries from the 2023 series: the 460×135 car plate, the 275×115
 /// motorcycle plate and the diplomatic `CD` plate. Private, public, government

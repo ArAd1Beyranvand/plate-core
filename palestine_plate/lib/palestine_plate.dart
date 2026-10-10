@@ -1,4 +1,4 @@
-/// Palestine's licence plates for the `core_plate` library.
+/// Palestine's licence plates for the `plate_core` library.
 ///
 /// Data, not code: two [PlateCountry] families (the West Bank's `ف / P` block
 /// and Gaza's flag), the alphabets, the usage-derived themes, and the

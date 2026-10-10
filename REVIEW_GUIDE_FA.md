@@ -1,4 +1,4 @@
-# راهنمای بررسی core_plate و iran_plate
+# راهنمای بررسی plate_core و iran_plate
 
 ## مقدمه
 
@@ -11,7 +11,7 @@
 
 ## بخش 1️⃣: استراتژی بررسی فایل‌به‌فایل
 
-### core_plate
+### plate_core
 
 #### 1.1 **Model Layer**
 
@@ -431,13 +431,13 @@ None applied during analysis — all decisions require your judgment.
   - PlateController = state (ChangeNotifier, mutable)
 
 - [ ] **Dependencies یک‌طرفه‌اند**
-  - `core_plate` ← zero country knowledge
-  - `iran_plate` → depends on `core_plate`
+  - `plate_core` ← zero country knowledge
+  - `iran_plate` → depends on `plate_core`
   - No circular dependencies
 
 - [ ] **Expansion points واضح هستند**
   - Adding country: create PlateSpec, PlateTheme, PlateCountry
-  - No core_plate changes needed
+  - No plate_core changes needed
 
 - [ ] **معماری decisions documented هستند**
   - Compositing strategy (canvas.dart)
@@ -447,7 +447,7 @@ None applied during analysis — all decisions require your judgment.
 ### B. Public API Review ✅
 
 - [ ] **Exports درست هستند**
-  - `core_plate` exports: PlateSpec, PlateTheme, PlateController, PlateCanvas, PlateView, PlateValidator, ...
+  - `plate_core` exports: PlateSpec, PlateTheme, PlateController, PlateCanvas, PlateView, PlateValidator, ...
   - `iran_plate` exports: IranPlates, IranThemes, IranUsage, IranCountry, ...
 
 - [ ] **No internal APIs exposed**
@@ -457,7 +457,7 @@ None applied during analysis — all decisions require your judgment.
 
 - [ ] **Naming consistency**
   - Iran* prefix for iran_plate classes
-  - Plate* prefix for core_plate classes
+  - Plate* prefix for plate_core classes
   - No generic names like `Helper` or `Utils`
 
 - [ ] **Constructors are discoverable**
@@ -494,12 +494,12 @@ None applied during analysis — all decisions require your judgment.
   - ✅ "Loop through keyed groups; ignore ungated sections" — do write
 
 - [ ] **Architecture is documented**
-  - [ ] **core_plate/lib/src/plate_spec.dart**
+  - [ ] **plate_core/lib/src/plate_spec.dart**
     - Comments explain plate structure
     - `debugValidateSpec()` explained
-  - [ ] **core_plate/lib/src/widgets/plate_canvas.dart**
+  - [ ] **plate_core/lib/src/widgets/plate_canvas.dart**
     - Compositing strategy documented (line 311-336)
-  - [ ] **core_plate/lib/src/input/plate_controller.dart**
+  - [ ] **plate_core/lib/src/input/plate_controller.dart**
     - Migration modes documented
   - [ ] **iran_plate/lib/src/iran_usage.dart**
     - Storage vs display split explained
@@ -598,7 +598,7 @@ None applied during analysis — all decisions require your judgment.
   - Can reader find "all themes"?
     - Yes: `IranThemes.blackOnWhite`, `IranThemes.blackOnYellow`, ...
   - Can reader find validators?
-    - Yes: `core_plate/lib/src/validators/`
+    - Yes: `plate_core/lib/src/validators/`
 
 ---
 
@@ -606,7 +606,7 @@ None applied during analysis — all decisions require your judgment.
 
 ### اگر وقت محدود داری: **2 ساعت** ⏱️
 
-1. **core_plate (45 min)**
+1. **plate_core (45 min)**
    - Read: `plate_spec.dart` (line 1-150, skip helpers)
    - Read: `plate_controller.dart` (line 1-100, 270-308)
    - Read: `plate_canvas.dart` (line 1-80, 311-336)
@@ -627,7 +627,7 @@ None applied during analysis — all decisions require your judgment.
 
 ### اگر وقت کامل داری: **5 ساعت** ⏱️
 
-1. **core_plate (2 hours)**
+1. **plate_core (2 hours)**
    - Full read: `plate_spec.dart`
    - Full read: `plate_controller.dart`
    - Full read: `plate_canvas.dart`
@@ -651,7 +651,7 @@ None applied during analysis — all decisions require your judgment.
 اگر فقط **3 چیز** رو می‌خوای بررسی کنی:
 
 ### ⚠️ #1: Migration Logic
-**File:** `core_plate/lib/src/input/plate_controller.dart`, line 270-308
+**File:** `plate_core/lib/src/input/plate_controller.dart`, line 270-308
 
 **چرا خطرناک:**
 - Chars از یک spec به دیگری منتقل می‌شوند
@@ -665,7 +665,7 @@ None applied during analysis — all decisions require your judgment.
 ---
 
 ### ⚠️ #2: Compositing Strategy
-**File:** `core_plate/lib/src/widgets/plate_canvas.dart`, line 311-336
+**File:** `plate_core/lib/src/widgets/plate_canvas.dart`, line 311-336
 
 **چرا خطرناک:**
 - دو‌ لایه rendering (frame + textfields)

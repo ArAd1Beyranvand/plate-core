@@ -1,4 +1,4 @@
-/// Venezuela's 2008 licence plate for the `core_plate` library.
+/// Venezuela's 2008 licence plate for the `plate_core` library.
 ///
 /// One spec, one theme: the car plate, navy on the flag, with the state name
 /// under the serial following the last letter. Colours marked `// CALIBRATE`

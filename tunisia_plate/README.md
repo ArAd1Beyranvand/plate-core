@@ -4,7 +4,7 @@ GO VEGAN 🌱
 
 ==================================
 
-From the mighty people of Iran to the people of Tunisia to view examples:
+From the mighty people of Iran to the brave people of Tunisia to view examples:
 
 https://platexample.ir/#/discover/tunisia
 

@@ -28,7 +28,7 @@ import 'indonesia_services.dart';
 /// 119 mm slot centred at y 48 — off the top of the plate. Slots are as tall
 /// as the canvas allows about the measured centre. The car serial is also
 /// narrower here than FE-Schrift: DejaVu Bold is wider, and the glyph is
-/// width-limited by its cell. `core_plate` is unchanged.
+/// width-limited by its cell. `plate_core` is unchanged.
 ///
 /// Measured off the goldens (DejaVu Bold): every glyph centre within ~4 mm
 /// and every row centre within 1 mm of the artwork, but ink heights of car

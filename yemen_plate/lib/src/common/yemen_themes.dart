@@ -34,6 +34,15 @@ abstract final class YemenThemes {
     plateRadiusRatio: _unifiedRadiusRatio,
   );
 
+  /// Private vehicles on white: black on white.
+  static const PlateTheme northernPrivateWhite = PlateTheme.monochrome(
+    field: YemenColors.white,
+    ink: YemenColors.darkInk,
+    inactive: YemenColors.inactiveOnLight,
+    borderWidthRatio: _borderWidthRatio,
+    plateRadiusRatio: _unifiedRadiusRatio,
+  );
+
   /// Taxis and buses: black on yellow.
   static const PlateTheme northernForHire = PlateTheme.monochrome(
     field: YemenColors.yellow,
@@ -80,12 +89,13 @@ abstract final class YemenThemes {
   );
 
   /// The northern theme for [usage]. [style] is used only for [YemenUsage.military].
-  /// Police resolves to [northernGovernment].
+  /// Police resolves to [northernGovernment]. [whiteBackground] switches private to white.
   static PlateTheme forNorthernUsage(
     YemenUsage usage, {
     YemenMilitaryStyle style = YemenMilitaryStyle.classic,
+    bool whiteBackground = false,
   }) => switch (usage) {
-    YemenUsage.private => northernPrivate,
+    YemenUsage.private => whiteBackground ? northernPrivateWhite : northernPrivate,
     YemenUsage.forHire => northernForHire,
     YemenUsage.transport => northernTransport,
     YemenUsage.government => northernGovernment,
