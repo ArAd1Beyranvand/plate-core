@@ -118,6 +118,10 @@ class _PlateCanvasState extends State<PlateCanvas> {
   /// comes in. Zero when a spec change plays no transition.
   Duration _resizeDuration = Duration.zero;
 
+  /// Whether the face colour tweens over [_resizeDuration] rather than
+  /// snapping; see [PlateSpecTransition.morphBackground].
+  bool _morphBackground = false;
+
   void _recordValues() {
     if (_controller.spec.id == widget.spec.id) {
       _shownValues = _controller.values;
@@ -142,8 +146,11 @@ class _PlateCanvasState extends State<PlateCanvas> {
       step: transition.step,
       reverse: true,
     )..removeWhere((id, _) => keeps(id));
+    final morph = transition.morphBackground;
+    if (morph) outDelays.remove(PlatePartId.background);
     final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
     _resizeDuration = outLength;
+    _morphBackground = morph;
     _ghost = _Ghost(
       serial: ++_ghostSerial,
       spec: from,
@@ -157,6 +164,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
         for (final id in PlatePartId.allOf(from))
           if (keeps(id)) id,
       },
+      dropped: {if (morph) PlatePartId.background},
       length: outLength,
       style: anim.style,
     );
@@ -174,6 +182,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     for (final id in PlatePartId.allOf(to)) {
       if (keeps(id)) anim.hide(id);
     }
+    // The incoming face shows under the ghost from the start, its colour
+    // tweening from the outgoing one's.
+    if (morph) anim.settle(PlatePartId.background);
   }
 
   void _ghostDone(int serial) {
@@ -229,6 +240,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       // across as [PlateCanvas.onSpecChange] directs.
       _controller.adoptSpec(widget.spec, preserve: widget.onSpecChange);
       _resizeDuration = Duration.zero;
+      _morphBackground = false;
       _startTransition(oldWidget, shown);
       oldWidget.controller?.detach(_machine);
       widget.controller?.detach(_machine);
@@ -457,12 +469,20 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // derive the same size, scale and alignment from the same plate-space
     // [SizedBox] — the geometry is identical to the single FittedBox this
     // replaced, and the stack sizes exactly as that one did.
-    final artwork = _PlateArtwork(
-      spec: spec,
-      theme: theme,
-      country: country,
-      controller: _controller,
-      clipper: clipper,
+    final artworkTheme = theme;
+    final artwork = TweenAnimationBuilder<Color?>(
+      tween: ColorTween(end: theme.plateBackground),
+      duration: _morphBackground ? _resizeDuration : Duration.zero,
+      curve: Curves.easeInOut,
+      builder: (context, face, _) => _PlateArtwork(
+        spec: spec,
+        theme: face == artworkTheme.plateBackground
+            ? artworkTheme
+            : artworkTheme.copyWith(plateBackground: face),
+        country: country,
+        controller: _controller,
+        clipper: clipper,
+      ),
     );
 
     // The alert. With autoValidate on, the canvas judges the plate itself and
@@ -1191,6 +1211,7 @@ class _Ghost {
     required this.values,
     required this.outDelays,
     required this.kept,
+    required this.dropped,
     required this.length,
     required this.style,
   });
@@ -1211,6 +1232,9 @@ class _Ghost {
   /// Parts both plates share: held in the ghost, then handed to the
   /// incoming plate when it goes.
   final Set<PlatePartId> kept;
+
+  /// Parts the ghost never shows: the incoming plate already draws them.
+  final Set<PlatePartId> dropped;
   final Duration length;
   final PlateAnimationStyle style;
 }
@@ -1242,6 +1266,9 @@ class _SpecGhostState extends State<_SpecGhost> {
       ..goOutAll(delays: g.outDelays);
     for (final id in g.kept) {
       _anim.settle(id);
+    }
+    for (final id in g.dropped) {
+      _anim.hide(id);
     }
     _done = Timer(g.length, () => widget.onDone(g.serial));
   }

@@ -424,11 +424,16 @@ class PlateSpecTransition {
     this.keepKinds = const <PlatePartKind>{},
     this.keep,
     this.keepIdentical = false,
+    this.morphBackground = false,
     this.step = const Duration(milliseconds: 60),
   });
 
   /// Also keep every part both plates draw the same way — see [samePart].
   final bool keepIdentical;
+
+  /// The face's base colour stays put and blends into the next plate's while
+  /// the canvas resizes, instead of going out and coming back in.
+  final bool morphBackground;
 
   final Set<PlatePartKind> keepKinds;
 
