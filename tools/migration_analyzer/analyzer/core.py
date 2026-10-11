@@ -7,7 +7,9 @@ against them, never substituted for them.
 """
 
 import json
+import queue
 import subprocess
+import threading
 import time
 import urllib.error
 import urllib.request
@@ -62,32 +64,85 @@ def list_models(endpoint, timeout=10):
 
 
 def chat(settings, messages, schema, sink):
-    """Stream one /api/chat call; returns the full content string."""
+    """Stream one /api/chat call; returns the full content string.
+
+    The HTTP read runs on a helper thread so this loop can report while
+    Ollama is silent (loading the model, evaluating the prompt)."""
     body = {
         'model': settings.model, 'messages': messages, 'stream': True, 'format': schema,
         'options': {'num_ctx': settings.num_ctx, 'temperature': settings.temperature},
         'think': settings.think,
     }
-    req = urllib.request.Request(settings.endpoint.rstrip('/') + '/api/chat',
-                                 data=json.dumps(body).encode(), headers={'Content-Type': 'application/json'})
-    parts = []
-    with urllib.request.urlopen(req, timeout=settings.timeout) as r:
-        for line in r:
-            if sink.stop_requested():
-                raise Stopped()
-            if not line.strip():
-                continue
-            chunk = json.loads(line)
-            if 'error' in chunk:
-                raise RuntimeError(chunk['error'])
-            msg = chunk.get('message', {})
-            if msg.get('thinking'):
-                sink.token(msg['thinking'])
-            if msg.get('content'):
-                parts.append(msg['content'])
-                sink.token(msg['content'])
-            if chunk.get('done'):
-                break
+    url = settings.endpoint.rstrip('/') + '/api/chat'
+    req = urllib.request.Request(url, data=json.dumps(body).encode(),
+                                 headers={'Content-Type': 'application/json'})
+    lines = queue.Queue()
+
+    def reader():
+        try:
+            with urllib.request.urlopen(req, timeout=settings.timeout) as r:
+                lines.put(('status', f'HTTP {r.status}, streaming'))
+                for line in r:
+                    lines.put(('line', line))
+        except Exception as e:  # handed to the caller's thread
+            lines.put(('error', e))
+        lines.put(('end', None))
+
+    sink.log(f'  POST {url} model={settings.model} num_ctx={settings.num_ctx} '
+             f'think={settings.think} ({approx_tokens(json.dumps(messages))} tokens in)')
+    threading.Thread(target=reader, daemon=True).start()
+    parts, n_tokens, n_think = [], 0, 0
+    t0 = time.time()
+    first = last_report = None
+    while True:
+        if sink.stop_requested():
+            raise Stopped()
+        try:
+            kind, value = lines.get(timeout=1)
+        except queue.Empty:
+            now = time.time()
+            if now - (last_report or t0) >= 5:
+                last_report = now
+                if first is None:
+                    sink.log(f'  waiting {now - t0:.0f}s for first token (model load / prompt evaluation)')
+                else:
+                    rate = (n_tokens + n_think) / max(now - first, 1e-6)
+                    sink.log(f'  {n_tokens} answer + {n_think} thinking tokens, {rate:.1f} tok/s')
+            continue
+        if kind == 'status':
+            sink.log(f'  {value} after {time.time() - t0:.1f}s')
+            continue
+        if kind == 'error':
+            raise RuntimeError(value) if not isinstance(value, OSError) else value
+        if kind == 'end':
+            break
+        if not value.strip():
+            continue
+        chunk = json.loads(value)
+        if 'error' in chunk:
+            raise RuntimeError(chunk['error'])
+        msg = chunk.get('message', {})
+        if first is None and (msg.get('thinking') or msg.get('content')):
+            first = time.time()
+            sink.log(f'  first token after {first - t0:.1f}s')
+        if msg.get('thinking'):
+            if n_think == 0:
+                sink.token('[thinking] ')
+            n_think += 1
+            sink.token(msg['thinking'])
+        if msg.get('content'):
+            if n_tokens == 0 and n_think:
+                sink.token('\n[answer] ')
+            n_tokens += 1
+            parts.append(msg['content'])
+            sink.token(msg['content'])
+        if chunk.get('done'):
+            ns = 1e9
+            sink.log(f'  done: load {chunk.get("load_duration", 0) / ns:.1f}s, prompt '
+                     f'{chunk.get("prompt_eval_count", "?")} tok in {chunk.get("prompt_eval_duration", 0) / ns:.1f}s, '
+                     f'output {chunk.get("eval_count", "?")} tok in {chunk.get("eval_duration", 0) / ns:.1f}s, '
+                     f'total {chunk.get("total_duration", 0) / ns:.1f}s, reason {chunk.get("done_reason")}')
+            break
     sink.token('\n')
     return ''.join(parts)
 

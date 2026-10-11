@@ -224,7 +224,7 @@ class App:
         return core.Sink(
             log=lambda m: self.q.put(('log', m)),
             token=lambda t: self.q.put(('token', t)),
-            prompt=lambda p: self.q.put(('prompt', p)) if self.show_prompt.get() else None,
+            prompt=lambda p: self.q.put(('prompt', p)),
             stop_requested=self.stop.is_set,
         )
 
@@ -241,7 +241,9 @@ class App:
                     if value.startswith('[') and ' prompt ≈' in value:
                         self._append(self.stream, f'\n--- {value}\n')
                 elif kind == 'prompt':
-                    self._append(self.prompt, value)
+                    # Filtered here: Tk variables are main-thread only.
+                    if self.show_prompt.get():
+                        self._append(self.prompt, value)
                 elif kind == 'models':
                     self.model_box['values'] = value
                     if value and not self.model.get():
