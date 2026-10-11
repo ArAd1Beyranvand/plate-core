@@ -6,6 +6,7 @@ about one unit at a time; its answers are stored next to the facts and checked
 against them, never substituted for them.
 """
 
+import hashlib
 import json
 import queue
 import subprocess
@@ -159,41 +160,42 @@ def _arr(items):
 STR, INT, BOOL = {'type': 'string'}, {'type': 'integer'}, {'type': 'boolean'}
 
 CLUSTER_SCHEMA = {
-    'type': 'object',
-    'required': ['verdict', 'unifiedId', 'registers', 'excludeMembers', 'preserve', 'lostOnMerge', 'risks', 'notes'],
+    'type': 'object', 'required': ['reason', 'verdict', 'excludeMembers', 'unifiedId', 'risks'],
     'properties': {
+        'reason': STR,
         'verdict': {'type': 'string', 'enum': ['one_structure', 'partial', 'keep_separate']},
-        'unifiedId': STR,
-        'registers': _arr({'type': 'object', 'required': ['group', 'min', 'max'],
-                           'properties': {'group': STR, 'min': INT, 'max': INT}}),
-        'excludeMembers': _arr(STR), 'preserve': _arr(STR), 'lostOnMerge': _arr(STR),
-        'risks': _arr(STR), 'notes': STR,
+        'excludeMembers': _arr(STR), 'unifiedId': STR, 'risks': _arr(STR),
     },
 }
 
 NEAR_SCHEMA = {
-    'type': 'object', 'required': ['verdict', 'reason', 'risks'],
-    'properties': {'verdict': {'type': 'string', 'enum': ['merge', 'keep_separate', 'unclear']},
-                   'reason': STR, 'risks': _arr(STR)},
+    'type': 'object', 'required': ['reason', 'verdict', 'risks'],
+    'properties': {'reason': STR, 'verdict': {'type': 'string', 'enum': ['merge', 'keep_separate', 'unclear']},
+                   'risks': _arr(STR)},
 }
 
-TYPE1_SCHEMA = {
-    'type': 'object', 'required': ['id', 'boundaries', 'notes'],
-    'properties': {
-        'id': STR, 'notes': STR,
-        'boundaries': _arr({'type': 'object', 'required': ['between', 'decision', 'reason'],
-                            'properties': {'between': _arr(INT),
-                                           'decision': {'type': 'string', 'enum': ['merge', 'split']},
-                                           'reason': STR}}),
-    },
-}
+def type1_schema(t1):
+    """One required key per soft boundary (b1, b2, ...), so the model can
+    neither skip a boundary nor invent indices."""
+    one = {'type': 'object', 'required': ['reason', 'decision'],
+           'properties': {'reason': STR, 'decision': {'type': 'string', 'enum': ['merge', 'split']}}}
+    keys = [f'b{n + 1}' for n in range(len(t1['softBoundaries']))]
+    return {'type': 'object', 'required': ['decisions', 'notes'],
+            'properties': {'decisions': {'type': 'object', 'required': keys,
+                                         'properties': {k: one for k in keys}},
+                           'notes': STR}}
+
+
+def type1_normalize(t1, answer):
+    return {'id': t1['id'], 'notes': answer['notes'],
+            'boundaries': [dict(between=b['between'], **answer['decisions'][f'b{n + 1}'])
+                           for n, b in enumerate(t1['softBoundaries'])]}
+
 
 SYNTH_SCHEMA = {
-    'type': 'object', 'required': ['summary', 'mustStaySeparate', 'knockOn', 'openQuestions'],
+    'type': 'object', 'required': ['summary', 'knockOn', 'openQuestions'],
     'properties': {
         'summary': STR,
-        'mustStaySeparate': _arr({'type': 'object', 'required': ['id', 'reason'],
-                                  'properties': {'id': STR, 'reason': STR}}),
         'knockOn': _arr({'type': 'object', 'required': ['area', 'note'],
                          'properties': {'area': STR, 'note': STR}}),
         'openQuestions': _arr(STR),
@@ -228,13 +230,10 @@ def validate(value, schema, path='$'):
 
 BACKGROUND = """You review a planned refactor of licence-plate specs. Facts below come from a deterministic analysis; treat them as correct and do not invent others.
 
-The migration:
-TYPE 1 - merge adjacent slots. Today every character is its own slot with its own FocusNode. Neighbouring cells that a person reads as one group become ONE input field (one FocusNode) holding n characters, e.g. Iran "9 8 ه 8 8 6 ایران 4 0" -> [98][ه][886][40].
-Hard boundaries are certain splits and are already applied: different line, a divider, a label/rule/decal between cells, alphabet or ink change.
-Soft boundaries are your judgement. Padding between cells is NOT a reason to split by itself: teams often padded every cell. Decide from how the real plate is read and written (source comments, ids, validators, tests, sample values): if the characters form one number/register, merge; if they are distinct registers (e.g. a region code next to a serial), split.
-TYPE 2 - variable-length fields. Specs that are the same plate and differ only in how many cells a register has collapse into ONE spec whose field accepts min..max characters. They must NOT be merged if they differ in anything else: panel, labels, rules, alphabets, mirrors, group keys, vehicle type, validators, or canvas proportions beyond what cell pitch explains.
+TYPE 1 - today every character is its own input cell. Neighbouring cells that a person reads as one number become ONE input field holding several characters. Cells on different lines, or with a divider/label between them, always stay separate.
+TYPE 2 - specs that are the same plate and differ ONLY in how many cells a register has become ONE spec whose field accepts min..max characters. Any other difference (alphabet, colours, labels, vehicle, layout not explained by the cell count) keeps them separate.
 
-Answer only with JSON matching the requested schema. Be concise; every string short."""
+Answer only with JSON matching the requested schema. Write "reason" first, then the decision. Keep strings short."""
 
 
 def compact_spec(spec, t1):
@@ -294,10 +293,15 @@ def cluster_prompt(country, cluster, specs_by_id, hint):
         prompt = (f'{BACKGROUND}\n\nCountry: {country}. TYPE 2 cluster (identical structure signature).\n'
                   f'FACTS:\n{json.dumps(facts, ensure_ascii=False)}\n\n'
                   + (f'VALIDATOR SOURCE (hint):\n{hint}\n\n' if hint and use_hint else '')
-                  + 'Judge: is this truly one structure? Propose a unified spec id and per-register min/max '
-                    '(registers must use the group keys above, and min/max must lie within observed counts). '
-                    'List what must be preserved, what would be lost on merge (pitch/width rules, mirrors, rules, '
-                    'labels, validators, catalogue lookups by id), risks, and any members to exclude.')
+                  + 'The members already have identical structure except register cell counts (see "registers"). '
+                    '"differs" lists every other value that is not equal between them. Decide:\n'
+                    '- one_structure: every value in "differs" follows from the cell count (more cells -> wider '
+                    'canvas, shifted starts, longer serial). excludeMembers must be [].\n'
+                    '- partial: one or more members are a different plate; list ONLY those in excludeMembers '
+                    '(at least two members must remain).\n'
+                    '- keep_separate: they are different plates.\n'
+                    'unifiedId: a spec id for the merged spec, in the style of the member ids. '
+                    'risks: what could break (validators, catalogue lookups by id, generators), max 3.')
         if approx_tokens(prompt) <= TOKEN_BUDGET:
             break
     return prompt
@@ -311,8 +315,9 @@ def near_prompt(country, near, specs_by_id):
     facts['b'].pop('type1')
     return (f'{BACKGROUND}\n\nCountry: {country}. NEAR MISS: two spec groups whose signatures differ in exactly '
             f'one attribute ("{near["attribute"]}").\nFACTS:\n{json.dumps(facts, ensure_ascii=False)}\n\n'
-            'Judge: should they become one TYPE 2 spec despite that difference (verdict merge), stay separate, '
-            'or is it unclear? Give the reason and risks.')
+            'Is that difference explained by the number of cells alone (e.g. a wider canvas or background '
+            'because one register has more cells)? If yes, verdict merge; if it is a real difference between two '
+            'plates, keep_separate; unclear only if the facts cannot tell. Max 2 risks.')
 
 
 _SOURCE_CACHE = {}
@@ -356,52 +361,105 @@ def spec_source(package, spec, limit=2500):
     return snippet, tests
 
 
-def type1_facts(t1):
-    return {k: t1[k] for k in ('rendering', 'segments', 'hardSplits', 'softBoundaries')}
+def type1_layout(t1):
+    """The cells in order with every boundary drawn: hard ones as their
+    reason, soft ones as bN for the model to decide."""
+    hard = {tuple(h['between']): h['reasons'] for h in t1['hardSplits']}
+    soft = {tuple(b['between']): f'b{n + 1}' for n, b in enumerate(t1['softBoundaries'])}
+    order = [i for seg in t1['segments'] for i in seg['indices']]
+    out = [t1['chars'][str(order[0])]]
+    for prev, cur in zip(order, order[1:]):
+        if (prev, cur) in soft:
+            out.append(f' {soft[(prev, cur)]} ')
+        elif 'different line/row height' in hard.get((prev, cur), []):
+            out.append(' / ')
+        else:
+            out.append(' | ')
+        out.append(t1['chars'][str(cur)])
+    return ''.join(out)
 
 
 def type1_prompt(country, package, spec, t1, hint):
-    facts = compact_spec(spec, type1_facts(t1))
+    groups = ', '.join(f'{g["key"] or "#" + str(n)} = slots {g["indices"][0]}..{g["indices"][-1]}'
+                       for n, g in enumerate(spec['textGroups']) if g['indices'])
+    lines = [f'Country: {country}. Spec "{spec["id"]}" ({spec["direction"]}). Text groups: {groups}.',
+             f'Sample, cells in slot order: {type1_layout(t1)}',
+             '  "|" = fixed split, "/" = new line (fixed), bN = boundary you decide.']
+    if t1['hardSplits']:
+        lines.append('Fixed splits: ' + '; '.join(f'{h["between"][0]}|{h["between"][1]} {", ".join(h["reasons"])}'
+                                                  for h in t1['hardSplits']))
+    lines.append('Boundaries to decide:')
+    for n, b in enumerate(t1['softBoundaries']):
+        a, c = b['between']
+        where = (f'both in group "{b["groups"][0]}"' if b['groups'][0] == b['groups'][1]
+                 else f'group "{b["groups"][0]}" -> group "{b["groups"][1]}"')
+        lines.append(f'  b{n + 1}: slot {a} "{t1["chars"][str(a)]}" | slot {c} "{t1["chars"][str(c)]}", {where}; '
+                     f'{", ".join(b["evidence"]) or "touching"}')
+    body = '\n'.join(lines) + '\n\n'
     src, tests = spec_source(package, spec)
-    body = (f'Country: {country}. TYPE 1 decision for spec "{spec["id"]}".\nFACTS:\n'
-            f'{json.dumps(facts, ensure_ascii=False)}\n\n')
-    tail = ('Decide EVERY soft boundary (copy its "between" pair): merge or split, with a short reason. '
-            '"default" is only a guess from geometry. Do not list hard splits; they are fixed.')
     extra = ''
     if src:
         extra += f'SPEC SOURCE:\n{src}\n\n'
     if tests:
         extra += 'TESTS MENTIONING IT:\n' + '\n'.join(tests) + '\n\n'
+    tail = ('For every bN decide:\n'
+            '- merge: both characters are part of ONE number/code that people read and type together '
+            '(e.g. the digits of a serial). Two cells of the SAME group: merge, unless the source shows those two '
+            'cells as separate values; then quote that line in the reason. A neighbouring group (e.g. a letter) '
+            'is not a reason.\n'
+            '- split: they are different registers with different meanings (region vs serial, type vs year). '
+            'Cells of different groups are usually split unless the source/validator treats them as one number.\n'
+            'The gap/padding between cells is NOT evidence either way. Each reason: max 12 words, naming the '
+            'group meaning or the source/validator line that decides it. notes: one sentence or "".')
     prompt = f'{BACKGROUND}\n\n{body}{extra}' + (f'VALIDATOR SOURCE (hint):\n{hint}\n\n' if hint else '') + tail
     if approx_tokens(prompt) > TOKEN_BUDGET:
         prompt = f'{BACKGROUND}\n\n{body}{extra}{tail}'
     return prompt
 
 
+def type1_plan(t, results):
+    """(fields as "[..][..]", 'model' | 'default', answer) for one spec."""
+    ans, _ = _model(results, f'T1-{t["id"]}')
+    order = [(0, i) for seg in t['segments'] for i in seg['indices']]
+    decisions = {tuple(b['between']): b['default'] for b in t['softBoundaries']}
+    if ans:
+        decisions.update({tuple(b['between']): b['decision'] for b in ans['boundaries']
+                          if tuple(b['between']) in decisions})
+    fields = fields_from(order, decisions, t['hardSplits'])
+    plan = ''.join('[' + ''.join(t['chars'].get(str(i), '?') for i in f) + ']' for f in fields)
+    return plan, len(fields), ('model' if ans else 'default'), ans
+
+
+SYNTH_BACKGROUND = """You summarise a planned refactor of one country's licence-plate specs for the developer doing it. TYPE 1 merges neighbouring single-character cells into multi-character fields; TYPE 2 collapses specs that differ only in a register's cell count into one spec with a min..max field. Use only the facts given; do not mention other countries. Answer only with JSON matching the schema."""
+
+
 def synth_prompt(country, pre, results):
     brief = {
-        'specs': [{'id': s['id'], 'groups': s['groups'], 'vehicle': s['vehicle'], 'catalogues': s['catalogues'][:3]}
-                  for s in pre['specs']],
-        'clusters': [{'id': c['id'], 'members': c['members'], 'confidence': c['confidence'],
-                      'model': results.get(c['id'], {}).get('answer')} for c in pre['type2']['clusters']],
-        'nearMisses': [{'id': n['id'], 'attribute': n['attribute'],
-                        'model': results.get(n['id'], {}).get('answer', {}).get('verdict')}
-                       for n in pre['type2']['nearMisses'][:20]],
+        'type1': {t['id']: type1_plan(t, results)[0] for t in pre['type1']},
+        'type2': ('none: no specs are merged, every spec keeps its own fixed field lengths'
+                  if not pre['type2']['clusters'] else 'see type2Clusters'),
+        'type2Clusters': [{'members': c['members'], 'verdict': (_model(results, c['id'])[0] or {}).get('verdict')}
+                          for c in pre['type2']['clusters']],
+        'nearMissesToMerge': [n['a'] + n['b'] for n in pre['type2']['nearMisses']
+                              if (_model(results, n['id'])[0] or {}).get('verdict') == 'merge'],
         'galleryDuplicates': [[e['id'] for e in d['entries']] for d in pre.get('gallery', {}).get('duplicates', [])],
-        'warnings': pre['warnings'][:10],
+        'catalogueMembers': sorted({p.split('[')[0] for s in pre['specs'] for p in s['catalogues']})[:30],
         'validatorFiles': pre['validatorFiles'],
+        'warnings': pre['warnings'][:10],
     }
     text = json.dumps(brief, ensure_ascii=False)
     if approx_tokens(text) > FACT_BUDGET:
-        for c in brief['clusters']:
-            if c['model']:
-                c['model'] = {k: c['model'].get(k) for k in ('verdict', 'unifiedId', 'registers')}
-        brief['specs'] = [s['id'] for s in pre['specs']]
+        plans = {}
+        for k, v in brief['type1'].items():
+            plans.setdefault(v, []).append(k)
+        brief['type1'] = {v: ks[:5] + ([f'+{len(ks) - 5} more'] if len(ks) > 5 else []) for v, ks in plans.items()}
         text = json.dumps(brief, ensure_ascii=False)
-    return (f'{BACKGROUND}\n\nCountry: {country}. Synthesis from the unit results below.\nFACTS:\n{text}\n\n'
-            'Write: a short summary; specs that must stay separate and why; knock-on impact (areas: validators, '
-            'serial generators (draw order / seeded reproducibility), catalogue lookups such as byDigits or car/moto '
-            'maps, themes/country coupling, example/gallery usage); open questions for the human.')
+    return (f'{SYNTH_BACKGROUND}\n\nCountry: {country}.\nFACTS ("type1" maps spec id -> planned fields; '
+            f'"[..]" is one input field):\n{text}\n\n'
+            'Write: summary (2-3 sentences: what changes for this country); knockOn (max 5; areas: validators, '
+            'serial generators, catalogue lookups, gallery/examples, tests; say concretely what changes); '
+            'openQuestions (max 3, only real decisions the developer must make). '
+            'If "type2" is none, do not propose merging specs, unified specs or min..max lengths.')
 
 
 # ---------------------------------------------------------------- units
@@ -413,6 +471,7 @@ class Unit:
     schema: dict
     build: callable      # () -> prompt; synth needs earlier results
     subject: list = field(default_factory=list)
+    normalize: callable = None   # answer -> stored answer (after validation)
 
 
 def load(country):
@@ -421,13 +480,33 @@ def load(country):
     return pre, {s['id']: s for s in specs}
 
 
+# Near misses differing in these can never be TYPE 2: the number of cells
+# does not change alphabets, groups, colours, labels or vehicle type. They are
+# decided here instead of asking the model.
+NEAR_FIXED = {'registers', 'direction', 'vehicle', 'restrictions', 'ink', 'countryPanel',
+              'labels', 'mirrors', 'bands', 'decals'}
+
+
+def fixed_results(pre):
+    out = {}
+    for n in pre['type2']['nearMisses']:
+        if n['attribute'] in NEAR_FIXED:
+            out[n['id']] = {'unit': n['id'], 'kind': 'near', 'subject': n['a'] + n['b'], 'status': 'ok',
+                            'fixed': True, 'conflicts': [],
+                            'answer': {'verdict': 'keep_separate', 'risks': [],
+                                       'reason': f'differ in {n["attribute"]}, which cell count cannot explain '
+                                                 '(decided by the prepass)'}}
+    return out
+
+
 def make_units(country, pre, specs_by_id, settings, results):
     hint = validator_hint(country, 4000)
     units = []
     for c in pre['type2']['clusters']:
         units.append(Unit(c['id'], 'cluster', CLUSTER_SCHEMA,
                           lambda c=c: cluster_prompt(country, c, specs_by_id, hint), c['members']))
-    for n in pre['type2']['nearMisses'][:settings.max_near_misses]:
+    asked = [n for n in pre['type2']['nearMisses'] if n['attribute'] not in NEAR_FIXED]
+    for n in asked[:settings.max_near_misses]:
         units.append(Unit(n['id'], 'near', NEAR_SCHEMA,
                           lambda n=n: near_prompt(country, n, specs_by_id), n['a'] + n['b']))
     hint1 = validator_hint(country, 1500)
@@ -435,8 +514,9 @@ def make_units(country, pre, specs_by_id, settings, results):
         if not t1['softBoundaries']:
             continue  # every boundary is hard: nothing to decide
         spec = specs_by_id[t1['id']]
-        units.append(Unit(f'T1-{t1["id"]}', 'type1', TYPE1_SCHEMA,
-                          lambda s=spec, t=t1: type1_prompt(country, pre['package'], s, t, hint1), [t1['id']]))
+        units.append(Unit(f'T1-{t1["id"]}', 'type1', type1_schema(t1),
+                          lambda s=spec, t=t1: type1_prompt(country, pre['package'], s, t, hint1), [t1['id']],
+                          normalize=lambda a, t=t1: type1_normalize(t, a)))
     units.append(Unit('SYNTH', 'synth', SYNTH_SCHEMA, lambda: synth_prompt(country, pre, results)))
     return units
 
@@ -449,20 +529,17 @@ def conflicts(unit, answer, pre):
     ids = {s['id'] for s in pre['specs']}
     if unit.kind == 'cluster':
         c = next(c for c in pre['type2']['clusters'] if c['id'] == unit.id)
-        regs = {r['group']: r for r in c['registers']}
-        for r in answer['registers']:
-            fact = regs.get(r['group'])
-            if not fact:
-                out.append(f'register "{r["group"]}" is not a group of this cluster')
-            elif r['min'] < fact['min'] or r['max'] > fact['max'] or r['min'] > r['max']:
-                out.append(f'register "{r["group"]}" {r["min"]}..{r["max"]} outside observed '
-                           f'{fact["min"]}..{fact["max"]}')
-        for m in answer['excludeMembers']:
+        ex = answer['excludeMembers']
+        for m in ex:
             if m not in c['members']:
                 out.append(f'excludes "{m}", which is not a cluster member')
+        if answer['verdict'] == 'one_structure' and ex:
+            out.append(f'verdict one_structure but excludes {ex}')
+        if answer['verdict'] == 'partial' and not 0 < len(set(ex) & set(c['members'])) <= len(c['members']) - 2:
+            out.append(f'verdict partial must exclude some members and keep at least two (excludes {ex})')
     elif unit.kind == 'near' and answer['verdict'] == 'merge':
         n = next(n for n in pre['type2']['nearMisses'] if n['id'] == unit.id)
-        if n['attribute'] in ('registers', 'direction', 'vehicle', 'restrictions'):
+        if n['attribute'] in NEAR_FIXED:
             out.append(f'proposes merging specs whose signature differs in "{n["attribute"]}" '
                        '(alphabet/group/direction/vehicle/validation structure)')
     elif unit.kind == 'type1':
@@ -482,14 +559,15 @@ def conflicts(unit, answer, pre):
         missing = soft - seen
         if missing:
             out.append(f'soft boundaries left undecided (default used): {sorted(map(list, missing))}')
-    elif unit.kind == 'synth':
-        for s in answer['mustStaySeparate']:
-            if s['id'] not in ids:
-                out.append(f'mustStaySeparate names unknown spec "{s["id"]}"')
     return out
 
 
 # ---------------------------------------------------------------- running
+
+def schema_stamp(unit):
+    """Cached answers are reused only while the unit's schema is unchanged."""
+    return hashlib.sha1(json.dumps(unit.schema, sort_keys=True).encode()).hexdigest()[:12]
+
 
 def unit_cache(country, unit_id):
     return UNITS / country / f'{unit_id}.json'
@@ -521,11 +599,14 @@ def run_unit(unit, pre, settings, sink, country):
         except json.JSONDecodeError as e:
             answer, errs = None, [f'invalid JSON: {e}']
         if not errs:
+            if unit.normalize:
+                answer = unit.normalize(answer)
             c = conflicts(unit, answer, pre)
             sink.log(f'[{country}] {unit.id} ok in {dt:.1f}s'
                      + (f'; {len(c)} CONFLICT(s) with prepass' if c else ''))
             return {'unit': unit.id, 'kind': unit.kind, 'subject': unit.subject, 'status': 'ok',
-                    'answer': answer, 'conflicts': c, 'seconds': round(dt, 1), 'promptTokens': tokens}
+                    'answer': answer, 'conflicts': c, 'seconds': round(dt, 1), 'promptTokens': tokens,
+                    'schema': schema_stamp(unit)}
         error = '; '.join(errs[:5])
         sink.log(f'[{country}] {unit.id} attempt {attempt + 1} invalid after {dt:.1f}s: {error}')
         messages += [{'role': 'assistant', 'content': text},
@@ -538,18 +619,19 @@ def run_unit(unit, pre, settings, sink, country):
 def run_country(country, settings, sink, redo_failed_only=False):
     """Run every unit, reusing cached successes; write the report at the end."""
     pre, specs_by_id = load(country)
-    results = {}
+    results = fixed_results(pre)
     units = make_units(country, pre, specs_by_id, settings, results)
     (UNITS / country).mkdir(parents=True, exist_ok=True)
     sink.log(f'[{country}] {len(units)} units: '
              f'{sum(u.kind == "cluster" for u in units)} clusters, {sum(u.kind == "near" for u in units)} near-misses, '
-             f'{sum(u.kind == "type1" for u in units)} type-1 batches, 1 synthesis')
+             f'{sum(u.kind == "type1" for u in units)} type-1 specs, 1 synthesis; '
+             f'{len(results)} near misses decided without the model')
     t0 = time.time()
     for unit in units:
         cache = unit_cache(country, unit.id)
         if cache.exists():
             cached = json.loads(cache.read_text())
-            if cached['status'] == 'ok' and unit.kind != 'synth':
+            if cached['status'] == 'ok' and unit.kind != 'synth' and cached.get('schema') == schema_stamp(unit):
                 results[unit.id] = cached
                 sink.log(f'[{country}] {unit.id} cached')
                 continue
@@ -656,25 +738,20 @@ def render_markdown(country, pre, results, settings, failed, all_conflicts):
           'are decided by the model, or by the geometric default where it gave no answer.', '']
     for t in pre['type1']:
         uid = f'T1-{t["id"]}'
-        ans, err = _model(results, uid)
-        order = [(0, i) for seg in t['segments'] for i in seg['indices']]
-        decisions = {tuple(b['between']): b['default'] for b in t['softBoundaries']}
-        if ans:
-            decisions.update({tuple(b['between']): b['decision'] for b in ans['boundaries']
-                              if tuple(b['between']) in decisions})
-        fields = fields_from(order, decisions, t['hardSplits'])
-        plan = ''.join('[' + ''.join(t['chars'].get(str(i), '?') for i in f) + ']' for f in fields)
-        who = 'model' if ans else 'default'
+        _, err = _model(results, uid)
+        plan, n_fields, who, ans = type1_plan(t, results)
         L.append(f'- `{t["id"]}`: {t["rendering"].split(" → ")[0]} → **{plan}** '
-                 f'({t["slotCount"]} slots → {len(fields)} fields, {who})')
+                 f'({t["slotCount"]} slots → {n_fields} fields, {who})')
         for h in t['hardSplits']:
             L.append(f'  - hard split {h["between"]}: {"; ".join(h["reasons"])}')
         for seg in t['segments']:
             if seg['caveats']:
                 L.append(f'  - segment {seg["indices"][0]}..{seg["indices"][-1]}: {"; ".join(seg["caveats"])}')
         if ans:
+            defaults = {tuple(b['between']): b['default'] for b in t['softBoundaries']}
             for b in ans['boundaries']:
-                L.append(f'  - **Model** {b["between"]} {b["decision"]}: {_md_escape(b["reason"])}')
+                flag = ' (overrides default — check)' if defaults.get(tuple(b['between'])) != b['decision'] else ''
+                L.append(f'  - **Model** {b["between"]} {b["decision"]}{flag}: {_md_escape(b["reason"])}')
             if ans['notes']:
                 L.append(f'  - **Model notes:** {_md_escape(ans["notes"])}')
         elif t['softBoundaries'] and uid in results:
@@ -710,14 +787,11 @@ def render_markdown(country, pre, results, settings, failed, all_conflicts):
         L += [f'- `{m}`: {", ".join(p)}' for m, p in c['catalogues'].items()]
         L.append('')
         if ans:
-            L += [f'**Model:** verdict `{ans["verdict"]}`, unified id `{ans["unifiedId"]}`, registers '
-                  + ', '.join(f'{r["group"]} {r["min"]}..{r["max"]}' for r in ans['registers'])]
-            for label, key in (('Preserve', 'preserve'), ('Lost on merge', 'lostOnMerge'),
-                               ('Risks', 'risks'), ('Exclude', 'excludeMembers')):
+            L += [f'**Model:** verdict `{ans["verdict"]}`, unified id `{ans["unifiedId"]}`. '
+                  f'{_md_escape(ans["reason"])}']
+            for label, key in (('Exclude', 'excludeMembers'), ('Risks', 'risks')):
                 if ans[key]:
                     L.append(f'- {label}: ' + '; '.join(_md_escape(x) for x in ans[key]))
-            if ans['notes']:
-                L.append(f'- Notes: {_md_escape(ans["notes"])}')
         else:
             L.append(err)
         L += _conflict_lines(results, c['id']) + ['']
@@ -729,6 +803,8 @@ def render_markdown(country, pre, results, settings, failed, all_conflicts):
         for n in near:
             ans, err = _model(results, n['id'])
             model = f'{ans["verdict"]}: {_md_escape(ans["reason"])}' if ans else err
+            if results.get(n['id'], {}).get('fixed'):
+                model = model.replace(' (decided by the prepass)', '') + ' _(prepass)_'
             if results.get(n['id'], {}).get('conflicts'):
                 model = '**CONFLICT** ' + model
             L.append(f'| {n["id"]} | {", ".join(n["a"])} | {", ".join(n["b"])} | {n["attribute"]} | {model} |')
@@ -736,8 +812,6 @@ def render_markdown(country, pre, results, settings, failed, all_conflicts):
     synth, err = _model(results, 'SYNTH')
     L += ['', '## 4. Specs that must stay separate', '',
           f'Singletons by signature (prepass): {", ".join(f"`{s}`" for s in pre["type2"]["singletons"]) or "none"}', '']
-    if synth:
-        L += [f'- **Model:** `{s["id"]}` — {_md_escape(s["reason"])}' for s in synth['mustStaySeparate']]
     L += ['', '## 5. Knock-on impact', '',
           f'Validator files: {", ".join(f"`{v}`" for v in pre["validatorFiles"]) or "none"}', '']
     lookups = sorted({p.split('[')[0] for s in pre['specs'] for p in s['catalogues']})
