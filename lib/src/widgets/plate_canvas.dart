@@ -113,6 +113,11 @@ class _PlateCanvasState extends State<PlateCanvas> {
   _Ghost? _ghost;
   int _ghostSerial = 0;
 
+  /// How long the canvas takes to grow or shrink to the next spec's size:
+  /// the outgoing plate's stagger, so the box settles before the next plate
+  /// comes in. Zero when a spec change plays no transition.
+  Duration _resizeDuration = Duration.zero;
+
   void _recordValues() {
     if (_controller.spec.id == widget.spec.id) {
       _shownValues = _controller.values;
@@ -138,6 +143,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       reverse: true,
     )..removeWhere((id, _) => keeps(id));
     final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
+    _resizeDuration = outLength;
     _ghost = _Ghost(
       serial: ++_ghostSerial,
       spec: from,
@@ -222,6 +228,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       // count — and migrates itself to the new spec, carrying the characters
       // across as [PlateCanvas.onSpecChange] directs.
       _controller.adoptSpec(widget.spec, preserve: widget.onSpecChange);
+      _resizeDuration = Duration.zero;
       _startTransition(oldWidget, shown);
       oldWidget.controller?.detach(_machine);
       widget.controller?.detach(_machine);
@@ -531,10 +538,44 @@ class _PlateCanvasState extends State<PlateCanvas> {
       controller: widget.animation ?? PlateAnimationScope.maybeOf(context),
       child: Theme(
         data: selectionTheme,
-        child: Material(type: MaterialType.transparency, child: face),
+        child: Material(
+          type: MaterialType.transparency,
+          // Sizes the face as the FittedBoxes inside it would, from a plate
+          // size that tweens between specs, so a switch resizes the canvas
+          // smoothly instead of snapping to the next plate's proportions.
+          child: TweenAnimationBuilder<Size?>(
+            tween: SizeTween(end: Size(spec.canvasWidth, spec.canvasHeight)),
+            duration: _resizeDuration,
+            curve: Curves.easeInOut,
+            builder: (context, size, child) => CustomSingleChildLayout(
+              delegate: _PlateSizeDelegate(size!),
+              child: child,
+            ),
+            child: face,
+          ),
+        ),
       ),
     );
   }
+}
+
+/// Lays the face out at [plateSize] scaled to fit the incoming constraints,
+/// exactly the size a `FittedBox(fit: BoxFit.contain)` around it would take.
+class _PlateSizeDelegate extends SingleChildLayoutDelegate {
+  const _PlateSizeDelegate(this.plateSize);
+
+  final Size plateSize;
+
+  @override
+  Size getSize(BoxConstraints constraints) =>
+      constraints.constrainSizeAndAttemptToPreserveAspectRatio(plateSize);
+
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) =>
+      BoxConstraints.tight(getSize(constraints));
+
+  @override
+  bool shouldRelayout(_PlateSizeDelegate old) => old.plateSize != plateSize;
 }
 
 /// Painted furniture (frame, country panel, rules, labels, decals).
