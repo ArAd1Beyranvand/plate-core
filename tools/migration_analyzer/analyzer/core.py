@@ -16,7 +16,10 @@ import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from .prepass import fields_from
+
 TOOL = Path(__file__).resolve().parent.parent
+ROOT = TOOL.parent.parent
 OUT = TOOL / 'out'
 SPECS, PREPASS, REPORTS, UNITS = OUT / 'specs', OUT / 'prepass', OUT / 'reports', OUT / 'units'
 PROGRESS = OUT / 'progress.log'
@@ -175,16 +178,14 @@ NEAR_SCHEMA = {
 }
 
 TYPE1_SCHEMA = {
-    'type': 'object', 'required': ['specs'],
-    'properties': {'specs': _arr({
-        'type': 'object', 'required': ['id', 'agree', 'exceptions', 'extraMerges', 'notes'],
-        'properties': {
-            'id': STR, 'agree': BOOL, 'notes': STR,
-            'exceptions': _arr({'type': 'object', 'required': ['indices', 'reason'],
-                                'properties': {'indices': _arr(INT), 'reason': STR}}),
-            'extraMerges': _arr({'type': 'object', 'required': ['indices', 'reason'],
-                                 'properties': {'indices': _arr(INT), 'reason': STR}}),
-        }})},
+    'type': 'object', 'required': ['id', 'boundaries', 'notes'],
+    'properties': {
+        'id': STR, 'notes': STR,
+        'boundaries': _arr({'type': 'object', 'required': ['between', 'decision', 'reason'],
+                            'properties': {'between': _arr(INT),
+                                           'decision': {'type': 'string', 'enum': ['merge', 'split']},
+                                           'reason': STR}}),
+    },
 }
 
 SYNTH_SCHEMA = {
@@ -228,7 +229,9 @@ def validate(value, schema, path='$'):
 BACKGROUND = """You review a planned refactor of licence-plate specs. Facts below come from a deterministic analysis; treat them as correct and do not invent others.
 
 The migration:
-TYPE 1 - merge adjacent slots. Today every character is its own slot. Contiguous slots in the same text group, with the same alphabet, adjacent and evenly pitched, become ONE input field with length n (e.g. Iran "9 8 ه 8 8 6 4 0" -> [98][ه][886][40]). A run must stay split only for a real reason: a visual divider, a different box style, a label between cells, a mirror that depends on per-cell geometry.
+TYPE 1 - merge adjacent slots. Today every character is its own slot with its own FocusNode. Neighbouring cells that a person reads as one group become ONE input field (one FocusNode) holding n characters, e.g. Iran "9 8 ه 8 8 6 ایران 4 0" -> [98][ه][886][40].
+Hard boundaries are certain splits and are already applied: different line, a divider, a label/rule/decal between cells, alphabet or ink change.
+Soft boundaries are your judgement. Padding between cells is NOT a reason to split by itself: teams often padded every cell. Decide from how the real plate is read and written (source comments, ids, validators, tests, sample values): if the characters form one number/register, merge; if they are distinct registers (e.g. a region code next to a serial), split.
 TYPE 2 - variable-length fields. Specs that are the same plate and differ only in how many cells a register has collapse into ONE spec whose field accepts min..max characters. They must NOT be merged if they differ in anything else: panel, labels, rules, alphabets, mirrors, group keys, vehicle type, validators, or canvas proportions beyond what cell pitch explains.
 
 Answer only with JSON matching the requested schema. Be concise; every string short."""
@@ -256,10 +259,7 @@ def compact_spec(spec, t1):
         'mirrors': [f'slot {m["source"]} -> {m["alphabet"] or "same"}' for m in spec['mirrors']],
         'labels': [l['text'] for l in spec['labels']],
         'rules': rules['summary'] if isinstance(rules, dict) else f'{len(rules)} rules',
-        'type1': {'rendering': t1['rendering'],
-                  'runs': [{'group': r['group'], 'indices': [r['indices'][0], r['indices'][-1]],
-                            'length': r['proposedLength'], 'caveats': r['caveats']} for r in t1['runs']],
-                  'refused': t1['refused']},
+        'type1': t1,
     }
 
 
@@ -275,7 +275,7 @@ def cluster_prompt(country, cluster, specs_by_id, hint):
     """Shrinks in steps until it fits: drop the validator hint, then list
     fewer members in full, then clip the per-attribute difference values."""
     def member(i):
-        m = compact_spec(specs_by_id[i], {'rendering': '', 'runs': [], 'refused': []})
+        m = compact_spec(specs_by_id[i], None)
         m.pop('type1')
         return m
 
@@ -305,8 +305,8 @@ def cluster_prompt(country, cluster, specs_by_id, hint):
 
 def near_prompt(country, near, specs_by_id):
     facts = {'nearMiss': near,
-             'a': compact_spec(specs_by_id[near['a'][0]], {'rendering': '', 'runs': [], 'refused': []}),
-             'b': compact_spec(specs_by_id[near['b'][0]], {'rendering': '', 'runs': [], 'refused': []})}
+             'a': compact_spec(specs_by_id[near['a'][0]], None),
+             'b': compact_spec(specs_by_id[near['b'][0]], None)}
     facts['a'].pop('type1')
     facts['b'].pop('type1')
     return (f'{BACKGROUND}\n\nCountry: {country}. NEAR MISS: two spec groups whose signatures differ in exactly '
@@ -315,13 +315,67 @@ def near_prompt(country, near, specs_by_id):
             'or is it unclear? Give the reason and risks.')
 
 
-def type1_prompt(country, batch):
-    return (f'{BACKGROUND}\n\nCountry: {country}. TYPE 1 review of these specs. "runs" are the merges the '
-            f'analysis proposes; "refused" are boundaries it would keep.\nFACTS:\n'
-            f'{json.dumps(batch, ensure_ascii=False)}\n\n'
-            'For each spec: agree (true) if the proposed runs are right. List exceptions: proposed runs that '
-            'must stay split (give their slot indices and why). List extraMerges only if a refused boundary '
-            'should merge anyway. One entry per spec id.')
+_SOURCE_CACHE = {}
+
+
+def package_files(package, sub):
+    key = (package, sub)
+    if key not in _SOURCE_CACHE:
+        base = ROOT / package / sub
+        _SOURCE_CACHE[key] = [(p, p.read_text(errors='replace').splitlines())
+                              for p in sorted(base.rglob('*.dart'))] if base.exists() else []
+    return _SOURCE_CACHE[key]
+
+
+def spec_source(package, spec, limit=2500):
+    """The declaration of the spec in lib/, found by its id literal (else by
+    the catalogue member name), plus test lines mentioning either."""
+    needles = [f"'{spec['id']}'", f'"{spec["id"]}"']
+    names = [p.split('[')[0].split('(')[0].split('.')[-1] for p in spec.get('catalogues', [])]
+    snippet = ''
+    for pats in (needles, [n for n in names if len(n) > 2]):
+        for path, lines in package_files(package, 'lib'):
+            for n, line in enumerate(lines):
+                if any(p in line for p in pats):
+                    lo, hi = max(0, n - 15), min(len(lines), n + 40)
+                    snippet = f'// {path.relative_to(ROOT)}:{n + 1}\n' + '\n'.join(lines[lo:hi])
+                    break
+            if snippet:
+                break
+        if snippet:
+            break
+    if len(snippet) > limit:
+        snippet = snippet[:limit] + '\n... [truncated]'
+    tests = []
+    for path, lines in package_files(package, 'test'):
+        for n, line in enumerate(lines):
+            if any(p in line for p in needles + [n_ for n_ in names if len(n_) > 2]):
+                tests.append(f'{path.relative_to(ROOT)}:{n + 1}: {line.strip()[:160]}')
+                if len(tests) >= 5:
+                    return snippet, tests
+    return snippet, tests
+
+
+def type1_facts(t1):
+    return {k: t1[k] for k in ('rendering', 'segments', 'hardSplits', 'softBoundaries')}
+
+
+def type1_prompt(country, package, spec, t1, hint):
+    facts = compact_spec(spec, type1_facts(t1))
+    src, tests = spec_source(package, spec)
+    body = (f'Country: {country}. TYPE 1 decision for spec "{spec["id"]}".\nFACTS:\n'
+            f'{json.dumps(facts, ensure_ascii=False)}\n\n')
+    tail = ('Decide EVERY soft boundary (copy its "between" pair): merge or split, with a short reason. '
+            '"default" is only a guess from geometry. Do not list hard splits; they are fixed.')
+    extra = ''
+    if src:
+        extra += f'SPEC SOURCE:\n{src}\n\n'
+    if tests:
+        extra += 'TESTS MENTIONING IT:\n' + '\n'.join(tests) + '\n\n'
+    prompt = f'{BACKGROUND}\n\n{body}{extra}' + (f'VALIDATOR SOURCE (hint):\n{hint}\n\n' if hint else '') + tail
+    if approx_tokens(prompt) > TOKEN_BUDGET:
+        prompt = f'{BACKGROUND}\n\n{body}{extra}{tail}'
+    return prompt
 
 
 def synth_prompt(country, pre, results):
@@ -333,6 +387,7 @@ def synth_prompt(country, pre, results):
         'nearMisses': [{'id': n['id'], 'attribute': n['attribute'],
                         'model': results.get(n['id'], {}).get('answer', {}).get('verdict')}
                        for n in pre['type2']['nearMisses'][:20]],
+        'galleryDuplicates': [[e['id'] for e in d['entries']] for d in pre.get('gallery', {}).get('duplicates', [])],
         'warnings': pre['warnings'][:10],
         'validatorFiles': pre['validatorFiles'],
     }
@@ -375,21 +430,13 @@ def make_units(country, pre, specs_by_id, settings, results):
     for n in pre['type2']['nearMisses'][:settings.max_near_misses]:
         units.append(Unit(n['id'], 'near', NEAR_SCHEMA,
                           lambda n=n: near_prompt(country, n, specs_by_id), n['a'] + n['b']))
-    batch, size, k = [], 0, 0
+    hint1 = validator_hint(country, 1500)
     for t1 in pre['type1']:
-        item = compact_spec(specs_by_id[t1['id']], t1)
-        cost = approx_tokens(json.dumps(item, ensure_ascii=False))
-        if batch and (size + cost > FACT_BUDGET or len(batch) >= 4):
-            k += 1
-            units.append(Unit(f'T1-{k}', 'type1', TYPE1_SCHEMA, lambda b=batch: type1_prompt(country, b),
-                              [b['id'] for b in batch]))
-            batch, size = [], 0
-        batch.append(item)
-        size += cost
-    if batch:
-        k += 1
-        units.append(Unit(f'T1-{k}', 'type1', TYPE1_SCHEMA, lambda b=batch: type1_prompt(country, b),
-                          [b['id'] for b in batch]))
+        if not t1['softBoundaries']:
+            continue  # every boundary is hard: nothing to decide
+        spec = specs_by_id[t1['id']]
+        units.append(Unit(f'T1-{t1["id"]}', 'type1', TYPE1_SCHEMA,
+                          lambda s=spec, t=t1: type1_prompt(country, pre['package'], s, t, hint1), [t1['id']]))
     units.append(Unit('SYNTH', 'synth', SYNTH_SCHEMA, lambda: synth_prompt(country, pre, results)))
     return units
 
@@ -419,19 +466,22 @@ def conflicts(unit, answer, pre):
             out.append(f'proposes merging specs whose signature differs in "{n["attribute"]}" '
                        '(alphabet/group/direction/vehicle/validation structure)')
     elif unit.kind == 'type1':
-        t1 = {t['id']: t for t in pre['type1']}
-        for s in answer['specs']:
-            if s['id'] not in t1:
-                out.append(f'unknown spec id "{s["id"]}"')
-                continue
-            runs = [set(r['indices']) for r in t1[s['id']]['runs']]
-            for e in s['exceptions']:
-                if not any(set(e['indices']) <= r for r in runs):
-                    out.append(f'{s["id"]}: exception {e["indices"]} is not inside a proposed run')
-            for e in s['extraMerges']:
-                runs_hit = [r for r in t1[s['id']]['runs'] if set(r['indices']) & set(e['indices'])]
-                if len({r['alphabet'] for r in runs_hit}) > 1 or len({r['group'] for r in runs_hit}) > 1:
-                    out.append(f'{s["id"]}: extra merge {e["indices"]} crosses alphabets or text groups')
+        t1 = next(t for t in pre['type1'] if t['id'] == unit.subject[0])
+        if answer['id'] != t1['id']:
+            out.append(f'answer is for "{answer["id"]}", not "{t1["id"]}"')
+        soft = {tuple(b['between']) for b in t1['softBoundaries']}
+        hard = {tuple(h['between']): h['reasons'] for h in t1['hardSplits']}
+        seen = set()
+        for b in answer['boundaries']:
+            pair = tuple(b['between'])
+            seen.add(pair)
+            if pair in hard and b['decision'] == 'merge':
+                out.append(f'merges {list(pair)} across a hard boundary ({"; ".join(hard[pair])})')
+            elif pair not in soft and pair not in hard:
+                out.append(f'{list(pair)} is not a boundary of this spec')
+        missing = soft - seen
+        if missing:
+            out.append(f'soft boundaries left undecided (default used): {sorted(map(list, missing))}')
     elif unit.kind == 'synth':
         for s in answer['mustStaySeparate']:
             if s['id'] not in ids:
@@ -602,32 +652,43 @@ def render_markdown(country, pre, results, settings, failed, all_conflicts):
         L.append(f'| `{s["id"]}` | {s["slots"]} | {" ".join(s["groups"])} | {s["vehicle"]} | {s["cloneOf"] or ""} |')
 
     L += ['', '## 2. TYPE 1 plan', '']
-    t1_answers = {}
-    for r in results.values():
-        if r['kind'] == 'type1' and r['status'] == 'ok':
-            for s in r['answer']['specs']:
-                t1_answers[s['id']] = (s, r['unit'])
+    L += ['Brackets are input fields (one FocusNode each). Hard splits are certain; soft boundaries '
+          'are decided by the model, or by the geometric default where it gave no answer.', '']
     for t in pre['type1']:
-        L.append(f'- `{t["id"]}`: {t["rendering"]}  ({t["slotCount"]} slots → {t["fieldCount"]} fields)')
-        for x in t['refused']:
-            L.append(f'  - kept split between {x["between"]} ({x["group"]}): {"; ".join(x["reasons"])}')
-        for r in t['runs']:
-            if r['caveats']:
-                L.append(f'  - run {r["indices"][0]}..{r["indices"][-1]}: {"; ".join(r["caveats"])}')
-        ans = t1_answers.get(t['id'])
+        uid = f'T1-{t["id"]}'
+        ans, err = _model(results, uid)
+        order = [(0, i) for seg in t['segments'] for i in seg['indices']]
+        decisions = {tuple(b['between']): b['default'] for b in t['softBoundaries']}
         if ans:
-            s, uid = ans
-            if not s['agree'] or s['exceptions'] or s['extraMerges'] or s['notes']:
-                L.append(f'  - **Model:** {"agrees" if s["agree"] else "disagrees"}. {_md_escape(s["notes"])}')
-                for e in s['exceptions']:
-                    L.append(f'    - exception {e["indices"]}: {_md_escape(e["reason"])}')
-                for e in s['extraMerges']:
-                    L.append(f'    - extra merge {e["indices"]}: {_md_escape(e["reason"])}')
-    for r in results.values():
-        if r['kind'] == 'type1':
-            if r['status'] != 'ok':
-                L.append(f'- _model failed for {", ".join(r["subject"])}: {_md_escape(r.get("error"))}_')
-            L += _conflict_lines(results, r['unit'])
+            decisions.update({tuple(b['between']): b['decision'] for b in ans['boundaries']
+                              if tuple(b['between']) in decisions})
+        fields = fields_from(order, decisions, t['hardSplits'])
+        plan = ''.join('[' + ''.join(t['chars'].get(str(i), '?') for i in f) + ']' for f in fields)
+        who = 'model' if ans else 'default'
+        L.append(f'- `{t["id"]}`: {t["rendering"].split(" → ")[0]} → **{plan}** '
+                 f'({t["slotCount"]} slots → {len(fields)} fields, {who})')
+        for h in t['hardSplits']:
+            L.append(f'  - hard split {h["between"]}: {"; ".join(h["reasons"])}')
+        for seg in t['segments']:
+            if seg['caveats']:
+                L.append(f'  - segment {seg["indices"][0]}..{seg["indices"][-1]}: {"; ".join(seg["caveats"])}')
+        if ans:
+            for b in ans['boundaries']:
+                L.append(f'  - **Model** {b["between"]} {b["decision"]}: {_md_escape(b["reason"])}')
+            if ans['notes']:
+                L.append(f'  - **Model notes:** {_md_escape(ans["notes"])}')
+        elif t['softBoundaries'] and uid in results:
+            L.append(f'  - {err}')
+        L += _conflict_lines(results, uid)
+
+    dups = pre.get('gallery', {}).get('duplicates', [])
+    L += ['', '## 2b. Gallery duplicates', '']
+    if not dups:
+        L.append('None: every gallery entry differs in spec, theme, panel country or validator.')
+    for d in dups:
+        L.append(f'- spec `{d["specId"]}`, theme {d["themeColors"]}: '
+                 + ', '.join(f'`{e["id"]}` ({_md_escape(e["label"])})' for e in d['entries'])
+                 + f' — {_md_escape(d["reason"])}')
 
     L += ['', '## 3. TYPE 2 plan', '']
     clusters = pre['type2']['clusters']

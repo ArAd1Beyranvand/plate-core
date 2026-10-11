@@ -27,6 +27,18 @@ dump's `warnings`.
 python3 analyzer/prepass.py [country ...]   # → out/prepass/<country>.json
 ```
 
+TYPE 1 splits each spec at **hard** boundaries: a different line, a divider,
+a label/rule/decal between cells, or an alphabet/ink change. Those are never
+merged. Every other boundary (padding, pitch, width, text-group change) is
+**soft**. It gets a geometric default, and the model decides it per spec
+from the spec's source in `lib/`, the test lines that mention it and the
+validator. Padding alone does not split, since many packages pad every cell
+(Iran `۹ ۸ ه ۸ ۸ ۶ ۴ ۰` → `[۹۸][ه][۸۸۶][۴۰]`). The report shows the
+resulting fields and flags as CONFLICT any merge across a hard boundary.
+
+The gallery is dumped too (`out/gallery.json`). Entries with the same spec,
+theme, country and validator are listed as duplicates.
+
 ## 3. Run the model
 
 Start Ollama (`ollama serve`) with a model pulled (an instruction-tuned 7–14B

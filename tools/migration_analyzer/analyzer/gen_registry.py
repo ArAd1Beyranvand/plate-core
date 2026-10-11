@@ -210,6 +210,10 @@ dependencies:
   plate_core:
     path: ../../plate_core
 {deps}
+  # Read-only: the gallery's entries (spec + theme + country) for duplicate
+  # detection. Nothing in plate_number_holder is modified.
+  plate_number_holder:
+    path: ../../plate_number_holder
 
 dev_dependencies:
   flutter_lints: ^6.0.0

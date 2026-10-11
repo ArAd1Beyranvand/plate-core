@@ -10,10 +10,12 @@ import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:plate_core/plate_core.dart';
+import 'package:plate_number_holder/screens/gallery/sources/sources.dart';
 
 import 'registry.g.dart';
 
 void main() {
+  test('dump gallery', _dumpGallery);
   test('dump specs', () {
     final out = Directory('out/specs')..createSync(recursive: true);
     final validatorsOut = Directory('out/validators')
@@ -108,6 +110,56 @@ void main() {
 }
 
 var _specTotal = 0;
+
+/// Every gallery entry, flattened over umbrella sources, to
+/// out/gallery.json. Theme identity is by value (PlateTheme.==), numbered in
+/// order of first appearance so two entries can be compared by `theme`.
+void _dumpGallery() {
+  final themes = <PlateTheme>[];
+  final seen = <String>{};
+  final entries = <Map<String, Object?>>[];
+  void visit(GallerySource source) {
+    for (final m in source.members) {
+      visit(m);
+    }
+    for (final section in source.sections) {
+      for (final e in section.entries) {
+        if (!seen.add('${e.id}|${e.spec.id}')) continue;
+        var theme = e.theme == null ? -1 : themes.indexOf(e.theme!);
+        if (e.theme != null && theme < 0) {
+          themes.add(e.theme!);
+          theme = themes.length - 1;
+        }
+        entries.add({
+          'source': source.countryName,
+          'packages': source.packageNames,
+          'section': section.title,
+          'id': e.id,
+          'label': e.label,
+          'specId': e.spec.id,
+          'theme': theme,
+          'themeColors': e.theme == null
+              ? null
+              : [_c(e.theme!.plateBackground), _c(e.theme!.ink)],
+          'country': e.country?.code ?? e.spec.country.code,
+          'validator': e.validator?.runtimeType.toString(),
+          'valueDrivenTheme': e.themeForValues != null,
+          'sample': e.sampleValues?.map((v) => v ?? '').join(),
+        });
+      }
+    }
+  }
+
+  for (final s in gallerySources) {
+    visit(s);
+  }
+  Directory('out').createSync(recursive: true);
+  File('out/gallery.json').writeAsStringSync(
+    const JsonEncoder.withIndent(' ').convert(entries),
+  );
+  // ignore: avoid_print
+  print('dumped ${entries.length} gallery entries');
+}
 
 class _Found {
   _Found(this.package, this.key);

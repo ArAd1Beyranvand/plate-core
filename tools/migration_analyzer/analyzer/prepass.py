@@ -3,8 +3,10 @@
 No model involved: these are the facts the LLM step may comment on but never
 overrides.
 
-  TYPE 1  runs of adjacent slots (same text group, alphabet, row, constant
-          pitch, nothing painted between) that collapse into one field.
+  TYPE 1  per spec: segments split at hard boundaries (line, divider,
+          painted item between, alphabet/ink change) and, inside them, soft
+          boundaries (padding, pitch, width, group change) with a default
+          merge/split for the model to confirm or overturn.
   TYPE 2  specs whose structure signature (everything except per-register
           cell counts) is identical, i.e. one plate with variable-length
           registers; plus near-miss pairs differing in one attribute.
@@ -23,6 +25,8 @@ SPECS = TOOL / 'out' / 'specs'
 OUT = TOOL / 'out' / 'prepass'
 
 PITCH_TOLERANCE = 0.5
+# Gaps within this many plate units count as touching (not padding).
+GAP_TOLERANCE = 0.5
 MOTO_RE = re.compile(r'moto|motorcycle|bike|scooter|two.?wheel', re.I)
 
 
@@ -68,9 +72,8 @@ def divider_xs(section, x0, x1, y0, y1, out):
 
 
 def vehicle_kind(spec):
-    if MOTO_RE.search(spec['id']):
-        return 'moto'
-    return 'square' if spec['aspect'] < 1.4 else 'car'
+    """From the id only; geometry says nothing reliable about the vehicle."""
+    return 'moto' if MOTO_RE.search(spec['id']) else 'unspecified'
 
 
 def aspect_class(a):
@@ -110,83 +113,115 @@ def blockers_between(spec, a, b):
     return reasons
 
 
+HARD_NOTE = ('never merged: different line, divider, label/decal/band/rule between, '
+             'alphabet or ink change, broken index order')
+
+
+def boundary(spec, prev, cur, same_group, pitch):
+    """(hard reasons, soft evidence) for the pair of cells prev -> cur.
+
+    Hard reasons are certain splits. Soft evidence (padding, pitch, width,
+    text-group change) is for the model to weigh: teams added padding between
+    every cell even where the plate reads as one field (Iran 98 ه 886 40).
+    """
+    slots = spec['slots']
+    a, b = slots[prev], slots[cur]
+    hard, soft = [], []
+    if a['box'][1] != b['box'][1] or a['box'][3] != b['box'][3]:
+        hard.append('different line/row height')
+    if a['alphabet'] != b['alphabet']:
+        hard.append(f'alphabet {a["alphabet"]} -> {b["alphabet"]}')
+    if a.get('color') != b.get('color'):
+        hard.append('different slot ink')
+    if abs(cur - prev) != 1:
+        hard.append(f'indices {prev}->{cur} not consecutive')
+    lo, hi = (a, b) if a['box'][0] <= b['box'][0] else (b, a)
+    gap = round(hi['box'][0] - right(lo['box']), 2)
+    if gap < -GAP_TOLERANCE:
+        hard.append(f'cells overlap by {-gap}')
+    if not hard:
+        hard += blockers_between(spec, a, b)
+    step = round(abs(b['box'][0] - a['box'][0]), 2)
+    if not same_group:
+        soft.append('text group changes')
+    if gap > GAP_TOLERANCE:
+        soft.append(f'padding {gap}')
+    if a['box'][2] != b['box'][2]:
+        soft.append(f'cell width {a["box"][2]} -> {b["box"][2]}')
+    if pitch is not None and abs(step - pitch) > PITCH_TOLERANCE:
+        soft.append(f'pitch {pitch} -> {step}')
+    return hard, soft, gap, step
+
+
 def type1(spec):
+    """Segments split at hard boundaries; inside a segment every boundary is
+    soft and gets a default (merge, except at a text-group change) that the
+    model confirms or overturns."""
     slots = spec['slots']
     mirrored = {m['source'] for m in spec['mirrors']}
-    runs, refused = [], []
-    for gi, group in enumerate(spec['textGroups']):
-        idx = [i for i in group['indices'] if i < len(slots)]
-        run = idx[:1]
-        pitch = None
-
-        def close(run):
-            if not run:
-                return
-            cells = [slots[i] for i in run]
-            x0 = min(c['box'][0] for c in cells)
-            x1 = max(right(c['box']) for c in cells)
-            caveats = []
-            if len(run) > 1 and mirrored & set(run):
-                caveats.append(f'{len(mirrored & set(run))} cell(s) echoed by per-cell mirrors')
-            if any(c['input'] == 'chosen' for c in cells) and len(run) > 1:
-                caveats.append('alphabet is chosen from a sheet, not typed')
-            runs.append({
-                'group': group['key'] or f'#{gi}', 'groupIndex': gi, 'indices': run,
-                'alphabet': cells[0]['alphabet'], 'proposedLength': len(run),
-                'resultingFieldWidth': round(x1 - x0, 2), 'fieldBox': [round(x0, 2), cells[0]['box'][1], round(x1 - x0, 2), cells[0]['box'][3]],
-                'pitch': pitch_of(run), 'caveats': caveats,
-            })
-
-        def pitch_of(run):
-            if len(run) < 2:
-                return None
-            return round(abs(slots[run[1]]['box'][0] - slots[run[0]]['box'][0]), 2)
-
-        for prev, cur in zip(idx, idx[1:]):
-            a, b = slots[prev], slots[cur]
-            why = []
-            if abs(cur - prev) != 1:
-                why.append(f'indices {prev}->{cur} not consecutive')
-            if a['alphabet'] != b['alphabet']:
-                why.append(f'alphabet {a["alphabet"]} -> {b["alphabet"]}')
-            if a['box'][1] != b['box'][1] or a['box'][3] != b['box'][3]:
-                why.append('different row/height')
-            if a.get('color') != b.get('color'):
-                why.append('different slot ink')
-            if a['box'][2] != b['box'][2]:
-                why.append('different cell width')
-            step = abs(b['box'][0] - a['box'][0])
-            if not why and pitch is not None and abs(step - pitch) > PITCH_TOLERANCE:
-                why.append(f'pitch changes {pitch} -> {round(step, 2)}')
-            if not why:
-                why += blockers_between(spec, a, b)
-            if why:
-                # Alphabet changes are the expected boundary; only report the rest.
-                if not (len(why) == 1 and why[0].startswith('alphabet')):
-                    refused.append({'group': group['key'] or f'#{gi}', 'between': [prev, cur], 'reasons': why})
-                close(run)
-                run, pitch = [cur], None
+    order = [(gi, i) for gi, g in enumerate(spec['textGroups']) for i in g['indices'] if i < len(slots)]
+    gkey = lambda gi: spec['textGroups'][gi]['key'] or f'#{gi}'
+    segments, hard_splits, soft = [], [], []
+    seg, pitch = [], None
+    for k, (gi, i) in enumerate(order):
+        if seg:
+            pgi, prev = order[k - 1]
+            h, s, gap, step = boundary(spec, prev, i, pgi == gi, pitch)
+            if h:
+                hard_splits.append({'between': [prev, i], 'reasons': h})
+                segments.append(seg)
+                seg, pitch = [], None
             else:
-                run.append(cur)
+                soft.append({'between': [prev, i], 'groups': [gkey(pgi), gkey(gi)], 'gap': gap,
+                             'step': step, 'evidence': s,
+                             'default': 'split' if pgi != gi else 'merge'})
                 pitch = step if pitch is None else pitch
-        close(run)
+        seg.append(i)
+    if seg:
+        segments.append(seg)
 
-    before, after = [], []
-    for group in spec['textGroups']:
-        before.append(' '.join(sample_char(spec, slots[i], n) for n, i in enumerate(group['indices']) if i < len(slots)))
-    n = 0
-    for r in runs:
-        after.append('[' + ''.join(sample_char(spec, slots[i], k) for k, i in enumerate(r['indices'])) + ']')
-    merged = sum(1 for r in runs if r['proposedLength'] > 1)
+    def caveats(run):
+        out = []
+        if len(run) > 1 and mirrored & set(run):
+            out.append(f'{len(mirrored & set(run))} cell(s) echoed by per-cell mirrors')
+        if len(run) > 1 and any(slots[i]['input'] == 'chosen' for i in run):
+            out.append('alphabet is chosen from a sheet, not typed')
+        return out
+
+    fields = fields_from(order, {tuple(b['between']): b['default'] for b in soft}, hard_splits)
+    before = ' · '.join(' '.join(sample_char(spec, slots[i], n) for n, i in enumerate(g['indices']) if i < len(slots))
+                        for g in spec['textGroups'])
     return {
         'id': spec['id'],
         'slotCount': len(slots),
-        'fieldCount': len(runs),
-        'mergeableRuns': merged,
-        'rendering': f'{" · ".join(before)} → {"".join(after)}',
-        'runs': runs,
-        'refused': refused,
+        'segments': [{'indices': s, 'alphabet': slots[s[0]]['alphabet'], 'caveats': caveats(s)} for s in segments],
+        'hardSplits': hard_splits,
+        'softBoundaries': soft,
+        'defaultFields': fields,
+        'fieldCount': len(fields),
+        'mergeableRuns': sum(1 for f in fields if len(f) > 1),
+        'rendering': f'{before} → {render_fields(spec, fields)}',
+        'chars': {str(i): sample_char(spec, slots[i], n) for g in spec['textGroups']
+                  for n, i in enumerate(g['indices']) if i < len(slots)},
     }
+
+
+def fields_from(order, decisions, hard_splits):
+    """Fields (index lists) from per-boundary merge/split decisions."""
+    hard = {tuple(h['between']) for h in hard_splits}
+    fields = []
+    for k, (_, i) in enumerate(order):
+        pair = (order[k - 1][1], i) if k else None
+        if fields and pair not in hard and decisions.get(pair) == 'merge':
+            fields[-1].append(i)
+        else:
+            fields.append([i])
+    return fields
+
+
+def render_fields(spec, fields):
+    return ''.join('[' + ''.join(sample_char(spec, spec['slots'][i], k) for k, i in enumerate(f)) + ']'
+                   for f in fields)
 
 
 # ---------------------------------------------------------------- TYPE 2
@@ -340,6 +375,33 @@ def type2(specs):
     return clusters, near, singletons, sigs
 
 
+# ---------------------------------------------------------------- gallery
+
+def gallery_facts(spec_ids):
+    """Gallery entries on this country's specs. Entries that agree on spec,
+    theme, panel country and validator draw the same plate - only the sample
+    value differs - so they are duplicates."""
+    path = TOOL / 'out' / 'gallery.json'
+    if not path.exists():
+        return {'entries': [], 'duplicates': [], 'note': 'out/gallery.json missing; rerun the Dart dump'}
+    entries = [e for e in json.loads(path.read_text()) if e['specId'] in spec_ids]
+    groups = {}
+    for e in entries:
+        key = (e['specId'], e['theme'], e['country'], e['validator'], e['valueDrivenTheme'])
+        groups.setdefault(key, []).append(e)
+    duplicates = [{
+        'specId': k[0], 'theme': k[1], 'themeColors': g[0]['themeColors'],
+        'entries': [{'id': e['id'], 'label': e['label'], 'section': e['section'], 'sample': e['sample']}
+                    for e in g],
+        'reason': 'same spec, theme, panel country and validator; only the sample value differs',
+    } for k, g in groups.items() if len(g) > 1]
+    return {
+        'entries': [{k: e[k] for k in ('id', 'label', 'section', 'specId', 'theme', 'themeColors', 'validator')}
+                    for e in entries],
+        'duplicates': duplicates,
+    }
+
+
 # ---------------------------------------------------------------- driver
 
 def analyse(path):
@@ -360,6 +422,7 @@ def analyse(path):
         'clones': [{'id': s['id'], 'cloneOf': s['cloneOf']} for s in specs if 'cloneOf' in s],
         'type1': [type1(s) for s in specs if 'cloneOf' not in s],
         'type2': {'clusters': clusters, 'nearMisses': near, 'singletons': singletons},
+        'gallery': gallery_facts({s['id'] for s in specs}),
         'signatures': sigs,
     }
 
@@ -378,7 +441,8 @@ def main(argv):
         (OUT / path.name).write_text(json.dumps(result, indent=1, ensure_ascii=False))
         t1 = sum(r['mergeableRuns'] for r in result['type1'])
         print(f'{result["country"]:<40} specs {len(result["specs"]):>3}  type1 runs {t1:>4}  '
-              f'type2 clusters {len(result["type2"]["clusters"]):>2}  near-miss {len(result["type2"]["nearMisses"]):>3}')
+              f'type2 clusters {len(result["type2"]["clusters"]):>2}  near-miss {len(result["type2"]["nearMisses"]):>3}  '
+              f'gallery dups {len(result["gallery"]["duplicates"]):>2}')
     return 0
 
 
