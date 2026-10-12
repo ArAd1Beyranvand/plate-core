@@ -763,6 +763,9 @@ class _FakeTarget implements PlateInputTarget {
   _FakeTarget({this.activeIndex});
 
   @override
+  bool get systemKeyboardActive => false;
+
+  @override
   final int? activeIndex;
 
   final List<String> submitted = [];

@@ -19,6 +19,7 @@ class PlateInputMachine implements PlateInputTarget {
     required this.commit,
     required this.inputSource,
     this.onActiveIndexChanged,
+    this.onSystemKeyboardChanged,
   }) {
     for (var i = 0; i < spec.slots.length; i++) {
       _focusNodes.add(FocusNode()..addListener(_handleFocusChange));
@@ -64,6 +65,26 @@ class PlateInputMachine implements PlateInputTarget {
   /// Fired when the focused slot changes or focus leaves the plate.
   final ValueChanged<int?>? onActiveIndexChanged;
 
+  /// Fired when [systemKeyboard] flips.
+  final VoidCallback? onSystemKeyboardChanged;
+
+  /// Under [PlateInputSource.keypadFirst], whether typed slots currently
+  /// take the platform keyboard rather than the keypad.
+  final ValueNotifier<bool> systemKeyboard = ValueNotifier(false);
+
+  @override
+  bool get systemKeyboardActive => systemKeyboard.value;
+
+  /// Typed slots take the platform keyboard until focus reaches a chosen slot
+  /// or leaves the plate.
+  void requestSystemKeyboard() => _setSystemKeyboard(true);
+
+  void _setSystemKeyboard(bool value) {
+    if (systemKeyboard.value == value) return;
+    systemKeyboard.value = value;
+    onSystemKeyboardChanged?.call();
+  }
+
   /// Fired when a chosen slot under [SlotBehavior.sheet] is reached.
   ValueChanged<int>? onSheetRequested;
 
@@ -104,6 +125,12 @@ class PlateInputMachine implements PlateInputTarget {
         }
       }
     }
+    // No platform keyboard can type a chosen slot, and none is wanted once
+    // focus has left the plate: both hand back to the keypad.
+    if (active == null ||
+        spec.slots[active].alphabet.input != AlphabetInput.typed) {
+      _setSystemKeyboard(false);
+    }
     if (active != _activeIndex) {
       _activeIndex = active;
       onActiveIndexChanged?.call(active);
@@ -141,9 +168,7 @@ class PlateInputMachine implements PlateInputTarget {
     final field = _controllers[index];
     if (field == null) return;
     final stored = value ?? '';
-    final text = stored.isEmpty
-        ? ''
-        : spec.slots[index].alphabet.render(stored);
+    final text = stored.isEmpty ? '' : spec.slots[index].render(stored);
     if (field.text == text) return;
     field.value = TextEditingValue(
       text: text,
@@ -162,7 +187,7 @@ class PlateInputMachine implements PlateInputTarget {
     final field = _mirrorControllers[mirrorIndex];
     if (field == null) return;
     final stored = value ?? '';
-    final text = stored.isEmpty ? '' : alphabet.render(stored);
+    final text = stored.isEmpty ? '' : alphabet.renderAll(stored);
     if (field.text == text) return;
     field.value = TextEditingValue(
       text: text,
@@ -171,6 +196,7 @@ class PlateInputMachine implements PlateInputTarget {
   }
 
   void dispose() {
+    systemKeyboard.dispose();
     for (final c in _controllers) {
       c?.dispose();
     }
@@ -190,9 +216,14 @@ class PlateInputMachine implements PlateInputTarget {
   @override
   void submitCharacter(String c) {
     final index = _activeIndex;
-    if (index == null || !spec.slots[index].alphabet.accepts(c)) return;
-    if (!commit(index, c)) return;
-    advanceFrom(index);
+    if (index == null) return;
+    final slot = spec.slots[index];
+    final held = readValues()[index] ?? '';
+    // A full run is retyped from its first character.
+    final next = (slot.isFull(held) ? '' : held) + slot.alphabet.canonical(c);
+    if (!slot.accepts(next)) return;
+    if (!commit(index, next)) return;
+    if (slot.isFull(next)) advanceFrom(index);
   }
 
   @override
@@ -201,11 +232,14 @@ class PlateInputMachine implements PlateInputTarget {
     if (index == null) return;
     final values = readValues();
     final current = values[index];
-    final target = (current == null || current.isEmpty)
-        ? spec.previousIndex(index)
-        : index;
+    final empty = current == null || current.isEmpty;
+    final target = empty ? spec.previousIndex(index) : index;
     if (target == null) return;
-    commit(target, '');
+    // Backspace takes one character off a run; the previous field is cleared
+    // by its last character the same way.
+    final held = empty ? (values[target] ?? '') : current;
+    final kept = held.runes.take(held.runes.length - 1);
+    commit(target, String.fromCharCodes(kept));
     _focusNodes[target].requestFocus();
   }
 
@@ -214,7 +248,7 @@ class PlateInputMachine implements PlateInputTarget {
     final values = readValues();
     for (var i = 0; i < spec.slots.length; i++) {
       final v = values[i];
-      if (v == null || v.isEmpty) {
+      if (!spec.slots[i].isFull(v)) {
         _focusNodes[i].requestFocus();
         return;
       }

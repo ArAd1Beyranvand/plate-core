@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/scheduler.dart';
 
 import 'package:flutter/material.dart';
 
@@ -146,8 +147,13 @@ class _PlateCanvasState extends State<PlateCanvas> {
       step: transition.step,
       reverse: true,
     )..removeWhere((id, _) => keeps(id));
+    // A morphing face takes its border with it: the incoming plate draws
+    // both from the start, so the outline never wipes out and redraws.
     final morph = transition.morphBackground;
-    if (morph) outDelays.remove(PlatePartId.background);
+    final morphed = {
+      if (morph) ...[PlatePartId.background, PlatePartId.border],
+    };
+    outDelays.removeWhere((id, _) => morphed.contains(id));
     final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
     _resizeDuration = outLength;
     _morphBackground = morph;
@@ -164,7 +170,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
         for (final id in PlatePartId.allOf(from))
           if (keeps(id)) id,
       },
-      dropped: {if (morph) PlatePartId.background},
+      dropped: morphed,
       length: outLength,
       style: anim.style,
     );
@@ -184,7 +190,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     }
     // The incoming face shows under the ghost from the start, its colour
     // tweening from the outgoing one's.
-    if (morph) anim.settle(PlatePartId.background);
+    for (final id in morphed) {
+      anim.settle(id);
+    }
   }
 
   void _ghostDone(int serial) {
@@ -303,6 +311,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
       readValues: () => _controller.values,
       commit: _commit,
       onActiveIndexChanged: _reportActiveIndex,
+      onSystemKeyboardChanged: () =>
+          widget.controller?.notifyActiveSlotChanged(),
     )..onSheetRequested = _openPicker;
     _machine = machine;
     widget.controller?.attach(machine);
@@ -469,46 +479,59 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // derive the same size, scale and alignment from the same plate-space
     // [SizedBox] — the geometry is identical to the single FittedBox this
     // replaced, and the stack sizes exactly as that one did.
-    final artworkTheme = theme;
-    final artwork = TweenAnimationBuilder<Color?>(
-      tween: ColorTween(end: theme.plateBackground),
-      duration: _morphBackground ? _resizeDuration : Duration.zero,
-      curve: Curves.easeInOut,
-      builder: (context, face, _) => _PlateArtwork(
-        spec: spec,
-        theme: face == artworkTheme.plateBackground
-            ? artworkTheme
-            : artworkTheme.copyWith(plateBackground: face),
-        country: country,
-        controller: _controller,
-        clipper: clipper,
-      ),
-    );
+    Widget buildFace(PlateTheme theme) {
+      final artworkTheme = theme;
+      final artwork = TweenAnimationBuilder<Color?>(
+        tween: ColorTween(end: theme.plateBackground),
+        duration: _morphBackground ? _resizeDuration : Duration.zero,
+        curve: Curves.easeInOut,
+        builder: (context, face, _) => _PlateArtwork(
+          spec: spec,
+          theme: face == artworkTheme.plateBackground
+              ? artworkTheme
+              : artworkTheme.copyWith(plateBackground: face),
+          country: country,
+          controller: _controller,
+          clipper: clipper,
+        ),
+      );
 
-    // The alert. With autoValidate on, the canvas judges the plate itself and
-    // paints the completed-field underline in the theme's alert colour — that,
-    // and nothing else: no dialog, no exception, and above all no rejected
-    // keystroke. With it off the validator is never called from here; a host
-    // that wants its own timing reads PlateController.validation.
-    //
-    // Only the input layer is inside the binding: a verdict flips
-    // `activeColor`, which recolours slot underlines and nothing else, so the
-    // artwork no longer rebuilds when the plate crosses between valid and
-    // invalid.
-    final validator = widget.validator;
-    final Widget inputs = widget.autoValidate && validator != null
-        ? _ValidationBinding(
-            controller: _controller,
-            validate: (values) {
-              final entry = _entryFor(values);
-              return restrictionVerdict(entry) ?? validator.validate(entry);
-            },
-            onVerdict: _publishVerdict,
-            builder: (verdict) => _PlateInputs(
+      // The alert. With autoValidate on, the canvas judges the plate itself and
+      // paints the completed-field underline in the theme's alert colour — that,
+      // and nothing else: no dialog, no exception, and above all no rejected
+      // keystroke. With it off the validator is never called from here; a host
+      // that wants its own timing reads PlateController.validation.
+      //
+      // Only the input layer is inside the binding: a verdict flips
+      // `activeColor`, which recolours slot underlines and nothing else, so the
+      // artwork no longer rebuilds when the plate crosses between valid and
+      // invalid.
+      final validator = widget.validator;
+      final Widget inputs = widget.autoValidate && validator != null
+          ? _ValidationBinding(
+              controller: _controller,
+              validate: (values) {
+                final entry = _entryFor(values);
+                return restrictionVerdict(entry) ?? validator.validate(entry);
+              },
+              onVerdict: _publishVerdict,
+              builder: (verdict) => _PlateInputs(
+                spec: spec,
+                theme: verdict.isValid
+                    ? theme
+                    : theme.copyWith(activeColor: theme.alertColor),
+                behaviors: behaviors,
+                machine: _machine,
+                controller: _controller,
+                mode: widget.mode,
+                onPick: _openPicker,
+                commit: _commit,
+                clipper: clipper,
+              ),
+            )
+          : _PlateInputs(
               spec: spec,
-              theme: verdict.isValid
-                  ? theme
-                  : theme.copyWith(activeColor: theme.alertColor),
+              theme: theme,
               behaviors: behaviors,
               machine: _machine,
               controller: _controller,
@@ -516,36 +539,35 @@ class _PlateCanvasState extends State<PlateCanvas> {
               onPick: _openPicker,
               commit: _commit,
               clipper: clipper,
-            ),
-          )
-        : _PlateInputs(
-            spec: spec,
-            theme: theme,
-            behaviors: behaviors,
-            machine: _machine,
-            controller: _controller,
-            mode: widget.mode,
-            onPick: _openPicker,
-            commit: _commit,
-            clipper: clipper,
-          );
+            );
 
-    final ghost = _ghost;
-    final Widget face = Stack(
-      fit: StackFit.passthrough,
-      children: [
-        artwork,
-        inputs,
-        if (ghost != null)
-          Positioned.fill(
-            child: _SpecGhost(
-              key: ValueKey<int>(ghost.serial),
-              ghost: ghost,
-              onDone: _ghostDone,
+      final ghost = _ghost;
+      final Widget face = Stack(
+        fit: StackFit.passthrough,
+        children: [
+          artwork,
+          inputs,
+          if (ghost != null)
+            Positioned.fill(
+              child: _SpecGhost(
+                key: ValueKey<int>(ghost.serial),
+                ghost: ghost,
+                onDone: _ghostDone,
+              ),
             ),
-          ),
-      ],
-    );
+        ],
+      );
+      return face;
+    }
+
+    final Widget face = spec.resolveTheme == null
+        ? buildFace(theme)
+        : _Livery(
+            spec: spec,
+            controller: _controller,
+            base: theme,
+            builder: buildFace,
+          );
 
     // Wrap in a Material so the typed slots' TextFields have the Material
     // ancestor they require. Without this a consumer must place PlateCanvas
@@ -567,9 +589,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
             tween: SizeTween(end: Size(spec.canvasWidth, spec.canvasHeight)),
             duration: _resizeDuration,
             curve: Curves.easeInOut,
-            builder: (context, size, child) => CustomSingleChildLayout(
-              delegate: _PlateSizeDelegate(size!),
-              child: child,
+            builder: (context, size, child) => _PlateSizeScope(
+              size: size!,
+              child: CustomSingleChildLayout(
+                delegate: _PlateSizeDelegate(size),
+                child: child,
+              ),
             ),
             child: face,
           ),
@@ -622,6 +647,87 @@ class _PlateArtwork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        Positioned.fill(
+          child: _MorphingFrame(
+            textDirection: spec.textDirection,
+            child: _FrameBinding(
+              theme: theme,
+              controller: controller,
+              background: spec.background,
+              panelColor: country.panelColor,
+            ),
+          ),
+        ),
+        _PlateContent(
+          spec: spec,
+          theme: theme,
+          country: country,
+          controller: controller,
+          clipper: clipper,
+        ),
+      ],
+    );
+  }
+}
+
+/// The face and border, laid out at the canvas's current plate size rather
+/// than the spec's, so they fill the box while it tweens between specs
+/// instead of letterboxing inside it. At rest the two sizes are the same.
+class _MorphingFrame extends StatelessWidget {
+  const _MorphingFrame({required this.textDirection, required this.child});
+
+  final TextDirection textDirection;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = _PlateSizeScope.of(context);
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: SizedBox(
+        width: size.width,
+        height: size.height,
+        child: Directionality(textDirection: textDirection, child: child),
+      ),
+    );
+  }
+}
+
+/// The plate size the canvas is laid out at this frame (see
+/// [_PlateSizeDelegate]).
+class _PlateSizeScope extends InheritedWidget {
+  const _PlateSizeScope({required this.size, required super.child});
+
+  final Size size;
+
+  static Size of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<_PlateSizeScope>()!.size;
+
+  @override
+  bool updateShouldNotify(_PlateSizeScope old) => old.size != size;
+}
+
+/// Everything printed on the face, in the spec's own coordinates.
+class _PlateContent extends StatelessWidget {
+  const _PlateContent({
+    required this.spec,
+    required this.theme,
+    required this.country,
+    required this.controller,
+    required this.clipper,
+  });
+
+  final PlateSpec spec;
+  final PlateTheme theme;
+  final PlateCountry country;
+  final PlateController controller;
+  final _PlateFaceClipper clipper;
+
+  @override
+  Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.contain,
       child: SizedBox(
@@ -631,14 +737,6 @@ class _PlateArtwork extends StatelessWidget {
           textDirection: spec.textDirection,
           child: Stack(
             children: [
-              Positioned.fill(
-                child: _FrameBinding(
-                  theme: theme,
-                  controller: controller,
-                  background: spec.background,
-                  panelColor: country.panelColor,
-                ),
-              ),
               Positioned.fill(
                 child: ClipRRect(
                   clipper: clipper,
@@ -674,7 +772,13 @@ class _PlateArtwork extends StatelessWidget {
                           ),
                         ),
                       for (var i = 0; i < spec.labels.length; i++)
-                        _Label(index: i, label: spec.labels[i], theme: theme),
+                        _Label(
+                          index: i,
+                          label: spec.labels[i],
+                          theme: theme,
+                          spec: spec,
+                          controller: controller,
+                        ),
                       for (var i = 0; i < spec.decals.length; i++)
                         _Placed(
                           box: spec.decals[i].box,
@@ -698,44 +802,257 @@ class _PlateArtwork extends StatelessWidget {
   }
 }
 
+/// Resolves [PlateSpec.resolveTheme] against the typed characters and
+/// cross-fades between the results. Rebuilds [builder] only when the resolved
+/// theme changes, not on every keystroke.
+class _Livery extends StatefulWidget {
+  const _Livery({
+    required this.spec,
+    required this.controller,
+    required this.base,
+    required this.builder,
+  });
+
+  final PlateSpec spec;
+  final PlateController controller;
+  final PlateTheme base;
+  final Widget Function(PlateTheme theme) builder;
+
+  @override
+  State<_Livery> createState() => _LiveryState();
+}
+
+class _LiveryState extends State<_Livery> {
+  late PlateTheme _theme;
+
+  PlateTheme _resolve() {
+    final values = widget.controller.values;
+    return widget.spec.resolveTheme!(
+      widget.base,
+      (key) => widget.spec.valueOfGroup(key, values),
+    );
+  }
+
+  void _onChanged() {
+    final next = _resolve();
+    if (next == _theme) return;
+    final phase = SchedulerBinding.instance.schedulerPhase;
+    if (phase == SchedulerPhase.persistentCallbacks) {
+      // Notified mid-build (the canvas attaching its controller): settle next frame.
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _onChanged();
+      });
+    } else {
+      setState(() => _theme = next);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _theme = _resolve();
+    widget.controller.addListener(_onChanged);
+  }
+
+  @override
+  void didUpdateWidget(_Livery old) {
+    super.didUpdateWidget(old);
+    if (old.controller != widget.controller) {
+      old.controller.removeListener(_onChanged);
+      widget.controller.addListener(_onChanged);
+    }
+    _theme = _resolve();
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(_onChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => TweenAnimationBuilder<PlateTheme>(
+    tween: _ThemeTween(end: _theme),
+    duration: const Duration(milliseconds: 350),
+    curve: Curves.easeInOut,
+    builder: (context, theme, _) => widget.builder(theme),
+  );
+}
+
+class _ThemeTween extends Tween<PlateTheme> {
+  _ThemeTween({required PlateTheme super.end});
+
+  @override
+  PlateTheme lerp(double t) {
+    final a = begin ?? end!, b = end!;
+    return b.copyWith(
+      plateBackground: Color.lerp(a.plateBackground, b.plateBackground, t),
+      plateBorder: Color.lerp(a.plateBorder, b.plateBorder, t),
+      ink: Color.lerp(a.ink, b.ink, t),
+      dividerColor: Color.lerp(a.dividerColor, b.dividerColor, t),
+      activeColor: Color.lerp(a.activeColor, b.activeColor, t),
+      inactiveColor: Color.lerp(a.inactiveColor, b.inactiveColor, t),
+    );
+  }
+}
+
 /// One [PlateLabel], its own animated part.
 class _Label extends StatelessWidget {
-  const _Label({required this.index, required this.label, required this.theme});
+  const _Label({
+    required this.index,
+    required this.label,
+    required this.theme,
+    required this.spec,
+    required this.controller,
+  });
 
   final int index;
   final PlateLabel label;
   final PlateTheme theme;
+  final PlateSpec spec;
+  final PlateController controller;
 
   @override
   Widget build(BuildContext context) {
     final l = label;
+    final resolve = l.resolve;
+    final style = theme
+        .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
+        .copyWith(
+          height: l.lineHeight,
+          fontFamily: l.fontFamily,
+          package: l.fontPackage,
+        );
+    Widget text(String value) => RotatedBox(
+      key: ValueKey<String>(value),
+      quarterTurns: l.rotated ? 3 : 0,
+      child: Text(
+        value,
+        textAlign: TextAlign.center,
+        // A label is placed by its box, not laid out
+        // by it: a caption too long for its box must
+        // overflow, never reflow onto a second line.
+        maxLines: '\n'.allMatches(value).length + 1,
+        softWrap: false,
+        overflow: TextOverflow.visible,
+        style: theme
+            .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
+            .copyWith(
+              height: l.lineHeight,
+              fontFamily: l.fontFamily,
+              package: l.fontPackage,
+            ),
+      ),
+    );
     return _Placed(
       box: l.box,
       child: PlatePartAnimator(
         id: PlatePartId.label(index),
         child: Center(
-          child: RotatedBox(
-            quarterTurns: l.rotated ? 3 : 0,
-            child: Text(
-              l.text,
-              textAlign: TextAlign.center,
-              // A label is placed by its box, not laid out
-              // by it: a caption too long for its box must
-              // overflow, never reflow onto a second line.
-              maxLines: '\n'.allMatches(l.text).length + 1,
-              softWrap: false,
-              overflow: TextOverflow.visible,
-              style: theme
-                  .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
-                  .copyWith(
-                    height: l.lineHeight,
-                    fontFamily: l.fontFamily,
-                    package: l.fontPackage,
-                  ),
-            ),
-          ),
+          child: resolve == null
+              ? text(l.text)
+              : ListenableBuilder(
+                  listenable: controller,
+                  builder: (context, _) {
+                    final values = controller.values;
+                    final value =
+                        resolve((key) => spec.valueOfGroup(key, values)) ??
+                        l.text;
+                    return FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: _StaggeredText(value: value, style: style),
+                    );
+                  },
+                ),
         ),
       ),
+    );
+  }
+}
+
+/// A caption whose characters leave one after another, and the next wording's
+/// arrive the same way, when [value] changes. One [Text.rich], so the letters
+/// keep joining across the per-character alpha spans.
+class _StaggeredText extends StatefulWidget {
+  const _StaggeredText({required this.value, required this.style});
+
+  final String value;
+  final TextStyle style;
+
+  @override
+  State<_StaggeredText> createState() => _StaggeredTextState();
+}
+
+class _StaggeredTextState extends State<_StaggeredText>
+    with SingleTickerProviderStateMixin {
+  static const _charMs = 220;
+  static const _stepMs = 55;
+
+  late final AnimationController _ticker = AnimationController(vsync: this);
+  late String _shown = widget.value;
+  bool _leaving = false;
+  bool _settled = true;
+
+  Duration _run(String text) => Duration(
+    milliseconds: _charMs + _stepMs * (text.length - 1).clamp(0, 99),
+  );
+
+  @override
+  void didUpdateWidget(_StaggeredText old) {
+    super.didUpdateWidget(old);
+    if (_leaving || widget.value == _shown) return;
+    _leaving = true;
+    _settled = false;
+    _ticker.duration = _run(_shown);
+    _ticker.forward(from: 0).whenComplete(_arrive);
+  }
+
+  void _arrive() {
+    if (!mounted) return;
+    setState(() {
+      _shown = widget.value;
+      _leaving = false;
+    });
+    _ticker.duration = _run(_shown);
+    _ticker.forward(from: 0).whenComplete(() => _settled = true);
+  }
+
+  @override
+  void dispose() {
+    _ticker.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final color = widget.style.color ?? const Color(0xFF000000);
+    return AnimatedBuilder(
+      animation: _ticker,
+      builder: (context, _) {
+        final elapsed = _ticker.value * _run(_shown).inMilliseconds;
+        double alpha(int i) {
+          if (_settled) return 1;
+          final t = ((elapsed - i * _stepMs) / _charMs).clamp(0.0, 1.0);
+          return _leaving ? 1 - t : t;
+        }
+
+        return Text.rich(
+          TextSpan(
+            children: [
+              for (var i = 0; i < _shown.length; i++)
+                TextSpan(
+                  text: _shown[i],
+                  style: TextStyle(color: color.withValues(alpha: alpha(i))),
+                ),
+            ],
+          ),
+          style: widget.style,
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          softWrap: false,
+          overflow: TextOverflow.visible,
+        );
+      },
     );
   }
 }
@@ -1054,17 +1371,22 @@ class _SlotBinding extends StatelessWidget {
       valueListenable: controller.slot(index),
       builder: (context, value, _) {
         machine.syncController(index, value);
-        return PlateSlotItem(
-          slot: slot,
-          behavior: behavior,
-          theme: theme,
-          value: value,
-          controller: machine.controllerAt(index),
-          focusNode: machine.focusNodeAt(index),
-          onChanged: (v) => commit(index, v),
-          onCompleted: onCompleted,
-          onBackspace: machine.backspaceCharacter,
-          onPressed: onPressed,
+        return ValueListenableBuilder<bool>(
+          valueListenable: machine.systemKeyboard,
+          builder: (context, systemKeyboard, _) => PlateSlotItem(
+            slot: slot,
+            behavior: behavior,
+            theme: theme,
+            value: value,
+            controller: machine.controllerAt(index),
+            focusNode: machine.focusNodeAt(index),
+            onChanged: (v) => commit(index, v),
+            onCompleted: onCompleted,
+            onBackspace: machine.backspaceCharacter,
+            onPressed: onPressed,
+            systemKeyboard: systemKeyboard,
+            onRequestSystemKeyboard: machine.requestSystemKeyboard,
+          ),
         );
       },
     );
@@ -1091,7 +1413,7 @@ class _MirrorBinding extends StatelessWidget {
       valueListenable: controller.slot(mirror.source),
       builder: (context, value, _) => Center(
         child: Text(
-          alphabet.render(value ?? ''),
+          alphabet.renderAll(value ?? ''),
           textAlign: TextAlign.center,
           style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
         ),
@@ -1124,6 +1446,9 @@ class _EditableMirrorBinding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The mirror takes the source field's run lengths, so a mirror over a
+    // four-to-six digit serial accepts the whole run.
+    final source = controller.spec.slots[mirror.source];
     return ValueListenableBuilder<String?>(
       valueListenable: controller.slot(mirror.source),
       builder: (context, value, _) {
@@ -1132,6 +1457,9 @@ class _EditableMirrorBinding extends StatelessWidget {
           slot: PlateSlot(
             alphabet: alphabet,
             box: PlateBox(0, 0, mirror.box.width, mirror.glyphHeight),
+            length: source.length,
+            minLength: source.minLength,
+            spacing: source.spacing,
           ),
           behavior: behavior,
           theme: theme,

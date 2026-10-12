@@ -61,6 +61,15 @@ class PlateAlphabet {
   /// The display form of [value]; falls back to [value] itself.
   String render(String value) => glyphs[value] ?? value;
 
+  /// [render] over each character of a multi-character [value], for a slot
+  /// whose [PlateSlot.length] is more than one.
+  String renderAll(String value) =>
+      value.runes.map((r) => render(String.fromCharCode(r))).join();
+
+  /// [canonical] over each character of a multi-character [value].
+  String canonicalAll(String value) =>
+      value.runes.map((r) => canonical(String.fromCharCode(r))).join();
+
   /// True when every legal character is an ASCII digit; picks the numeric
   /// keyboard. Declared rather than derived from [characters] because a `const`
   /// constructor cannot compute it and this sits on the slot build path.

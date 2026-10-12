@@ -18,6 +18,10 @@ enum SlotBehavior {
   /// host). IME suppressed, cursor shown on focus, taps only claim focus.
   externalField,
 
+  /// [PlateInputSource.keypadFirst]: characters arrive from a keypad or
+  /// physical keys; a tap on a typed slot brings up the platform keyboard.
+  keypadFirstField,
+
   /// Tapping opens the character picker. Chosen alphabets under
   /// [PlateInputSource.system].
   sheet,
@@ -41,5 +45,7 @@ SlotBehavior resolveSlotBehavior({
     case PlateInputSource.packageKeypad:
     case PlateInputSource.host:
       return SlotBehavior.externalField;
+    case PlateInputSource.keypadFirst:
+      return SlotBehavior.keypadFirstField;
   }
 }

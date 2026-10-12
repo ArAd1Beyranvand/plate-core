@@ -3,16 +3,72 @@ import 'package:flutter/widgets.dart';
 import 'plate_alphabet.dart';
 import 'plate_box.dart';
 import 'plate_country.dart';
+import '../theme/plate_theme.dart';
 import 'plate_restriction.dart';
 
 /// One editable position on a plate. [box].height doubles as the glyph height,
 /// so there is deliberately no separate field for it.
 @immutable
 class PlateSlot {
-  const PlateSlot({required this.alphabet, required this.box, this.color});
+  const PlateSlot({
+    required this.alphabet,
+    required this.box,
+    this.color,
+    this.length = 1,
+    int? minLength,
+    this.spacing = 0,
+  }) : minLength = minLength ?? length,
+       assert(length >= 1, 'A slot holds at least one character.'),
+       assert(
+         minLength == null || (minLength >= 1 && minLength <= length),
+         'minLength is 1..length.',
+       );
 
   final PlateAlphabet alphabet;
   final PlateBox box;
+
+  /// The most characters the slot holds. A field of two digits is one slot of
+  /// [length] 2, not two slots: it is one box, one focus stop, and its value is
+  /// the run typed so far. Use 1 for a cell that holds a single character, and
+  /// only for a run that is printed and edited as a unit — a register whose
+  /// cells are drawn apart stays [plateRegister].
+  ///
+  /// A [PlateAlphabet.chosen] alphabet is picked a character at a time, so its
+  /// slot stays at 1.
+  final int length;
+
+  /// The fewest characters that make the field complete; [length] unless the
+  /// field is variable, like a serial of four to six digits. Focus still moves
+  /// on only at [length] — below it the user may type more — but a plate whose
+  /// every field has reached its [minLength] counts as complete.
+  final int minLength;
+
+  /// Extra space after each character of a run, in plate units, so a field
+  /// reads at the printed pitch rather than the font's advance. Measure it
+  /// from the reference; it has no meaning for a slot of [length] 1.
+  final double spacing;
+
+  /// Whether [value] is a legal, possibly partial, content of this slot: at
+  /// most [length] characters, each of them in [alphabet] in either form.
+  bool accepts(String value) {
+    final characters = value.runes.map(String.fromCharCode).toList();
+    return characters.isNotEmpty &&
+        characters.length <= length &&
+        characters.every(alphabet.accepts);
+  }
+
+  /// [value] folded to storage form, character by character.
+  String canonical(String value) => alphabet.canonicalAll(value);
+
+  /// [value] in display form, character by character.
+  String render(String value) => alphabet.renderAll(value);
+
+  /// Whether [value] fills the slot to [length]: nothing more can be typed.
+  bool isFull(String? value) => value != null && value.runes.length >= length;
+
+  /// Whether [value] is long enough to complete the field: [minLength].
+  bool isComplete(String? value) =>
+      value != null && value.runes.length >= minLength;
 
   /// Ink for this slot, or null for the theme's. Set it only for a slot on a
   /// coloured [PlateSection] region where the field's ink would be illegible —
@@ -270,6 +326,19 @@ class PlateDecal {
   final PlateBox box;
 }
 
+/// Picks the wording of a [PlateLabel] from what is typed on the plate.
+/// [group] reads a [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does.
+/// Return null to keep [PlateLabel.text].
+typedef PlateLabelResolver =
+    String? Function(String Function(String key) group);
+
+/// Picks the colours a plate is printed in from what is typed on it, so one
+/// spec can be several liveries. [base] is the theme the host passed; [group]
+/// reads a [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does. Return
+/// [base] to leave it alone. The change cross-fades.
+typedef PlateThemeResolver =
+    PlateTheme Function(PlateTheme base, String Function(String key) group);
+
 /// Fixed text printed on the plate face (e.g. "ایران").
 @immutable
 class PlateLabel {
@@ -282,11 +351,17 @@ class PlateLabel {
     this.lineHeight,
     this.fontFamily,
     this.fontPackage,
+    this.resolve,
   });
 
   final String text;
   final PlateBox box;
   final double glyphHeight;
+
+  /// Replaces [text] with what the typed characters say, e.g. the issuing
+  /// province under the plate's code. Must be a static or top-level function
+  /// to keep the label const. The change cross-fades.
+  final PlateLabelResolver? resolve;
 
   /// Ink for this label, or null for the theme's. Set it only for a label on a
   /// [PlateBand], where the field's ink would be illegible — the theme carries
@@ -385,6 +460,7 @@ class PlateSpec {
     this.inkOverride,
     this.textGroups = const <PlateTextGroup>[],
     this.restrictions = const <PlateRestriction>[],
+    this.resolveTheme,
   });
 
   /// Stable identifier, e.g. 'xx.car'. The sole basis of [operator ==].
@@ -444,6 +520,10 @@ class PlateSpec {
   /// asserts it, since a restriction on a missing group would never fire.
   final List<PlateRestriction> restrictions;
 
+  /// Derives the theme from the typed characters, or null for the host's theme
+  /// as given. Must be a static or top-level function to keep the spec const.
+  final PlateThemeResolver? resolveTheme;
+
   /// How many values this plate stores. Derived, never hard-coded.
   int get slotCount => slots.length;
 
@@ -474,7 +554,7 @@ class PlateSpec {
     final buffer = StringBuffer(group.prefix);
     for (final i in group.indices) {
       final value = i < values.length ? (values[i] ?? '') : '';
-      buffer.write(slotAt(i)?.alphabet.render(value) ?? '');
+      buffer.write(slotAt(i)?.render(value) ?? '');
     }
     return buffer.toString();
   }

@@ -56,7 +56,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:iran_plate/iran_plate.dart';
 
 PlateCanvas(
-  spec: IranPlates.car,
+  spec: IranPlates.civil,
   onChooseCharacter: (alphabet) async => null,
 )
 ```

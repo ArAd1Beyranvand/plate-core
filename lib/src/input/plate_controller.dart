@@ -50,18 +50,18 @@ class PlateController extends ChangeNotifier {
   factory PlateController.fromValues(PlateSpec spec, List<String?> values) =>
       PlateController(spec: spec, values: values);
 
-  /// One character of [text] per slot in order; skipping characters no alphabet
-  /// accepts. Separators cost nothing — a space is skipped rather than consuming
-  /// a slot.
+  /// The characters of [text] poured into the slots in order, each slot taking
+  /// up to its [PlateSlot.length]; skipping characters no alphabet accepts.
+  /// Separators cost nothing — a space is skipped rather than consuming a slot.
   factory PlateController.fromText(PlateSpec spec, String text) {
     final values = List<String?>.filled(spec.slotCount, null);
     var index = 0;
     for (final character in text.characters) {
       if (index >= spec.slotCount) break;
-      final alphabet = spec.slots[index].alphabet;
-      if (!alphabet.accepts(character)) continue;
-      values[index] = alphabet.canonical(character);
-      index++;
+      final slot = spec.slots[index];
+      if (!slot.accepts(character)) continue;
+      values[index] = (values[index] ?? '') + slot.canonical(character);
+      if (slot.isFull(values[index])) index++;
     }
     return PlateController(spec: spec, values: values);
   }
@@ -269,6 +269,10 @@ class PlateController extends ChangeNotifier {
   /// The slot currently accepting input. Null when unfocused.
   PlateSlot? get activeSlot => _spec.slotAt(activeIndex ?? -1);
 
+  /// True while the platform keyboard stands in for the host's keypad under
+  /// [PlateInputSource.keypadFirst]; the host hides its keypad meanwhile.
+  bool get systemKeyboardActive => _target?.systemKeyboardActive ?? false;
+
   bool get isAttached => _target != null;
 
   /// Commit [character] to the active slot and advance focus, as typing would.
@@ -335,7 +339,10 @@ class PlateController extends ChangeNotifier {
   }
 
   bool _computeCompleted() =>
-      _values.isNotEmpty && !_values.any((v) => v == null || v.isEmpty);
+      _values.isNotEmpty &&
+      [
+        for (var i = 0; i < _values.length; i++) i,
+      ].every((i) => _spec.slots[i].isComplete(_values[i]));
 
   /// [value] as the slot will store it — null for cleared or refused characters.
   /// A national-numeral slot accepts either form (storage `'5'` or glyph `'۵'`)
@@ -343,15 +350,18 @@ class PlateController extends ChangeNotifier {
   static String? _sanitize(PlateSpec spec, int index, String? value) {
     if (value == null || value.isEmpty) return null;
     final slot = spec.slotAt(index);
-    if (slot == null || !slot.alphabet.accepts(value)) return null;
-    return slot.alphabet.canonical(value);
+    if (slot == null || !slot.accepts(value)) return null;
+    return slot.canonical(value);
   }
 
   /// The fixed character of a slot whose alphabet holds exactly one — printed on
   /// every plate, not typed. Null for an ordinary slot.
   static String? _printedCharacter(PlateSpec spec, int index) {
-    final characters = spec.slots[index].alphabet.characters;
-    return characters.length == 1 ? characters.single : null;
+    final slot = spec.slots[index];
+    final characters = slot.alphabet.characters;
+    return slot.length == 1 && characters.length == 1
+        ? characters.single
+        : null;
   }
 
   static PlateTextGroup? _groupNamed(PlateSpec spec, String key) {
@@ -398,17 +408,20 @@ class PlateController extends ChangeNotifier {
       final source = _groupNamed(from, key);
       if (source == null) continue;
 
-      // The source group's non-empty characters, skipped rather than carried as
-      // gaps — a half-typed register carries as far as it got.
+      // The source group's characters, skipped rather than carried as gaps — a
+      // half-typed register carries as far as it got. Poured into the target's
+      // slots by their lengths, so a run of two fields can become two cells.
       final characters = <String>[
         for (final i in source.indices)
-          if (i < values.length && (values[i] ?? '').isNotEmpty) values[i]!,
+          if (i < values.length) ...(values[i] ?? '').characters,
       ];
 
-      for (var n = 0; n < target.indices.length; n++) {
-        final index = target.indices[n];
-        final character = n < characters.length ? characters[n] : '';
-        result[index] = _sanitize(to, index, character);
+      var next = 0;
+      for (final index in target.indices) {
+        final length = to.slots[index].length;
+        final take = characters.skip(next).take(length).join();
+        next += length;
+        result[index] = _sanitize(to, index, take);
       }
     }
 

@@ -21,6 +21,8 @@ class PlateSlotItem extends StatelessWidget {
     required this.onBackspace,
     this.theme,
     this.onPressed,
+    this.systemKeyboard = false,
+    this.onRequestSystemKeyboard,
   });
 
   final PlateSlot slot;
@@ -39,6 +41,13 @@ class PlateSlotItem extends StatelessWidget {
   final PlateTheme? theme;
   final VoidCallback? onPressed;
 
+  /// [SlotBehavior.keypadFirstField] only: whether typed slots currently take
+  /// the platform keyboard.
+  final bool systemKeyboard;
+
+  /// [SlotBehavior.keypadFirstField] only: fired when a typed slot is tapped.
+  final VoidCallback? onRequestSystemKeyboard;
+
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? PlateTheme.of(context);
@@ -51,6 +60,7 @@ class PlateSlotItem extends StatelessWidget {
       case SlotBehavior.imeField:
         return _TypedField(
           slot: slot,
+          value: value,
           behavior: behavior,
           controller: controller!,
           focusNode: focusNode,
@@ -64,6 +74,7 @@ class PlateSlotItem extends StatelessWidget {
         if (isTyped) {
           return _TypedField(
             slot: slot,
+            value: value,
             behavior: behavior,
             controller: controller!,
             focusNode: focusNode,
@@ -85,9 +96,11 @@ class PlateSlotItem extends StatelessWidget {
         );
 
       case SlotBehavior.externalField:
+      case SlotBehavior.keypadFirstField:
         if (isTyped) {
           return _TypedField(
             slot: slot,
+            value: value,
             behavior: behavior,
             controller: controller!,
             focusNode: focusNode,
@@ -95,6 +108,8 @@ class PlateSlotItem extends StatelessWidget {
             onCompleted: onCompleted,
             onBackspace: onBackspace,
             theme: effectiveTheme,
+            systemKeyboard: systemKeyboard,
+            onRequestSystemKeyboard: onRequestSystemKeyboard,
           );
         }
         return _ChosenSlot(
@@ -146,15 +161,21 @@ class _GlyphSlot extends StatelessWidget {
           : Center(
               child: FittedBox(
                 fit: BoxFit.scaleDown,
-                child: Text(
-                  slot.alphabet.render(v),
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  softWrap: false,
-                  overflow: TextOverflow.clip,
-                  style: theme.glyphStyle(
-                    slot.box.height,
-                    slot.color ?? theme.ink,
+                // Letter spacing trails the last glyph too; the same space
+                // before the first keeps the run centred.
+                child: Padding(
+                  padding: EdgeInsets.only(left: slot.spacing),
+                  child: Text(
+                    slot.render(v),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    softWrap: false,
+                    overflow: TextOverflow.clip,
+                    style: theme.glyphStyle(
+                      slot.box.height,
+                      slot.color ?? theme.ink,
+                      letterSpacing: slot.spacing,
+                    ),
                   ),
                 ),
               ),
@@ -167,6 +188,7 @@ class _GlyphSlot extends StatelessWidget {
 class _TypedField extends StatelessWidget {
   const _TypedField({
     required this.slot,
+    required this.value,
     required this.behavior,
     required this.controller,
     required this.focusNode,
@@ -174,9 +196,12 @@ class _TypedField extends StatelessWidget {
     required this.onCompleted,
     required this.onBackspace,
     required this.theme,
+    this.systemKeyboard = false,
+    this.onRequestSystemKeyboard,
   });
 
   final PlateSlot slot;
+  final String? value;
   final SlotBehavior behavior;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -184,6 +209,8 @@ class _TypedField extends StatelessWidget {
   final VoidCallback? onCompleted;
   final VoidCallback? onBackspace;
   final PlateTheme theme;
+  final bool systemKeyboard;
+  final VoidCallback? onRequestSystemKeyboard;
 
   @override
   Widget build(BuildContext context) {
@@ -211,62 +238,90 @@ class _TypedField extends StatelessWidget {
           onBackspace?.call();
           return KeyEventResult.handled;
         },
-        child: ListenableBuilder(
-          listenable: focusNode,
-          builder: (context, _) => TextField(
-            controller: controller,
-            focusNode: focusNode,
-            readOnly: readOnly,
-            onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
-            showCursor: readOnly ? focusNode.hasFocus : null,
-            textAlign: TextAlign.center,
-            style: theme.glyphStyle(slot.box.height, slot.color ?? theme.ink),
-            cursorColor: theme.activeColor,
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding: EdgeInsets.symmetric(
-                vertical: slot.box.height * 0.12,
+        child: Listener(
+          // Flips the keyboard type on pointer down so the rebuilt field is in
+          // place when the tap-up opens the input connection.
+          onPointerDown: behavior == SlotBehavior.keypadFirstField
+              ? (_) => onRequestSystemKeyboard?.call()
+              : null,
+          child: ListenableBuilder(
+            listenable: focusNode,
+            builder: (context, _) => TextField(
+              controller: controller,
+              focusNode: focusNode,
+              readOnly: readOnly,
+              onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
+              // A slot is filled from its end, so the cursor sits after what is
+              // already there whichever part of the field was tapped.
+              onTap: () => controller.selection = TextSelection.collapsed(
+                offset: controller.text.length,
               ),
-              filled: false,
-              counterText: '',
-              hintText: slot.alphabet.placeholder,
-              hintStyle: theme.glyphStyle(slot.box.height, theme.inactiveColor),
-              border: UnderlineInputBorder(
-                borderSide: BorderSide(color: theme.inactiveColor),
+              showCursor: readOnly ? focusNode.hasFocus : null,
+              textAlign: TextAlign.center,
+              style: theme.glyphStyle(
+                slot.box.height,
+                slot.color ?? theme.ink,
+                letterSpacing: slot.spacing,
               ),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: underlineColor),
+              cursorColor: theme.activeColor,
+              decoration: InputDecoration(
+                isDense: true,
+                // Left inset balances the letter spacing trailing the run.
+                contentPadding: EdgeInsets.only(
+                  left: slot.spacing,
+                  top: slot.box.height * 0.12,
+                  bottom: slot.box.height * 0.12,
+                ),
+                filled: false,
+                counterText: '',
+                hintText: slot.alphabet.placeholder,
+                hintStyle: theme.glyphStyle(
+                  slot.box.height,
+                  theme.inactiveColor,
+                ),
+                border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: theme.inactiveColor),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: underlineColor),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: theme.activeColor),
+                ),
               ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: theme.activeColor),
-              ),
-            ),
-            onChanged: (typed) {
-              if (slot.alphabet.accepts(typed)) {
-                final canonical = slot.alphabet.canonical(typed);
-                if (slot.alphabet.glyphs.isEmpty && canonical != typed) {
+              onChanged: (typed) {
+                if (typed.isEmpty || slot.accepts(typed)) {
+                  final canonical = slot.canonical(typed);
+                  if (slot.alphabet.glyphs.isEmpty && canonical != typed) {
+                    controller.value = TextEditingValue(
+                      text: canonical,
+                      selection: TextSelection.collapsed(
+                        offset: canonical.length,
+                      ),
+                    );
+                  }
+                  if (!onChanged(canonical)) return;
+                  if (slot.isFull(canonical)) onCompleted?.call();
+                } else {
+                  // A run keeps what was already valid in it; a stray character
+                  // only costs itself.
+                  final kept = slot.render(value ?? '');
                   controller.value = TextEditingValue(
-                    text: canonical,
-                    selection: TextSelection.collapsed(
-                      offset: canonical.length,
-                    ),
+                    text: kept,
+                    selection: TextSelection.collapsed(offset: kept.length),
                   );
                 }
-                if (!onChanged(canonical)) return;
-                if (typed != '') {
-                  if (onCompleted != null) onCompleted!();
-                }
-              } else {
-                controller.text = '';
-                onChanged('');
-              }
-            },
-            maxLength: 1,
-            keyboardType: behavior == SlotBehavior.hardwareField
-                ? TextInputType.none
-                : slot.alphabet.isNumeric
-                ? TextInputType.number
-                : TextInputType.text,
+              },
+              maxLength: slot.length,
+              keyboardType:
+                  behavior == SlotBehavior.hardwareField ||
+                      (behavior == SlotBehavior.keypadFirstField &&
+                          !systemKeyboard)
+                  ? TextInputType.none
+                  : slot.alphabet.isNumeric
+                  ? TextInputType.number
+                  : TextInputType.text,
+            ),
           ),
         ),
       ),
@@ -337,7 +392,9 @@ class _ChosenSlot extends StatelessWidget {
       return InkWell(onTap: onPressed, child: slotBox(restingColor));
     }
 
-    final consumesKeys = behavior == SlotBehavior.hardwareField;
+    final consumesKeys =
+        behavior == SlotBehavior.hardwareField ||
+        behavior == SlotBehavior.keypadFirstField;
     return Focus(
       focusNode: focusNode,
       onKeyEvent: consumesKeys

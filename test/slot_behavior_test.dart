@@ -13,12 +13,14 @@ const _system = PlateInputSource.system;
 const _hardware = PlateInputSource.hardwareKeyboard;
 const _keypad = PlateInputSource.packageKeypad;
 const _host = PlateInputSource.host;
+const _keypadFirst = PlateInputSource.keypadFirst;
 
 const _glyph = SlotBehavior.glyph;
 const _ime = SlotBehavior.imeField;
 const _hardwareField = SlotBehavior.hardwareField;
 const _external = SlotBehavior.externalField;
 const _sheet = SlotBehavior.sheet;
+const _keypadFirstField = SlotBehavior.keypadFirstField;
 
 /// The table in `slot_behavior.dart:29-37`, transcribed by hand rather than
 /// re-derived — a test that recomputes the function it is checking checks
@@ -30,20 +32,24 @@ const _table = <(PlateMode, AlphabetInput, PlateInputSource, SlotBehavior)>[
   (_display, _typed, _hardware, _glyph),
   (_display, _typed, _keypad, _glyph),
   (_display, _typed, _host, _glyph),
+  (_display, _typed, _keypadFirst, _glyph),
   (_display, _chosen, _system, _glyph),
   (_display, _chosen, _hardware, _glyph),
   (_display, _chosen, _keypad, _glyph),
   (_display, _chosen, _host, _glyph),
+  (_display, _chosen, _keypadFirst, _glyph),
 
   (_input, _typed, _system, _ime),
   (_input, _typed, _hardware, _hardwareField),
   (_input, _typed, _keypad, _external),
   (_input, _typed, _host, _external),
+  (_input, _typed, _keypadFirst, _keypadFirstField),
 
   (_input, _chosen, _system, _sheet),
   (_input, _chosen, _hardware, _hardwareField),
   (_input, _chosen, _keypad, _external),
   (_input, _chosen, _host, _external),
+  (_input, _chosen, _keypadFirst, _keypadFirstField),
 ];
 
 void main() {
@@ -52,7 +58,7 @@ void main() {
       final combinations = <(PlateMode, AlphabetInput, PlateInputSource)>{
         for (final row in _table) (row.$1, row.$2, row.$3),
       };
-      expect(_table, hasLength(16));
+      expect(_table, hasLength(20));
       expect(
         combinations,
         hasLength(

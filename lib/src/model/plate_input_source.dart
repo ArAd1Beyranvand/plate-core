@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../input/plate_controller.dart';
+
 /// How characters get into a plate slot.
 enum PlateInputSource {
   /// Bring up the platform keyboard (the IME) to enter this slot.
@@ -15,6 +17,13 @@ enum PlateInputSource {
   /// The host app supplies every character through [PlateController];
   /// the IME is suppressed.
   host,
+
+  /// The on-screen keypad by default, with physical keys always accepted.
+  /// Tapping a typed slot asks for the platform keyboard instead; it stays up
+  /// while focus moves between typed slots and drops back to the keypad when
+  /// focus reaches a chosen slot or leaves the plate. The host shows its
+  /// keypad unless [PlateController.systemKeyboardActive] is true.
+  keypadFirst,
 }
 
 /// Hardware keyboard on desktop, the system IME everywhere else. Web falls out

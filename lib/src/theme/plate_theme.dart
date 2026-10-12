@@ -103,11 +103,16 @@ class PlateTheme {
   }
 
   /// Text style for plate glyphs (digits/letters) at a given slot height.
-  TextStyle glyphStyle(double slotHeight, Color color) => TextStyle(
+  TextStyle glyphStyle(
+    double slotHeight,
+    Color color, {
+    double letterSpacing = 0,
+  }) => TextStyle(
     color: color,
     fontWeight: FontWeight.w700,
     fontSize: slotHeight * 0.72,
     height: 1.0,
+    letterSpacing: letterSpacing,
   );
 
   /// The nearest enclosing [PlateTheme], or [PlateTheme.standard] if none.
