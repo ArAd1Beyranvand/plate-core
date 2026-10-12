@@ -4,7 +4,8 @@ import 'package:plate_core/plate_core.dart';
 
 /// Generates plausible values for fixtures and demos. Pure Dart.
 ///
-/// Fills every slot with a random digit, then, on a civil spec, makes the
+/// Fills every field with a random run of its length, then, on a civil spec,
+/// makes the
 /// `type` group a class ([vehicleClass], default random) plus a year
 /// 00–26, and the `wilaya` group [wilaya] or a code 01–58 (the ones issued
 /// before 2027).
@@ -17,13 +18,11 @@ abstract final class AlgeriaSerialGenerator {
   }) {
     final Random rnd = random ?? Random();
     final List<String?> values = <String?>[
-      for (int i = 0; i < spec.slots.length; i++) '${rnd.nextInt(10)}',
+      for (final PlateSlot slot in spec.slots)
+        List<String>.generate(slot.length, (_) => '${rnd.nextInt(10)}').join(),
     ];
     void fill(String key, String text) {
-      final List<int> slots = spec.indicesOfGroup(key);
-      for (int i = 0; i < slots.length && i < text.length; i++) {
-        values[slots[i]] = text[i];
-      }
+      values[spec.indicesOfGroup(key).single] = text;
     }
 
     if (spec.indicesOfGroup('type').isNotEmpty) {

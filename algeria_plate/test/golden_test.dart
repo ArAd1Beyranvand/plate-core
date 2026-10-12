@@ -72,7 +72,7 @@ void main() {
       tester,
       spec: AlgeriaPlates.singleLine,
       theme: AlgeriaThemes.front,
-      values: '0 2 8 6 5 1 1 4 1 1',
+      values: '02865 114 11',
       name: 'dz_front',
     );
   });
@@ -82,7 +82,7 @@ void main() {
       tester,
       spec: AlgeriaPlates.singleLine,
       theme: AlgeriaThemes.rear,
-      values: '5 6 7 8 9 1 2 0 3 4',
+      values: '56789 120 34',
       name: 'dz_rear',
     );
   });
@@ -92,7 +92,7 @@ void main() {
       tester,
       spec: AlgeriaPlates.twoLine,
       theme: AlgeriaThemes.rear,
-      values: '7 6 7 3 9 1 2 5 1 0',
+      values: '76739 125 10',
       name: 'dz_two_line',
     );
   });
@@ -102,7 +102,7 @@ void main() {
       tester,
       spec: AlgeriaPlates.diplomatic,
       theme: AlgeriaThemes.diplomatic,
-      values: '5 5 8 6 6 2 7',
+      values: '558 66 27',
       name: 'dz_diplomatic',
     );
   });
@@ -112,7 +112,7 @@ void main() {
       tester,
       spec: AlgeriaPlates.army,
       theme: AlgeriaThemes.army,
-      values: '1 4 0 5 0 1 9 2 0',
+      values: '140501920',
       name: 'dz_army',
     );
   });

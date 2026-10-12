@@ -41,7 +41,7 @@ void main() {
     for (final YemenUsage usage in YemenUsage.unified) {
       await _pump(
         tester,
-        spec: YemenUnifiedPlates.car5,
+        spec: YemenUnifiedPlates.car,
         country: YemenCountry.unifiedFor(usage),
         theme: YemenThemes.forUnifiedUsage(usage),
       );
@@ -68,7 +68,7 @@ void main() {
     for (final YemenUsage usage in YemenUsage.northern) {
       await _pump(
         tester,
-        spec: YemenNorthernPlates.carGov2Serial5,
+        spec: YemenNorthernPlates.car,
         country: YemenCountry.northernFor(usage),
         theme: YemenThemes.forNorthernUsage(usage),
       );
@@ -97,7 +97,7 @@ void main() {
       final PlateTheme theme = YemenThemes.forNorthernUsage(usage);
       await _pump(
         tester,
-        spec: YemenNorthernPlates.carGov2Serial5,
+        spec: YemenNorthernPlates.car,
         country: YemenCountry.northernFor(usage),
         theme: theme,
       );
@@ -118,7 +118,7 @@ void main() {
               width: 600,
               height: 171,
               child: PlateCanvas(
-                spec: YemenUnifiedPlates.car5,
+                spec: YemenUnifiedPlates.car,
                 onChooseCharacter: (PlateAlphabet a) async => null,
               ),
             ),

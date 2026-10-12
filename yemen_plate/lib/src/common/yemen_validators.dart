@@ -89,14 +89,14 @@ class YemenNorthernValidator extends GatedPlateValidator {
   static const String reasonSerialNotNumeric = 'The serial is digits only.';
 
   /// Reported when the serial is empty or longer than six digits.
-  static const String reasonSerialLength = 'The serial is one to six digits.';
+  static const String reasonSerialLength = 'The serial is four to six digits.';
 
   /// Reported when the serial starts with a zero.
   static const String reasonSerialLeadingZero =
       'The serial is not padded with leading zeros.';
 
   /// The shortest and longest serial this system prints.
-  static const int minSerialLength = 1;
+  static const int minSerialLength = 4;
   static const int maxSerialLength = 6;
 
   @override

@@ -18,12 +18,8 @@ abstract final class YemenUnifiedSerialGenerator {
     final List<int> number = _require(spec, 'number');
     final List<int> sideCode = _require(spec, 'sideCode');
 
-    for (final int i in number) {
-      values[i] = rnd.nextInt(10).toString();
-    }
-    for (final int i in sideCode) {
-      values[i] = rnd.nextInt(10).toString();
-    }
+    _fill(spec, values, number, () => rnd.nextInt(10).toString(), rnd);
+    _fill(spec, values, sideCode, () => rnd.nextInt(10).toString(), rnd);
 
     return values;
   }
@@ -48,8 +44,7 @@ abstract final class YemenUnifiedSerialGenerator {
 /// See [YemenUnifiedSerialGenerator] for the general contract.
 abstract final class YemenNorthernSerialGenerator {
   /// A value for [spec] — governorate code and serial, positioned by spec's text groups.
-  /// Governorate drawn uniformly from the range the spec can hold (1..22 for two cells, 1..9 for one).
-  /// Two-cell codes zero-padded (plate's format); serials not (plate's format).
+  /// Governorate drawn uniformly from 1..22; serial a random length within its field, no leading zero.
   /// Throws [ArgumentError] if [spec] has no `governorate` and `serial` groups.
   static List<String?> generate(PlateSpec spec, {Random? random}) {
     final Random rnd = random ?? Random();
@@ -58,21 +53,22 @@ abstract final class YemenNorthernSerialGenerator {
     final List<int> governorate = _require(spec, 'governorate');
     final List<int> serial = _require(spec, 'serial');
 
-    final int maxCode = governorate.length >= 2 ? YemenGovernorate.maxCode : 9;
     final String code =
         (YemenGovernorate.minCode +
-                rnd.nextInt(maxCode - YemenGovernorate.minCode + 1))
-            .toString()
-            .padLeft(governorate.length, '0');
-    for (int i = 0; i < governorate.length; i++) {
-      values[governorate[i]] = code[i];
-    }
+                rnd.nextInt(
+                  YemenGovernorate.maxCode - YemenGovernorate.minCode + 1,
+                ))
+            .toString();
+    values[governorate.single] = code;
 
-    for (int i = 0; i < serial.length; i++) {
-      // No leading zero: the first digit runs 1..9.
-      values[serial[i]] = (i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10))
-          .toString();
-    }
+    // No leading zero: the first digit runs 1..9.
+    final PlateSlot field = spec.slots[serial.single];
+    final int length =
+        field.minLength + rnd.nextInt(field.length - field.minLength + 1);
+    values[serial.single] = [
+      for (int i = 0; i < length; i++)
+        (i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10)).toString(),
+    ].join();
 
     return values;
   }
@@ -89,6 +85,23 @@ abstract final class YemenNorthernSerialGenerator {
       (_) => generate(spec, random: rnd),
       growable: false,
     );
+  }
+}
+
+// Fills each slot in [indices] with a run of a random length between the
+// slot's minLength and length.
+void _fill(
+  PlateSpec spec,
+  List<String?> values,
+  List<int> indices,
+  String Function() digit,
+  Random rnd,
+) {
+  for (final int i in indices) {
+    final PlateSlot slot = spec.slots[i];
+    final int length =
+        slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
+    values[i] = [for (int c = 0; c < length; c++) digit()].join();
   }
 }
 

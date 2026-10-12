@@ -4,30 +4,30 @@ import 'package:plate_core/plate_core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yemen_plate/yemen_plate.dart';
 
-/// Every spec this package declares — eleven, one per geometry.
-///
-/// There is no usage axis to walk any more: a usage is a `PlateCountry` and a
-/// `PlateTheme` the host hands to the canvas, so the same spec draws a private
-/// plate and a government one. What is left to sweep is the geometry.
+/// Every spec this package declares: a car and a motorcycle per system. A
+/// usage is a `PlateCountry` and a `PlateTheme` the host hands to the canvas.
 Iterable<PlateSpec> get _allSpecs sync* {
   yield* _unifiedSpecs;
   yield* _northernSpecs;
 }
 
 Iterable<PlateSpec> get _unifiedSpecs sync* {
-  yield* YemenUnifiedPlates.carGeometries.values;
-  yield* YemenUnifiedPlates.motoGeometries.values;
+  yield YemenUnifiedPlates.car;
+  yield YemenUnifiedPlates.moto;
 }
 
 Iterable<PlateSpec> get _northernSpecs sync* {
-  yield* YemenNorthernPlates.carGeometries.values;
-  yield* YemenNorthernPlates.motoGeometries.values;
+  yield YemenNorthernPlates.car;
+  // ignore: deprecated_member_use_from_same_package
+  yield YemenNorthernPlates.moto;
 }
 
-/// The slot indices of [spec]'s group named [key].
-List<int> _indices(PlateSpec spec, String key) => spec.effectiveTextGroups
+/// The single slot of [spec]'s group named [key].
+PlateSlot _field(PlateSpec spec, String key) => spec.slots[spec
+    .effectiveTextGroups
     .firstWhere((PlateTextGroup g) => g.key == key)
-    .indices;
+    .indices
+    .single];
 
 void main() {
   group('debugValidateSpec', () {
@@ -48,13 +48,6 @@ void main() {
     }
   });
 
-  group('the count is the point', () {
-    test('eleven specs, five northern and six unified', () {
-      expect(_northernSpecs.length, 5);
-      expect(_unifiedSpecs.length, 6);
-    });
-  });
-
   group('ids', () {
     test('are unique across both systems', () {
       final List<String> ids = <String>[for (final s in _allSpecs) s.id];
@@ -63,7 +56,7 @@ void main() {
 
     test('carry no usage segment', () {
       // The whole phase, as an assertion: a spec is a geometry, so its id
-      // names one. `ye.northern.car.g2s5`, never `....private`.
+      // names one. `ye.northern.car`, never `....private`.
       for (final PlateSpec spec in _allSpecs) {
         expect(
           YemenUsage.values.any((YemenUsage u) => spec.id.contains(u.name)),
@@ -73,14 +66,6 @@ void main() {
       }
     });
 
-    test('are four segments on System B and three on System A', () {
-      for (final PlateSpec spec in _northernSpecs) {
-        expect(spec.id.split('.').length, 4, reason: spec.id);
-      }
-      for (final PlateSpec spec in _unifiedSpecs) {
-        expect(spec.id.split('.').length, 3, reason: spec.id);
-      }
-    });
   });
 
   group('text groups carry the keys the validators read', () {
@@ -111,40 +96,37 @@ void main() {
     });
   });
 
-  group('slot counts match the geometry the name and the key claim', () {
-    test('System B cars', () {
-      YemenNorthernPlates.carGeometries.forEach((
-        (int, int) shape,
-        PlateSpec spec,
-      ) {
-        final (int gov, int serial) = shape;
-        expect(spec.slots.length, gov + serial, reason: spec.id);
-        expect(_indices(spec, 'governorate').length, gov, reason: spec.id);
-        expect(_indices(spec, 'serial').length, serial, reason: spec.id);
-        // One echo per digit: the small Latin row prints the whole number.
-        expect(spec.mirrors.length, gov + serial, reason: spec.id);
-      });
-    });
-
-    test('System B motorcycles', () {
-      YemenNorthernPlates.motoGeometries.forEach((
-        (int, int) shape,
-        PlateSpec spec,
-      ) {
-        expect(spec.slots.length, shape.$1 + shape.$2, reason: spec.id);
-      });
-    });
-
-    test('System A: the number, plus two side-code cells', () {
-      for (final MapEntry<int, PlateSpec> e in <MapEntry<int, PlateSpec>>[
-        ...YemenUnifiedPlates.carGeometries.entries,
-        ...YemenUnifiedPlates.motoGeometries.entries,
-      ]) {
-        final PlateSpec spec = e.value;
-        expect(spec.slots.length, e.key + 2, reason: spec.id);
-        expect(_indices(spec, 'number').length, e.key, reason: spec.id);
-        expect(_indices(spec, 'sideCode').length, 2, reason: spec.id);
+  group('fields are single slots with a min and max length', () {
+    test('System A: number 4..6, side code 2', () {
+      for (final PlateSpec spec in _unifiedSpecs) {
+        expect(spec.slots.length, 2, reason: spec.id);
+        final number = _field(spec, 'number');
+        expect((number.minLength, number.length), (4, 6), reason: spec.id);
+        final sideCode = _field(spec, 'sideCode');
+        expect((sideCode.minLength, sideCode.length), (2, 2), reason: spec.id);
       }
+    });
+
+    test('System B: governorate 1..2, serial 4..6, one echo per field', () {
+      for (final PlateSpec spec in _northernSpecs) {
+        expect(spec.slots.length, 2, reason: spec.id);
+        final gov = _field(spec, 'governorate');
+        expect((gov.minLength, gov.length), (1, 2), reason: spec.id);
+        final serial = _field(spec, 'serial');
+        expect((serial.minLength, serial.length), (4, 6), reason: spec.id);
+        expect(spec.mirrors.length, 2, reason: spec.id);
+      }
+    });
+
+    test('a short value completes once every field reaches its minimum', () {
+      final controller = PlateController.fromValues(YemenNorthernPlates.car, [
+        '7',
+        '123',
+      ]);
+      expect(controller.isCompleted, isFalse);
+      controller.setAt(1, '1234');
+      expect(controller.isCompleted, isTrue);
+      controller.dispose();
     });
   });
 
@@ -191,45 +173,6 @@ void main() {
           expect(v.isValid, isTrue, reason: '${spec.id} $values: ${v.reason}');
         }
       }
-    });
-  });
-
-  test('every northern serial register ends flush at the same right edge', () {
-    // P3B's thesis, kept: four, five and six digits all fill x [140, 530), so
-    // no length can run past its siblings. The four-cell layout used to end at
-    // 531.
-    for (final PlateSpec spec in YemenNorthernPlates.carGeometries.values) {
-      final List<PlateBox> boxes = <PlateBox>[
-        for (final int i in _indices(spec, 'serial')) spec.slots[i].box,
-      ];
-      expect(boxes.first.left, 140, reason: spec.id);
-      expect(boxes.last.left + boxes.last.width, 530, reason: spec.id);
-    }
-  });
-
-  group('the geometry lookups', () {
-    test('car() and moto() return the geometry maps', () {
-      expect(
-        YemenNorthernPlates.car(governorateDigits: 2, serialDigits: 5),
-        same(YemenNorthernPlates.carGov2Serial5),
-      );
-      expect(
-        YemenNorthernPlates.car(governorateDigits: 1, serialDigits: 4),
-        isNull,
-      );
-      expect(
-        YemenNorthernPlates.moto(governorateDigits: 2, serialDigits: 5),
-        isNotNull,
-      );
-      expect(
-        YemenUnifiedPlates.car(numberDigits: 5),
-        same(YemenUnifiedPlates.car5),
-      );
-      expect(YemenUnifiedPlates.car(numberDigits: 7), isNull);
-      expect(
-        YemenUnifiedPlates.moto(numberDigits: 4),
-        same(YemenUnifiedPlates.moto4),
-      );
     });
   });
 

@@ -6,8 +6,7 @@ import '../common/yemen_country.dart';
 
 /// System A — the unified plate. White for every usage; colour-coding lives in
 /// [YemenThemes]. Usage varies the blue panel captions (country block), passed at render time.
-/// Vehicle number is 4–6 digits; each length is a separate spec because [PlateSpec] has
-/// a fixed slot list. Swapping specs on a live canvas preserves the value via group key.
+/// Vehicle number is one field of 4–6 digits ([PlateSlot.minLength] 4, length 6).
 ///
 /// Car canvas: 1024 x 292 (aspect 3.51), measured from an issued plate.
 /// Four zones: country block (x 0.027 .. 0.276), vehicle number (x 0.285 .. 0.812),
@@ -70,57 +69,22 @@ abstract final class YemenUnifiedPlates {
     stepY: 12, // CALIBRATE: dot pitch
   );
 
-  // Side code cells: measured x 0.876 .. 0.947, 40-unit pitch. Widened to 52 units
-  // to fit Roboto digits (40 would clip). Kept measured centre (x 933).
-  static const PlateSlot _carSideCodeHigh = PlateSlot(
+  // Side code: measured x 0.876 .. 0.947, 40-unit pitch per digit. Widened to
+  // 104 units to fit Roboto digits; kept the measured centre (x 933).
+  static const PlateSlot _carSideCode = PlateSlot(
     alphabet: YemenAlphabets.digits,
-    box: PlateBox(881, 14, 52, 124),
-  );
-  static const PlateSlot _carSideCodeLow = PlateSlot(
-    alphabet: YemenAlphabets.digits,
-    box: PlateBox(933, 14, 52, 124),
+    box: PlateBox(881, 14, 104, 124),
+    length: 2,
   );
 
-  // 4/5/6 number cells (x 292 .. 832) plus side-code cells. All lengths end flush at right edge;
-  // only top/height differ per length. Tops centre cap on measured band (y 0.197 .. 0.754).
-  static final List<PlateSlot> _car4Slots = <PlateSlot>[
-    ...plateRegisterAcross(
-      alphabet: YemenAlphabets.digits,
-      count: 4,
-      left: 292,
-      right: 832,
-      top: 14,
-      height: 264,
-    ),
-    _carSideCodeHigh,
-    _carSideCodeLow,
-  ];
-
-  static final List<PlateSlot> _car5Slots = <PlateSlot>[
-    ...plateRegisterAcross(
-      alphabet: YemenAlphabets.digits,
-      count: 5,
-      left: 292,
-      right: 832,
-      top: 15,
-      height: 258,
-    ),
-    _carSideCodeHigh,
-    _carSideCodeLow,
-  ];
-
-  static final List<PlateSlot> _car6Slots = <PlateSlot>[
-    ...plateRegisterAcross(
-      alphabet: YemenAlphabets.digits,
-      count: 6,
-      left: 292,
-      right: 832,
-      top: 31,
-      height: 215,
-    ),
-    _carSideCodeHigh,
-    _carSideCodeLow,
-  ];
+  // Vehicle number: one field of four to six digits over x 292 .. 832. The
+  // height is the six-digit one, so the longest number still fits the span.
+  static const PlateSlot _carNumber = PlateSlot(
+    alphabet: YemenAlphabets.digits,
+    box: PlateBox(292, 31, 540, 215),
+    length: 6,
+    minLength: 4,
+  );
 
   // Motorcycle: same content reflowed into square canvas. Zone A becomes full-width
   // top band (اليمن + YEMEN side by side), Zone B the middle, Zone C2 a full-width
@@ -158,215 +122,60 @@ abstract final class YemenUnifiedPlates {
     stepX: 12, // CALIBRATE dot pitch
   );
 
-  static const PlateSlot _motoSideCodeHigh = PlateSlot(
+  static const PlateSlot _motoSideCode = PlateSlot(
     alphabet: YemenAlphabets.digits,
-    box: PlateBox(16, 214, 27, 60), // CALIBRATE
-  );
-  static const PlateSlot _motoSideCodeLow = PlateSlot(
-    alphabet: YemenAlphabets.digits,
-    box: PlateBox(48, 214, 27, 60), // CALIBRATE
+    box: PlateBox(16, 214, 59, 60), // CALIBRATE
+    length: 2,
   );
 
-  // Motorcycle registers are gapped (cells narrower than stride); each states pitch.
-  static final List<PlateSlot> _moto4Slots = <PlateSlot>[
-    ...plateRegister(
-      alphabet: YemenAlphabets.digits,
-      count: 4,
-      left: 21,
-      top: 63,
-      width: 57,
-      height: 130,
-      pitch: 63,
-    ),
-    _motoSideCodeHigh,
-    _motoSideCodeLow,
+  static const PlateSlot _motoNumber = PlateSlot(
+    alphabet: YemenAlphabets.digits,
+    box: PlateBox(16, 82, 257, 92), // CALIBRATE
+    length: 6,
+    minLength: 4,
+  );
+
+  // Side code after the number (different zone). Keys restore the semantics;
+  // the validator reads by key.
+  static const List<PlateTextGroup> _groups = <PlateTextGroup>[
+    PlateTextGroup(<int>[0], key: 'number'),
+    PlateTextGroup(<int>[1], key: 'sideCode'),
   ];
 
-  static final List<PlateSlot> _moto5Slots = <PlateSlot>[
-    ...plateRegister(
-      alphabet: YemenAlphabets.digits,
-      count: 5,
-      left: 16,
-      top: 73,
-      width: 48,
-      height: 110,
-      pitch: 52,
-    ),
-    _motoSideCodeHigh,
-    _motoSideCodeLow,
-  ];
-
-  static final List<PlateSlot> _moto6Slots = <PlateSlot>[
-    ...plateRegister(
-      alphabet: YemenAlphabets.digits,
-      count: 6,
-      left: 17,
-      top: 82,
-      width: 40,
-      height: 92,
-      pitch: 43,
-    ),
-    _motoSideCodeHigh,
-    _motoSideCodeLow,
-  ];
-
-  // Text groups: slots in reading order, side-code cells after number cells
-  // (different zone). Keys restore the semantics; validator reads by key.
-  static const List<PlateTextGroup> _groups4 = <PlateTextGroup>[
-    PlateTextGroup(<int>[0, 1, 2, 3], key: 'number'),
-    PlateTextGroup(<int>[4, 5], key: 'sideCode'),
-  ];
-  static const List<PlateTextGroup> _groups5 = <PlateTextGroup>[
-    PlateTextGroup(<int>[0, 1, 2, 3, 4], key: 'number'),
-    PlateTextGroup(<int>[5, 6], key: 'sideCode'),
-  ];
-  static const List<PlateTextGroup> _groups6 = <PlateTextGroup>[
-    PlateTextGroup(<int>[0, 1, 2, 3, 4, 5], key: 'number'),
-    PlateTextGroup(<int>[6, 7], key: 'sideCode'),
-  ];
-
-  // Six specs (one per geometry; used to be six geometries × five usages).
-  // Usage is not a field — it selects the country block, passed at render time.
-  // Usage example: PlateCanvas(spec: YemenUnifiedPlates.car(numberDigits: 5)!,
-  //                            country: YemenCountry.unifiedFor(usage), ...)
-  //
   // Each spec names `YemenCountry.unifiedPrivate` as its own `country`, so a
   // caller that passes no override gets the ordinary case rather than an
   // uncaptioned panel. If you are tempted to give a usage its own colour, read
   // `YemenThemes`.
   // ---------------------------------------------------------------------------
 
-  /// A five-digit car plate: the length of the official mock-up sample
-  /// `24378`, and the plate to reach for first.
-  static final PlateSpec car5 = PlateSpec(
-    id: 'ye.unified.car5',
+  /// The car plate. Usage is not a field: it selects the country block,
+  /// passed at render time — `country: YemenCountry.unifiedFor(usage)`.
+  static final PlateSpec car = PlateSpec(
+    id: 'ye.unified.car',
     country: YemenCountry.unifiedPrivate,
     canvasWidth: _carWidth,
     canvasHeight: _carHeight,
     panel: _carPanel,
     background: _carBackground,
-    slots: _car5Slots,
+    slots: const <PlateSlot>[_carNumber, _carSideCode],
     rules: _carStipple,
     labels: _carLabels,
-    textGroups: _groups5,
+    textGroups: _groups,
     borderWidthRatioOverride: _borderRatio,
   );
 
-  /// A four-digit car plate.
-  static final PlateSpec car4 = PlateSpec(
-    id: 'ye.unified.car4',
-    country: YemenCountry.unifiedPrivate,
-    canvasWidth: _carWidth,
-    canvasHeight: _carHeight,
-    panel: _carPanel,
-    background: _carBackground,
-    slots: _car4Slots,
-    rules: _carStipple,
-    labels: _carLabels,
-    textGroups: _groups4,
-    borderWidthRatioOverride: _borderRatio,
-  );
-
-  /// A six-digit car plate.
-  static final PlateSpec car6 = PlateSpec(
-    id: 'ye.unified.car6',
-    country: YemenCountry.unifiedPrivate,
-    canvasWidth: _carWidth,
-    canvasHeight: _carHeight,
-    panel: _carPanel,
-    background: _carBackground,
-    slots: _car6Slots,
-    rules: _carStipple,
-    labels: _carLabels,
-    textGroups: _groups6,
-    borderWidthRatioOverride: _borderRatio,
-  );
-
-  /// A five-digit motorcycle plate.
-  static final PlateSpec moto5 = PlateSpec(
-    id: 'ye.unified.moto5',
+  /// The motorcycle plate. Unverified — no photograph was available.
+  static final PlateSpec moto = PlateSpec(
+    id: 'ye.unified.moto',
     country: YemenCountry.unifiedPrivate,
     canvasWidth: _motoWidth,
     canvasHeight: _motoHeight,
     panel: _motoPanel,
     background: _motoBackground,
-    slots: _moto5Slots,
+    slots: const <PlateSlot>[_motoNumber, _motoSideCode],
     rules: _motoStipple,
     labels: _motoLabels,
-    textGroups: _groups5,
+    textGroups: _groups,
     borderWidthRatioOverride: _borderRatio,
   );
-
-  /// A four-digit motorcycle plate.
-  static final PlateSpec moto4 = PlateSpec(
-    id: 'ye.unified.moto4',
-    country: YemenCountry.unifiedPrivate,
-    canvasWidth: _motoWidth,
-    canvasHeight: _motoHeight,
-    panel: _motoPanel,
-    background: _motoBackground,
-    slots: _moto4Slots,
-    rules: _motoStipple,
-    labels: _motoLabels,
-    textGroups: _groups4,
-    borderWidthRatioOverride: _borderRatio,
-  );
-
-  /// A six-digit motorcycle plate.
-  static final PlateSpec moto6 = PlateSpec(
-    id: 'ye.unified.moto6',
-    country: YemenCountry.unifiedPrivate,
-    canvasWidth: _motoWidth,
-    canvasHeight: _motoHeight,
-    panel: _motoPanel,
-    background: _motoBackground,
-    slots: _moto6Slots,
-    rules: _motoStipple,
-    labels: _motoLabels,
-    textGroups: _groups6,
-    borderWidthRatioOverride: _borderRatio,
-  );
-
-  // ---------------------------------------------------------------------------
-  // Lookups. Keyed by number length alone — there is no usage axis left to key
-  // on.
-  // ---------------------------------------------------------------------------
-
-  /// The car geometries this package builds, keyed by how many digits the
-  /// vehicle number has.
-  static final Map<int, PlateSpec> carGeometries = <int, PlateSpec>{
-    4: car4,
-    5: car5,
-    6: car6,
-  };
-
-  /// The motorcycle geometries, keyed by how many digits the vehicle number
-  /// has. Unverified — no photograph of a unified motorcycle plate was
-  /// available.
-  static final Map<int, PlateSpec> motoGeometries = <int, PlateSpec>{
-    4: moto4,
-    5: moto5,
-    6: moto6,
-  };
-
-  /// The unified car plate whose vehicle number has [numberDigits] digits, or
-  /// null when that is not a length this package builds.
-  ///
-  /// Usage is not a parameter. It selects the two caption lines in the blue
-  /// side panel, which the host passes to the canvas:
-  /// `country: YemenCountry.unifiedFor(usage)`.
-  ///
-  /// Handing a live `PlateCanvas` a spec with a different id carries the value
-  /// across per `PlateCanvas.onSpecChange`; with `byGroupKey` a change of
-  /// length keeps the digits that still fit. See the class doc.
-  static PlateSpec? car({required int numberDigits}) =>
-      carGeometries[numberDigits];
-
-  /// The unified motorcycle plate whose vehicle number has [numberDigits]
-  /// digits, or null.
-  static PlateSpec? moto({required int numberDigits}) =>
-      motoGeometries[numberDigits];
-
-  /// The number lengths a unified plate can have, shortest first.
-  static const List<int> numberLengths = <int>[4, 5, 6];
 }

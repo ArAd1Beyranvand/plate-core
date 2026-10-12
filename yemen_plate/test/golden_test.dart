@@ -3,19 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yemen_plate/yemen_plate.dart';
 
-/// Goldens for the northern (System B) specs. Modelled on
-/// `palestine_plate/test/golden_test.dart`.
-///
-/// The private/government pair off `carGov2Serial5` is the point of this
-/// file: one spec, rendered twice with only `country:` and `theme:` differing,
-/// is the P4 country/theme split shown as pixels. If the two are wired
-/// correctly the images differ in field colour and panel word and nothing
-/// else — same geometry, same digits, same mirrors.
-///
-/// The other two goldens pin the P3B pitch corrections (`carGov2Serial4`'s
-/// register used to end one unit past its siblings; `motoGov2Serial5`'s
-/// fourth cell used to sit 0.4 unit off pitch) so the fix has a rendered
-/// appearance on record, not just a changelog entry.
+/// Goldens for the two systems. The northern private/government pair is one
+/// spec rendered twice with only `country:` and `theme:` differing: the images
+/// should differ in field colour and panel word and nothing else. The other
+/// goldens pin the min/max fields at both ends of their range.
 ///
 /// Regenerate with `flutter test --update-goldens` after a deliberate change.
 void main() {
@@ -60,60 +51,64 @@ void main() {
     controller.dispose();
   }
 
-  group('northern car g2s5: one spec, two usages', () {
-    // 2 governorate digits + 5 serial digits = 7 slots.
-    final spec = YemenNorthernPlates.car(
-      governorateDigits: 2,
-      serialDigits: 5,
-    )!;
+  final cases =
+      <String, (PlateSpec, PlateTheme, PlateCountry, List<String?>)>{
+        'ye_northern_car_private': (
+          YemenNorthernPlates.car,
+          YemenThemes.forNorthernUsage(YemenUsage.private),
+          YemenCountry.northernFor(YemenUsage.private),
+          ['12', '34567'],
+        ),
+        'ye_northern_car_government': (
+          YemenNorthernPlates.car,
+          YemenThemes.forNorthernUsage(YemenUsage.government),
+          YemenCountry.northernFor(YemenUsage.government),
+          ['12', '34567'],
+        ),
+        'ye_northern_car_short': (
+          YemenNorthernPlates.car,
+          YemenThemes.forNorthernUsage(YemenUsage.private),
+          YemenCountry.northernFor(YemenUsage.private),
+          ['7', '1234'],
+        ),
+        'ye_northern_moto': (
+          // ignore: deprecated_member_use_from_same_package
+          YemenNorthernPlates.moto,
+          YemenThemes.forNorthernUsage(YemenUsage.private),
+          YemenCountry.northernFor(YemenUsage.private),
+          ['12', '345678'],
+        ),
+        'ye_unified_car': (
+          YemenUnifiedPlates.car,
+          YemenThemes.forUnifiedUsage(YemenUsage.private),
+          YemenCountry.unifiedFor(YemenUsage.private),
+          ['243786', '12'],
+        ),
+        'ye_unified_car_short': (
+          YemenUnifiedPlates.car,
+          YemenThemes.forUnifiedUsage(YemenUsage.private),
+          YemenCountry.unifiedFor(YemenUsage.private),
+          ['2437', '12'],
+        ),
+        'ye_unified_moto': (
+          YemenUnifiedPlates.moto,
+          YemenThemes.forUnifiedUsage(YemenUsage.private),
+          YemenCountry.unifiedFor(YemenUsage.private),
+          ['243786', '12'],
+        ),
+      };
 
-    testWidgets('private (blue)', (tester) async {
+  for (final entry in cases.entries) {
+    testWidgets(entry.key, (tester) async {
+      final (spec, theme, country, values) = entry.value;
       await renderGolden(
         tester,
         spec: spec,
-        theme: YemenThemes.forNorthernUsage(YemenUsage.private),
-        country: YemenCountry.northernFor(YemenUsage.private),
-        values: const ['1', '2', '3', '4', '5', '6', '7'],
-        name: 'ye_northern_car_g2s5_private',
+        theme: theme,
+        country: country,
+        values: values,
+        name: entry.key,
       );
     });
-
-    testWidgets('government (green)', (tester) async {
-      await renderGolden(
-        tester,
-        spec: spec,
-        theme: YemenThemes.forNorthernUsage(YemenUsage.government),
-        country: YemenCountry.northernFor(YemenUsage.government),
-        values: const ['1', '2', '3', '4', '5', '6', '7'],
-        name: 'ye_northern_car_g2s5_government',
-      );
-    });
-  });
-
-  group('P3B pitch corrections, pinned', () {
-    testWidgets('carGov2Serial4: register now ends flush at 530', (
-      tester,
-    ) async {
-      await renderGolden(
-        tester,
-        spec: YemenNorthernPlates.carGov2Serial4,
-        theme: YemenThemes.forNorthernUsage(YemenUsage.private),
-        country: YemenCountry.northernFor(YemenUsage.private),
-        values: const ['1', '2', '3', '4', '5', '6'],
-        name: 'ye_northern_car_g2s4',
-      );
-    });
-
-    testWidgets('motoGov2Serial5: uniform 41.8 pitch', (tester) async {
-      await renderGolden(
-        tester,
-        // ignore: deprecated_member_use_from_same_package
-        spec: YemenNorthernPlates.motoGov2Serial5,
-        theme: YemenThemes.forNorthernUsage(YemenUsage.private),
-        country: YemenCountry.northernFor(YemenUsage.private),
-        values: const ['1', '2', '3', '4', '5', '6', '7'],
-        name: 'ye_northern_moto_g2s5',
-      );
-    });
-  });
+  }
 }

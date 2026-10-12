@@ -1,3 +1,14 @@
+## Unreleased
+
+**Breaking. Fields are variable-length slots.** The 11 specs are now four:
+`YemenUnifiedPlates.car` / `.moto` (number 4–6 digits, side code 2) and
+`YemenNorthernPlates.car` / `.moto` (governorate 1–2 digits, serial 4–6). Each
+field is one `PlateSlot` with `minLength`/`length`, so a plate completes once
+every field reaches its minimum. Removed: `car4`/`car5`/`car6`, `moto4`/`moto5`/
+`moto6`, `carGov*Serial*`, `motoGov2Serial5`, `carGeometries`/`motoGeometries`,
+`car({...})`/`moto({...})` and `numberLengths`. `YemenNorthernValidator` now
+requires a serial of at least four digits.
+
 ## 0.3.0
 
 **Breaking. A usage class no longer selects a spec.** It selects a country block

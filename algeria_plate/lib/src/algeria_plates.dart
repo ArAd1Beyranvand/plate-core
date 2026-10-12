@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -27,9 +29,9 @@ import 'algeria_country.dart';
 /// width-limited by its 45.6 mm cell, since DejaVu Bold's digits are far
 /// wider than the plate's condensed face. `plate_core` is unchanged.
 ///
-/// **Fixed cells.** The regulation makes `1` 20 mm wide and every other digit
-/// 30, with an even 10 mm between them; a `PlateSlot` is a fixed cell, so a
-/// `1` here sits centred in a full cell.
+/// **Fields, not cells.** Each group is one `PlateSlot` run spanning its
+/// cells; `spacing` brings the font's advance up to the measured pitch. The
+/// regulation's narrow 20 mm `1` is not modelled.
 abstract final class _Layout {
   static const double width = 520;
   static const double height = 110;
@@ -75,41 +77,45 @@ abstract final class _Layout {
 /// * [diplomatic] — `NNN-NN-NN`, black on teal.
 /// * [army] — nine silver digits on black, the flag in a roundel at the left.
 ///
-/// The civil specs have the text groups `serial` (5), `type` (3: vehicle
-/// class then year of manufacture) and `wilaya` (2); diplomatic has
-/// `serial`, `status` and `mission`; army has `serial`.
+/// The civil specs have one field per text group: `serial` (5), `type` (3:
+/// vehicle class then year of manufacture) and `wilaya` (2); diplomatic has
+/// `serial` (1–3), `status` (2) and `mission` (2); army has `serial` (9).
 ///
 /// Not implemented: the 140×120 motorcycle plate. The article gives 26 mm
 /// digits with "the rest the same", i.e. 10 mm between them, which cannot
 /// put five digits on a 140 mm row.
 abstract final class AlgeriaPlates {
   static const List<PlateTextGroup> _civilGroups = <PlateTextGroup>[
-    PlateTextGroup(<int>[0, 1, 2, 3, 4], key: 'serial'),
-    PlateTextGroup(<int>[5, 6, 7], key: 'type'),
-    PlateTextGroup(<int>[8, 9], key: 'wilaya'),
+    PlateTextGroup(<int>[0], key: 'serial'),
+    PlateTextGroup(<int>[1], key: 'type'),
+    PlateTextGroup(<int>[2], key: 'wilaya'),
   ];
 
-  static List<PlateSlot> _digits(
+  /// One field of [count] digits over [count] cells of [pitch]. The glyph is
+  /// set at 0.72 of the height and a digit advances ~0.6 em, so the spacing is
+  /// what is left of the pitch.
+  static PlateSlot _field(
     int count, {
     required double left,
     required double top,
     required double pitch,
     required double height,
-  }) => plateRegister(
+    int? minLength,
+  }) => PlateSlot(
     alphabet: AlgeriaAlphabets.digits,
-    count: count,
-    left: left,
-    top: top,
-    width: pitch,
-    height: height,
+    box: PlateBox(left, top, count * pitch, height),
+    length: count,
+    minLength: minLength,
+    spacing: max(0, pitch - 0.6 * 0.72 * height),
   );
 
   static final PlateSpec singleLine = () {
     const double p = _Layout.pitch;
     const double typeLeft = _Layout.left + 5 * p + _Layout.groupGap;
     const double wilayaLeft = typeLeft + 3 * p + _Layout.groupGap;
-    List<PlateSlot> group(int n, double left) => _digits(
+    PlateSlot group(int n, double left, {int? minLength}) => _field(
       n,
+      minLength: minLength,
       left: left,
       top: _Layout.slotTop,
       pitch: p,
@@ -123,9 +129,9 @@ abstract final class AlgeriaPlates {
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
       slots: <PlateSlot>[
-        ...group(5, _Layout.left),
-        ...group(3, typeLeft),
-        ...group(2, wilayaLeft),
+        group(5, _Layout.left),
+        group(3, typeLeft),
+        group(2, wilayaLeft),
       ],
       textGroups: _civilGroups,
     );
@@ -135,7 +141,7 @@ abstract final class AlgeriaPlates {
     const double p = _Layout.twoPitch;
     const double w = _Layout.twoWidth;
     const double lowerLeft = (w - (5 * p + _Layout.twoGap)) / 2;
-    List<PlateSlot> group(int n, double left, double top) => _digits(
+    PlateSlot group(int n, double left, double top) => _field(
       n,
       left: left,
       top: top,
@@ -152,9 +158,9 @@ abstract final class AlgeriaPlates {
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.twoHeight)),
       slots: <PlateSlot>[
-        ...group(5, (w - 5 * p) / 2, _Layout.twoRow1Top),
-        ...group(3, lowerLeft, _Layout.twoRow2Top),
-        ...group(2, lowerLeft + 3 * p + _Layout.twoGap, _Layout.twoRow2Top),
+        group(5, (w - 5 * p) / 2, _Layout.twoRow1Top),
+        group(3, lowerLeft, _Layout.twoRow2Top),
+        group(2, lowerLeft + 3 * p + _Layout.twoGap, _Layout.twoRow2Top),
       ],
       textGroups: _civilGroups,
     );
@@ -168,8 +174,9 @@ abstract final class AlgeriaPlates {
     const double left = (_Layout.width - (7 * p + 2 * h)) / 2;
     const double statusLeft = left + 3 * p + h;
     const double missionLeft = statusLeft + 2 * p + h;
-    List<PlateSlot> group(int n, double left) => _digits(
+    PlateSlot group(int n, double left, {int? minLength}) => _field(
       n,
+      minLength: minLength,
       left: left,
       top: _Layout.slotTop,
       pitch: p,
@@ -183,15 +190,15 @@ abstract final class AlgeriaPlates {
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
       slots: <PlateSlot>[
-        ...group(3, left),
-        ...group(2, statusLeft),
-        ...group(2, missionLeft),
+        group(3, left, minLength: 1),
+        group(2, statusLeft),
+        group(2, missionLeft),
       ],
       labels: <PlateLabel>[_hyphen(left + 3 * p), _hyphen(statusLeft + 2 * p)],
       textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1, 2], key: 'serial'),
-        PlateTextGroup(<int>[3, 4], key: 'status'),
-        PlateTextGroup(<int>[5, 6], key: 'mission'),
+        PlateTextGroup(<int>[0], key: 'serial'),
+        PlateTextGroup(<int>[1], key: 'status'),
+        PlateTextGroup(<int>[2], key: 'mission'),
       ],
     );
   }();
@@ -217,13 +224,15 @@ abstract final class AlgeriaPlates {
     canvasHeight: _Layout.height,
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-    slots: _digits(
-      9,
-      left: _Layout.armyLeft,
-      top: _Layout.armySlotTop,
-      pitch: _Layout.armyPitch,
-      height: _Layout.slotHeight,
-    ),
+    slots: <PlateSlot>[
+      _field(
+        9,
+        left: _Layout.armyLeft,
+        top: _Layout.armySlotTop,
+        pitch: _Layout.armyPitch,
+        height: _Layout.slotHeight,
+      ),
+    ],
     decals: const <PlateDecal>[
       PlateDecal(
         image: AssetImage('assets/dz_roundel.png', package: 'algeria_plate'),
@@ -236,7 +245,7 @@ abstract final class AlgeriaPlates {
       ),
     ],
     textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0, 1, 2, 3, 4, 5, 6, 7, 8], key: 'serial'),
+      PlateTextGroup(<int>[0], key: 'serial'),
     ],
   );
 }

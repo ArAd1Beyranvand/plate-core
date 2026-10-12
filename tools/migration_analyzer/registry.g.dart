@@ -13,14 +13,19 @@ import 'package:brazil_plate/brazil_plate.dart' as brazil_plate;
 import 'package:brunei_plate/brunei_plate.dart' as brunei_plate;
 import 'package:burkina_faso_plate/burkina_faso_plate.dart' as burkina_faso_plate;
 import 'package:cambodia_plate/cambodia_plate.dart' as cambodia_plate;
+import 'package:cameroon_plate/cameroon_plate.dart' as cameroon_plate;
+import 'package:cape_verde_plate/cape_verde_plate.dart' as cape_verde_plate;
 import 'package:central_african_republic_plate/central_african_republic_plate.dart' as central_african_republic_plate;
+import 'package:chad_plate/chad_plate.dart' as chad_plate;
 import 'package:chile_plate/chile_plate.dart' as chile_plate;
 import 'package:colombia_plate/colombia_plate.dart' as colombia_plate;
 import 'package:comoros_plate/comoros_plate.dart' as comoros_plate;
 import 'package:cuba_plate/cuba_plate.dart' as cuba_plate;
 import 'package:djibouti_plate/djibouti_plate.dart' as djibouti_plate;
 import 'package:egypt_plate/egypt_plate.dart' as egypt_plate;
+import 'package:equatorial_guinea_plate/equatorial_guinea_plate.dart' as equatorial_guinea_plate;
 import 'package:eritrea_plate/eritrea_plate.dart' as eritrea_plate;
+import 'package:gabon_plate/gabon_plate.dart' as gabon_plate;
 import 'package:germany_plate/germany_plate.dart' as germany_plate;
 import 'package:india_plate/india_plate.dart' as india_plate;
 import 'package:indonesia_plate/indonesia_plate.dart' as indonesia_plate;
@@ -136,8 +141,19 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (package: 'cambodia_plate', key: 'cambodia', source: "CambodiaPlates.internationalMotorcycle", read: () => cambodia_plate.CambodiaPlates.internationalMotorcycle),
   (package: 'cambodia_plate', key: 'cambodia', source: "CambodiaPlates.all", read: () => cambodia_plate.CambodiaPlates.all),
   (package: 'cambodia_plate', key: 'cambodia', source: "CambodiaPlates.of(*)", read: () => <Object?>[for (final a0 in [cambodia_plate.CambodiaCategory.private, cambodia_plate.CambodiaCategory.privateLong, cambodia_plate.CambodiaCategory.police, cambodia_plate.CambodiaCategory.diplomatic, cambodia_plate.CambodiaCategory.nonGovernmental, cambodia_plate.CambodiaCategory.internationalMotorcycle]) cambodia_plate.CambodiaPlates.of(a0)]),
+  (package: 'cameroon_plate', key: 'cameroon', source: "CameroonPlates.private", read: () => cameroon_plate.CameroonPlates.private),
+  (package: 'cameroon_plate', key: 'cameroon', source: "CameroonPlates.diplomatic", read: () => cameroon_plate.CameroonPlates.diplomatic),
+  (package: 'cameroon_plate', key: 'cameroon', source: "CameroonPlates.all", read: () => cameroon_plate.CameroonPlates.all),
+  (package: 'cape_verde_plate', key: 'cape_verde', source: "CapeVerdePlates.regular", read: () => cape_verde_plate.CapeVerdePlates.regular),
+  (package: 'cape_verde_plate', key: 'cape_verde', source: "CapeVerdePlates.freeFont", read: () => cape_verde_plate.CapeVerdePlates.freeFont),
+  (package: 'cape_verde_plate', key: 'cape_verde', source: "CapeVerdePlates.military", read: () => cape_verde_plate.CapeVerdePlates.military),
+  (package: 'cape_verde_plate', key: 'cape_verde', source: "CapeVerdePlates.diplomatic", read: () => cape_verde_plate.CapeVerdePlates.diplomatic),
+  (package: 'cape_verde_plate', key: 'cape_verde', source: "CapeVerdePlates.all", read: () => cape_verde_plate.CapeVerdePlates.all),
   (package: 'central_african_republic_plate', key: 'central_african_republic', source: "CentralAfricanRepublicPlates.private", read: () => central_african_republic_plate.CentralAfricanRepublicPlates.private),
   (package: 'central_african_republic_plate', key: 'central_african_republic', source: "CentralAfricanRepublicPlates.all", read: () => central_african_republic_plate.CentralAfricanRepublicPlates.all),
+  (package: 'chad_plate', key: 'chad', source: "ChadPlates.private", read: () => chad_plate.ChadPlates.private),
+  (package: 'chad_plate', key: 'chad', source: "ChadPlates.temporary", read: () => chad_plate.ChadPlates.temporary),
+  (package: 'chad_plate', key: 'chad', source: "ChadPlates.all", read: () => chad_plate.ChadPlates.all),
   (package: 'chile_plate', key: 'chile', source: "ChilePlates.private", read: () => chile_plate.ChilePlates.private),
   (package: 'chile_plate', key: 'chile', source: "ChilePlates.taxi", read: () => chile_plate.ChilePlates.taxi),
   (package: 'chile_plate', key: 'chile', source: "ChilePlates.collectiveTaxi", read: () => chile_plate.ChilePlates.collectiveTaxi),
@@ -168,7 +184,11 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (package: 'egypt_plate', key: 'egypt', source: "EgyptPlates.police", read: () => egypt_plate.EgyptPlates.police),
   (package: 'egypt_plate', key: 'egypt', source: "EgyptPlates.motorcycle", read: () => egypt_plate.EgyptPlates.motorcycle),
   (package: 'egypt_plate', key: 'egypt', source: "EgyptPlates.all", read: () => egypt_plate.EgyptPlates.all),
+  (package: 'equatorial_guinea_plate', key: 'equatorial_guinea', source: "EquatorialGuineaPlates.regular", read: () => equatorial_guinea_plate.EquatorialGuineaPlates.regular),
+  (package: 'equatorial_guinea_plate', key: 'equatorial_guinea', source: "EquatorialGuineaPlates.all", read: () => equatorial_guinea_plate.EquatorialGuineaPlates.all),
   (package: 'eritrea_plate', key: 'eritrea', source: "EritreaPlates.standard", read: () => eritrea_plate.EritreaPlates.standard),
+  (package: 'gabon_plate', key: 'gabon', source: "GabonPlates.private", read: () => gabon_plate.GabonPlates.private),
+  (package: 'gabon_plate', key: 'gabon', source: "GabonPlates.all", read: () => gabon_plate.GabonPlates.all),
   (package: 'germany_plate', key: 'germany', source: "GermanPlates.car", read: () => germany_plate.GermanPlates.car),
   (package: 'germany_plate', key: 'germany', source: "GermanPlates.allCars", read: () => germany_plate.GermanPlates.allCars),
   (package: 'germany_plate', key: 'germany', source: "GermanPlates.allCarVariants", read: () => germany_plate.GermanPlates.allCarVariants),
@@ -199,20 +219,7 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (package: 'indonesia_plate', key: 'indonesia', source: "IndonesiaPlates.diplomatic()", read: () => indonesia_plate.IndonesiaPlates.diplomatic()),
   (package: 'indonesia_plate', key: 'indonesia', source: "IndonesiaPlates.military(*)", read: () => <Object?>[for (final a0 in [indonesia_plate.IndonesiaService.army, indonesia_plate.IndonesiaService.navy, indonesia_plate.IndonesiaService.airForce, indonesia_plate.IndonesiaService.armedForces]) indonesia_plate.IndonesiaPlates.military(a0)]),
   (package: 'indonesia_plate', key: 'indonesia', source: "IndonesiaPlates.police()", read: () => indonesia_plate.IndonesiaPlates.police()),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.car", read: () => iran_plate.IranPlates.car),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.disabled", read: () => iran_plate.IranPlates.disabled),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.taxi", read: () => iran_plate.IranPlates.taxi),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.publicTransport", read: () => iran_plate.IranPlates.publicTransport),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.agricultural", read: () => iran_plate.IranPlates.agricultural),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.government", read: () => iran_plate.IranPlates.government),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.temporary", read: () => iran_plate.IranPlates.temporary),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.police", read: () => iran_plate.IranPlates.police),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.irgc", read: () => iran_plate.IranPlates.irgc),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.army", read: () => iran_plate.IranPlates.army),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.ministryOfDefence", read: () => iran_plate.IranPlates.ministryOfDefence),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.generalStaff", read: () => iran_plate.IranPlates.generalStaff),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.political", read: () => iran_plate.IranPlates.political),
-  (package: 'iran_plate', key: 'iran', source: "IranPlates.service", read: () => iran_plate.IranPlates.service),
+  (package: 'iran_plate', key: 'iran', source: "IranPlates.civil", read: () => iran_plate.IranPlates.civil),
   (package: 'iran_plate', key: 'iran', source: "IranPlates.protocol", read: () => iran_plate.IranPlates.protocol),
   (package: 'iran_plate', key: 'iran', source: "IranPlates.historic", read: () => iran_plate.IranPlates.historic),
   (package: 'iran_plate', key: 'iran', source: "IranPlates.motorcycle", read: () => iran_plate.IranPlates.motorcycle),
@@ -631,13 +638,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (package: 'vietnam_plate', key: 'vietnam', source: "VietnamPlates.militaryLong()", read: () => vietnam_plate.VietnamPlates.militaryLong()),
   (package: 'vietnam_plate', key: 'vietnam', source: "VietnamPlates.militaryShort()", read: () => vietnam_plate.VietnamPlates.militaryShort()),
   (package: 'vietnam_plate', key: 'vietnam', source: "VietnamPlates.militaryMotorcycle()", read: () => vietnam_plate.VietnamPlates.militaryMotorcycle()),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.carGov2Serial5", read: () => yemen_plate.YemenNorthernPlates.carGov2Serial5),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.carGov1Serial5", read: () => yemen_plate.YemenNorthernPlates.carGov1Serial5),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.carGov2Serial4", read: () => yemen_plate.YemenNorthernPlates.carGov2Serial4),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.carGov2Serial6", read: () => yemen_plate.YemenNorthernPlates.carGov2Serial6),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.motoGov2Serial5", read: () => yemen_plate.YemenNorthernPlates.motoGov2Serial5),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.carGeometries", read: () => yemen_plate.YemenNorthernPlates.carGeometries),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.motoGeometries", read: () => yemen_plate.YemenNorthernPlates.motoGeometries),
+  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.car", read: () => yemen_plate.YemenNorthernPlates.car),
+  (package: 'yemen_plate', key: 'yemen', source: "YemenNorthernPlates.moto", read: () => yemen_plate.YemenNorthernPlates.moto),
   (package: 'yemen_plate', key: 'yemen', source: "RiyadhPlates.private", read: () => yemen_plate.RiyadhPlates.private),
   (package: 'yemen_plate', key: 'yemen', source: "RiyadhPlates.publicTransport", read: () => yemen_plate.RiyadhPlates.publicTransport),
   (package: 'yemen_plate', key: 'yemen', source: "RiyadhPlates.commercial", read: () => yemen_plate.RiyadhPlates.commercial),
@@ -669,14 +671,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (package: 'yemen_plate', key: 'yemen', source: "YemenGovernoratePlates.temporary(*)", read: () => <Object?>[for (final a0 in [yemen_plate.YemenSouthernGovernorate.hadhramaut, yemen_plate.YemenSouthernGovernorate.alMahrah, yemen_plate.YemenSouthernGovernorate.shabwah, yemen_plate.YemenSouthernGovernorate.marib]) yemen_plate.YemenGovernoratePlates.temporary(a0)]),
   (package: 'yemen_plate', key: 'yemen', source: "YemenGovernoratePlates.police(*)", read: () => <Object?>[for (final a0 in [yemen_plate.YemenSouthernGovernorate.hadhramaut, yemen_plate.YemenSouthernGovernorate.alMahrah, yemen_plate.YemenSouthernGovernorate.shabwah, yemen_plate.YemenSouthernGovernorate.marib]) yemen_plate.YemenGovernoratePlates.police(a0)]),
   (package: 'yemen_plate', key: 'yemen', source: "YemenGovernoratePlates.motorcycle(*)", read: () => <Object?>[for (final a0 in [yemen_plate.YemenSouthernGovernorate.hadhramaut, yemen_plate.YemenSouthernGovernorate.alMahrah, yemen_plate.YemenSouthernGovernorate.shabwah, yemen_plate.YemenSouthernGovernorate.marib]) yemen_plate.YemenGovernoratePlates.motorcycle(a0)]),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.car5", read: () => yemen_plate.YemenUnifiedPlates.car5),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.car4", read: () => yemen_plate.YemenUnifiedPlates.car4),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.car6", read: () => yemen_plate.YemenUnifiedPlates.car6),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.moto5", read: () => yemen_plate.YemenUnifiedPlates.moto5),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.moto4", read: () => yemen_plate.YemenUnifiedPlates.moto4),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.moto6", read: () => yemen_plate.YemenUnifiedPlates.moto6),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.carGeometries", read: () => yemen_plate.YemenUnifiedPlates.carGeometries),
-  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.motoGeometries", read: () => yemen_plate.YemenUnifiedPlates.motoGeometries),
+  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.car", read: () => yemen_plate.YemenUnifiedPlates.car),
+  (package: 'yemen_plate', key: 'yemen', source: "YemenUnifiedPlates.moto", read: () => yemen_plate.YemenUnifiedPlates.moto),
   (package: 'zimbabwe_plate', key: 'zimbabwe', source: "ZimbabwePlates.row", read: () => zimbabwe_plate.ZimbabwePlates.row),
   (package: 'zimbabwe_plate', key: 'zimbabwe', source: "ZimbabwePlates.stacked", read: () => zimbabwe_plate.ZimbabwePlates.stacked),
   (package: 'zimbabwe_plate', key: 'zimbabwe', source: "ZimbabwePlates.all", read: () => zimbabwe_plate.ZimbabwePlates.all),
@@ -831,14 +827,10 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
     "vietnam_plate/lib/src/vietnam_plates.dart: VietnamPlates builds specs at runtime into a private cache",
   ],
   'yemen': <String>[
-    "yemen_plate/lib/src/northern/northern_plates.dart: lookup function YemenNorthernPlates.car({ required int governorateDigits, required int serialDigits, }) has non-enumerable parameters; only its default/catalogued results are dumped",
-    "yemen_plate/lib/src/northern/northern_plates.dart: lookup function YemenNorthernPlates.moto({ required int governorateDigits, required int serialDigits, }) has non-enumerable parameters; only its default/catalogued results are dumped",
     "yemen_plate/lib/src/southern/governorate_plates.dart: YemenGovernoratePlates.car has optional parameters; only the defaults are dumped",
     "yemen_plate/lib/src/southern/governorate_plates.dart: YemenGovernoratePlates.temporary has optional parameters; only the defaults are dumped",
     "yemen_plate/lib/src/southern/governorate_plates.dart: YemenGovernoratePlates.police has optional parameters; only the defaults are dumped",
     "yemen_plate/lib/src/southern/governorate_plates.dart: YemenGovernoratePlates.motorcycle has optional parameters; only the defaults are dumped",
-    "yemen_plate/lib/src/unified/unified_plates.dart: lookup function YemenUnifiedPlates.car({required int numberDigits}) has non-enumerable parameters; only its default/catalogued results are dumped",
-    "yemen_plate/lib/src/unified/unified_plates.dart: lookup function YemenUnifiedPlates.moto({required int numberDigits}) has non-enumerable parameters; only its default/catalogued results are dumped",
   ],
 };
 
@@ -855,14 +847,19 @@ const Map<String, List<String>> validatorFiles = <String, List<String>>{
   'brunei': <String>["brunei_plate/lib/src/brunei_validators.dart"],
   'burkina_faso': <String>["burkina_faso_plate/lib/src/burkina_faso_validators.dart"],
   'cambodia': <String>["cambodia_plate/lib/src/cambodia_validators.dart"],
+  'cameroon': <String>["cameroon_plate/lib/src/cameroon_validators.dart"],
+  'cape_verde': <String>["cape_verde_plate/lib/src/cape_verde_validators.dart"],
   'central_african_republic': <String>["central_african_republic_plate/lib/src/central_african_republic_validators.dart"],
+  'chad': <String>["chad_plate/lib/src/chad_validators.dart"],
   'chile': <String>["chile_plate/lib/src/chile_validators.dart"],
   'colombia': <String>["colombia_plate/lib/src/colombia_validators.dart"],
   'comoros': <String>["comoros_plate/lib/src/comoros_validators.dart"],
   'cuba': <String>["cuba_plate/lib/src/cuba_validators.dart"],
   'djibouti': <String>["djibouti_plate/lib/src/djibouti_validators.dart"],
   'egypt': <String>["egypt_plate/lib/src/egypt_validators.dart"],
+  'equatorial_guinea': <String>["equatorial_guinea_plate/lib/src/equatorial_guinea_validators.dart"],
   'eritrea': <String>["eritrea_plate/lib/src/eritrea_validators.dart"],
+  'gabon': <String>["gabon_plate/lib/src/gabon_validators.dart"],
   'germany': <String>["germany_plate/lib/src/german_plate_validator.dart"],
   'india': <String>["india_plate/lib/src/india_validators.dart"],
   'indonesia': <String>["indonesia_plate/lib/src/indonesia_validators.dart"],

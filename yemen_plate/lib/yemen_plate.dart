@@ -39,11 +39,12 @@ export 'src/common/yemen_country.dart';
 /// between them by usage.
 export 'src/common/yemen_themes.dart';
 
-/// System A: six specs — car and motorcycle, four to six number digits.
+/// System A: a car and a motorcycle spec; the number is one field of four to
+/// six digits.
 export 'src/unified/unified_plates.dart';
 
-/// System B: four car specs, plus one motorcycle spec whose geometry is
-/// unverified and marked `@Deprecated` because of it.
+/// System B: a car spec (governorate 1–2 digits, serial 4–6), plus a
+/// motorcycle spec whose geometry is unverified and marked `@Deprecated` because of it.
 export 'src/northern/northern_plates.dart';
 
 /// Hadhramaut, Al Mahrah, Shabwah and Marib: the coloured-strip plates, one

@@ -13,7 +13,7 @@ class ExampleApp extends StatelessWidget {
     // still in force across the north — is `YemenNorthernPlates`; the two are
     // separate namespaces because they are two current systems, not a current
     // one and a legacy one.
-    final spec = YemenUnifiedPlates.car(numberDigits: 5)!;
+    final spec = YemenUnifiedPlates.car;
     return MaterialApp(
       home: Scaffold(
         body: Center(

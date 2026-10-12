@@ -51,6 +51,46 @@ abstract final class PersianAlphabets {
     placeholder: '؟',
   );
 
+  /// Every series letter of the civil blank, for the one spec that changes
+  /// livery with its letter: the [privateLetters], then each class's fixed
+  /// letter, then `ژ` (printed `♿︎`, see [disabledSymbol]) and Latin `D`, `S`.
+  static const PlateAlphabet civilLetters = PlateAlphabet(
+    id: 'fa.civilLetters',
+    characters: [
+      'ب',
+      'ج',
+      'د',
+      'س',
+      'ص',
+      'ط',
+      'ق',
+      'ل',
+      'م',
+      'ن',
+      'و',
+      'ه',
+      'ی',
+      'ت',
+      'ع',
+      'ک',
+      'الف',
+      'گ',
+      'پ',
+      'ث',
+      'ش',
+      'ز',
+      'ف',
+      'ژ',
+      'D',
+      'S',
+    ],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+    direction: TextDirection.rtl,
+    placeholder: '؟',
+    glyphs: {'ژ': '♿︎'},
+  );
+
   /// The wheelchair symbol ♿︎ a disabled driver's plate carries where a private
   /// plate carries its county letter.
   ///
