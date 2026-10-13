@@ -749,6 +749,9 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
     "lebanon_plate/lib/src/lebanon_plates.dart: lookup function LebanonPlates.oneLineOf({required int digits}) has non-enumerable parameters; only its default/catalogued results are dumped",
     "lebanon_plate/lib/src/lebanon_plates.dart: lookup function LebanonPlates.twoLineOf({required int digits}) has non-enumerable parameters; only its default/catalogued results are dumped",
   ],
+  'lesotho': <String>[
+    "no public PlateSpec catalogue found by discovery",
+  ],
   'libya': <String>[
     "libya_plate/lib/src/libya_plates.dart: private catalogue LibyaPlates._cache (specs in it are dumped only if also reachable publicly)",
     "libya_plate/lib/src/libya_plates.dart: LibyaPlates.private has optional parameters; only the defaults are dumped",
@@ -770,6 +773,9 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
     "maldives_plate/lib/src/maldives_plates.dart: MaldivesPlates.of has optional parameters; only the defaults are dumped",
     "maldives_plate/lib/src/maldives_plates.dart: MaldivesPlates builds specs at runtime into a private cache",
   ],
+  'mauritius': <String>[
+    "no public PlateSpec catalogue found by discovery",
+  ],
   'namibia': <String>[
     "namibia_plate/lib/src/namibia_plates.dart: lookup function NamibiaPlates.standard({required int digits, int regionLetters = 1}) has non-enumerable parameters; only its default/catalogued results are dumped",
     "namibia_plate/lib/src/namibia_plates.dart: NamibiaPlates.personalised has optional parameters; only the defaults are dumped",
@@ -784,6 +790,9 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
   'republic_of_ireland': <String>[
     "republic_of_ireland_plate/lib/src/republic_of_ireland_plates.dart: lookup function RepublicOfIrelandPlates.standardFor(String county) has non-enumerable parameters; only its default/catalogued results are dumped",
     "republic_of_ireland_plate/lib/src/republic_of_ireland_plates.dart: lookup function RepublicOfIrelandPlates.electricFor(String county) has non-enumerable parameters; only its default/catalogued results are dumped",
+  ],
+  'seychelles': <String>[
+    "no public PlateSpec catalogue found by discovery",
   ],
   'spain': <String>[
     "spain_plate/lib/src/spain_plates.dart: lookup function SpainPlates.diplomaticFor(int embassyDigits) has non-enumerable parameters; only its default/catalogued results are dumped",
