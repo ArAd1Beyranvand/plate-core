@@ -258,6 +258,9 @@ class _TypedField extends StatelessWidget {
               ),
               showCursor: readOnly ? focusNode.hasFocus : null,
               textAlign: TextAlign.center,
+              // The slot's script, not the plate's: Persian numerals run
+              // left to right inside an RTL plate, and the caret must follow.
+              textDirection: slot.alphabet.direction,
               style: theme.glyphStyle(
                 slot.box.height,
                 slot.color ?? theme.ink,
