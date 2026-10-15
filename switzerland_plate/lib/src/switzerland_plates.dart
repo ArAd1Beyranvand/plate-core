@@ -7,6 +7,7 @@ import 'package:plate_alphabet/plate_alphabet.dart';
 import 'switzerland_colors.dart';
 import 'switzerland_country.dart';
 import 'switzerland_missions.dart';
+import 'switzerland_regions.dart';
 
 /// Where the ink sits, in the flat unit the offline stage rectified every
 /// photograph to (520 × 256 per plate, normalised non-uniformly), and how it
@@ -215,6 +216,7 @@ abstract final class SwitzerlandPlates {
     labels: labels,
     bands: bands,
     restrictions: restrictions,
+    resolveRegion: SwitzerlandRegions.captionOf,
   );
 
   static const _Frame _high = _Frame(_Layout.highWidth, _Layout.highHeight);

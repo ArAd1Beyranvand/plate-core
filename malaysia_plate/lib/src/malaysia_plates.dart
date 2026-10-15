@@ -6,6 +6,7 @@ import 'package:plate_core/plate_core.dart';
 import 'malaysia_alphabets.dart';
 import 'malaysia_colors.dart';
 import 'malaysia_country.dart';
+import 'malaysia_regions.dart';
 
 /// Where the ink sits on a Malaysian plate, in millimetres.
 ///
@@ -220,6 +221,7 @@ abstract final class MalaysiaPlates {
         suffixGap: _Layout.suffixGap,
       ),
       textGroups: _groups(suffix),
+      resolveRegion: MalaysiaRegions.captionOf,
     );
   }
 
@@ -266,6 +268,7 @@ abstract final class MalaysiaPlates {
           ),
       ],
       textGroups: _groups(suffix),
+      resolveRegion: MalaysiaRegions.captionOf,
     );
   }
 
@@ -318,6 +321,7 @@ abstract final class MalaysiaPlates {
         suffixGap: _Layout.evGap,
       ),
       textGroups: _groups(suffix),
+      resolveRegion: MalaysiaRegions.captionOf,
     );
   }
 

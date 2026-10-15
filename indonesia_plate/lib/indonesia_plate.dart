@@ -12,6 +12,7 @@ export 'src/indonesia_alphabets.dart';
 export 'src/indonesia_country.dart';
 export 'src/indonesia_themes.dart';
 export 'src/indonesia_plates.dart';
+export 'src/indonesia_regions.dart';
 export 'src/indonesia_services.dart';
 export 'src/indonesia_validators.dart';
 export 'src/indonesia_serial_generator.dart';

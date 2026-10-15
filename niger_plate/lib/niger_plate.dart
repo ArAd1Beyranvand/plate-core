@@ -11,6 +11,7 @@ export 'src/niger_colors.dart';
 export 'src/niger_country.dart';
 export 'src/niger_other_plates.dart';
 export 'src/niger_plates.dart';
+export 'src/niger_regions.dart';
 export 'src/niger_serial_generator.dart';
 export 'src/niger_themes.dart';
 export 'src/niger_usage.dart';

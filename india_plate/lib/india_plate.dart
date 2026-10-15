@@ -8,5 +8,6 @@ export 'src/india_alphabets.dart';
 export 'src/india_colors.dart';
 export 'src/india_country.dart';
 export 'src/india_plates.dart';
+export 'src/india_regions.dart';
 export 'src/india_themes.dart';
 export 'src/india_validators.dart';

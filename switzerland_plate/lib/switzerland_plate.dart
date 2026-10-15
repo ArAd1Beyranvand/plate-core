@@ -11,3 +11,4 @@ export 'src/switzerland_missions.dart';
 export 'src/switzerland_serial_generator.dart';
 export 'src/switzerland_validators.dart';
 export 'package:plate_alphabet/plate_alphabet.dart' show SwitzerlandAlphabets;
+export 'src/switzerland_regions.dart';

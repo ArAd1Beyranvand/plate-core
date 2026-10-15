@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'bolivia_alphabets.dart';
 import 'bolivia_colors.dart';
 import 'bolivia_country.dart';
+import 'bolivia_regions.dart';
 
 /// Where the ink sits on a Bolivian plate, in millimetres.
 ///
@@ -278,6 +279,7 @@ abstract final class BoliviaPlates {
         PlateTextGroup(<int>[1], key: 'letters'),
         PlateTextGroup(<int>[2], prefix: ' ', key: 'department'),
       ],
+      resolveRegion: BoliviaRegions.captionOf,
     );
   }
 

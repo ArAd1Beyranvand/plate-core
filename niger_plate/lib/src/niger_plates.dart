@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'niger_alphabets.dart';
 import 'niger_colors.dart';
 import 'niger_country.dart';
+import 'niger_regions.dart';
 
 /// Where the ink sits, in plate coordinates. Measured off the Wikipedia
 /// artwork (`НІГЕР_НОМЕР_1.gif`, `НІГЕР_НОМЕР_2.gif`, 669×144) by normalising
@@ -145,6 +146,7 @@ abstract final class NigerPlates {
       const PlateTextGroup(<int>[1], key: 'series'),
       const PlateTextGroup(<int>[2], key: 'serial'),
     ],
+    resolveRegion: NigerRegions.captionOf,
   );
 
   static final PlateSpec privateSpec = _build(_private);

@@ -11,5 +11,6 @@ export 'src/malaysia_alphabets.dart';
 export 'src/malaysia_country.dart';
 export 'src/malaysia_themes.dart';
 export 'src/malaysia_plates.dart';
+export 'src/malaysia_regions.dart';
 export 'src/malaysia_validators.dart';
 export 'src/malaysia_serial_generator.dart';

@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'lebanon_alphabets.dart';
 import 'lebanon_colors.dart';
 import 'lebanon_country.dart';
+import 'lebanon_regions.dart';
 
 /// Lebanon's two geometries: [oneLine] (1040×220, band left) and [twoLine]
 /// (520×288, band top). The number is one slot of one to six digits.
@@ -113,6 +114,7 @@ abstract final class LebanonPlates {
     ],
     labels: _oneLineLabels,
     textGroups: _groups,
+    resolveRegion: LebanonRegions.captionOf,
     borderWidthRatioOverride: _borderRatio,
   );
 
@@ -129,6 +131,7 @@ abstract final class LebanonPlates {
     ],
     labels: _twoLineLabels,
     textGroups: _groups,
+    resolveRegion: LebanonRegions.captionOf,
     borderWidthRatioOverride: _borderRatio,
   );
 

@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'india_alphabets.dart';
 import 'india_country.dart';
+import 'india_regions.dart';
 
 /// Where the ink sits, in millimetres.
 ///
@@ -147,6 +148,7 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
     labels: labels,
     slots: slots,
     textGroups: groups,
+    resolveRegion: IndiaRegions.captionOf,
   );
 }
 

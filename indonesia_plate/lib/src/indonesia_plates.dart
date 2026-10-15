@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'indonesia_alphabets.dart';
 import 'indonesia_colors.dart';
 import 'indonesia_country.dart';
+import 'indonesia_regions.dart';
 import 'indonesia_services.dart';
 
 /// Where the ink sits on an Indonesian plate, in millimetres.
@@ -526,6 +527,7 @@ abstract final class IndonesiaPlates {
         const PlateTextGroup(<int>[2], key: 'suffix'),
         ..._expiryGroups(3),
       ],
+      resolveRegion: IndonesiaRegions.captionOf,
     );
   }
 

@@ -10,6 +10,7 @@ export 'src/bolivia_alphabets.dart';
 export 'src/bolivia_colors.dart';
 export 'src/bolivia_country.dart';
 export 'src/bolivia_plates.dart';
+export 'src/bolivia_regions.dart';
 export 'src/bolivia_serial_generator.dart';
 export 'src/bolivia_themes.dart';
 export 'src/bolivia_validators.dart';

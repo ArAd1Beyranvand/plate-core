@@ -34,6 +34,7 @@ export 'src/lebanon_themes.dart';
 
 /// The two geometries, and their short-number variants.
 export 'src/lebanon_plates.dart';
+export 'src/lebanon_regions.dart';
 
 /// The advisory validator, which does not bar a keystroke.
 export 'src/lebanon_validators.dart';
