@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import '../common/yemen_alphabets.dart';
 import '../common/yemen_country.dart';
+import 'northern_regions.dart';
 
 /// System B — the 1993 format, still the larger share of the fleet. A top band
 /// (اليمن + usage word) over a left/right split (governorate code + serial).
@@ -212,6 +213,7 @@ abstract final class YemenNorthernPlates {
     background: _carBackground,
     labels: _carLabels,
     textGroups: _groups,
+    resolveRegion: YemenRegions.captionOf,
     borderWidthRatioOverride: _borderRatio,
   );
 
@@ -244,6 +246,7 @@ abstract final class YemenNorthernPlates {
     background: _motoBackground,
     labels: _motoLabels,
     textGroups: _groups,
+    resolveRegion: YemenRegions.captionOf,
     borderWidthRatioOverride: _borderRatio,
   );
 }

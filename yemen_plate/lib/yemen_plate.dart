@@ -69,3 +69,4 @@ export 'src/riyadh/riyadh_themes.dart';
 export 'src/riyadh/riyadh_plates.dart';
 export 'src/riyadh/riyadh_validators.dart';
 export 'package:plate_alphabet/plate_alphabet.dart' show RiyadhAlphabets;
+export 'src/northern/northern_regions.dart';

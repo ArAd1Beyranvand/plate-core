@@ -1,0 +1,98 @@
+import 'package:plate_core/plate_core.dart';
+
+/// Locates a Vietnamese plate from its two-digit province code.
+///
+/// Source: the "Codes" section of
+/// https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Vietnam
+/// (a code the article assigns to two places is omitted).
+abstract final class VietnamRegions {
+  static const Map<String, String> _provinces = <String, String>{
+    '11': 'Cao Bằng',
+    '12': 'Lạng Sơn',
+    '14': 'Quảng Ninh',
+    '15': 'Hải Phòng',
+    '16': 'Hải Phòng',
+    '17': 'Hưng Yên',
+    '18': 'Ninh Bình',
+    '19': 'Phú Thọ',
+    '20': 'Thái Nguyên',
+    '21': 'Lào Cai',
+    '22': 'Tuyên Quang',
+    '23': 'Tuyên Quang',
+    '24': 'Lào Cai',
+    '25': 'Lai Châu',
+    '26': 'Sơn La',
+    '27': 'Điện Biên',
+    '28': 'Phú Thọ',
+    '29': 'Hà Nội',
+    '30': 'Hà Nội',
+    '31': 'Hà Nội',
+    '32': 'Hà Nội',
+    '33': 'Hà Nội',
+    '34': 'Hải Phòng',
+    '35': 'Ninh Bình',
+    '36': 'Thanh Hóa',
+    '37': 'Nghệ An',
+    '38': 'Hà Tĩnh',
+    '39': 'Đồng Nai',
+    '40': 'Hà Nội',
+    '41': 'Hồ Chí Minh City',
+    '43': 'Đà Nẵng',
+    '47': 'Đắk Lắk',
+    '48': 'Lâm Đồng',
+    '49': 'Lâm Đồng',
+    '50': 'Hồ Chí Minh City',
+    '51': 'Hồ Chí Minh City',
+    '52': 'Hồ Chí Minh City',
+    '53': 'Hồ Chí Minh City',
+    '54': 'Hồ Chí Minh City',
+    '55': 'Hồ Chí Minh City',
+    '56': 'Hồ Chí Minh City',
+    '57': 'Hồ Chí Minh City',
+    '58': 'Hồ Chí Minh City',
+    '59': 'Hồ Chí Minh City',
+    '60': 'Đồng Nai',
+    '61': 'Hồ Chí Minh City',
+    '62': 'Tây Ninh',
+    '63': 'Đồng Tháp',
+    '64': 'Vĩnh Long',
+    '65': 'Cần Thơ',
+    '66': 'Đồng Tháp',
+    '67': 'An Giang',
+    '68': 'An Giang',
+    '69': 'Cà Mau',
+    '70': 'Tây Ninh',
+    '71': 'Vĩnh Long',
+    '72': 'Hồ Chí Minh City',
+    '73': 'Quảng Trị',
+    '74': 'Quảng Trị',
+    '75': 'Huế',
+    '76': 'Quảng Ngãi',
+    '77': 'Gia Lai',
+    '78': 'Đắk Lắk',
+    '79': 'Khánh Hòa',
+    '81': 'Gia Lai',
+    '82': 'Quảng Ngãi',
+    '83': 'Cần Thơ',
+    '84': 'Vĩnh Long',
+    '85': 'Khánh Hòa',
+    '86': 'Lâm Đồng',
+    '88': 'Phú Thọ',
+    '89': 'Hưng Yên',
+    '90': 'Ninh Bình',
+    '92': 'Đà Nẵng',
+    '93': 'Đồng Nai',
+    '94': 'Cà Mau',
+    '95': 'Cần Thơ',
+    '97': 'Thái Nguyên',
+    '98': 'Bắc Ninh',
+    '99': 'Bắc Ninh',
+  };
+
+  /// The province of [code], or null when incomplete or unissued.
+  static String? lookup(String code) => _provinces[code];
+
+  /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
+  static String? captionOf(String Function(String key) group) =>
+      lookup(group('province'));
+}

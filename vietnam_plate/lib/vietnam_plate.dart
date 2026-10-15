@@ -15,3 +15,4 @@ export 'src/vietnam_missions.dart';
 export 'src/vietnam_validators.dart';
 export 'src/vietnam_serial_generator.dart';
 export 'package:plate_alphabet/plate_alphabet.dart' show VietnamAlphabets;
+export 'src/vietnam_regions.dart';

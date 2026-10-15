@@ -7,6 +7,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'vietnam_colors.dart';
 import 'vietnam_country.dart';
+import 'vietnam_regions.dart';
 import 'vietnam_missions.dart';
 
 /// Where the ink sits on a Vietnamese plate, in millimetres.
@@ -455,6 +456,7 @@ abstract final class VietnamPlates {
           PlateTextGroup(g.value, key: g.key),
       ],
       restrictions: restrictions,
+      resolveRegion: VietnamRegions.captionOf,
     );
   }
 }
