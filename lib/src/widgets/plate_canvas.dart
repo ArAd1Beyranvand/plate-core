@@ -236,16 +236,11 @@ class _PlateCanvasState extends State<PlateCanvas> {
   @override
   void didUpdateWidget(PlateCanvas oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // This used to react to the controller alone, on the assumption that
-    // Flutter hands a spec change a fresh State. It does not, when the host
-    // swaps `spec:` on a canvas that keeps its type and position in the tree —
-    // an ordinary thing for a host to do — and the machine then holds the
-    // previous plate's nodes: wrong slot, or off the end of the list outright.
+    // A host swapping `spec:` keeps this State, so the machine, bound to the
+    // old spec's slots, must be rebuilt here.
     if (widget.spec.id != oldWidget.spec.id) {
       final shown = _shownValues;
-      // The controller holds the previous plate's values — a different slot
-      // count — and migrates itself to the new spec, carrying the characters
-      // across as [PlateCanvas.onSpecChange] directs.
+      // The controller migrates its values per [PlateCanvas.onSpecChange].
       _controller.adoptSpec(widget.spec, preserve: widget.onSpecChange);
       _resizeDuration = Duration.zero;
       _morphBackground = false;
@@ -273,13 +268,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     super.dispose();
   }
 
-  /// Points [_controller] at the host's controller when it passed one, and at a
-  /// private one otherwise.
-  ///
-  /// [replacing] means a live canvas has just been handed a different
-  /// [PlateCanvas.controller]. A private one we stand down for a host-supplied
-  /// controller is disposed; the host's own never is — it outlives us, and is
-  /// routinely handed straight back on the next build.
+  /// Points [_controller] at the host's controller, else a private one.
+  /// [replacing] marks a live canvas handed a different controller: a private
+  /// one stood down is disposed, the host's never is.
   void _adoptController({bool replacing = false}) {
     if (replacing) _controller.removeListener(_recordValues);
     _adoptControllerOnly(replacing: replacing);
@@ -307,7 +298,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
     assert(debugValidateSpec(widget.spec));
     final machine = PlateInputMachine(
       spec: widget.spec,
-      inputSource: _resolveInputSource(),
+      inputSource: widget.inputSource ?? defaultInputSource(),
       readValues: () => _controller.values,
       commit: _commit,
       onActiveIndexChanged: _reportActiveIndex,
@@ -363,10 +354,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
     });
   }
 
-  PlateInputSource _resolveInputSource() {
-    return widget.inputSource ?? defaultInputSource();
-  }
-
   /// Presents the character picker for a chosen slot.
   Future<void> _openPicker(int index) async {
     final slot = widget.spec.slots[index];
@@ -396,15 +383,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
         activeColor: ink,
       );
     }
-    // PlateMode.display renders inert, picker-like slots regardless of the
-    // configured source, so force [PlateInputSource.system] there.
+    // Display mode renders inert slots whatever the configured source.
     _machine.inputSource = widget.mode == PlateMode.input
-        ? _resolveInputSource()
+        ? widget.inputSource ?? defaultInputSource()
         : PlateInputSource.system;
 
-    // Resolve each slot's behaviour once, here, from the three things that
-    // decide it. Every gesture and rendering branch downstream is a switch on
-    // this value — nothing re-derives it.
+    // Resolved once; everything downstream switches on it.
     final behaviors = <SlotBehavior>[
       for (final s in spec.slots)
         resolveSlotBehavior(
@@ -414,98 +398,57 @@ class _PlateCanvasState extends State<PlateCanvas> {
         ),
     ];
 
-    // The plate's face is always white, so its cursor and text-selection
-    // colours are pinned to a light Material theme regardless of the host
-    // app's brightness. Cached against the one colour it derives from (see
-    // [_selectionThemeFor]) and scoped over the whole slot list, instead of
-    // each typed slot constructing its own.
+    // The face is always white, so cursor and selection colours are pinned to
+    // a light theme whatever the host's brightness.
     final selectionTheme = _selectionThemeFor(theme.activeColor);
 
-    // NOTE: this build deliberately does NOT watch the plate value.
-    //
-    // It used to `context.select` the whole [PlateNumber], which meant every
-    // change rebuilt this entire subtree — the frame, the clip, the country
-    // panel, every rule, label and decal, and all eight slots — to change one
-    // character. The frame and each slot now subscribe to just the part they
-    // render: [_FrameBinding] is a [ValueListenableBuilder] on
-    // `controller.completed`, and [_SlotBinding] a [ValueListenableBuilder] on
-    // `controller.slot(index)` — one `ValueListenable<String?>` per position.
-    // So a keystroke rebuilds one slot + its mirrors, and the plate's static
-    // furniture is built once. A [PlateMirror] echoes one slot's value, so
-    // [_MirrorBinding] listens to `controller.slot(mirror.source)` the same
-    // way — a keystroke stays local to the slot it lands in and the mirrors
-    // pointed at it.
-    //
-    // [_ValidationBinding] is the one exception, and only under autoValidate:
-    // it watches the value through a verdict (a [PlateSelector] that compares
-    // by reason), so it rebuilds on a flip between valid and invalid rather
-    // than on a keystroke.
+    // This build deliberately does not watch the plate value. The frame, each
+    // slot and each mirror subscribe only to the part they render
+    // ([_FrameBinding], [_SlotBinding], [_MirrorBinding]), so a keystroke
+    // rebuilds one slot and its mirrors while the static furniture is built
+    // once. [_ValidationBinding] is the exception, under autoValidate only, and
+    // rebuilds on a verdict flip rather than a keystroke.
 
-    // The rounded white face, so content (e.g. the blue country panel) is
-    // clipped to the same corner radius the frame paints instead of poking
-    // square corners into the rounded plate. Kept in sync with PlateFrame's
-    // own geometry: border thickness and inner radius both derive from the
-    // plate height. Taken off the base theme: the alert only recolours the
-    // underlines, so geometry cannot shift when a verdict flips.
+    // The clip matches the frame's inner radius so the country panel does not
+    // poke square corners into the rounded plate. It derives from the base
+    // theme: the alert recolours underlines only, so geometry never shifts on
+    // a verdict flip.
     final border = theme.borderWidthRatio * spec.canvasHeight;
     final outerRadius = theme.plateRadiusRatio * spec.canvasHeight;
     final innerRadius = (outerRadius - border).clamp(0.0, outerRadius);
 
     final clipper = _faceClipperFor(border, innerRadius);
 
-    // THE FACE IS TWO LAYERS, AND THAT IS THE WHOLE POINT.
+    // The face is two layers. Every typed slot is a TextField, whose
+    // EditableText creates composited layers; beneath a FittedBox those force
+    // a TransformLayer, so the compositor scales a recorded face and the
+    // engine raster-caches it. The plate then softens a beat after appearing
+    // (the flag emblem first). The printed furniture therefore gets its own
+    // FittedBox with no TextField under it: its scale stays vector at device
+    // resolution and keystrokes never dirty it.
     //
-    // Every typed slot is a TextField, and EditableText wraps itself in
-    // `CompositedTransformTarget`s — real composited layers. A composited layer
-    // anywhere beneath a FittedBox forces that FittedBox to stop applying its
-    // scale to the canvas and push a TransformLayer instead. That takes the
-    // plate out of the vector pass: the face is recorded in plate coordinates
-    // and handed to the compositor to scale, which makes it a raster-cache
-    // candidate — and the engine takes it, after a few still frames. That is
-    // why the plate looks right the moment it appears and softens a beat
-    // later, why it churns while anything upstream keeps invalidating the
-    // cache, and why the first thing to go is the country flag's emblem, which
-    // is only a few device pixels across.
-    //
-    // So the printed furniture — frame, country panel and flag, rules, labels,
-    // decals — gets a FittedBox of its own with no TextField anywhere under it.
-    // Nothing in that subtree composites, so its scale stays on the canvas and
-    // the flag is drawn as vector at device resolution on every frame it
-    // paints. It cannot be dirtied by a keystroke either: the live characters
-    // live in the layer above it.
-    //
-    // [StackFit.passthrough] is what holds the two in register. It hands both
-    // layers this canvas's own constraints unchanged, so both FittedBoxes
-    // derive the same size, scale and alignment from the same plate-space
-    // [SizedBox] — the geometry is identical to the single FittedBox this
-    // replaced, and the stack sizes exactly as that one did.
+    // [StackFit.passthrough] keeps the layers in register: both get this
+    // canvas's constraints unchanged and derive the same size and alignment.
     Widget buildFace(PlateTheme theme) {
-      final artworkTheme = theme;
       final artwork = TweenAnimationBuilder<Color?>(
         tween: ColorTween(end: theme.plateBackground),
         duration: _morphBackground ? _resizeDuration : Duration.zero,
         curve: Curves.easeInOut,
         builder: (context, face, _) => _PlateArtwork(
           spec: spec,
-          theme: face == artworkTheme.plateBackground
-              ? artworkTheme
-              : artworkTheme.copyWith(plateBackground: face),
+          theme: face == theme.plateBackground
+              ? theme
+              : theme.copyWith(plateBackground: face),
           country: country,
           controller: _controller,
           clipper: clipper,
         ),
       );
 
-      // The alert. With autoValidate on, the canvas judges the plate itself and
-      // paints the completed-field underline in the theme's alert colour — that,
-      // and nothing else: no dialog, no exception, and above all no rejected
-      // keystroke. With it off the validator is never called from here; a host
-      // that wants its own timing reads PlateController.validation.
-      //
-      // Only the input layer is inside the binding: a verdict flips
-      // `activeColor`, which recolours slot underlines and nothing else, so the
-      // artwork no longer rebuilds when the plate crosses between valid and
-      // invalid.
+      // With autoValidate the canvas judges the plate and recolours the
+      // completed-field underline to the alert colour: no dialog, no exception,
+      // no rejected keystroke. Only the input layer sits inside the binding, so
+      // the artwork does not rebuild on a verdict flip.
       final validator = widget.validator;
       final Widget inputs = widget.autoValidate && validator != null
           ? _ValidationBinding(
@@ -542,7 +485,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
             );
 
       final ghost = _ghost;
-      final Widget face = Stack(
+      return Stack(
         fit: StackFit.passthrough,
         children: [
           artwork,
@@ -557,7 +500,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
             ),
         ],
       );
-      return face;
     }
 
     final Widget face = spec.resolveTheme == null
@@ -569,13 +511,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
             builder: buildFace,
           );
 
-    // Wrap in a Material so the typed slots' TextFields have the Material
-    // ancestor they require. Without this a consumer must place PlateCanvas
-    // under a Scaffold (or their own Material) or it throws on first build.
-    // `type: transparency` adds no ink or surface colour — the plate paints
-    // its own white face.
-    // Always in the tree, so supplying or dropping a controller never
-    // remounts the slots beneath it.
+    // The Material gives the typed TextFields the ancestor they require, so a
+    // host needs no Scaffold. Transparent: the plate paints its own face.
+    // Always present, so adding or dropping a controller never remounts slots.
     return PlateAnimationScope(
       controller: widget.animation ?? PlateAnimationScope.maybeOf(context),
       child: Theme(
