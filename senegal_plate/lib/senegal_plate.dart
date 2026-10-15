@@ -7,5 +7,6 @@ export 'src/senegal_colors.dart';
 export 'src/senegal_country.dart';
 export 'src/senegal_themes.dart';
 export 'src/senegal_plates.dart';
+export 'src/senegal_regions.dart';
 export 'src/senegal_validators.dart';
 export 'package:plate_alphabet/plate_alphabet.dart' show SenegalAlphabets;

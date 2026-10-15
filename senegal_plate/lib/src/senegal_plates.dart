@@ -5,6 +5,7 @@ import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
 import 'senegal_country.dart';
+import 'senegal_regions.dart';
 import 'senegal_themes.dart';
 
 /// Where the ink sits, in plate units. Every plate is 520 wide.
@@ -281,6 +282,7 @@ abstract final class SenegalPlates {
           ),
       ],
       textGroups: groups,
+      resolveRegion: SenegalRegions.captionOf,
     );
   }
 }
