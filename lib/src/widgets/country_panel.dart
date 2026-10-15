@@ -7,8 +7,8 @@ import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
 import 'plate_flag.dart';
 
-/// Coloured block on left of plate: flag and country caption, laid out LTR
-/// regardless of plate direction. Everything country-specific is a [PlateCountry].
+/// The coloured block of a plate: flag and caption, laid out LTR whatever the
+/// plate's direction. Everything country-specific comes from [PlateCountry].
 class CountryPanel extends StatelessWidget {
   const CountryPanel({
     super.key,
@@ -22,34 +22,21 @@ class CountryPanel extends StatelessWidget {
   final PlateCountry country;
   final PlatePanel panel;
 
-  /// False when the plate's background already paints the block as a
-  /// [PlateFill.panel] region — the panel then lays out only the flag and
-  /// wording, so no box edge of its own sits against the border.
+  /// False when the background already paints the block as a
+  /// [PlateFill.panel] region, so the panel lays out only flag and wording.
   final bool paintBlock;
 
   @override
   Widget build(BuildContext context) {
-    // Outside the ColoredBox, so the shape cuts the block's own colour and not
-    // just what is laid out on it. Absent for every country whose block is the
-    // plain rectangle of `panel.box` — see [PlatePanel.shape].
-    final shape = panel.shape;
-    if (shape != null) {
-      return ClipPath(
-        clipper: shape,
-        child: _Block(
-          panel: panel,
-          theme: theme,
-          country: country,
-          paintBlock: paintBlock,
-        ),
-      );
-    }
-    return _Block(
+    final block = _Block(
       panel: panel,
       theme: theme,
       country: country,
       paintBlock: paintBlock,
     );
+    // Outside the ColoredBox, so the shape cuts the block's own colour too.
+    final shape = panel.shape;
+    return shape == null ? block : ClipPath(clipper: shape, child: block);
   }
 }
 

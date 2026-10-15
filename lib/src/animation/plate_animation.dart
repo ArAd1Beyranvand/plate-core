@@ -315,13 +315,16 @@ class PlateAnimationController extends ChangeNotifier {
   PlatePartPhase phaseOf(PlatePartId id) =>
       (_cues[id]?.value ?? _fallback).phase;
 
+  ValueNotifier<PlatePartCue> _notifierOf(PlatePartId id) =>
+      cueOf(id) as ValueNotifier<PlatePartCue>;
+
   /// Cues one part.
   void cue(
     PlatePartId id,
     PlatePartPhase phase, {
     Duration delay = Duration.zero,
   }) {
-    (cueOf(id) as ValueNotifier<PlatePartCue>).value = PlatePartCue(
+    _notifierOf(id).value = PlatePartCue(
       phase,
       delay: delay,
       serial: ++_serial,
@@ -338,7 +341,7 @@ class PlateAnimationController extends ChangeNotifier {
 
   /// Takes [id] straight to gone, with no transition.
   void hide(PlatePartId id) {
-    (cueOf(id) as ValueNotifier<PlatePartCue>).value = PlatePartCue(
+    _notifierOf(id).value = PlatePartCue(
       PlatePartPhase.goingOut,
       serial: ++_serial,
       instant: true,
@@ -355,7 +358,7 @@ class PlateAnimationController extends ChangeNotifier {
     _fallback = PlatePartCue(phase, serial: serial);
     final ids = <PlatePartId>{..._cues.keys, ...delays.keys};
     for (final id in ids) {
-      (cueOf(id) as ValueNotifier<PlatePartCue>).value = PlatePartCue(
+      _notifierOf(id).value = PlatePartCue(
         phase,
         delay: delays[id] ?? Duration.zero,
         serial: serial,

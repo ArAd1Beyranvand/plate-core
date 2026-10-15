@@ -429,87 +429,36 @@ class _PlateCanvasState extends State<PlateCanvas> {
     //
     // [StackFit.passthrough] keeps the layers in register: both get this
     // canvas's constraints unchanged and derive the same size and alignment.
-    Widget buildFace(PlateTheme theme) {
-      final artwork = TweenAnimationBuilder<Color?>(
-        tween: ColorTween(end: theme.plateBackground),
-        duration: _morphBackground ? _resizeDuration : Duration.zero,
-        curve: Curves.easeInOut,
-        builder: (context, face, _) => _PlateArtwork(
-          spec: spec,
-          theme: face == theme.plateBackground
-              ? theme
-              : theme.copyWith(plateBackground: face),
-          country: country,
-          controller: _controller,
-          clipper: clipper,
-        ),
-      );
+    final validator = widget.validator;
+    final validate = widget.autoValidate && validator != null
+        ? (List<String?> values) {
+            final entry = _entryFor(values);
+            return restrictionVerdict(entry) ?? validator.validate(entry);
+          }
+        : null;
 
-      // With autoValidate the canvas judges the plate and recolours the
-      // completed-field underline to the alert colour: no dialog, no exception,
-      // no rejected keystroke. Only the input layer sits inside the binding, so
-      // the artwork does not rebuild on a verdict flip.
-      final validator = widget.validator;
-      final Widget inputs = widget.autoValidate && validator != null
-          ? _ValidationBinding(
-              controller: _controller,
-              validate: (values) {
-                final entry = _entryFor(values);
-                return restrictionVerdict(entry) ?? validator.validate(entry);
-              },
-              onVerdict: _publishVerdict,
-              builder: (verdict) => _PlateInputs(
-                spec: spec,
-                theme: verdict.isValid
-                    ? theme
-                    : theme.copyWith(activeColor: theme.alertColor),
-                behaviors: behaviors,
-                machine: _machine,
-                controller: _controller,
-                mode: widget.mode,
-                onPick: _openPicker,
-                commit: _commit,
-                clipper: clipper,
-              ),
-            )
-          : _PlateInputs(
-              spec: spec,
-              theme: theme,
-              behaviors: behaviors,
-              machine: _machine,
-              controller: _controller,
-              mode: widget.mode,
-              onPick: _openPicker,
-              commit: _commit,
-              clipper: clipper,
-            );
-
-      final ghost = _ghost;
-      return Stack(
-        fit: StackFit.passthrough,
-        children: [
-          artwork,
-          inputs,
-          if (ghost != null)
-            Positioned.fill(
-              child: _SpecGhost(
-                key: ValueKey<int>(ghost.serial),
-                ghost: ghost,
-                onDone: _ghostDone,
-              ),
-            ),
-        ],
-      );
-    }
-
-    final Widget face = spec.resolveTheme == null
-        ? buildFace(theme)
-        : _Livery(
-            spec: spec,
-            controller: _controller,
-            base: theme,
-            builder: buildFace,
-          );
+    final face = _Livery(
+      spec: spec,
+      controller: _controller,
+      base: theme,
+      builder: (theme) => _Face(
+        spec: spec,
+        theme: theme,
+        country: country,
+        controller: _controller,
+        machine: _machine,
+        clipper: clipper,
+        behaviors: behaviors,
+        mode: widget.mode,
+        morphDuration: _morphBackground ? _resizeDuration : Duration.zero,
+        ghost: _ghost,
+        validate: validate,
+        onVerdict: _publishVerdict,
+        onPick: _openPicker,
+        commit: _commit,
+        onGhostDone: _ghostDone,
+      ),
+    );
 
     // The Material gives the typed TextFields the ancestor they require, so a
     // host needs no Scaffold. Transparent: the plate paints its own face.
@@ -538,6 +487,114 @@ class _PlateCanvasState extends State<PlateCanvas> {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// The two-layer face: printed artwork under live inputs, plus the outgoing
+/// plate's ghost while a spec change plays.
+class _Face extends StatelessWidget {
+  const _Face({
+    required this.spec,
+    required this.theme,
+    required this.country,
+    required this.controller,
+    required this.machine,
+    required this.clipper,
+    required this.behaviors,
+    required this.mode,
+    required this.morphDuration,
+    required this.ghost,
+    required this.validate,
+    required this.onVerdict,
+    required this.onPick,
+    required this.commit,
+    required this.onGhostDone,
+  });
+
+  final PlateSpec spec;
+  final PlateTheme theme;
+  final PlateCountry country;
+  final PlateController controller;
+  final PlateInputMachine machine;
+  final _PlateFaceClipper clipper;
+  final List<SlotBehavior> behaviors;
+  final PlateMode mode;
+
+  /// Zero unless the face colour tweens to the next spec's.
+  final Duration morphDuration;
+  final _Ghost? ghost;
+
+  /// Non-null under autoValidate: judges the plate and recolours the
+  /// completed-field underline to the alert colour. Only the input layer sits
+  /// inside the binding, so the artwork does not rebuild on a verdict flip.
+  final PlateValidation Function(List<String?> values)? validate;
+  final ValueChanged<PlateValidation> onVerdict;
+  final ValueChanged<int> onPick;
+  final bool Function(int index, String value) commit;
+  final ValueChanged<int> onGhostDone;
+
+  @override
+  Widget build(BuildContext context) {
+    final validate = this.validate;
+    final ghost = this.ghost;
+    return Stack(
+      fit: StackFit.passthrough,
+      children: [
+        TweenAnimationBuilder<Color?>(
+          tween: ColorTween(end: theme.plateBackground),
+          duration: morphDuration,
+          curve: Curves.easeInOut,
+          builder: (context, face, _) => _PlateArtwork(
+            spec: spec,
+            theme: face == theme.plateBackground
+                ? theme
+                : theme.copyWith(plateBackground: face),
+            country: country,
+            controller: controller,
+            clipper: clipper,
+          ),
+        ),
+        if (validate == null)
+          _PlateInputs(
+            spec: spec,
+            theme: theme,
+            behaviors: behaviors,
+            machine: machine,
+            controller: controller,
+            mode: mode,
+            onPick: onPick,
+            commit: commit,
+            clipper: clipper,
+          )
+        else
+          _ValidationBinding(
+            controller: controller,
+            validate: validate,
+            onVerdict: onVerdict,
+            builder: (verdict) => _PlateInputs(
+              spec: spec,
+              theme: verdict.isValid
+                  ? theme
+                  : theme.copyWith(activeColor: theme.alertColor),
+              behaviors: behaviors,
+              machine: machine,
+              controller: controller,
+              mode: mode,
+              onPick: onPick,
+              commit: commit,
+              clipper: clipper,
+            ),
+          ),
+        if (ghost != null)
+          Positioned.fill(
+            child: _SpecGhost(
+              key: ValueKey<int>(ghost.serial),
+              ghost: ghost,
+              onDone: onGhostDone,
+            ),
+          ),
+      ],
     );
   }
 }
@@ -741,8 +798,8 @@ class _PlateContent extends StatelessWidget {
 }
 
 /// Resolves [PlateSpec.resolveTheme] against the typed characters and
-/// cross-fades between the results. Rebuilds [builder] only when the resolved
-/// theme changes, not on every keystroke.
+/// cross-fades between the results, rebuilding [builder] only when the
+/// resolved theme changes. Passes [base] through when the spec has no resolver.
 class _Livery extends StatefulWidget {
   const _Livery({
     required this.spec,
@@ -764,11 +821,10 @@ class _LiveryState extends State<_Livery> {
   late PlateTheme _theme;
 
   PlateTheme _resolve() {
+    final resolve = widget.spec.resolveTheme;
+    if (resolve == null) return widget.base;
     final values = widget.controller.values;
-    return widget.spec.resolveTheme!(
-      widget.base,
-      (key) => widget.spec.valueOfGroup(key, values),
-    );
+    return resolve(widget.base, (key) => widget.spec.valueOfGroup(key, values));
   }
 
   void _onChanged() {
@@ -809,12 +865,14 @@ class _LiveryState extends State<_Livery> {
   }
 
   @override
-  Widget build(BuildContext context) => TweenAnimationBuilder<PlateTheme>(
-    tween: _ThemeTween(end: _theme),
-    duration: const Duration(milliseconds: 350),
-    curve: Curves.easeInOut,
-    builder: (context, theme, _) => widget.builder(theme),
-  );
+  Widget build(BuildContext context) => widget.spec.resolveTheme == null
+      ? widget.builder(widget.base)
+      : TweenAnimationBuilder<PlateTheme>(
+          tween: _ThemeTween(end: _theme),
+          duration: const Duration(milliseconds: 350),
+          curve: Curves.easeInOut,
+          builder: (context, theme, _) => widget.builder(theme),
+        );
 }
 
 class _ThemeTween extends Tween<PlateTheme> {
@@ -861,34 +919,13 @@ class _Label extends StatelessWidget {
           fontFamily: l.fontFamily,
           package: l.fontPackage,
         );
-    Widget text(String value) => RotatedBox(
-      key: ValueKey<String>(value),
-      quarterTurns: l.rotated ? 3 : 0,
-      child: Text(
-        value,
-        textAlign: TextAlign.center,
-        // A label is placed by its box, not laid out
-        // by it: a caption too long for its box must
-        // overflow, never reflow onto a second line.
-        maxLines: '\n'.allMatches(value).length + 1,
-        softWrap: false,
-        overflow: TextOverflow.visible,
-        style: theme
-            .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
-            .copyWith(
-              height: l.lineHeight,
-              fontFamily: l.fontFamily,
-              package: l.fontPackage,
-            ),
-      ),
-    );
     return _Placed(
       box: l.box,
       child: PlatePartAnimator(
         id: PlatePartId.label(index),
         child: Center(
           child: resolve == null
-              ? text(l.text)
+              ? _LabelText(value: l.text, style: style, rotated: l.rotated)
               : ListenableBuilder(
                   listenable: controller,
                   builder: (context, _) {
@@ -1567,6 +1604,34 @@ class _SpecGhostState extends State<_SpecGhost> {
         animation: _anim,
         onChooseCharacter: noCharacterChooser,
       ),
+    ),
+  );
+}
+
+class _LabelText extends StatelessWidget {
+  const _LabelText({
+    required this.value,
+    required this.style,
+    required this.rotated,
+  });
+
+  final String value;
+  final TextStyle style;
+  final bool rotated;
+
+  @override
+  Widget build(BuildContext context) => RotatedBox(
+    key: ValueKey<String>(value),
+    quarterTurns: rotated ? 3 : 0,
+    child: Text(
+      value,
+      textAlign: TextAlign.center,
+      // A label is placed by its box, not laid out by it: a caption too long
+      // for its box must overflow, never reflow onto a second line.
+      maxLines: '\n'.allMatches(value).length + 1,
+      softWrap: false,
+      overflow: TextOverflow.visible,
+      style: style,
     ),
   );
 }
