@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-/// Visual styling: chrome colours and ratios. All chrome colours are fixed to
-/// values sampled from real plates and must never be tinted by a caller's
-/// accent colour. Only [activeColor] / [inactiveColor] vary and are used solely
-/// for input-mode field outlines.
+/// Chrome colours and ratios, sampled from real plates; never tint them with a
+/// host accent. Only [activeColor] and [inactiveColor], used solely for
+/// input-mode outlines, are chrome-free.
 ///
-/// The `*Ratio` fields are fractions of the plate HEIGHT, so it scales cleanly.
+/// The `*Ratio` fields are fractions of the plate height.
 @immutable
 class PlateTheme {
   const PlateTheme({
@@ -28,18 +27,16 @@ class PlateTheme {
   final double borderWidthRatio;
   final double plateRadiusRatio;
 
-  /// Outline colour for a completed input field; input-mode only.
+  /// Outline of a completed input field.
   final Color activeColor;
 
-  /// Outline colour for an empty/in-progress input field; input-mode only.
+  /// Outline of an empty or in-progress input field.
   final Color inactiveColor;
 
-  /// Outline colour a [PlateCanvas] paints when validating and the plate is
-  /// invalid; input-mode only.
+  /// Outline [PlateCanvas] paints when validating an invalid plate.
   final Color alertColor;
 
-  /// Standard white-face / black-frame plate theme, sampled from real plate
-  /// photos.
+  /// White face, black frame.
   factory PlateTheme.standard() {
     return const PlateTheme(
       plateBackground: Color(0xFFFFFFFF),
@@ -53,12 +50,9 @@ class PlateTheme {
     );
   }
 
-  /// A plate printed in one ink on one field. [ink] is the border, glyphs,
-  /// rules and completed-field outline — a real plate does not print its
-  /// divider in a different colour from its digits.
-  ///
-  /// [inactive] is input chrome only: the outline under an empty field. It is
-  /// never printed, so it takes no default.
+  /// A plate printed in one ink on one field: [ink] is the border, glyphs,
+  /// rules and completed-field outline. [inactive] is input chrome only (the
+  /// outline under an empty field) and so has no default.
   const PlateTheme.monochrome({
     required Color field,
     required Color ink,
@@ -102,7 +96,6 @@ class PlateTheme {
     );
   }
 
-  /// Text style for plate glyphs (digits/letters) at a given slot height.
   TextStyle glyphStyle(
     double slotHeight,
     Color color, {
@@ -115,7 +108,7 @@ class PlateTheme {
     letterSpacing: letterSpacing,
   );
 
-  /// The nearest enclosing [PlateTheme], or [PlateTheme.standard] if none.
+  /// The enclosing [PlateThemeScope]'s theme, else [PlateTheme.standard].
   static PlateTheme of(BuildContext context) {
     final scope = context.dependOnInheritedWidgetOfExactType<PlateThemeScope>();
     return scope?.theme ?? PlateTheme.standard();
@@ -142,7 +135,6 @@ class PlateTheme {
   int get hashCode => Object.hashAll(_props);
 }
 
-/// Provides a [PlateTheme] to descendants via [PlateTheme.of].
 class PlateThemeScope extends InheritedWidget {
   const PlateThemeScope({super.key, required this.theme, required super.child});
 

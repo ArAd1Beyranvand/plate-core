@@ -4,8 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../model/plate_asset.dart';
 import '../model/plate_country.dart';
 
-/// Renders a country's flag from its asset; first frame pays the parse cost.
-/// Warms the asset in `didChangeDependencies` if animating plates into view.
+/// A country's flag, or nothing when it has none.
 class PlateFlag extends StatelessWidget {
   const PlateFlag({super.key, required this.country, this.borderRadius});
 
@@ -30,9 +29,10 @@ class PlateFlag extends StatelessWidget {
       ),
     };
 
-    if (borderRadius != null) {
+    final radius = borderRadius;
+    if (radius != null) {
       flag = ClipRRect(
-        borderRadius: BorderRadius.circular(borderRadius!),
+        borderRadius: BorderRadius.circular(radius),
         child: flag,
       );
     }

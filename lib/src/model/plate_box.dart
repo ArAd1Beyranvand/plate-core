@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-/// A rectangle in plate-space: the same coordinate system slots, rules, labels,
-/// decals and the country panel all live in, with the origin at the plate's
-/// top-left and units matching [PlateSpec.canvasWidth]/[canvasHeight].
+/// A rectangle in plate coordinates: origin at the plate's top-left, units
+/// shared with [PlateSpec.canvasWidth] and [PlateSpec.canvasHeight].
 @immutable
 class PlateBox {
   const PlateBox(this.left, this.top, this.width, this.height);

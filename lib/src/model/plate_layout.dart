@@ -1,15 +1,11 @@
-/// Constructors for the *regular* parts of a plate face: registers, runs of
-/// equal cells at a constant pitch. [PlateTextGroup] declares which slots form
-/// a register; these say where the cells sit.
+/// Builders for the regular parts of a plate face: runs of equal cells at a
+/// constant pitch. [PlateTextGroup] declares which slots form a register; these
+/// say where the cells sit.
 ///
-/// They build ordinary [PlateSlot] / [PlateMirror] / [PlateRule] values, so the
-/// widget layer cannot tell a generated register from a literal one. Irregular
-/// elements — an isolated cell, a label, a divider straddling a gap — stay
-/// literals; forcing one through a register constructor is worse than writing
-/// the four numbers.
-///
-/// These return `final` lists, so a spec built from one is a `static final`.
-/// Harmless: it initialises lazily and [PlateSpec] equality is over `id` alone.
+/// They return ordinary [PlateSlot], [PlateMirror] and [PlateRule] values, so
+/// the widget layer cannot tell them from literals. Irregular elements stay
+/// literals. The lists are not `const`, so a spec built from one is a
+/// `static final`; [PlateSpec] equality is over `id` alone.
 library;
 
 import 'dart:ui' show Color;
@@ -18,12 +14,9 @@ import 'plate_alphabet.dart';
 import 'plate_box.dart';
 import 'plate_spec.dart';
 
-/// [count] equal cells over [alphabet], the first at [left], each [width] wide
-/// and [height] tall at [top], stepping by [pitch] — which defaults to [width],
-/// i.e. flush cells with no gap between them.
-///
-/// Pass an explicit [pitch] for a gapped register, where the cells are narrower
-/// than their stride. [color] is every cell's [PlateSlot.color].
+/// [count] equal cells over [alphabet] from [left], each [width] by [height] at
+/// [top], stepping by [pitch] (default [width]: flush cells). Pass [pitch] for a
+/// gapped register. [color] is every cell's [PlateSlot.color].
 List<PlateSlot> plateRegister({
   required PlateAlphabet alphabet,
   required int count,
@@ -46,11 +39,9 @@ List<PlateSlot> plateRegister({
   ]);
 }
 
-/// [count] flush cells filling `[left, right)` exactly — [plateRegister]
-/// expressed by the span to fill rather than by one cell's width.
-///
-/// Prefer this wherever the register is defined by its bounds: changing [count]
-/// re-derives the cell width and still ends flush at [right].
+/// [count] flush cells filling `[left, right)` exactly: [plateRegister] given
+/// the span instead of the cell width, so changing [count] still ends flush at
+/// [right].
 List<PlateSlot> plateRegisterAcross({
   required PlateAlphabet alphabet,
   required int count,
@@ -74,12 +65,8 @@ List<PlateSlot> plateRegisterAcross({
   );
 }
 
-/// One [PlateMirror] per entry of [sources], laid out as a register: the echo
-/// band a plate printing its number twice needs. Mirrors come out in [sources]
-/// order, so the echo reads in the same direction as the slots it echoes.
-///
-/// [editable] makes the whole band a row of paired input fields — see
-/// [PlateMirror].
+/// One [PlateMirror] per entry of [sources], laid out as a register, in
+/// [sources] order. [editable] makes the band a row of paired input fields.
 List<PlateMirror> plateEcho({
   required Iterable<int> sources,
   required double left,
@@ -104,9 +91,8 @@ List<PlateMirror> plateEcho({
   ]);
 }
 
-/// [count] identical rules stepping by [stepX] across and [stepY] down: a
-/// stippled separator, or any other repeated mark. Both steps default to 0, so
-/// a caller names only the axis the run moves along.
+/// [count] identical rules stepping by [stepX] across and [stepY] down, such as
+/// a stippled separator.
 List<PlateRule> plateStipple({
   required int count,
   required double left,

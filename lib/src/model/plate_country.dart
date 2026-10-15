@@ -2,13 +2,12 @@ import 'package:flutter/widgets.dart';
 
 import 'plate_asset.dart';
 
-/// The country-specific chrome of a licence plate: the flag, the caption beside
-/// it, and the country panel's colours. Concrete constants live in each
-/// country's own package.
+/// The country chrome of a plate: flag, caption and panel colours. Concrete
+/// constants live in each country's own package.
 ///
-/// `PlateSpec.country` is only the default: `PlateCanvas.country` overrides it
+/// [PlateSpec.country] is only the default; `PlateCanvas.country` overrides it
 /// at render time, so a panel that varies along an axis the spec does not
-/// encode — a vehicle's usage class, say — needs no second spec.
+/// encode (a vehicle's usage class) needs no second spec.
 @immutable
 class PlateCountry {
   const PlateCountry({
@@ -28,25 +27,22 @@ class PlateCountry {
   /// Printed beside the flag, top to bottom. Always laid out LTR.
   final List<String> captionLines;
 
-  /// Lines printed on the *far* side of the flag from [captionLines] — above it
-  /// in a vertical panel, before it in a horizontal one.
-  ///
-  /// For a panel of three parts rather than two, where the flag has to come
-  /// between two runs of wording: an Afghan plate stacks the province name, the
-  /// emblem, then the province's Latin code. [CountryPanel] splits the room
-  /// left after the flag between the two when both are present.
+  /// Wording on the far side of the flag from [captionLines] (above it in a
+  /// vertical panel), for a panel that sandwiches the flag between two runs of
+  /// text. [CountryPanel] splits the room the flag leaves between the two.
   final List<String> headingLines;
 
   final Color panelColor;
   final Color panelTextColor;
 
-  /// Sizes the flag within [CountryPanel] without distortion.
+  /// Width over height; sizes the flag without distortion.
   final double flagAspectRatio;
 
-  /// Null for a country with no flag; [PlateFlag] then renders nothing.
+  /// Null for a country with no flag.
   final PlateAsset? flag;
 
-  /// A fine outline some countries print around the flag (Bahrain's, for one).
+  /// A fine outline printed around the flag, for flags whose edge would
+  /// otherwise vanish into the panel.
   final Color? flagBorderColor;
 
   @override

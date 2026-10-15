@@ -2,32 +2,31 @@ import 'plate_alphabet.dart';
 import 'plate_input_source.dart';
 import 'plate_number.dart';
 
-/// What a slot does about input, resolved once. Every rendering and gesture
-/// decision in `PlateSlotItem` switches on this rather than re-deriving it.
+/// What a slot does about input, resolved once per build; rendering and
+/// gestures switch on it rather than re-deriving it.
 enum SlotBehavior {
-  /// Read-only glyph. No focus node, no gestures. [PlateMode.display].
+  /// Read-only glyph ([PlateMode.display]).
   glyph,
 
   /// TextField with the platform IME.
   imeField,
 
-  /// TextField with the IME suppressed; physical key events are consumed.
+  /// TextField with the IME suppressed; physical keys are consumed.
   hardwareField,
 
-  /// Focusable slot whose characters arrive from outside (package keypad or
-  /// host). IME suppressed, cursor shown on focus, taps only claim focus.
+  /// Characters arrive from a keypad or the host. IME suppressed; a tap only
+  /// claims focus.
   externalField,
 
-  /// [PlateInputSource.keypadFirst]: characters arrive from a keypad or
-  /// physical keys; a tap on a typed slot brings up the platform keyboard.
+  /// [PlateInputSource.keypadFirst]: a tap on a typed slot asks for the
+  /// platform keyboard.
   keypadFirstField,
 
-  /// Tapping opens the character picker. Chosen alphabets under
-  /// [PlateInputSource.system].
+  /// Tapping opens the character picker.
   sheet,
 }
 
-/// Note that [AlphabetInput.chosen] only reaches [SlotBehavior.sheet] under
+/// A [AlphabetInput.chosen] alphabet reaches [SlotBehavior.sheet] only under
 /// [PlateInputSource.system]; every other source drives its own field type.
 SlotBehavior resolveSlotBehavior({
   required PlateMode mode,

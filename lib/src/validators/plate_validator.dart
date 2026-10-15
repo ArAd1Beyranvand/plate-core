@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import '../model/plate_spec.dart';
 
-/// The verdict on a plate. [reason] is developer- or user-facing text
-/// explaining an invalid plate; null when valid.
+/// The verdict on a plate; [reason] explains an invalid one and is null when
+/// valid.
 @immutable
 class PlateValidation {
   const PlateValidation.valid() : reason = null;
@@ -13,8 +13,6 @@ class PlateValidation {
 
   bool get isValid => reason == null;
 
-  /// Equality over [reason] so listeners rebuild on verdict changes, not on
-  /// every committed value that keeps the verdict the same.
   @override
   bool operator ==(Object other) =>
       other is PlateValidation && other.reason == reason;
@@ -23,7 +21,7 @@ class PlateValidation {
   int get hashCode => reason.hashCode;
 }
 
-/// Everything a validator needs about a plate as it stands.
+/// A plate as it stands, for a validator to judge.
 @immutable
 class PlateEntry {
   const PlateEntry({
@@ -35,29 +33,25 @@ class PlateEntry {
   final PlateSpec spec;
   final List<String?> values;
 
-  /// The focused slot, for a validator to stay quiet about groups the user has
-  /// not reached yet. Never for deciding which keys are legal.
+  /// The focused slot, so a validator can stay quiet about groups the user has
+  /// not reached.
   final int? activeIndex;
 
-  /// Canonical value of the group with [key], or '' if no group has it.
+  /// Canonical value of the group named [key]; '' if none.
   String group(String key) => spec.valueOfGroup(key, values);
 
-  /// The group containing [activeIndex], or null.
   PlateTextGroup? get activeGroup =>
       activeIndex == null ? null : spec.groupAt(activeIndex!);
 }
 
-/// True when every character is an ASCII digit 0-9.
 bool isDigits(String value) =>
     value.isNotEmpty && value.codeUnits.every((u) => u >= 0x30 && u <= 0x39);
 
-/// [isDigits] and exactly [length] characters.
 bool isDigitsOfLength(String value, int length) =>
     value.length == length && isDigits(value);
 
-/// Whether a plate's value is acceptable. A validator never prevents input;
-/// it is asked and answers. What the host does with the answer — paint red,
-/// enable submit, do nothing — is the host's decision.
+/// Judges a plate. It never prevents input; what to do with the verdict is the
+/// host's decision.
 abstract class PlateValidator {
   const PlateValidator();
 
@@ -65,23 +59,20 @@ abstract class PlateValidator {
 }
 
 /// The verdict a spec's restrictions give on [entry], or null when none is
-/// broken. Every judge in core asks this first — a restricted value is
-/// invalid whatever a validator says, and whether or not it is gated.
+/// broken. Asked before any validator: a restricted value is invalid
+/// regardless.
 PlateValidation? restrictionVerdict(PlateEntry entry) {
   final broken = entry.spec.restrictionViolatedBy(entry.values);
   return broken == null ? null : PlateValidation.invalid(broken.reason);
 }
 
-/// A [PlateValidator] that stays quiet until one named register has something
-/// in it. The register named by [gateGroup] is the last one the user reaches,
-/// so by the time it is non-empty there is a whole plate to judge.
+/// A [PlateValidator] that stays quiet until [gateGroup], the last register the
+/// user reaches, has content, so only a whole plate is judged.
 abstract class GatedPlateValidator extends PlateValidator {
   const GatedPlateValidator();
 
-  /// The [PlateTextGroup.key] whose emptiness keeps this validator quiet.
   String get gateGroup;
 
-  /// The verdict on a plate whose [gateGroup] is non-empty.
   PlateValidation judge(PlateEntry entry);
 
   @override

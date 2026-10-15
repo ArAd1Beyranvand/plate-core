@@ -6,8 +6,7 @@ import 'plate_country.dart';
 import '../theme/plate_theme.dart';
 import 'plate_restriction.dart';
 
-/// One editable position on a plate. [box].height doubles as the glyph height,
-/// so there is deliberately no separate field for it.
+/// One editable position on a plate. [box].height doubles as the glyph height.
 @immutable
 class PlateSlot {
   const PlateSlot({
@@ -27,33 +26,30 @@ class PlateSlot {
   final PlateAlphabet alphabet;
   final PlateBox box;
 
-  /// The most characters the slot holds. A field of two digits is one slot of
-  /// [length] 2, not two slots: it is one box, one focus stop, and its value is
-  /// the run typed so far. Use 1 for a cell that holds a single character, and
-  /// only for a run that is printed and edited as a unit — a register whose
-  /// cells are drawn apart stays [plateRegister].
-  ///
-  /// A [PlateAlphabet.chosen] alphabet is picked a character at a time, so its
-  /// slot stays at 1.
+  /// The most characters the slot holds. A run printed and edited as a unit
+  /// ("two digits") is one slot of [length] 2: one box, one focus stop. A
+  /// register whose cells are drawn apart stays [plateRegister]. A chosen
+  /// alphabet is picked a symbol at a time, so its slot stays at 1.
   final int length;
 
-  /// The fewest characters that make the field complete; [length] unless the
-  /// field is variable, like a serial of four to six digits. Focus still moves
-  /// on only at [length] — below it the user may type more — but a plate whose
-  /// every field has reached its [minLength] counts as complete.
+  /// The fewest characters that complete the field; [length] unless the field
+  /// is variable, like a serial of four to six digits. Focus still advances
+  /// only at [length].
   final int minLength;
 
-  /// Extra space after each character of a run, in plate units, so a field
-  /// reads at the printed pitch rather than the font's advance. Measure it
-  /// from the reference; it has no meaning for a slot of [length] 1.
+  /// Extra space after each character of a run, in plate units, matching the
+  /// printed pitch rather than the font's advance. Meaningless at [length] 1.
   final double spacing;
 
-  /// Whether [value] is a legal, possibly partial, content of this slot: at
-  /// most [length] characters, each of them in [alphabet] in either form. A
-  /// slot on a chosen alphabet holds exactly one symbol, whatever its length.
+  /// Ink for this slot, or null for the theme's. Only for a slot on a coloured
+  /// region where the theme's ink would be illegible; same case as
+  /// [PlateLabel.color].
+  final Color? color;
+
+  /// Whether [value] is a legal, possibly partial, content: at most [length]
+  /// characters, each in [alphabet] in either form.
   bool accepts(String value) {
-    // A chosen symbol may be several characters long ('CD', 'XXXIII'): it is
-    // picked whole, so it is judged whole.
+    // A chosen symbol may span several characters ('CD'); it is judged whole.
     if (alphabet.input == AlphabetInput.chosen) return alphabet.accepts(value);
     final characters = value.runes.map(String.fromCharCode).toList();
     return characters.isNotEmpty &&
@@ -61,38 +57,28 @@ class PlateSlot {
         characters.every(alphabet.accepts);
   }
 
-  /// [value] folded to storage form, character by character.
   String canonical(String value) => alphabet.canonicalAll(value);
 
-  /// [value] in display form, character by character.
   String render(String value) => alphabet.renderAll(value);
 
-  /// Whether [value] fills the slot to [length]: nothing more can be typed.
+  /// Nothing more can be typed.
   bool isFull(String? value) => value != null && value.runes.length >= length;
 
-  /// Whether [value] is long enough to complete the field: [minLength].
   bool isComplete(String? value) =>
       value != null && value.runes.length >= minLength;
-
-  /// Ink for this slot, or null for the theme's. Set it only for a slot on a
-  /// coloured [PlateSection] region where the field's ink would be illegible —
-  /// Abu Dhabi's white code on its red column — the same case as
-  /// [PlateLabel.color], for a character the user types.
-  final Color? color;
 }
 
-/// An echo of a slot's value, painted elsewhere on the plate — the same number
-/// printed twice, once per script.
+/// An echo of a slot's value painted elsewhere on the plate, such as the same
+/// number printed once per script.
 ///
-/// A mirror shares the [source] slot's single value and owns no position in
-/// [PlateSpec.slots], so it never adds to [PlateSpec.slotCount], text groups,
-/// completion or validation. When [editable] it is still one value: it gets its
-/// own [FocusNode] and text controller but reads and writes the source's
-/// position, so typing in either row updates both.
+/// A mirror shares the [source] slot's value and owns no position in
+/// [PlateSpec.slots], so it never counts towards [PlateSpec.slotCount], text
+/// groups, completion or validation. When [editable] it gets its own focus node
+/// and text controller but reads and writes the source's position.
 ///
-/// [alphabet] is the transform — echoing in another numeral system means
-/// pointing it at an alphabet with different [PlateAlphabet.glyphs]. Null uses
-/// the source slot's own.
+/// [alphabet] is the transform: point it at an alphabet with different
+/// [PlateAlphabet.glyphs] to echo in another numeral system. Null uses the
+/// source slot's own.
 @immutable
 class PlateMirror {
   const PlateMirror({
@@ -112,7 +98,7 @@ class PlateMirror {
   final bool editable;
 }
 
-/// A painted rule (e.g. a vertical divider between character groups).
+/// A painted mark such as a short divider between character groups.
 @immutable
 class PlateRule {
   const PlateRule({required this.box});
@@ -122,13 +108,12 @@ class PlateRule {
 
 /// What a [PlateSection] leaf is painted in.
 ///
-/// [field], [panel] and [divider] are resolved at render time — the theme's
+/// [field], [panel] and [divider] resolve at render time to the theme's
 /// `plateBackground`, the rendered country's `panelColor` and the theme's
-/// `dividerColor` — so one spec follows a host's livery and a usage-varying
-/// country.
+/// `dividerColor`, so one spec follows a host's livery and a varying country.
 @immutable
 class PlateFill {
-  /// A colour of the design's own, e.g. a validity-date band.
+  /// A colour of the design's own.
   const PlateFill.color(Color this.color)
     : _role = null,
       stripes = null,
@@ -142,19 +127,17 @@ class PlateFill {
       angle = 0,
       fog = null;
 
-  /// Parallel bands across the leaf, tilted by [angle] — a flag printed
-  /// under the characters, as on Venezuela's plates.
+  /// Parallel bands across the leaf, tilted by [angle]: a flag printed under
+  /// the characters.
   ///
-  /// [stops] are the boundaries between consecutive [stripes], as the y at
-  /// which each crosses the leaf's vertical centreline, in plate coordinates.
-  /// There is one fewer stop than stripes; the first stripe runs out to the
-  /// leaf's top and the last to its bottom. [angle] is in radians, positive
-  /// rising to the right, and turns every boundary about the leaf's centre.
+  /// [stops] are the y, in plate coordinates, at which each boundary between
+  /// consecutive [stripes] crosses the leaf's vertical centreline. There is one
+  /// fewer stop than stripes; the first stripe runs to the leaf's top and the
+  /// last to its bottom. [angle] is in radians, positive rising to the right,
+  /// turning every boundary about the leaf's centre.
   ///
-  /// The stripes are fills themselves, so the top one can be [field] and
-  /// follow the theme. They may not be stripes again.
-  ///
-  /// [fog] washes the field colour over the middle of the stripes.
+  /// Stripes are fills themselves (so the top one can be [field]) but may not
+  /// nest. [fog] washes the field colour over the middle of them.
   const PlateFill.stripes(
     List<PlateFill> this.stripes, {
     required this.stops,
@@ -166,8 +149,7 @@ class PlateFill {
   static const PlateFill field = PlateFill._(_FillRole.field);
   static const PlateFill panel = PlateFill._(_FillRole.panel);
 
-  /// The divider colour, for a strip that runs out to the plate's edge — a
-  /// divider with field on one side only.
+  /// The divider colour, for a strip that runs out to the plate's edge.
   static const PlateFill divider = PlateFill._(_FillRole.divider);
 
   final Color? color;
@@ -181,11 +163,9 @@ class PlateFill {
   bool get isPanel => _role == _FillRole.panel;
   bool get isStripes => stripes != null;
 
-  /// Whether this fill, or any of its [stripes], is the panel colour.
   bool get paintsPanel => isPanel || (stripes?.any((s) => s.isPanel) ?? false);
 
-  /// The paint colour, given the render-time [field] and [panel] colours.
-  /// Not meaningful for [isStripes]; paint each of [stripes] instead.
+  /// The paint colour; not meaningful for [isStripes], paint each stripe.
   Color resolve({
     required Color field,
     required Color panel,
@@ -201,9 +181,8 @@ class PlateFill {
 enum _FillRole { field, panel, divider }
 
 /// The theme's field colour airbrushed over a [PlateFill.stripes] leaf: an
-/// ellipse at [opacity] out to [plateau] of its radii, fading to nothing at
-/// its edge — Venezuela's flag, pale behind the characters and full colour
-/// only at the plate's ends.
+/// ellipse at [opacity] out to [plateau] of its radii, fading to nothing at its
+/// edge. It pales the stripes behind the characters.
 @immutable
 class PlateFog {
   const PlateFog({
@@ -221,23 +200,22 @@ class PlateFog {
 
   final double opacity;
 
-  /// The fraction of [radii] the fog holds full [opacity] to.
+  /// Fraction of [radii] over which the fog holds full [opacity].
   final double plateau;
 }
 
 /// The plate face divided into regions: a guillotine tree of columns and rows
 /// whose leaves are [PlateFill]s.
 ///
-/// The background is painted in one pass under the border, so a coloured
-/// strip runs to the plate's edge and the border is drawn over it — there is
-/// no box edge for the face to show through. Positions are plate
-/// coordinates along the parent's axis, never offsets from the frame, so the
+/// Painted in one pass under the border, so a coloured strip runs to the
+/// plate's edge with the border over it and no box edge for the face to show
+/// through. Positions are plate coordinates along the parent's axis, so the
 /// layout does not move when a theme changes the border width.
 @immutable
 class PlateSection {
-  /// A leaf. [shape] cuts it to something other than its rectangle (Qatar's
-  /// serrated hoist); the clipper gets the leaf's size and returns the region
-  /// to fill, and the field shows through the rest.
+  /// A leaf. [shape] cuts it to something other than its rectangle: the
+  /// clipper gets the leaf's size and returns the region to fill, and the field
+  /// shows through the rest.
   const PlateSection.fill(PlateFill this.fill, {this.shape})
     : axis = null,
       parts = const <PlatePart>[];
@@ -264,11 +242,51 @@ class PlateSection {
 
   bool get isLeaf => axis == null;
 
-  /// Whether any leaf is filled with the country's panel colour — in which
-  /// case the background owns the panel block and [CountryPanel] lays out only
-  /// the flag and caption on it.
+  /// Whether any leaf is filled with the panel colour, in which case the
+  /// background owns the panel block and [CountryPanel] lays out only the flag
+  /// and caption on it.
   bool get paintsPanel =>
       isLeaf ? fill!.paintsPanel : parts.any((p) => p.section.paintsPanel);
+
+  /// The leaves and dividers of this tree laid over [bounds], depth-first.
+  /// Indices match [PlatePartId.region] and [PlatePartId.divider].
+  ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) layout(
+    Rect bounds,
+  ) {
+    final leaves = <(PlateSection, Rect)>[];
+    final dividers = <Rect>[];
+    void walk(PlateSection s, Rect r) {
+      if (s.isLeaf) {
+        leaves.add((s, r));
+        return;
+      }
+      final across = s.axis == Axis.horizontal;
+      var start = across ? r.left : r.top;
+      final last = s.parts.length - 1;
+      for (var i = 0; i <= last; i++) {
+        final part = s.parts[i];
+        final end = i == last ? (across ? r.right : r.bottom) : part.end!;
+        walk(
+          part.section,
+          across
+              ? Rect.fromLTRB(start, r.top, end, r.bottom)
+              : Rect.fromLTRB(r.left, start, r.right, end),
+        );
+        if (part.divider > 0 && i != last) {
+          final half = part.divider / 2;
+          dividers.add(
+            across
+                ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
+                : Rect.fromLTRB(r.left, end - half, r.right, end + half),
+          );
+        }
+        start = end;
+      }
+    }
+
+    walk(this, bounds);
+    return (leaves: leaves, dividers: dividers);
+  }
 }
 
 /// One region of a split [PlateSection].
@@ -277,10 +295,10 @@ class PlatePart {
   /// [end] is the region's far edge in plate coordinates along the parent's
   /// axis; null on the last part, which runs to the parent's end.
   ///
-  /// [divider] is the thickness of a rule painted centred on [end], across the
-  /// parent's full extent, in the theme's divider colour. It belongs here and
-  /// not in [PlateSpec.rules] because it separates two regions: a rule
-  /// positioned as a box would have its own edges to show the field through.
+  /// [divider] is the thickness of a rule centred on [end] across the parent's
+  /// full extent, in the theme's divider colour. It lives here rather than in
+  /// [PlateSpec.rules] because a boxed rule would show the field through its
+  /// own edges.
   const PlatePart(this.section, {this.end, this.divider = 0});
 
   final PlateSection section;
@@ -288,14 +306,13 @@ class PlatePart {
   final double divider;
 }
 
-/// A solid block of colour laid over the background — Kuwait's capsule
-/// behind "C.D". A region of the background that divides the plate is a
-/// [PlateSection]; a band is for a shape that floats on one.
+/// A solid block of colour floating on the background, such as a capsule
+/// behind a code. A region that divides the plate is a [PlateSection] instead.
 ///
-/// Paints only the rectangle; the characters over it are ordinary slots and
-/// [PlateLabel]s positioned inside [box]. Not a fat [PlateRule], because a rule
-/// takes the theme's divider colour and so would follow [PlateSpec.inkOverride];
-/// a band is the field the ink is printed *on*, so it carries its own [color].
+/// Paints only the rectangle; characters over it are ordinary slots and
+/// [PlateLabel]s inside [box]. Not a fat [PlateRule]: a rule takes the divider
+/// colour and follows [PlateSpec.inkOverride], whereas a band is the field the
+/// ink is printed on and carries its own [color].
 @immutable
 class PlateBand {
   const PlateBand({
@@ -308,42 +325,36 @@ class PlateBand {
   final PlateBox box;
   final Color color;
 
-  /// Rounds the band's top-left and top-right corners by this radius; the
-  /// bottom corners stay square since they sit on the plate's own edge.
+  /// Radius of the top corners; the bottom stay square on the plate's edge.
   final double topCornerRadius;
 
-  /// Rounds the bottom-left and bottom-right corners too — set alongside
-  /// [topCornerRadius] to make a small band a full capsule, e.g. a white
-  /// pill sitting inside a larger coloured band.
+  /// Radius of the bottom corners; set with [topCornerRadius] for a capsule.
   final double bottomCornerRadius;
 }
 
-/// A fixed image on the plate face — a sticker or badge that sits between
-/// character groups rather than inside a slot.
+/// A fixed image on the plate face, such as a sticker or badge.
 @immutable
 class PlateDecal {
   const PlateDecal({required this.image, required this.box});
 
-  /// e.g. an `AssetImage(..., package: 'germany_plate')`.
   final ImageProvider image;
 
   final PlateBox box;
 }
 
-/// Picks the wording of a [PlateLabel] from what is typed on the plate.
-/// [group] reads a [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does.
-/// Return null to keep [PlateLabel.text].
+/// Picks a [PlateLabel]'s wording from what is typed. [group] reads a
+/// [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does. Null keeps
+/// [PlateLabel.text].
 typedef PlateLabelResolver =
     String? Function(String Function(String key) group);
 
-/// Picks the colours a plate is printed in from what is typed on it, so one
-/// spec can be several liveries. [base] is the theme the host passed; [group]
-/// reads a [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does. Return
-/// [base] to leave it alone. The change cross-fades.
+/// Picks a plate's colours from what is typed, so one spec can be several
+/// liveries. [base] is the host's theme (return it to leave it alone); [group]
+/// reads a [PlateTextGroup] by key. Changes cross-fade.
 typedef PlateThemeResolver =
     PlateTheme Function(PlateTheme base, String Function(String key) group);
 
-/// Fixed text printed on the plate face (e.g. "ایران").
+/// Fixed text printed on the plate face.
 @immutable
 class PlateLabel {
   const PlateLabel({
@@ -362,35 +373,30 @@ class PlateLabel {
   final PlateBox box;
   final double glyphHeight;
 
-  /// Replaces [text] with what the typed characters say, e.g. the issuing
-  /// province under the plate's code. Must be a static or top-level function
-  /// to keep the label const. The change cross-fades.
+  /// Replaces [text] with what the typed characters say. Static or top-level,
+  /// to keep the label const. Changes cross-fade.
   final PlateLabelResolver? resolve;
 
-  /// Ink for this label, or null for the theme's. Set it only for a label on a
-  /// [PlateBand], where the field's ink would be illegible — the theme carries
-  /// one ink, and overriding that would recolour the digits too.
+  /// Ink for this label, or null for the theme's. Only for a label on a
+  /// [PlateBand], where the theme's ink would be illegible.
   final Color? color;
 
-  /// True to turn the text 90° counter-clockwise to fill a narrow column with
-  /// one horizontal word, rather than stacking its letters upright.
+  /// Turns the text 90° counter-clockwise to fill a narrow column with one
+  /// horizontal word, rather than stacking its letters upright.
   final bool rotated;
 
-  /// [TextStyle.height] override for [glyphStyle], or null for its default.
-  /// Set it on a stacked-letter label (one line per character) to open up the
-  /// gaps between the lines so the stack fills a tall box.
+  /// Overrides the glyph style's line height, to open up a stacked-letter
+  /// label so it fills a tall box.
   final double? lineHeight;
 
-  /// Face for this label, or null for the theme's. Set it when the plate
-  /// letters a fixed word in a hand the digits' face cannot imitate.
+  /// Face for this label, or null for the theme's.
   final String? fontFamily;
 
-  /// Package that bundles [fontFamily], e.g. the country package itself.
+  /// Package that bundles [fontFamily].
   final String? fontPackage;
 }
 
-/// The coloured country block on the plate face: where it sits, and how the
-/// flag and caption are laid out inside it.
+/// The country block: where it sits and how its flag and caption are laid out.
 @immutable
 class PlatePanel {
   const PlatePanel({
@@ -413,36 +419,26 @@ class PlatePanel {
   /// [Axis.vertical] puts the flag above the caption, horizontal beside it.
   final Axis direction;
 
-  /// Clips the panel to something other than [box]'s rectangle.
-  ///
-  /// The block a country prints is not always a rectangle. Qatar's is the
-  /// hoist end of its own flag: a maroon column whose inboard edge is the
-  /// flag's nine-point serration, so the panel has to be cut to that zigzag
-  /// before anything is painted in it. The clipper is handed [box]'s size in
-  /// plate coordinates and returns the shape to keep.
-  ///
-  /// Null — the default, and every country but Qatar — leaves the panel the
-  /// full rectangle, with no clip in the tree at all.
+  /// Clips the panel to a non-rectangular block. Handed [box]'s size in plate
+  /// coordinates, returns the shape to keep. Null adds no clip to the tree.
   final CustomClipper<Path>? shape;
 }
 
-/// One visual group in the plain-text rendering of a plate (e.g. a digit
-/// triple). [prefix] is prepended to the rendered characters (e.g. a country
-/// code before a regional group).
+/// One visual group in a plate's text rendering. [prefix] is prepended to the
+/// rendered characters.
 @immutable
 class PlateTextGroup {
   const PlateTextGroup(this.indices, {this.prefix = '', this.key});
   final List<int> indices;
   final String prefix;
 
-  /// Optional semantic identifier (e.g. 'district', 'letters', 'serial'),
-  /// used by spec-aware validators to pull a group's value by name instead
-  /// of by position. Null for groups with no validator meaning.
+  /// Semantic name (e.g. 'letters', 'serial') that validators, restrictions and
+  /// resolvers use to read the group by name rather than position.
   final String? key;
 }
 
-/// A complete plate design. Adding a plate — including for a new country — means
-/// adding a const of this type. It must never mean adding a widget.
+/// A complete plate design. Adding a plate means adding a const of this type,
+/// never a widget.
 @immutable
 class PlateSpec {
   const PlateSpec({
@@ -476,91 +472,76 @@ class PlateSpec {
   final double canvasWidth, canvasHeight;
   final PlatePanel panel;
 
-  /// Suppresses [panel] for a plate with no country block, such as a German
-  /// short-term or export plate.
-  ///
-  /// A bool rather than a nullable [panel]: callers read `spec.panel.box`
-  /// unconditionally, so a suppressed panel still declares its geometry and the
-  /// face simply does not paint it.
+  /// Suppresses [panel] for a plate with no country block. A bool rather than a
+  /// nullable [panel] because callers read `spec.panel.box` unconditionally.
   final bool noPanel;
 
   /// The face's regions and the dividers between them, painted under the
-  /// border. A panel that runs edge to edge belongs here as a
-  /// [PlateFill.panel] region rather than as a coloured box on the face.
+  /// border. A panel running edge to edge belongs here as a [PlateFill.panel]
+  /// region.
   final PlateSection background;
 
-  /// Blocks of colour floating on [background], under the rules and labels.
+  /// Blocks of colour floating on [background], under rules and labels.
   final List<PlateBand> bands;
 
   final List<PlateSlot> slots;
 
-  /// Printed marks that do not divide the plate — a short tick, a perforation
-  /// dash. A line from edge to edge is a [PlatePart.divider].
+  /// Marks that do not divide the plate, like a short tick. An edge-to-edge
+  /// line is a [PlatePart.divider].
   final List<PlateRule> rules;
   final List<PlateLabel> labels;
   final List<PlateDecal> decals;
 
-  /// Echoes of slot values. See [PlateMirror] — they never add to [slotCount].
+  /// Echoes of slot values; they never count towards [slotCount].
   final List<PlateMirror> mirrors;
 
   final TextDirection textDirection;
 
-  /// Applied via theme.copyWith when non-null.
   final double? borderWidthRatioOverride;
 
   /// The one ink this plate is printed in, for a design whose print colour is
-  /// its own rather than the host's livery (Germany's green tax-exempt and red
-  /// dealer plates). Null for the theme's ink.
-  ///
-  /// Replaces the whole monochrome set — glyphs, border, rules, completed-field
-  /// outline — since a green plate has a green rim, not a black one.
+  /// its own rather than the host's livery. Replaces the whole monochrome set
+  /// (glyphs, border, rules, completed-field outline). Null for the theme's.
   final Color? inkOverride;
 
-  /// Groups of slot indices for the plain-text rendering, in [textDirection]
-  /// reading order. Empty means one group per slot in index order.
+  /// Slot indices grouped for text rendering, in [textDirection] reading
+  /// order. Empty means one group per slot.
   final List<PlateTextGroup> textGroups;
 
-  /// Register values this plate refuses outright; see [PlateRestriction].
-  /// Each must name a keyed group in [textGroups] — [debugValidateSpec]
-  /// asserts it, since a restriction on a missing group would never fire.
+  /// Register values this plate refuses outright. Each must name a keyed group
+  /// in [textGroups]; [debugValidateSpec] asserts it.
   final List<PlateRestriction> restrictions;
 
-  /// Derives the theme from the typed characters, or null for the host's theme
-  /// as given. Must be a static or top-level function to keep the spec const.
+  /// Derives the theme from the typed characters, or null for the host's.
+  /// Static or top-level, to keep the spec const.
   final PlateThemeResolver? resolveTheme;
 
-  /// Where the typed characters say the plate was issued — a state, a city —
-  /// for a plate with no free space to print it. The host shows the result
-  /// beside the plate ([PlateController.regionCaption]); null while it cannot
-  /// be told. Static or top-level, to keep the spec const.
+  /// Where the typed characters say the plate was issued, for a plate with no
+  /// room to print it; the host shows it via [PlateController.regionCaption].
+  /// Null while it cannot be told. Static or top-level, to keep the spec const.
   final PlateLabelResolver? resolveRegion;
 
-  /// How many values this plate stores. Derived, never hard-coded.
   int get slotCount => slots.length;
 
   /// The slot at [index], or null when [index] is outside the plate.
   PlateSlot? slotAt(int index) =>
       index >= 0 && index < slots.length ? slots[index] : null;
 
-  /// [textGroups], or the one-group-per-slot fallback. Read this rather than
-  /// reimplementing the fallback.
+  /// [textGroups], or one group per slot when none are declared.
   List<PlateTextGroup> get effectiveTextGroups => textGroups.isNotEmpty
       ? textGroups
       : [
           for (var i = 0; i < slots.length; i++) PlateTextGroup([i]),
         ];
 
-  /// The group in [effectiveTextGroups] containing [index], or null when
-  /// [index] is outside every group.
-  PlateTextGroup? groupAt(int index) {
-    for (final g in effectiveTextGroups) {
-      if (g.indices.contains(index)) return g;
-    }
-    return null;
-  }
+  PlateTextGroup? groupAt(int index) =>
+      effectiveTextGroups.where((g) => g.indices.contains(index)).firstOrNull;
 
-  /// [group]'s prefix followed by each of its slot values rendered through
-  /// that slot's alphabet. Unset slots render as ''.
+  PlateTextGroup? groupNamed(String key) =>
+      effectiveTextGroups.where((g) => g.key == key).firstOrNull;
+
+  /// [group]'s prefix followed by its slot values rendered through their
+  /// alphabets. Unset slots render as ''.
   String renderGroup(PlateTextGroup group, List<String?> values) {
     final buffer = StringBuffer(group.prefix);
     for (final i in group.indices) {
@@ -570,7 +551,7 @@ class PlateSpec {
     return buffer.toString();
   }
 
-  /// The slot focus advances to from [index], or null at the end of the plate.
+  /// The slot focus advances to from [index], or null at the end.
   int? nextIndex(int index) =>
       index >= 0 && index + 1 < slots.length ? index + 1 : null;
 
@@ -578,24 +559,12 @@ class PlateSpec {
   int? previousIndex(int index) =>
       index > 0 && index < slots.length ? index - 1 : null;
 
-  PlateTextGroup? _groupNamed(String key) {
-    for (final g in effectiveTextGroups) {
-      if (g.key == key) return g;
-    }
-    return null;
-  }
-
-  /// The raw (unrendered) [values] of the group named [key], concatenated.
-  /// Unset slots and an unknown key both give ''.
-  String valueOfGroup(String key, List<String?> values) {
-    final group = _groupNamed(key);
-    if (group == null) return '';
-    final buffer = StringBuffer();
-    for (final i in group.indices) {
-      buffer.write(i < values.length ? (values[i] ?? '') : '');
-    }
-    return buffer.toString();
-  }
+  /// The raw (unrendered) values of the group named [key], concatenated; ''
+  /// for an unknown key or unset slots.
+  String valueOfGroup(String key, List<String?> values) => [
+    for (final i in groupNamed(key)?.indices ?? const <int>[])
+      if (i < values.length) values[i] ?? '',
+  ].join();
 
   /// The first of [restrictions] that [values] break, or null.
   PlateRestriction? restrictionViolatedBy(List<String?> values) {
@@ -605,18 +574,16 @@ class PlateSpec {
     return null;
   }
 
-  /// Throws [PlateRestrictionException] when [values] break a restriction.
-  /// For code that takes a plate value from somewhere other than a controller
-  /// — a database row, a scan — and must not carry a refused one further.
+  /// Throws [PlateRestrictionException] when [values] break a restriction. For
+  /// values that bypass a controller, such as a database row or a scan.
   void checkRestrictions(List<String?> values) {
     final r = restrictionViolatedBy(values);
     if (r != null) throw PlateRestrictionException(r);
   }
 
-  /// The slot indices of the group named [key] — what a caller that *writes* a
-  /// register needs. Empty for an unknown key.
+  /// Empty for an unknown key.
   List<int> indicesOfGroup(String key) =>
-      _groupNamed(key)?.indices ?? const <int>[];
+      groupNamed(key)?.indices ?? const <int>[];
 
   @override
   bool operator ==(Object other) => other is PlateSpec && other.id == id;
@@ -627,8 +594,7 @@ class PlateSpec {
 
 /// Debug-only consistency check: every rect fits the canvas, every mirror
 /// echoes a real slot, registers are evenly pitched, and alphabet ids key
-/// content one-to-one. Always returns true — call it inside an `assert(...)` so
-/// it is stripped from release builds.
+/// content one-to-one. Always returns true; call it inside `assert(...)`.
 bool debugValidateSpec(PlateSpec spec) {
   void checkInCanvas(PlateBox b, String what) {
     assert(
@@ -708,10 +674,8 @@ bool debugValidateSpec(PlateSpec spec) {
     'background',
   );
 
-  // One rounded coordinate in a hand-written run of cells is invisible until
-  // someone measures the plate. Only keyed groups of three or more cells on one
-  // row have a pitch to be wrong about; a two-line layout splits a register
-  // across bands, so it is exempt.
+  // Only keyed groups of three or more cells on one row have a pitch; a
+  // register split across lines is exempt.
   for (final g in spec.effectiveTextGroups) {
     if (g.key == null || g.indices.length < 3) continue;
     final boxes = <PlateBox>[
@@ -743,10 +707,9 @@ bool debugValidateSpec(PlateSpec spec) {
     );
   }
 
-  // Within one spec an alphabet id must map one-to-one onto rendered content.
-  // The key is characters AND glyphs: an alphabet accepting ASCII digits but
-  // printing national numerals shares `latin.digits`' character list and means
-  // something else entirely.
+  // An alphabet id must map one-to-one onto rendered content, keyed by
+  // characters and glyphs: national numerals share `latin.digits`' characters
+  // but mean something else.
   final byId = <String, String>{};
   final byContent = <String, String>{};
   for (final a in <PlateAlphabet>[
@@ -774,6 +737,5 @@ bool debugValidateSpec(PlateSpec spec) {
   return true;
 }
 
-/// What an alphabet accepts, paired with how each accepted character renders.
 String _contentKey(PlateAlphabet a) =>
     a.characters.map((c) => '$c=${a.render(c)}').join(' ');

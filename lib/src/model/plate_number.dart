@@ -13,8 +13,6 @@ class PlateNumber {
 
   bool get isEmpty => !values.any((e) => e != null);
 
-  /// Value equality, so that watchers rebuild on a real character change
-  /// rather than on every emission.
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
@@ -25,6 +23,5 @@ class PlateNumber {
   int get hashCode => Object.hashAll(values);
 }
 
-/// How a plate (and its items) render: [input] shows editable fields, [display]
-/// shows bare glyphs on the white face like a real plate photo.
+/// [input] shows editable fields; [display] shows bare glyphs, as printed.
 enum PlateMode { input, display }
