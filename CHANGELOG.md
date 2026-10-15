@@ -1,3 +1,8 @@
+## Unreleased
+
+- `PlateController.setGroup` gives each slot up to its own `length` from the value (a chosen symbol is taken whole) instead of one character per slot, so it works on slots that hold a run.
+- `PlateSlot.accepts` takes a chosen-alphabet value whole, so a multi-character symbol (`CD`, `XXXIII`) is a legal slot value instead of being split into characters and refused.
+
 ## 0.11.5
 
 **`PlateRestriction`: register values a spec refuses in every layer.** The

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 
+import '../model/plate_alphabet.dart';
 import '../model/plate_number.dart';
 import '../model/plate_restriction.dart';
 import '../model/plate_spec.dart';
@@ -139,6 +141,10 @@ class PlateController extends ChangeNotifier {
   /// when no group carries that key.
   String group(String key) => _spec.valueOfGroup(key, _values);
 
+  /// [PlateSpec.resolveRegion] over what is typed now; null when the spec has
+  /// none or the region cannot be told yet.
+  String? get regionCaption => _spec.resolveRegion?.call(group);
+
   /// Writes [value] across the slots of the group named [key], one character
   /// per slot in group order, stopping at the shorter of the two. Characters
   /// the target slot refuses clear it rather than being forced in. No-op when
@@ -150,11 +156,21 @@ class PlateController extends ChangeNotifier {
     if (group == null) return false;
     final characters = value.characters;
     final candidate = List<String?>.of(_values);
-    for (var n = 0; n < group.indices.length; n++) {
-      final index = group.indices[n];
+    // A slot holds a run, so each takes up to its own length from [value]; a
+    // chosen symbol ('XXXIII') is taken whole.
+    var offset = 0;
+    for (final index in group.indices) {
       if (_printedCharacter(_spec, index) != null) continue;
-      final character = n < characters.length ? characters[n] : '';
-      candidate[index] = _sanitize(_spec, index, character);
+      final slot = _spec.slots[index];
+      final take = slot.alphabet.input == AlphabetInput.chosen
+          ? characters.length - offset
+          : slot.length;
+      candidate[index] = _sanitize(
+        _spec,
+        index,
+        characters.skip(offset).take(take).join(),
+      );
+      offset += take;
     }
     if (_refuse(candidate)) return false;
     for (final index in group.indices) {
@@ -249,6 +265,15 @@ class PlateController extends ChangeNotifier {
 
   void attach(PlateInputTarget target) {
     _target = target;
+    // Attached from the canvas's initState, inside a build: listeners that
+    // setState would assert, so they hear of it after the frame.
+    if (SchedulerBinding.instance.schedulerPhase ==
+        SchedulerPhase.persistentCallbacks) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (identical(_target, target)) notifyListeners();
+      });
+      return;
+    }
     notifyListeners();
   }
 

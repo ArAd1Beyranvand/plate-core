@@ -49,8 +49,12 @@ class PlateSlot {
   final double spacing;
 
   /// Whether [value] is a legal, possibly partial, content of this slot: at
-  /// most [length] characters, each of them in [alphabet] in either form.
+  /// most [length] characters, each of them in [alphabet] in either form. A
+  /// slot on a chosen alphabet holds exactly one symbol, whatever its length.
   bool accepts(String value) {
+    // A chosen symbol may be several characters long ('CD', 'XXXIII'): it is
+    // picked whole, so it is judged whole.
+    if (alphabet.input == AlphabetInput.chosen) return alphabet.accepts(value);
     final characters = value.runes.map(String.fromCharCode).toList();
     return characters.isNotEmpty &&
         characters.length <= length &&
@@ -461,6 +465,7 @@ class PlateSpec {
     this.textGroups = const <PlateTextGroup>[],
     this.restrictions = const <PlateRestriction>[],
     this.resolveTheme,
+    this.resolveRegion,
   });
 
   /// Stable identifier, e.g. 'xx.car'. The sole basis of [operator ==].
@@ -523,6 +528,12 @@ class PlateSpec {
   /// Derives the theme from the typed characters, or null for the host's theme
   /// as given. Must be a static or top-level function to keep the spec const.
   final PlateThemeResolver? resolveTheme;
+
+  /// Where the typed characters say the plate was issued — a state, a city —
+  /// for a plate with no free space to print it. The host shows the result
+  /// beside the plate ([PlateController.regionCaption]); null while it cannot
+  /// be told. Static or top-level, to keep the spec const.
+  final PlateLabelResolver? resolveRegion;
 
   /// How many values this plate stores. Derived, never hard-coded.
   int get slotCount => slots.length;

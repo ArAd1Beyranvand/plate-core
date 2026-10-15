@@ -253,7 +253,7 @@ void main() {
       await h.retire(tester);
     });
 
-    testWidgets('unfocuses at the last slot rather than wrapping', (
+    testWidgets('stays on the last slot rather than wrapping or dropping focus', (
       tester,
     ) async {
       final h = _Harness(spec: _spec());
@@ -263,9 +263,8 @@ void main() {
       h.machine.advanceFrom(2);
       await tester.pump();
 
-      expect(h.machine.activeIndex, isNull);
-      expect(h.machine.focusNodeAt(0).hasFocus, isFalse);
-      expect(h.activeChanges.last, isNull);
+      expect(h.machine.activeIndex, 2);
+      expect(h.machine.focusNodeAt(2).hasFocus, isTrue);
 
       await h.retire(tester);
     });

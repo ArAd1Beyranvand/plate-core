@@ -1079,6 +1079,13 @@ class _PlateInputs extends StatelessWidget {
   final PlateController controller;
   final PlateMode mode;
   final void Function(int index) onPick;
+
+  /// A chosen slot opens the picker on tap even when a keypad drives input.
+  static bool _opensPicker(SlotBehavior behavior, PlateSlot slot) =>
+      behavior == SlotBehavior.sheet ||
+      (slot.alphabet.input == AlphabetInput.chosen &&
+          (behavior == SlotBehavior.externalField ||
+              behavior == SlotBehavior.keypadFirstField));
   final bool Function(int index, String value) commit;
   final _PlateFaceClipper clipper;
 
@@ -1151,7 +1158,7 @@ class _PlateInputs extends StatelessWidget {
                           onCompleted: mode == PlateMode.input
                               ? () => machine.advanceFrom(i)
                               : null,
-                          onPressed: behaviors[i] == SlotBehavior.sheet
+                          onPressed: _opensPicker(behaviors[i], spec.slots[i])
                               ? () => onPick(i)
                               : null,
                         ),

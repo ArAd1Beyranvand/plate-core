@@ -138,13 +138,10 @@ class PlateInputMachine implements PlateInputTarget {
   }
 
   /// Advance focus off [index] to the next slot, the sheet for a chosen slot,
-  /// or nowhere at the end of the plate.
+  /// or stay put at the end of the plate so backspace still acts.
   void advanceFrom(int index) {
     final next = spec.nextIndex(index);
-    if (next == null) {
-      _focusNodes[index].unfocus();
-      return;
-    }
+    if (next == null) return;
     final nextBehavior = resolveSlotBehavior(
       mode: PlateMode.input,
       input: spec.slots[next].alphabet.input,
@@ -219,8 +216,7 @@ class PlateInputMachine implements PlateInputTarget {
     if (index == null) return;
     final slot = spec.slots[index];
     final held = readValues()[index] ?? '';
-    // A full run is retyped from its first character.
-    final next = (slot.isFull(held) ? '' : held) + slot.alphabet.canonical(c);
+    final next = held + slot.alphabet.canonical(c);
     if (!slot.accepts(next)) return;
     if (!commit(index, next)) return;
     if (slot.isFull(next)) advanceFrom(index);
