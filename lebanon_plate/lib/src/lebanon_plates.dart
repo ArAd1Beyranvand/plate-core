@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -6,9 +8,7 @@ import 'lebanon_colors.dart';
 import 'lebanon_country.dart';
 
 /// Lebanon's two geometries: [oneLine] (1040×220, band left) and [twoLine]
-/// (520×288, band top). Both use up to six digits. Shorter numbers are
-/// available via [oneLineOf] / [twoLineOf] (one to six digits), keyed and
-/// cached in [oneLineGeometries] / [twoLineGeometries].
+/// (520×288, band top). The number is one slot of one to six digits.
 ///
 /// Everything is from photographs, marked `// CALIBRATE`. The one-line band
 /// text runs vertically on the real plate; here it prints horizontally
@@ -16,7 +16,6 @@ import 'lebanon_country.dart';
 abstract final class LebanonPlates {
   static const double _borderRatio = 0.022; // CALIBRATE
   static const int standardDigits = 6;
-  static const List<int> digitLengths = <int>[1, 2, 3, 4, 5, 6];
 
   static const double _oneLineWidth = 1040;
   static const double _oneLineHeight = 220;
@@ -83,82 +82,55 @@ abstract final class LebanonPlates {
     box: PlateBox(26, 116, 84, 140),
   );
 
-  static List<PlateSlot> _oneLineSlots(int digits) => <PlateSlot>[
-    _oneLineLetter,
-    ...plateRegister(
-      alphabet: LebanonAlphabets.digits,
-      count: digits,
-      left: 320,
-      top: 34,
-      width: 113,
-      height: 152,
-      pitch: 113,
-    ),
+  /// One slot of up to [standardDigits] digits, at least one; the text
+  /// centres in the box.
+  static PlateSlot _digits(PlateBox box, double pitch) => PlateSlot(
+    alphabet: LebanonAlphabets.digits,
+    box: box,
+    length: standardDigits,
+    minLength: 1,
+    spacing: max(0, pitch - 0.6 * 0.72 * box.height),
+  );
+
+  static const List<PlateTextGroup> _groups = <PlateTextGroup>[
+    PlateTextGroup(<int>[0], key: 'letter'),
+    PlateTextGroup(<int>[1], key: 'serial'),
   ];
 
-  static List<PlateSlot> _twoLineSlots(int digits) => <PlateSlot>[
-    _twoLineLetter,
-    ...plateRegister(
-      alphabet: LebanonAlphabets.digits,
-      count: digits,
-      left: 120,
-      top: 116,
-      width: 62,
-      height: 140,
-      pitch: 62,
-    ),
-  ];
+  static final PlateSpec oneLine = _oneLineSpec();
+  static final PlateSpec twoLine = _twoLineSpec();
 
-  /// Slot 0 is letter; remaining are serial digits.
-  static List<PlateTextGroup> _groups(int digits) => <PlateTextGroup>[
-    const PlateTextGroup(<int>[0], key: 'letter'),
-    PlateTextGroup(<int>[for (int i = 1; i <= digits; i++) i], key: 'serial'),
-  ];
-
-  static final PlateSpec oneLine = _oneLineSpec(standardDigits);
-  static final PlateSpec twoLine = _twoLineSpec(standardDigits);
-
-  static PlateSpec _oneLineSpec(int digits) => PlateSpec(
-    id: 'lb.oneLine$digits',
+  static PlateSpec _oneLineSpec() => PlateSpec(
+    id: 'lb.oneLine',
     country: LebanonCountry.private,
     canvasWidth: _oneLineWidth,
     canvasHeight: _oneLineHeight,
     panel: _oneLinePanel,
     background: _oneLineBackground,
-    slots: _oneLineSlots(digits),
+    slots: <PlateSlot>[
+      _oneLineLetter,
+      _digits(const PlateBox(320, 34, 6 * 113, 152), 113),
+    ],
     labels: _oneLineLabels,
-    textGroups: _groups(digits),
+    textGroups: _groups,
     borderWidthRatioOverride: _borderRatio,
   );
 
-  static PlateSpec _twoLineSpec(int digits) => PlateSpec(
-    id: 'lb.twoLine$digits',
+  static PlateSpec _twoLineSpec() => PlateSpec(
+    id: 'lb.twoLine',
     country: LebanonCountry.private,
     canvasWidth: _twoLineWidth,
     canvasHeight: _twoLineHeight,
     panel: _twoLinePanel,
     background: _twoLineBackground,
-    slots: _twoLineSlots(digits),
+    slots: <PlateSlot>[
+      _twoLineLetter,
+      _digits(const PlateBox(120, 116, 6 * 62, 140), 62),
+    ],
     labels: _twoLineLabels,
-    textGroups: _groups(digits),
+    textGroups: _groups,
     borderWidthRatioOverride: _borderRatio,
   );
-
-  /// One-line and two-line geometries by digit count, built once.
-  static final Map<int, PlateSpec> oneLineGeometries = <int, PlateSpec>{
-    for (final int d in digitLengths)
-      d: d == standardDigits ? oneLine : _oneLineSpec(d),
-  };
-
-  static final Map<int, PlateSpec> twoLineGeometries = <int, PlateSpec>{
-    for (final int d in digitLengths)
-      d: d == standardDigits ? twoLine : _twoLineSpec(d),
-  };
-
-  static PlateSpec? oneLineOf({required int digits}) =>
-      oneLineGeometries[digits];
-  static PlateSpec? twoLineOf({required int digits}) =>
-      twoLineGeometries[digits];
 
   static List<PlateSpec> get all => <PlateSpec>[oneLine, twoLine];
 }

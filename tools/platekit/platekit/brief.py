@@ -82,9 +82,15 @@ def categories_section(facts: dict, photos: dict) -> str:
     return '\n'.join(lines)
 
 
+def _fields(row: dict) -> str:
+    """`2@40–75 | 1@90–110 | 3@125–200`: one entry per field, i.e. per PlateSlot."""
+    fs = row.get('fields') or [{'x': row['x'], 'glyphs': len(row['runs'])}]
+    return ' · '.join(f"{f['glyphs']}@{f['x'][0]:g}–{f['x'][1]:g}" for f in fs)
+
+
 def photo_section(photos: dict) -> str:
     """photos: name -> {found, measure, colours, ask} as the CLI saves them."""
-    lines = ['## Photos', '', '| photo | fit | aspect | field | ink | rows (y: x-span, runs) | local model |',
+    lines = ['## Photos', '', '| photo | fit | aspect | field | ink | rows (y: x-span, fields as glyphs@x) | local model |',
              '|---|---|---|---|---|---|---|']
     flagged = []
     for name, p in photos.items():
@@ -95,9 +101,13 @@ def photo_section(photos: dict) -> str:
         if not f.get('confident'):
             flagged.append(name)
         m, c = p.get('measure', {}), p.get('colours', {})
-        rows = '; '.join(f"{r['y'][0]:g}–{r['y'][1]:g}: {r['x'][0]:g}–{r['x'][1]:g}, {len(r['runs'])}"
+        rows = '; '.join(f"{r['y'][0]:g}–{r['y'][1]:g}: {r['x'][0]:g}–{r['x'][1]:g}, {_fields(r)}"
                          for r in m.get('rows', []))
-        a = ', '.join(f'{k}={v}' for k, v in p.get('ask', {}).items() if v != 'unknown')
+        ask = dict(p.get('ask', {}))
+        kinds, lens = ask.pop('fields', []), ask.pop('field_lengths', [])
+        a = ', '.join(f'{k}={v}' for k, v in ask.items() if v != 'unknown')
+        if kinds:
+            a += ', fields=' + ' · '.join(f'{n} {k}' for k, n in zip(kinds, lens + ['?'] * len(kinds)))
         lines.append(f"| {name} | {fit} | {f.get('aspect', 0):.2f} | "
                      f"{c.get('field', '?')} | {c.get('ink', '?')} | {rows} | {a} |")
     lines += ['', '### Structure per photo (plate units)', '']

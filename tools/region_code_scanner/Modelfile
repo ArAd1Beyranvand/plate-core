@@ -1,0 +1,132 @@
+FROM qwen3.5:0.8b
+PARAMETER temperature 0
+PARAMETER num_ctx 12288
+SYSTEM """You read one section of a Wikipedia article about a country's vehicle registration plates, given as HTML.
+Decide if the section tells which letters or digits on a plate identify a geographic region:
+a state, province, region, district, county, city, division, governorate, prefecture, department,
+municipality, oblast, krai, canton, voivodeship, wilaya, emirate, territory, zone, island, atoll,
+parish, commune, arrondissement, borough, town or the local registration office (e.g. an RTO). It counts as a prose rule
+("the first two letters indicate the state"), a list, or a table of codes and places, current or historical.
+It does NOT count if the section is only about colours, sizes, fonts, serial numbers, government,
+military, diplomatic or organisation codes, or the plate history without codes per place.
+Answer only JSON: {"region_codes": true} or {"region_codes": false}."""
+MESSAGE user """Country: India
+Section: Permanent registration format > Private and commercial vehicles
+HTML:
+<p>The current format for the registration of private and commercial came into force on 1 July 1989 as part of Motor Vehicles Act, 1988. The format consists of four parts:</p> <ul><li>Part 1: Two-letter state code; two letters which indicates the State or Union Territory in which the vehicle is registered.</li> <li>Part 2: RTO number; a two-digit number allocated to a district RTO within the respective state or Union Territory. Due to heavy volume of vehicle registration, unique numbers may be allocated to multiple RTOs within a single district.</li> <li>Part 3: Single or multiple letters; consists of one, two or three letters or may not exist at all. These show the ongoing registration series of respective RTO and can indirectly indicate the number of registered vehicles (in some cases, also indicate vehicle type). The letters 'I' and 'O' are not used here to avoid confusion with digits"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: India
+Section: Format for private and commercial vehicles > Part 1: Two-letter state code > Current codes
+HTML:
+<p>Two-letter codes currently in use for different states and union territories are as follows:</p> <table> <tbody><tr><th>Code</th> <th>State or Union Territory</th></tr> <tr> <td>AN</td> <td>Andaman and Nicobar Islands</td></tr> <tr> <td>AP</td> <td>Andhra Pradesh</td></tr> <tr> <td>AR</td> <td>Arunachal Pradesh</td></tr> <tr> <td>AS</td> <td>Assam</td></tr> <tr> <td>BR</td> <td>Bihar</td></tr> <tr> <td>CG</td> <td>Chhattisgarh</td></tr> <tr> <td>CH</td> <td>Chandigarh</td></tr> <tr> <td>DD</td> <td>Dadra and Nagar Haveli and Daman and Diu</td></tr> <tr> <td>DL</td> <td>Delhi</td></tr> <tr> <td>GA</td> <td>Goa</td></tr> <tr> <td>GJ</td> <td>Gujarat</td></tr> <tr> <td>HP</td> <td>Himachal Pradesh</td></tr> <tr> <td>HR</td> <td>Haryana</td></tr> <tr> <td>JH</td> <td>Jharkhand</td></tr> <tr> <td>JK</td> <td>Jammu and Kashmir</td></tr> <tr> <td>KA</td> <td>Karnataka</td></tr> <tr> <td>KL</"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: India
+Section: Format for private and commercial vehicles > Part 2: RTO number
+HTML:
+Main article: List of RTO districts in India <p>As all states have at least two districts, the district's RTO is the authority for registering vehicles. A vehicle can be registered in a particular district if the owner has a registered residence or business entity in that district. Each RTO is allotted unique two digit number(s) and vehicles registered with a specific RTO have the corresponding RTO number as part of their registration number. Thus, in most cases, district of registration can be uniquely identified from the registration number. Andhra Pradesh follows a separate format and a common district number (AP 39 as of 2023) is used across all districts/RTOs in the state.</p> <p>Due to heavy volume of vehicle registration in highly populated districts, multiple RTOs may operate within that district, with each RTO being allotted a unique number. As an example, Chennai has 15 RTOs in"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: India
+Section: Permanent registration format > Vehicles of diplomatic missions
+HTML:
+<p>Registration of vehicles belonging to diplomatic missions is administered by Indian Ministry of External Affairs. Following registration format is used:</p> <table> <caption>Diplomatic Mission Registration Format</caption> <tbody><tr> <td> 123 XX 4567 </td></tr> </tbody></table> <p>Characters are representative of following:</p> <ul><li>'123': Unique number of at most 3 digits allocated to the diplomatic mission by the Ministry of External Affairs (see list below). Leading zero is not used.</li> <li>'XX': Represents the type of mission to which the vehicle is registered: <ul><li>'CD' which is short for corps diplomatique, for vehicles registered to an embassy</li> <li>'CC' which is short for corps consulaire, for vehicles registered to a consulate</li> <li>'UN' which is short for United Nations, for vehicles registered to a UN organisation or one of its specialised agencies</li> <li>'"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: India
+Section: Format for private and commercial vehicles > Part 3: Single or multiple letters
+HTML:
+<p>The default use of letter(s) is as registration series of an RTO i.e. when initial 9999 registrations have been done and all unique 4-digit numbers used up, a prefix A is added and the number sequence reset to 1. Thus, letter(s) can indirectly indicate the number of registered vehicles (in some cases, also indicate vehicle class).</p> <p>In Tamil Nadu, the letter G is reserved for Government (both the Union Government of India and State Governments) vehicles and the letter N is reserved for State Transport Buses, while A to F, H to M and P to Z are for passenger vehicles of all kinds, including commercial vehicles. For e.g. TN 60 AG 3333 could be a government vehicle registered in Theni, whereas a TN 58 N 4006 could be a government Bus registered in Madurai District.</p> <p>In Andhra Pradesh and Telangana, the letter Z is reserved for the State Road Transport (APSRTC and TSRTC) buses """
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: India
+Section: Colour coding
+HTML:
+<p>Registration plates are specified in multiple combinations of text colour and background colour to distinctively identify different categories of vehicles.</p> <p>Following combinations have been specified:</p> <table> <caption></caption> <tbody><tr><th>Vehicle Category</th> <th>Sub-category <br>(if any)</th> <th>Text <br> Colour</th> <th>Background <br>Colour</th> <th>Example</th></tr> <tr> <td colspan="5">Permanent Registration</td></tr> <tr> <td rowspan="2">Private</td> <td>-</td> <td>Black</td> <td>White</td> <td>AN 01 Z 0123</td></tr> <tr> <td>Electric</td> <td>White</td> <td>Green</td> <td>AN 01 Z 0123</td></tr> <tr> <td rowspan="2">Commercial <br>(Transport)</td> <td>-</td> <td>Black</td> <td>Yellow</td> <td>AN 01 Z 0123</td></tr> <tr> <td>Electric</td> <td>Yellow</td> <td>Green</td> <td>AN 01 Z 0123</td></tr> <tr> <td rowspan="2">Commercial <br>(Rental)</td> <td>-</td> <td>Yel"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Spain
+Section: History > Provincial codes
+HTML:
+† Former provinces <table> <tbody><tr><th>Code</th><th>Province</th><th>Notes</th></tr> <tr> <td>A</td><td>Alicante</td><td></td></tr> <tr> <td>ALB</td> <td rowspan="2">Albacete</td><td>Used until 1926, replaced by AB.</td></tr> <tr> <td>AB</td><td>Used since 1926.</td></tr> <tr> <td>AL</td><td>Almería</td><td></td></tr> <tr> <td>AOE</td><td>Africa Occidental Española †</td><td>Used until 1951, replaced by I and SHA.</td></tr> <tr> <td>AV</td><td>Ávila</td><td></td></tr> <tr> <td>B</td><td>Barcelona</td><td></td></tr> <tr> <td>BA</td><td>Badajoz</td><td></td></tr> <tr> <td>BI</td><td>Biscay</td><td>BI stands for its capital Bilbao.</td></tr> <tr> <td>BU</td><td>Burgos</td><td></td></tr> <tr> <td>C</td><td>La Coruña</td><td></td></tr> <tr> <td>CA</td><td>Cádiz</td><td></td></tr> <tr> <td>CAC</td><td rowspan="2">Cáceres</td><td>Used until 1926, replaced by CC.</td></tr> <tr> <td>CC</td><td"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Spain
+Section: History > 1970 to 2000
+HTML:
+<p>The second system used the format <code>XXX-NNNN-YY</code>, where <code>XXX</code> was the province code or a one- two- or three-letter special code (such as <code>ET</code> for army cars and <code>DGP</code> for police cars), <code>NNNN</code> was a sequence number from <code>0000</code> to <code>9999</code> (always four-digit numbers, padded with leading zeroes if necessary), and <code>YY</code> was a "counter" series consisting of one and then two letters, which incremented after the sequence number reached <code>9999</code>.</p> <p>No "counter" series used the consonants Q and R (and Q has never been allowed in any way, the apparent reason for this being its resemblance to the vowel O and the digit 0), while two-letter combinations ending in the vowels A, E, I and O were also forbidden, apparently to avoid the forming of potentially offensive Spanish words when combined with some """
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Spain
+Section: Special plates > State codes
+HTML:
+<p>These keep the old system of letter code plus numbers.</p> <table> <tbody><tr><th>Code</th><th>Organization</th><th>Meanings</th><th>Notes</th></tr> <tr> <td>CME</td><td>Cos dels Mossos d'Esquadra</td><td>Autonomous police force of Catalonia</td><td></td></tr> <tr> <td>DGP</td><td>Dirección General de la Policía</td><td>Spanish National Police</td><td></td></tr> <tr> <td>CNP</td><td>Cuerpo Nacional de Policía</td><td>Spanish National Police</td><td>Since 2008</td></tr> <tr> <td>E</td><td>Ertzaintza</td><td>Autonomous police force of the Basque Country</td><td>The E on the plate is in a special Basque font.</td></tr> <tr> <td>EA</td><td>Ejército del Aire</td><td>Spanish Air Force</td><td></td></tr> <tr> <td>ET</td><td>Ejército de Tierra</td><td>Spanish Army</td><td></td></tr> <tr> <td>FAE</td> <td>Fuerzas Aliadas en España</td><td>Allied NATO Forces in Spain</td><td></td></tr> <tr> <td"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Spain
+Section: Current system
+HTML:
+<p>Spain has finished using the L-series, the format of which was nnnn LLL where:</p> <ul><li>nnnn is a sequence number from 0000 to 9999,</li> <li>LLL is a "counter" comprising three letters, which increments after the sequence number reaches 9999. The consonants B, C, D, F, G, H, J, K, L, M, N, P, R, S, T, V, W, X, Y and Z are used for a total of 80 million possible registrations in the system.</li> <li>L see Colour plates. It is not used in private vehicles.</li></ul> <p>This format, introduced on 18 September 2000, is used nationwide, so there is no way of knowing where the vehicle was registered. The "counter" gives a rough idea of when the vehicle was registered, but is less reliable for determining its age, as imported second-hand vehicles are registered in the same way as new models.</p> <p>In 2025 the three-letter counter reached the end of the M-series, and began the N-series, """
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Kazakhstan
+Section: Design until August 2012 > Regional codes
+HTML:
+<table> <tbody><tr> <th>New Area Code</th><th>Old Area Code</th><th>City/Area</th></tr> <tr> <td>01</td><td>Z</td><td>Astana</td></tr> <tr> <td>02</td><td>A</td><td>Almaty</td></tr> <tr> <td>03</td><td>C, O, W</td><td>Akmola Region</td></tr> <tr> <td>04</td><td>D</td><td>Aktobe Region</td></tr> <tr> <td>05</td><td>B, V</td><td>Almaty Region</td></tr> <tr> <td>06</td><td>E</td><td>Atyrau Region</td></tr> <tr> <td>07</td><td>L</td><td>West Kazakhstan Region</td></tr> <tr> <td>08</td><td>H</td><td>Zhambyl Region</td></tr> <tr> <td>09</td><td>K, M</td><td>Karagandy Region; until 1997 Jezkazgan Province</td></tr> <tr> <td>10</td><td>P, W</td><td>Kostanay Region</td></tr> <tr> <td>11</td><td>N</td><td>Kyzylorda Region</td></tr> <tr> <td>12</td><td>R</td><td>Mangystau Region</td></tr> <tr> <td>13</td><td>X</td><td>Turkestan Region</td></tr> <tr> <td>14</td><td>S</td><td>Pavlodar Region</td></tr"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Kazakhstan
+Section: Design until August 2012 > Codes on Soviet era plates
+HTML:
+<table> <tbody><tr><th>Suffix</th> <th>City/Province</th></tr> <tr> <th>АК</th> <td>Akmola Province</td></tr> <tr> <th>ЦЛ</th> <td>Akmola Province</td></tr> <tr> <th>АП</th> <td>Alma-Ata Province</td></tr> <tr> <th>АТ</th> <td>Alma-Ata</td></tr> <tr> <th>АЮ</th> <td>Aktobe Province</td></tr> <tr> <th>ВА</th> <td>East Kazakhstan Province</td></tr> <tr> <th>ВК</th> <td>East Kazakhstan Province</td></tr> <tr> <th>ГУ</th> <td>Atyrau Province</td></tr> <tr> <th>ГТ</th> <td>Atyrau Province</td></tr> <tr> <th>ДЖ</th> <td>Jambyl Province</td></tr> <tr> <th>ДК</th> <td>Jezkazgan Province</td></tr> <tr> <th>ЗК</th> <td>West Kazakhstan Province</td></tr> <tr> <th>КЗ</th> <td>Kyzylorda Province</td></tr> <tr> <th>КТ</th> <td>Kokshetau Province</td></tr> <tr> <th>КЩ</th> <td>Kostanay Province</td></tr> <tr> <th>МШ</th> <td>Mangystau Province</td></tr> <tr> <th>НЖ</th> <td>Kostanay Province</td></tr> """
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Kazakhstan
+Section: Design until August 2012 > Codes on government plates
+HTML:
+<table> <tbody><tr> <th>Code</th> <th>Organisation</th></tr> <tr> <td>01</td> <td>President</td></tr> <tr> <td>02</td> <td>Prime Minister</td></tr> <tr> <td>03</td> <td>Mazhilis</td></tr> <tr> <td>04</td> <td>Senate</td></tr> <tr> <td>05</td> <td>Secretary of State</td></tr> <tr> <td>AV, AST</td> <td>Government and administration, senators</td></tr> <tr> <td>SK</td> <td>Presidential Security ("Security Kazakhstan")</td></tr> <tr> <td>NS</td> <td>National security</td></tr> <tr> <td>АС (AW*, KP*)</td> <td>Ministry of Internal Affairs</td></tr> <tr> <td>SP*</td> <td>Tax Police (Salyk policijasy)</td></tr> <tr> <td>ТC*</td> <td>Custom Committee</td></tr> <tr> <td>VP*</td> <td>Almaty municipal car</td></tr> <tr> <td>PK*</td> <td>General Prosecutor</td></tr> <tr> <td>АА</td> <td>Akym (Head of the region)</td></tr> <tr> <td>1</td> <td>Akym (Head of the region)</td></tr> <tr> <td>2-120</td> <td"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Kazakhstan
+Section: Design until August 2012 > Codes on diplomatic plates
+HTML:
+<table> <tbody><tr> <th>Code</th> <th>Country or organisation</th></tr> <tr> <td>001</td> <td> United States</td></tr> <tr> <td>002</td> <td> Iran</td></tr> <tr> <td>003</td> <td> China</td></tr> <tr> <td>004</td> <td> Turkey</td></tr> <tr> <td>005</td> <td> Germany</td></tr> <tr> <td>006</td> <td> Pakistan</td></tr> <tr> <td>007</td> <td> Israel</td></tr> <tr> <td>008</td> <td> India</td></tr> <tr> <td>009</td> <td> Canada</td></tr> <tr> <td>010</td> <td> North Korea</td></tr> <tr> <td>011</td> <td> France</td></tr> <tr> <td>012</td> <td> Mongolia</td></tr> <tr> <td>013</td> <td> Italy</td></tr> <tr> <td>014</td> <td> Cuba</td></tr> <tr> <td>015</td> <td> Hungary</td></tr> <tr> <td>016</td> <td> Libya</td></tr> <tr> <td>017</td> <td> Romania</td></tr> <tr> <td>018</td> <td> United Kingdom</td></tr> <tr> <td>019</td> <td> Russia</td></tr> <tr> <td>020</td> <td> Armenia</td></tr> <tr> <td"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Malaysia
+Section: Sarawak > Current format
+HTML:
+<table> <tbody><tr><td>QAB 2397 L</td></tr> </tbody></table> <p>All registration plates of Sarawak for private and commercial motorised vehicles with the exceptions of those used by taxis, vehicle dealers and diplomats follow a Q<u>d</u>x #### x algorithm.</p> <ul><li>Q - The constant prefix for all Sarawakian number plates.</li> <li><u>d</u> - The division (area) prefix. (e.g. : A = Kuching, M = Miri)</li> <li>x - The alphabetical sequences. (e.g. : A, B, C ... X and Y)</li> <li># - The number sequence. (e.g. : 1, 2, 3 ... 9998, 9999)</li></ul> <p>The letters I, O and Z are not used and there are no leading zeroes, as in the case of the Peninsular Malaysian number plates. The current algorithm for the majority of Sarawak's divisions start with the constant Q prefix, followed by the division prefix and the number sequence. An example would be QK 1 of Kuching Division, which was issued in"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Malaysia
+Section: Peninsular Malaysia > History of Peninsular Malaysian registration numbers > Pre-1948
+HTML:
+<p>The registration plate system in Malaysia traces back to the introduction of motor vehicles in the early-1900s in colonial British Malaya, with the introduction by respectable state governments of a basic <u>x</u> #### format, where <u>x</u> prefix is the state identifier. Because the <u>x</u> #### format were not expected to be exhausted for a considerable time, state identifiers were allowed to be represented by one or two letters.</p> <h5>Straits Settlements</h5> <table> <tbody><tr> <th>Registration plates of Straits Settlements before 1948</th></tr> <tr> <th>Prefix</th> <th>State</th> <th>Prefix</th> <th>State</th></tr> <tr> <td>M</td><td>Malacca</td><td>P</td><td>Penang</td></tr> <tr> <td>S</td><td>Singapore</td><td>W</td><td>Province Wellesley</td></tr> <tr> <td>L</td><td>Labuan</td></tr> <tr> <td>B, K</td><td>Brunei</td></tr> </tbody></table> <p>Number plates for the Straits Se"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Malaysia
+Section: Specialised plates, other schemes and miscellaneous > Foreign missions > Diplomatic Corps
+HTML:
+<table> <tbody><tr><td>39-08-DC</td></tr> </tbody></table> <p>The registration plates of diplomatic corps in Malaysia are very distinct from other number plate formats in the country. They follow a <code>&lt;1C>-&lt;2C>-DC</code> format and have either white characters on a red background or white characters on a black background. Furthermore, leading zeroes are used in addition to hyphens between the characters.</p> <ul><li>&lt;1C> - The first code denotes the nationality. (see list below)</li> <li>&lt;2C> - The second code denotes a rank. (e.g. : 01 = Head of Mission's Official Car, 52 = Attaché)</li> <li>DC - The constant suffix which denotes Diplomatic Corps.</li></ul> <table> <tbody><tr><th colspan="6">List of country codes on Malaysian diplomatic vehicle registration plates</th></tr> <tr> <th>Number</th><th>Country or Organisation</th><th>Number</th><th>Country or Organisation</th>"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Malaysia
+Section: Specialised plates, other schemes and miscellaneous > Commemorative plates
+HTML:
+<p>A limited number of commemorative vanity plates, or plates with distinctive prefixes are made available by the Malaysian Road Transport Department at a higher cost. These special plates may be used to denote the manufacturer of the car, such as the <code>Proton</code> prefix for Proton cars or special events, such as the <code>SUKOM</code> prefix for the 1998 Commonwealth Games.</p> <table> <tbody><tr> <th>Commemorative plates of Malaysia</th></tr> <tr> <th>Prefix</th><th>Notes</th></tr> <tr> <td>Malaysia</td><td>Malaysia number plate series . The font used is LongHaul for letters and Arial Black for numbers. <p></p></td></tr> <tr> <td>1M4U</td><td>Issued in March 2013 to symbolise the 1Malaysia for Youth (IM4U) concept.</td></tr> <tr> <td>A_A</td><td>A_A number plate series, commemorating JPJ/RTD's 79th anniversary</td></tr> <tr> <td>A1M</td><td>Yayasan Artis 1Malaysia, a foundation """
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Germany
+Section: Constituent elements > Area code
+HTML:
+<p>The first part or Unterscheidungszeichen consists of one, two or three letters representing the district where the car was registered, such as B for Berlin or HSK for Hochsauerlandkreis. These letters basically refer to the German districts, yet after some changes in the law they are no longer unambiguous. When the current system was introduced, each district was assigned exactly one abbreviation. Whenever a district was merged with another or changed its name, their area code would be redefined. Whereas existing registrations would remain valid, any vehicle registered henceforth could only be issued the current code. In some cases an urban district and the surrounding non-urban district share the same letter code. Usually, these are distinguished by different letter/digit patterns. The assignment of each code and combination is registered with the Zentrales Fahrzeugregister (ZFZR).</"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Germany
+Section: Constituent elements > Area code > List of area codes
+HTML:
+<table> <tbody><tr><th>List of license plate area codes of Germany</th></tr> <tr> <td> <table> <tbody><tr><th colspan="5">Codes starting with letter A </th></tr><tr> <th>Code </th><th>City / rural district </th><th>State </th><th>Namesake </th><th>Notes </th></tr><tr> <td rowspan="2">A </td><td>Augsburg City </td><td rowspan="2">Bavaria </td><td rowspan="2">Augsburg </td><td>From [A-AA 100 to 999]<br>To [A-ZZ 100 to 999]<br>(Excludes [A-PS 100 to 999], reserved for city Police)<br>From [A-AA 5000 to 9999] to [A-ZZ 5000 to 9999]<br>[A-X 1 to 999]<br>Where X is: B, F, G<br>[A-XY 1 to 99]<br>Where either X or Y or both are: B, F, G </td></tr><tr> <td>Augsburg District </td><td>From [A-A 1000 to 9999]<br>To [A-Z 1000 to 9999]<br>From [A-AA 1000 to 4999] to [A-ZZ 1000 to 4999]<br>[A-X 1 to 999]<br>Where X isn't: B, F, G<br>[A-XY 1 to 99]<br>Where neither X nor Y are: B, F, G' </td></tr><tr> <"""
+MESSAGE assistant {"region_codes": true}
+MESSAGE user """Country: Germany
+Section: Special codes, colours and formats > Different codes > Federal government
+HTML:
+<p>Instead of a city code (which would mostly mean B for Berlin) the federal government uses an exclusive abbreviation of their own. The code BD (Bundesrepublik Deutschland) applies to the federal government, ministries, parliament, presidential office, etc. which are identified by their initial number.</p> <table> <caption>List</caption> <tbody><tr><th>Code</th><th>Name (German)</th><th>Name/Translation (English)</th></tr> <tr> <th>BD 1</th> <td>Bundestag</td><td>Bundestag</td></tr> <tr> <th>BD 2</th> <td colspan="2">(Reserve)</td></tr> <tr> <th>BD 3</th> <td>Bundesrat</td><td>Bundesrat</td></tr> <tr> <th>BD 4</th> <td>Bundesverfassungsgericht</td><td>Federal Constitutional Court</td></tr> <tr> <th>BD 5</th> <td>Bundespräsidialamt</td><td>Federal Presidential Office</td></tr> <tr> <th rowspan="2">BD 6</th> <td>Bundeskanzleramt</td><td>Federal Chancellery</td></tr> <tr> <td>Presse- und I"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Germany
+Section: Constituent elements > Serial letters and digits
+HTML:
+<p>The final identifier or Erkennungsnummer of the licence plate consists of one or two letters, followed by a number of up to four digits. Thus, basically any combination from A1 to ZZ9999 is possible, yet restricted by the maximum length of eight characters, including the area code. All 26 letters of the Latin alphabet may be used, yet this was not always so. In order to avoid confusion between B and 8, F and E, G and 6, I and 1, O and Q and 0, those six letters were excluded from the middle part of registration plates. In 1992, the letters B, F and G were permitted, and in 2000 the alphabet was completed as I, O and Q have been allowed. In the very first months of the numbering system, between July and November 1956, the letter I was used but J was not. This was soon reversed, but single vintage cars kept sporting their letter I between 1956 and 2000 when it was re-introduced.</p> <p>"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Germany
+Section: Format and legal requirements > Physical characteristics
+HTML:
+<p>German number plates are rectangular, with standard dimensions 520 mm × 110 mm (20+1⁄2 in × 4+3⁄8 in) for cars, trucks, buses and their trailers. Plates bearing few characters may have reduced length but must retain the size and shape of the characters. Plates in two lines for the said types of vehicles measure 340 mm × 200 mm (13+3⁄8 in × 7+7⁄8 in). Motorcycles also have plates in two lines but with specific dimensions: Plates for "large motorcycles" (engine displacement over 125 cc or power output exceeding 11 kW (15 bhp)) issued until 2011 combine a size of 280 mm × 200 mm (11 in × 7+7⁄8 in) with characters of the same size as used for car plates, while those issued since 2011 have characters of reduced size and measure either 180 mm × 200 mm (7+1⁄8 in × 7+7⁄8 in) or 220 mm × 200 mm (8+5⁄8 in × 7+7⁄8 in). Plates for "light motorcycles" (Leichtkrafträder up to 125 cc and 11 kW (15 b"""
+MESSAGE assistant {"region_codes": false}
+MESSAGE user """Country: Germany
+Section: (intro)
+HTML:
+<p> </p> <table><caption>Germany</caption><tbody><tr><td colspan="2">German number plate, current format (FE-style)</td></tr><tr><th>Country</th><td>Germany</td></tr><tr><th>Country code</th><td>D</td></tr><tr><th colspan="2">Current series</th></tr><tr><th>Size</th><td>520 mm × 110 mm<br/>20+1⁄2 in × 4+3⁄8 in</td></tr><tr><th>Serial format</th><td>Not standard (max 8 characters)</td></tr><tr><th>Colour (front)</th><td>Black on white</td></tr><tr><th>Colour (rear)</th><td>Black on white</td></tr><tr><th>Introduced</th><td>1956</td></tr><tr><th colspan="2">History</th></tr><tr><th>First issued</th><td>1906</td></tr></tbody></table> <p>Vehicle registration plates (German: Kraftfahrzeug-Kennzeichen or, more colloquially, Nummernschilder) are mandatory alphanumeric plates used to display the registration mark of a vehicle registered in Germany. They have existed in the country since 1906, wi"""
+MESSAGE assistant {"region_codes": false}

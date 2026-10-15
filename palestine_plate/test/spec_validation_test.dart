@@ -43,7 +43,7 @@ void main() {
   test('West Bank specs declare the keyed groups their validators read', () {
     for (final spec in PSWestBankPlates.all) {
       final keys = spec.effectiveTextGroups.map((g) => g.key).toSet();
-      final isModern = spec.slots.length == 6;
+      final isModern = keys.contains('region');
       if (isModern) {
         expect(
           keys,
@@ -70,4 +70,18 @@ void main() {
       );
     }
   });
+
+  test(
+    'a serial is one four-digit field and a plate is complete only when full',
+    () {
+      final spec = PSWestBankPlates.modernCar;
+      expect(spec.slots.map((s) => s.length), [1, 4, 1]);
+      final partial = PlateController.fromValues(spec, ['1', '023', 'H']);
+      final full = PlateController.fromValues(spec, ['1', '0234', 'H']);
+      expect(partial.isCompleted, isFalse);
+      expect(full.isCompleted, isTrue);
+      partial.dispose();
+      full.dispose();
+    },
+  );
 }

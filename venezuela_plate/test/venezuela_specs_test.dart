@@ -6,7 +6,10 @@ void main() {
   PlateValidation judge(String value) => const VenezuelaValidator().validate(
     PlateEntry(
       spec: VenezuelaPlates.car,
-      values: <String?>[for (final c in value.split('')) c],
+      values: <String?>[
+        value.substring(0, value.length < 6 ? value.length : 6),
+        if (value.length > 6) value.substring(6),
+      ],
     ),
   );
 

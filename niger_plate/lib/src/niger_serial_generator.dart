@@ -8,7 +8,12 @@ abstract final class NigerSerialGenerator {
     final Random rnd = random ?? Random();
     return <String?>[
       for (final PlateSlot slot in spec.slots)
-        slot.alphabet.characters[rnd.nextInt(slot.alphabet.characters.length)],
+        [
+          for (int i = 0; i < slot.length; i++)
+            slot.alphabet.characters[rnd.nextInt(
+              slot.alphabet.characters.length,
+            )],
+        ].join(),
     ];
   }
 }

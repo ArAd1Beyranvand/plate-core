@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -124,6 +126,24 @@ abstract final class NigerOtherPlates {
     final labels = <PlateLabel>[];
     final groups = <String, List<int>>{};
     double x = left;
+    // Adjacent digit cells of one group are one slot.
+    String? run;
+    double runLeft = 0;
+    int runCount = 0;
+    void flush() {
+      if (run == null) return;
+      groups.putIfAbsent(run!, () => <int>[]).add(slots.length);
+      slots.add(
+        PlateSlot(
+          alphabet: NigerAlphabets.digits,
+          box: PlateBox(runLeft, 0, runCount * _Layout.pitch, _Layout.height),
+          length: runCount,
+          spacing: max(0, _Layout.pitch - 0.6 * 0.72 * _Layout.height),
+        ),
+      );
+      run = null;
+    }
+
     for (final _Cell cell in format.cells) {
       final PlateBox box = PlateBox(
         x,
@@ -133,9 +153,15 @@ abstract final class NigerOtherPlates {
       );
       switch (cell.kind) {
         case _Kind.digit:
-          groups.putIfAbsent(cell.group, () => <int>[]).add(slots.length);
-          slots.add(PlateSlot(alphabet: NigerAlphabets.digits, box: box));
+          if (run != cell.group) {
+            flush();
+            run = cell.group;
+            runLeft = x;
+            runCount = 0;
+          }
+          runCount++;
         case _Kind.word:
+          flush();
           labels.add(
             PlateLabel(
               text: cell.text,
@@ -144,9 +170,11 @@ abstract final class NigerOtherPlates {
             ),
           );
         case _Kind.gap:
+          flush();
       }
       x += cell.span * _Layout.pitch;
     }
+    flush();
     return PlateSpec(
       id: format.id,
       country: format.country,

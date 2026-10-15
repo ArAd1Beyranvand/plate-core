@@ -11,11 +11,11 @@ import 'lebanon_validators.dart';
 /// Pass [random] for repeatability: `generate(spec, random: Random(7))`.
 abstract final class LebanonSerialGenerator {
   /// A value for [spec]: letter and number at the spec's text group indices.
-  /// Returns a list `spec.slots.length` long, fully filled.
+  /// Returns one string per slot.
   ///
   /// [letter] or [usage] fixes the letter; both is an error. [letter] omitted
   /// draws from currently-issued letters (K excluded). MP numbers are 1..128;
-  /// others have uniform width, non-zero leading digit.
+  /// others fill the slot, non-zero leading digit.
   ///
   /// Throws if spec has no `letter` and `serial` groups (not a Lebanon spec).
   static List<String?> generate(
@@ -41,19 +41,11 @@ abstract final class LebanonSerialGenerator {
             ? LebanonLetter.fromCharacter(usage!.letter!)!
             : _issued[rnd.nextInt(_issued.length)]);
 
-    for (int i = 0; i < letterSlots.length; i++) {
-      values[letterSlots[i]] = i == 0 ? chosen.character : '';
-    }
+    values[letterSlots.first] = chosen.character;
 
-    final String serial = chosen == LebanonLetter.mp
-        ? (1 + rnd.nextInt(LebanonValidator.maxParliamentNumber))
-              .toString()
-              .padLeft(serialSlots.length.clamp(1, 3), '0')
-        : _number(serialSlots.length, rnd);
-
-    for (int i = 0; i < serialSlots.length; i++) {
-      values[serialSlots[i]] = i < serial.length ? serial[i] : '';
-    }
+    values[serialSlots.first] = chosen == LebanonLetter.mp
+        ? (1 + rnd.nextInt(LebanonValidator.maxParliamentNumber)).toString()
+        : _number(spec.slots[serialSlots.first].length, rnd);
 
     return values;
   }

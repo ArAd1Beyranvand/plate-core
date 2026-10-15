@@ -5,8 +5,8 @@ import 'package:lebanon_plate/lebanon_plate.dart';
 /// Every spec this package ships, so a `debugValidateSpec` failure names the
 /// plate it came from.
 Iterable<PlateSpec> _allSpecs() sync* {
-  yield* LebanonPlates.oneLineGeometries.values;
-  yield* LebanonPlates.twoLineGeometries.values;
+  yield LebanonPlates.oneLine;
+  yield LebanonPlates.twoLine;
 }
 
 void main() {
@@ -22,25 +22,26 @@ void main() {
       expect(ids.toSet(), hasLength(ids.length));
     });
 
-    test('the standard geometries are the six-digit ones, by identity', () {
-      // Identity, not equality: a `PlateCanvas` handed a different instance
-      // with a different id treats it as a spec change and migrates the value.
-      expect(LebanonPlates.oneLineOf(digits: 6), same(LebanonPlates.oneLine));
-      expect(LebanonPlates.twoLineOf(digits: 6), same(LebanonPlates.twoLine));
-      expect(LebanonPlates.oneLineOf(digits: 7), isNull);
-      expect(LebanonPlates.oneLineOf(digits: 0), isNull);
+    test('the number is one slot of one to six digits', () {
+      for (final PlateSpec spec in _allSpecs()) {
+        expect(spec.slots, hasLength(2), reason: spec.id);
+        expect(spec.slots[1].length, 6, reason: spec.id);
+        expect(spec.slots[1].minLength, 1, reason: spec.id);
+      }
     });
 
-    test('every spec is a letter slot followed by digit slots', () {
+    test('every spec is a letter slot followed by a digit slot', () {
       for (final PlateSpec spec in _allSpecs()) {
         expect(
           spec.slots.first.alphabet,
           same(LebanonAlphabets.letters),
           reason: spec.id,
         );
-        for (final PlateSlot slot in spec.slots.skip(1)) {
-          expect(slot.alphabet, same(LebanonAlphabets.digits), reason: spec.id);
-        }
+        expect(
+          spec.slots[1].alphabet,
+          same(LebanonAlphabets.digits),
+          reason: spec.id,
+        );
       }
     });
 
@@ -49,11 +50,7 @@ void main() {
         final List<int> letter = spec.indicesOfGroup('letter');
         final List<int> serial = spec.indicesOfGroup('serial');
         expect(letter, <int>[0], reason: spec.id);
-        expect(
-          <int>[...letter, ...serial],
-          List<int>.generate(spec.slots.length, (int i) => i),
-          reason: spec.id,
-        );
+        expect(serial, <int>[1], reason: spec.id);
       }
     });
 

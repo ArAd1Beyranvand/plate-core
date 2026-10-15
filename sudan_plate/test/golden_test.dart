@@ -69,30 +69,30 @@ void main() {
     // The Wikipedia artwork.
     (
       'sd_private',
-      SudanPlates.serial5,
+      SudanPlates.standard,
       SudanUsage.private,
-      ['7', 'KH', '1', '0', '3', '4', '6'],
+      ['7', 'KH', '10346'],
     ),
     // worldlicenseplates' Al Jazirah plate.
     (
       'sd_private_g',
-      SudanPlates.serial5,
+      SudanPlates.standard,
       SudanUsage.private,
-      ['1', 'G', '1', '4', '3', '4', '9'],
+      ['1', 'G', '14349'],
     ),
     // worldlicenseplates' bus/taxi plate.
     (
       'sd_transport',
-      SudanPlates.serial4,
+      SudanPlates.standard,
       SudanUsage.transport,
-      ['4', 'KH', '1', '2', '0', '9'],
+      ['4', 'KH', '1209'],
     ),
     // worldlicenseplates' commercial plate.
     (
       'sd_commercial',
-      SudanPlates.serial5,
+      SudanPlates.standard,
       SudanUsage.commercial,
-      ['8', 'RS', '2', '0', '3', '6', '8'],
+      ['8', 'RS', '20368'],
     ),
   ];
   for (final (name, spec, usage, values) in cases) {
@@ -108,7 +108,7 @@ void main() {
   }
 
   test('every spec passes debugValidateSpec', () {
-    for (final PlateSpec spec in SudanPlates.bySerialDigits.values) {
+    for (final PlateSpec spec in <PlateSpec>[SudanPlates.standard]) {
       expect(debugValidateSpec(spec), isTrue);
     }
   });
@@ -118,6 +118,22 @@ void main() {
     expect(SudanAlphabets.stateLatin.render('KH'), 'KH');
     expect(SudanAlphabets.arabicDigits.render('7'), '٧');
     expect(SudanAlphabets.stateArabic.canonical('خ'), 'KH');
+  });
+
+  test('serial is one field of four or five digits', () {
+    final PlateSpec spec = SudanPlates.standard;
+    expect(spec.slots.length, 3);
+    expect(spec.slots[2].minLength, 4);
+    expect(spec.slots[2].length, 5);
+    final PlateController c = PlateController.fromValues(spec, [
+      '4',
+      'KH',
+      '120',
+    ]);
+    expect(c.isCompleted, isFalse);
+    c.setAt(2, '1209');
+    expect(c.isCompleted, isTrue);
+    c.dispose();
   });
 
   test('validator', () {

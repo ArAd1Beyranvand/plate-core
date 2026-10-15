@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -90,8 +92,7 @@ abstract final class _Layout {
   static const double missionWidth = 82;
   static const double dipPitch = 38.8;
 
-  /// Right edge of each three-digit group's last cell; a shorter group keeps
-  /// its right edge.
+  /// Right edge of each three-digit group's last cell.
   static const double dipCountryRight = 277.8;
   static const double dipSerialRight = 443.8;
 
@@ -147,10 +148,6 @@ abstract final class _Layout {
   static const double policeSlotHeight = 76;
 }
 
-/// One registration's shape: 1–2 area letters, 1–4 digits, 0–3 suffix
-/// letters (`B 1945 PKL`).
-typedef IndonesiaFormat = ({int prefix, int digits, int suffix});
-
 /// Indonesia's 2023-series geometries.
 ///
 /// * [car] — 460×135, FE-Schrift serial over a centred `MM · YY` expiry row.
@@ -158,12 +155,16 @@ typedef IndonesiaFormat = ({int prefix, int digits, int suffix});
 /// * [diplomatic] — the car plate with `CD`/`CC`, the mission's number and
 ///   the vehicle's, always over a band.
 ///
-/// [car] and [motorcycle] take `band: true` for an electric vehicle: the
-/// lower region is then filled in the theme's divider colour, which the EV
-/// themes set to blue. The usage classes — private, public, government,
-/// free-trade zone — are themes on the same spec.
+/// [carEv] and [motorcycleEv] fill the lower region in the theme's divider
+/// colour, which the EV themes set to blue. The usage classes — private,
+/// public, government, free-trade zone — are themes on the same spec.
 ///
-/// Text groups: `prefix`, `number`, `suffix` (if any), `month`, `year`;
+/// A registration is `B 1945 PKL`: one to two area letters, one to four
+/// digits, one to three suffix letters. Each is one slot sized for its
+/// longest run and centred in its box, so a shorter value sits mid-field. A
+/// plate with no suffix is not specced: the slot needs at least one letter.
+///
+/// Text groups: `prefix`, `number`, `suffix`, `month`, `year`;
 /// diplomatic: `mission`, `country`, `serial`, `month`, `year`; military:
 /// `number`, `suffix`; police: `region`, `number`, `suffix`.
 ///
@@ -198,78 +199,34 @@ typedef IndonesiaFormat = ({int prefix, int digits, int suffix});
 /// red-on-white dealer plate, which has no reference artwork. The faint
 /// Korlantas watermark at bottom left is omitted.
 abstract final class IndonesiaPlates {
-  static const List<int> prefixLengths = <int>[1, 2];
-  static const List<int> digitLengths = <int>[1, 2, 3, 4];
-  static const List<int> suffixLengths = <int>[0, 1, 2, 3];
+  static final PlateSpec car = _serialSpec(band: false, motorcycle: false);
+  static final PlateSpec carEv = _serialSpec(band: true, motorcycle: false);
+  static final PlateSpec motorcycle = _serialSpec(
+    band: false,
+    motorcycle: true,
+  );
+  static final PlateSpec motorcycleEv = _serialSpec(
+    band: true,
+    motorcycle: true,
+  );
 
-  static final Map<(IndonesiaFormat, bool), PlateSpec> _car =
-      <(IndonesiaFormat, bool), PlateSpec>{};
-  static final Map<(IndonesiaFormat, bool), PlateSpec> _moto =
-      <(IndonesiaFormat, bool), PlateSpec>{};
-  static final Map<(int, int), PlateSpec> _dip = <(int, int), PlateSpec>{};
+  /// `CD`/`CC`, the mission's number and the vehicle's, each 1–3 digits.
+  static final PlateSpec diplomatic = _diplomaticSpec();
 
-  static PlateSpec car({
-    int prefix = 2,
-    int digits = 4,
-    int suffix = 3,
-    bool band = false,
-  }) {
-    final IndonesiaFormat f = _check(prefix, digits, suffix);
-    return _car[(f, band)] ??= _serialSpec(f, band: band, motorcycle: false);
-  }
+  static final Map<IndonesiaService, PlateSpec> _mil =
+      <IndonesiaService, PlateSpec>{};
 
-  static PlateSpec motorcycle({
-    int prefix = 2,
-    int digits = 4,
-    int suffix = 3,
-    bool band = false,
-  }) {
-    final IndonesiaFormat f = _check(prefix, digits, suffix);
-    return _moto[(f, band)] ??= _serialSpec(f, band: band, motorcycle: true);
-  }
+  /// A TNI plate for [service]; the number is 4–5 digits.
+  static PlateSpec military(IndonesiaService service) =>
+      _mil[service] ??= _militarySpec(service);
 
-  /// [countryDigits] and [serialDigits] are each 1–3.
-  static PlateSpec diplomatic({int countryDigits = 3, int serialDigits = 3}) {
-    if (countryDigits < 1 ||
-        countryDigits > 3 ||
-        serialDigits < 1 ||
-        serialDigits > 3) {
-      throw ArgumentError(
-        'A diplomatic plate has 1–3 digits per group '
-        '(got $countryDigits and $serialDigits).',
-      );
-    }
-    return _dip[(countryDigits, serialDigits)] ??= _diplomaticSpec(
-      countryDigits,
-      serialDigits,
-    );
-  }
+  /// A Polri plate; the number is 4–5 digits.
+  static final PlateSpec police = _policeSpec();
 
-  static const List<int> serviceDigitLengths = <int>[4, 5];
-
-  static final Map<(IndonesiaService, int), PlateSpec> _mil =
-      <(IndonesiaService, int), PlateSpec>{};
-  static final Map<int, PlateSpec> _police = <int, PlateSpec>{};
-
-  /// A TNI plate for [service], with a [digits]-digit number (4 or 5).
-  static PlateSpec military(IndonesiaService service, {int digits = 5}) {
-    _checkService(digits);
-    return _mil[(service, digits)] ??= _militarySpec(service, digits);
-  }
-
-  /// A Polri plate with a [digits]-digit number (4 or 5).
-  static PlateSpec police({int digits = 4}) {
-    _checkService(digits);
-    return _police[digits] ??= _policeSpec(digits);
-  }
-
-  static void _checkService(int digits) {
-    if (!serviceDigitLengths.contains(digits)) {
-      throw ArgumentError(
-        'A military or police number is 4 or 5 digits (got $digits).',
-      );
-    }
-  }
+  /// Letter spacing that puts a run of [length] characters at [pitch] instead
+  /// of the font's advance.
+  static double _spacing(double pitch, double height) =>
+      max(0, pitch - 0.6 * 0.72 * height);
 
   static PlateDecal _asset(String file, PlateBox box) => PlateDecal(
     image: AssetImage('assets/$file', package: 'indonesia_plate'),
@@ -291,37 +248,35 @@ abstract final class IndonesiaPlates {
   }
 
   /// `NNNNN-SS` centred on [centre], from [top]: slots, the dash and groups
-  /// starting at slot [first].
+  /// starting at slot [first]. The number is 4–5 digits.
   static ({List<PlateSlot> slots, PlateLabel dash, List<PlateTextGroup> groups})
   _serviceSerial({
-    required int digits,
     required double centre,
     required double top,
     required double height,
     required double pitch,
     int first = 0,
   }) {
+    const int digits = 5;
     final double left = centre - ((digits + 2) * pitch + _Layout.dashGap) / 2;
     final double numberRight = left + digits * pitch;
     final double suffixLeft = numberRight + _Layout.dashGap;
     final double dashCentre = (numberRight + suffixLeft) / 2;
+    final double spacing = _spacing(pitch, height);
     return (
       slots: <PlateSlot>[
-        ...plateRegister(
+        PlateSlot(
           alphabet: IndonesiaAlphabets.digits,
-          count: digits,
-          left: left,
-          top: top,
-          width: pitch,
-          height: height,
+          box: PlateBox(left, top, digits * pitch, height),
+          length: digits,
+          minLength: 4,
+          spacing: spacing,
         ),
-        ...plateRegister(
+        PlateSlot(
           alphabet: IndonesiaAlphabets.digits,
-          count: 2,
-          left: suffixLeft,
-          top: top,
-          width: pitch,
-          height: height,
+          box: PlateBox(suffixLeft, top, 2 * pitch, height),
+          length: 2,
+          spacing: spacing,
         ),
       ],
       dash: PlateLabel(
@@ -335,30 +290,24 @@ abstract final class IndonesiaPlates {
         glyphHeight: height,
       ),
       groups: <PlateTextGroup>[
-        PlateTextGroup(<int>[
-          for (int i = first; i < first + digits; i++) i,
-        ], key: 'number'),
-        PlateTextGroup(<int>[
-          first + digits,
-          first + digits + 1,
-        ], key: 'suffix'),
+        PlateTextGroup(<int>[first], key: 'number'),
+        PlateTextGroup(<int>[first + 1], key: 'suffix'),
       ],
     );
   }
 
-  static PlateSpec _militarySpec(IndonesiaService s, int digits) {
+  static PlateSpec _militarySpec(IndonesiaService s) {
     final double dividerStart = s.dividerCentre - s.dividerWidth / 2;
     final double fieldCentre =
         (s.dividerCentre + s.dividerWidth / 2 + _Layout.carWidth - s.rim) / 2;
     final serial = _serviceSerial(
-      digits: digits,
       centre: fieldCentre,
       top: _Layout.milSlotTop,
       height: _Layout.milSlotHeight,
       pitch: _Layout.servicePitch,
     );
     return PlateSpec(
-      id: 'id.military.${s.id}.$digits',
+      id: 'id.military.${s.id}',
       country: IndonesiaCountry.indonesia,
       canvasWidth: _Layout.carWidth,
       canvasHeight: _Layout.serviceHeight,
@@ -391,13 +340,12 @@ abstract final class IndonesiaPlates {
     );
   }
 
-  static PlateSpec _policeSpec(int digits) {
+  static PlateSpec _policeSpec() {
     const double dividerEnd =
         _Layout.policeDividerCentre + _Layout.policeDividerWidth / 2;
     const double fieldCentre =
         (dividerEnd + _Layout.carWidth - _Layout.policeRim) / 2;
     final serial = _serviceSerial(
-      digits: digits,
       centre: fieldCentre,
       top: _Layout.policeSlotTop,
       height: _Layout.policeSlotHeight,
@@ -405,7 +353,7 @@ abstract final class IndonesiaPlates {
       first: 1,
     );
     return PlateSpec(
-      id: 'id.police.$digits',
+      id: 'id.police',
       country: IndonesiaCountry.indonesia,
       canvasWidth: _Layout.carWidth,
       canvasHeight: _Layout.serviceHeight,
@@ -455,18 +403,6 @@ abstract final class IndonesiaPlates {
     );
   }
 
-  static IndonesiaFormat _check(int prefix, int digits, int suffix) {
-    if (!prefixLengths.contains(prefix) ||
-        !digitLengths.contains(digits) ||
-        !suffixLengths.contains(suffix)) {
-      throw ArgumentError(
-        'An Indonesian registration is 1–2 letters, 1–4 digits and 0–3 '
-        'letters (got $prefix, $digits and $suffix).',
-      );
-    }
-    return (prefix: prefix, digits: digits, suffix: suffix);
-  }
-
   static PlateSection _background(double bandTop) =>
       PlateSection.rows(<PlatePart>[
         PlatePart(PlateSection.plain, end: bandTop),
@@ -485,24 +421,14 @@ abstract final class IndonesiaPlates {
     Color? color,
   }) => (
     slots: <PlateSlot>[
-      ...plateRegister(
-        alphabet: IndonesiaAlphabets.digits,
-        count: 2,
-        left: monthLeft,
-        top: top,
-        width: pitch,
-        height: height,
-        color: color,
-      ),
-      ...plateRegister(
-        alphabet: IndonesiaAlphabets.digits,
-        count: 2,
-        left: yearLeft,
-        top: top,
-        width: pitch,
-        height: height,
-        color: color,
-      ),
+      for (final double left in <double>[monthLeft, yearLeft])
+        PlateSlot(
+          alphabet: IndonesiaAlphabets.digits,
+          box: PlateBox(left, top, 2 * pitch, height),
+          length: 2,
+          spacing: _spacing(pitch, height),
+          color: color,
+        ),
     ],
     dot: PlateLabel(
       text: '•',
@@ -518,15 +444,11 @@ abstract final class IndonesiaPlates {
   );
 
   static List<PlateTextGroup> _expiryGroups(int first) => <PlateTextGroup>[
-    PlateTextGroup(<int>[first, first + 1], key: 'month'),
-    PlateTextGroup(<int>[first + 2, first + 3], key: 'year'),
+    PlateTextGroup(<int>[first], key: 'month'),
+    PlateTextGroup(<int>[first + 1], key: 'year'),
   ];
 
-  static PlateSpec _serialSpec(
-    IndonesiaFormat f, {
-    required bool band,
-    required bool motorcycle,
-  }) {
+  static PlateSpec _serialSpec({required bool band, required bool motorcycle}) {
     final double width = motorcycle ? _Layout.motoWidth : _Layout.carWidth;
     final double height = motorcycle ? _Layout.motoHeight : _Layout.carHeight;
     final double pitch = motorcycle ? _Layout.motoPitch : _Layout.carPitch;
@@ -541,13 +463,12 @@ abstract final class IndonesiaPlates {
         ? _Layout.motoSlotHeight
         : _Layout.carSlotHeight;
 
-    final double content =
-        (f.prefix + f.digits + f.suffix) * pitch +
-        gapNumber +
-        (f.suffix > 0 ? gapSuffix : 0);
+    // Each field is sized for its longest run: 1–2 letters, 1–4 digits and
+    // 1–3 letters.
+    final double content = 9 * pitch + gapNumber + gapSuffix;
     final double left = (width - content) / 2;
-    final double numberLeft = left + f.prefix * pitch + gapNumber;
-    final double suffixLeft = numberLeft + f.digits * pitch + gapSuffix;
+    final double numberLeft = left + 2 * pitch + gapNumber;
+    final double suffixLeft = numberLeft + 4 * pitch + gapSuffix;
 
     final expiry = motorcycle
         ? _expiry(
@@ -567,12 +488,8 @@ abstract final class IndonesiaPlates {
             pitch: _Layout.expiryPitch,
           );
 
-    final int n = f.prefix + f.digits;
-    final int serial = n + f.suffix;
     return PlateSpec(
-      id:
-          'id.${motorcycle ? 'motorcycle' : 'car'}'
-          '.${f.prefix}${f.digits}${f.suffix}${band ? '.band' : ''}',
+      id: 'id.${motorcycle ? 'motorcycle' : 'car'}${band ? '.band' : ''}',
       country: IndonesiaCountry.indonesia,
       canvasWidth: width,
       canvasHeight: height,
@@ -582,53 +499,39 @@ abstract final class IndonesiaPlates {
           ? _background(motorcycle ? _Layout.motoBandTop : _Layout.carBandTop)
           : PlateSection.plain,
       slots: <PlateSlot>[
-        ...plateRegister(
+        PlateSlot(
           alphabet: IndonesiaAlphabets.letters,
-          count: f.prefix,
-          left: left,
-          top: top,
-          width: pitch,
-          height: slotHeight,
+          box: PlateBox(left, top, 2 * pitch, slotHeight),
+          length: 2,
+          minLength: 1,
         ),
-        ...plateRegister(
+        PlateSlot(
           alphabet: IndonesiaAlphabets.digits,
-          count: f.digits,
-          left: numberLeft,
-          top: top,
-          width: pitch,
-          height: slotHeight,
+          box: PlateBox(numberLeft, top, 4 * pitch, slotHeight),
+          length: 4,
+          minLength: 1,
         ),
-        if (f.suffix > 0)
-          ...plateRegister(
-            alphabet: IndonesiaAlphabets.letters,
-            count: f.suffix,
-            left: suffixLeft,
-            top: top,
-            width: pitch,
-            height: slotHeight,
-          ),
+        PlateSlot(
+          alphabet: IndonesiaAlphabets.letters,
+          box: PlateBox(suffixLeft, top, 3 * pitch, slotHeight),
+          length: 3,
+          minLength: 1,
+        ),
         ...expiry.slots,
       ],
       labels: <PlateLabel>[expiry.dot],
       textGroups: <PlateTextGroup>[
-        PlateTextGroup(<int>[
-          for (int i = 0; i < f.prefix; i++) i,
-        ], key: 'prefix'),
-        PlateTextGroup(<int>[
-          for (int i = f.prefix; i < n; i++) i,
-        ], key: 'number'),
-        if (f.suffix > 0)
-          PlateTextGroup(<int>[
-            for (int i = n; i < serial; i++) i,
-          ], key: 'suffix'),
-        ..._expiryGroups(serial),
+        const PlateTextGroup(<int>[0], key: 'prefix'),
+        const PlateTextGroup(<int>[1], key: 'number'),
+        const PlateTextGroup(<int>[2], key: 'suffix'),
+        ..._expiryGroups(3),
       ],
     );
   }
 
   /// The expiry on the band is white on both the black trim and the EV blue,
   /// whatever the serial's ink, so its colour is the design's own.
-  static PlateSpec _diplomaticSpec(int countryDigits, int serialDigits) {
+  static PlateSpec _diplomaticSpec() {
     final expiry = _expiry(
       monthLeft: _Layout.carMonthLeft,
       yearLeft: _Layout.carYearLeft,
@@ -638,9 +541,8 @@ abstract final class IndonesiaPlates {
       pitch: _Layout.expiryPitch,
       color: IndonesiaColors.white,
     );
-    final int serialEnd = 1 + countryDigits + serialDigits;
     return PlateSpec(
-      id: 'id.diplomatic.$countryDigits$serialDigits',
+      id: 'id.diplomatic',
       country: IndonesiaCountry.indonesia,
       canvasWidth: _Layout.carWidth,
       canvasHeight: _Layout.carHeight,
@@ -657,34 +559,29 @@ abstract final class IndonesiaPlates {
             _Layout.dipSlotHeight,
           ),
         ),
-        ...plateRegister(
-          alphabet: IndonesiaAlphabets.digits,
-          count: countryDigits,
-          left: _Layout.dipCountryRight - countryDigits * _Layout.dipPitch,
-          top: _Layout.dipSlotTop,
-          width: _Layout.dipPitch,
-          height: _Layout.dipSlotHeight,
-        ),
-        ...plateRegister(
-          alphabet: IndonesiaAlphabets.digits,
-          count: serialDigits,
-          left: _Layout.dipSerialRight - serialDigits * _Layout.dipPitch,
-          top: _Layout.dipSlotTop,
-          width: _Layout.dipPitch,
-          height: _Layout.dipSlotHeight,
-        ),
+        for (final double right in <double>[
+          _Layout.dipCountryRight,
+          _Layout.dipSerialRight,
+        ])
+          PlateSlot(
+            alphabet: IndonesiaAlphabets.digits,
+            box: PlateBox(
+              right - 3 * _Layout.dipPitch,
+              _Layout.dipSlotTop,
+              3 * _Layout.dipPitch,
+              _Layout.dipSlotHeight,
+            ),
+            length: 3,
+            minLength: 1,
+          ),
         ...expiry.slots,
       ],
       labels: <PlateLabel>[expiry.dot],
       textGroups: <PlateTextGroup>[
         const PlateTextGroup(<int>[0], key: 'mission'),
-        PlateTextGroup(<int>[
-          for (int i = 1; i <= countryDigits; i++) i,
-        ], key: 'country'),
-        PlateTextGroup(<int>[
-          for (int i = 1 + countryDigits; i < serialEnd; i++) i,
-        ], key: 'serial'),
-        ..._expiryGroups(serialEnd),
+        const PlateTextGroup(<int>[1], key: 'country'),
+        const PlateTextGroup(<int>[2], key: 'serial'),
+        ..._expiryGroups(3),
       ],
     );
   }

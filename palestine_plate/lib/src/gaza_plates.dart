@@ -3,6 +3,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'palestine_alphabets.dart';
 import 'palestine_country.dart';
+import 'palestine_slots.dart';
 
 /// Gaza plate designs: one grammar (3·DDDD·DD). Group 3 drives glyph colour.
 /// Flag (no identity block). Field always white; no inversion. All dimensions
@@ -10,8 +11,8 @@ import 'palestine_country.dart';
 abstract final class PSGazaPlates {
   static const List<PlateTextGroup> _groups = [
     PlateTextGroup([0], key: 'prefix'),
-    PlateTextGroup([1, 2, 3, 4], key: 'serial'),
-    PlateTextGroup([5, 6], key: 'usage'),
+    PlateTextGroup([1], key: 'serial'),
+    PlateTextGroup([2], key: 'usage'),
   ];
 
   // -------------------------------------------------------------------------
@@ -24,22 +25,23 @@ abstract final class PSGazaPlates {
       alphabet: PSAlphabets.gazaPrefix,
       box: PlateBox(20, 9, 47, 92),
     ),
-    ...plateRegister(
+    psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
       left: 95,
       top: 9,
-      width: 47,
+      cellWidth: 47,
       height: 92,
       pitch: 51,
     ),
-    const PlateSlot(
+    psRun(
       alphabet: PSAlphabets.digits,
-      box: PlateBox(323, 9, 47, 92),
-    ),
-    const PlateSlot(
-      alphabet: PSAlphabets.digits,
-      box: PlateBox(374, 9, 47, 92),
+      count: 2,
+      left: 323,
+      top: 9,
+      cellWidth: 47,
+      height: 92,
+      pitch: 51,
     ),
   ];
 
@@ -93,22 +95,23 @@ abstract final class PSGazaPlates {
       alphabet: PSAlphabets.gazaPrefix,
       box: PlateBox(14, 9, 48, 92),
     ),
-    ...plateRegister(
+    psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
       left: 74,
       top: 9,
-      width: 48,
+      cellWidth: 48,
       height: 92,
       pitch: 52,
     ),
-    const PlateSlot(
+    psRun(
       alphabet: PSAlphabets.digits,
-      box: PlateBox(290, 9, 48, 92),
-    ),
-    const PlateSlot(
-      alphabet: PSAlphabets.digits,
-      box: PlateBox(342, 9, 48, 92),
+      count: 2,
+      left: 290,
+      top: 9,
+      cellWidth: 48,
+      height: 92,
+      pitch: 52,
     ),
   ];
 
@@ -157,22 +160,23 @@ abstract final class PSGazaPlates {
       alphabet: PSAlphabets.gazaPrefix,
       box: PlateBox(16.5, 53, 34, 42),
     ),
-    ...plateRegister(
+    psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
       left: 70.5,
       top: 53,
-      width: 34,
+      cellWidth: 34,
       height: 42,
       pitch: 37,
     ),
-    const PlateSlot(
+    psRun(
       alphabet: PSAlphabets.digits,
-      box: PlateBox(80.5, 101, 34, 42),
-    ), // Line 2
-    const PlateSlot(
-      alphabet: PSAlphabets.digits,
-      box: PlateBox(117.5, 101, 34, 42),
+      count: 2,
+      left: 80.5,
+      top: 101,
+      cellWidth: 34,
+      height: 42,
+      pitch: 37,
     ),
   ];
 

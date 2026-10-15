@@ -110,34 +110,41 @@ abstract final class VenezuelaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      ...plateRegister(
+      PlateSlot(
         alphabet: VenezuelaAlphabets.serial,
-        count: 6,
-        left: _Layout.serialLeft,
-        top: _Layout.slotTop,
-        width: _Layout.pitch,
-        height: _Layout.slotHeight,
+        box: PlateBox(
+          _Layout.serialLeft,
+          _Layout.slotTop,
+          6 * _Layout.pitch,
+          _Layout.slotHeight,
+        ),
+        length: 6,
+        spacing: math.max(
+          0,
+          _Layout.pitch - 0.6 * 0.72 * _Layout.slotHeight,
+        ),
       ),
-      ...plateRegister(
+      PlateSlot(
         alphabet: VenezuelaAlphabets.state,
-        count: 1,
-        left: _Layout.serialLeft + 6 * _Layout.pitch,
-        top: _Layout.slotTop,
-        width: _Layout.pitch,
-        height: _Layout.slotHeight,
+        box: PlateBox(
+          _Layout.serialLeft + 6 * _Layout.pitch,
+          _Layout.slotTop,
+          _Layout.pitch,
+          _Layout.slotHeight,
+        ),
       ),
     ],
     mirrors: const <PlateMirror>[
       PlateMirror(
-        source: 6,
+        source: 1,
         box: _Layout.state,
         glyphHeight: _Layout.stateGlyph,
         alphabet: VenezuelaAlphabets.stateName,
       ),
     ],
     textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0, 1, 2, 3, 4, 5], key: 'serial'),
-      PlateTextGroup(<int>[6], key: 'state'),
+      PlateTextGroup(<int>[0], key: 'serial'),
+      PlateTextGroup(<int>[1], key: 'state'),
     ],
   );
 

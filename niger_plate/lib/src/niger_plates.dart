@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -126,22 +128,22 @@ abstract final class NigerPlates {
           _Layout.digitHeight,
         ),
       ),
-      ...plateRegister(
+      PlateSlot(
         alphabet: NigerAlphabets.digits,
-        count: _Layout.serialDigits,
-        left: _Layout.serialLeft,
-        top: 0,
-        width: _Layout.serialPitch,
-        height: _Layout.digitHeight,
+        box: PlateBox(
+          _Layout.serialLeft,
+          0,
+          _Layout.serialPitch * _Layout.serialDigits,
+          _Layout.digitHeight,
+        ),
+        length: _Layout.serialDigits,
+        spacing: max(0, _Layout.serialPitch - 0.6 * 0.72 * _Layout.digitHeight),
       ),
     ],
     textGroups: <PlateTextGroup>[
       const PlateTextGroup(<int>[0], key: 'region'),
       const PlateTextGroup(<int>[1], key: 'series'),
-      PlateTextGroup(
-        List<int>.generate(_Layout.serialDigits, (i) => 2 + i),
-        key: 'serial',
-      ),
+      const PlateTextGroup(<int>[2], key: 'serial'),
     ],
   );
 

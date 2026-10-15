@@ -61,7 +61,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.modernCar,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['1', '0', '2', '3', '4', 'H'],
+        values: const ['1', '0234', 'H'],
         name: 'wb_modern_car_green',
       );
     });
@@ -71,7 +71,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.legacyCar,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['4', '0', '2', '3', '4', '4', '1'],
+        values: const ['4', '0234', '41'],
         name: 'wb_legacy_car_green',
       );
     });
@@ -86,7 +86,7 @@ void main() {
         country: PSWestBankPlates.legacyCountryForUsage(
           PSUsage.publicTransport,
         ),
-        values: const ['4', '0', '2', '3', '4', '3', '0'],
+        values: const ['4', '0234', '30'],
         name: 'wb_legacy_car_publicTransport_whiteOnGreen',
       );
     });
@@ -97,7 +97,7 @@ void main() {
         spec: PSWestBankPlates.legacyCar,
         theme: PSThemes.forUsage(PSUsage.government),
         country: PSWestBankPlates.legacyCountryForUsage(PSUsage.government),
-        values: const ['4', '0', '2', '3', '4', '9', '9'],
+        values: const ['4', '0234', '99'],
         name: 'wb_legacy_car_government_red',
       );
     });
@@ -107,7 +107,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.modernCarTwoLine,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['1', '0', '2', '3', '4', 'H'],
+        values: const ['1', '0234', 'H'],
         name: 'wb_modern_car2l_green',
       );
     });
@@ -117,7 +117,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.legacyCarTwoLine,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['4', '0', '2', '3', '4', '4', '1'],
+        values: const ['4', '0234', '41'],
         name: 'wb_legacy_car2l_green',
       );
     });
@@ -131,7 +131,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.modernMoto,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['2', '0', '3', '4', '5', 'L'],
+        values: const ['2', '0345', 'L'],
         name: 'wb_modern_moto_green',
       );
     });
@@ -141,7 +141,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.modernMotoTwoLine,
         theme: PSThemes.forUsage(PSUsage.private),
-        values: const ['1', '0', '2', '3', '4', 'H'],
+        values: const ['1', '0234', 'H'],
         name: 'wb_modern_moto2l_green',
       );
     });
@@ -151,7 +151,7 @@ void main() {
         tester,
         spec: PSWestBankPlates.modernTrade,
         theme: PSThemes.forUsage(PSUsage.tradePlate),
-        values: const ['1', '0', '2', '3', '4', 'H'],
+        values: const ['1', '0234', 'H'],
         name: 'wb_modern_trade_blue',
       );
     });
@@ -163,7 +163,7 @@ void main() {
         tester,
         spec: PSGazaPlates.car2012,
         theme: PSThemes.forGazaUsageCode('05')!,
-        values: const ['3', '0', '2', '3', '4', '0', '5'],
+        values: const ['3', '0234', '05'],
         name: 'gz_2012_car_black',
       );
     });
@@ -175,7 +175,7 @@ void main() {
         tester,
         spec: PSGazaPlates.moto,
         theme: PSThemes.forGazaUsageCode('25')!,
-        values: const ['3', '0', '2', '3', '4', '2', '5'],
+        values: const ['3', '0234', '25'],
         name: 'gz_moto_blue',
       );
     });
@@ -185,7 +185,7 @@ void main() {
         tester,
         spec: PSGazaPlates.car2012TwoLine,
         theme: PSThemes.forGazaUsageCode('15')!,
-        values: const ['3', '0', '2', '3', '4', '1', '5'],
+        values: const ['3', '0234', '15'],
         name: 'gz_2012_car2l_green',
       );
     });
@@ -197,7 +197,7 @@ void main() {
         tester,
         spec: PSGazaPlates.car2021TwoLine,
         theme: PSThemes.forGazaUsageCode('55')!,
-        values: const ['3', '0', '2', '3', '4', '5', '5'],
+        values: const ['3', '0234', '55'],
         name: 'gz_2021_car2l_red',
       );
     });

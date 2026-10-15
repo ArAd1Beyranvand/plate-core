@@ -17,7 +17,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:sudan_plate/sudan_plate.dart';
 
 PlateCanvas(
-  spec: SudanPlates.privateCar,
+  spec: SudanPlates.standard,
   theme: SudanThemes.standard,
   validator: const SudanValidator(),
   autoValidate: true,

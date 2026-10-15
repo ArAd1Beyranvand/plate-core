@@ -1,3 +1,8 @@
+## Unreleased
+
+- The number is one `PlateSlot` of one to six digits instead of a `plateRegister` of single cells. A value is one string per slot: `['B', '123456']`.
+- Removed `oneLineOf`, `twoLineOf`, `oneLineGeometries`, `twoLineGeometries` and `digitLengths`; a short number is the same spec with fewer digits, centred rather than left-aligned.
+
 ## 0.1.0
 
 First release.

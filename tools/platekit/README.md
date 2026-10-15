@@ -91,7 +91,7 @@ pk scaffold Laos la --epithet "resilient" \
    --register
 ```
 
-`cats.json` is `[{"id": "private", "getter": "private", "theme": "private", "value": "ຮ ຍ 8 1 1 8"}, …]`
+`cats.json` is `[{"id": "private", "getter": "private", "theme": "private", "value": "ຮຍ 8118"}, …]` — `value` is one space-separated token per slot (field), not per character
 (one per golden). Writes `laos_plate/` with `pubspec.yaml`, `LICENSE`,
 `analysis_options.yaml`, `README.md` (template + alphabetical "Also
 available"), `lib/laos_plate.dart` and `test/golden_test.dart`;

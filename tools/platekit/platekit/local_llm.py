@@ -160,8 +160,12 @@ def _validate(answer: dict, schema: dict) -> dict:
         if spec.get('type') == 'integer' and not isinstance(v, int):
             v = 'unknown'
         if spec.get('type') == 'array':
-            want = {'integer': int, 'string': str}.get(spec.get('items', {}).get('type'), object)
-            v = [x for x in v if isinstance(x, want)] if isinstance(v, list) else []
+            item = spec.get('items', {})
+            want = {'integer': int, 'string': str}.get(item.get('type'), object)
+            # a bad item becomes 'unknown' rather than dropped: `fields` and
+            # `field_lengths` are read position by position
+            v = [x if isinstance(x, want) and x in item.get('enum', [x]) else 'unknown'
+                 for x in v] if isinstance(v, list) else []
         out[k] = v
     return out
 

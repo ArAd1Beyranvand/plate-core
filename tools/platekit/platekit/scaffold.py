@@ -113,7 +113,8 @@ void main() {{
     await loader.load();
   }});
 
-  /// category id -> (spec, theme, space-separated sample value)
+  /// category id -> (spec, theme, sample value: one space-separated token
+  /// per slot, i.e. per field — `'AB 1234'`, never `'A B 1 2 3 4'`)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{{
 {cases}
@@ -279,7 +280,7 @@ def package(root: Path, country: str, code: str, *, epithet: str = '', summary: 
         cases='\n'.join(
             f"    '{c['id']}': ({P}Plates.{c['getter']}, {P}Themes.{c['theme']}, '{c['value']}'),"
             for c in cats) or f"    // One per category, e.g.\n"
-                               f"    // 'private': ({P}Plates.private, {P}Themes.private, 'A B 1 2 3 4'),"))
+                               f"    // 'private': ({P}Plates.private, {P}Themes.private, 'AB 1234'),"))
     return written
 
 
@@ -317,8 +318,9 @@ def stub_notes(out: Path, measurements: dict) -> str:
     for name, m in measurements.items():
         lines.append(f'/// * {name}: aspect {m["aspect"]}, field {m["field"]}, ink {m["ink"]}')
         for r in m['rows']:
-            lines.append(f'///   row y {r["y"][0]}–{r["y"][1]}, x {r["x"][0]}–{r["x"][1]}, '
-                         f'{len(r["runs"])} runs')
+            fs = r.get('fields') or [{'x': r['x'], 'glyphs': len(r['runs'])}]
+            lines.append(f'///   row y {r["y"][0]}–{r["y"][1]}, x {r["x"][0]}–{r["x"][1]}, fields '
+                         + ', '.join(f'{f["glyphs"]} glyphs at {f["x"][0]}–{f["x"][1]}' for f in fs))
     text = '\n'.join(lines) + '\n'
     out.write_text(text)
     return text

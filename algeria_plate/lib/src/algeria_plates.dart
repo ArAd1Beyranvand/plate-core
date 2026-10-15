@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'algeria_alphabets.dart';
 import 'algeria_country.dart';
+import 'algeria_regions.dart';
 
 /// Where the ink sits on an Algerian plate, in millimetres.
 ///
@@ -134,6 +135,7 @@ abstract final class AlgeriaPlates {
         group(2, wilayaLeft),
       ],
       textGroups: _civilGroups,
+      resolveRegion: AlgeriaRegions.captionOf,
     );
   }();
 
@@ -163,6 +165,7 @@ abstract final class AlgeriaPlates {
         group(2, lowerLeft + 3 * p + _Layout.twoGap, _Layout.twoRow2Top),
       ],
       textGroups: _civilGroups,
+      resolveRegion: AlgeriaRegions.captionOf,
     );
   }();
 

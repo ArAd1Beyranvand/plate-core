@@ -125,11 +125,9 @@ abstract final class SudanPlates {
     ),
   ];
 
-  static PlateSpec _build({required String id, required int serialDigits}) {
-    final double pitch =
-        (_Layout.serialRight - _Layout.serialLeft) / serialDigits;
+  static PlateSpec _build() {
     return PlateSpec(
-      id: id,
+      id: 'sd.2009',
       country: SudanCountry.sudan,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
@@ -146,14 +144,16 @@ abstract final class SudanPlates {
           alphabet: SudanAlphabets.stateArabic,
           box: _Layout.stateBox,
         ),
-        ...plateRegister(
+        const PlateSlot(
           alphabet: SudanAlphabets.arabicDigits,
-          count: serialDigits,
-          left: _Layout.serialLeft,
-          top: _Layout.serialTop,
-          width: pitch,
-          height: _Layout.serialHeight,
-          pitch: pitch,
+          box: PlateBox(
+            _Layout.serialLeft,
+            _Layout.serialTop,
+            _Layout.serialRight - _Layout.serialLeft,
+            _Layout.serialHeight,
+          ),
+          length: 5,
+          minLength: 4,
         ),
       ],
       mirrors: <PlateMirror>[
@@ -171,12 +171,15 @@ abstract final class SudanPlates {
           alphabet: SudanAlphabets.stateLatin,
           editable: true,
         ),
-        ...plateEcho(
-          sources: List<int>.generate(serialDigits, (i) => 2 + i),
-          left: _Layout.serialLeft,
-          top: _Layout.serialEchoTop,
-          width: pitch,
-          height: _Layout.serialEchoGlyph,
+        const PlateMirror(
+          source: 2,
+          box: PlateBox(
+            _Layout.serialLeft,
+            _Layout.serialEchoTop,
+            _Layout.serialRight - _Layout.serialLeft,
+            _Layout.serialEchoGlyph,
+          ),
+          glyphHeight: _Layout.serialEchoGlyph,
           alphabet: SudanAlphabets.digits,
           editable: true,
         ),
@@ -184,23 +187,11 @@ abstract final class SudanPlates {
       textGroups: <PlateTextGroup>[
         const PlateTextGroup(<int>[0], key: 'class'),
         const PlateTextGroup(<int>[1], key: 'state'),
-        PlateTextGroup(
-          List<int>.generate(serialDigits, (i) => 2 + i),
-          prefix: '-',
-          key: 'serial',
-        ),
+        const PlateTextGroup(<int>[2], prefix: '-', key: 'serial'),
       ],
     );
   }
 
-  /// Five-digit serial: the artwork and most photographs.
-  static final PlateSpec serial5 = _build(id: 'sd.2009.s5', serialDigits: 5);
-
-  /// Four-digit serial: the bus-and-taxi photograph (`4KH 1209`).
-  static final PlateSpec serial4 = _build(id: 'sd.2009.s4', serialDigits: 4);
-
-  static final Map<int, PlateSpec> bySerialDigits = <int, PlateSpec>{
-    4: serial4,
-    5: serial5,
-  };
+  /// The one spec: the serial is a single field of four or five digits.
+  static final PlateSpec standard = _build();
 }

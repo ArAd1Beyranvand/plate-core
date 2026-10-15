@@ -3,8 +3,7 @@ import 'package:plate_core/plate_core.dart';
 import 'india_alphabets.dart';
 
 /// Judges any `IndiaPlates` value by the groups its spec has. Reports, never
-/// throws, never bars a keystroke; quiet until every cell is filled, since
-/// diplomatic numbers and temporary series may legitimately be short.
+/// throws, never bars a keystroke; quiet until every field has reached its minimum length.
 class IndiaValidator extends PlateValidator {
   const IndiaValidator();
 
@@ -18,8 +17,12 @@ class IndiaValidator extends PlateValidator {
 
   @override
   PlateValidation validate(PlateEntry entry) {
-    if (entry.values.length < entry.spec.slotCount ||
-        entry.values.any((v) => v == null || v.isEmpty)) {
+    final slots = entry.spec.slots;
+    if (entry.values.length < slots.length ||
+        [
+          for (var i = 0; i < slots.length; i++)
+            slots[i].isComplete(entry.values[i]),
+        ].contains(false)) {
       return const PlateValidation.valid();
     }
     final keys = <String?>{

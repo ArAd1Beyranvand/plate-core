@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
@@ -119,8 +121,8 @@ class _Builder {
   final List<PlateTextGroup> groups = <PlateTextGroup>[];
   final List<PlateLabel> labels = <PlateLabel>[];
 
-  /// [count] cells centred from [firstCx] at [pitch]; returns the next cell's
-  /// centre.
+  /// [count] cells centred from [firstCx] at [pitch]; returns the
+  /// next cell's centre.
   double run(
     String key,
     PlateAlphabet alphabet,
@@ -130,17 +132,25 @@ class _Builder {
     double cy,
     double box,
   ) {
+    // A chosen alphabet is picked one symbol at a time, so each is its own
+    // slot; typed digits share one slot per run.
+    final perSlot = alphabet.input == AlphabetInput.chosen ? 1 : count;
     final start = slots.length;
-    slots.addAll(
-      plateRegister(
-        alphabet: alphabet,
-        count: count,
-        left: firstCx - pitch / 2,
-        top: cy - box / 2,
-        width: pitch,
-        height: box,
-      ),
-    );
+    for (var i = 0; i < count; i += perSlot) {
+      slots.add(
+        PlateSlot(
+          alphabet: alphabet,
+          box: PlateBox(
+            firstCx - pitch / 2 + i * pitch,
+            cy - box / 2,
+            perSlot * pitch,
+            box,
+          ),
+          length: perSlot,
+          spacing: max(0, pitch - 0.6 * 0.72 * box),
+        ),
+      );
+    }
     groups.add(
       PlateTextGroup(<int>[
         for (var i = start; i < slots.length; i++) i,

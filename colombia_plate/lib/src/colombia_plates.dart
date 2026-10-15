@@ -248,11 +248,25 @@ class ColombiaSeries {
 const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 0, _Layout.height));
 
 abstract final class ColombiaPlates {
+  static PlateSlot _field(
+    PlateAlphabet alphabet,
+    int count,
+    double left,
+    double pitch,
+    double top,
+    double height,
+  ) => PlateSlot(
+    alphabet: alphabet,
+    box: PlateBox(left, top, count * pitch, height),
+    length: count,
+    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  );
+
   /// The `ABC·123` plate: the serial split by the ministry roundel, the
   /// municipality (or `COLOMBIA`) under it.
   ///
-  /// Slots: the first group then the second, left to right; the letter
-  /// group's leading cells hold the series' fixed letters.
+  /// Slots: the first group then the second, left to right. The series'
+  /// fixed letters are checked by the validator.
   static PlateSpec standard({
     ColombiaSeries series = ColombiaSeries.private,
     String city = 'BOGOTA D.C.',
@@ -264,41 +278,13 @@ abstract final class ColombiaPlates {
         _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
     final double splitX = left + split * _Layout.pitch;
     final double secondLeft = splitX + _Layout.gap;
-    final double secondRight = secondLeft + (cells - split) * _Layout.pitch;
 
-    final List<PlateBox> boxes = <PlateBox>[
-      for (final PlateSlot s in plateRegisterAcross(
-        alphabet: ColombiaAlphabets.letters,
-        count: split,
-        left: left,
-        right: splitX,
-        top: _Layout.serialTop,
-        height: _Layout.serialHeight,
-      ))
-        s.box,
-      for (final PlateSlot s in plateRegisterAcross(
-        alphabet: ColombiaAlphabets.letters,
-        count: cells - split,
-        left: secondLeft,
-        right: secondRight,
-        top: _Layout.serialTop,
-        height: _Layout.serialHeight,
-      ))
-        s.box,
-    ];
-    final int firstLetter = series.digitsFirst ? series.digits : 0;
-    PlateAlphabet alphabetAt(int i) {
-      final int letter = i - firstLetter;
-      if (letter < 0 || letter >= series.letters) {
-        return ColombiaAlphabets.digits;
-      }
-      return letter < series.fixed.length
-          ? ColombiaAlphabets.fixed(series.fixed[letter])
-          : ColombiaAlphabets.letters;
-    }
-
-    final List<int> firstIdx = <int>[for (int i = 0; i < split; i++) i];
-    final List<int> secondIdx = <int>[for (int i = split; i < cells; i++) i];
+    final PlateAlphabet firstAlphabet = series.digitsFirst
+        ? ColombiaAlphabets.digits
+        : ColombiaAlphabets.letters;
+    final PlateAlphabet secondAlphabet = series.digitsFirst
+        ? ColombiaAlphabets.letters
+        : ColombiaAlphabets.digits;
 
     return PlateSpec(
       id: 'co.${series.id}',
@@ -345,16 +331,30 @@ abstract final class ColombiaPlates {
           ),
       ],
       slots: <PlateSlot>[
-        for (final (int i, PlateBox box) in boxes.indexed)
-          PlateSlot(alphabet: alphabetAt(i), box: box),
+        _field(
+          firstAlphabet,
+          split,
+          left,
+          _Layout.pitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
+        ),
+        _field(
+          secondAlphabet,
+          cells - split,
+          secondLeft,
+          _Layout.pitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
+        ),
       ],
       textGroups: <PlateTextGroup>[
         PlateTextGroup(
-          firstIdx,
+          const <int>[0],
           key: series.digitsFirst ? 'number' : 'letters',
         ),
         PlateTextGroup(
-          secondIdx,
+          const <int>[1],
           prefix: ' ',
           key: series.digitsFirst ? 'letters' : 'number',
         ),
@@ -389,26 +389,26 @@ abstract final class ColombiaPlates {
         ),
       ],
       slots: <PlateSlot>[
-        ...plateRegisterAcross(
-          alphabet: ColombiaAlphabets.digits,
-          count: 2,
-          left: left,
-          right: split,
-          top: _Layout.serialTop,
-          height: _Layout.serialHeight,
+        _field(
+          ColombiaAlphabets.digits,
+          2,
+          left,
+          _Layout.policePitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
         ),
-        ...plateRegisterAcross(
-          alphabet: ColombiaAlphabets.digits,
-          count: 4,
-          left: split + _Layout.policeGap,
-          right: split + _Layout.policeGap + 4 * _Layout.policePitch,
-          top: _Layout.serialTop,
-          height: _Layout.serialHeight,
+        _field(
+          ColombiaAlphabets.digits,
+          4,
+          split + _Layout.policeGap,
+          _Layout.policePitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
         ),
       ],
       textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1], key: 'unit'),
-        PlateTextGroup(<int>[2, 3, 4, 5], prefix: '-', key: 'number'),
+        PlateTextGroup(<int>[0], key: 'unit'),
+        PlateTextGroup(<int>[1], prefix: '-', key: 'number'),
       ],
     );
   }();
@@ -455,35 +455,35 @@ abstract final class ColombiaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      ...plateRegister(
-        alphabet: ColombiaAlphabets.letters,
-        count: 1,
-        left: _Layout.dipTypeCentre - _Layout.dipCell / 2,
-        top: _Layout.dipSerialTop,
-        width: _Layout.dipCell,
-        height: _Layout.dipSerialHeight,
+      _field(
+        ColombiaAlphabets.letters,
+        1,
+        _Layout.dipTypeCentre - _Layout.dipCell / 2,
+        _Layout.dipCell,
+        _Layout.dipSerialTop,
+        _Layout.dipSerialHeight,
       ),
-      ...plateRegister(
-        alphabet: ColombiaAlphabets.letters,
-        count: 2,
-        left: _Layout.dipCountryLeft,
-        top: _Layout.dipSerialTop,
-        width: _Layout.dipCountryPitch,
-        height: _Layout.dipSerialHeight,
+      _field(
+        ColombiaAlphabets.letters,
+        2,
+        _Layout.dipCountryLeft,
+        _Layout.dipCountryPitch,
+        _Layout.dipSerialTop,
+        _Layout.dipSerialHeight,
       ),
-      ...plateRegister(
-        alphabet: ColombiaAlphabets.digits,
-        count: 3,
-        left: _Layout.dipNumberLeft,
-        top: _Layout.dipSerialTop,
-        width: _Layout.dipNumberPitch,
-        height: _Layout.dipSerialHeight,
+      _field(
+        ColombiaAlphabets.digits,
+        3,
+        _Layout.dipNumberLeft,
+        _Layout.dipNumberPitch,
+        _Layout.dipSerialTop,
+        _Layout.dipSerialHeight,
       ),
     ],
     textGroups: const <PlateTextGroup>[
       PlateTextGroup(<int>[0], key: 'type'),
-      PlateTextGroup(<int>[1, 2], prefix: ' ', key: 'country'),
-      PlateTextGroup(<int>[3, 4, 5], prefix: ' ', key: 'number'),
+      PlateTextGroup(<int>[1], prefix: ' ', key: 'country'),
+      PlateTextGroup(<int>[2], prefix: ' ', key: 'number'),
     ],
   );
 }

@@ -90,15 +90,14 @@ PlateCanvas(
 )
 ```
 
-Short numbers - a motorcycle `M` plate, a parliament `MP` plate - are the same
-faces with fewer digit cells:
+The number is one slot of one to six digits, so a short number - a motorcycle
+`M` plate, a parliament `MP` plate - is the same face with fewer digits:
 
 ```dart
-LebanonPlates.oneLineOf(digits: 3); // null for a length this package does not build
+PlateController.fromValues(LebanonPlates.oneLine, ['MP', '128']);
 ```
 
-The cells keep the six-digit pitch and stay left-aligned against the letter,
-because that is what a short number on a full-size plate looks like.
+The digits centre in the number's box.
 
 ## Validation
 

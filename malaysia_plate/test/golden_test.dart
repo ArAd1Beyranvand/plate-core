@@ -67,7 +67,7 @@ void main() {
       tester,
       spec: MalaysiaPlates.singleRow(suffix: true),
       theme: MalaysiaThemes.standard,
-      values: 'Q A B 8 5 5 7 K',
+      values: 'QAB 8557 K',
       name: 'my_single_suffix',
     );
   });
@@ -77,7 +77,7 @@ void main() {
       tester,
       spec: MalaysiaPlates.singleRow(),
       theme: MalaysiaThemes.standard,
-      values: 'P F Q 5 2 1 7',
+      values: 'PFQ 5217',
       name: 'my_single',
     );
   });
@@ -85,9 +85,9 @@ void main() {
   testWidgets('taxi, HWD 378', (tester) async {
     await render(
       tester,
-      spec: MalaysiaPlates.singleRow(digits: 3),
+      spec: MalaysiaPlates.singleRow(),
       theme: MalaysiaThemes.taxi,
-      values: 'H W D 3 7 8',
+      values: 'HWD 378',
       name: 'my_taxi',
     );
   });
@@ -97,7 +97,7 @@ void main() {
       tester,
       spec: MalaysiaPlates.twoRow(),
       theme: MalaysiaThemes.standard,
-      values: 'Q A F 6 2 2 9',
+      values: 'QAF 6229',
       name: 'my_two_row',
     );
   });
@@ -107,7 +107,7 @@ void main() {
       tester,
       spec: MalaysiaPlates.diplomatic,
       theme: MalaysiaThemes.diplomatic,
-      values: '9 9 6 4 DC',
+      values: '99 64 DC',
       name: 'my_diplomatic',
     );
   });
@@ -117,7 +117,7 @@ void main() {
       tester,
       spec: MalaysiaPlates.ev(),
       theme: MalaysiaThemes.ev,
-      values: 'V E A 1 2 3 4',
+      values: 'VEA 1234',
       name: 'my_ev',
     );
   });

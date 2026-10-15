@@ -28,7 +28,8 @@ void main() {
     String name,
   ) async {
     final controller = PlateController.fromValues(spec, <String?>[
-      for (final c in value.split('')) c,
+      value.substring(0, 6),
+      value.substring(6),
     ]);
     await tester.pumpWidget(
       MaterialApp(

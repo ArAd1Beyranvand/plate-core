@@ -72,7 +72,7 @@ void main() {
         tester,
         spec: BoliviaPlates.standard(service: s),
         theme: BoliviaThemes.standard,
-        values: '1 8 5 2 P H D L',
+        values: '1852 PHD L',
         name: 'bo_standard_${s.id}',
       );
     });
@@ -83,7 +83,7 @@ void main() {
       tester,
       spec: BoliviaPlates.standard(digits: 3),
       theme: BoliviaThemes.standard,
-      values: '0 4 7 A B C S',
+      values: '047 ABC S',
       name: 'bo_standard_3',
     );
   });
@@ -100,7 +100,7 @@ void main() {
         tester,
         spec: BoliviaPlates.special(m),
         theme: missionThemes[m]!,
-        values: '5 7 0 7',
+        values: '57 07',
         name: 'bo_special_${m.id}',
       );
     });
@@ -111,7 +111,7 @@ void main() {
       tester,
       spec: BoliviaPlates.mercosur,
       theme: BoliviaThemes.mercosur,
-      values: 'B B 0 1 2 3 4',
+      values: 'BB 01234',
       name: 'bo_mercosur',
     );
   });

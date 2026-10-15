@@ -26,19 +26,19 @@ void main() {
 
   /// The photographed value of each category, where there is a photo.
   const Map<String, String> values = <String, String>{
-    'private': 'ຮ ຍ 8 1 1 8',
-    'private_ev': 'ຂ ກ 4 7 1 4',
-    'government': 'ກ ກ 6 8 8 4',
-    'company': 'ອ ທ 1 2 3 4',
-    'company_ev': 'ອ ທ 0 0 0 4',
-    'taxable_company': 'ກ ກ 2 6 6 2',
-    'temporary': 'ຊ ຄ 3 2 4 8 1 0 2 0 2 4 0 1',
-    'diplomatic': '2 3 1 4',
-    'foreign_guest': '1 2 3 4',
-    'united_nations': '1 2 3 4',
-    'financial_institution': '1 2 3 4',
-    'public_security': '0 5 4 9',
-    'national_defence': '1 2 3 4',
+    'private': 'ຮ ຍ 8118',
+    'private_ev': 'ຂ ກ 4714',
+    'government': 'ກ ກ 6884',
+    'company': 'ອ ທ 1234',
+    'company_ev': 'ອ ທ 0004',
+    'taxable_company': 'ກ ກ 2662',
+    'temporary': 'ຊ ຄ 3 248 10 2024 01',
+    'diplomatic': '23 14',
+    'foreign_guest': '12 34',
+    'united_nations': '12 34',
+    'financial_institution': '12 34',
+    'public_security': '0549',
+    'national_defence': '1234',
   };
 
   for (final LaosCategory category in LaosCategory.values) {

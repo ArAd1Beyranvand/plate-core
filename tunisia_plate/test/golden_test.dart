@@ -86,9 +86,9 @@ void main() {
   testWidgets('standard, 131 تونس 2180', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.standard(),
+      spec: TunisiaPlates.standard,
       theme: TunisiaThemes.standard,
-      values: '1 3 1 2 1 8 0',
+      values: '131 2180',
       name: 'tn_standard',
     );
   });
@@ -96,9 +96,9 @@ void main() {
   testWidgets('standard, two-digit series', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.standard(seriesDigits: 2),
+      spec: TunisiaPlates.standard,
       theme: TunisiaThemes.standard,
-      values: '7 3 3 2 9 4',
+      values: '73 3294',
       name: 'tn_standard_2',
     );
   });
@@ -106,9 +106,9 @@ void main() {
   testWidgets('rental, 126 تونس 8202', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.standard(),
+      spec: TunisiaPlates.standard,
       theme: TunisiaThemes.rental,
-      values: '1 2 6 8 2 0 2',
+      values: '126 8202',
       name: 'tn_rental',
     );
   });
@@ -116,9 +116,9 @@ void main() {
   testWidgets('square, 6069 / 47 تونس', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.square(seriesDigits: 2),
+      spec: TunisiaPlates.square,
       theme: TunisiaThemes.standard,
-      values: '6 0 6 9 4 7',
+      values: '6069 47',
       name: 'tn_square',
     );
   });
@@ -126,9 +126,9 @@ void main() {
   testWidgets('square, three-digit series', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.square(),
+      spec: TunisiaPlates.square,
       theme: TunisiaThemes.standard,
-      values: '6 0 6 9 2 5 8',
+      values: '6069 258',
       name: 'tn_square_3',
     );
   });
@@ -136,9 +136,9 @@ void main() {
   testWidgets('government, 20 - 130486', (tester) async {
     await render(
       tester,
-      spec: TunisiaPlates.government(),
+      spec: TunisiaPlates.government,
       theme: TunisiaThemes.government,
-      values: '2 0 1 3 0 4 8 6',
+      values: '20 130486',
       name: 'tn_government',
     );
   });
@@ -148,7 +148,7 @@ void main() {
       tester,
       spec: TunisiaPlates.military,
       theme: TunisiaThemes.military,
-      values: '2 1 5 5 1',
+      values: '21551',
       name: 'tn_military',
     );
   });
@@ -159,7 +159,7 @@ void main() {
         tester,
         spec: TunisiaPlates.diplomatic(m),
         theme: TunisiaThemes.diplomatic,
-        values: m == TunisiaMission.chief ? '4 6 0 1' : '4 6 0 2',
+        values: m == TunisiaMission.chief ? '46 01' : '46 02',
         name: 'tn_diplomatic_${m.id}',
       );
     });
@@ -170,7 +170,7 @@ void main() {
       tester,
       spec: TunisiaPlates.temporary(),
       theme: TunisiaThemes.standard,
-      values: '7 3 1 4 1',
+      values: '73141',
       name: 'tn_temporary',
     );
   });
@@ -182,9 +182,24 @@ void main() {
       tester,
       spec: TunisiaPlates.temporary(TunisiaSuffix.dealer),
       theme: TunisiaThemes.standard,
-      values: '1 2 3 4 5',
+      values: '12345',
       name: 'tn_dealer_layout',
     );
+  });
+
+  test('series and government number are variable fields', () {
+    expect(TunisiaPlates.standard.slots.length, 2);
+    expect(TunisiaPlates.standard.slots.first.minLength, 1);
+    expect(TunisiaPlates.standard.slots.first.length, 3);
+    expect(TunisiaPlates.government.slots.last.length, 6);
+    final PlateController c = PlateController.fromValues(
+      TunisiaPlates.standard,
+      ['7', '3294'],
+    );
+    expect(c.isCompleted, isTrue);
+    c.setAt(1, '329');
+    expect(c.isCompleted, isFalse);
+    c.dispose();
   });
 
   test('validator', () {
@@ -200,9 +215,9 @@ void main() {
 
   test('generator fills every slot of every spec', () {
     for (final PlateSpec spec in <PlateSpec>[
-      TunisiaPlates.standard(),
-      TunisiaPlates.square(seriesDigits: 1),
-      TunisiaPlates.government(),
+      TunisiaPlates.standard,
+      TunisiaPlates.square,
+      TunisiaPlates.government,
       TunisiaPlates.diplomatic(),
       TunisiaPlates.military,
       TunisiaPlates.temporary(),

@@ -137,7 +137,7 @@ abstract final class _Layout {
 /// One stretch of a centred row, left to right: digit cells, a fixed word, a
 /// dash, or empty space.
 final class _Run {
-  const _Run.digits(String this.key, this.count)
+  const _Run.digits(String this.key, this.count, {this.minLength})
     : text = null,
       font = null,
       width = 0,
@@ -151,6 +151,7 @@ final class _Run {
   const _Run.text(String this.text, this.width, this.glyph, this.y, {this.font})
     : key = null,
       count = 0,
+      minLength = null,
       thickness = 0;
 
   /// A dash [width] long and [thickness] thick, centred at plate y [y].
@@ -159,6 +160,7 @@ final class _Run {
       font = null,
       text = null,
       count = 0,
+      minLength = null,
       glyph = 0;
 
   const _Run.gap(this.width)
@@ -166,12 +168,14 @@ final class _Run {
       font = null,
       text = null,
       count = 0,
+      minLength = null,
       glyph = 0,
       thickness = 0,
       y = 0;
 
   final String? key;
   final int count;
+  final int? minLength;
   final String? text;
   final String? font;
   final double width;
@@ -279,36 +283,20 @@ class TunisiaSuffix {
 /// series; the TUNISIA sticker on the military photo, a sticker on that
 /// specimen. Screw holes are not printed.
 abstract final class TunisiaPlates {
-  static const List<int> seriesLengths = <int>[1, 2, 3];
-
-  static final Map<(int, bool), PlateSpec> _ordinary =
-      <(int, bool), PlateSpec>{};
-  static final Map<int, PlateSpec> _government = <int, PlateSpec>{};
   static final Map<TunisiaMission, PlateSpec> _diplomatic =
       <TunisiaMission, PlateSpec>{};
   static final Map<TunisiaSuffix, PlateSpec> _temporary =
       <TunisiaSuffix, PlateSpec>{};
 
-  /// [seriesDigits] is 1–3: series 1–999 print without leading zeros.
-  static PlateSpec standard({int seriesDigits = 3}) {
-    _checkSeries(seriesDigits);
-    return _ordinary[(seriesDigits, false)] ??= _standardSpec(seriesDigits);
-  }
+  /// The one-line plate. The series is one field of 1–3 digits: series 1–999
+  /// print without leading zeros.
+  static final PlateSpec standard = _standardSpec();
 
-  static PlateSpec square({int seriesDigits = 3}) {
-    _checkSeries(seriesDigits);
-    return _ordinary[(seriesDigits, true)] ??= _squareSpec(seriesDigits);
-  }
+  static final PlateSpec square = _squareSpec();
 
-  /// [numberDigits] is 1–6; the photo and the article show six.
-  static PlateSpec government({int numberDigits = 6}) {
-    if (numberDigits < 1 || numberDigits > 6) {
-      throw ArgumentError(
-        'A government number is 1–6 digits (got $numberDigits).',
-      );
-    }
-    return _government[numberDigits] ??= _governmentSpec(numberDigits);
-  }
+  /// The ministry code and a vehicle number of 1–6 digits; the photo and the
+  /// article show six.
+  static final PlateSpec government = _governmentSpec();
 
   static PlateSpec diplomatic([
     TunisiaMission mission = TunisiaMission.corps,
@@ -317,12 +305,6 @@ abstract final class TunisiaPlates {
   static PlateSpec temporary([
     TunisiaSuffix suffix = TunisiaSuffix.suspended,
   ]) => _temporary[suffix] ??= _temporarySpec(suffix);
-
-  static void _checkSeries(int n) {
-    if (!seriesLengths.contains(n)) {
-      throw ArgumentError('A series is 1–3 digits (got $n).');
-    }
-  }
 
   /// Lays [runs] out left to right, centred on [centre]. Group indices start
   /// at [first], for a spec whose earlier row already holds slots.
@@ -345,22 +327,19 @@ abstract final class TunisiaPlates {
     final List<PlateTextGroup> groups = <PlateTextGroup>[];
     for (final _Run r in runs) {
       if (r.key != null) {
-        slots.addAll(
-          plateRegister(
+        slots.add(
+          PlateSlot(
             alphabet: TunisiaAlphabets.digits,
-            count: r.count,
-            left: x,
-            top: top,
-            width: pitch,
-            height: height,
+            box: PlateBox(x, top, r.count * pitch, height),
+            length: r.count,
+            minLength: r.minLength,
+            spacing: r.minLength == null
+                ? max(0, pitch - 0.6 * 0.72 * height)
+                : 0,
           ),
         );
-        groups.add(
-          PlateTextGroup(<int>[
-            for (int i = 0; i < r.count; i++) index + i,
-          ], key: r.key),
-        );
-        index += r.count;
+        groups.add(PlateTextGroup(<int>[index], key: r.key));
+        index += 1;
       } else if (r.text != null) {
         // A label is centred in its box only while its line fits: a wider one
         // is clamped to the box and overflows to the right. Arabic advances
@@ -415,11 +394,11 @@ abstract final class TunisiaPlates {
     textGroups: row.groups,
   );
 
-  static PlateSpec _standardSpec(int series) => _spec(
-    'standard.$series',
+  static PlateSpec _standardSpec() => _spec(
+    'standard',
     _row(
       <_Run>[
-        _Run.digits('series', series),
+        const _Run.digits('series', 3, minLength: 1),
         const _Run.gap(_Layout.tunisGapBefore),
         const _Run.text(
           'تونس',
@@ -438,7 +417,7 @@ abstract final class TunisiaPlates {
   );
 
   /// The number on top; series and تونس below, in the photo's order.
-  static PlateSpec _squareSpec(int series) {
+  static PlateSpec _squareSpec() {
     const double centre = _Layout.squareWidth / 2;
     final _Row upper = _row(
       const <_Run>[_Run.digits('number', 4)],
@@ -451,7 +430,7 @@ abstract final class TunisiaPlates {
     );
     final _Row lower = _row(
       <_Run>[
-        _Run.digits('series', series),
+        const _Run.digits('series', 3, minLength: 1),
         const _Run.gap(_Layout.squareTunisGap),
         const _Run.text(
           'تونس',
@@ -467,10 +446,10 @@ abstract final class TunisiaPlates {
       centre: centre,
       canvasWidth: _Layout.squareWidth,
       canvasHeight: _Layout.squareHeight,
-      first: 4,
+      first: 1,
     );
     return _spec(
-      'square.$series',
+      'square',
       (
         slots: <PlateSlot>[...upper.slots, ...lower.slots],
         labels: lower.labels,
@@ -484,8 +463,8 @@ abstract final class TunisiaPlates {
     );
   }
 
-  static PlateSpec _governmentSpec(int digits) => _spec(
-    'government.$digits',
+  static PlateSpec _governmentSpec() => _spec(
+    'government',
     _row(
       <_Run>[
         const _Run.digits('ministry', 2),
@@ -496,7 +475,7 @@ abstract final class TunisiaPlates {
           _Layout.govDashY,
         ),
         const _Run.gap(_Layout.govGapAfter),
-        _Run.digits('number', digits),
+        const _Run.digits('number', 6, minLength: 1),
       ],
       pitch: _Layout.govPitch,
       top: _Layout.govSlotTop,

@@ -15,8 +15,8 @@ void main() {
       );
       final v = PSWestBankModernValidator.validateFields(
         region: values[0]!,
-        serial: values.sublist(1, 5).join(),
-        governorate: values[5]!,
+        serial: values[1]!,
+        governorate: values[2]!,
       );
       expect(v.isValid, isTrue, reason: '$values: ${v.reason}');
     }
@@ -31,8 +31,8 @@ void main() {
       );
       final v = PSWestBankLegacyValidator.validateFields(
         district: values[0]!,
-        serial: values.sublist(1, 5).join(),
-        usage: values.sublist(5, 7).join(),
+        serial: values[1]!,
+        usage: values[2]!,
       );
       expect(v.isValid, isTrue, reason: '$values: ${v.reason}');
     }
@@ -44,8 +44,8 @@ void main() {
       final values = PSSerialGenerator.gaza(PSGazaPlates.car2012, random: rng);
       final v = PSGazaValidator.validateFields(
         prefix: values[0]!,
-        serial: values.sublist(1, 5).join(),
-        usage: values.sublist(5, 7).join(),
+        serial: values[1]!,
+        usage: values[2]!,
       );
       expect(v.isValid, isTrue, reason: '$values: ${v.reason}');
     }
@@ -57,7 +57,7 @@ void main() {
       final letter = PSSerialGenerator.modernWestBank(
         PSWestBankPlates.modernCar,
         random: rng,
-      )[5];
+      )[2];
       expect(PSGovernorate.confusableLetters, isNot(contains(letter)));
       expect(PSGovernorate.reservedGazaLetters, isNot(contains(letter)));
     }
@@ -70,7 +70,7 @@ void main() {
     }
   });
 
-  test('writes each register into the slots its spec names', () {
+  test('writes each field into the slot its spec names', () {
     final spec = PSWestBankPlates.modernCar;
     final values = PSSerialGenerator.modernWestBank(spec, random: Random(1));
     expect(values.length, spec.slots.length);
@@ -80,7 +80,7 @@ void main() {
       expect(PSGovernorate.letters, contains(values[i]));
     }
     for (final i in spec.indicesOfGroup('serial')) {
-      expect(values[i], matches(RegExp(r'^[0-9]$')));
+      expect(values[i], matches(RegExp(r'^[0-9]{4}$')));
     }
   });
 
@@ -92,10 +92,6 @@ void main() {
   });
 
   test('toFilename concatenates with no separator', () {
-    expect(
-      PSSerialGenerator.toFilename(['1', '0', '2', '3', '4', 'H']),
-      '1'
-      '0234H',
-    );
+    expect(PSSerialGenerator.toFilename(['1', '0234', 'H']), '10234H');
   });
 }

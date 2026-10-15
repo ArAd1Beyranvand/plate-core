@@ -67,9 +67,9 @@ void main() {
   testWidgets('long car white', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.long(),
+      spec: VietnamPlates.long,
       theme: VietnamThemes.white,
-      values: '3 0 F 2 5 6 5 8',
+      values: '30 F 256 58',
       name: 'vn_white_long',
       width: 520,
       height: 110,
@@ -79,9 +79,9 @@ void main() {
   testWidgets('long car yellow', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.long(),
+      spec: VietnamPlates.long,
       theme: VietnamThemes.yellow,
-      values: '5 1 K 1 2 3 4 5',
+      values: '51 K 123 45',
       name: 'vn_yellow_long',
       width: 520,
       height: 110,
@@ -91,9 +91,9 @@ void main() {
   testWidgets('long car blue', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.long(),
+      spec: VietnamPlates.long,
       theme: VietnamThemes.blue,
-      values: '8 0 A 0 0 1 2 3',
+      values: '80 A 001 23',
       name: 'vn_blue_long',
       width: 520,
       height: 110,
@@ -103,9 +103,9 @@ void main() {
   testWidgets('long two-letter series', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.long(serial: 2),
+      spec: VietnamPlates.long,
       theme: VietnamThemes.blue,
-      values: '8 0 L D 1 2 3 4 5',
+      values: '80 LD 123 45',
       name: 'vn_blue_long_ld',
       width: 520,
       height: 110,
@@ -115,9 +115,9 @@ void main() {
   testWidgets('short car', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.short(),
+      spec: VietnamPlates.short,
       theme: VietnamThemes.white,
-      values: '3 0 F 2 5 6 5 8',
+      values: '30 F 256 58',
       name: 'vn_white_short',
       width: 330,
       height: 165,
@@ -127,9 +127,9 @@ void main() {
   testWidgets('short car yellow', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.short(),
+      spec: VietnamPlates.short,
       theme: VietnamThemes.yellow,
-      values: '5 1 K 1 2 3 4 5',
+      values: '51 K 123 45',
       name: 'vn_yellow_short',
       width: 330,
       height: 165,
@@ -139,9 +139,9 @@ void main() {
   testWidgets('motorcycle', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.motorcycle(),
+      spec: VietnamPlates.motorcycle,
       theme: VietnamThemes.white,
-      values: '2 9 A B 2 2 6 5 8',
+      values: '29 A B 226 58',
       name: 'vn_white_moto',
       width: 190,
       height: 140,
@@ -151,9 +151,9 @@ void main() {
   testWidgets('temporary', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.temporary(),
+      spec: VietnamPlates.temporary,
       theme: VietnamThemes.white,
-      values: 'T 8 0 2 3 5 8 8',
+      values: 'T 80 235 88',
       name: 'vn_white_temporary',
       width: 330,
       height: 165,
@@ -165,7 +165,7 @@ void main() {
       tester,
       spec: VietnamPlates.foreignLong(),
       theme: VietnamThemes.white,
-      values: '8 0 4 4 1 N G 4 5',
+      values: '80 441 NG 45',
       name: 'vn_foreign_long_ng',
       width: 520,
       height: 110,
@@ -177,7 +177,7 @@ void main() {
       tester,
       spec: VietnamPlates.foreignLong(codeFirst: true),
       theme: VietnamThemes.white,
-      values: '2 7 Q T 5 4 7 4 5',
+      values: '27 QT 547 45',
       name: 'vn_foreign_long_qt',
       width: 520,
       height: 110,
@@ -189,7 +189,7 @@ void main() {
       tester,
       spec: VietnamPlates.foreignLong(statusColor: null),
       theme: VietnamThemes.white,
-      values: '8 0 4 4 1 N N 4 5',
+      values: '80 441 NN 45',
       name: 'vn_foreign_long_nn',
       width: 520,
       height: 110,
@@ -201,7 +201,7 @@ void main() {
       tester,
       spec: VietnamPlates.foreignShort(),
       theme: VietnamThemes.white,
-      values: '8 0 4 4 1 N G 4 5',
+      values: '80 441 NG 45',
       name: 'vn_foreign_short_ng',
       width: 330,
       height: 165,
@@ -211,9 +211,9 @@ void main() {
   testWidgets('military long', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.militaryLong(),
+      spec: VietnamPlates.militaryLong,
       theme: VietnamThemes.red,
-      values: 'A B 1 2 3 4',
+      values: 'AB 12 34',
       name: 'vn_military_long',
       width: 532,
       height: 100,
@@ -223,9 +223,9 @@ void main() {
   testWidgets('military short', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.militaryShort(),
+      spec: VietnamPlates.militaryShort,
       theme: VietnamThemes.red,
-      values: 'A B 1 2 3 4',
+      values: 'AB 12 34',
       name: 'vn_military_short',
       width: 280,
       height: 200,
@@ -235,9 +235,9 @@ void main() {
   testWidgets('military motorcycle', (tester) async {
     await render(
       tester,
-      spec: VietnamPlates.militaryMotorcycle(),
+      spec: VietnamPlates.militaryMotorcycle,
       theme: VietnamThemes.red,
-      values: 'A B 1 2 3',
+      values: 'AB 123',
       name: 'vn_military_moto',
       width: 190,
       height: 140,

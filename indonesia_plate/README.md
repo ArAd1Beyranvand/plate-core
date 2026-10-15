@@ -17,7 +17,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:indonesia_plate/indonesia_plate.dart';
 
 PlateCanvas(
-  spec: IndonesiaPlates.carPlate,
+  spec: IndonesiaPlates.car,
   theme: IndonesiaThemes.standard,
   validator: const IndonesiaValidator(),
   autoValidate: true,

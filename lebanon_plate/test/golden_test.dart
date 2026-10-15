@@ -54,7 +54,7 @@ void main() {
     controller.dispose();
   }
 
-  const List<String?> beirut = <String?>['B', '1', '2', '3', '4', '5', '6'];
+  const List<String?> beirut = <String?>['B', '123456'];
 
   group('one spec, two usages', () {
     testWidgets('private (white)', (tester) async {
@@ -72,7 +72,7 @@ void main() {
         tester,
         spec: LebanonPlates.oneLine,
         usage: LebanonUsage.diplomatic,
-        values: const <String?>['D', '1', '2', '3', '4', '5', '6'],
+        values: const <String?>['D', '123456'],
         name: 'lb_one_line_diplomatic',
       );
     });
@@ -82,7 +82,7 @@ void main() {
         tester,
         spec: LebanonPlates.oneLine,
         usage: LebanonUsage.consular,
-        values: const <String?>['C', '1', '2', '3', '4', '5', '6'],
+        values: const <String?>['C', '123456'],
         name: 'lb_one_line_consular',
       );
     });
@@ -106,21 +106,21 @@ void main() {
         tester,
         spec: LebanonPlates.twoLine,
         usage: LebanonUsage.publicInstitution,
-        values: const <String?>['M', '1', '2', '3', '4', '5', '6'],
+        values: const <String?>['M', '123456'],
         name: 'lb_two_line_public_institution',
       );
     });
   });
 
-  group('short numbers keep the six-digit pitch', () {
+  group('short numbers sit centred in the number slot', () {
     testWidgets('a parliament plate, three digits on a full-size face', (
       tester,
     ) async {
       await renderGolden(
         tester,
-        spec: LebanonPlates.oneLineOf(digits: 3)!,
+        spec: LebanonPlates.oneLine,
         usage: LebanonUsage.private,
-        values: const <String?>['MP', '1', '2', '8'],
+        values: const <String?>['MP', '128'],
         name: 'lb_one_line_mp3',
       );
     });

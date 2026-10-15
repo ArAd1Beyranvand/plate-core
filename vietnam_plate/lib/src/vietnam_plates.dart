@@ -1,4 +1,4 @@
-import 'dart:math' show max, min;
+import 'dart:math' show max;
 
 import 'package:flutter/widgets.dart' show Color;
 
@@ -65,14 +65,6 @@ class _Row {
   /// The ink's centre and baseline: `glyphStyle` prints a cap ~0.525 of the box.
   double get inkCentre => top + height / 2;
   double get inkBottom => inkCentre + 0.525 * height / 2;
-
-  /// The slot's width. A glyph is centred in its box and shrinks to its width.
-  /// The plates print a condensed face and `glyphStyle` a regular one, whose
-  /// digits are ~0.5 of the box height wide, so a box as narrow as the pitch
-  /// would shrink the ink. Boxes are widened to fit a digit, up to 15% over the
-  /// pitch (past that the glyphs touch) and overlap their neighbours; their
-  /// centres keep the pitch.
-  double get cellWidth => min(max(pitch, 0.5 * height), 1.15 * pitch);
 
   /// A glyph's cell pitch, the dash's and dot's cell, and their ink.
   final double pitch, dashCell, dashWidth, dashHeight, dotCell, dotSize;
@@ -150,32 +142,37 @@ abstract final class _Layout {
   ], rim: 0);
 }
 
-/// One piece of a row: a run of [count] cells over [alphabet], or a printed
-/// [mark] — `-` or `.`. Runs with the same [key] form one text group, in order.
+/// One piece of a row: a field of up to [count] cells over [alphabet] (at
+/// least [minLength]), or a printed [mark] — `-` or `.`. Each field is one slot
+/// and one text group; a [key] used twice in a plate becomes `key2`.
 class _Part {
   const _Part.run(
     PlateAlphabet this.alphabet,
     this.count,
     String this.key, {
     this.color,
+    this.minLength,
   }) : mark = null;
   const _Part.dash()
     : alphabet = null,
       count = 0,
       key = null,
       color = null,
+      minLength = null,
       mark = '-';
   const _Part.dot()
     : alphabet = null,
       count = 0,
       key = null,
       color = null,
+      minLength = null,
       mark = '.';
 
   final PlateAlphabet? alphabet;
   final int count;
   final String? key;
   final Color? color;
+  final int? minLength;
   final String? mark;
 }
 
@@ -208,74 +205,72 @@ abstract final class VietnamPlates {
   static PlateSpec _memo(String id, PlateSpec Function() build) =>
       _cache[id] ??= build();
 
-  static void _check(String name, int value, List<int> allowed) {
-    if (!allowed.contains(value)) {
-      throw ArgumentError.value(value, name, 'must be one of $allowed');
-    }
-  }
+  /// The series: one letter, or two for the special series (`LD`, `DA`, `LA`).
+  static const _Part _series = _Part.run(
+    VietnamAlphabets.series,
+    2,
+    'series',
+    minLength: 1,
+  );
 
-  /// `30F-256.58`. [serial] is 1 letter, or 2 for the special series (`LD`,
-  /// `DA`, `LA`); [digits] is 5 (`256.58`) or 4 (`2565`, the old numbering).
-  static PlateSpec long({int serial = 1, int digits = 5}) {
-    _check('serial', serial, const <int>[1, 2]);
-    _check('digits', digits, const <int>[4, 5]);
-    return _memo(
-      'vn.long.$serial$digits',
-      () => _build('vn.long.$serial$digits', _Layout.longCar, <List<_Part>>[
-        <_Part>[
-          const _Part.run(VietnamAlphabets.digits, 2, 'province'),
-          _Part.run(VietnamAlphabets.series, serial, 'series'),
-          const _Part.dash(),
-          ..._number(digits),
-        ],
-      ]),
-    );
-  }
+  /// `256.58`.
+  static const List<_Part> _number = <_Part>[
+    _Part.run(VietnamAlphabets.digits, 3, 'number'),
+    _Part.dot(),
+    _Part.run(VietnamAlphabets.digits, 2, 'number'),
+  ];
+
+  /// `30F-256.58`.
+  static final PlateSpec long = _build(
+    'vn.long',
+    _Layout.longCar,
+    <List<_Part>>[
+      <_Part>[
+        const _Part.run(VietnamAlphabets.digits, 2, 'province'),
+        _series,
+        const _Part.dash(),
+        ..._number,
+      ],
+    ],
+  );
 
   /// `30F` over `256.58`.
-  static PlateSpec short({int serial = 1, int digits = 5}) {
-    _check('serial', serial, const <int>[1, 2]);
-    _check('digits', digits, const <int>[4, 5]);
-    return _memo(
-      'vn.short.$serial$digits',
-      () => _build('vn.short.$serial$digits', _Layout.shortCar, <List<_Part>>[
-        <_Part>[
-          const _Part.run(VietnamAlphabets.digits, 2, 'province'),
-          _Part.run(VietnamAlphabets.series, serial, 'series'),
-        ],
-        _number(digits),
-      ]),
-    );
-  }
+  static final PlateSpec short = _build(
+    'vn.short',
+    _Layout.shortCar,
+    <List<_Part>>[
+      <_Part>[const _Part.run(VietnamAlphabets.digits, 2, 'province'), _series],
+      _number,
+    ],
+  );
 
   /// `29-AB` over `226.58`. The second cell of the series is a letter or a
   /// digit (`29-B1`).
-  static PlateSpec motorcycle({int digits = 5}) {
-    _check('digits', digits, const <int>[4, 5]);
-    return _memo(
-      'vn.moto.$digits',
-      () => _build('vn.moto.$digits', _Layout.motorcycle, <List<_Part>>[
-        const <_Part>[
-          _Part.run(VietnamAlphabets.digits, 2, 'province'),
-          _Part.dash(),
-          _Part.run(VietnamAlphabets.series, 1, 'series'),
-          _Part.run(VietnamAlphabets.seriesOrDigit, 1, 'series'),
-        ],
-        _number(digits),
-      ]),
-    );
-  }
+  static final PlateSpec motorcycle = _build(
+    'vn.moto',
+    _Layout.motorcycle,
+    <List<_Part>>[
+      const <_Part>[
+        _Part.run(VietnamAlphabets.digits, 2, 'province'),
+        _Part.dash(),
+        _Part.run(VietnamAlphabets.series, 1, 'series'),
+        _Part.run(VietnamAlphabets.seriesOrDigit, 1, 'series'),
+      ],
+      _number,
+    ],
+  );
 
   /// `T80` over `235.88`: the short plate, `T` first.
-  static PlateSpec temporary() => _memo(
+  static final PlateSpec temporary = _build(
     'vn.temporary',
-    () => _build('vn.temporary', _Layout.shortCar, <List<_Part>>[
+    _Layout.shortCar,
+    <List<_Part>>[
       const <_Part>[
         _Part.run(VietnamAlphabets.letters, 1, 'series'),
         _Part.run(VietnamAlphabets.digits, 2, 'province'),
       ],
-      _number(5),
-    ]),
+      _number,
+    ],
   );
 
   /// `80-441-NG-45`, or with [codeFirst] `27-QT-547-45` (an international
@@ -349,9 +344,7 @@ abstract final class VietnamPlates {
       );
 
   /// `AB-12-34`.
-  static PlateSpec militaryLong() => _memo(
-    'vn.militaryLong',
-    () => _build('vn.militaryLong', _Layout.longMilitary, <List<_Part>>[
+  static final PlateSpec militaryLong = _build('vn.militaryLong', _Layout.longMilitary, <List<_Part>>[
       const <_Part>[
         _Part.run(VietnamAlphabets.letters, 2, 'unit'),
         _Part.dash(),
@@ -359,39 +352,23 @@ abstract final class VietnamPlates {
         _Part.dash(),
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
       ],
-    ]),
-  );
+    ]);
 
   /// `AB` over `12-34`.
-  static PlateSpec militaryShort() => _memo(
-    'vn.militaryShort',
-    () => _build('vn.militaryShort', _Layout.shortMilitary, <List<_Part>>[
+  static final PlateSpec militaryShort = _build('vn.militaryShort', _Layout.shortMilitary, <List<_Part>>[
       const <_Part>[_Part.run(VietnamAlphabets.letters, 2, 'unit')],
       const <_Part>[
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
         _Part.dash(),
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
       ],
-    ]),
-  );
+    ]);
 
   /// `AB` over `123`.
-  static PlateSpec militaryMotorcycle() => _memo(
-    'vn.militaryMoto',
-    () => _build('vn.militaryMoto', _Layout.motorcycleMilitary, <List<_Part>>[
+  static final PlateSpec militaryMotorcycle = _build('vn.militaryMoto', _Layout.motorcycleMilitary, <List<_Part>>[
       const <_Part>[_Part.run(VietnamAlphabets.letters, 2, 'unit')],
       const <_Part>[_Part.run(VietnamAlphabets.digits, 3, 'number')],
-    ]),
-  );
-
-  /// `256.58` or `2565`.
-  static List<_Part> _number(int digits) => digits == 5
-      ? const <_Part>[
-          _Part.run(VietnamAlphabets.digits, 3, 'number'),
-          _Part.dot(),
-          _Part.run(VietnamAlphabets.digits, 2, 'number'),
-        ]
-      : const <_Part>[_Part.run(VietnamAlphabets.digits, 4, 'number')];
+    ]);
 
   static PlateSpec _build(
     String id,
@@ -440,28 +417,26 @@ abstract final class VietnamPlates {
             );
             x += row.dotCell;
           default:
-            // A mark splits a group's cells unevenly, so each run is its own
-            // group: `number`, then `number2`.
+            // A mark splits a number, so each field is its own group:
+            // `number`, then `number2`.
             String key = p.key!;
             for (int n = 2; groups.containsKey(key); n++) {
               key = '${p.key}$n';
             }
-            for (int i = 0; i < p.count; i++) {
-              groups.putIfAbsent(key, () => <int>[]).add(slots.length);
-              slots.add(
-                PlateSlot(
-                  alphabet: p.alphabet!,
-                  box: PlateBox(
-                    x + (row.pitch - row.cellWidth) / 2,
-                    row.top,
-                    row.cellWidth,
-                    row.height,
-                  ),
-                  color: p.color,
-                ),
-              );
-              x += row.pitch;
-            }
+            groups[key] = <int>[slots.length];
+            slots.add(
+              PlateSlot(
+                alphabet: p.alphabet!,
+                box: PlateBox(x, row.top, p.count * row.pitch, row.height),
+                length: p.count,
+                minLength: p.minLength,
+                spacing: p.count == 1 || p.minLength != null
+                    ? 0
+                    : max(0, row.pitch - 0.6 * 0.72 * row.height),
+                color: p.color,
+              ),
+            );
+            x += p.count * row.pitch;
         }
       }
     }

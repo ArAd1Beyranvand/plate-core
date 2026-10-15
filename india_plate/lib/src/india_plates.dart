@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -49,13 +51,21 @@ abstract final class _Layout {
   static const double indGlyph = 20.5;
 }
 
-/// One run of cells in a format: [count] editable cells in [alphabet] keyed
-/// [key], or, for [_Run.fixed], printed characters no one types (BH, VA, TC).
+/// One field of a format: up to [count] characters in [alphabet] keyed [key]
+/// (at least [min]), or, for [_Run.fixed], printed characters no one types
+/// (BH, VA, TC).
 class _Run {
-  const _Run(this.key, this.alphabet, this.count) : text = '';
-  const _Run.fixed(this.text) : key = '', alphabet = null, count = text.length;
+  const _Run(this.key, this.alphabet, this.count, {int? min})
+    : text = '',
+      min = min ?? count;
+  const _Run.fixed(this.text)
+    : key = '',
+      alphabet = null,
+      count = text.length,
+      min = text.length;
 
   final String key;
+  final int min;
   final PlateAlphabet? alphabet;
   final int count;
   final String text;
@@ -100,22 +110,16 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
       }
       prefix += run.text;
     } else {
-      final first = slots.length;
-      slots.addAll(
-        plateRegister(
-          alphabet: run.alphabet!,
-          count: run.count,
-          left: left,
-          top: top,
-          width: pitch,
-          height: height,
-        ),
-      );
       groups.add(
-        PlateTextGroup(
-          <int>[for (var i = first; i < slots.length; i++) i],
-          prefix: prefix,
-          key: run.key,
+        PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key),
+      );
+      slots.add(
+        PlateSlot(
+          alphabet: run.alphabet!,
+          box: PlateBox(left, top, run.count * pitch, height),
+          length: run.count,
+          minLength: run.min,
+          spacing: max(0, pitch - 0.6 * 0.72 * height),
         ),
       );
       prefix = '';
@@ -205,11 +209,11 @@ abstract final class IndiaPlates {
   ]);
 
   /// 52 CD 19: mission number, type, vehicle number. Both numbers are
-  /// written without leading zeros, so short ones leave cells blank.
+  /// written without leading zeros, so both fields start at one character.
   static final PlateSpec diplomatic = _plate('in.diplomatic', const <_Run>[
-    _Run('mission', _d, 3),
+    _Run('mission', _d, 3, min: 1),
     _Run('type', _l, 2),
-    _Run('number', _d, 4),
+    _Run('number', _d, 4, min: 1),
   ]);
 
   /// T 1123 KL 5986 K(K): T, month and year, state, number, series.

@@ -1,3 +1,13 @@
+## Unreleased
+
+- **Breaking: serials and usage codes are one field each.** The four serial
+  digits are one `PlateSlot(length: 4)` and the legacy/Gaza two-digit usage code
+  one `PlateSlot(length: 2)`, so every spec has three slots and the text groups
+  are `[0]`, `[1]`, `[2]`. Values are `['1', '0234', 'H']`, not one character
+  per slot.
+- `PSSerialGenerator` writes one string per field.
+- Removed the per-cell `plateRegister` calls from every West Bank and Gaza spec.
+
 ## 0.3.0
 
 - **Breaking: removed the `@Deprecated` `PSWestBankPlates.legacyCarForUsage`

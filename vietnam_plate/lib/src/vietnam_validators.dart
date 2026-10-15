@@ -11,7 +11,7 @@ String _number(PlateEntry entry) =>
 ///
 /// Checks what QCVN 08:2024/BCA and the article state: the province code is
 /// two digits from 11 up (there is no 00 to 10), the series is letters from
-/// the issued alphabet, and the number is 4 or 5 digits. Does not check which
+/// the issued alphabet, and the number is five digits (`256.58`). Does not check which
 /// province codes or series have actually been issued.
 class VietnamValidator extends GatedPlateValidator {
   const VietnamValidator();
@@ -21,7 +21,7 @@ class VietnamValidator extends GatedPlateValidator {
 
   static const String reasonProvince = 'The province code is 11 to 99.';
   static const String reasonSeries = 'The series is missing.';
-  static const String reasonNumber = 'The number is 4 or 5 digits.';
+  static const String reasonNumber = 'The number is 5 digits.';
 
   @override
   PlateValidation judge(PlateEntry entry) {
@@ -34,7 +34,7 @@ class VietnamValidator extends GatedPlateValidator {
       return const PlateValidation.invalid(reasonSeries);
     }
     final String number = _number(entry);
-    if (number.length < 4 || number.length > 5 || !isDigits(number)) {
+    if (number.length != 5 || !isDigits(number)) {
       return const PlateValidation.invalid(reasonNumber);
     }
     return const PlateValidation.valid();

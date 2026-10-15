@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
 
@@ -205,6 +208,20 @@ class BoliviaMission {
 }
 
 abstract final class BoliviaPlates {
+  static PlateSlot _field(
+    PlateAlphabet alphabet,
+    int count,
+    double left,
+    double pitch,
+    double top,
+    double height,
+  ) => PlateSlot(
+    alphabet: alphabet,
+    box: PlateBox(left, top, count * pitch, height),
+    length: count,
+    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  );
+
   /// The PTA plate, `1234ABC` under BOLIVIA, and the department letter. Older
   /// vehicles carry three digits; the row stays centred.
   ///
@@ -234,21 +251,21 @@ abstract final class BoliviaPlates {
         ),
       ],
       slots: <PlateSlot>[
-        ...plateRegisterAcross(
-          alphabet: BoliviaAlphabets.digits,
-          count: digits,
-          left: left,
-          right: split,
-          top: _Layout.serialTop,
-          height: _Layout.serialHeight,
+        _field(
+          BoliviaAlphabets.digits,
+          digits,
+          left,
+          _Layout.pitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
         ),
-        ...plateRegisterAcross(
-          alphabet: BoliviaAlphabets.letters,
-          count: 3,
-          left: split,
-          right: split + 3 * _Layout.pitch,
-          top: _Layout.serialTop,
-          height: _Layout.serialHeight,
+        _field(
+          BoliviaAlphabets.letters,
+          3,
+          split,
+          _Layout.pitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
         ),
         PlateSlot(
           alphabet: BoliviaAlphabets.departments,
@@ -257,13 +274,9 @@ abstract final class BoliviaPlates {
         ),
       ],
       textGroups: <PlateTextGroup>[
-        PlateTextGroup(<int>[
-          for (int i = 0; i < digits; i++) i,
-        ], key: 'number'),
-        PlateTextGroup(<int>[
-          for (int i = digits; i < cells; i++) i,
-        ], key: 'letters'),
-        PlateTextGroup(<int>[cells], prefix: ' ', key: 'department'),
+        PlateTextGroup(<int>[0], key: 'number'),
+        PlateTextGroup(<int>[1], key: 'letters'),
+        PlateTextGroup(<int>[2], prefix: ' ', key: 'department'),
       ],
     );
   }
@@ -304,27 +317,27 @@ abstract final class BoliviaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      ...plateRegisterAcross(
-        alphabet: BoliviaAlphabets.digits,
-        count: 2,
-        left: _Layout.dipLeft,
-        right: _Layout.dipLeft + 2 * _Layout.dipPitch,
-        top: _Layout.dipSerialTop,
-        height: _Layout.dipSerialHeight,
+      _field(
+        BoliviaAlphabets.digits,
+        2,
+        _Layout.dipLeft,
+        _Layout.dipPitch,
+        _Layout.dipSerialTop,
+        _Layout.dipSerialHeight,
       ),
-      ...plateRegisterAcross(
-        alphabet: BoliviaAlphabets.digits,
-        count: 2,
-        left: _Layout.dipRight - 2 * _Layout.dipPitch,
-        right: _Layout.dipRight,
-        top: _Layout.dipSerialTop,
-        height: _Layout.dipSerialHeight,
+      _field(
+        BoliviaAlphabets.digits,
+        2,
+        _Layout.dipRight - 2 * _Layout.dipPitch,
+        _Layout.dipPitch,
+        _Layout.dipSerialTop,
+        _Layout.dipSerialHeight,
       ),
     ],
     textGroups: <PlateTextGroup>[
-      const PlateTextGroup(<int>[0, 1], key: 'country'),
+      const PlateTextGroup(<int>[0], key: 'country'),
       PlateTextGroup(
-        const <int>[2, 3],
+        const <int>[1],
         prefix: '-${mission.code}-',
         key: 'rank',
       ),
@@ -357,26 +370,26 @@ abstract final class BoliviaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      ...plateRegister(
-        alphabet: BoliviaAlphabets.letters,
-        count: 2,
-        left: _Layout.mLettersLeft,
-        top: _Layout.mSerialTop,
-        width: _Layout.mLetterPitch,
-        height: _Layout.mSerialHeight,
+      _field(
+        BoliviaAlphabets.letters,
+        2,
+        _Layout.mLettersLeft,
+        _Layout.mLetterPitch,
+        _Layout.mSerialTop,
+        _Layout.mSerialHeight,
       ),
-      ...plateRegister(
-        alphabet: BoliviaAlphabets.digits,
-        count: 5,
-        left: _Layout.mDigitsLeft,
-        top: _Layout.mSerialTop,
-        width: _Layout.mDigitPitch,
-        height: _Layout.mSerialHeight,
+      _field(
+        BoliviaAlphabets.digits,
+        5,
+        _Layout.mDigitsLeft,
+        _Layout.mDigitPitch,
+        _Layout.mSerialTop,
+        _Layout.mSerialHeight,
       ),
     ],
     textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0, 1], key: 'letters'),
-      PlateTextGroup(<int>[2, 3, 4, 5, 6], prefix: ' ', key: 'number'),
+      PlateTextGroup(<int>[0], key: 'letters'),
+      PlateTextGroup(<int>[1], prefix: ' ', key: 'number'),
     ],
   );
 }

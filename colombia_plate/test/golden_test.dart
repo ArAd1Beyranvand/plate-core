@@ -67,41 +67,41 @@ void main() {
   }
 
   final List<(ColombiaSeries, PlateTheme, String, String?)> cases = [
-    (ColombiaSeries.private, ColombiaThemes.private, 'N A Z 8 2 7', 'ARMENIA'),
+    (ColombiaSeries.private, ColombiaThemes.private, 'NAZ 827', 'ARMENIA'),
     (
       ColombiaSeries.commercial,
       ColombiaThemes.commercial,
-      'X Z F 6 0 7',
+      'XZF 607',
       'S. ANDRES ISLA',
     ),
     (
       ColombiaSeries.official,
       ColombiaThemes.official,
-      'O V D 9 4 7',
+      'OVD 947',
       'PEREIRA',
     ),
     (
       ColombiaSeries.antiqueCar,
       ColombiaThemes.antique,
-      'A I D 8 9 9',
+      'AID 899',
       'BOGOTA D.C.',
     ),
     (
       ColombiaSeries.mototaxi,
       ColombiaThemes.private,
-      '1 2 3 A B C',
+      '123 ABC',
       'SINCELEJO',
     ),
-    (ColombiaSeries.trailer, ColombiaThemes.official, 'R 1 2 3 4 5', 'CALI'),
-    (ColombiaSeries.tankTruck, ColombiaThemes.tank, 'T 1 2 3 4', 'MEDELLIN'),
-    (ColombiaSeries.consular, ColombiaThemes.consular, 'C C 0 0 7 1', null),
+    (ColombiaSeries.trailer, ColombiaThemes.official, 'R 12345', 'CALI'),
+    (ColombiaSeries.tankTruck, ColombiaThemes.tank, 'T 1234', 'MEDELLIN'),
+    (ColombiaSeries.consular, ColombiaThemes.consular, 'CC 0071', null),
     (
       ColombiaSeries.organization,
       ColombiaThemes.organization,
-      'O I 0 0 4 5',
+      'OI 0045',
       null,
     ),
-    (ColombiaSeries.staff, ColombiaThemes.staff, 'A T 0 2 8 2', null),
+    (ColombiaSeries.staff, ColombiaThemes.staff, 'AT 0282', null),
   ];
   for (final (ColombiaSeries s, PlateTheme theme, String values, String? city)
       in cases) {
@@ -121,7 +121,7 @@ void main() {
       tester,
       spec: ColombiaPlates.police,
       theme: ColombiaThemes.police,
-      values: '6 0 0 0 0 7',
+      values: '60 0007',
       name: 'co_police',
     );
   });
@@ -131,7 +131,7 @@ void main() {
       tester,
       spec: ColombiaPlates.diplomatic,
       theme: ColombiaThemes.diplomatic,
-      values: 'A F R 0 0 0',
+      values: 'A FR 000',
       name: 'co_diplomatic',
     );
   });
@@ -160,11 +160,12 @@ void main() {
     }
   });
 
-  test('a fixed letter cell holds only that letter', () {
+  test('generated letters start with the fixed series letters', () {
     final PlateSpec spec = ColombiaPlates.standard(
       series: ColombiaSeries.consular,
     );
-    expect(spec.slots[0].alphabet.characters, <String>['C']);
-    expect(spec.slots[2].alphabet.characters, contains('7'));
+    final List<String?> v = ColombiaSerialGenerator.generate(spec);
+    expect(v[0], startsWith('CC'));
+    expect(v[1], hasLength(4));
   });
 }

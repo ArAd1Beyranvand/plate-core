@@ -25,28 +25,28 @@ void main() {
   test('provincial: photographed registers pass, class letter checked', () {
     const LaosValidator v = LaosValidator();
     final PlateSpec spec = LaosPlates.private;
-    expect(check(v, spec, 'ຮ ຍ 8 1 1 8').isValid, isTrue);
-    expect(check(v, spec, 'ກ ກ 6 8 8 4').isValid, isTrue);
-    expect(check(v, spec, 'ຊ ກ 1 2 3 4').reason, LaosValidator.reasonClass);
-    expect(check(v, spec, 'ກ ກ 1 2 3').reason, LaosValidator.reasonSerial);
+    expect(check(v, spec, 'ຮ ຍ 8118').isValid, isTrue);
+    expect(check(v, spec, 'ກ ກ 6884').isValid, isTrue);
+    expect(check(v, spec, 'ຊ ກ 1234').reason, LaosValidator.reasonClass);
+    expect(check(v, spec, 'ກ ກ 123').reason, LaosValidator.reasonSerial);
   });
 
   test('temporary: the photographed plate passes', () {
     const LaosTemporaryValidator v = LaosTemporaryValidator();
     final PlateSpec spec = LaosPlates.temporary;
-    expect(check(v, spec, 'ຊ ຄ 3 2 4 8 1 0 2 0 2 4 0 1').isValid, isTrue);
+    expect(check(v, spec, 'ຊ ຄ 3 248 10 2024 01').isValid, isTrue);
     expect(
-      check(v, spec, 'ຊ ຄ 3 2 4 8 1 0 2 0 2').reason,
+      check(v, spec, 'ຊ ຄ 3 248 10 2024').reason,
       LaosTemporaryValidator.reasonExpiry,
     );
   });
 
   test('prefixed: 2-2 on international plates, 4 on police', () {
     const LaosPrefixedValidator v = LaosPrefixedValidator();
-    expect(check(v, LaosPlates.diplomatic, '2 3 1 4').isValid, isTrue);
-    expect(check(v, LaosPlates.publicSecurity, '0 5 4 9').isValid, isTrue);
+    expect(check(v, LaosPlates.diplomatic, '23 14').isValid, isTrue);
+    expect(check(v, LaosPlates.publicSecurity, '0549').isValid, isTrue);
     expect(
-      check(v, LaosPlates.publicSecurity, '0 5 4').reason,
+      check(v, LaosPlates.publicSecurity, '054').reason,
       LaosPrefixedValidator.reasonSerial,
     );
   });
@@ -56,7 +56,7 @@ void main() {
     expect(
       const LaosValidator()
           .validate(
-            PlateEntry(spec: spec, values: List<String?>.filled(6, null)),
+            PlateEntry(spec: spec, values: List<String?>.filled(3, null)),
           )
           .isValid,
       isTrue,

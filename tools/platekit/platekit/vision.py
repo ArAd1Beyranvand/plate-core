@@ -246,6 +246,30 @@ def ink_mask(im: np.ndarray, chroma: float | None = None):
     return np.linalg.norm(lab - ink_c, axis=2) < np.linalg.norm(lab - field_c, axis=2)
 
 
+def fields(runs: list) -> list[dict]:
+    """Glyph runs grouped into fields: a field is printed and typed as a unit
+    (`12 ب 345`), so its glyphs sit at one pitch and a field break is a gap
+    clearly wider than that. Each field: its x-span and glyph count."""
+    if not runs:
+        return []
+    # a dash or dot between fields is a run much narrower than a glyph:
+    # it ends the field and is not counted
+    width = float(np.median([b - a for a, b in runs]))
+    gaps = [b[0] - a[1] for a, b in zip(runs, runs[1:])]
+    # the lower quartile, not the median: on `12 ب 345` half the gaps are breaks
+    pitch_gap = float(np.percentile(gaps, 25)) if gaps else 0
+    out, cut = [[]], False
+    for i, r in enumerate(runs):
+        if len(runs) > 2 and r[1] - r[0] < 0.5 * width:
+            cut = True
+            continue
+        if out[-1] and (cut or len(gaps) > 1 and gaps[i - 1] > max(1.8 * pitch_gap, pitch_gap + 3)):
+            out.append([])
+        out[-1].append(r)
+        cut = False
+    return [{'x': [f[0][0], f[-1][1]], 'glyphs': len(f)} for f in out if f]
+
+
 def measure(im: np.ndarray, cw: float, ch: float, *, win=None, gap: float = 2.5,
             chroma: float | None = None) -> dict:
     """Rows of ink and the glyph runs inside each, in plate units."""
@@ -267,11 +291,13 @@ def measure(im: np.ndarray, cw: float, ch: float, *, win=None, gap: float = 2.5,
         if (b - a) * sy < 3:
             continue
         cols = _runs(sub[a:b + 1].sum(0) > 0, int(gap / sx))
+        runs = [[round((X0 + p) * sx, 1), round((X0 + q + 1) * sx, 1)]
+                for p, q in cols if (q - p) * sx > 1]
         rows.append({
             'y': [round((Y0 + a) * sy, 1), round((Y0 + b + 1) * sy, 1)],
             'x': [round((X0 + cols[0][0]) * sx, 1), round((X0 + cols[-1][1] + 1) * sx, 1)],
-            'runs': [[round((X0 + p) * sx, 1), round((X0 + q + 1) * sx, 1)]
-                     for p, q in cols if (q - p) * sx > 1],
+            'runs': runs,
+            'fields': fields(runs),
         })
     return {'size_px': [W, H], 'aspect': round(W / H, 3), 'field': modal(~ink),
             'ink': modal(ink), 'rows': rows}

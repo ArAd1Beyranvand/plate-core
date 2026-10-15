@@ -3,6 +3,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'palestine_alphabets.dart';
 import 'palestine_country.dart';
+import 'palestine_slots.dart';
 import 'palestine_usage.dart';
 
 /// West Bank plate designs: modernCar (D·DDDD·L, since 2018) and legacyCar
@@ -38,12 +39,12 @@ abstract final class PSWestBankPlates {
       alphabet: PSAlphabets.digits,
       box: PlateBox(19.5, 9, 55, 92),
     ),
-    ...plateRegister(
+    psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
       left: 109.5,
       top: 9,
-      width: 55,
+      cellWidth: 55,
       height: 92,
       pitch: 59,
     ),
@@ -68,8 +69,8 @@ abstract final class PSWestBankPlates {
 
   static const List<PlateTextGroup> _modernGroups = [
     PlateTextGroup([0], key: 'region'),
-    PlateTextGroup([1, 2, 3, 4], key: 'serial'),
-    PlateTextGroup([5], key: 'governorate'),
+    PlateTextGroup([1], key: 'serial'),
+    PlateTextGroup([2], key: 'governorate'),
   ];
 
   /// Standard West Bank car plate (issued since July 2018).
@@ -96,22 +97,23 @@ abstract final class PSWestBankPlates {
       alphabet: PSAlphabets.districtDigits,
       box: PlateBox(20, 9, 47, 92),
     ),
-    ...plateRegister(
+    psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
       left: 95,
       top: 9,
-      width: 47,
+      cellWidth: 47,
       height: 92,
       pitch: 51,
     ),
-    const PlateSlot(
+    psRun(
       alphabet: PSAlphabets.digits,
-      box: PlateBox(323, 9, 47, 92),
-    ),
-    const PlateSlot(
-      alphabet: PSAlphabets.digits,
-      box: PlateBox(374, 9, 47, 92),
+      count: 2,
+      left: 323,
+      top: 9,
+      cellWidth: 47,
+      height: 92,
+      pitch: 51,
     ),
   ];
 
@@ -130,8 +132,8 @@ abstract final class PSWestBankPlates {
 
   static const List<PlateTextGroup> _legacyGroups = [
     PlateTextGroup([0], key: 'district'),
-    PlateTextGroup([1, 2, 3, 4], key: 'serial'),
-    PlateTextGroup([5, 6], key: 'usage'),
+    PlateTextGroup([1], key: 'serial'),
+    PlateTextGroup([2], key: 'usage'),
   ];
 
   /// Pre-2018 West Bank car plate. Recolour by calling [legacyCountryForUsage].
@@ -186,12 +188,12 @@ abstract final class PSWestBankPlates {
         alphabet: PSAlphabets.digits,
         box: PlateBox(16.5, 12, 34, 60),
       ),
-      ...plateRegister(
+      psRun(
         alphabet: PSAlphabets.digits,
         count: 4,
         left: 70.5,
         top: 12,
-        width: 34,
+        cellWidth: 34,
         height: 60,
         pitch: 37,
       ),
@@ -218,22 +220,23 @@ abstract final class PSWestBankPlates {
         alphabet: PSAlphabets.districtDigits,
         box: PlateBox(16.5, 12, 34, 60),
       ),
-      ...plateRegister(
+      psRun(
         alphabet: PSAlphabets.digits,
         count: 4,
         left: 70.5,
         top: 12,
-        width: 34,
+        cellWidth: 34,
         height: 60,
         pitch: 37,
       ),
-      const PlateSlot(
+      psRun(
         alphabet: PSAlphabets.digits,
-        box: PlateBox(80.5, 80, 34, 60),
-      ), // Line 2
-      const PlateSlot(
-        alphabet: PSAlphabets.digits,
-        box: PlateBox(117.5, 80, 34, 60),
+        count: 2,
+        left: 80.5,
+        top: 80,
+        cellWidth: 34,
+        height: 60,
+        pitch: 37,
       ),
     ],
     rules: _twoLineRules,
@@ -260,12 +263,12 @@ abstract final class PSWestBankPlates {
         alphabet: PSAlphabets.digits,
         box: PlateBox(12.5, 47, 30, 62),
       ),
-      ...plateRegister(
+      psRun(
         alphabet: PSAlphabets.digits,
         count: 4,
         left: 60,
         top: 47,
-        width: 30,
+        cellWidth: 30,
         height: 62,
         pitch: 32,
       ),
@@ -315,12 +318,12 @@ abstract final class PSWestBankPlates {
         alphabet: PSAlphabets.digits,
         box: PlateBox(12.5, 14, 24, 46),
       ),
-      ...plateRegister(
+      psRun(
         alphabet: PSAlphabets.digits,
         count: 4,
         left: 50.5,
         top: 14,
-        width: 24,
+        cellWidth: 24,
         height: 46,
         pitch: 26,
       ),
@@ -359,12 +362,12 @@ abstract final class PSWestBankPlates {
         alphabet: PSAlphabets.digits,
         box: PlateBox(43, 38, 48, 64),
       ),
-      ...plateRegister(
+      psRun(
         alphabet: PSAlphabets.digits,
         count: 4,
         left: 120,
         top: 38,
-        width: 48,
+        cellWidth: 48,
         height: 64,
         pitch: 51,
       ),

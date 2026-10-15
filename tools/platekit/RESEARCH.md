@@ -29,7 +29,7 @@ the LLM, but with offline input that replaces most of what it used to read.
 | 12 | Field and ink colours | code | `vision.colours` | EV field `FFAC00` vs `FFAF00` by hand; the local model said "yellow" |
 | 13 | Layout booleans (badge, rows, script, rotated text) | local | `pk ask`, `prompts/layout.md` | qwen3.5:4b: correct booleans in 26 s; wrong colour name; never used for numbers |
 | 14 | Group categories into designs | LLM, less | `brief.md` rows column | Same row count and spans means one design; the LLM confirms |
-| 15 | Write the spec builders (`_plates.dart`) | LLM | — | Judgement: slot groups, what is fixed and what is typed, edge cases |
+| 15 | Write the spec builders (`_plates.dart`) | LLM | — | Judgement: one `PlateSlot` per field (`length`/`minLength`), what is fixed and what is typed, edge cases |
 | 16 | Validator rules | LLM | — | From the format column and prose; short |
 | 17 | Package boilerplate, README, export, golden harness | code | `pk scaffold` | 7 files; the README is a fixed template plus one epithet |
 | 18 | Workspace + gallery registration, render test | code | `pk scaffold --register` | 4 edits, all insert-after-pattern |

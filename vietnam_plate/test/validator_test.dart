@@ -9,7 +9,7 @@ void main() {
     final PlateSpec spec = VietnamPlates.foreignLong();
     for (final String code in VietnamMissions.refused) {
       final List<String?> v = <String?>[
-        '8', '0', code[0], code[1], code[2], 'N', 'G', '4', '5', //
+        '80', code, 'NG', '45', //
       ];
       expect(spec.restrictionViolatedBy(v), isNotNull, reason: code);
     }
@@ -30,19 +30,31 @@ void main() {
 
   test('every spec has the groups the generator fills', () {
     for (final PlateSpec s in <PlateSpec>[
-      VietnamPlates.long(),
-      VietnamPlates.long(serial: 2, digits: 4),
-      VietnamPlates.short(),
-      VietnamPlates.motorcycle(),
-      VietnamPlates.temporary(),
+      VietnamPlates.long,
+      VietnamPlates.short,
+      VietnamPlates.motorcycle,
+      VietnamPlates.temporary,
       VietnamPlates.foreignLong(codeFirst: true),
       VietnamPlates.foreignShort(),
-      VietnamPlates.militaryLong(),
-      VietnamPlates.militaryShort(),
-      VietnamPlates.militaryMotorcycle(),
+      VietnamPlates.militaryLong,
+      VietnamPlates.militaryShort,
+      VietnamPlates.militaryMotorcycle,
     ]) {
       final List<String?> v = VietnamSerialGenerator.generate(s);
       expect(v.whereType<String>().length, s.slots.length, reason: s.id);
     }
+  });
+
+  test('a series completes from one letter; the number needs all five', () {
+    final PlateController c = PlateController.fromValues(
+      VietnamPlates.long,
+      <String?>['30', 'F', '256', '58'],
+    );
+    expect(c.isCompleted, isTrue);
+    c.setAt(1, 'LD');
+    expect(c.isCompleted, isTrue);
+    c.setAt(3, '5');
+    expect(c.isCompleted, isFalse);
+    c.dispose();
   });
 }

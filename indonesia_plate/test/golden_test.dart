@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:plate_core/plate_core.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +72,9 @@ void main() {
   testWidgets('private car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(prefix: 1),
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.private,
-      values: 'B 1 9 4 5 P K L 0 8 2 8',
+      values: 'B 1945 PKL 08 28',
       name: 'id_car_private',
     );
   });
@@ -81,9 +82,9 @@ void main() {
   testWidgets('public car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(),
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.public,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_public',
     );
   });
@@ -91,9 +92,9 @@ void main() {
   testWidgets('government car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(),
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.government,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_govt',
     );
   });
@@ -101,9 +102,9 @@ void main() {
   testWidgets('free-trade-zone car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(),
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.freeTradeZone,
-      values: 'B P 1 2 3 4 A B C 0 8 2 8',
+      values: 'BP 1234 ABC 08 28',
       name: 'id_car_ftz',
     );
   });
@@ -111,9 +112,9 @@ void main() {
   testWidgets('private EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(band: true),
+      spec: IndonesiaPlates.carEv,
       theme: IndonesiaThemes.privateEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_private_ev',
     );
   });
@@ -121,9 +122,9 @@ void main() {
   testWidgets('public EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(band: true),
+      spec: IndonesiaPlates.carEv,
       theme: IndonesiaThemes.publicEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_public_ev',
     );
   });
@@ -131,9 +132,9 @@ void main() {
   testWidgets('government EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(band: true),
+      spec: IndonesiaPlates.carEv,
       theme: IndonesiaThemes.governmentEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_govt_ev',
     );
   });
@@ -141,9 +142,9 @@ void main() {
   testWidgets('FTZ EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(band: true),
+      spec: IndonesiaPlates.carEv,
       theme: IndonesiaThemes.freeTradeZoneEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_car_ftz_ev',
     );
   });
@@ -151,9 +152,9 @@ void main() {
   testWidgets('short car, B 1 A', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.car(prefix: 1, digits: 1, suffix: 1),
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.private,
-      values: 'B 1 A 0 1 2 8',
+      values: 'B 1 A 01 28',
       name: 'id_car_short',
     );
   });
@@ -161,9 +162,9 @@ void main() {
   testWidgets('private motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(),
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.private,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_private',
     );
   });
@@ -171,9 +172,9 @@ void main() {
   testWidgets('public motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(),
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.public,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_public',
     );
   });
@@ -181,9 +182,9 @@ void main() {
   testWidgets('government motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(),
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.government,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_govt',
     );
   });
@@ -191,9 +192,9 @@ void main() {
   testWidgets('FTZ motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(),
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.freeTradeZone,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_ftz',
     );
   });
@@ -201,9 +202,9 @@ void main() {
   testWidgets('private EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(band: true),
+      spec: IndonesiaPlates.motorcycleEv,
       theme: IndonesiaThemes.privateEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_private_ev',
     );
   });
@@ -211,9 +212,9 @@ void main() {
   testWidgets('public EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(band: true),
+      spec: IndonesiaPlates.motorcycleEv,
       theme: IndonesiaThemes.publicEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_public_ev',
     );
   });
@@ -221,9 +222,9 @@ void main() {
   testWidgets('government EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(band: true),
+      spec: IndonesiaPlates.motorcycleEv,
       theme: IndonesiaThemes.governmentEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_govt_ev',
     );
   });
@@ -231,9 +232,9 @@ void main() {
   testWidgets('FTZ EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycle(band: true),
+      spec: IndonesiaPlates.motorcycleEv,
       theme: IndonesiaThemes.freeTradeZoneEv,
-      values: 'X X 1 2 3 4 A B C 0 8 2 8',
+      values: 'XX 1234 ABC 08 28',
       name: 'id_moto_ftz_ev',
     );
   });
@@ -241,9 +242,9 @@ void main() {
   testWidgets('diplomatic', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.diplomatic(),
+      spec: IndonesiaPlates.diplomatic,
       theme: IndonesiaThemes.diplomatic,
-      values: 'CD 1 2 3 1 2 3 0 8 2 8',
+      values: 'CD 123 123 08 28',
       name: 'id_diplomatic',
     );
   });
@@ -251,9 +252,9 @@ void main() {
   testWidgets('diplomatic EV', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.diplomatic(),
+      spec: IndonesiaPlates.diplomatic,
       theme: IndonesiaThemes.diplomaticEv,
-      values: 'CD 1 2 3 1 2 3 0 8 2 8',
+      values: 'CD 123 123 08 28',
       name: 'id_diplomatic_ev',
     );
   });
@@ -270,7 +271,7 @@ void main() {
         tester,
         spec: IndonesiaPlates.military(service),
         theme: theme,
-        values: '7 5 3 5 9 0 0',
+        values: '75359 00',
         name: 'id_military_${service.id}',
       );
     });
@@ -279,9 +280,9 @@ void main() {
   testWidgets('military, four digits', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.military(IndonesiaService.navy, digits: 4),
+      spec: IndonesiaPlates.military(IndonesiaService.navy),
       theme: IndonesiaThemes.navy,
-      values: '8 1 9 1 0 0',
+      values: '8191 00',
       name: 'id_military_navy_4',
     );
   });
@@ -289,9 +290,9 @@ void main() {
   testWidgets('police', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.police(),
+      spec: IndonesiaPlates.police,
       theme: IndonesiaThemes.police,
-      values: 'XXXIII 3 7 0 5 4 0',
+      values: 'XXXIII 3705 40',
       name: 'id_police',
     );
   });
@@ -301,15 +302,12 @@ void main() {
         const IndonesiaServiceValidator().judge(
           PlateEntry(spec: spec, values: values.split(' ')),
         );
-    final PlateSpec police = IndonesiaPlates.police();
+    final PlateSpec police = IndonesiaPlates.police;
     final PlateSpec army = IndonesiaPlates.military(IndonesiaService.army);
-    expect(judge(police, 'XV 3 7 0 5 4 0'), const PlateValidation.valid());
-    expect(
-      judge(police, 'XL 3 7 0 5 4 0'),
-      isNot(const PlateValidation.valid()),
-    );
-    expect(judge(army, '7 5 3 5 9 0 0'), const PlateValidation.valid());
-    expect(judge(army, '0 5 3 5 9 0 0'), isNot(const PlateValidation.valid()));
+    expect(judge(police, 'XV 3705 40'), const PlateValidation.valid());
+    expect(judge(police, 'XL 3705 40'), isNot(const PlateValidation.valid()));
+    expect(judge(army, '75359 00'), const PlateValidation.valid());
+    expect(judge(army, '05359 00'), isNot(const PlateValidation.valid()));
   });
 
   test('validator', () {
@@ -332,8 +330,46 @@ void main() {
     expect(ok('B', '1', '', '13'), isFalse);
   });
 
-  test('generator fills every slot', () {
-    final PlateSpec spec = IndonesiaPlates.car();
-    expect(IndonesiaSerialGenerator.generate(spec), everyElement(isNotNull));
+  test('fields are variable, and complete at their minimum', () {
+    final PlateSpec spec = IndonesiaPlates.car;
+    expect(spec.slotCount, 5);
+    expect(spec.slots[0].length, 2);
+    expect(spec.slots[0].minLength, 1);
+    expect(spec.slots[1].length, 4);
+    expect(spec.slots[2].length, 3);
+    expect(
+      IndonesiaPlates.military(IndonesiaService.army).slots[0].minLength,
+      4,
+    );
+    expect(spec.slots[1].isComplete('1'), isTrue);
+    expect(spec.slots[1].isComplete(null), isFalse);
+    expect(spec.slots[1].isFull('123'), isFalse);
+  });
+
+  test('generator fills every slot within its field', () {
+    final Random rnd = Random(1);
+    for (final PlateSpec spec in <PlateSpec>[
+      IndonesiaPlates.car,
+      IndonesiaPlates.motorcycleEv,
+    ]) {
+      for (int n = 0; n < 50; n++) {
+        final List<String?> v = IndonesiaSerialGenerator.generate(
+          spec,
+          random: rnd,
+        );
+        expect(v, everyElement(isNotNull));
+        for (int i = 0; i < v.length; i++) {
+          expect(spec.slots[i].accepts(v[i]!), isTrue, reason: '$v at $i');
+          expect(spec.slots[i].isComplete(v[i]), isTrue);
+        }
+        expect(
+          IndonesiaValidator()
+              .validate(PlateEntry(spec: spec, values: v))
+              .isValid,
+          isTrue,
+          reason: '$v',
+        );
+      }
+    }
   });
 }

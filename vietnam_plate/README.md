@@ -17,7 +17,7 @@ import 'package:plate_core/plate_core.dart';
 import 'package:vietnam_plate/vietnam_plate.dart';
 
 PlateCanvas(
-  spec: VietnamPlates.long(),
+  spec: VietnamPlates.long,
   theme: VietnamThemes.white,
   validator: const VietnamValidator(),
   autoValidate: true,

@@ -24,7 +24,7 @@ abstract final class PSSerialGenerator {
       values[i] = _digit(rng);
     }
     for (final i in serial) {
-      values[i] = _digit(rng);
+      values[i] = _digits(rng, 4);
     }
     final letters = PSGovernorate.letters;
     for (final i in governorate) {
@@ -33,7 +33,7 @@ abstract final class PSSerialGenerator {
     return values;
   }
 
-  /// Value for legacy West Bank [spec]. Usage code spans two slots.
+  /// Value for legacy West Bank [spec]. Usage code is one two-digit slot.
   /// Throws ArgumentError if spec lacks required groups.
   static List<String?> legacyWestBank(PlateSpec spec, {Random? random}) {
     final rng = random ?? Random();
@@ -47,7 +47,7 @@ abstract final class PSSerialGenerator {
       values[i] = districtCodes[rng.nextInt(districtCodes.length)];
     }
     for (final i in serial) {
-      values[i] = _digit(rng);
+      values[i] = _digits(rng, 4);
     }
     _writeUsage(
       values,
@@ -69,7 +69,7 @@ abstract final class PSSerialGenerator {
       values[i] = '3';
     }
     for (final i in serial) {
-      values[i] = _digit(rng);
+      values[i] = _digits(rng, 4);
     }
     _writeUsage(
       values,
@@ -79,15 +79,13 @@ abstract final class PSSerialGenerator {
     return values;
   }
 
-  /// Writes each character of [code] into the successive slots of [indices].
   static void _writeUsage(
     List<String?> values,
     List<int> indices,
     String code,
   ) {
-    final chars = code.split('');
-    for (var n = 0; n < indices.length && n < chars.length; n++) {
-      values[indices[n]] = chars[n];
+    for (final i in indices) {
+      values[i] = code;
     }
   }
 
@@ -108,4 +106,7 @@ abstract final class PSSerialGenerator {
       values.map((v) => v ?? '').join();
 
   static String _digit(Random rng) => rng.nextInt(10).toString();
+
+  static String _digits(Random rng, int n) =>
+      List.generate(n, (_) => _digit(rng)).join();
 }

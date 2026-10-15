@@ -87,10 +87,7 @@ void main() {
 
     test('quiet until the governorate group is reached', () {
       final spec = PSWestBankPlates.modernCar;
-      final entry = PlateEntry(
-        spec: spec,
-        values: ['1', '0', '2', '3', '4', null],
-      );
+      final entry = PlateEntry(spec: spec, values: ['1', '0234', null]);
       expect(const PSWestBankModernValidator().validate(entry).isValid, isTrue);
     });
   });
@@ -152,10 +149,7 @@ void main() {
 
     test('quiet until the usage group is reached', () {
       final spec = PSWestBankPlates.legacyCar;
-      final entry = PlateEntry(
-        spec: spec,
-        values: ['4', '0', '2', '3', '4', null, null],
-      );
+      final entry = PlateEntry(spec: spec, values: ['4', '0234', null]);
       expect(const PSWestBankLegacyValidator().validate(entry).isValid, isTrue);
     });
   });
@@ -212,10 +206,7 @@ void main() {
 
     test('quiet until the usage group is reached', () {
       final spec = PSGazaPlates.car2012;
-      final entry = PlateEntry(
-        spec: spec,
-        values: ['3', '0', '2', '3', '4', null, null],
-      );
+      final entry = PlateEntry(spec: spec, values: ['3', '0234', null]);
       expect(const PSGazaValidator().validate(entry).isValid, isTrue);
     });
   });

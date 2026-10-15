@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:plate_core/plate_core.dart';
 
 import 'mali_alphabets.dart';
@@ -53,94 +55,26 @@ PlateSpec maliStandardPlate() {
     panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
     background: PlateSection.plain,
     slots: <PlateSlot>[
-      // First letter
-      PlateSlot(
-        alphabet: MaliAlphabets.letters,
-        box: PlateBox(
-          _Layout.leftLettersLeft,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Second letter
-      PlateSlot(
-        alphabet: MaliAlphabets.letters,
-        box: PlateBox(
-          _Layout.leftLettersLeft + _Layout.cellWidth,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // First digit
-      PlateSlot(
-        alphabet: MaliAlphabets.digits,
-        box: PlateBox(
-          _Layout.digitsLeft,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Second digit
-      PlateSlot(
-        alphabet: MaliAlphabets.digits,
-        box: PlateBox(
-          _Layout.digitsLeft + _Layout.cellWidth,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Third digit
-      PlateSlot(
-        alphabet: MaliAlphabets.digits,
-        box: PlateBox(
-          _Layout.digitsLeft + 2 * _Layout.cellWidth,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Fourth digit
-      PlateSlot(
-        alphabet: MaliAlphabets.digits,
-        box: PlateBox(
-          _Layout.digitsLeft + 3 * _Layout.cellWidth,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Third letter
-      PlateSlot(
-        alphabet: MaliAlphabets.letters,
-        box: PlateBox(
-          _Layout.rightLettersLeft,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
-      // Fourth letter
-      PlateSlot(
-        alphabet: MaliAlphabets.letters,
-        box: PlateBox(
-          _Layout.rightLettersLeft + _Layout.cellWidth,
-          top,
-          _Layout.cellWidth,
-          _Layout.glyphHeight,
-        ),
-      ),
+      _field(MaliAlphabets.letters, 2, _Layout.leftLettersLeft, top),
+      _field(MaliAlphabets.digits, 4, _Layout.digitsLeft, top),
+      _field(MaliAlphabets.letters, 2, _Layout.rightLettersLeft, top),
     ],
-    textGroups: <PlateTextGroup>[
-      PlateTextGroup(const <int>[0, 1], key: 'prefix'),
-      PlateTextGroup(const <int>[2, 3, 4, 5], key: 'number'),
-      PlateTextGroup(const <int>[6, 7], key: 'suffix'),
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'prefix'),
+      PlateTextGroup(<int>[1], key: 'number'),
+      PlateTextGroup(<int>[2], key: 'suffix'),
     ],
   );
 }
+
+/// One field of [count] cells from [left], spaced to the cell width.
+PlateSlot _field(PlateAlphabet alphabet, int count, double left, double top) =>
+    PlateSlot(
+      alphabet: alphabet,
+      box: PlateBox(left, top, count * _Layout.cellWidth, _Layout.glyphHeight),
+      length: count,
+      spacing: max(0, _Layout.cellWidth - 0.6 * 0.72 * _Layout.glyphHeight),
+    );
 
 /// All Mali plate specs, keyed by a simple name.
 abstract final class MaliPlates {

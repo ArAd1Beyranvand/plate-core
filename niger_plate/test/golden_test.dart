@@ -28,38 +28,38 @@ void main() {
       'ne_private',
       NigerPlates.privateSpec,
       NigerUsage.private,
-      ['8', 'H', '7', '6', '5', '4'],
+      ['8', 'H', '7654'],
     ),
     (
       'ne_commercial',
       NigerPlates.commercialSpec,
       NigerUsage.commercial,
-      ['1', 'E', '2', '3', '4', '5'],
+      ['1', 'E', '2345'],
     ),
     // The four below have no reference image; these goldens pin the layout.
     (
       'ne_state',
       NigerOtherPlates.state,
       NigerUsage.stateTransport,
-      ['1', '2', '3', '4', '5', '6'],
+      ['12345', '6'],
     ),
     (
       'ne_military',
       NigerOtherPlates.military,
       NigerUsage.military,
-      ['1', '2', '3', '4', '5'],
+      ['12345'],
     ),
     (
       'ne_diplomatic_cmd',
       NigerOtherPlates.diplomaticChief,
       NigerUsage.diplomaticChief,
-      ['1', '2', '3'],
+      ['123'],
     ),
     (
       'ne_diplomatic_cd',
       NigerOtherPlates.diplomaticStaff,
       NigerUsage.diplomaticStaff,
-      ['1', '2', '3', '4'],
+      ['123', '4'],
     ),
   ];
   for (final (name, spec, usage, values) in cases) {

@@ -10,10 +10,7 @@ void main() {
       'fills every slot of every geometry with something the validator accepts',
       () {
         final Random rnd = Random(7);
-        for (final PlateSpec spec in <PlateSpec>[
-          ...LebanonPlates.oneLineGeometries.values,
-          ...LebanonPlates.twoLineGeometries.values,
-        ]) {
+        for (final PlateSpec spec in <PlateSpec>[LebanonPlates.oneLine, LebanonPlates.twoLine]) {
           for (final List<String?> values
               in LebanonSerialGenerator.generateMany(spec, 40, random: rnd)) {
             expect(values, hasLength(spec.slots.length), reason: spec.id);

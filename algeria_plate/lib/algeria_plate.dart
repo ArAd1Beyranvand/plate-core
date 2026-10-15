@@ -10,6 +10,7 @@ export 'src/algeria_alphabets.dart';
 export 'src/algeria_colors.dart';
 export 'src/algeria_country.dart';
 export 'src/algeria_plates.dart';
+export 'src/algeria_regions.dart';
 export 'src/algeria_serial_generator.dart';
 export 'src/algeria_themes.dart';
 export 'src/algeria_validators.dart';

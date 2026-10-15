@@ -51,14 +51,15 @@ class TunisiaGovernmentValidator extends GatedPlateValidator {
   String get gateGroup => 'number';
 
   static const String reasonMinistry = 'The ministry code is two digits.';
-  static const String reasonNumber = 'The vehicle number is digits.';
+  static const String reasonNumber = 'The vehicle number is one to six digits.';
 
   @override
   PlateValidation judge(PlateEntry entry) {
     if (!isDigitsOfLength(entry.group('ministry'), 2)) {
       return const PlateValidation.invalid(reasonMinistry);
     }
-    if (!isDigits(entry.group('number'))) {
+    final String number = entry.group('number');
+    if (!isDigits(number) || number.length > 6) {
       return const PlateValidation.invalid(reasonNumber);
     }
     return const PlateValidation.valid();

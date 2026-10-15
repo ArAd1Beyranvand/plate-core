@@ -419,7 +419,10 @@ def cmd_before(a):
               f'The offline stage already ran (tools/platekit). Read '
               f'.plateref/{code}/brief.md and .plateref/{code}/sheet_flat.png first, '
               f'instead of the article and the photos; open other images only where '
-              f'the brief says CHECK. The package skeleton {pkg}/ exists. Follow '
+              f'the brief says CHECK. The package skeleton {pkg}/ exists. Model every '
+              f'field (a run printed and typed as a unit) as one PlateSlot with '
+              f'length/minLength, as the /numbmig rules and "Fields, not cells" in '
+              f'the brief say — not one cell per character. Follow '
               f'"What is left for you" at the end of the brief and stop there; '
               f'registration, goldens, tests and the commit plan are done afterwards '
               f'by `pk.py after`.')
@@ -428,6 +431,22 @@ def cmd_before(a):
         print(f'archived to {archive.save(work)}')
     print(f'\nDone. Now start Claude Code in {ROOT} and paste '
           f'.plateref/{code}/claude_prompt.txt:\n\n{prompt}\n')
+
+
+def _per_character_samples(pkg: Path, gallery: Path) -> list[str]:
+    """Sample values typed one character per slot (`'A B 1 2 3 4'`,
+    `['1', '2', '3']`): the sign of a field split into cells. Each field is
+    one PlateSlot, so its sample is one token."""
+    found = []
+    for f in (pkg / 'test' / 'golden_test.dart', gallery):
+        if not f.exists():
+            continue
+        for n, line in enumerate(f.read_text().splitlines(), 1):
+            if (re.search(r"'(?:\S ){3,}\S'", line)
+                    or re.search(r"(?:'[^'\s]',\s*){4,}", line)):
+                found.append(f'{f.relative_to(ROOT)}:{n}: one character per slot — '
+                             f'make each field one PlateSlot (length/minLength) and its sample one token')
+    return found
 
 
 def cmd_after(a):
@@ -453,6 +472,7 @@ def cmd_after(a):
     print(logfilter.run(['flutter', 'pub', 'get'], ROOT).strip().splitlines()[-1])
     logfilter.run(['dart', 'format', 'lib', 'test'], ROOT / pkg)
 
+    report += _per_character_samples(ROOT / pkg, holder / 'lib/screens/gallery/sources' / f'{s}.dart')
     _step('3/6 analyze')
     for d in (pkg, 'plate_number_holder'):
         issues = [i for i in logfilter.analyze(logfilter.run(['flutter', 'analyze'], ROOT / d))

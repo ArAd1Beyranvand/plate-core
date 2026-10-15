@@ -277,16 +277,40 @@ def safe_name(name: str) -> str:
     return re.sub(r'[^A-Za-z0-9._-]+', '_', name)
 
 
-def download(names: list[str], out: Path) -> dict[str, dict]:
-    meta = resolve_images(names)
+def page_images(html: str) -> dict[str, dict]:
+    """The pictures exactly as the article shows them: each <img>'s own URL
+    (the largest of its srcset), no per-file lookup or original download."""
+    out = {}
+    for img in BeautifulSoup(html, 'lxml').select('img'):
+        a = img.find_parent('a', href=re.compile(r'/wiki/File:'))
+        ref = a['href'] if a else img.get('resource', '')
+        if 'File:' not in ref:
+            continue
+        name = urllib.parse.unquote(ref.split('File:', 1)[1])
+        if name in out:
+            continue
+        url, best = img.get('src'), 1.0
+        for part in (img.get('srcset') or '').split(','):
+            bits = part.split()
+            if len(bits) == 2 and bits[1].endswith('x') and float(bits[1][:-1]) > best:
+                url, best = bits[0], float(bits[1][:-1])
+        if url and url.startswith('//'):
+            url = 'https:' + url
+        out[name] = {'url': url, 'width': img.get('data-file-width'), 'height': img.get('data-file-height')}
+    return out
+
+
+def download(names: list[str], out: Path, html: str) -> dict[str, dict]:
+    shown = page_images(html)
+    meta = {n: shown[n] for n in names if n in shown}
     for n, (name, info) in enumerate(meta.items(), 1):
         progress.step_items(n, len(meta))
         if not info['url']:
             continue
         dest = out / ('orig_' + safe_name(name))
         url = info['url']
-        if name.lower().endswith('.svg'):  # Wikimedia's PNG render of the drawing
-            dest, url, info['drawing'] = dest.with_suffix('.png'), info['thumb'] or url, True
+        if name.lower().endswith('.svg'):  # the page already shows a PNG render of the drawing
+            dest, info['drawing'] = dest.with_suffix('.png'), True
         if name.lower().endswith('.gif'):  # OpenCV cannot read GIF; keep the first frame as PNG
             dest, info['drawing'] = dest.with_suffix('.png'), True
         if not dest.exists():
@@ -316,6 +340,6 @@ def run(country: str, out: Path) -> dict:
     facts = parse(html)
     facts['country'] = country
     facts['source'] = article_url(country)
-    facts['images'] = download(facts['all_images'], out)
+    facts['images'] = download(facts['all_images'], out, html)
     (out / 'facts.json').write_text(json.dumps(facts, ensure_ascii=False, indent=1))
     return facts
