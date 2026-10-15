@@ -7,11 +7,9 @@ import '../model/plate_spec.dart';
 import '../model/slot_behavior.dart';
 import 'plate_input_controller.dart';
 
-/// Owns focus and navigation for one plate: the focus nodes and text
-/// controllers. Takes values through [readValues] and writes them through
-/// [commit], so it is independent of how the host stores state. Tied to its
-/// [spec]: a spec change disposes it and builds a new one rather than
-/// reindexing.
+/// Focus nodes and text controllers for one plate. Reads values through
+/// [readValues] and writes through [commit], so it is independent of host
+/// state. Bound to its [spec]: a spec change builds a new machine.
 class PlateInputMachine implements PlateInputTarget {
   PlateInputMachine({
     required this.spec,
@@ -29,10 +27,8 @@ class PlateInputMachine implements PlateInputTarget {
             : null,
       );
     }
-    // An editable mirror is a second field over one slot, but it is not a slot
-    // itself: it adds nothing to the plate's count, grammar or completion. Its
-    // focus reports as its source's, so a keypad reads the same alphabet
-    // whichever row is being typed.
+    // An editable mirror is a second field over one slot, not a slot: its focus
+    // reports as its source's, so a keypad sees one alphabet for both rows.
     for (var i = 0; i < spec.mirrors.length; i++) {
       final mirror = spec.mirrors[i];
       final alphabet = mirror.alphabet ?? spec.slots[mirror.source].alphabet;
@@ -44,22 +40,19 @@ class PlateInputMachine implements PlateInputTarget {
         _mirrorControllers.add(null);
       }
     }
-    // Seed the active slot to the first one before focus lands. A host that
-    // renders its keypad off [activeIndex] starts on the first slot's alphabet
-    // rather than defaulting to a type. The seed is not announced from here.
+    // Seeded, unannounced, so a keypad driven by [activeIndex] starts on the
+    // first slot's alphabet.
     _activeIndex = spec.slots.isNotEmpty ? 0 : null;
   }
 
   final PlateSpec spec;
   final List<String?> Function() readValues;
 
-  /// Writes one slot's character back to the host; '' clears the slot.
-  /// Returns whether the value was stored: a controller refuses a value that
-  /// breaks a spec's restriction, and focus must not move past a refusal.
+  /// Writes one slot's value back to the host; '' clears it. Returns whether it
+  /// was stored; focus must not advance past a refusal.
   final bool Function(int index, String value) commit;
 
-  /// Where characters come from. Re-resolved per build; [PlateMode.display]
-  /// forces [PlateInputSource.system].
+  /// Where characters come from; re-resolved per build.
   PlateInputSource inputSource;
 
   /// Fired when the focused slot changes or focus leaves the plate.
@@ -68,8 +61,8 @@ class PlateInputMachine implements PlateInputTarget {
   /// Fired when [systemKeyboard] flips.
   final VoidCallback? onSystemKeyboardChanged;
 
-  /// Under [PlateInputSource.keypadFirst], whether typed slots currently
-  /// take the platform keyboard rather than the keypad.
+  /// Under [PlateInputSource.keypadFirst], whether typed slots use the platform
+  /// keyboard rather than the keypad.
   final ValueNotifier<bool> systemKeyboard = ValueNotifier(false);
 
   @override
@@ -116,7 +109,6 @@ class PlateInputMachine implements PlateInputTarget {
         break;
       }
     }
-    // An editable mirror reports focus as its source's — the two share one value.
     if (active == null) {
       for (var i = 0; i < _mirrorFocusNodes.length; i++) {
         if (_mirrorFocusNodes[i]?.hasFocus ?? false) {
@@ -125,8 +117,7 @@ class PlateInputMachine implements PlateInputTarget {
         }
       }
     }
-    // No platform keyboard can type a chosen slot, and none is wanted once
-    // focus has left the plate: both hand back to the keypad.
+    // Chosen slots and a plate without focus fall back to the keypad.
     if (active == null ||
         spec.slots[active].alphabet.input != AlphabetInput.typed) {
       _setSystemKeyboard(false);
@@ -137,8 +128,8 @@ class PlateInputMachine implements PlateInputTarget {
     }
   }
 
-  /// Advance focus off [index] to the next slot, the sheet for a chosen slot,
-  /// or stay put at the end of the plate so backspace still acts.
+  /// Moves focus past [index]: to the next slot, or its sheet if chosen. At the
+  /// end of the plate focus stays so backspace still acts.
   void advanceFrom(int index) {
     final next = spec.nextIndex(index);
     if (next == null) return;
@@ -154,37 +145,27 @@ class PlateInputMachine implements PlateInputTarget {
     }
   }
 
-  /// Sync one slot's field with the host's value for it. Per-slot, not bulk:
-  /// the canvas's slot bindings each subscribe to their own character, so a
-  /// keystroke rebuilds one slot.
-  ///
-  /// The field shows the alphabet's display form (national numerals) while the
-  /// host stores the canonical value. This lets a national-numeral slot type in
-  /// its own script.
-  void syncController(int index, String? value) {
-    final field = _controllers[index];
-    if (field == null) return;
-    final stored = value ?? '';
-    final text = stored.isEmpty ? '' : spec.slots[index].render(stored);
-    if (field.text == text) return;
-    field.value = TextEditingValue(
-      text: text,
-      selection: TextSelection.collapsed(offset: text.length),
-    );
-  }
+  /// Syncs one slot's field with the host's canonical value. The field shows
+  /// the alphabet's display form (national numerals), so a slot types in its
+  /// own script. Per slot, so a keystroke rebuilds one slot.
+  void syncController(int index, String? value) =>
+      _setText(_controllers[index], value, spec.slots[index].render);
 
-  /// Sync an editable mirror's field with its source slot's value, rendered
-  /// through the mirror's alphabet — the Latin row shows `5` where the Iranian
-  /// row shows `٥`.
+  /// Syncs an editable mirror's field with its source slot's value, rendered
+  /// through the mirror's [alphabet].
   void syncMirrorController(
     int mirrorIndex,
     PlateAlphabet alphabet,
     String? value,
+  ) => _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
+
+  static void _setText(
+    TextEditingController? field,
+    String? stored,
+    String Function(String) render,
   ) {
-    final field = _mirrorControllers[mirrorIndex];
     if (field == null) return;
-    final stored = value ?? '';
-    final text = stored.isEmpty ? '' : alphabet.renderAll(stored);
+    final text = stored == null || stored.isEmpty ? '' : render(stored);
     if (field.text == text) return;
     field.value = TextEditingValue(
       text: text,
@@ -231,8 +212,6 @@ class PlateInputMachine implements PlateInputTarget {
     final empty = current == null || current.isEmpty;
     final target = empty ? spec.previousIndex(index) : index;
     if (target == null) return;
-    // Backspace takes one character off a run; the previous field is cleared
-    // by its last character the same way.
     final held = empty ? (values[target] ?? '') : current;
     final kept = held.runes.take(held.runes.length - 1);
     commit(target, String.fromCharCodes(kept));
@@ -242,14 +221,8 @@ class PlateInputMachine implements PlateInputTarget {
   @override
   void focusFirstEmptySlot() {
     final values = readValues();
-    for (var i = 0; i < spec.slots.length; i++) {
-      final v = values[i];
-      if (!spec.slots[i].isFull(v)) {
-        _focusNodes[i].requestFocus();
-        return;
-      }
-    }
-    _focusNodes.first.requestFocus();
+    final i = spec.slots.indexed.where((e) => !e.$2.isFull(values[e.$1]));
+    _focusNodes[i.firstOrNull?.$1 ?? 0].requestFocus();
   }
 
   @override

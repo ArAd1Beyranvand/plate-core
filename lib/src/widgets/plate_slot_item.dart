@@ -6,8 +6,7 @@ import '../model/plate_spec.dart';
 import '../model/slot_behavior.dart';
 import '../theme/plate_theme.dart';
 
-/// One plate position, driven by [PlateSlot] and [SlotBehavior]. Never reads
-/// the bloc; [behavior] is resolved once and switched on, not re-derived.
+/// One plate position, rendered per [SlotBehavior].
 class PlateSlotItem extends StatelessWidget {
   const PlateSlotItem({
     super.key,
@@ -51,90 +50,38 @@ class PlateSlotItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? PlateTheme.of(context);
-    final isTyped = slot.alphabet.input == AlphabetInput.typed;
-
-    switch (behavior) {
-      case SlotBehavior.glyph:
-        return _GlyphSlot(slot: slot, value: value, theme: effectiveTheme);
-
-      case SlotBehavior.imeField:
-        return _TypedField(
-          slot: slot,
-          value: value,
-          behavior: behavior,
-          controller: controller!,
-          focusNode: focusNode,
-          onChanged: onChanged,
-          onCompleted: onCompleted,
-          onBackspace: onBackspace,
-          theme: effectiveTheme,
-        );
-
-      case SlotBehavior.hardwareField:
-        if (isTyped) {
-          return _TypedField(
-            slot: slot,
-            value: value,
-            behavior: behavior,
-            controller: controller!,
-            focusNode: focusNode,
-            onChanged: onChanged,
-            onCompleted: onCompleted,
-            onBackspace: onBackspace,
-            theme: effectiveTheme,
-          );
-        }
-        return _ChosenSlot(
-          slot: slot,
-          behavior: behavior,
-          value: value,
-          focusNode: focusNode,
-          onChanged: onChanged,
-          onPressed: onPressed,
-          onBackspace: onBackspace,
-          theme: effectiveTheme,
-        );
-
-      case SlotBehavior.externalField:
-      case SlotBehavior.keypadFirstField:
-        if (isTyped) {
-          return _TypedField(
-            slot: slot,
-            value: value,
-            behavior: behavior,
-            controller: controller!,
-            focusNode: focusNode,
-            onChanged: onChanged,
-            onCompleted: onCompleted,
-            onBackspace: onBackspace,
-            theme: effectiveTheme,
-            systemKeyboard: systemKeyboard,
-            onRequestSystemKeyboard: onRequestSystemKeyboard,
-          );
-        }
-        return _ChosenSlot(
-          slot: slot,
-          behavior: behavior,
-          value: value,
-          focusNode: focusNode,
-          onChanged: onChanged,
-          onPressed: onPressed,
-          onBackspace: onBackspace,
-          theme: effectiveTheme,
-        );
-
-      case SlotBehavior.sheet:
-        return _ChosenSlot(
-          slot: slot,
-          behavior: behavior,
-          value: value,
-          focusNode: focusNode,
-          onChanged: onChanged,
-          onPressed: onPressed,
-          onBackspace: onBackspace,
-          theme: effectiveTheme,
-        );
+    if (behavior == SlotBehavior.glyph) {
+      return _GlyphSlot(slot: slot, value: value, theme: effectiveTheme);
     }
+    final typed =
+        behavior == SlotBehavior.imeField ||
+        (behavior != SlotBehavior.sheet &&
+            slot.alphabet.input == AlphabetInput.typed);
+    if (typed) {
+      return _TypedField(
+        slot: slot,
+        value: value,
+        behavior: behavior,
+        controller: controller!,
+        focusNode: focusNode,
+        onChanged: onChanged,
+        onCompleted: onCompleted,
+        onBackspace: onBackspace,
+        theme: effectiveTheme,
+        systemKeyboard: systemKeyboard,
+        onRequestSystemKeyboard: onRequestSystemKeyboard,
+      );
+    }
+    return _ChosenSlot(
+      slot: slot,
+      behavior: behavior,
+      value: value,
+      focusNode: focusNode,
+      onChanged: onChanged,
+      onPressed: onPressed,
+      onBackspace: onBackspace,
+      theme: effectiveTheme,
+    );
   }
 }
 
@@ -358,41 +305,29 @@ class _ChosenSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEmpty = value == null || value!.isEmpty;
 
-    final letter = isEmpty
-        ? Text(
-            slot.alphabet.placeholder,
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            softWrap: false,
-            overflow: TextOverflow.clip,
-            style: theme.glyphStyle(slot.box.height, theme.inactiveColor),
-          )
-        : Text(
-            slot.alphabet.render(value!),
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            softWrap: false,
-            overflow: TextOverflow.clip,
-            style: theme.glyphStyle(slot.box.height, slot.color ?? theme.ink),
-          );
-
-    Widget slotBox(Color underlineColor) => SizedBox(
-      width: slot.box.width,
-      height: slot.box.height,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border(bottom: BorderSide(color: underlineColor)),
-        ),
-        child: Center(
-          child: FittedBox(fit: BoxFit.scaleDown, child: letter),
-        ),
+    final letter = Text(
+      isEmpty ? slot.alphabet.placeholder : slot.alphabet.render(value!),
+      textAlign: TextAlign.center,
+      maxLines: 1,
+      softWrap: false,
+      overflow: TextOverflow.clip,
+      style: theme.glyphStyle(
+        slot.box.height,
+        isEmpty ? theme.inactiveColor : slot.color ?? theme.ink,
       ),
     );
 
     final restingColor = isEmpty ? theme.inactiveColor : theme.activeColor;
 
     if (behavior == SlotBehavior.sheet) {
-      return InkWell(onTap: onPressed, child: slotBox(restingColor));
+      return InkWell(
+        onTap: onPressed,
+        child: _SlotBox(
+          slot: slot,
+          underlineColor: restingColor,
+          child: letter,
+        ),
+      );
     }
 
     final consumesKeys =
@@ -424,10 +359,40 @@ class _ChosenSlot extends StatelessWidget {
           final hasFocus = Focus.of(context).hasFocus;
           return GestureDetector(
             onTap: () => focusNode.requestFocus(),
-            child: slotBox(hasFocus ? theme.activeColor : restingColor),
+            child: _SlotBox(
+              slot: slot,
+              underlineColor: hasFocus ? theme.activeColor : restingColor,
+              child: letter,
+            ),
           );
         },
       ),
     );
   }
+}
+
+class _SlotBox extends StatelessWidget {
+  const _SlotBox({
+    required this.slot,
+    required this.underlineColor,
+    required this.child,
+  });
+
+  final PlateSlot slot;
+  final Color underlineColor;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+    width: slot.box.width,
+    height: slot.box.height,
+    child: DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(color: underlineColor)),
+      ),
+      child: Center(
+        child: FittedBox(fit: BoxFit.scaleDown, child: child),
+      ),
+    ),
+  );
 }
