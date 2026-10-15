@@ -497,7 +497,8 @@ class PlateSpecTransition {
             a.direction == b.direction &&
             identical(a.shape, b.shape);
       case PlatePartKind.region:
-        final a = _leafAt(from, i), b = _leafAt(to, i);
+        final a = _layout(from).leaves.elementAtOrNull(i);
+        final b = _layout(to).leaves.elementAtOrNull(i);
         if (a == null || b == null) return false;
         return a.$2 == b.$2 &&
             identical(a.$1.shape, b.$1.shape) &&
@@ -505,7 +506,8 @@ class PlateSpecTransition {
             (!a.$1.paintsPanel ||
                 from.country.panelColor == to.country.panelColor);
       case PlatePartKind.divider:
-        final a = _dividerAt(from, i), b = _dividerAt(to, i);
+        final a = _layout(from).dividers.elementAtOrNull(i);
+        final b = _layout(to).dividers.elementAtOrNull(i);
         return a != null && a == b && from.inkOverride == to.inkOverride;
       case PlatePartKind.slot:
         if (fromValues == null || toValues == null) return false;
@@ -554,65 +556,11 @@ class PlateSpecTransition {
         b.fog == null;
   }
 
-  /// Leaf [index] of [spec]'s background and its rect, depth-first.
-  static (PlateSection, Rect)? _leafAt(PlateSpec spec, int index) {
-    (PlateSection, Rect)? hit;
-    var seen = 0;
-    _walk(spec, (s, r) {
-      if (hit == null && seen++ == index) hit = (s, r);
-    }, null);
-    return hit;
-  }
-
-  /// Divider [index] of [spec]'s background as a rect, depth-first.
-  static Rect? _dividerAt(PlateSpec spec, int index) {
-    Rect? hit;
-    var seen = 0;
-    _walk(spec, null, (r) {
-      if (hit == null && seen++ == index) hit = r;
-    });
-    return hit;
-  }
-
-  static void _walk(
+  static ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) _layout(
     PlateSpec spec,
-    void Function(PlateSection leaf, Rect r)? onLeaf,
-    void Function(Rect divider)? onDivider,
-  ) {
-    void walk(PlateSection s, Rect r) {
-      if (s.isLeaf) {
-        onLeaf?.call(s, r);
-        return;
-      }
-      final across = s.axis == Axis.horizontal;
-      var start = across ? r.left : r.top;
-      final last = s.parts.length - 1;
-      for (var i = 0; i <= last; i++) {
-        final part = s.parts[i];
-        final end = i == last ? (across ? r.right : r.bottom) : part.end!;
-        walk(
-          part.section,
-          across
-              ? Rect.fromLTRB(start, r.top, end, r.bottom)
-              : Rect.fromLTRB(r.left, start, r.right, end),
-        );
-        if (part.divider > 0 && i != last) {
-          final half = part.divider / 2;
-          onDivider?.call(
-            across
-                ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
-                : Rect.fromLTRB(r.left, end - half, r.right, end + half),
-          );
-        }
-        start = end;
-      }
-    }
-
-    walk(
-      spec.background,
-      Rect.fromLTWH(0, 0, spec.canvasWidth, spec.canvasHeight),
-    );
-  }
+  ) => spec.background.layout(
+    Rect.fromLTWH(0, 0, spec.canvasWidth, spec.canvasHeight),
+  );
 
   static bool _sameBox(PlateBox a, PlateBox b) =>
       a.left == b.left &&

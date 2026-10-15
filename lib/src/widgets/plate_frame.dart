@@ -103,60 +103,6 @@ class _Geometry {
   late final RRect face;
 }
 
-/// Leaf [index] of [section] laid over [r], depth-first, or null.
-(PlateSection, Rect)? _leafAt(PlateSection section, Rect r, int index) {
-  var seen = 0;
-  (PlateSection, Rect)? walk(PlateSection s, Rect r) {
-    if (s.isLeaf) return seen++ == index ? (s, r) : null;
-    final across = s.axis == Axis.horizontal;
-    var start = across ? r.left : r.top;
-    final last = s.parts.length - 1;
-    for (var i = 0; i <= last; i++) {
-      final part = s.parts[i];
-      final end = i == last ? (across ? r.right : r.bottom) : part.end!;
-      final child = across
-          ? Rect.fromLTRB(start, r.top, end, r.bottom)
-          : Rect.fromLTRB(r.left, start, r.right, end);
-      final hit = walk(part.section, child);
-      if (hit != null) return hit;
-      start = end;
-    }
-    return null;
-  }
-
-  return walk(section, r);
-}
-
-/// Divider [index] of [section] laid over [r], depth-first, or null.
-Rect? _dividerAt(PlateSection section, Rect r, int index) {
-  var seen = 0;
-  Rect? walk(PlateSection s, Rect r) {
-    if (s.isLeaf) return null;
-    final across = s.axis == Axis.horizontal;
-    var start = across ? r.left : r.top;
-    final last = s.parts.length - 1;
-    for (var i = 0; i <= last; i++) {
-      final part = s.parts[i];
-      final end = i == last ? (across ? r.right : r.bottom) : part.end!;
-      final child = across
-          ? Rect.fromLTRB(start, r.top, end, r.bottom)
-          : Rect.fromLTRB(r.left, start, r.right, end);
-      final hit = walk(part.section, child);
-      if (hit != null) return hit;
-      if (part.divider > 0 && i != last && seen++ == index) {
-        final half = part.divider / 2;
-        return across
-            ? Rect.fromLTRB(end - half, r.top, end + half, r.bottom)
-            : Rect.fromLTRB(r.left, end - half, r.right, end + half);
-      }
-      start = end;
-    }
-    return null;
-  }
-
-  return walk(section, r);
-}
-
 bool _fades(PlatePartFrame frame) => switch (frame.motion.effect) {
   PlatePartEffect.fade ||
   PlatePartEffect.fadeScale ||
@@ -256,7 +202,10 @@ class _RegionPainter extends CustomPainter {
     if (frame.hidden) return;
     if (_laidOutFor != size) {
       _laidOutFor = size;
-      _leaf = _leafAt(background, Offset.zero & size, index);
+      _leaf = background
+          .layout(Offset.zero & size)
+          .leaves
+          .elementAtOrNull(index);
     }
     final leaf = _leaf;
     if (leaf == null) return;
@@ -419,7 +368,10 @@ class _SectionDividerPainter extends PlateDividerPainter {
   void _layout(Size size) {
     if (_laidOutFor == size) return;
     _laidOutFor = size;
-    _rect = _dividerAt(background, Offset.zero & size, index);
+    _rect = background
+        .layout(Offset.zero & size)
+        .dividers
+        .elementAtOrNull(index);
     _clip = _Geometry(theme, size).face;
   }
 
