@@ -1,11 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-/// The colours of the Italian plates. Every plate is black on white with the
-/// EU band, so the artwork's own values are used: white, black and the band's
-/// `033FA2` and ring yellow `FFCC00` are the modal pixels of the vector
-/// reference (`1999_CZ_889_KF`). The photographed two-line and motorcycle
-/// plates carry their photo's lighting (their blues sample from `1F579E` to
-/// `03609D`), so they are not used.
+/// Sampled from the vector car-plate artwork. The photographed two-line and
+/// motorcycle plates carry their photo's lighting, so their blues are unused.
 abstract final class ItalyColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);

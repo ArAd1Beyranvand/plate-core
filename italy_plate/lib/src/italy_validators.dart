@@ -25,16 +25,10 @@ class ItalyValidator extends GatedPlateValidator {
     }
     final String suffix = entry.group('suffix');
     final String number = entry.group('number');
-    if (suffix.isEmpty) {
-      if (!isDigitsOfLength(number, 5)) {
-        return const PlateValidation.invalid(reasonNumber);
-      }
-      return const PlateValidation.valid();
-    }
-    if (!isDigitsOfLength(number, 3)) {
+    if (!isDigitsOfLength(number, suffix.isEmpty ? 5 : 3)) {
       return const PlateValidation.invalid(reasonNumber);
     }
-    if (!_letters.hasMatch(suffix)) {
+    if (suffix.isNotEmpty && !_letters.hasMatch(suffix)) {
       return const PlateValidation.invalid(reasonSuffix);
     }
     return const PlateValidation.valid();

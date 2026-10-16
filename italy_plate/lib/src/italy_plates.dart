@@ -7,8 +7,8 @@ import 'package:plate_core/plate_core.dart';
 import 'italy_colors.dart';
 import 'italy_country.dart';
 
-/// One field: [count] characters of the [alphabet] whose first character is centred on [cx], at
-/// [pitch], in a box [top]..[top]+[height] tall.
+/// One field: [count] characters whose first is centred on [cx], at [pitch],
+/// in a box [top]..[top]+[height] tall.
 class _Run {
   const _Run(
     this.key,
@@ -87,8 +87,7 @@ class _Design {
 /// code in the ring, the 360×110 front plate, and every special series
 /// (trailer, police, military, Carabinieri, fire brigade, Red Cross, Port
 /// Authority, diplomatic, test, agricultural, moped, historic); the offline
-/// stage found no usable measurement for them. No diplomatic plate is
-/// implemented, so nothing Israel-specific exists here to refuse.
+/// stage found no usable measurement for them.
 abstract final class _Layout {
   static const _Design car = _Design(
     id: 'it.private',
@@ -153,13 +152,11 @@ abstract final class _Layout {
   static const double ringStroke = 0.1;
 }
 
-/// The Italian plates. Groups `prefix`, `number`, and `suffix` (absent on the
-/// motorcycle plate).
+/// Groups `prefix`, `number` and `suffix` (absent on the motorcycle plate).
 ///
-/// [private] is the one-line car plate, `AA 000 AA`; [twoLine] puts the prefix
-/// above the number and suffix; [motorcycle] is the square `AA 00000`. All are
-/// black on white with the EU band on the left and a blue band with a yellow
-/// ring on the right, painted by the background.
+/// [private] is `AA 000 AA`; [twoLine] puts the prefix above the number and
+/// suffix; [motorcycle] is the square `AA 00000`. The blue bands and the
+/// yellow ring are painted by the background.
 abstract final class ItalyPlates {
   static final PlateSpec private = _spec(_Layout.car);
   static final PlateSpec twoLine = _spec(_Layout.twoLine);
