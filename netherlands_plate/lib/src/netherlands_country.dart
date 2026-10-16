@@ -5,7 +5,7 @@ import 'netherlands_colors.dart';
 /// The Netherlands as a `PlateCountry`: the EU panel (circle-of-stars flag
 /// over `NL`) down the left edge of every plate that carries one.
 ///
-/// The flag is `Flag_of_Europe.svg` (Wikimedia Commons).
+/// The flag is `EuropeanStars.flag`.
 abstract final class NetherlandsCountry {
   static const PlateCountry netherlands = PlateCountry(
     code: 'nl',
@@ -13,9 +13,6 @@ abstract final class NetherlandsCountry {
     panelColor: NetherlandsColors.euBlue,
     panelTextColor: NetherlandsColors.euInk,
     flagAspectRatio: 3 / 2,
-    flag: SvgPlateAsset(
-      'assets/flags/Flag_of_Europe.svg',
-      package: 'netherlands_plate',
-    ),
+    flag: EuropeanStars.flag,
   );
 }
