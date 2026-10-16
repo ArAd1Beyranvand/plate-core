@@ -5,12 +5,10 @@ import 'laos_colors.dart';
 
 /// One ink on one field, the frame in the ink.
 ///
-/// Measured off the flattened photos (340×150): the frame line's inner edge
-/// sits 6.6 in from the plate edge (sides 6.2–7.5, median 6.6), so the border
-/// is 6.6/150 = 0.044 of the height; the corners round at 12 (diagonal
-/// readings 9.4–13.7, median 11.9), 0.08. A 1–2 unit rim of field shows
-/// outside the line on most plates; at that size it is within the corner fit's
-/// error, so the border runs to the edge and keeps the rounded corners.
+/// Measured off the flattened 340×150 photos: the frame's inner edge sits 6.6
+/// in from the plate edge (0.044 of the height) and the corners round at 12
+/// (0.08). The 1–2 unit rim of field outside the line is within the corner
+/// fit's error, so the border runs to the edge.
 abstract final class LaosThemes {
   /// Private plates.
   static final PlateTheme yellow = _ink(LaosColors.yellow, LaosColors.black);

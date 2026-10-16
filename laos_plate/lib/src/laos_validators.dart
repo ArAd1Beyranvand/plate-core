@@ -94,17 +94,12 @@ class LaosPrefixedValidator extends GatedPlateValidator {
 
   @override
   PlateValidation judge(PlateEntry entry) {
-    final String serial = entry.group('serial');
-    if (entry.spec.indicesOfGroup('code').isNotEmpty) {
-      if (!isDigitsOfLength(entry.group('code'), 2)) {
-        return const PlateValidation.invalid(reasonCode);
-      }
-      if (!isDigitsOfLength(serial, 2)) {
-        return const PlateValidation.invalid(reasonSerial);
-      }
-    } else if (!isDigitsOfLength(serial, 4)) {
-      return const PlateValidation.invalid(reasonSerial);
+    final bool hasCode = entry.spec.indicesOfGroup('code').isNotEmpty;
+    if (hasCode && !isDigitsOfLength(entry.group('code'), 2)) {
+      return const PlateValidation.invalid(reasonCode);
     }
-    return const PlateValidation.valid();
+    return isDigitsOfLength(entry.group('serial'), hasCode ? 2 : 4)
+        ? const PlateValidation.valid()
+        : const PlateValidation.invalid(reasonSerial);
   }
 }

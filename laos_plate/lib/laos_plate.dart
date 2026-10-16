@@ -7,11 +7,12 @@
 /// theme; shape is the spec.
 library;
 
+export 'package:plate_alphabet/plate_alphabet.dart' show LaosAlphabets;
+
 export 'src/laos_colors.dart';
 export 'src/laos_country.dart';
+export 'src/laos_plates.dart';
+export 'src/laos_provinces.dart';
 export 'src/laos_themes.dart';
 export 'src/laos_usage.dart';
-export 'src/laos_provinces.dart';
-export 'src/laos_plates.dart';
 export 'src/laos_validators.dart';
-export 'package:plate_alphabet/plate_alphabet.dart' show LaosAlphabets;

@@ -12,14 +12,11 @@ import 'laos_usage.dart';
 
 /// Where the ink sits on the 2001 Lao plates, in plate units.
 ///
-/// Every reference is a photograph. Each was flattened by fitting a line to
-/// each plate edge (the first strong colour step in from the car body, along
-/// the middle 60% of the side) and warping the quad to 340×150; then the ink
-/// was projected onto each axis.
+/// Every reference is a photograph, flattened by warping the fitted plate
+/// edges to 340×150 and projecting the ink onto each axis.
 ///
-/// The canvas is not the article's 520×110 (aspect 4.73): no photographed
-/// plate is that shape. The photos measure 2.16–2.30 (median 2.26; the taxable
-/// plate's 2.46 is shot from above), which is 340×150 (2.27).
+/// The canvas is not the article's 520×110 (aspect 4.73): the photographed
+/// plates measure 2.16–2.30, which is 340×150 (2.27).
 ///
 /// Measured ink, as target for the goldens:
 ///
@@ -217,7 +214,6 @@ PlateLabel _text(
 ///
 /// Pair each with its theme in [themeOf].
 ///
-/// The article lists no Israel-specific value (it gives no mission codes).
 /// Not implemented: the pre-2001 series, which the article only dates.
 abstract final class LaosPlates {
   static final Map<String, PlateSpec> _cache = <String, PlateSpec>{};

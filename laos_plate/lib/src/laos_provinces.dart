@@ -3,11 +3,9 @@ import 'package:flutter/foundation.dart';
 /// A registering province: the name printed across the top of a provincial
 /// plate.
 ///
-/// [caption] for Vientiane Capital is the photographed plates' own text. The
-/// others are the provinces' Lao names from Wikidata (`lo` labels of the
-/// items behind en.wikipedia's "Provinces of Laos") without their leading
-/// ແຂວງ ("province"): no reference photo shows another province's plate, so
-/// whether plates print that word is not known.
+/// [caption] for Vientiane Capital is the photographed text. The others are
+/// the Wikidata Lao names without the leading ແຂວງ ("province"); no photo
+/// shows another province, so whether plates print that word is unknown.
 @immutable
 class LaosProvince {
   const LaosProvince._(this.id, this.name, this.caption);
