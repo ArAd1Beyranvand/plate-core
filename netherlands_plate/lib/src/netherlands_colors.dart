@@ -1,16 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-/// The colours of the Dutch plates, sampled from the flattened references
-/// (modal pixel of the region, `.plateref/nl`).
+/// Modal pixels of the flattened references (`.plateref/nl`).
 ///
-/// The standard field `FFD101` and ink `000000` are the modal pixels of the
-/// clean `Dutch_plate_yellow_NL_code_*` renders; the EU panel `0000B7` is the
-/// same renders' blue (they are not the flag's official `003399`). The
-/// photographs of the royal, trailer and Grens Verkeer plates read orange or
-/// pale under their own lighting, but the plates are the same reflective
-/// yellow, so they share it. The dealer plate is the one green field
-/// (`50B25E`, median of the photograph) and the BFG plate light on dark grey
-/// (`383837` / `F0F0F0`, estimated from a 250 px photograph).
+/// The yellow field, black ink and EU blue come from the clean
+/// `Dutch_plate_yellow_NL_code_*` renders; the blue is theirs, not the flag's
+/// official `003399`. Photographed royal, trailer and Grens Verkeer plates
+/// read orange or pale under their lighting but are the same reflective
+/// yellow. Dealer green and the BFG grey are estimated from 250 px photos.
 abstract final class NetherlandsColors {
   static const Color yellow = Color(0xFFFFD101);
   static const Color black = Color(0xFF000000);

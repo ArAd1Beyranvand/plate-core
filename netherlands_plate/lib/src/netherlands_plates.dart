@@ -74,17 +74,15 @@ const _Kind _d = _Kind.digits;
 /// (`CD`, no EU panel), [consular] (`CDJ`), the green [dealer] plate and the
 /// [bfg] plate, which separates its fields with spaces.
 ///
-/// Dealer and BFG are estimated from 250 px photographs: their spans are the
-/// standard pitch laid from the photographed start, not measured runs.
+/// Dealer and BFG spans are the standard pitch laid from the photographed
+/// start (250 px photographs), not measured runs.
 ///
 /// Not implemented: the pre-1999 sidecodes 1–5 and the light-blue 1973–78
 /// plates (historical), the blue taxi and electric-scooter plates and the
 /// white/black classic plates (no reference), motorcycles (a two-row plate
 /// with no documented size), military, RC and Utrecht plates (references too
 /// distorted to measure), and the Caribbean plates (North American size, no
-/// EU panel). Photographs of royal, trailer and special plates read orange
-/// under their lighting; they are the same yellow. No Israel-specific values
-/// exist.
+/// EU panel).
 abstract final class NetherlandsPlates {
   /// `99-XX-XX`, 1999–2008.
   static final PlateSpec sidecode6 = _plate('nl.sidecode6', const <_Field>[

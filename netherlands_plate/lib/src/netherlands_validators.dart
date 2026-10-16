@@ -21,15 +21,18 @@ class NetherlandsValidator extends GatedPlateValidator {
   static const String reasonLetters =
       'Ordinary plates use only the letters B D F G H J K L N P R S T V X Z.';
 
+  static final RegExp _alphanumeric = RegExp(r'^[A-Z0-9]+$');
+  static final RegExp _upper = RegExp(r'^[A-Z]+$');
+
   @override
   PlateValidation judge(PlateEntry entry) {
     for (final String key in const <String>['a', 'b', 'c']) {
       final String field = entry.group(key);
-      if (field.isNotEmpty && !RegExp(r'^[A-Z0-9]+$').hasMatch(field)) {
+      if (field.isNotEmpty && !_alphanumeric.hasMatch(field)) {
         return const PlateValidation.invalid(reasonCharacters);
       }
       if (field.length == 3 &&
-          RegExp(r'^[A-Z]+$').hasMatch(field) &&
+          _upper.hasMatch(field) &&
           field != 'CDJ' &&
           field != 'BFG' &&
           !field.split('').every(NetherlandsAlphabets.consonants.contains)) {
