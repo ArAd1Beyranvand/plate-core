@@ -32,6 +32,8 @@ const List<String> switzerlandCantons = <String>[
   'ZH',
 ];
 
+bool _isPlain(String s) => isDigits(s) && !s.startsWith('0');
+
 /// Judges a canton-and-number plate (`SwitzerlandPlates.high`, `long`,
 /// `front`, `dealer`, `temporary`, `customs`, `motorcycle`, `scooter`).
 /// Reports, never bars a keystroke; gated on the number.
@@ -59,7 +61,7 @@ class SwitzerlandValidator extends GatedPlateValidator {
       return const PlateValidation.invalid(reasonCanton);
     }
     final String number = entry.group('number');
-    if (!isDigits(number) || number.startsWith('0')) {
+    if (!_isPlain(number)) {
       return const PlateValidation.invalid(reasonNumber);
     }
     return const PlateValidation.valid();
@@ -93,11 +95,11 @@ class SwitzerlandDiplomaticValidator extends GatedPlateValidator {
       return const PlateValidation.invalid(SwitzerlandValidator.reasonCanton);
     }
     final String serial = entry.group('serial');
-    if (!isDigits(serial) || serial.startsWith('0')) {
+    if (!_isPlain(serial)) {
       return const PlateValidation.invalid(reasonSerial);
     }
     final String code = entry.group('code');
-    if (!isDigits(code) || code.startsWith('0')) {
+    if (!_isPlain(code)) {
       return const PlateValidation.invalid(reasonCode);
     }
     return const PlateValidation.valid();

@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
-import 'package:plate_core/plate_core.dart';
 import 'package:plate_alphabet/plate_alphabet.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'switzerland_colors.dart';
 import 'switzerland_country.dart';
