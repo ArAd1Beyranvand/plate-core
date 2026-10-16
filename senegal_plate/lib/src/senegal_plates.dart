@@ -10,12 +10,10 @@ import 'senegal_themes.dart';
 
 /// Where the ink sits, in plate units. Every plate is 520 wide.
 ///
-/// The article gives 52×11 cm (one row), 32×20 cm (truck rear) and 24×13 cm
-/// (motorcycle), so the canvases are 520×110, 520×325 and 520×281. The
-/// references are photographs flattened to 520×110 whatever their shape, so
-/// every y measured off the two-row plates is multiplied by 325/110 and
-/// 281/110 (their photos fit at aspect 1.52 and 1.76, about 3% under the
-/// article, as the one-row photos do). Centres are of ink runs on the flat
+/// The canvases are 520×110 (one row), 520×325 (truck rear) and 520×281
+/// (motorcycle), from the documented sizes. The photographs were flattened to
+/// 520×110 whatever their shape, so every y measured off the two-row plates is
+/// multiplied by 325/110 or 281/110. Centres are of ink runs on the flat
 /// photos:
 ///
 /// * old `DK-1234-AB` (flat v2), ink y 17.5–87.5: `DK` 55.4, 110 (pitch 54.6);
@@ -104,7 +102,7 @@ class _Mark {
 ///
 /// Not implemented: the pre-2009 Ziguinchor plate (pictured, unticked), the
 /// 2000s version with a country strip, and any other class the article does not
-/// picture. The article names no Israel-specific value.
+/// picture.
 abstract final class SenegalPlates {
   static final PlateSpec old = _build(
     id: 'sn.old',

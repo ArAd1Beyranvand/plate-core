@@ -27,6 +27,10 @@ class SenegalValidator extends PlateValidator {
   };
 
   static final RegExp _letters2 = RegExp(r'^[A-Z]{2}$');
+  static final RegExp _letters1or2 = RegExp(r'^[A-Z]{1,2}$');
+  static final RegExp _digits2 = RegExp(r'^[0-9]{2}$');
+  static final RegExp _digits3 = RegExp(r'^[0-9]{3}$');
+  static final RegExp _digits4 = RegExp(r'^[0-9]{4}$');
 
   @override
   PlateValidation validate(PlateEntry entry) {
@@ -40,17 +44,15 @@ class SenegalValidator extends PlateValidator {
     for (final PlateTextGroup g in groups) {
       final String value = entry.group(g.key!);
       final (RegExp, String)? rule = switch (g.key) {
-        'number' => (
-          RegExp(old ? r'^[0-9]{4}$' : r'^[0-9]{3}$'),
-          old ? 'The number is 4 digits.' : 'The number is 3 digits.',
-        ),
+        'number' when old => (_digits4, 'The number is 4 digits.'),
+        'number' => (_digits3, 'The number is 3 digits.'),
         'letters' when old => (
-          RegExp(r'^[A-Z]{1,2}$'),
+          _letters1or2,
           'The closing series is 1 or 2 letters.',
         ),
         'letters' => (_letters2, 'The closing series is 2 letters.'),
         'series' => (_letters2, 'The series is 2 letters.'),
-        'department' => (RegExp(r'^[0-9]{2}$'), 'The department is 2 digits.'),
+        'department' => (_digits2, 'The department is 2 digits.'),
         _ => null,
       };
       if (rule != null && !rule.$1.hasMatch(value)) {

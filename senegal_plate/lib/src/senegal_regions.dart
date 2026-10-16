@@ -1,10 +1,7 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Locates a Senegalese plate from its two-letter region code.
-///
-/// Source: the "Regional Codes" section of
-/// https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Senegal
-/// The article gives no department codes, so the caption stops at the region.
+/// Locates a Senegalese plate from its two-letter region code. No department
+/// codes are documented, so the caption stops at the region.
 abstract final class SenegalRegions {
   static const Map<String, String> _regions = <String, String>{
     'DK': 'Dakar',
