@@ -1,8 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Judges an Eritrean registration: `ER`, a digit in the disc and a five
-/// digit number (`ER – 3  01860`). The article has no format table, so this
-/// is the one reference plate; it reports and never bars a keystroke.
+/// Judges `ER`, a digit in the disc and a five-digit number (`ER – 3  01860`).
+/// Only one reference plate exists, so the rules are its shape. Reports, never
+/// bars a keystroke.
 class EritreaValidator extends GatedPlateValidator {
   const EritreaValidator();
 

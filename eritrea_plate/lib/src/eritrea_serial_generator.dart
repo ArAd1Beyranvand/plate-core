@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:plate_core/plate_core.dart';
 
-/// Plausible values for fixtures and demos: the disc digit, then the five-digit number.
+/// Random values for fixtures and demos: the disc digit, then the number.
 abstract final class EritreaSerialGenerator {
   static List<String?> generate(PlateSpec spec, {Random? random}) {
     final Random rnd = random ?? Random();

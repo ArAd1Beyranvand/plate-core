@@ -44,9 +44,7 @@ abstract final class _Layout {
   static const double numberHeight = 160;
 }
 
-/// Eritrea's plate: `ER – D` over `NNNNN`.
-///
-/// Text groups: `code` (1, the disc), `number` (5).
+/// `ER – D` over `NNNNN`. Text groups: `code` (the disc) and `number`.
 abstract final class EritreaPlates {
   static final PlateSpec standard = PlateSpec(
     id: 'er.standard',
