@@ -39,7 +39,7 @@ class PlateCountry {
   final double flagAspectRatio;
 
   /// Null for a country with no flag.
-  final PlateAsset? flag;
+  final PlateGraphic? flag;
 
   /// A fine outline printed around the flag, for flags whose edge would
   /// otherwise vanish into the panel.

@@ -19,6 +19,7 @@ import '../theme/plate_theme.dart';
 import '../validators/plate_validator.dart';
 import 'country_panel.dart';
 import 'plate_divider.dart';
+import 'plate_drawing_view.dart';
 import 'plate_frame.dart';
 import 'plate_selector.dart';
 import 'plate_slot_item.dart';
@@ -766,10 +767,16 @@ class _PlateContent extends StatelessWidget {
                           box: spec.decals[i].box,
                           child: PlatePartAnimator(
                             id: PlatePartId.decal(i),
-                            child: Image(
-                              image: spec.decals[i].image,
-                              fit: BoxFit.contain,
-                            ),
+                            child: switch (spec.decals[i].drawing) {
+                              final drawing? => PlateDrawingView(
+                                drawing: drawing,
+                                fit: BoxFit.contain,
+                              ),
+                              null => Image(
+                                image: spec.decals[i].image!,
+                                fit: BoxFit.contain,
+                              ),
+                            },
                           ),
                         ),
                     ],

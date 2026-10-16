@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'plate_alphabet.dart';
+import 'plate_asset.dart';
 import 'plate_box.dart';
 import 'plate_country.dart';
 import '../theme/plate_theme.dart';
@@ -332,12 +333,19 @@ class PlateBand {
   final double bottomCornerRadius;
 }
 
-/// A fixed image on the plate face, such as a sticker or badge.
+/// A fixed image on the plate face, such as a sticker or badge: a raster
+/// [image], or a [drawing] of const shapes that needs no file.
 @immutable
 class PlateDecal {
-  const PlateDecal({required this.image, required this.box});
+  const PlateDecal({this.image, this.drawing, required this.box})
+    : assert(
+        (image == null) != (drawing == null),
+        'A decal is an image or a drawing, not both and not neither.',
+      );
 
-  final ImageProvider image;
+  final ImageProvider? image;
+
+  final PlateDrawing? drawing;
 
   final PlateBox box;
 }

@@ -1,5 +1,7 @@
-## Unreleased
+## 0.12.0
 
+- **Code-drawn flags.** `PlateDrawing` (a width, a height and a list of const `PlateShape`s: rect, polygon, circle, crescent, star, star ring) is a `PlateGraphic`, as `SvgPlateAsset` and `RasterPlateAsset` now are, so `PlateCountry.flag` takes it and `PlateFlag` paints it with `PlateDrawingView`. `PlateDecal` takes a `drawing:` instead of an `image:`. A drawing ships no file and needs no pubspec entry.
+- `EuropeanStars.band` and `EuropeanStars.flag` replace the shipped `Flag_of_Europe.svg`, which is gone along with the package's `flutter: assets:` entry.
 - `PlateController.setGroup` gives each slot up to its own `length` from the value (a chosen symbol is taken whole) instead of one character per slot, so it works on slots that hold a run.
 - `PlateSlot.accepts` takes a chosen-alphabet value whole, so a multi-character symbol (`CD`, `XXXIII`) is a legal slot value instead of being split into characters and refused.
 

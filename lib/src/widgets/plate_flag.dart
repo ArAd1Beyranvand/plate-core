@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../model/plate_asset.dart';
 import '../model/plate_country.dart';
+import 'plate_drawing_view.dart';
 
 /// A country's flag, or nothing when it has none.
 class PlateFlag extends StatelessWidget {
@@ -27,6 +28,7 @@ class PlateFlag extends StatelessWidget {
         package: asset.package,
         fit: BoxFit.fill,
       ),
+      PlateDrawing() => PlateDrawingView(drawing: asset),
     };
 
     final radius = borderRadius;
