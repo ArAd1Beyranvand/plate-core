@@ -7,12 +7,13 @@
 /// refused.
 library;
 
+export 'package:plate_alphabet/plate_alphabet.dart' show VietnamAlphabets;
+
 export 'src/vietnam_colors.dart';
 export 'src/vietnam_country.dart';
-export 'src/vietnam_themes.dart';
-export 'src/vietnam_plates.dart';
 export 'src/vietnam_missions.dart';
-export 'src/vietnam_validators.dart';
-export 'src/vietnam_serial_generator.dart';
-export 'package:plate_alphabet/plate_alphabet.dart' show VietnamAlphabets;
+export 'src/vietnam_plates.dart';
 export 'src/vietnam_regions.dart';
+export 'src/vietnam_serial_generator.dart';
+export 'src/vietnam_themes.dart';
+export 'src/vietnam_validators.dart';
