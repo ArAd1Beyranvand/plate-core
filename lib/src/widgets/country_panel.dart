@@ -56,6 +56,74 @@ class _Block extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The panel is always placed at its box, so the box is its size.
+    final box = panel.box;
+    final resolvedPadding = panel.padding ?? EdgeInsets.all(box.height * 0.10);
+    final innerW = box.width - resolvedPadding.horizontal;
+    final innerH = box.height - resolvedPadding.vertical;
+    final flag = _flagSize(
+      panel: panel,
+      country: country,
+      innerW: innerW,
+      innerH: innerH,
+    );
+    final horizontal = panel.direction == Axis.horizontal;
+    // The room the flag leaves: a heading and a caption split it
+    // evenly, either alone takes all of it.
+    final hasHeading = country.headingLines.isNotEmpty;
+    final slackW = horizontal ? (innerW - flag.width).clamp(0.0, innerW) : null;
+    final slackH = horizontal
+        ? null
+        : (innerH - flag.height).clamp(0.0, innerH);
+    final share = hasHeading ? 0.5 : 1.0;
+
+    final flagBox = SizedBox(
+      width: flag.width,
+      height: flag.height,
+      child: PlatePartAnimator(
+        id: PlatePartId.flag,
+        child: PlateFlag(country: country),
+      ),
+    );
+    final children = <Widget>[
+      if (hasHeading)
+        PlatePartAnimator(
+          id: PlatePartId.caption,
+          child: _PanelWording(
+            lines: country.headingLines,
+            color: country.panelTextColor,
+            scale: panel.captionScale,
+            alignment: Alignment.centerLeft,
+            width: slackW == null ? null : slackW * share,
+            height: slackH == null ? null : slackH * share,
+          ),
+        ),
+      horizontal ? flagBox : Center(child: flagBox),
+      PlatePartAnimator(
+        id: PlatePartId.caption,
+        child: _PanelWording(
+          lines: country.captionLines,
+          color: country.panelTextColor,
+          scale: panel.captionScale,
+          alignment: horizontal ? Alignment.centerRight : Alignment.centerLeft,
+          width: slackW == null ? null : slackW * share,
+          height: slackH == null ? null : slackH * share,
+        ),
+      ),
+    ];
+    final content = Padding(
+      padding: resolvedPadding,
+      child: horizontal
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: children,
+            )
+          : Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: children,
+            ),
+    );
     return Directionality(
       textDirection: TextDirection.ltr,
       child: PlatePartAnimator(
@@ -63,84 +131,7 @@ class _Block extends StatelessWidget {
         selfPainted: true,
         child: _BlockFill(
           color: paintBlock ? country.panelColor : const Color(0x00000000),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final uniformPad = constraints.maxHeight * 0.10;
-              final resolvedPadding =
-                  panel.padding ?? EdgeInsets.all(uniformPad);
-              final innerW = constraints.maxWidth - resolvedPadding.horizontal;
-              final innerH = constraints.maxHeight - resolvedPadding.vertical;
-              final flag = _flagSize(
-                panel: panel,
-                country: country,
-                innerW: innerW,
-                innerH: innerH,
-              );
-              final horizontal = panel.direction == Axis.horizontal;
-              // The room the flag leaves, and how many pieces of wording have to
-              // share it. A heading and a caption split it evenly; either one
-              // alone takes the lot, which is the layout this widget has always
-              // had.
-              final hasHeading = country.headingLines.isNotEmpty;
-              final slackW = horizontal
-                  ? (innerW - flag.width).clamp(0.0, innerW)
-                  : null;
-              final slackH = horizontal
-                  ? null
-                  : (innerH - flag.height).clamp(0.0, innerH);
-              final share = hasHeading ? 0.5 : 1.0;
-
-              final flagBox = SizedBox(
-                width: flag.width,
-                height: flag.height,
-                child: PlatePartAnimator(
-                  id: PlatePartId.flag,
-                  child: PlateFlag(country: country),
-                ),
-              );
-              final children = <Widget>[
-                if (hasHeading)
-                  PlatePartAnimator(
-                    id: PlatePartId.caption,
-                    child: _PanelWording(
-                      lines: country.headingLines,
-                      color: country.panelTextColor,
-                      scale: panel.captionScale,
-                      alignment: Alignment.centerLeft,
-                      width: slackW == null ? null : slackW * share,
-                      height: slackH == null ? null : slackH * share,
-                    ),
-                  ),
-                horizontal ? flagBox : Center(child: flagBox),
-                PlatePartAnimator(
-                  id: PlatePartId.caption,
-                  child: _PanelWording(
-                    lines: country.captionLines,
-                    color: country.panelTextColor,
-                    scale: panel.captionScale,
-                    alignment: horizontal
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    width: slackW == null ? null : slackW * share,
-                    height: slackH == null ? null : slackH * share,
-                  ),
-                ),
-              ];
-              return Padding(
-                padding: resolvedPadding,
-                child: horizontal
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: children,
-                      )
-                    : Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: children,
-                      ),
-              );
-            },
-          ),
+          child: content,
         ),
       ),
     );

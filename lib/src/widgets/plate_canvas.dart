@@ -555,10 +555,15 @@ class _Face extends StatelessWidget {
             clipper: clipper,
           ),
         ),
-        if (validate == null)
-          _PlateInputs(
+        _ValidationBinding(
+          controller: controller,
+          validate: validate,
+          onVerdict: onVerdict,
+          builder: (verdict) => _PlateInputs(
             spec: spec,
-            theme: theme,
+            theme: verdict.isValid
+                ? theme
+                : theme.copyWith(activeColor: theme.alertColor),
             behaviors: behaviors,
             machine: machine,
             controller: controller,
@@ -566,26 +571,8 @@ class _Face extends StatelessWidget {
             onPick: onPick,
             commit: commit,
             clipper: clipper,
-          )
-        else
-          _ValidationBinding(
-            controller: controller,
-            validate: validate,
-            onVerdict: onVerdict,
-            builder: (verdict) => _PlateInputs(
-              spec: spec,
-              theme: verdict.isValid
-                  ? theme
-                  : theme.copyWith(activeColor: theme.alertColor),
-              behaviors: behaviors,
-              machine: machine,
-              controller: controller,
-              mode: mode,
-              onPick: onPick,
-              commit: commit,
-              clipper: clipper,
-            ),
           ),
+        ),
         if (ghost != null)
           Positioned.fill(
             child: _SpecGhost(
@@ -1166,12 +1153,16 @@ class _ValidationBinding extends StatelessWidget {
   });
 
   final PlateController controller;
-  final PlateValidation Function(List<String?> values) validate;
+
+  /// Null for no validation: the inputs build once, as valid.
+  final PlateValidation Function(List<String?> values)? validate;
   final ValueChanged<PlateValidation> onVerdict;
   final Widget Function(PlateValidation verdict) builder;
 
   @override
   Widget build(BuildContext context) {
+    final validate = this.validate;
+    if (validate == null) return builder(const PlateValidation.valid());
     return PlateSelector<PlateValidation>(
       controller: controller,
       selector: (c) => validate(c.values),
