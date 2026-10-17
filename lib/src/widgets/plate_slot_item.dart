@@ -161,10 +161,13 @@ class _TypedField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEmpty = controller.text.isEmpty;
-    final underlineColor = isEmpty ? theme.inactiveColor : theme.activeColor;
-
     final readOnly = behavior == SlotBehavior.externalField;
+    final style = _fittedStyle();
+    // A shrunk run keeps its bottom where a full-size one would sit, so its
+    // baseline lines up with the neighbouring slots.
+    final shrink =
+        theme.glyphStyle(slot.box.height, theme.ink).fontSize! -
+        style.fontSize!;
 
     return SizedBox(
       width: slot.box.width,
@@ -192,7 +195,8 @@ class _TypedField extends StatelessWidget {
               ? (_) => onRequestSystemKeyboard?.call()
               : null,
           child: ListenableBuilder(
-            listenable: focusNode,
+            // The controller too: the underline darkens as the slot fills.
+            listenable: Listenable.merge([focusNode, controller]),
             builder: (context, _) => TextField(
               controller: controller,
               focusNode: focusNode,
@@ -208,32 +212,32 @@ class _TypedField extends StatelessWidget {
               // The slot's script, not the plate's: Persian numerals run
               // left to right inside an RTL plate, and the caret must follow.
               textDirection: slot.alphabet.direction,
-              style: theme.glyphStyle(
-                slot.box.height,
-                slot.color ?? theme.ink,
-                letterSpacing: slot.spacing,
-              ),
+              style: style,
               cursorColor: theme.activeColor,
               decoration: InputDecoration(
                 isDense: true,
                 // Left inset balances the letter spacing trailing the run.
                 contentPadding: EdgeInsets.only(
                   left: slot.spacing,
-                  top: slot.box.height * 0.12,
+                  top: slot.box.height * 0.12 + shrink,
                   bottom: slot.box.height * 0.12,
                 ),
                 filled: false,
                 counterText: '',
                 hintText: slot.alphabet.placeholder,
-                hintStyle: theme.glyphStyle(
-                  slot.box.height,
-                  theme.inactiveColor,
+                hintStyle: style.copyWith(
+                  color: theme.inactiveColor,
+                  letterSpacing: 0,
                 ),
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(color: theme.inactiveColor),
                 ),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: underlineColor),
+                  borderSide: BorderSide(
+                    color: controller.text.isEmpty
+                        ? theme.inactiveColor
+                        : theme.activeColor,
+                  ),
                 ),
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: theme.activeColor),
@@ -275,6 +279,37 @@ class _TypedField extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  /// [PlateTheme.glyphStyle], shrunk so a full run of the widest legal
+  /// character fits the slot. Display slots get this from a [FittedBox]; an
+  /// editable field cannot be scaled that way, so it is sized up front.
+  TextStyle _fittedStyle() {
+    final base = theme.glyphStyle(
+      slot.box.height,
+      slot.color ?? theme.ink,
+      letterSpacing: slot.spacing,
+    );
+    final alphabet = slot.alphabet;
+    final painter = TextPainter(textDirection: alphabet.direction, maxLines: 1);
+    var widest = 0.0;
+    for (final c in alphabet.characters) {
+      painter.text = TextSpan(
+        text: alphabet.render(c) * slot.length,
+        style: base,
+      );
+      painter.layout();
+      if (painter.width > widest) widest = painter.width;
+    }
+    painter.dispose();
+    // The left inset that balances trailing letter spacing, plus caret room.
+    final available = slot.box.width - slot.spacing - 4;
+    if (widest <= available || widest == 0) return base;
+    final scale = available / widest;
+    return base.copyWith(
+      fontSize: base.fontSize! * scale,
+      letterSpacing: slot.spacing * scale,
     );
   }
 }
