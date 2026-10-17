@@ -219,8 +219,11 @@ class _TypedField extends StatelessWidget {
                 // Left inset balances the letter spacing trailing the run.
                 contentPadding: EdgeInsets.only(
                   left: slot.spacing,
-                  top: slot.box.height * 0.12 + shrink,
-                  bottom: slot.box.height * 0.12,
+                  // A full-size run (0.72 of the box) centred, so the field
+                  // fills its box like a chosen slot: same baseline, underline
+                  // on the box's bottom edge.
+                  top: slot.box.height * 0.14 + shrink,
+                  bottom: slot.box.height * 0.14,
                 ),
                 filled: false,
                 counterText: '',
