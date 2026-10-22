@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 /// The three diplomatic-staff blues are three photographs the article calls
 /// "blue" alike; their pixels disagree, so they stay three colours.
 abstract final class ColombiaColors {
-  /// Private: black on yellow. Artwork.
+  /// Private: black on yellow, from artwork.
   static const Color privateYellow = Color(0xFFFFC600);
   static const Color privateBlack = Color(0xFF000000);
 

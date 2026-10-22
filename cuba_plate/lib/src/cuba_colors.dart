@@ -19,9 +19,7 @@ abstract final class CubaColors {
   /// their mean. It is a bright Euroband-like blue, not a navy.
   static const Color band = Color(0xFF1F74EB); // CALIBRATE
 
-  /// CUBA on the blue strip.
   static const Color bandInk = Color(0xFFFFFFFF);
 
-  /// Unfocused slot outline.
   static const Color inactive = Color(0x66666666);
 }

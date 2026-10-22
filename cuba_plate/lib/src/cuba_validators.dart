@@ -2,8 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'cuba_alphabets.dart';
 
-/// Judges a 2013 Cuban plate value. Reports, never throws, never bars a
-/// keystroke.
+/// Judges a 2013 Cuban plate value. Reports, never bars a keystroke.
 ///
 /// Quiet until the first serial group has a digit. Checks the letter is an
 /// issued series and the serial is the full digit count of the spec — six on
@@ -15,8 +14,7 @@ class CubaValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   static const String reasonLetterMissing = 'A plate starts with a letter.';
-  static const String reasonLetterUnissued =
-      'I, O, Q, S, W and Z are not issued.';
+  static const String reasonLetterUnissued = 'I, O, Q, S, W and Z are not issued.';
   static const String reasonSerialNotNumeric = 'The number is digits only.';
   static const String reasonSerialLength = 'The number fills every cell.';
 

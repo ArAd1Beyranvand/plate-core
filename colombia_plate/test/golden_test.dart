@@ -14,9 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -30,10 +28,7 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(
-      spec,
-      values.split(' '),
-    );
+    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
     tester.view.physicalSize = const Size(1200, 600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -58,53 +53,24 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
 
   final List<(ColombiaSeries, PlateTheme, String, String?)> cases = [
     (ColombiaSeries.private, ColombiaThemes.private, 'NAZ 827', 'ARMENIA'),
-    (
-      ColombiaSeries.commercial,
-      ColombiaThemes.commercial,
-      'XZF 607',
-      'S. ANDRES ISLA',
-    ),
-    (
-      ColombiaSeries.official,
-      ColombiaThemes.official,
-      'OVD 947',
-      'PEREIRA',
-    ),
-    (
-      ColombiaSeries.antiqueCar,
-      ColombiaThemes.antique,
-      'AID 899',
-      'BOGOTA D.C.',
-    ),
-    (
-      ColombiaSeries.mototaxi,
-      ColombiaThemes.private,
-      '123 ABC',
-      'SINCELEJO',
-    ),
+    (ColombiaSeries.commercial, ColombiaThemes.commercial, 'XZF 607', 'S. ANDRES ISLA'),
+    (ColombiaSeries.official, ColombiaThemes.official, 'OVD 947', 'PEREIRA'),
+    (ColombiaSeries.antiqueCar, ColombiaThemes.antique, 'AID 899', 'BOGOTA D.C.'),
+    (ColombiaSeries.mototaxi, ColombiaThemes.private, '123 ABC', 'SINCELEJO'),
     (ColombiaSeries.trailer, ColombiaThemes.official, 'R 12345', 'CALI'),
     (ColombiaSeries.tankTruck, ColombiaThemes.tank, 'T 1234', 'MEDELLIN'),
     (ColombiaSeries.consular, ColombiaThemes.consular, 'CC 0071', null),
-    (
-      ColombiaSeries.organization,
-      ColombiaThemes.organization,
-      'OI 0045',
-      null,
-    ),
+    (ColombiaSeries.organization, ColombiaThemes.organization, 'OI 0045', null),
     (ColombiaSeries.staff, ColombiaThemes.staff, 'AT 0282', null),
   ];
-  for (final (ColombiaSeries s, PlateTheme theme, String values, String? city)
-      in cases) {
+  for (final (ColombiaSeries s, PlateTheme theme, String values, String? city) in cases) {
     testWidgets('standard ${s.id}, $values', (tester) async {
       await render(
         tester,
@@ -138,8 +104,7 @@ void main() {
 
   test('validator', () {
     bool ok(ColombiaSeries s, String l, String n) =>
-        ColombiaValidator.validateFields(s, letters: l, number: n) ==
-        const PlateValidation.valid();
+        ColombiaValidator.validateFields(s, letters: l, number: n) == const PlateValidation.valid();
     expect(ok(ColombiaSeries.private, 'NAZ', '827'), isTrue);
     expect(ok(ColombiaSeries.private, 'NA', '827'), isFalse);
     expect(ok(ColombiaSeries.official, 'OVD', '947'), isTrue);
@@ -151,8 +116,7 @@ void main() {
 
   test('generator fills every slot of every spec', () {
     for (final PlateSpec spec in <PlateSpec>[
-      for (final ColombiaSeries s in ColombiaSeries.values)
-        ColombiaPlates.standard(series: s),
+      for (final ColombiaSeries s in ColombiaSeries.values) ColombiaPlates.standard(series: s),
       ColombiaPlates.police,
       ColombiaPlates.diplomatic,
     ]) {
@@ -161,9 +125,7 @@ void main() {
   });
 
   test('generated letters start with the fixed series letters', () {
-    final PlateSpec spec = ColombiaPlates.standard(
-      series: ColombiaSeries.consular,
-    );
+    final PlateSpec spec = ColombiaPlates.standard(series: ColombiaSeries.consular);
     final List<String?> v = ColombiaSerialGenerator.generate(spec);
     expect(v[0], startsWith('CC'));
     expect(v[1], hasLength(4));

@@ -11,10 +11,12 @@ import 'colombia_plates.dart';
 abstract final class ColombiaSerialGenerator {
   static List<String?> generate(PlateSpec spec, {Random? random}) {
     final Random rnd = random ?? Random();
-    String fixed = '';
-    for (final ColombiaSeries s in ColombiaSeries.values) {
-      if (spec.id == 'co.${s.id}') fixed = s.fixed;
-    }
+    final String fixed =
+        ColombiaSeries.values
+            .where((ColombiaSeries s) => spec.id == 'co.${s.id}')
+            .lastOrNull
+            ?.fixed ??
+        '';
     return <String?>[
       for (final PlateSlot slot in spec.slots)
         () {

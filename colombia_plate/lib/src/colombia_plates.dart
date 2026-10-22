@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'colombia_alphabets.dart';
 import 'colombia_colors.dart';
@@ -41,7 +41,7 @@ import 'colombia_country.dart';
 /// width-limited below the reference height (~49 of 83 mm). Captions are
 /// sized to the measured ink *width* for the same reason, so they come out
 /// shorter than the reference too. A narrow glyph (`I`, `1`) is not width-
-/// limited and stands taller than its neighbours. `plate_core` is unchanged.
+/// limited and stands taller than its neighbours.
 ///
 /// **Not drawn.** The ministry roundel's artwork (a fisheye `◉` stands in
 /// for it), the antique plate's car graphic, the diplomatic plate's crest,
@@ -104,7 +104,6 @@ abstract final class _Layout {
   static const double dashLength = 12;
 }
 
-/// The four screw holes of the shared design.
 final List<PlateBand> _holes = <PlateBand>[
   for (final double x in _Layout.holeX)
     for (final double y in _Layout.holeY)
@@ -244,7 +243,6 @@ class ColombiaSeries {
   ];
 }
 
-/// No Colombian plate has a flag panel; every spec sets `noPanel`.
 const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 0, _Layout.height));
 
 abstract final class ColombiaPlates {
@@ -274,8 +272,7 @@ abstract final class ColombiaPlates {
     final String caption = series.caption ?? city;
     final int cells = series.letters + series.digits;
     final int split = series.digitsFirst ? series.digits : series.letters;
-    final double left =
-        _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
+    final double left = _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
     final double splitX = left + split * _Layout.pitch;
     final double secondLeft = splitX + _Layout.gap;
 
@@ -295,10 +292,7 @@ abstract final class ColombiaPlates {
       panel: _noPanel,
       background: series.antique
           ? const PlateSection.columns(<PlatePart>[
-              PlatePart(
-                PlateSection.fill(PlateFill.divider),
-                end: _Layout.stripLeftEnd,
-              ),
+              PlatePart(PlateSection.fill(PlateFill.divider), end: _Layout.stripLeftEnd),
               PlatePart(PlateSection.plain, end: _Layout.stripRightStart),
               PlatePart(PlateSection.fill(PlateFill.divider)),
             ])
@@ -307,20 +301,13 @@ abstract final class ColombiaPlates {
       labels: <PlateLabel>[
         PlateLabel(
           text: '◉',
-          box: PlateBox(
-            splitX,
-            _Layout.roundelY - _Layout.gap / 2,
-            _Layout.gap,
-            _Layout.gap,
-          ),
+          box: PlateBox(splitX, _Layout.roundelY - _Layout.gap / 2, _Layout.gap, _Layout.gap),
           glyphHeight: _Layout.roundelGlyph,
         ),
         PlateLabel(
           text: caption,
           box: _Layout.caption,
-          glyphHeight:
-              _Layout.captionGlyph *
-              min(1, _Layout.captionFit / caption.length),
+          glyphHeight: _Layout.captionGlyph * min(1, _Layout.captionFit / caption.length),
         ),
         if (series.antique)
           const PlateLabel(
@@ -331,14 +318,7 @@ abstract final class ColombiaPlates {
           ),
       ],
       slots: <PlateSlot>[
-        _field(
-          firstAlphabet,
-          split,
-          left,
-          _Layout.pitch,
-          _Layout.serialTop,
-          _Layout.serialHeight,
-        ),
+        _field(firstAlphabet, split, left, _Layout.pitch, _Layout.serialTop, _Layout.serialHeight),
         _field(
           secondAlphabet,
           cells - split,
@@ -349,15 +329,8 @@ abstract final class ColombiaPlates {
         ),
       ],
       textGroups: <PlateTextGroup>[
-        PlateTextGroup(
-          const <int>[0],
-          key: series.digitsFirst ? 'number' : 'letters',
-        ),
-        PlateTextGroup(
-          const <int>[1],
-          prefix: ' ',
-          key: series.digitsFirst ? 'letters' : 'number',
-        ),
+        PlateTextGroup(const <int>[0], key: series.digitsFirst ? 'number' : 'letters'),
+        PlateTextGroup(const <int>[1], prefix: ' ', key: series.digitsFirst ? 'letters' : 'number'),
       ],
     );
   }
@@ -365,8 +338,7 @@ abstract final class ColombiaPlates {
   /// The National Police plate, `60-0007`, between `COLOMBIA` and
   /// `POLICIA NACIONAL`. Slots: the two digits, then the four.
   static final PlateSpec police = () {
-    final double left =
-        _Layout.centre - (6 * _Layout.policePitch + _Layout.policeGap) / 2;
+    final double left = _Layout.centre - (6 * _Layout.policePitch + _Layout.policeGap) / 2;
     final double split = left + 2 * _Layout.policePitch;
     return PlateSpec(
       id: 'co.police',
@@ -377,11 +349,7 @@ abstract final class ColombiaPlates {
       panel: _noPanel,
       rules: const <PlateRule>[PlateRule(box: _Layout.policeDash)],
       labels: const <PlateLabel>[
-        PlateLabel(
-          text: 'COLOMBIA',
-          box: _Layout.policeTop,
-          glyphHeight: _Layout.policeTopGlyph,
-        ),
+        PlateLabel(text: 'COLOMBIA', box: _Layout.policeTop, glyphHeight: _Layout.policeTopGlyph),
         PlateLabel(
           text: 'POLICIA NACIONAL',
           box: _Layout.policeBottom,
@@ -436,9 +404,7 @@ abstract final class ColombiaPlates {
           box: PlateBox(
             _Layout.dashLeft +
                 i *
-                    (_Layout.dashRight -
-                        _Layout.dashLeft -
-                        _Layout.dashLength) /
+                    (_Layout.dashRight - _Layout.dashLeft - _Layout.dashLength) /
                     (_Layout.dashCount - 1),
             _Layout.dashY,
             _Layout.dashLength,
