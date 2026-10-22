@@ -125,6 +125,24 @@ def _files(node) -> list[str]:
     return names
 
 
+def _css(style: str, prop: str) -> str | None:
+    m = re.search(rf'(?<![\w-]){prop}\s*:\s*([^;]+)', style, re.I)
+    return m.group(1).strip() if m else None
+
+
+def _drawn_plates(tr) -> list[dict]:
+    """Plates drawn as a styled cell, not a picture (Bangladesh's table):
+    the cell's own background and text colour, and its text by line."""
+    out = []
+    for td in tr.select('td[style]'):
+        bg = _css(td['style'], 'background(?:-color)?')
+        if not bg or td.find('td') or not td.find_parent('table').find_parent('td'):
+            continue
+        out.append({'background': bg, 'color': _css(td['style'], 'color'),
+                    'lines': [s.strip() for s in td.get_text('\n').split('\n') if s.strip()]})
+    return out
+
+
 def parse(html: str) -> dict:
     """Infobox, prose by section, every table row with its images."""
     soup = BeautifulSoup(html, 'lxml')
@@ -163,6 +181,7 @@ def parse(html: str) -> dict:
             rows.append({
                 'cells': [_text(c) for c in cells],
                 'images': _files(tr),
+                'drawn': _drawn_plates(tr),
             })
         tables.append({'caption': _text(caption) if caption else '', 'rows': rows})
         t.decompose()
@@ -302,7 +321,15 @@ def page_images(html: str) -> dict[str, dict]:
 
 def download(names: list[str], out: Path, html: str) -> dict[str, dict]:
     shown = page_images(html)
-    meta = {n: shown[n] for n in names if n in shown}
+    api_meta = resolve_images(names)
+    meta = {}
+    for name in names:
+        info = shown.get(name, {})
+        api_info = api_meta.get(name, {})
+        if not info.get('url') and api_info.get('url'):
+            info = api_info
+        if info and info.get('url'):
+            meta[name] = info
     for n, (name, info) in enumerate(meta.items(), 1):
         progress.step_items(n, len(meta))
         if not info['url']:

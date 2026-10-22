@@ -21,12 +21,7 @@ void main() {
     await loader.load();
   });
 
-  Future<void> renderGolden(
-    WidgetTester tester,
-    PlateSpec spec,
-    String value,
-    String name,
-  ) async {
+  Future<void> renderGolden(WidgetTester tester, PlateSpec spec, String value, String name) async {
     final controller = PlateController.fromValues(spec, <String?>[
       value.substring(0, 6),
       value.substring(6),
@@ -52,25 +47,14 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
 
-  testWidgets(
-    'car, Lara',
-    (t) => renderGolden(t, VenezuelaPlates.car, 'AB174SK', 've_car_lara'),
-  );
+  testWidgets('car, Lara', (t) => renderGolden(t, VenezuelaPlates.car, 'AB174SK', 've_car_lara'));
   testWidgets(
     'car, Distrito Capital',
-    (t) => renderGolden(
-      t,
-      VenezuelaPlates.car,
-      'AA848YA',
-      've_car_distrito_capital',
-    ),
+    (t) => renderGolden(t, VenezuelaPlates.car, 'AA848YA', 've_car_distrito_capital'),
   );
 }

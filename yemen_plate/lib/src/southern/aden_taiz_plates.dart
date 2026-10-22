@@ -1,5 +1,5 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import '../common/yemen_alphabets.dart';
 import '../common/yemen_country.dart';
@@ -78,9 +78,7 @@ abstract final class YemenAdenPlates {
       PlateLabel(text: 'عدن', box: PlateBox(215, 2, 120, 50), glyphHeight: 58),
       PlateLabel(text: 'ADEN', box: PlateBox(252, 44, 80, 22), glyphHeight: 30),
     ],
-    decals: const <PlateDecal>[
-      PlateDecal(image: _lighthouse, box: PlateBox(11.9, 11.7, 31, 53.7)),
-    ],
+    decals: const <PlateDecal>[PlateDecal(image: _lighthouse, box: PlateBox(11.9, 11.7, 31, 53.7))],
     // Ink centre y 117.7; the tallest centred box that stays on the plate is
     // 65 .. 170.
     slots: plateRegister(
@@ -124,11 +122,7 @@ abstract final class YemenTaizPlates {
       PlatePart(PlateSection.plain),
     ]),
     labels: const <PlateLabel>[
-      PlateLabel(
-        text: 'مؤقت-تعز',
-        box: PlateBox(14.5, 17, 280, 80),
-        glyphHeight: 66,
-      ),
+      PlateLabel(text: 'مؤقت-تعز', box: PlateBox(14.5, 17, 280, 80), glyphHeight: 66),
       PlateLabel(text: 'ج-ي', box: PlateBox(345, 25, 140, 80), glyphHeight: 66),
     ],
     slots: plateRegister(

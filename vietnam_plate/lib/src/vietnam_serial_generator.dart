@@ -24,16 +24,14 @@ abstract final class VietnamSerialGenerator {
       final String key = group.key ?? '';
       for (final int i in group.indices) {
         final PlateSlot slot = spec.slots[i];
-        final int count =
-            slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
+        final int count = slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
         values[i] = switch (key) {
           'province' => (11 + rnd.nextInt(89)).toString(),
           'mission' => _mission(rnd),
           'series' => List<String>.generate(count, (_) => pick(_series)).join(),
           // A motorcycle series' second cell is a letter or a digit.
           'series2' => rnd.nextBool() ? pick(_digits) : pick(_series),
-          'unit' || 'status' =>
-            List<String>.generate(count, (_) => pick(_letters)).join(),
+          'unit' || 'status' => List<String>.generate(count, (_) => pick(_letters)).join(),
           _ => List<String>.generate(count, (_) => pick(_digits)).join(),
         };
       }

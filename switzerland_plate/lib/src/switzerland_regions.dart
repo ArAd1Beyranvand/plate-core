@@ -38,6 +38,5 @@ abstract final class SwitzerlandRegions {
   static String? lookup(String code) => _cantons[code.toUpperCase()];
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('canton'));
+  static String? captionOf(String Function(String key) group) => lookup(group('canton'));
 }

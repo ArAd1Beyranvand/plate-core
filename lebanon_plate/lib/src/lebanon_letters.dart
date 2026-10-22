@@ -1,15 +1,8 @@
-/// The letter on a Lebanese plate. On white plates, the town of registration
-/// (B Beirut, T Tripoli, etc.). On coloured plates, the class letter. See
-/// `LebanonUsage` for why the two axes are separate. [inUse] is advisory:
-/// `K` is documented issued but not current, yet is never rejected.
+/// The letter on a Lebanese plate: the town on white plates, the class on
+/// coloured ones. [inUse] is advisory; `K` is not current but never rejected.
 enum LebanonLetter {
   /// Pre-1998 general series.
-  a(
-    'A',
-    town: null,
-    governorate: null,
-    description: 'General series, pre-1998',
-  ),
+  a('A', town: null, governorate: null, description: 'General series, pre-1998'),
   b('B', town: 'Beirut', governorate: 'Beirut', description: 'Beirut'),
   y('Y', town: 'Aley', governorate: 'Mount Lebanon', description: 'Aley'),
   g('G', town: 'Jounieh', governorate: 'Mount Lebanon', description: 'Jounieh'),
@@ -19,13 +12,7 @@ enum LebanonLetter {
   t('T', town: 'Tripoli', governorate: 'North Lebanon', description: 'Tripoli'),
 
   /// Baalbek, not currently issued.
-  k(
-    'K',
-    town: 'Baalbek',
-    governorate: 'Beqaa',
-    description: 'Baalbek',
-    inUse: false,
-  ),
+  k('K', town: 'Baalbek', governorate: 'Beqaa', description: 'Baalbek', inUse: false),
   z('Z', town: 'Zahleh', governorate: 'Beqaa', description: 'Zahleh'),
   j('J', town: null, governorate: null, description: 'Judicial'),
   r('R', town: null, governorate: null, description: 'Religious official'),
@@ -58,10 +45,7 @@ enum LebanonLetter {
   /// Case-insensitive lookup; `'mp'` and `'MP'` both return [mp].
   static LebanonLetter? fromCharacter(String character) {
     final String key = character.toUpperCase();
-    for (final LebanonLetter l in values) {
-      if (l.character == key) return l;
-    }
-    return null;
+    return values.where((LebanonLetter l) => l.character == key).firstOrNull;
   }
 
   static const List<String> characters = <String>[

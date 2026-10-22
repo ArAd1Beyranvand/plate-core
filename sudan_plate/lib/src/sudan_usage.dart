@@ -1,11 +1,6 @@
-/// The 2009-series liveries a reference photograph exists for.
-///
-/// The traffic police list eight groups (ملاكى private, تجارى commercial,
-/// شرطة police, حكومى government, إستثمار investment, مواتر motorcycles,
-/// هيئات دبلوماسية diplomatic, منظمات organisations), but only these three
-/// are photographed on the 2009 plate. Government plates on record are the
-/// older yellow series; diplomatic, UN and NGO plates are a separate
-/// two-row design.
+/// The 2009-series liveries with a reference photograph. The traffic police
+/// list eight groups; the rest are either the older yellow series or a
+/// separate two-row design.
 // TODO(sudan-usages): add the other groups with a reference image each.
 enum SudanUsage {
   /// Black on white.

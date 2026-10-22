@@ -3,11 +3,8 @@ import 'package:plate_core/plate_core.dart';
 import 'palestine_colors.dart';
 import 'palestine_usage.dart';
 
-/// Colour schemes for Palestinian plates. Colour is derived from usage, not chosen;
-/// host calls [forUsage] to get theme for a usage, then passes it to [PlateCanvas]
-/// beside the spec. All themes use measured border/radius ratios from reference image.
 abstract final class PSThemes {
-  /// Measured from `pics/reference_plate.png`: 7px border, 26px corner radius.
+  /// Measured from `pics/reference_plate.png`.
   static const double _borderWidthRatio = 0.027;
   static const double _plateRadiusRatio = 0.10;
 
@@ -22,7 +19,7 @@ abstract final class PSThemes {
     plateRadiusRatio: _plateRadiusRatio,
   );
 
-  /// White on green: public transport (taxi, service, bus). Only West Bank scheme that inverts.
+  /// White on green: public transport. The only inverted West Bank scheme.
   static const PlateTheme whiteOnGreen = PlateTheme.monochrome(
     field: PSColors.green,
     ink: PSColors.white,
@@ -49,21 +46,18 @@ abstract final class PSThemes {
     plateRadiusRatio: _plateRadiusRatio,
   );
 
-  /// Theme for a given usage. Commercial and municipality resolve to Gaza themes.
+  /// Commercial and municipality resolve to Gaza themes.
   static PlateTheme forUsage(PSUsage usage) => switch (usage) {
-    PSUsage.private => greenOnWhite,
-    PSUsage.leased => greenOnWhite,
-    PSUsage.police => greenOnWhite,
+    PSUsage.private || PSUsage.leased || PSUsage.police => greenOnWhite,
     PSUsage.publicTransport => whiteOnGreen,
-    PSUsage.government => redOnWhite,
-    PSUsage.exempt => redOnWhite,
+    PSUsage.government || PSUsage.exempt => redOnWhite,
     PSUsage.tradePlate => whiteOnBlue,
     PSUsage.commercial => gazaGreen,
     PSUsage.municipality => gazaBlue,
   };
 
   // --- Gaza ----------------------------------------------------------------
-  // Field always white; only glyphs, border, rules change. No inversion like West Bank.
+  // The field is always white; only glyphs, border and rules change.
 
   /// Black glyphs: Gaza private cars (codes 00–09).
   static const PlateTheme gazaBlack = PlateTheme.monochrome(
@@ -101,14 +95,12 @@ abstract final class PSThemes {
     plateRadiusRatio: _plateRadiusRatio,
   );
 
-  /// Theme for Gaza plate with usage [code], or null if invalid (codes 30–39, 60–99 unallocated).
+  /// Null if [code] is unallocated.
   static PlateTheme? forGazaUsageCode(String code) {
-    final usage = PSGazaUsage.forCode(code);
-    return switch (usage) {
+    return switch (PSGazaUsage.forCode(code)) {
       PSUsage.private => gazaBlack,
       PSUsage.commercial => gazaGreen,
-      PSUsage.publicTransport => gazaBlue,
-      PSUsage.municipality => gazaBlue,
+      PSUsage.publicTransport || PSUsage.municipality => gazaBlue,
       PSUsage.government => gazaRed,
       _ => null,
     };

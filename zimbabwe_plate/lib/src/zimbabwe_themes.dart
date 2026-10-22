@@ -9,10 +9,7 @@ import 'zimbabwe_colors.dart';
 /// and the corners round at 0.04; neither is measured.
 abstract final class ZimbabweThemes {
   /// Private single-row plate (2006).
-  static final PlateTheme yellow = _ink(
-    ZimbabweColors.yellow,
-    ZimbabweColors.yellowInk,
-  );
+  static final PlateTheme yellow = _ink(ZimbabweColors.yellow, ZimbabweColors.yellowInk);
 
   /// Private two-row plate.
   static final PlateTheme yellowStacked = _ink(
@@ -21,16 +18,10 @@ abstract final class ZimbabweThemes {
   );
 
   /// Private plate on the white field introduced in 2006.
-  static final PlateTheme white = _ink(
-    ZimbabweColors.white,
-    ZimbabweColors.black,
-  );
+  static final PlateTheme white = _ink(ZimbabweColors.white, ZimbabweColors.black);
 
   /// Commercial plate: red on white.
-  static final PlateTheme commercial = _ink(
-    ZimbabweColors.white,
-    ZimbabweColors.red,
-  );
+  static final PlateTheme commercial = _ink(ZimbabweColors.white, ZimbabweColors.red);
 }
 
 PlateTheme _ink(Color field, Color ink) => PlateTheme.monochrome(

@@ -9,47 +9,38 @@ import 'package:plate_core/plate_core.dart';
 abstract final class SwedenAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const List<String> _letters = <String>[
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', //
-    'N', 'O', 'P', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z',
-  ];
-
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'se.letters',
-    characters: _letters,
+    include: 'A-Z',
+    exclude: 'I Q V',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// The last character of a registration: a digit, or (from 2019) a letter
   /// other than O.
-  static const PlateAlphabet last = PlateAlphabet(
+  static const PlateAlphabet last = PlateAlphabet.pattern(
     id: 'se.last',
-    characters: <String>[
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', //
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', //
-      'P', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z',
-    ],
+    include: '0-9 A-Z',
+    exclude: 'I O Q V',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// A diplomatic mission code: two letters, none of I, O, Q, V.
-  static const PlateAlphabet missionLetters = PlateAlphabet(
+  static const PlateAlphabet missionLetters = PlateAlphabet.pattern(
     id: 'se.mission',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', //
-      'N', 'P', 'R', 'S', 'T', 'U', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'I O Q V',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// The diplomatic status letter, ambassador (A) to international
   /// organisation staff (I).
-  static const PlateAlphabet status = PlateAlphabet(
+  static const PlateAlphabet status = PlateAlphabet.pattern(
     id: 'se.status',
-    characters: <String>['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+    include: 'A-I',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

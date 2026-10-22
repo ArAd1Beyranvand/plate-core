@@ -13,9 +13,7 @@ import 'package:algeria_plate/algeria_plate.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -29,10 +27,7 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(
-      spec,
-      values.split(' '),
-    );
+    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -55,14 +50,9 @@ void main() {
     );
     // The army roundel is decoded off the real event loop, which fake time
     // does not advance; runAsync gives it a real slice of time.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
-    );
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -119,11 +109,7 @@ void main() {
 
   test('validator', () {
     bool ok(String serial, String type, String wilaya) =>
-        AlgeriaValidator.validateFields(
-          serial: serial,
-          type: type,
-          wilaya: wilaya,
-        ) ==
+        AlgeriaValidator.validateFields(serial: serial, type: type, wilaya: wilaya) ==
         const PlateValidation.valid();
     expect(ok('02865', '114', '11'), isTrue);
     expect(ok('00513', '111', '69'), isTrue);

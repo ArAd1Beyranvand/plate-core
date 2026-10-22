@@ -11,12 +11,9 @@ import '../plate_alphabet.dart';
 abstract final class MaldivesAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'mv.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

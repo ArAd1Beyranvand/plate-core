@@ -3,87 +3,34 @@ import 'package:plate_core/plate_core.dart';
 
 import '../plate_alphabet.dart';
 
-/// The Persian alphabets a plate slot can be drawn over.
+/// Persian alphabets for Iranian plate slots. Digits are shared via
+/// [PlateAlphabetDigits.iranian]; letters live here because plate rules
+/// constrain them.
 ///
-/// Digits come from [PlateAlphabetDigits.iranian] (shared across all packages);
-/// letters live here because they are constrained by plate validation rules.
-///
-/// The difference in the letter series matches the whole *Letter series* table
-/// on the Wikipedia article:
-/// - [privateLetters] — the thirteen-letter county series a **private** plate
-///   picks from. Genuine choices, so `AlphabetInput.chosen` opens a picker.
-/// - one single-character alphabet per non-private class ([taxiLetter],
-///   [policeLetter], …). Their letter is fixed for the class, so there is
-///   nothing to pick; they are still `AlphabetInput.chosen` so that the slot
-///   cannot be typed into and emptied.
+/// [privateLetters] is the thirteen-letter series a private plate picks from.
+/// Every other class has a fixed letter, so it gets a one-character alphabet:
+/// `chosen` rather than `typed`, so the user cannot clear the letter.
 abstract final class PersianAlphabets {
-  /// Digits: shared via [PlateAlphabetDigits.iranian] in plate_alphabet.
-  /// Use that instead of defining locally.
   static const PlateAlphabet digits = PlateAlphabetDigits.iranian;
 
-  /// The thirteen letters a **private** plate's series letter can be, in the
-  /// order the article's table lists them.
-  ///
-  /// Only these thirteen. `ت`, `ع`, `ک`, `پ`, `ث`, `ز`, `ژ`, `ش`, `ف`, `گ` and
-  /// `الف` all appear on Iranian plates, but each is reserved to one non-private
-  /// class and is fixed for every plate in it — offering them in this picker
-  /// would let a user build a private plate that cannot legally exist.
-  static const PlateAlphabet privateLetters = PlateAlphabet(
+  /// The thirteen letters a private plate's series can be. Every other letter
+  /// is reserved to one non-private class; offering it here would let a user
+  /// build a private plate that cannot legally exist.
+  static const PlateAlphabet privateLetters = PlateAlphabet.pattern(
     id: 'fa.privateLetters',
-    characters: [
-      'ب',
-      'ج',
-      'د',
-      'س',
-      'ص',
-      'ط',
-      'ق',
-      'ل',
-      'م',
-      'ن',
-      'و',
-      'ه',
-      'ی',
-    ],
+    include: 'ب ج د س ص ط ق ل م ن و ه ی',
     input: AlphabetInput.chosen,
     isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
 
-  /// Every series letter of the civil blank, for the one spec that changes
-  /// livery with its letter: the [privateLetters], then each class's fixed
-  /// letter, then `ژ` (printed `♿︎`, see [disabledSymbol]) and Latin `D`, `S`.
-  static const PlateAlphabet civilLetters = PlateAlphabet(
+  /// Every series letter of the civil blank, for the spec whose livery follows
+  /// its letter: [privateLetters], each class's fixed letter, `ژ` (printed
+  /// `♿︎`, see [disabledSymbol]) and Latin `D`, `S`.
+  static const PlateAlphabet civilLetters = PlateAlphabet.pattern(
     id: 'fa.civilLetters',
-    characters: [
-      'ب',
-      'ج',
-      'د',
-      'س',
-      'ص',
-      'ط',
-      'ق',
-      'ل',
-      'م',
-      'ن',
-      'و',
-      'ه',
-      'ی',
-      'ت',
-      'ع',
-      'ک',
-      'الف',
-      'گ',
-      'پ',
-      'ث',
-      'ش',
-      'ز',
-      'ف',
-      'ژ',
-      'D',
-      'S',
-    ],
+    include: 'ب ج د س ص ط ق ل م ن و ه ی ت ع ک الف گ پ ث ش ز ف ژ D S',
     input: AlphabetInput.chosen,
     isNumeric: false,
     direction: TextDirection.rtl,
@@ -91,16 +38,9 @@ abstract final class PersianAlphabets {
     glyphs: {'ژ': '♿︎'},
   );
 
-  /// The wheelchair symbol ♿︎ a disabled driver's plate carries where a private
-  /// plate carries its county letter.
-  ///
-  /// Stored as `ژ` and rendered as `♿︎`, because that is what the article's
-  /// footnote says the two are: "while the actual wheelchair symbol ♿︎ is shown
-  /// on license plates of private vehicles of people with disability, on the
-  /// police digital database, the letter `ژ` is used as a placeholder". The
-  /// database form is the storage form and the symbol is the display form —
-  /// precisely the split [PlateAlphabet.glyphs] exists for, so a plate read back
-  /// out of this package reads `ژ` and matches the registry.
+  /// The wheelchair symbol ♿︎ a disabled driver's plate carries in place of a
+  /// county letter. Stored as `ژ`, the police database's placeholder, so a
+  /// plate read back matches the registry.
   static const PlateAlphabet disabledSymbol = PlateAlphabet(
     id: 'fa.disabledSymbol',
     characters: ['ژ'],
@@ -111,18 +51,10 @@ abstract final class PersianAlphabets {
     glyphs: {'ژ': '♿︎'},
   );
 
-  // Below: one alphabet per class whose series letter is fixed. They are
-  // written out rather than produced by a helper because a `const` value cannot
-  // come from a function call — and they must be `const` so the specs that use
-  // them stay const-constructible.
-  //
-  // Every one is `chosen`, not `typed`, even though there is nothing to choose:
-  // a typed slot is a slot the user can clear, and the letter on a taxi plate is
-  // not theirs to clear. A picker over a one-character alphabet has exactly one
-  // answer, so opening it is a no-op rather than a decision.
+  // One alphabet per fixed-letter class, written out because a `const` value
+  // cannot come from a function call.
 
-  /// `ت`, for تاکسی. Printed under the Latin word TAXI, which the taxi spec
-  /// carries as a [PlateLabel] — the wording is chrome, not a value.
+  /// `ت`, for تاکسی (taxi). The Latin word TAXI is a [PlateLabel], not a value.
   static const PlateAlphabet taxiLetter = PlateAlphabet(
     id: 'fa.taxiLetter',
     characters: ['ت'],
@@ -152,9 +84,8 @@ abstract final class PersianAlphabets {
     placeholder: '؟',
   );
 
-  /// `الف` — the name of the first letter of the alphabet, spelled out, which
-  /// is how a government plate prints it. One character to this package even
-  /// though it is three code points: it is one position on the plate.
+  /// `الف`, how a government plate prints its letter: three code points, one
+  /// plate position.
   static const PlateAlphabet governmentLetter = PlateAlphabet(
     id: 'fa.governmentLetter',
     characters: ['الف'],
@@ -224,8 +155,7 @@ abstract final class PersianAlphabets {
     placeholder: '؟',
   );
 
-  /// Latin `D` — diplomatic and consular corps. The one class whose series
-  /// letter is genuinely Latin rather than a transliteration, so it reads LTR.
+  /// Latin `D` — diplomatic and consular corps; reads LTR.
   static const PlateAlphabet politicalLetter = PlateAlphabet(
     id: 'fa.politicalLetter',
     characters: ['D'],
@@ -234,8 +164,7 @@ abstract final class PersianAlphabets {
     placeholder: '?',
   );
 
-  /// Latin `S` — international-organisation service plates. See
-  /// [politicalLetter].
+  /// Latin `S` — international-organisation service plates.
   static const PlateAlphabet serviceLetter = PlateAlphabet(
     id: 'fa.serviceLetter',
     characters: ['S'],

@@ -6,10 +6,7 @@ import 'netherlands_colors.dart';
 /// One ink on one field, frame in the ink colour.
 abstract final class NetherlandsThemes {
   /// Black on reflective yellow: every ordinary and special plate.
-  static final PlateTheme standard = _theme(
-    NetherlandsColors.yellow,
-    NetherlandsColors.black,
-  );
+  static final PlateTheme standard = _theme(NetherlandsColors.yellow, NetherlandsColors.black);
 
   /// Dealer ("handelaar") plates: dark on green.
   static final PlateTheme dealer = _theme(
@@ -18,10 +15,7 @@ abstract final class NetherlandsThemes {
   );
 
   /// BFG (British Forces Germany) plates: light on dark grey.
-  static final PlateTheme bfg = _theme(
-    NetherlandsColors.bfgField,
-    NetherlandsColors.bfgInk,
-  );
+  static final PlateTheme bfg = _theme(NetherlandsColors.bfgField, NetherlandsColors.bfgInk);
 }
 
 PlateTheme _theme(Color field, Color ink) => PlateTheme.monochrome(

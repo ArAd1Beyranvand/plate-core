@@ -13,27 +13,9 @@ abstract final class LebanonAlphabets {
 
   /// Seventeen letters, including `MP` (two glyphs). Chosen input because `MP`
   /// is two chars; picker is better UI for a closed, meaningful list anyway.
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'lb.letters',
-    characters: <String>[
-      'A',
-      'B',
-      'Y',
-      'G',
-      'N',
-      'O',
-      'S',
-      'T',
-      'K',
-      'Z',
-      'J',
-      'R',
-      'M',
-      'C',
-      'D',
-      'P',
-      'MP',
-    ],
+    include: 'A B Y G N O S T K Z J R M C D P MP',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

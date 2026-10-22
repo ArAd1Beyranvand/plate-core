@@ -1,32 +1,22 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'niger_alphabets.dart';
 import 'niger_country.dart';
 
-/// The article's "Other Formats": state transport, military and the two
-/// diplomatic plates. **No image of any of them was found**, so nothing here
-/// is measured off them. Digit height, frame and the 520×110 canvas are the
-/// private plate's, and every cell is one 54-unit pitch (the artwork's own is
-/// 53.9) so the digits look like the measured plates'. Where each element
-/// sits, and every colour (see `NigerThemes`), is a reading of the article's
-/// prose.
-///
-/// Each plate is one row of cells, centred on the canvas: a digit slot, a
-/// fixed word, or a gap, each some number of pitches wide.
+/// Plates with no artwork: positions are read from the article's prose, with
+/// the private plate's digit height, frame and canvas. Each plate is one row
+/// of cells (digit, fixed word or gap), each some number of pitches wide.
 abstract final class _Layout {
   static const double width = 520;
   static const double height = 110;
   static const double pitch = 54;
 
-  /// Fixed letters are set a little smaller than the digits so a three-letter
-  /// word fits its three cells.
+  /// Smaller than the digits so a three-letter word fits its three cells.
   static const double wordGlyph = 84;
 
-  /// The military flag at the left, in the artwork-less guess: 7:6, and a
-  /// little under the plate's inner height.
   static const PlateBox flag = PlateBox(18, 22.5, 70, 60);
 }
 
@@ -43,8 +33,7 @@ class _Cell {
   final double span;
 }
 
-/// What differs between the four: the country, where the row starts, and its
-/// cells. `left` is null to centre the row on the canvas.
+/// `left` is null to centre the row on the canvas.
 class _Format {
   const _Format({
     required this.id,
@@ -120,8 +109,7 @@ abstract final class NigerOtherPlates {
   );
 
   static PlateSpec _build(_Format format) {
-    final double left =
-        format.left ?? (_Layout.width - format.span * _Layout.pitch) / 2;
+    final double left = format.left ?? (_Layout.width - format.span * _Layout.pitch) / 2;
     final slots = <PlateSlot>[];
     final labels = <PlateLabel>[];
     final groups = <String, List<int>>{};
@@ -145,12 +133,7 @@ abstract final class NigerOtherPlates {
     }
 
     for (final _Cell cell in format.cells) {
-      final PlateBox box = PlateBox(
-        x,
-        0,
-        cell.span * _Layout.pitch,
-        _Layout.height,
-      );
+      final PlateBox box = PlateBox(x, 0, cell.span * _Layout.pitch, _Layout.height);
       switch (cell.kind) {
         case _Kind.digit:
           if (run != cell.group) {
@@ -162,13 +145,7 @@ abstract final class NigerOtherPlates {
           runCount++;
         case _Kind.word:
           flush();
-          labels.add(
-            PlateLabel(
-              text: cell.text,
-              box: box,
-              glyphHeight: _Layout.wordGlyph,
-            ),
-          );
+          labels.add(PlateLabel(text: cell.text, box: box, glyphHeight: _Layout.wordGlyph));
         case _Kind.gap:
           flush();
       }
@@ -180,10 +157,7 @@ abstract final class NigerOtherPlates {
       country: format.country,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
-      panel: PlatePanel(
-        box: format.panel ?? const PlateBox(0, 0, 1, 1),
-        padding: EdgeInsets.zero,
-      ),
+      panel: PlatePanel(box: format.panel ?? const PlateBox(0, 0, 1, 1), padding: EdgeInsets.zero),
       noPanel: format.panel == null,
       labels: labels,
       slots: slots,

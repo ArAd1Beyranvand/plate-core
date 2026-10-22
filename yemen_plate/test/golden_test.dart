@@ -29,11 +29,7 @@ void main() {
               height: 520 * spec.canvasHeight / spec.canvasWidth,
               child: PlateThemeScope(
                 theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: country,
-                ),
+                child: PlateView(controller: controller, theme: theme, country: country),
               ),
             ),
           ),
@@ -42,61 +38,57 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
 
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
 
-  final cases =
-      <String, (PlateSpec, PlateTheme, PlateCountry, List<String?>)>{
-        'ye_northern_car_private': (
-          YemenNorthernPlates.car,
-          YemenThemes.forNorthernUsage(YemenUsage.private),
-          YemenCountry.northernFor(YemenUsage.private),
-          ['12', '34567'],
-        ),
-        'ye_northern_car_government': (
-          YemenNorthernPlates.car,
-          YemenThemes.forNorthernUsage(YemenUsage.government),
-          YemenCountry.northernFor(YemenUsage.government),
-          ['12', '34567'],
-        ),
-        'ye_northern_car_short': (
-          YemenNorthernPlates.car,
-          YemenThemes.forNorthernUsage(YemenUsage.private),
-          YemenCountry.northernFor(YemenUsage.private),
-          ['7', '1234'],
-        ),
-        'ye_northern_moto': (
-          // ignore: deprecated_member_use_from_same_package
-          YemenNorthernPlates.moto,
-          YemenThemes.forNorthernUsage(YemenUsage.private),
-          YemenCountry.northernFor(YemenUsage.private),
-          ['12', '345678'],
-        ),
-        'ye_unified_car': (
-          YemenUnifiedPlates.car,
-          YemenThemes.forUnifiedUsage(YemenUsage.private),
-          YemenCountry.unifiedFor(YemenUsage.private),
-          ['243786', '12'],
-        ),
-        'ye_unified_car_short': (
-          YemenUnifiedPlates.car,
-          YemenThemes.forUnifiedUsage(YemenUsage.private),
-          YemenCountry.unifiedFor(YemenUsage.private),
-          ['2437', '12'],
-        ),
-        'ye_unified_moto': (
-          YemenUnifiedPlates.moto,
-          YemenThemes.forUnifiedUsage(YemenUsage.private),
-          YemenCountry.unifiedFor(YemenUsage.private),
-          ['243786', '12'],
-        ),
-      };
+  final cases = <String, (PlateSpec, PlateTheme, PlateCountry, List<String?>)>{
+    'ye_northern_car_private': (
+      YemenNorthernPlates.car,
+      YemenThemes.forNorthernUsage(YemenUsage.private),
+      YemenCountry.northernFor(YemenUsage.private),
+      ['12', '34567'],
+    ),
+    'ye_northern_car_government': (
+      YemenNorthernPlates.car,
+      YemenThemes.forNorthernUsage(YemenUsage.government),
+      YemenCountry.northernFor(YemenUsage.government),
+      ['12', '34567'],
+    ),
+    'ye_northern_car_short': (
+      YemenNorthernPlates.car,
+      YemenThemes.forNorthernUsage(YemenUsage.private),
+      YemenCountry.northernFor(YemenUsage.private),
+      ['7', '1234'],
+    ),
+    'ye_northern_moto': (
+      // ignore: deprecated_member_use_from_same_package
+      YemenNorthernPlates.moto,
+      YemenThemes.forNorthernUsage(YemenUsage.private),
+      YemenCountry.northernFor(YemenUsage.private),
+      ['12', '345678'],
+    ),
+    'ye_unified_car': (
+      YemenUnifiedPlates.car,
+      YemenThemes.forUnifiedUsage(YemenUsage.private),
+      YemenCountry.unifiedFor(YemenUsage.private),
+      ['243786', '12'],
+    ),
+    'ye_unified_car_short': (
+      YemenUnifiedPlates.car,
+      YemenThemes.forUnifiedUsage(YemenUsage.private),
+      YemenCountry.unifiedFor(YemenUsage.private),
+      ['2437', '12'],
+    ),
+    'ye_unified_moto': (
+      YemenUnifiedPlates.moto,
+      YemenThemes.forUnifiedUsage(YemenUsage.private),
+      YemenCountry.unifiedFor(YemenUsage.private),
+      ['243786', '12'],
+    ),
+  };
 
   for (final entry in cases.entries) {
     testWidgets(entry.key, (tester) async {

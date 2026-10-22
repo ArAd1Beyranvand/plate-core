@@ -50,11 +50,7 @@ void main() {
         findsOneWidget,
         reason: '${usage.name}: the country override did not reach the panel',
       );
-      expect(
-        find.text(usage.unifiedLatin!),
-        findsOneWidget,
-        reason: usage.name,
-      );
+      expect(find.text(usage.unifiedLatin!), findsOneWidget, reason: usage.name);
       if (usage != YemenUsage.private) {
         // The spec's own default, which must not be what is painted.
         expect(find.text('PRIV.'), findsNothing, reason: usage.name);
@@ -80,18 +76,12 @@ void main() {
       // their band carries اليمن alone, and خصوصي must not leak through from
       // the spec's private default.
       if (usage != YemenUsage.private) {
-        expect(
-          lines.any((String l) => l.contains('خصوصي')),
-          isFalse,
-          reason: usage.name,
-        );
+        expect(lines.any((String l) => l.contains('خصوصي')), isFalse, reason: usage.name);
       }
     }
   });
 
-  testWidgets('System B: the field colour is the usage', (
-    WidgetTester tester,
-  ) async {
+  testWidgets('System B: the field colour is the usage', (WidgetTester tester) async {
     final Set<Color> fields = <Color>{};
     for (final YemenUsage usage in YemenUsage.northern) {
       final PlateTheme theme = YemenThemes.forNorthernUsage(usage);

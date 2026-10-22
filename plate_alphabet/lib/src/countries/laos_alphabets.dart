@@ -12,12 +12,9 @@ import '../plate_alphabet.dart';
 abstract final class LaosAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'la.letters',
-    characters: <String>[
-      'ກ', 'ຂ', 'ຄ', 'ງ', 'ຈ', 'ສ', 'ຊ', 'ຍ', 'ດ', 'ຕ', 'ຖ', 'ທ', 'ນ', 'ບ', //
-      'ປ', 'ຜ', 'ຝ', 'ພ', 'ຟ', 'ມ', 'ຢ', 'ຣ', 'ລ', 'ວ', 'ຫ', 'ອ', 'ຮ',
-    ],
+    include: 'ກ ຂ ຄ ງ ຈ ສ ຊ ຍ ດ ຕ ຖ ທ ນ ບ ປ ຜ ຝ ພ ຟ ມ ຢ ຣ ລ ວ ຫ ອ ຮ',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

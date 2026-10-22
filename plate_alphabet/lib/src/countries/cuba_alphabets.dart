@@ -8,12 +8,10 @@ abstract final class CubaAlphabets {
 
   /// The series letter. I, O, Q, S, W and Z are not issued, to avoid confusing
   /// them with digits and with each other.
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cu.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', //
-      'L', 'M', 'N', 'P', 'R', 'T', 'U', 'V', 'X', 'Y',
-    ],
+    include: 'A-Y',
+    exclude: 'I O Q S W',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

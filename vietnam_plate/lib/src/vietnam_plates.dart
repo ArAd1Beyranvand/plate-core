@@ -82,9 +82,7 @@ class _Geo {
 }
 
 abstract final class _Layout {
-  static const _Geo longCar = _Geo(520, 110, <_Row>[
-    _Row(top: 1, height: 108, pitch: 48),
-  ]);
+  static const _Geo longCar = _Geo(520, 110, <_Row>[_Row(top: 1, height: 108, pitch: 48)]);
 
   static const _Geo longForeign = _Geo(520, 110, <_Row>[
     _Row(top: 1, height: 108, pitch: 44.5, dashCell: 27.8, dashWidth: 16),
@@ -96,45 +94,17 @@ abstract final class _Layout {
   ]);
 
   static const _Geo motorcycle = _Geo(190, 140, <_Row>[
-    _Row(
-      top: 0,
-      height: 72,
-      pitch: 28,
-      dashCell: 26.5,
-      dashWidth: 12,
-      dashHeight: 8,
-    ),
+    _Row(top: 0, height: 72, pitch: 28, dashCell: 26.5, dashWidth: 12, dashHeight: 8),
     _Row(top: 60, height: 80, pitch: 32.2, dotCell: 13, dotSize: 7.5),
   ]);
 
   static const _Geo longMilitary = _Geo(532, 100, <_Row>[
-    _Row(
-      top: 2.2,
-      height: 97.6,
-      pitch: 54.5,
-      dashCell: 80,
-      dashWidth: 25,
-      dashHeight: 8,
-    ),
+    _Row(top: 2.2, height: 97.6, pitch: 54.5, dashCell: 80, dashWidth: 25, dashHeight: 8),
   ], rim: 0);
 
   static const _Geo shortMilitary = _Geo(280, 200, <_Row>[
-    _Row(
-      top: 0,
-      height: 109,
-      pitch: 48,
-      dashCell: 48,
-      dashWidth: 21,
-      dashHeight: 8,
-    ),
-    _Row(
-      top: 93.4,
-      height: 106.6,
-      pitch: 48,
-      dashCell: 48,
-      dashWidth: 21,
-      dashHeight: 8,
-    ),
+    _Row(top: 0, height: 109, pitch: 48, dashCell: 48, dashWidth: 21, dashHeight: 8),
+    _Row(top: 93.4, height: 106.6, pitch: 48, dashCell: 48, dashWidth: 21, dashHeight: 8),
   ], rim: 0);
 
   static const _Geo motorcycleMilitary = _Geo(190, 140, <_Row>[
@@ -203,16 +173,10 @@ class _Part {
 abstract final class VietnamPlates {
   static final Map<String, PlateSpec> _cache = <String, PlateSpec>{};
 
-  static PlateSpec _memo(String id, PlateSpec Function() build) =>
-      _cache[id] ??= build();
+  static PlateSpec _memo(String id, PlateSpec Function() build) => _cache[id] ??= build();
 
   /// The series: one letter, or two for the special series (`LD`, `DA`, `LA`).
-  static const _Part _series = _Part.run(
-    VietnamAlphabets.series,
-    2,
-    'series',
-    minLength: 1,
-  );
+  static const _Part _series = _Part.run(VietnamAlphabets.series, 2, 'series', minLength: 1);
 
   /// `256.58`.
   static const List<_Part> _number = <_Part>[
@@ -222,57 +186,41 @@ abstract final class VietnamPlates {
   ];
 
   /// `30F-256.58`.
-  static final PlateSpec long = _build(
-    'vn.long',
-    _Layout.longCar,
-    <List<_Part>>[
-      <_Part>[
-        const _Part.run(VietnamAlphabets.digits, 2, 'province'),
-        _series,
-        const _Part.dash(),
-        ..._number,
-      ],
+  static final PlateSpec long = _build('vn.long', _Layout.longCar, <List<_Part>>[
+    <_Part>[
+      const _Part.run(VietnamAlphabets.digits, 2, 'province'),
+      _series,
+      const _Part.dash(),
+      ..._number,
     ],
-  );
+  ]);
 
   /// `30F` over `256.58`.
-  static final PlateSpec short = _build(
-    'vn.short',
-    _Layout.shortCar,
-    <List<_Part>>[
-      <_Part>[const _Part.run(VietnamAlphabets.digits, 2, 'province'), _series],
-      _number,
-    ],
-  );
+  static final PlateSpec short = _build('vn.short', _Layout.shortCar, <List<_Part>>[
+    <_Part>[const _Part.run(VietnamAlphabets.digits, 2, 'province'), _series],
+    _number,
+  ]);
 
   /// `29-AB` over `226.58`. The second cell of the series is a letter or a
   /// digit (`29-B1`).
-  static final PlateSpec motorcycle = _build(
-    'vn.moto',
-    _Layout.motorcycle,
-    <List<_Part>>[
-      const <_Part>[
-        _Part.run(VietnamAlphabets.digits, 2, 'province'),
-        _Part.dash(),
-        _Part.run(VietnamAlphabets.series, 1, 'series'),
-        _Part.run(VietnamAlphabets.seriesOrDigit, 1, 'series'),
-      ],
-      _number,
+  static final PlateSpec motorcycle = _build('vn.moto', _Layout.motorcycle, <List<_Part>>[
+    const <_Part>[
+      _Part.run(VietnamAlphabets.digits, 2, 'province'),
+      _Part.dash(),
+      _Part.run(VietnamAlphabets.series, 1, 'series'),
+      _Part.run(VietnamAlphabets.seriesOrDigit, 1, 'series'),
     ],
-  );
+    _number,
+  ]);
 
   /// `T80` over `235.88`: the short plate, `T` first.
-  static final PlateSpec temporary = _build(
-    'vn.temporary',
-    _Layout.shortCar,
-    <List<_Part>>[
-      const <_Part>[
-        _Part.run(VietnamAlphabets.letters, 1, 'series'),
-        _Part.run(VietnamAlphabets.digits, 2, 'province'),
-      ],
-      _number,
+  static final PlateSpec temporary = _build('vn.temporary', _Layout.shortCar, <List<_Part>>[
+    const <_Part>[
+      _Part.run(VietnamAlphabets.letters, 1, 'series'),
+      _Part.run(VietnamAlphabets.digits, 2, 'province'),
     ],
-  );
+    _number,
+  ]);
 
   /// `80-441-NG-45`, or with [codeFirst] `27-QT-547-45` (an international
   /// organisation outside Hanoi). [statusColor] is the code's ink: red for
@@ -290,23 +238,13 @@ abstract final class VietnamPlates {
           const _Part.run(VietnamAlphabets.digits, 2, 'province'),
           const _Part.dash(),
           if (codeFirst) ...<_Part>[
-            _Part.run(
-              VietnamAlphabets.letters,
-              2,
-              'status',
-              color: statusColor,
-            ),
+            _Part.run(VietnamAlphabets.letters, 2, 'status', color: statusColor),
             const _Part.dash(),
           ],
           const _Part.run(VietnamAlphabets.digits, 3, 'mission'),
           const _Part.dash(),
           if (!codeFirst) ...<_Part>[
-            _Part.run(
-              VietnamAlphabets.letters,
-              2,
-              'status',
-              color: statusColor,
-            ),
+            _Part.run(VietnamAlphabets.letters, 2, 'status', color: statusColor),
             const _Part.dash(),
           ],
           const _Part.run(VietnamAlphabets.digits, 2, 'number'),
@@ -317,35 +255,32 @@ abstract final class VietnamPlates {
   );
 
   /// `80-441` over `NN-02`.
-  static PlateSpec foreignShort({Color? statusColor = VietnamColors.codeRed}) =>
-      _memo(
-        'vn.foreignShort.${statusColor == null ? 'k' : 'r'}',
-        () => _build(
-          'vn.foreignShort.${statusColor == null ? 'k' : 'r'}',
-          _Layout.shortCar,
-          <List<_Part>>[
-            const <_Part>[
-              _Part.run(VietnamAlphabets.digits, 2, 'province'),
-              _Part.dash(),
-              _Part.run(VietnamAlphabets.digits, 3, 'mission'),
-            ],
-            <_Part>[
-              _Part.run(
-                VietnamAlphabets.letters,
-                2,
-                'status',
-                color: statusColor,
-              ),
-              const _Part.dash(),
-              const _Part.run(VietnamAlphabets.digits, 2, 'number'),
-            ],
-          ],
-          restrictions: const <PlateRestriction>[VietnamMissions.restriction],
-        ),
-      );
+  static PlateSpec foreignShort({Color? statusColor = VietnamColors.codeRed}) => _memo(
+    'vn.foreignShort.${statusColor == null ? 'k' : 'r'}',
+    () => _build(
+      'vn.foreignShort.${statusColor == null ? 'k' : 'r'}',
+      _Layout.shortCar,
+      <List<_Part>>[
+        const <_Part>[
+          _Part.run(VietnamAlphabets.digits, 2, 'province'),
+          _Part.dash(),
+          _Part.run(VietnamAlphabets.digits, 3, 'mission'),
+        ],
+        <_Part>[
+          _Part.run(VietnamAlphabets.letters, 2, 'status', color: statusColor),
+          const _Part.dash(),
+          const _Part.run(VietnamAlphabets.digits, 2, 'number'),
+        ],
+      ],
+      restrictions: const <PlateRestriction>[VietnamMissions.restriction],
+    ),
+  );
 
   /// `AB-12-34`.
-  static final PlateSpec militaryLong = _build('vn.militaryLong', _Layout.longMilitary, <List<_Part>>[
+  static final PlateSpec militaryLong = _build(
+    'vn.militaryLong',
+    _Layout.longMilitary,
+    <List<_Part>>[
       const <_Part>[
         _Part.run(VietnamAlphabets.letters, 2, 'unit'),
         _Part.dash(),
@@ -353,23 +288,32 @@ abstract final class VietnamPlates {
         _Part.dash(),
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
       ],
-    ]);
+    ],
+  );
 
   /// `AB` over `12-34`.
-  static final PlateSpec militaryShort = _build('vn.militaryShort', _Layout.shortMilitary, <List<_Part>>[
+  static final PlateSpec militaryShort = _build(
+    'vn.militaryShort',
+    _Layout.shortMilitary,
+    <List<_Part>>[
       const <_Part>[_Part.run(VietnamAlphabets.letters, 2, 'unit')],
       const <_Part>[
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
         _Part.dash(),
         _Part.run(VietnamAlphabets.digits, 2, 'number'),
       ],
-    ]);
+    ],
+  );
 
   /// `AB` over `123`.
-  static final PlateSpec militaryMotorcycle = _build('vn.militaryMoto', _Layout.motorcycleMilitary, <List<_Part>>[
+  static final PlateSpec militaryMotorcycle = _build(
+    'vn.militaryMoto',
+    _Layout.motorcycleMilitary,
+    <List<_Part>>[
       const <_Part>[_Part.run(VietnamAlphabets.letters, 2, 'unit')],
       const <_Part>[_Part.run(VietnamAlphabets.digits, 3, 'number')],
-    ]);
+    ],
+  );
 
   static PlateSpec _build(
     String id,

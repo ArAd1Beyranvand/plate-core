@@ -22,6 +22,5 @@ abstract final class LebanonRegions {
   static String? lookup(String letter) => _towns[letter];
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('letter'));
+  static String? captionOf(String Function(String key) group) => lookup(group('letter'));
 }

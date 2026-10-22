@@ -1,38 +1,30 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'lebanon_colors.dart';
 import 'lebanon_usage.dart';
 
-/// One `PlateTheme` per `LebanonUsage`. Pairs a field colour with its ink:
-/// dark on light fields, light on dark ones. The usage axis lives here
-/// (geometry is in `LebanonPlates`), so the host passes both the spec and
-/// a theme from `forUsage(usage)`.
+/// One `PlateTheme` per `LebanonUsage`: a field colour with dark or light ink.
+/// The host passes a spec for geometry and a theme from [forUsage] for colour.
 abstract final class LebanonThemes {
-  /// Border thickness as a fraction of plate height. Lebanese plates carry a
-  /// thin black frame set well inside the edge, unlike the thick frames of the
-  /// region's other formats.
+  /// Border thickness as a fraction of plate height; a thin frame set well
+  /// inside the edge.
   static const double _borderWidthRatio = 0.022; // CALIBRATE
 
-  /// The corner radius, as a fraction of plate height. A Lebanese plate is
-  /// barely rounded.
   static const double _plateRadiusRatio = 0.045; // CALIBRATE
 
-  static PlateTheme _field({
-    required Color field,
-    required Color ink,
-    required Color inactive,
-  }) => PlateTheme(
-    plateBackground: field,
-    plateBorder: LebanonColors.frame,
-    ink: ink,
-    dividerColor: LebanonColors.frame,
-    borderWidthRatio: _borderWidthRatio,
-    plateRadiusRatio: _plateRadiusRatio,
-    activeColor: ink,
-    inactiveColor: inactive,
-    alertColor: const Color(0xFFD32F2F),
-  );
+  static PlateTheme _field({required Color field, required Color ink, required Color inactive}) =>
+      PlateTheme(
+        plateBackground: field,
+        plateBorder: LebanonColors.frame,
+        ink: ink,
+        dividerColor: LebanonColors.frame,
+        borderWidthRatio: _borderWidthRatio,
+        plateRadiusRatio: _plateRadiusRatio,
+        activeColor: ink,
+        inactiveColor: inactive,
+        alertColor: const Color(0xFFD32F2F),
+      );
 
   static final PlateTheme private = _field(
     field: LebanonColors.white,
@@ -82,8 +74,8 @@ abstract final class LebanonThemes {
     inactive: LebanonColors.inactiveOnLight,
   );
 
-  /// The theme for [usage]. [publicTransport] inherits [publicInstitution]'s
-  /// red (unattested; see TODO on `LebanonUsage.publicTransport`).
+  /// [LebanonUsage.publicTransport] inherits the red of public institutions
+  /// (unattested).
   static PlateTheme forUsage(LebanonUsage usage) => switch (usage) {
     LebanonUsage.private => private,
     LebanonUsage.consular => consular,

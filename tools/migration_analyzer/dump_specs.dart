@@ -18,8 +18,7 @@ void main() {
   test('dump gallery', _dumpGallery);
   test('dump specs', () {
     final out = Directory('out/specs')..createSync(recursive: true);
-    final validatorsOut = Directory('out/validators')
-      ..createSync(recursive: true);
+    final validatorsOut = Directory('out/validators')..createSync(recursive: true);
 
     // Identity, not ==: PlateSpec.== compares ids only, and two different
     // objects sharing an id is itself something to report.
@@ -36,10 +35,7 @@ void main() {
       }
       void add(Object? v, String path) {
         if (v is PlateSpec) {
-          specs
-              .putIfAbsent(v, () => _Found(e.package, e.key))
-              .catalogues
-              .add(path);
+          specs.putIfAbsent(v, () => _Found(e.package, e.key)).catalogues.add(path);
         } else if (v is PlateSpec Function()) {
           add(v(), '$path()');
         } else if (v is Map) {
@@ -63,9 +59,7 @@ void main() {
       ...discoveryWarnings.keys,
       ...errors.keys,
     };
-    final packageOf = <String, String>{
-      for (final e in registry) e.key: e.package,
-    };
+    final packageOf = <String, String>{for (final e in registry) e.key: e.package};
     for (final MapEntry(key: spec, value: found) in specs.entries) {
       byKey.putIfAbsent(found.key, () => []).add({
         ..._spec(spec),
@@ -75,10 +69,7 @@ void main() {
 
     for (final key in keys.toList()..sort()) {
       final list = byKey[key] ?? [];
-      final warnings = <String>[
-        ...?discoveryWarnings[key],
-        ...?errors[key],
-      ];
+      final warnings = <String>[...?discoveryWarnings[key], ...?errors[key]];
       _markClones(list, warnings);
       _specTotal += list.length;
       final validatorText = StringBuffer();
@@ -88,9 +79,7 @@ void main() {
           ..writeln(File('../../$path').readAsStringSync());
       }
       if (validatorText.isNotEmpty) {
-        File(
-          '${validatorsOut.path}/$key.txt',
-        ).writeAsStringSync(validatorText.toString());
+        File('${validatorsOut.path}/$key.txt').writeAsStringSync(validatorText.toString());
       }
       if (list.isEmpty) warnings.add('no PlateSpec reached for this key');
       File('${out.path}/$key.json').writeAsStringSync(
@@ -138,9 +127,7 @@ void _dumpGallery() {
           'label': e.label,
           'specId': e.spec.id,
           'theme': theme,
-          'themeColors': e.theme == null
-              ? null
-              : [_c(e.theme!.plateBackground), _c(e.theme!.ink)],
+          'themeColors': e.theme == null ? null : [_c(e.theme!.plateBackground), _c(e.theme!.ink)],
           'country': e.country?.code ?? e.spec.country.code,
           'validator': e.validator?.runtimeType.toString(),
           'valueDrivenTheme': e.themeForValues != null,
@@ -154,9 +141,7 @@ void _dumpGallery() {
     visit(s);
   }
   Directory('out').createSync(recursive: true);
-  File('out/gallery.json').writeAsStringSync(
-    const JsonEncoder.withIndent(' ').convert(entries),
-  );
+  File('out/gallery.json').writeAsStringSync(const JsonEncoder.withIndent(' ').convert(entries));
   // ignore: avoid_print
   print('dumped ${entries.length} gallery entries');
 }
@@ -170,8 +155,7 @@ class _Found {
 
 String _body(Map<String, Object?> s) => jsonEncode({
   for (final e in s.entries)
-    if (e.key != 'id' && e.key != 'country' && e.key != 'catalogues')
-      e.key: e.value,
+    if (e.key != 'id' && e.key != 'country' && e.key != 'catalogues') e.key: e.value,
 });
 
 /// A lookup function rebuilds a spec as a new object; the same id with the
@@ -187,9 +171,7 @@ void _markClones(List<Map<String, Object?>> list, List<String> warnings) {
       return false;
     }
     if (_body(first) == _body(s)) {
-      (first['catalogues']! as List<String>).addAll(
-        s['catalogues']! as List<String>,
-      );
+      (first['catalogues']! as List<String>).addAll(s['catalogues']! as List<String>);
       return true;
     }
     warnings.add(
@@ -211,18 +193,11 @@ void _markClones(List<Map<String, Object?>> list, List<String> warnings) {
   }
 }
 
-String _c(Color? c) => c == null
-    ? 'theme'
-    : '#${c.toARGB32().toRadixString(16).padLeft(8, '0')}';
+String _c(Color? c) => c == null ? 'theme' : '#${c.toARGB32().toRadixString(16).padLeft(8, '0')}';
 
 double _r(double v) => (v * 100).roundToDouble() / 100;
 
-List<double> _box(PlateBox b) => [
-  _r(b.left),
-  _r(b.top),
-  _r(b.width),
-  _r(b.height),
-];
+List<double> _box(PlateBox b) => [_r(b.left), _r(b.top), _r(b.width), _r(b.height)];
 
 Map<String, Object?> _alphabet(PlateAlphabet a) => {
   'count': a.characters.length,
@@ -250,10 +225,7 @@ Object? _fill(PlateFill f) {
 }
 
 Object? _section(PlateSection s) => s.isLeaf
-    ? {
-        'fill': _fill(s.fill!),
-        if (s.shape != null) 'shape': s.shape.runtimeType.toString(),
-      }
+    ? {'fill': _fill(s.fill!), if (s.shape != null) 'shape': s.shape.runtimeType.toString()}
     : {
         'axis': s.axis == Axis.horizontal ? 'columns' : 'rows',
         'parts': [
@@ -275,10 +247,7 @@ Object _rules(List<PlateRule> rules) {
     'count': rules.length,
     'sizes': sizes.toList(),
     'pitch': _r(lefts[1] - lefts[0]),
-    'extent': [
-      _r(lefts.first),
-      _r(rules.map((r) => r.box.right).reduce((a, b) => a > b ? a : b)),
-    ],
+    'extent': [_r(lefts.first), _r(rules.map((r) => r.box.right).reduce((a, b) => a > b ? a : b))],
     'summary':
         '${rules.length} rects ${sizes.join('/')}, '
         'x ${_r(lefts.first)}..${_r(lefts.last)}',
@@ -349,8 +318,7 @@ Map<String, Object?> _spec(PlateSpec s) {
           'key': g.key,
           'indices': g.indices,
           'prefix': g.prefix,
-          'reversed':
-              g.indices.length > 1 && g.indices.first > g.indices.last,
+          'reversed': g.indices.length > 1 && g.indices.first > g.indices.last,
         },
     ],
     'explicitTextGroups': s.textGroups.isNotEmpty,
@@ -377,16 +345,13 @@ Map<String, Object?> _spec(PlateSpec s) {
         },
     ],
     'bands': [
-      for (final b in s.bands)
-        {'box': _box(b.box), 'color': _c(b.color)},
+      for (final b in s.bands) {'box': _box(b.box), 'color': _c(b.color)},
     ],
     'decals': [
-      for (final d in s.decals)
-        {'image': d.image.toString(), 'box': _box(d.box)},
+      for (final d in s.decals) {'image': d.image.toString(), 'box': _box(d.box)},
     ],
     'restrictions': [
-      for (final r in s.restrictions)
-        {'group': r.group, 'values': r.values, 'reason': r.reason},
+      for (final r in s.restrictions) {'group': r.group, 'values': r.values, 'reason': r.reason},
     ],
   };
 }

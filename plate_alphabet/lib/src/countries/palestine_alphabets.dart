@@ -14,9 +14,10 @@ abstract final class PSAlphabets {
 
   /// Legacy West Bank district codes: `1`, `3`–`9`. `0` and `2` are illegal
   /// and barred at alphabet level, not just by validator.
-  static const PlateAlphabet districtDigits = PlateAlphabet(
+  static const PlateAlphabet districtDigits = PlateAlphabet.pattern(
     id: 'ps.districtDigits',
-    characters: ['1', '3', '4', '5', '6', '7', '8', '9'],
+    include: '1-9',
+    exclude: '2',
     input: AlphabetInput.typed,
     isNumeric: true,
   );
@@ -24,23 +25,10 @@ abstract final class PSAlphabets {
   /// Thirteen issued governorate letters: `A B C D E F G H J K L M N`.
   /// `chosen` not `typed`: prevents keyboard offering illegal letters `I`, `O`,
   /// and reserved Gaza letters `P`–`T`. See [PSGovernorate] for the sequence.
-  static const PlateAlphabet governorateLetters = PlateAlphabet(
+  static const PlateAlphabet governorateLetters = PlateAlphabet.pattern(
     id: 'ps.governorateLetters',
-    characters: [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-    ],
+    include: 'A-N',
+    exclude: 'I',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

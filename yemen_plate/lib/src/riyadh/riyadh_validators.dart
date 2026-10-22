@@ -1,10 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Judges a Riyadh plate: three letters from the seventeen the article lists and
-/// one to four digits. Reports, never bars a keystroke.
-///
-/// Not checked: the combinations banned since 2009 (`SEX`, `ASS`, ...), since
-/// the article gives only examples, not the list.
+/// Judges a Riyadh plate: three letters from the seventeen issued and one to
+/// four digits. The combinations banned since 2009 are not checked; only
+/// examples are published, not the list.
 class RiyadhValidator extends GatedPlateValidator {
   const RiyadhValidator();
 

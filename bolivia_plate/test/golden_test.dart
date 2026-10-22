@@ -14,9 +14,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -30,10 +28,7 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(
-      spec,
-      values.split(' '),
-    );
+    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
     tester.view.physicalSize = const Size(1200, 600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -58,10 +53,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }

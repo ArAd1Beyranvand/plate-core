@@ -8,30 +8,17 @@ import 'package:plate_core/plate_core.dart';
 abstract final class BosniaAndHerzegovinaAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const List<String> _letters = <String>[
-    'A',
-    'E',
-    'J',
-    'K',
-    'M',
-    'O',
-    'T',
-  ];
-
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ba.letters',
-    characters: _letters,
+    include: 'A E J K M O T',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// First character of a serial: a digit or one of [letters].
-  static const PlateAlphabet first = PlateAlphabet(
+  static const PlateAlphabet first = PlateAlphabet.pattern(
     id: 'ba.first',
-    characters: <String>[
-      'A', 'E', 'J', 'K', 'M', 'O', 'T', //
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    ],
+    include: 'A E J K M O T 0-9',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

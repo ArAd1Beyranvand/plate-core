@@ -12,12 +12,10 @@ import '../plate_alphabet.dart';
 abstract final class TurkeyAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tr.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', //
-      'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'Y', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'Q W X',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

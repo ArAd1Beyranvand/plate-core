@@ -8,28 +8,25 @@ import 'package:plate_core/plate_core.dart';
 /// are the Latin capitals without Q, W, X and Y, which are not issued; also
 /// from memory, and only advisory.
 abstract final class SloveniaAlphabets {
-  static const PlateAlphabet digits = PlateAlphabet.latinDigits;
-
   static const List<String> regionCodes = <String>[
     'CE', 'GO', 'KK', 'KP', 'KR', 'LJ', 'MB', 'MS', 'NM', 'PO', 'SG', //
   ];
 
+  static const PlateAlphabet digits = PlateAlphabet.latinDigits;
+
   /// The letters region codes are made of.
-  static const PlateAlphabet regionLetters = PlateAlphabet(
+  static const PlateAlphabet regionLetters = PlateAlphabet.pattern(
     id: 'si.region.letters',
-    characters: <String>[
-      'B', 'C', 'E', 'G', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', //
-    ],
+    include: 'B-S',
+    exclude: 'D F H I Q',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'si.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'Q W X Y',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

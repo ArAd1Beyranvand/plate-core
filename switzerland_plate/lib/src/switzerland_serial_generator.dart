@@ -16,18 +16,15 @@ abstract final class SwitzerlandSerialGenerator {
     final Random rnd = random ?? Random();
     final List<String?> values = List<String?>.filled(spec.slots.length, null);
     String digits(PlateSlot slot) {
-      final int n =
-          slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
+      final int n = slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
       return <String>[
-        for (int i = 0; i < n; i++)
-          '${i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10)}',
+        for (int i = 0; i < n; i++) '${i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10)}',
       ].join();
     }
 
     for (int i = 0; i < spec.slots.length; i++) {
       final PlateSlot slot = spec.slots[i];
-      if (slot.alphabet.input == AlphabetInput.chosen ||
-          slot.alphabet.characters.length == 1) {
+      if (slot.alphabet.input == AlphabetInput.chosen || slot.alphabet.characters.length == 1) {
         values[i] = slot.alphabet.characters.first;
       } else if (slot.alphabet.isNumeric) {
         String d;

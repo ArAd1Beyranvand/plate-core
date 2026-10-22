@@ -69,6 +69,38 @@ be drawn algorithmically (stripes, bands, crosses, discs) — is painted onto th
 embed an asset, or add a per-country painter for something an algorithm can draw. Only a genuinely
 complex emblem (a crest) may be a decal, and say why.
 
+### Design rule: flags are drawn in code when they are easy (plate_core 0.12+)
+
+`PlateCountry.flag` and `PlateDecal.drawing` take a `PlateDrawing(width, height, <PlateShape>[...])`
+(`plate_core/lib/src/model/plate_shape.dart`): const shapes in the flag's own coordinate space, painted
+in order. Vocabulary: `PlateRectShape`, `PlatePolygonShape`, `PlateCircleShape`, `PlateRingShape`,
+`PlateCrescentShape`, `PlateStarShape`, `PlateStarRingShape` (EU ring: `european_stars.dart`).
+Working example: `algeria_plate/lib/src/algeria_country.dart` (`_flag`, 900×600 — white field,
+green half, crescent, star). Colours come from the country's `*Colors` class, not literals where a
+named colour exists.
+
+Every time a package is added or touched, check its flag **before** reaching for an SVG:
+
+1. **Easy → code.** Stripes/bands (any axis), triangles, cross, canton, disc, ring, crescent, stars,
+   star ring, simple polygons, the Union Jack. Write a `PlateDrawing` from the official proportions
+   (read the Wikipedia flag-article construction sheet; sample colours from pixels as usual). No
+   `assets/flags/*.svg`, no `pubspec.yaml` `assets:` entry, no `flutter_svg` use for it.
+2. **Not easy → SVG, and say why.** Coats of arms, crests, carpets, text/calligraphy, dozens of paths
+   (Iran, Brazil, Belarus, Bolivia, Belize, Turkmenistan, ...). Keep the SVG, minify it, and note the
+   reason in the report. Do not hand-trace an emblem to avoid a file.
+3. **Migrating an existing package:** replace the `SvgPlateAsset` flag with the `PlateDrawing`, delete
+   the SVG file and its `assets:` line (keep the `assets:` key only if other files remain), make sure
+   `plate_core: ^0.12.0` or newer, render it beside the old SVG to compare, then run `flutter analyze`
+   and `flutter test`. Raster PNG decals of a flag duplicate the SVG — convert them to `drawing:` too.
+4. A flag that only appears in a *source page* is not plate content — see below.
+
+Flags that merely appear in a source page are not plate content. Reference tables such as the
+Russian Wikipedia "Codes of diplomatic representative offices and international organizations"
+(Ministry of Internal Affairs Order 282, 28 March 2002: `001 United Kingdom`, `014 Norway`,
+`069 Finland`, ...) show a flag next to each country only as an illustration of the name. Take the
+code and the country/organization name as text and never download or embed those flags. The same
+goes for the sample photos of diplomatic vehicles on that page: use them only to measure the plate.
+
 ### Design rule: strips and dividers are the background, never boxes on it
 
 **Any vertical strip, horizontal band or divider that runs to the plate's edge is painted as
@@ -472,6 +504,8 @@ Every line here is one an earlier pass would have failed.
 - [ ] Every plate renders in the gallery app without asserting, each with its own theme.
 - [ ] Validators separate from specs; alphabets live in `plate_alphabet`.
 - [ ] Anything painted (dividers, SVG-like shapes, simple flags) is drawn on the background algorithmically.
+- [ ] The flag was assessed: easy ones are a `PlateDrawing` (no SVG, no asset entry); complex ones
+      keep an SVG with the reason stated.
 - [ ] Israel-specific values are blocked with `PlateRestriction` (or nothing Israel-specific exists).
 - [ ] README follows the template exactly, with the country's epithet.
 - [ ] Gallery entries added last, after the package was finished.

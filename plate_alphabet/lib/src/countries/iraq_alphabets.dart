@@ -6,7 +6,7 @@ import '../plate_alphabet.dart';
 ///
 /// The 2022/2024 series is the first to print in the Latin alphabet and
 /// western Arabic numerals; everything before it used Arabic script and
-/// eastern Arabic numerals. These are the current series only.
+/// Iranshahr numerals. These are the current series only.
 abstract final class IraqAlphabets {
   /// Western Arabic numerals — what the current series prints, for both the
   /// governorate code and the serial.
@@ -19,12 +19,9 @@ abstract final class IraqAlphabets {
   /// this is the full Latin alphabet; the narrower historical set is
   /// [IraqValidators.arabicSeriesLetters], which describes rather than
   /// restricts.
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'iq.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

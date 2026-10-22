@@ -6,30 +6,24 @@ import 'package:lebanon_plate/lebanon_plate.dart';
 
 void main() {
   group('LebanonSerialGenerator', () {
-    test(
-      'fills every slot of every geometry with something the validator accepts',
-      () {
-        final Random rnd = Random(7);
-        for (final PlateSpec spec in <PlateSpec>[LebanonPlates.oneLine, LebanonPlates.twoLine]) {
-          for (final List<String?> values
-              in LebanonSerialGenerator.generateMany(spec, 40, random: rnd)) {
-            expect(values, hasLength(spec.slots.length), reason: spec.id);
-            expect(
-              values.any((String? v) => v == null),
-              isFalse,
-              reason: spec.id,
-            );
-            expect(
-              const LebanonValidator()
-                  .validate(PlateEntry(spec: spec, values: values))
-                  .isValid,
-              isTrue,
-              reason: '${spec.id} $values',
-            );
-          }
+    test('fills every slot of every geometry with something the validator accepts', () {
+      final Random rnd = Random(7);
+      for (final PlateSpec spec in <PlateSpec>[LebanonPlates.oneLine, LebanonPlates.twoLine]) {
+        for (final List<String?> values in LebanonSerialGenerator.generateMany(
+          spec,
+          40,
+          random: rnd,
+        )) {
+          expect(values, hasLength(spec.slots.length), reason: spec.id);
+          expect(values.any((String? v) => v == null), isFalse, reason: spec.id);
+          expect(
+            const LebanonValidator().validate(PlateEntry(spec: spec, values: values)).isValid,
+            isTrue,
+            reason: '${spec.id} $values',
+          );
         }
-      },
-    );
+      }
+    });
 
     test('is repeatable for a given seed', () {
       final List<String?> a = LebanonSerialGenerator.generate(
@@ -104,10 +98,7 @@ void main() {
             .indicesOfGroup('serial')
             .map((int i) => values[i] ?? '')
             .join();
-        expect(
-          int.parse(serial),
-          inInclusiveRange(1, LebanonValidator.maxParliamentNumber),
-        );
+        expect(int.parse(serial), inInclusiveRange(1, LebanonValidator.maxParliamentNumber));
       }
     });
 
@@ -119,16 +110,10 @@ void main() {
         canvasHeight: 50,
         panel: PlatePanel(box: PlateBox(0, 0, 10, 50)),
         slots: <PlateSlot>[
-          PlateSlot(
-            alphabet: LebanonAlphabets.digits,
-            box: PlateBox(20, 5, 20, 40),
-          ),
+          PlateSlot(alphabet: LebanonAlphabets.digits, box: PlateBox(20, 5, 20, 40)),
         ],
       );
-      expect(
-        () => LebanonSerialGenerator.generate(foreign),
-        throwsArgumentError,
-      );
+      expect(() => LebanonSerialGenerator.generate(foreign), throwsArgumentError);
     });
   });
 }

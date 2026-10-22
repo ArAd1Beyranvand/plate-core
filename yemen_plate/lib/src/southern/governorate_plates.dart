@@ -1,5 +1,7 @@
-import 'package:plate_core/plate_core.dart';
+import 'dart:math';
+
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import '../common/yemen_alphabets.dart';
 import '../common/yemen_country.dart';
@@ -141,83 +143,57 @@ class YemenSouthernGovernorate {
 /// So one spec per governorate and digit count serves private, hire,
 /// commercial and government alike.
 abstract final class YemenGovernoratePlates {
-  // ---------------------------------------------------------------------------
-  // Backgrounds. Every strip and divider runs to the frame.
-  // ---------------------------------------------------------------------------
-
   static PlateSection _top(bool banded) =>
       banded ? const PlateSection.fill(PlateFill.panel) : PlateSection.plain;
 
   /// Strip | (name / serial). Marib's name row is in the strip colour.
-  static PlateSection _carBackground(bool banded) =>
-      PlateSection.columns(<PlatePart>[
-        const PlatePart(
-          PlateSection.fill(PlateFill.panel),
-          end: _Layout.stripEnd,
-          divider: _Layout.divider,
-        ),
-        PlatePart(
-          PlateSection.rows(<PlatePart>[
-            PlatePart(
-              _top(banded),
-              end: _Layout.rowEnd,
-              divider: _Layout.divider,
-            ),
-            const PlatePart(PlateSection.plain),
-          ]),
-        ),
-      ]);
-
-  /// (name / serial) | blue مؤقت strip.
-  static const PlateSection _temporaryBackground = PlateSection.columns(
-    <PlatePart>[
-      PlatePart(
-        PlateSection.rows(<PlatePart>[
-          PlatePart(
-            PlateSection.plain,
-            end: _Layout.rowEnd,
-            divider: _Layout.divider,
-          ),
-          PlatePart(PlateSection.plain),
-        ]),
-        end: _Layout.tempStripEnd,
-        divider: _Layout.divider,
-      ),
-      PlatePart(PlateSection.fill(PlateFill.panel)),
-    ],
-  );
-
-  /// White name column | (blue الشرطة band / serial).
-  static const PlateSection _policeBackground = PlateSection.columns(
-    <PlatePart>[
-      PlatePart(
-        PlateSection.plain,
-        end: _Layout.stripEnd,
-        divider: _Layout.divider,
-      ),
-      PlatePart(
-        PlateSection.rows(<PlatePart>[
-          PlatePart(
-            PlateSection.fill(PlateFill.panel),
-            end: _Layout.rowEnd,
-            divider: _Layout.divider,
-          ),
-          PlatePart(PlateSection.plain),
-        ]),
-      ),
-    ],
-  );
-
-  /// name / serial, divider full width. Marib's name row is in the band colour.
-  static PlateSection _motoBackground(bool banded) =>
+  static PlateSection _carBackground(bool banded) => PlateSection.columns(<PlatePart>[
+    const PlatePart(
+      PlateSection.fill(PlateFill.panel),
+      end: _Layout.stripEnd,
+      divider: _Layout.divider,
+    ),
+    PlatePart(
       PlateSection.rows(<PlatePart>[
         PlatePart(_top(banded), end: _Layout.rowEnd, divider: _Layout.divider),
         const PlatePart(PlateSection.plain),
-      ]);
+      ]),
+    ),
+  ]);
 
-  // ---------------------------------------------------------------------------
-  // Pieces.
-  // ---------------------------------------------------------------------------
+  /// (name / serial) | blue مؤقت strip.
+  static const PlateSection _temporaryBackground = PlateSection.columns(<PlatePart>[
+    PlatePart(
+      PlateSection.rows(<PlatePart>[
+        PlatePart(PlateSection.plain, end: _Layout.rowEnd, divider: _Layout.divider),
+        PlatePart(PlateSection.plain),
+      ]),
+      end: _Layout.tempStripEnd,
+      divider: _Layout.divider,
+    ),
+    PlatePart(PlateSection.fill(PlateFill.panel)),
+  ]);
+
+  /// White name column | (blue الشرطة band / serial).
+  static const PlateSection _policeBackground = PlateSection.columns(<PlatePart>[
+    PlatePart(PlateSection.plain, end: _Layout.stripEnd, divider: _Layout.divider),
+    PlatePart(
+      PlateSection.rows(<PlatePart>[
+        PlatePart(
+          PlateSection.fill(PlateFill.panel),
+          end: _Layout.rowEnd,
+          divider: _Layout.divider,
+        ),
+        PlatePart(PlateSection.plain),
+      ]),
+    ),
+  ]);
+
+  /// name / serial, divider full width. Marib's name row is in the band colour.
+  static PlateSection _motoBackground(bool banded) => PlateSection.rows(<PlatePart>[
+    PlatePart(_top(banded), end: _Layout.rowEnd, divider: _Layout.divider),
+    const PlatePart(PlateSection.plain),
+  ]);
 
   /// A label whose ink is centred on ([cx], [cy]). The box is generous; a
   /// label is positioned by its box's centre and is free to overflow it.
@@ -237,20 +213,18 @@ abstract final class YemenGovernoratePlates {
   );
 
   /// [count] digit cells of [pitch], centred on [cx].
-  static List<PlateSlot> _serial(int count, double cx, double pitch) =>
-      plateRegister(
-        alphabet: YemenAlphabets.digits,
-        count: count,
-        left: cx - count * pitch / 2,
-        top: _Layout.serialTop,
-        width: pitch,
-        height: _Layout.serialHeight,
-      );
+  static List<PlateSlot> _serial(int count, double cx, double pitch) => plateRegister(
+    alphabet: YemenAlphabets.digits,
+    count: count,
+    left: cx - count * pitch / 2,
+    top: _Layout.serialTop,
+    width: pitch,
+    height: _Layout.serialHeight,
+  );
 
   /// The pitch for [count] digits across [span]: a full bold digit when it
   /// fits, otherwise an even share and the slot shrinks the glyph.
-  static double _pitch(int count, double span) =>
-      span / count < _Layout.digitPitch ? span / count : _Layout.digitPitch;
+  static double _pitch(int count, double span) => min(span / count, _Layout.digitPitch);
 
   static List<PlateTextGroup> _groups(int count) => <PlateTextGroup>[
     PlateTextGroup(List<int>.generate(count, (i) => i), key: 'serial'),
@@ -260,10 +234,6 @@ abstract final class YemenGovernoratePlates {
   static String _stacked(String word) => word.split('').join('\n');
 
   static const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 1, 1));
-
-  // ---------------------------------------------------------------------------
-  // Builders.
-  // ---------------------------------------------------------------------------
 
   /// The car plate: strip, name, [count]-digit serial. [count] is 4 on every
   /// published plate but Hadhramaut's private, which shows 5.
@@ -310,15 +280,7 @@ abstract final class YemenGovernoratePlates {
       labels: <PlateLabel>[
         _centred(g.name, 195, _Layout.nameCy, _Layout.nameGlyph),
         // Ink x 412 .. 466, y 35 .. 240: four letters, ~51 a line.
-        _centred(
-          _stacked('مؤقت'),
-          441,
-          137.5,
-          62,
-          width: 110,
-          height: 220,
-          lineHeight: 1.1,
-        ),
+        _centred(_stacked('مؤقت'), 441, 137.5, 62, width: 110, height: 220, lineHeight: 1.1),
       ],
       slots: _serial(count, cx, _pitch(count, right - left)),
       textGroups: _groups(count),
@@ -353,14 +315,7 @@ abstract final class YemenGovernoratePlates {
           lineHeight: 0.95,
         ),
         _centred('الشرطة', 330.5, 60, _Layout.nameGlyph),
-        _centred(
-          g.policePrefix ?? '',
-          212,
-          _Layout.serialCy,
-          height,
-          width: 160,
-          height: height,
-        ),
+        _centred(g.policePrefix ?? '', 212, _Layout.serialCy, height, width: 160, height: height),
       ],
       slots: plateRegister(
         alphabet: YemenAlphabets.digits,
@@ -381,9 +336,7 @@ abstract final class YemenGovernoratePlates {
     const cx = _Layout.motoWidth / 2;
     return PlateSpec(
       id: 'ye.${g.id}.moto.s$count',
-      country: g.banded
-          ? YemenCountry.southernForHire
-          : YemenCountry.southernPrivate,
+      country: g.banded ? YemenCountry.southernForHire : YemenCountry.southernPrivate,
       canvasWidth: _Layout.motoWidth,
       canvasHeight: _Layout.height,
       panel: _noPanel,
@@ -395,47 +348,24 @@ abstract final class YemenGovernoratePlates {
     );
   }
 
-  // ---------------------------------------------------------------------------
-  // The published plates, one per article row that differs in layout.
-  // Usage rows that differ only in strip colour share a spec.
-  // ---------------------------------------------------------------------------
+  // One spec per published layout; rows differing only in strip colour share it.
 
   static final PlateSpec hadhramaut = car(YemenSouthernGovernorate.hadhramaut);
-  static final PlateSpec hadhramautFiveDigit = car(
-    YemenSouthernGovernorate.hadhramaut,
-    count: 5,
-  );
-  static final PlateSpec hadhramautTemporary = temporary(
-    YemenSouthernGovernorate.hadhramaut,
-  );
-  static final PlateSpec hadhramautPolice = police(
-    YemenSouthernGovernorate.hadhramaut,
-  );
-  static final PlateSpec hadhramautMotorcycle = motorcycle(
-    YemenSouthernGovernorate.hadhramaut,
-  );
+  static final PlateSpec hadhramautFiveDigit = car(YemenSouthernGovernorate.hadhramaut, count: 5);
+  static final PlateSpec hadhramautTemporary = temporary(YemenSouthernGovernorate.hadhramaut);
+  static final PlateSpec hadhramautPolice = police(YemenSouthernGovernorate.hadhramaut);
+  static final PlateSpec hadhramautMotorcycle = motorcycle(YemenSouthernGovernorate.hadhramaut);
 
   static final PlateSpec alMahrah = car(YemenSouthernGovernorate.alMahrah);
-  static final PlateSpec alMahrahMotorcycle = motorcycle(
-    YemenSouthernGovernorate.alMahrah,
-  );
+  static final PlateSpec alMahrahMotorcycle = motorcycle(YemenSouthernGovernorate.alMahrah);
 
   static final PlateSpec shabwah = car(YemenSouthernGovernorate.shabwah);
-  static final PlateSpec shabwahTemporary = temporary(
-    YemenSouthernGovernorate.shabwah,
-  );
-  static final PlateSpec shabwahPolice = police(
-    YemenSouthernGovernorate.shabwah,
-  );
+  static final PlateSpec shabwahTemporary = temporary(YemenSouthernGovernorate.shabwah);
+  static final PlateSpec shabwahPolice = police(YemenSouthernGovernorate.shabwah);
 
   /// Shabwah's motorcycle artwork shows three digits.
-  static final PlateSpec shabwahMotorcycle = motorcycle(
-    YemenSouthernGovernorate.shabwah,
-    count: 3,
-  );
+  static final PlateSpec shabwahMotorcycle = motorcycle(YemenSouthernGovernorate.shabwah, count: 3);
 
   static final PlateSpec marib = car(YemenSouthernGovernorate.marib);
-  static final PlateSpec maribMotorcycle = motorcycle(
-    YemenSouthernGovernorate.marib,
-  );
+  static final PlateSpec maribMotorcycle = motorcycle(YemenSouthernGovernorate.marib);
 }

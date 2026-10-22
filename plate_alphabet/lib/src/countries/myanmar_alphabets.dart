@@ -12,13 +12,9 @@ abstract final class MyanmarAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.latinUppercase;
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const PlateAlphabet serialPrefix = PlateAlphabet(
+  static const PlateAlphabet serialPrefix = PlateAlphabet.pattern(
     id: 'mm.prefix',
-    characters: <String>[
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', //
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: '0-9 A-Z',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );
@@ -40,33 +36,25 @@ abstract final class MyanmarAlphabets {
     '5': '၅', '6': '၆', '7': '၇', '8': '၈', '9': '၉',
   };
 
-  static const PlateAlphabet burmeseDigits = PlateAlphabet(
+  static const PlateAlphabet burmeseDigits = PlateAlphabet.pattern(
     id: 'mm.burmese.digits',
-    characters: <String>['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    include: '0-9',
     input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: _burmeseNumerals,
   );
 
-  static const List<String> _consonants = <String>[
-    'က', 'ခ', 'ဂ', 'ဃ', 'င', 'စ', 'ဆ', 'ဇ', 'ဈ', 'ည', 'ဋ', 'ဌ', 'ဍ', 'ဎ', //
-    'ဏ', 'တ', 'ထ', 'ဒ', 'ဓ', 'န', 'ပ', 'ဖ', 'ဗ', 'ဘ', 'မ', 'ယ', 'ရ', 'လ', //
-    'ဝ', 'သ', 'ဟ', 'ဠ', 'အ',
-  ];
-
-  static const PlateAlphabet burmeseLetters = PlateAlphabet(
+  static const PlateAlphabet burmeseLetters = PlateAlphabet.pattern(
     id: 'mm.burmese.letters',
-    characters: _consonants,
+    include: 'က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );
 
   /// A cell that is a numeral or a consonant (`၂၃ ယ`).
-  static const PlateAlphabet burmeseMixed = PlateAlphabet(
+  static const PlateAlphabet burmeseMixed = PlateAlphabet.pattern(
     id: 'mm.burmese.mixed',
-    characters: <String>[
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ..._consonants, //
-    ],
+    include: '0-9 က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
     isNumeric: false,
     glyphs: _burmeseNumerals,

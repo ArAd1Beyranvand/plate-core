@@ -10,12 +10,9 @@ abstract final class UruguayAlphabets {
 
   static const PlateAlphabet letters = PlateAlphabet.latinUppercase;
 
-  static const PlateAlphabet department = PlateAlphabet(
+  static const PlateAlphabet department = PlateAlphabet.pattern(
     id: 'uy.department',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', //
-      'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
-    ],
+    include: 'A-S',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

@@ -29,31 +29,15 @@ void main() {
       <String, (PlateSpec, PlateTheme, String)>{
         'old': (SenegalPlates.old, SenegalThemes.old, 'DK 1234 AB'),
         'old_single': (SenegalPlates.old, SenegalThemes.old, 'TH 1234 A'),
-        'current': (
-          SenegalPlates.current,
-          SenegalThemes.current,
-          'AA 012 BC DK 01',
-        ),
-        'truck_rear': (
-          SenegalPlates.truckRear,
-          SenegalThemes.twoRow,
-          'AA 012 BC DK 01',
-        ),
-        'motorcycle': (
-          SenegalPlates.motorcycle,
-          SenegalThemes.twoRow,
-          'AA 123 BC DK 01',
-        ),
+        'current': (SenegalPlates.current, SenegalThemes.current, 'AA 012 BC DK 01'),
+        'truck_rear': (SenegalPlates.truckRear, SenegalThemes.twoRow, 'AA 012 BC DK 01'),
+        'motorcycle': (SenegalPlates.motorcycle, SenegalThemes.twoRow, 'AA 123 BC DK 01'),
       };
 
-  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c
-      in cases.entries) {
+  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c in cases.entries) {
     testWidgets(c.key, (tester) async {
       final (PlateSpec spec, PlateTheme theme, String values) = c.value;
-      final PlateController controller = PlateController.fromValues(
-        spec,
-        values.split(' '),
-      );
+      final PlateController controller = PlateController.fromValues(spec, values.split(' '));
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -75,10 +59,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/sn_${c.key}.png'),
-      );
+      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/sn_${c.key}.png'));
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });

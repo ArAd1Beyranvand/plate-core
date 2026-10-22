@@ -1,15 +1,13 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'tunisia_colors.dart';
 
-/// The Tunisian liveries: one ink on one field, a rim in silver or the ink.
-///
-/// Measured off the photos normalised to 520×110: the rim is 4–5 mm on every
-/// plate (4.5 on the military one), so 0.041 of the height. The outer corner
-/// is ~5 mm on the pressed plates and ~10 mm on the military one. Both ratios
-/// are of the canvas height. Dashes are `PlateRule`s, so [PlateTheme.dividerColor]
-/// is the ink.
+/// One ink on one field, a rim in silver or the ink. Ratios are of the canvas
+/// height, measured off photos normalised to 520x110: the rim is ~4.5 mm
+/// everywhere, the outer corner ~5 mm on pressed plates and ~10 mm on the
+/// military one. Dashes are `PlateRule`s, so [PlateTheme.dividerColor] is the
+/// ink.
 abstract final class TunisiaThemes {
   static PlateTheme _livery({
     required Color field,
@@ -29,8 +27,7 @@ abstract final class TunisiaThemes {
     alertColor: const Color(0xFFD32F2F),
   );
 
-  /// White on black in a silver rim: the ordinary plate, and the temporary
-  /// (`ن ت`) plate, which the photo shows in the same paint.
+  /// Also the temporary plate, which the photo shows in the same paint.
   static final PlateTheme standard = _livery(
     field: TunisiaColors.black,
     ink: TunisiaColors.white,
@@ -38,7 +35,6 @@ abstract final class TunisiaThemes {
     rim: TunisiaColors.rimSilver,
   );
 
-  /// White on blue in a silver rim: rental cars.
   static final PlateTheme rental = _livery(
     field: TunisiaColors.rentalBlue,
     ink: TunisiaColors.white,
@@ -46,21 +42,19 @@ abstract final class TunisiaThemes {
     rim: TunisiaColors.rimSilver,
   );
 
-  /// Red on white, framed in red: ministries and state offices.
   static final PlateTheme government = _livery(
     field: TunisiaColors.governmentWhite,
     ink: TunisiaColors.governmentRed,
     inactive: TunisiaColors.inactiveOnLight,
   );
 
-  /// Black on white, framed in black: diplomatic missions.
   static final PlateTheme diplomatic = _livery(
     field: TunisiaColors.diplomaticWhite,
     ink: TunisiaColors.diplomaticBlack,
     inactive: TunisiaColors.inactiveOnLight,
   );
 
-  /// White on black, framed in white, with rounder corners.
+  /// Rounder corners.
   static final PlateTheme military = _livery(
     field: TunisiaColors.black,
     ink: TunisiaColors.white,

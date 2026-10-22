@@ -9,9 +9,9 @@ abstract final class BhutanAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
   /// The area code, 1 to 5.
-  static const PlateAlphabet area = PlateAlphabet(
+  static const PlateAlphabet area = PlateAlphabet.pattern(
     id: 'alphabet.bt.area',
-    characters: <String>['1', '2', '3', '4', '5'],
+    include: '1-5',
     input: AlphabetInput.typed,
     isNumeric: true,
   );

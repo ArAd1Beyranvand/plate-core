@@ -15,26 +15,21 @@ import '../plate_alphabet.dart';
 abstract final class RiyadhAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  /// `0-9` printed as Eastern Arabic numerals, for the large row.
-  static const PlateAlphabet arabicDigits = PlateAlphabetDigits.iranshahr;
-
-  static const List<String> _latin = <String>[
-    'A', 'B', 'J', 'D', 'R', 'S', 'X', 'T', 'E', //
-    'G', 'K', 'L', 'Z', 'N', 'H', 'U', 'V',
-  ];
+  /// `0-9` printed as Iranshahr numerals, for the large row.
+  static const PlateAlphabet iranshahrDigits = PlateAlphabetDigits.iranshahr;
 
   /// The Latin row of the letters.
-  static const PlateAlphabet lettersLatin = PlateAlphabet(
+  static const PlateAlphabet lettersLatin = PlateAlphabet.pattern(
     id: 'ye.riyadh.letters.latin',
-    characters: _latin,
+    include: 'A B J D R S X T E G K L Z N H U V',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// The Arabic row of the letters.
-  static const PlateAlphabet lettersArabic = PlateAlphabet(
+  static const PlateAlphabet lettersArabic = PlateAlphabet.pattern(
     id: 'ye.riyadh.letters.arabic',
-    characters: _latin,
+    include: 'A B J D R S X T E G K L Z N H U V',
     input: AlphabetInput.chosen,
     isNumeric: false,
     direction: TextDirection.rtl,

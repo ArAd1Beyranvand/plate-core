@@ -50,11 +50,7 @@ class LaosCategory {
   /// Whether [prefix] is underlined, as on the police plate.
   final bool underline;
 
-  static const LaosCategory private = LaosCategory._(
-    'private',
-    'Private',
-    LaosDesign.provincial,
-  );
+  static const LaosCategory private = LaosCategory._('private', 'Private', LaosDesign.provincial);
   static const LaosCategory privateEv = LaosCategory._(
     'private_ev',
     'Private (electric)',

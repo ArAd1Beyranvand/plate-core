@@ -4,10 +4,8 @@ import 'sudan_alphabets.dart';
 
 /// Judges a `SudanPlates` value. Reports, never bars a keystroke.
 ///
-/// What the sources fix: a single class digit (seen 1, 3, 4, 7, 8 — its
-/// meaning is not documented, and it is not the usage, since `4` appears on
-/// both a private and a taxi plate), a state code, and a serial of four or
-/// five digits.
+/// A single class digit (its meaning is undocumented and is not the usage), a
+/// state code, and a serial of four or five digits.
 class SudanValidator extends GatedPlateValidator {
   const SudanValidator();
 

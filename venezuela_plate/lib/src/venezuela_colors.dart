@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-/// Every colour a Venezuelan plate is printed in. No clean artwork exists, so
-/// each is sampled from the three frontal photographs on Wikipedia (AB174SK
-/// Lara, AA064ST Trujillo, AE328KG Carabobo), with every photograph first
+/// Sampled from three frontal photographs (no clean artwork exists), each first
 /// scaled so its white field reads `FFFFFF`. Each is a calibration target.
 /// Colours go into `VenezuelaThemes`, never into specs.
 abstract final class VenezuelaColors {

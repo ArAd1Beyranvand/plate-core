@@ -1,50 +1,28 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'tunisia_alphabets.dart';
+import 'tunisia_colors.dart';
 import 'tunisia_country.dart';
 
-/// Where the ink sits on a Tunisian plate, in millimetres.
+/// Ink positions in millimetres, measured from photographs (no artwork
+/// exists). Each plate's rim was mapped to the article's rear size, 520x110
+/// (275x200 for the two-line plate). The photos measure 4.60-4.97 aspect
+/// against the documented 4.73, so x carries a few millimetres of
+/// perspective; rows are centred on the plate rather than placed at each
+/// photo's offset.
 ///
-/// Every reference is a photograph (the article has no artwork). Each plate's
-/// rim was found from the luminance profile and its outer edge mapped to the
-/// article's rear size, 520×110, or 275×200 for the two-line plate. The photos
-/// measure 4.60–4.97 against the documented 4.73, so x positions carry a few
-/// millimetres of perspective; rows are centred on the plate rather than
-/// placed at each photo's offset.
-///
-/// * Ordinary (`Standard_Tunisian_licence_plate.jpg`, rental `…_2.jpg`):
-///   ink y 24.5..89 and 22.3..90.5. Digit pitch 46.6, 44.3, 44.8, 47.0 per
-///   group, mean 45.6. Last series centre to تونس centre 93.1 / 92.5; تونس
-///   centre to first number centre 97.2 / 91.8. تونس ink 111 / 105 wide.
-/// * Two-line (`Standard square Tunisian license plate.jpg`, 275×200): number
-///   ink y 21.5..87, pitch 44.7; `47 تونس` ink y 109.6..176.3, pitch 44.5,
-///   last series centre to تونس centre 81.1, تونس 108.4 wide.
-/// * Government (`Tunisian 20 Ministerial license plate.jpg`): ink y
-///   15.6..92.1, pitch 46.1 / 46.0. Dash 28.5×11.8 centred at y 60, 67.4 after
-///   the last ministry centre and 61.1 before the first number cell.
-/// * Military (`Military plate Tunisia.jpg`): five digits, ink x 208.5..432,
-///   y 19.5..94; proportional, so pitch 45.5 is the cell that spans that run.
-///   Flag x 57.1..136.8, y 20.3..88.1, disc 0.85 of its height.
-/// * Diplomatic (`Tunisian license plates 04.JPG`): `46` ink x 33.2..106.2,
-///   `CD` 131.6..206.7, `س د` 229.7..354.7, `02` 393.3..483.1. Digits y
-///   ~19.5..85, pitch 38.4 / 49.6 (a shadowed photo), mean 44.
-/// * Temporary (`Tunisian license plates 03.JPG`): five digits ink x
-///   55.8..235.8, y 17.6..94.6, pitch 39.0; dash 20.5×11.9 at y 56.5; `ن ت`
-///   347.4..449.5.
-///
-/// **Under-height ink, accepted.** The photos' digits are 64–77 mm tall in a
+/// Under-height ink is accepted: the photos' digits are 64-77 mm tall in a
 /// condensed face. `glyphStyle` sets 0.72 of the slot and a bold digit is
-/// ~0.73 of that, so 66 mm would need a 126 mm slot on a 110 mm plate; and
-/// DejaVu Bold's digits are wider than the plate's, so a slot's glyph is
-/// width-limited by its 45.6 mm cell before it is height-limited. Labels are
-/// sized to the measured ink *width* for the same reason. `plate_core` is
-/// unchanged.
+/// ~0.73 of that, so 66 mm would need a 126 mm slot on a 110 mm plate, and
+/// the fallback face's digits are wider than the plate's, so a glyph is
+/// width-limited by its cell first. Labels are sized to the measured ink
+/// width for the same reason.
 ///
-/// **Fixed cells.** The plates are lettered by hand on a proportional face —
-/// the `1` is half a cell — and a `PlateSlot` is a fixed cell.
+/// Cells are fixed: the plates are lettered by hand on a proportional face
+/// (the `1` is half a cell) and a `PlateSlot` is a fixed cell.
 abstract final class _Layout {
   static const double width = 520;
   static const double height = 110;
@@ -96,8 +74,7 @@ abstract final class _Layout {
   static const double dipLatinWidth = 75.1;
   static const double dipArabicWidth = 125;
 
-  /// Between the runs, from the ink edges: the `46` cells (centred on its
-  /// ink, 69.0) end at 113.0; `02`'s start at 393.8.
+  /// Gaps between runs, from the measured ink edges.
   static const double dipGap1 = 131.6 - 113.0;
   static const double dipGap2 = 229.7 - 206.7;
   static const double dipGap3 = 393.8 - 354.7;
@@ -109,8 +86,7 @@ abstract final class _Layout {
   static const double tmpDashY = 56.5;
   static const double tmpCaptionWidth = 102;
   static const double tmpGapBefore = 65.7 - tmpPitch / 2 - tmpDashWidth / 2;
-  static const double tmpGapAfter =
-      106.9 - tmpDashWidth / 2 - tmpCaptionWidth / 2;
+  static const double tmpGapAfter = 106.9 - tmpDashWidth / 2 - tmpCaptionWidth / 2;
 
   static const double labelSlack = 40;
 
@@ -118,15 +94,14 @@ abstract final class _Layout {
   static const String tunisFont = 'TunisiaAmiri';
 
   /// Label glyph heights, fitted on the goldens so each word's ink matches
-  /// the measured width above (see `test/golden_test.dart`).
+  /// the measured width.
   static const double tunisGlyph = 92;
 
   /// Smaller on the square, where a three-digit series leaves no room.
   static const double squareTunisGlyph = 76;
   static const double tmpCaptionGlyph = 80;
 
-  /// Label box centres, fitted so the ink centres land on the measured ones:
-  /// تونس 56 (one-line) and 144 (two-line), `CD` 54.4, `س د` 55, `ن ت` 64.8.
+  /// Label box centres, fitted so the ink centres land on the measured ones.
   static const double tunisY = 50;
   static const double squareTunisY = 138;
   static const double dipLatinY = 55.4;
@@ -145,9 +120,9 @@ final class _Run {
       thickness = 0,
       y = 0;
 
-  /// A word boxed [width] wide whose box is centred at plate y [y]. The box
-  /// is not the ink: Arabic sits low in its line, so [y] is fitted.
-  /// [font] is a family bundled by this package, or null for the theme's.
+  /// A word boxed [width] wide, its box centred at plate y [y]. The box is not
+  /// the ink: Arabic sits low in its line, so [y] is fitted. [font] is a
+  /// family bundled by this package, or null for the theme's.
   const _Run.text(String this.text, this.width, this.glyph, this.y, {this.font})
     : key = null,
       count = 0,
@@ -192,8 +167,7 @@ typedef _Row = ({
 });
 
 /// A diplomatic plate's code: Latin and Arabic initials, fixed by the
-/// vehicle's status. [latinGlyph] and [arabicGlyph] fit each word to the
-/// `CD` plate's measured boxes.
+/// vehicle's status. The glyph heights fit each word to the `CD` boxes.
 @immutable
 class TunisiaMission {
   const TunisiaMission({
@@ -238,11 +212,7 @@ class TunisiaMission {
     arabicGlyph: 80,
   );
 
-  static const List<TunisiaMission> values = <TunisiaMission>[
-    corps,
-    mission,
-    chief,
-  ];
+  static const List<TunisiaMission> values = <TunisiaMission>[corps, mission, chief];
 }
 
 /// The word after a temporary plate's serial: `ن ت` for a vehicle under
@@ -254,57 +224,50 @@ class TunisiaSuffix {
   final String id;
   final String arabic;
 
-  static const TunisiaSuffix suspended = TunisiaSuffix(
-    id: 'rs',
-    arabic: 'ن\u200Cت',
-  );
-  static const TunisiaSuffix dealer = TunisiaSuffix(
-    id: 'ww',
-    arabic: 'ع\u200Cع',
-  );
+  static const TunisiaSuffix suspended = TunisiaSuffix(id: 'rs', arabic: 'ن\u200Cت');
+  static const TunisiaSuffix dealer = TunisiaSuffix(id: 'ww', arabic: 'ع\u200Cع');
 }
 
-/// Tunisia's plate geometries.
-///
-/// * [standard] — 520×110, `NNN تونس NNNN`: series, "Tunisia", registration.
-///   White on black for ordinary cars, white on blue for rentals: the theme.
-/// * [square] — the 275×200 two-line rear plate, number over series and تونس.
-/// * [government] — `NN - NNNNNN`, ministry and vehicle, red on white.
-/// * [diplomatic] — `NN CD س د NN`; `MD` and `CMD` by [TunisiaMission].
-/// * [military] — five digits with the flag at the left.
-/// * [temporary] — `NNNNN - ن ت`, or `ع ع` for a dealer ([TunisiaSuffix]).
+/// * [standard]: 520x110, `NNN تونس NNNN`. Ordinary and rental cars differ
+///   by theme.
+/// * [square]: the 275x200 two-line rear plate, number over series and تونس.
+/// * [government]: `NN - NNNNNN`, ministry and vehicle.
+/// * [diplomatic]: `NN CD س د NN`; `MD` and `CMD` by [TunisiaMission].
+/// * [military]: five digits with the flag at the left.
+/// * [temporary]: `NNNNN - ن ت`, or `ع ع` for a dealer ([TunisiaSuffix]).
 ///
 /// Every spec is one centred row built by `_row`; they differ in the runs.
 /// Text groups: `series`, `number`; government `ministry`, `number`;
 /// diplomatic `country`, `serial`; military and temporary `serial`.
 ///
-/// Not implemented: the 170×120 motorcycle plate (its one photo is 112 px
-/// wide and shows a `د ن` format the article does not describe); the pre-1975
-/// series; the TUNISIA sticker on the military photo, a sticker on that
-/// specimen. Screw holes are not printed.
+/// Not implemented: the motorcycle plate (its one photo is too small and
+/// shows an undocumented format), the pre-1975 series, and the sticker on the
+/// military photo. Screw holes are not printed.
 abstract final class TunisiaPlates {
-  static final Map<TunisiaMission, PlateSpec> _diplomatic =
-      <TunisiaMission, PlateSpec>{};
-  static final Map<TunisiaSuffix, PlateSpec> _temporary =
-      <TunisiaSuffix, PlateSpec>{};
+  /// The flag cropped to the disc, as the military plate prints it.
+  static const PlateDrawing _militaryFlag = PlateDrawing(55.2, 46.9, <PlateShape>[
+    PlateRectShape(0, 0, 55.2, 46.9, TunisiaColors.flagRed),
+    PlateCircleShape(27.6, 23.45, 20, Color(0xFFFFFFFF)),
+    PlateCrescentShape(27.6, 23.45, 15, 4, 12, TunisiaColors.flagRed),
+    PlateStarShape(31.6, 23.45, 9, TunisiaColors.flagRed, rotation: 270),
+  ]);
 
-  /// The one-line plate. The series is one field of 1–3 digits: series 1–999
-  /// print without leading zeros.
+  static final Map<TunisiaMission, PlateSpec> _diplomatic = <TunisiaMission, PlateSpec>{};
+  static final Map<TunisiaSuffix, PlateSpec> _temporary = <TunisiaSuffix, PlateSpec>{};
+
+  /// The series is one field of 1-3 digits, printed without leading zeros.
   static final PlateSpec standard = _standardSpec();
 
   static final PlateSpec square = _squareSpec();
 
-  /// The ministry code and a vehicle number of 1–6 digits; the photo and the
-  /// article show six.
+  /// A ministry code and a vehicle number of 1-6 digits.
   static final PlateSpec government = _governmentSpec();
 
-  static PlateSpec diplomatic([
-    TunisiaMission mission = TunisiaMission.corps,
-  ]) => _diplomatic[mission] ??= _diplomaticSpec(mission);
+  static PlateSpec diplomatic([TunisiaMission mission = TunisiaMission.corps]) =>
+      _diplomatic[mission] ??= _diplomaticSpec(mission);
 
-  static PlateSpec temporary([
-    TunisiaSuffix suffix = TunisiaSuffix.suspended,
-  ]) => _temporary[suffix] ??= _temporarySpec(suffix);
+  static PlateSpec temporary([TunisiaSuffix suffix = TunisiaSuffix.suspended]) =>
+      _temporary[suffix] ??= _temporarySpec(suffix);
 
   /// Lays [runs] out left to right, centred on [centre]. Group indices start
   /// at [first], for a spec whose earlier row already holds slots.
@@ -333,23 +296,17 @@ abstract final class TunisiaPlates {
             box: PlateBox(x, top, r.count * pitch, height),
             length: r.count,
             minLength: r.minLength,
-            spacing: r.minLength == null
-                ? max(0, pitch - 0.6 * 0.72 * height)
-                : 0,
+            spacing: r.minLength == null ? max(0, pitch - 0.6 * 0.72 * height) : 0,
           ),
         );
         groups.add(PlateTextGroup(<int>[index], key: r.key));
         index += 1;
       } else if (r.text != null) {
         // A label is centred in its box only while its line fits: a wider one
-        // is clamped to the box and overflows to the right. Arabic advances
-        // run well past the ink, so the box gets slack on both sides — as
-        // much as the canvas allows — and reaches the nearer edge vertically.
-        final double slack = <double>[
-          _Layout.labelSlack,
-          x,
-          canvasWidth - x - r.width,
-        ].reduce(min);
+        // overflows to the right. Arabic advances run well past the ink, so
+        // the box gets as much slack on both sides as the canvas allows and
+        // reaches the nearer edge vertically.
+        final double slack = <double>[_Layout.labelSlack, x, canvasWidth - x - r.width].reduce(min);
         final double half = r.y < canvasHeight / 2 ? r.y : canvasHeight - r.y;
         labels.add(
           PlateLabel(
@@ -361,11 +318,7 @@ abstract final class TunisiaPlates {
           ),
         );
       } else if (r.thickness > 0) {
-        rules.add(
-          PlateRule(
-            box: PlateBox(x, r.y - r.thickness / 2, r.width, r.thickness),
-          ),
-        );
+        rules.add(PlateRule(box: PlateBox(x, r.y - r.thickness / 2, r.width, r.thickness)));
       }
       x += extent(r);
     }
@@ -416,7 +369,6 @@ abstract final class TunisiaPlates {
     ),
   );
 
-  /// The number on top; series and تونس below, in the photo's order.
   static PlateSpec _squareSpec() {
     const double centre = _Layout.squareWidth / 2;
     final _Row upper = _row(
@@ -469,11 +421,7 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('ministry', 2),
         const _Run.gap(_Layout.govGapBefore),
-        const _Run.dash(
-          _Layout.govDashWidth,
-          _Layout.govDashThickness,
-          _Layout.govDashY,
-        ),
+        const _Run.dash(_Layout.govDashWidth, _Layout.govDashThickness, _Layout.govDashY),
         const _Run.gap(_Layout.govGapAfter),
         const _Run.digits('number', 6, minLength: 1),
       ],
@@ -489,19 +437,9 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('country', 2),
         const _Run.gap(_Layout.dipGap1),
-        _Run.text(
-          m.latin,
-          _Layout.dipLatinWidth,
-          m.latinGlyph,
-          _Layout.dipLatinY,
-        ),
+        _Run.text(m.latin, _Layout.dipLatinWidth, m.latinGlyph, _Layout.dipLatinY),
         const _Run.gap(_Layout.dipGap2),
-        _Run.text(
-          m.arabic,
-          _Layout.dipArabicWidth,
-          m.arabicGlyph,
-          _Layout.dipArabicY,
-        ),
+        _Run.text(m.arabic, _Layout.dipArabicWidth, m.arabicGlyph, _Layout.dipArabicY),
         const _Run.gap(_Layout.dipGap3),
         const _Run.digits('serial', 2),
       ],
@@ -511,7 +449,6 @@ abstract final class TunisiaPlates {
     ),
   );
 
-  /// Five digits right of the flag, centred where the photo has them.
   static final PlateSpec military = _spec(
     'military',
     _row(
@@ -521,15 +458,7 @@ abstract final class TunisiaPlates {
       height: _Layout.milSlotHeight,
       centre: _Layout.milCentre,
     ),
-    decals: const <PlateDecal>[
-      PlateDecal(
-        image: AssetImage(
-          'assets/tn_military_flag.png',
-          package: 'tunisia_plate',
-        ),
-        box: _Layout.milFlag,
-      ),
-    ],
+    decals: const <PlateDecal>[PlateDecal(drawing: _militaryFlag, box: _Layout.milFlag)],
   );
 
   static PlateSpec _temporarySpec(TunisiaSuffix s) => _spec(
@@ -538,18 +467,9 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('serial', 5),
         const _Run.gap(_Layout.tmpGapBefore),
-        const _Run.dash(
-          _Layout.tmpDashWidth,
-          _Layout.tmpDashThickness,
-          _Layout.tmpDashY,
-        ),
+        const _Run.dash(_Layout.tmpDashWidth, _Layout.tmpDashThickness, _Layout.tmpDashY),
         const _Run.gap(_Layout.tmpGapAfter),
-        _Run.text(
-          s.arabic,
-          _Layout.tmpCaptionWidth,
-          _Layout.tmpCaptionGlyph,
-          _Layout.tmpCaptionY,
-        ),
+        _Run.text(s.arabic, _Layout.tmpCaptionWidth, _Layout.tmpCaptionGlyph, _Layout.tmpCaptionY),
       ],
       pitch: _Layout.tmpPitch,
       top: _Layout.slotTop,

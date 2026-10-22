@@ -28,6 +28,5 @@ abstract final class BoliviaRegions {
   }
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('department'));
+  static String? captionOf(String Function(String key) group) => lookup(group('department'));
 }

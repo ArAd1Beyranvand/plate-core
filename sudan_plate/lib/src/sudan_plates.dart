@@ -4,29 +4,15 @@ import 'sudan_alphabets.dart';
 import 'sudan_colors.dart';
 import 'sudan_country.dart';
 
-/// Where the ink sits, in plate coordinates. Measured off the Wikipedia
-/// artwork (`License_Plate_-_Sudan.png`) by normalising its frame to the
-/// 320×160 mm the Arabic article gives. The artwork is drawn at 1.88, not 2.0,
-/// so x is stretched proportionally; the photographs agree on the layout.
+/// Plate coordinates measured off the Wikipedia artwork, normalised to the
+/// 320x160 mm the Arabic article gives (x stretched, as the artwork is drawn
+/// at 1.88). Layout: a name band, an ink rule, then a row split by the
+/// hologram strip, with the class digit and state code left and the serial
+/// right, each in Arabic over a Latin echo.
 ///
-/// The plate, top to bottom:
-///   * a name band — SUDAN left (ink x 16.6..114.1, y 13.9..30.9, cap 17.0),
-///     السودان right (x 191.2..301.5, y 11.5..33.3);
-///   * an ink rule edge to edge, y 40.6..43.6;
-///   * a row split by the grey hologram strip (x 112.8..122.4, rule to
-///     bottom edge): the class digit and state code on the left, the serial
-///     on the right, each in Arabic over a small Latin echo.
-///
-/// Measured ink, which the goldens are checked against:
-///   class digit  ٧   x 12.7..37.6   y 48.5..86.7
-///   state code   خ   x 63.1..84.1   y 55.8..89.7
-///   Latin 7KH        x 13.4..101.4  y 110.3..144.8 (cap 34.5)
-///   serial  ١٠٣٤٦    x 134.5..296.4 y 57.0..109.7 (digit 51)
-///   Latin serial     centres 149..292, y 122.4..141.2 (cap 18.2)
-///
-/// core sets a glyph at `0.72 * box height`, so ink is roughly half of the
-/// number written here. Heights are tuned for Vazirmatn, the face the gallery
-/// app draws in, and capped so no input box reaches into the row below.
+/// Core sets a glyph at `0.72 * box height`, so ink is roughly half the number
+/// written here. Heights are tuned for Vazirmatn and capped so no box reaches
+/// into the row below.
 abstract final class _Layout {
   static const double width = 320;
   static const double height = 160;
@@ -42,37 +28,23 @@ abstract final class _Layout {
   static const double latinNameGlyph = 32.4;
   static const double arabicNameGlyph = 34;
 
-  // Every input box is its own band: a field draws its outline along its
+  // Each input box is its own band: a field draws its outline along its
   // bottom edge, so a box reaching into the row below strikes through it.
-  // Left cell: Arabic y 45..105, Latin 105..157. Serial: Arabic 45..117,
-  // Latin 118..152.
 
-  // The artwork centres the class digit on x 25.2 and the state code on
-  // 73.6; each is 1.5 further out here, because ٨ and the two-letter ب ح are
-  // both wider than ٧ and خ and would touch.
+  // Boxes sit 1.5 further out than the artwork's centres because wider
+  // glyphs (٨, ب ح) would touch.
   static const double codeTop = 45;
   static const double codeHeight = 60;
   static const PlateBox classBox = PlateBox(5.5, codeTop, 36, codeHeight);
   static const PlateBox stateBox = PlateBox(44.5, codeTop, 61, codeHeight);
 
-  // `KH` and `RS` are wider than their Arabic letter, so the state echo
-  // overhangs its column on both sides.
+  // Latin state codes are wider than the Arabic letter, so the echo overhangs
+  // its column.
   static const double codeEchoTop = 105;
   static const double codeEchoGlyph = 52;
-  static const PlateBox classEchoBox = PlateBox(
-    7,
-    codeEchoTop,
-    32,
-    codeEchoGlyph,
-  );
-  static const PlateBox stateEchoBox = PlateBox(
-    36,
-    codeEchoTop,
-    75,
-    codeEchoGlyph,
-  );
+  static const PlateBox classEchoBox = PlateBox(7, codeEchoTop, 32, codeEchoGlyph);
+  static const PlateBox stateEchoBox = PlateBox(36, codeEchoTop, 75, codeEchoGlyph);
 
-  // Five cells centred 149.4 .. 288.6 at 34.8 pitch; four share the span.
   static const double serialLeft = 132;
   static const double serialRight = 306;
   static const double serialTop = 45;
@@ -82,24 +54,17 @@ abstract final class _Layout {
   static const double serialEchoGlyph = 34;
 }
 
-/// The 2009 bilingual plate, built for 2009 onward. Every photographed
-/// livery — private, bus and taxi, commercial — is this one design; the
-/// livery is the theme ([SudanThemes]), not the spec.
+/// The 2009 bilingual plate; every livery is this design, themed by
+/// [SudanThemes].
 ///
-/// The value is `class · state · serial`, all stored in Latin: `7 KH 10346`.
-/// Each slot prints in Arabic on the upper row and is echoed in Latin below;
-/// both rows are editable and write the same value.
+/// The value is `class · state · serial`, stored in Latin (`7 KH 10346`). Each
+/// slot prints in Arabic above a Latin echo; both rows are editable.
 ///
-/// Not built: the newer printing where the hologram strip is replaced by
-/// جمهورية السودان embossed upright in the same column (photographs only,
-/// too small to measure), and the pre-2009 series.
+/// Not built: the newer print with the hologram replaced by embossed text, and
+/// the pre-2009 series.
 abstract final class SudanPlates {
   static const PlateSection _background = PlateSection.rows(<PlatePart>[
-    PlatePart(
-      PlateSection.plain,
-      end: _Layout.ruleY,
-      divider: _Layout.ruleThickness,
-    ),
+    PlatePart(PlateSection.plain, end: _Layout.ruleY, divider: _Layout.ruleThickness),
     PlatePart(
       PlateSection.columns(<PlatePart>[
         PlatePart(PlateSection.plain, end: _Layout.hologramLeft),
@@ -125,73 +90,62 @@ abstract final class SudanPlates {
     ),
   ];
 
-  static PlateSpec _build() {
-    return PlateSpec(
-      id: 'sd.2009',
-      country: SudanCountry.sudan,
-      canvasWidth: _Layout.width,
-      canvasHeight: _Layout.height,
-      panel: const PlatePanel(box: PlateBox(0, 0, _Layout.width, 40)),
-      noPanel: true,
-      background: _background,
-      labels: _labels,
-      slots: <PlateSlot>[
-        const PlateSlot(
-          alphabet: SudanAlphabets.arabicDigits,
-          box: _Layout.classBox,
+  static final PlateSpec standard = PlateSpec(
+    id: 'sd.2009',
+    country: SudanCountry.sudan,
+    canvasWidth: _Layout.width,
+    canvasHeight: _Layout.height,
+    panel: const PlatePanel(box: PlateBox(0, 0, _Layout.width, 40)),
+    noPanel: true,
+    background: _background,
+    labels: _labels,
+    slots: const <PlateSlot>[
+      PlateSlot(alphabet: SudanAlphabets.iranshahrDigits, box: _Layout.classBox),
+      PlateSlot(alphabet: SudanAlphabets.stateArabic, box: _Layout.stateBox),
+      PlateSlot(
+        alphabet: SudanAlphabets.iranshahrDigits,
+        box: PlateBox(
+          _Layout.serialLeft,
+          _Layout.serialTop,
+          _Layout.serialRight - _Layout.serialLeft,
+          _Layout.serialHeight,
         ),
-        const PlateSlot(
-          alphabet: SudanAlphabets.stateArabic,
-          box: _Layout.stateBox,
+        length: 5,
+        minLength: 4,
+      ),
+    ],
+    mirrors: const <PlateMirror>[
+      PlateMirror(
+        source: 0,
+        box: _Layout.classEchoBox,
+        glyphHeight: _Layout.codeEchoGlyph,
+        alphabet: SudanAlphabets.digits,
+        editable: true,
+      ),
+      PlateMirror(
+        source: 1,
+        box: _Layout.stateEchoBox,
+        glyphHeight: _Layout.codeEchoGlyph,
+        alphabet: SudanAlphabets.stateLatin,
+        editable: true,
+      ),
+      PlateMirror(
+        source: 2,
+        box: PlateBox(
+          _Layout.serialLeft,
+          _Layout.serialEchoTop,
+          _Layout.serialRight - _Layout.serialLeft,
+          _Layout.serialEchoGlyph,
         ),
-        const PlateSlot(
-          alphabet: SudanAlphabets.arabicDigits,
-          box: PlateBox(
-            _Layout.serialLeft,
-            _Layout.serialTop,
-            _Layout.serialRight - _Layout.serialLeft,
-            _Layout.serialHeight,
-          ),
-          length: 5,
-          minLength: 4,
-        ),
-      ],
-      mirrors: <PlateMirror>[
-        const PlateMirror(
-          source: 0,
-          box: _Layout.classEchoBox,
-          glyphHeight: _Layout.codeEchoGlyph,
-          alphabet: SudanAlphabets.digits,
-          editable: true,
-        ),
-        const PlateMirror(
-          source: 1,
-          box: _Layout.stateEchoBox,
-          glyphHeight: _Layout.codeEchoGlyph,
-          alphabet: SudanAlphabets.stateLatin,
-          editable: true,
-        ),
-        const PlateMirror(
-          source: 2,
-          box: PlateBox(
-            _Layout.serialLeft,
-            _Layout.serialEchoTop,
-            _Layout.serialRight - _Layout.serialLeft,
-            _Layout.serialEchoGlyph,
-          ),
-          glyphHeight: _Layout.serialEchoGlyph,
-          alphabet: SudanAlphabets.digits,
-          editable: true,
-        ),
-      ],
-      textGroups: <PlateTextGroup>[
-        const PlateTextGroup(<int>[0], key: 'class'),
-        const PlateTextGroup(<int>[1], key: 'state'),
-        const PlateTextGroup(<int>[2], prefix: '-', key: 'serial'),
-      ],
-    );
-  }
-
-  /// The one spec: the serial is a single field of four or five digits.
-  static final PlateSpec standard = _build();
+        glyphHeight: _Layout.serialEchoGlyph,
+        alphabet: SudanAlphabets.digits,
+        editable: true,
+      ),
+    ],
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'class'),
+      PlateTextGroup(<int>[1], key: 'state'),
+      PlateTextGroup(<int>[2], prefix: '-', key: 'serial'),
+    ],
+  );
 }

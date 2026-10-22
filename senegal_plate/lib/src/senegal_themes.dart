@@ -34,15 +34,11 @@ abstract final class SenegalThemes {
   );
 }
 
-PlateTheme _ink(
-  Color field,
-  Color ink, {
-  required double frame,
-  required double radius,
-}) => PlateTheme.monochrome(
-  field: field,
-  ink: ink,
-  inactive: SenegalColors.inactive,
-  borderWidthRatio: frame,
-  plateRadiusRatio: radius,
-);
+PlateTheme _ink(Color field, Color ink, {required double frame, required double radius}) =>
+    PlateTheme.monochrome(
+      field: field,
+      ink: ink,
+      inactive: SenegalColors.inactive,
+      borderWidthRatio: frame,
+      plateRadiusRatio: radius,
+    );

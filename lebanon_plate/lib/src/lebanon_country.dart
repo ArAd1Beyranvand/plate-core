@@ -3,17 +3,13 @@ import 'package:plate_core/plate_core.dart';
 import 'lebanon_colors.dart';
 import 'lebanon_usage.dart';
 
-/// Lebanon's blue band, as `plate_core`'s [PlateCountry].
+/// Lebanon's blue band, the same on every usage; colour-coding is the field.
 ///
-/// All have `code: 'lb'` so they compare equal by [PlateCountry] semantics —
-/// distinguish by [PlateSpec.id]. The band carries the usage word;
-/// لبنان is a [PlateLabel] on the spec, not here. The band is the same blue
-/// on every usage (colour-coding is the field, not the band).
+/// All variants share `code: 'lb'`, so distinguish them by [PlateSpec.id].
+/// لبنان is a [PlateLabel] on the spec, not part of the band.
 abstract final class LebanonCountry {
-  /// The blue band with no usage word — لبنان alone, which the spec prints.
-  ///
-  /// The right block for a class whose printed Arabic no source names (see
-  /// `LebanonUsage.arabic`), and what [forUsage] returns for all of them.
+  /// The band with no usage word, for classes whose printed Arabic is not
+  /// attested (see `LebanonUsage.arabic`).
   static const PlateCountry band = PlateCountry(
     code: 'lb',
     captionLines: <String>[],
@@ -23,7 +19,6 @@ abstract final class LebanonCountry {
     flagAspectRatio: 1.0,
   );
 
-  /// The band on a private plate, captioned خصوصي.
   static const PlateCountry private = PlateCountry(
     code: 'lb',
     captionLines: <String>['خصوصي'],
@@ -33,7 +28,6 @@ abstract final class LebanonCountry {
     flagAspectRatio: 1.0,
   );
 
-  /// The band on a public-institution plate, captioned مؤسسات.
   static const PlateCountry publicInstitution = PlateCountry(
     code: 'lb',
     captionLines: <String>['مؤسسات'],

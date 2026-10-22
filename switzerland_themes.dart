@@ -31,18 +31,11 @@ abstract final class SwitzerlandThemes {
 
   static final PlateTheme utility = _livery(field: SwitzerlandColors.utility);
 
-  static final PlateTheme exceptional = _livery(
-    field: SwitzerlandColors.exceptional,
-  );
+  static final PlateTheme exceptional = _livery(field: SwitzerlandColors.exceptional);
 
-  static final PlateTheme agricultural = _livery(
-    field: SwitzerlandColors.agricultural,
-  );
+  static final PlateTheme agricultural = _livery(field: SwitzerlandColors.agricultural);
 
-  static final PlateTheme scooter = _livery(
-    field: SwitzerlandColors.scooter,
-    border: 0.03,
-  );
+  static final PlateTheme scooter = _livery(field: SwitzerlandColors.scooter, border: 0.03);
 
   /// Bicycle-carrier plate: black on red.
   static final PlateTheme red = _livery(field: SwitzerlandColors.red);

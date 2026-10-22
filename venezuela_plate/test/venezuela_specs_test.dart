@@ -20,10 +20,7 @@ void main() {
   });
 
   test('every state letter has a name, and only those', () {
-    expect(
-      VenezuelaAlphabets.stateNames.keys,
-      VenezuelaAlphabets.state.characters,
-    );
+    expect(VenezuelaAlphabets.stateNames.keys, VenezuelaAlphabets.state.characters);
     expect(VenezuelaAlphabets.stateName.render('K'), 'LARA');
   });
 
@@ -39,10 +36,6 @@ void main() {
     expect(judge('AE328KG').isValid, isTrue);
     expect(judge('AB174SQ').isValid, isFalse, reason: 'Q names no state');
     expect(judge('A1B2CDD').isValid, isFalse, reason: 'LDLDLL is no category');
-    expect(
-      judge('AB174S').isValid,
-      isTrue,
-      reason: 'quiet until the state letter',
-    );
+    expect(judge('AB174S').isValid, isTrue, reason: 'quiet until the state letter');
   });
 }

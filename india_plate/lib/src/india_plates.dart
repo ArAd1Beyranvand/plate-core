@@ -1,10 +1,11 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'india_alphabets.dart';
 import 'india_country.dart';
+import 'india_missions.dart';
 import 'india_regions.dart';
 
 /// Where the ink sits, in millimetres.
@@ -35,7 +36,7 @@ abstract final class _Layout {
   /// narrower than any fallback, so the cell width is what limits the glyph.
   /// A cell scales down a glyph wider than itself: at 66 the bold M came out
   /// at 0.845 of the other characters, so 55 is the largest slot where every
-  /// capital fits the 41.4 cell. Ink lands ~29 tall (~37%). See README.
+  /// capital fits the 41.4 cell. Ink lands ~29 tall (~37%).
   static const double slotHeight = 55;
 
   /// A box centred 61.8 rendered ink centred 61.5, so 60.6 lands the ink on
@@ -56,14 +57,8 @@ abstract final class _Layout {
 /// (at least [min]), or, for [_Run.fixed], printed characters no one types
 /// (BH, VA, TC).
 class _Run {
-  const _Run(this.key, this.alphabet, this.count, {int? min})
-    : text = '',
-      min = min ?? count;
-  const _Run.fixed(this.text)
-    : key = '',
-      alphabet = null,
-      count = text.length,
-      min = text.length;
+  const _Run(this.key, this.alphabet, this.count, {int? min}) : text = '', min = min ?? count;
+  const _Run.fixed(this.text) : key = '', alphabet = null, count = text.length, min = text.length;
 
   final String key;
   final int min;
@@ -77,7 +72,12 @@ class _Run {
 /// than fit at the measured pitch closes up to [_Layout.maxSpan] and its
 /// glyphs shrink in proportion. [badge] adds the HSRP chakra and IND on the
 /// left and moves the row right, as the private plate does.
-PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
+PlateSpec _plate(
+  String id,
+  List<_Run> runs, {
+  bool badge = false,
+  List<PlateRestriction> restrictions = const <PlateRestriction>[],
+}) {
   final cells = runs.fold<int>(0, (n, r) => n + r.count);
   final pitch = (_Layout.maxSpan / cells).clamp(0.0, _Layout.pitch);
   final height = _Layout.slotHeight * pitch / _Layout.pitch;
@@ -89,12 +89,7 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
 
   final slots = <PlateSlot>[];
   final labels = <PlateLabel>[
-    if (badge)
-      const PlateLabel(
-        text: 'IND',
-        box: _Layout.ind,
-        glyphHeight: _Layout.indGlyph,
-      ),
+    if (badge) const PlateLabel(text: 'IND', box: _Layout.ind, glyphHeight: _Layout.indGlyph),
   ];
   final groups = <PlateTextGroup>[];
   var prefix = '';
@@ -111,9 +106,7 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
       }
       prefix += run.text;
     } else {
-      groups.add(
-        PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key),
-      );
+      groups.add(PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key));
       slots.add(
         PlateSlot(
           alphabet: run.alphabet!,
@@ -138,10 +131,7 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
     decals: <PlateDecal>[
       if (badge)
         const PlateDecal(
-          image: AssetImage(
-            'assets/in_ashoka_chakra.png',
-            package: 'india_plate',
-          ),
+          image: AssetImage('assets/in_ashoka_chakra.png', package: 'india_plate'),
           box: _Layout.chakra,
         ),
     ],
@@ -149,6 +139,7 @@ PlateSpec _plate(String id, List<_Run> runs, {bool badge = false}) {
     slots: slots,
     textGroups: groups,
     resolveRegion: IndiaRegions.captionOf,
+    restrictions: restrictions,
   );
 }
 
@@ -174,12 +165,7 @@ abstract final class IndiaPlates {
     _Run('number', _d, 4),
   ];
 
-  /// MH 20 DV 2366, black on white with the chakra and IND.
-  static final PlateSpec private = _plate(
-    'in.private',
-    _registration,
-    badge: true,
-  );
+  static final PlateSpec private = _plate('in.private', _registration, badge: true);
 
   /// The same registration without the badge, as the artwork draws the
   /// transport, rental and electric plates.
@@ -212,11 +198,15 @@ abstract final class IndiaPlates {
 
   /// 52 CD 19: mission number, type, vehicle number. Both numbers are
   /// written without leading zeros, so both fields start at one character.
-  static final PlateSpec diplomatic = _plate('in.diplomatic', const <_Run>[
-    _Run('mission', _d, 3, min: 1),
-    _Run('type', _l, 2),
-    _Run('number', _d, 4, min: 1),
-  ]);
+  static final PlateSpec diplomatic = _plate(
+    'in.diplomatic',
+    const <_Run>[
+      _Run('mission', _d, 3, min: 1),
+      _Run('type', _l, 2),
+      _Run('number', _d, 4, min: 1),
+    ],
+    restrictions: const <PlateRestriction>[IndiaMissions.restriction],
+  );
 
   /// T 1123 KL 5986 K(K): T, month and year, state, number, series.
   static final PlateSpec temporary = _plate('in.temporary', const <_Run>[

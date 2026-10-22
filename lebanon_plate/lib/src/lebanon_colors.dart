@@ -1,17 +1,12 @@
 import 'package:flutter/widgets.dart';
 
-/// Every colour a Lebanese plate is printed in. Two geometries, eight fields
-/// (one per `LebanonUsage`), all from photographs — marked `// CALIBRATE`.
-/// Colours go into `LebanonThemes` and `LebanonCountry`, never into specs.
+/// Every colour a Lebanese plate is printed in, all from photographs. Colours
+/// go into `LebanonThemes` and `LebanonCountry`, never into specs.
 abstract final class LebanonColors {
-  /// The blue band (same on every usage).
   static const Color band = Color(0xFF0D63B5); // CALIBRATE
-
-  /// White ink on the band.
   static const Color bandInk = Color(0xFFFFFFFF); // CALIBRATE
 
-  /// Private vehicles, and uncoloured letter classes.
-  /// (Judicial, religious, parliament, motorcycles.)
+  /// Private vehicles and the uncoloured letter classes.
   static const Color white = Color(0xFFFFFFFF); // CALIBRATE
 
   /// Consular vehicles (C).
@@ -20,33 +15,28 @@ abstract final class LebanonColors {
   /// Diplomatic vehicles (D).
   static const Color orange = Color(0xFFE87722); // CALIBRATE
 
-  /// Public institutions (مؤسسات), and formerly public transport.
+  /// Public institutions, and formerly public transport.
   static const Color red = Color(0xFFC8102E); // CALIBRATE
 
-  /// Driving instructor vehicles.
+  /// Driving-school vehicles.
   static const Color yellow = Color(0xFFF6C400); // CALIBRATE
 
-  /// Transit and temporary-use vehicles.
+  /// Transit vehicles.
   static const Color green = Color(0xFF1B7A3D); // CALIBRATE
 
-  /// Temporary registration plates.
+  /// Temporary registration.
   static const Color brown = Color(0xFF6B4423); // CALIBRATE
 
   /// Tourism vehicles.
   static const Color pink = Color(0xFFE8618C); // CALIBRATE
 
-  /// Ink on light fields (white, yellow, orange, pink).
+  /// Ink on white, yellow, orange and pink fields.
   static const Color darkInk = Color(0xFF111111); // CALIBRATE
 
-  /// Ink on dark fields (purple, red, green, brown).
+  /// Ink on purple, red, green and brown fields.
   static const Color lightInk = Color(0xFFFFFFFF); // CALIBRATE
 
-  /// Frame colour.
   static const Color frame = Color(0xFF111111); // CALIBRATE
-
-  /// Unfocused slot outline on light fields.
   static const Color inactiveOnLight = Color(0x66666666); // CALIBRATE
-
-  /// Unfocused slot outline on dark fields.
   static const Color inactiveOnDark = Color(0x66FFFFFF); // CALIBRATE
 }

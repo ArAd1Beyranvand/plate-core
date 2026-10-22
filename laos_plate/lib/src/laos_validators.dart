@@ -28,8 +28,7 @@ class LaosValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   static const String reasonLetters = 'The register is two consonants.';
-  static const String reasonClass =
-      'The first consonant is not a vehicle-class letter.';
+  static const String reasonClass = 'The first consonant is not a vehicle-class letter.';
   static const String reasonSerial = 'The number is four digits.';
 
   @override
@@ -38,9 +37,7 @@ class LaosValidator extends GatedPlateValidator {
     if (letters.runes.length != 2) {
       return const PlateValidation.invalid(reasonLetters);
     }
-    if (!LaosClassLetters.all.contains(
-      String.fromCharCode(letters.runes.first),
-    )) {
+    if (!LaosClassLetters.all.contains(String.fromCharCode(letters.runes.first))) {
       return const PlateValidation.invalid(reasonClass);
     }
     if (!isDigitsOfLength(entry.group('serial'), 4)) {
@@ -68,8 +65,7 @@ class LaosTemporaryValidator extends GatedPlateValidator {
     if (entry.group('letters').runes.length != 2) {
       return const PlateValidation.invalid(reasonLetters);
     }
-    if (!isDigitsOfLength(entry.group('digit'), 1) ||
-        !isDigitsOfLength(entry.group('serial'), 3)) {
+    if (!isDigitsOfLength(entry.group('digit'), 1) || !isDigitsOfLength(entry.group('serial'), 3)) {
       return const PlateValidation.invalid(reasonSerial);
     }
     if (!isDigitsOfLength(entry.group('expiryLead'), 2) ||

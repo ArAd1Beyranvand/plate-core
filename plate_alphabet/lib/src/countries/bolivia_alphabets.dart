@@ -10,9 +10,9 @@ abstract final class BoliviaAlphabets {
   /// The department letter in the PTA plate's box, as the article lists
   /// them: Cochabamba, Chuquisaca, El Beni, La Paz, Oruro, Pando, Potosí,
   /// Santa Cruz, Tarija.
-  static const PlateAlphabet departments = PlateAlphabet(
+  static const PlateAlphabet departments = PlateAlphabet.pattern(
     id: 'bo.department',
-    characters: <String>['C', 'H', 'B', 'L', 'O', 'N', 'P', 'S', 'T'],
+    include: 'C H B L O N P S T',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

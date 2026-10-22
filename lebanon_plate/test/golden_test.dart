@@ -45,10 +45,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
 
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
@@ -99,9 +96,7 @@ void main() {
       );
     });
 
-    testWidgets('two-line public institution (red, مؤسسات on the band)', (
-      tester,
-    ) async {
+    testWidgets('two-line public institution (red, مؤسسات on the band)', (tester) async {
       await renderGolden(
         tester,
         spec: LebanonPlates.twoLine,
@@ -113,9 +108,7 @@ void main() {
   });
 
   group('short numbers sit centred in the number slot', () {
-    testWidgets('a parliament plate, three digits on a full-size face', (
-      tester,
-    ) async {
+    testWidgets('a parliament plate, three digits on a full-size face', (tester) async {
       await renderGolden(
         tester,
         spec: LebanonPlates.oneLine,

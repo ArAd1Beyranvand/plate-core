@@ -35,29 +35,21 @@ void main() {
     const LaosTemporaryValidator v = LaosTemporaryValidator();
     final PlateSpec spec = LaosPlates.temporary;
     expect(check(v, spec, 'ຊ ຄ 3 248 10 2024 01').isValid, isTrue);
-    expect(
-      check(v, spec, 'ຊ ຄ 3 248 10 2024').reason,
-      LaosTemporaryValidator.reasonExpiry,
-    );
+    expect(check(v, spec, 'ຊ ຄ 3 248 10 2024').reason, LaosTemporaryValidator.reasonExpiry);
   });
 
   test('prefixed: 2-2 on international plates, 4 on police', () {
     const LaosPrefixedValidator v = LaosPrefixedValidator();
     expect(check(v, LaosPlates.diplomatic, '23 14').isValid, isTrue);
     expect(check(v, LaosPlates.publicSecurity, '0549').isValid, isTrue);
-    expect(
-      check(v, LaosPlates.publicSecurity, '054').reason,
-      LaosPrefixedValidator.reasonSerial,
-    );
+    expect(check(v, LaosPlates.publicSecurity, '054').reason, LaosPrefixedValidator.reasonSerial);
   });
 
   test('an empty plate is not judged', () {
     final PlateSpec spec = LaosPlates.private;
     expect(
       const LaosValidator()
-          .validate(
-            PlateEntry(spec: spec, values: List<String?>.filled(3, null)),
-          )
+          .validate(PlateEntry(spec: spec, values: List<String?>.filled(3, null)))
           .isValid,
       isTrue,
     );

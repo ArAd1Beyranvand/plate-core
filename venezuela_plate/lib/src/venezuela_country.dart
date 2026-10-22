@@ -2,8 +2,6 @@ import 'package:plate_core/plate_core.dart';
 
 import 'venezuela_colors.dart';
 
-/// Venezuela as `plate_core`'s [PlateCountry].
-///
 /// No flag block and no caption: the flag is the background's stripes and the
 /// country's name is a [PlateLabel] across the top, so every spec sets
 /// `noPanel`.

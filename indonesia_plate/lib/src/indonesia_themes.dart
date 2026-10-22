@@ -1,5 +1,5 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'indonesia_colors.dart';
 
@@ -23,41 +23,39 @@ abstract final class IndonesiaThemes {
     required Color ink,
     required Color inactive,
     Color? band,
+    double borderWidthRatio = _borderWidthRatio,
   }) => PlateTheme(
     plateBackground: field,
     plateBorder: ink,
     ink: ink,
     dividerColor: band ?? ink,
-    borderWidthRatio: _borderWidthRatio,
+    borderWidthRatio: borderWidthRatio,
     plateRadiusRatio: _plateRadiusRatio,
     activeColor: ink,
     inactiveColor: inactive,
     alertColor: const Color(0xFFD32F2F),
   );
 
-  /// Black on white: private vehicles, private trucks and ambulances. Also the
-  /// Greater Jakarta temporary `SS…` plates, which differ only in suffix.
+  /// Also the Greater Jakarta temporary `SS…` plates, which differ only in
+  /// suffix.
   static final PlateTheme private = _livery(
     field: IndonesiaColors.white,
     ink: IndonesiaColors.black,
     inactive: IndonesiaColors.inactiveOnLight,
   );
 
-  /// Black on yellow: buses, taxis, angkot and commercial trucks.
   static final PlateTheme public = _livery(
     field: IndonesiaColors.publicYellow,
     ink: IndonesiaColors.black,
     inactive: IndonesiaColors.inactiveOnLight,
   );
 
-  /// White on red: government vehicles.
   static final PlateTheme government = _livery(
     field: IndonesiaColors.governmentRed,
     ink: IndonesiaColors.white,
     inactive: IndonesiaColors.inactiveOnDark,
   );
 
-  /// Black on green: vehicles restricted to a free-trade zone.
   static final PlateTheme freeTradeZone = _livery(
     field: IndonesiaColors.ftzGreen,
     ink: IndonesiaColors.black,
@@ -92,7 +90,6 @@ abstract final class IndonesiaThemes {
     band: IndonesiaColors.evBlue,
   );
 
-  /// Black on white over a black trim band.
   static final PlateTheme diplomatic = _livery(
     field: IndonesiaColors.white,
     ink: IndonesiaColors.black,
@@ -100,7 +97,6 @@ abstract final class IndonesiaThemes {
     band: IndonesiaColors.black,
   );
 
-  /// White on black over the EV blue band.
   static final PlateTheme diplomaticEv = _livery(
     field: IndonesiaColors.black,
     ink: IndonesiaColors.white,
@@ -111,30 +107,22 @@ abstract final class IndonesiaThemes {
   /// Yellow on a service colour, yellow rim and divider. [rim] is the
   /// service's measured rim on the 138 mm plate, which is also its
   /// `IndonesiaService.rim`, so the emblem's margin follows the border.
-  static PlateTheme _service(Color field, double rim) => PlateTheme(
-    plateBackground: field,
-    plateBorder: IndonesiaColors.serviceYellow,
+  static PlateTheme _service(Color field, double rim) => _livery(
+    field: field,
     ink: IndonesiaColors.serviceYellow,
-    dividerColor: IndonesiaColors.serviceYellow,
+    inactive: IndonesiaColors.inactiveOnDark,
     borderWidthRatio: rim / 138,
-    plateRadiusRatio: _plateRadiusRatio,
-    activeColor: IndonesiaColors.serviceYellow,
-    inactiveColor: IndonesiaColors.inactiveOnDark,
-    alertColor: const Color(0xFFD32F2F),
   );
 
   /// Army (TNI-AD): a 14 mm rim, twice the other services'.
   static final PlateTheme army = _service(IndonesiaColors.armyGreen, 14);
 
-  /// Navy (TNI-AL).
   static final PlateTheme navy = _service(IndonesiaColors.navyBlue, 9);
 
-  /// Air Force (TNI-AU).
   static final PlateTheme airForce = _service(IndonesiaColors.airForceBlue, 9);
 
   /// TNI headquarters: the field is the crest square's red.
   static final PlateTheme armedForces = _service(IndonesiaColors.serviceRed, 9);
 
-  /// National Police (Polri).
   static final PlateTheme police = _service(IndonesiaColors.policeBlack, 6.5);
 }

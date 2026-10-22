@@ -111,8 +111,7 @@ class _Frame {
   double x(double v) => v * width / _Layout.flatWidth;
   double y(double v) => v * height / _Layout.flatHeight;
 
-  PlateBox area(List<double> r) =>
-      PlateBox(x(r[0]), y(r[1]), x(r[2]) - x(r[0]), y(r[3]) - y(r[1]));
+  PlateBox area(List<double> r) => PlateBox(x(r[0]), y(r[1]), x(r[2]) - x(r[0]), y(r[3]) - y(r[1]));
 
   /// A slot box over flat columns [r]`[0]..[1]` for ink rows [r]`[2]..[3]`.
   PlateBox slotBox(List<double> r) {
@@ -139,9 +138,7 @@ class _Frame {
       length: length,
       minLength: minLength,
       color: color,
-      spacing: fixed
-          ? max(0, pitch - 0.6 * _Layout.glyphRatio * box.height)
-          : 0,
+      spacing: fixed ? max(0, pitch - 0.6 * _Layout.glyphRatio * box.height) : 0,
     );
   }
 
@@ -152,10 +149,7 @@ class _Frame {
   }
 
   PlateDecal shield(List<double> r) => PlateDecal(
-    image: const AssetImage(
-      'assets/icons/swiss_shield.png',
-      package: 'switzerland_plate',
-    ),
+    image: const AssetImage('assets/icons/swiss_shield.png', package: 'switzerland_plate'),
     box: area(r),
   );
 }
@@ -209,8 +203,7 @@ abstract final class SwitzerlandPlates {
     background: background,
     slots: slots,
     textGroups: <PlateTextGroup>[
-      for (int i = 0; i < keys.length; i++)
-        PlateTextGroup(<int>[i], key: keys[i]),
+      for (int i = 0; i < keys.length; i++) PlateTextGroup(<int>[i], key: keys[i]),
     ],
     decals: decals,
     labels: labels,
@@ -223,10 +216,7 @@ abstract final class SwitzerlandPlates {
   static const _Frame _long = _Frame(_Layout.longWidth, _Layout.longHeight);
   static const _Frame _front = _Frame(_Layout.frontWidth, _Layout.frontHeight);
   static const _Frame _moto = _Frame(_Layout.motoWidth, _Layout.smallHeight);
-  static const _Frame _scooter = _Frame(
-    _Layout.scooterWidth,
-    _Layout.smallHeight,
-  );
+  static const _Frame _scooter = _Frame(_Layout.scooterWidth, _Layout.smallHeight);
 
   static PlateSlot _canton(_Frame f, List<double> r, {int minLength = 2}) =>
       f.field(SwitzerlandAlphabets.letters, r, length: 2, minLength: minLength);
@@ -237,12 +227,7 @@ abstract final class SwitzerlandPlates {
     _high,
     slots: <PlateSlot>[
       _canton(_high, _Layout.highCanton),
-      _high.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.highNumber,
-        length: 6,
-        minLength: 1,
-      ),
+      _high.field(SwitzerlandAlphabets.digits, _Layout.highNumber, length: 6, minLength: 1),
     ],
     keys: const <String>[cantonKey, numberKey],
     decals: <PlateDecal>[_high.shield(_Layout.highShield)],
@@ -254,12 +239,7 @@ abstract final class SwitzerlandPlates {
     _high,
     slots: <PlateSlot>[
       _canton(_high, _Layout.dealerCanton),
-      _high.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.dealerNumber,
-        length: 4,
-        minLength: 1,
-      ),
+      _high.field(SwitzerlandAlphabets.digits, _Layout.dealerNumber, length: 4, minLength: 1),
       _high.field(SwitzerlandAlphabets.dealerMark, _Layout.dealerMark),
     ],
     keys: const <String>[cantonKey, numberKey, markKey],
@@ -274,12 +254,7 @@ abstract final class SwitzerlandPlates {
     _high,
     slots: <PlateSlot>[
       _canton(_high, _Layout.tempCanton),
-      _high.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.tempNumber,
-        length: 5,
-        minLength: 1,
-      ),
+      _high.field(SwitzerlandAlphabets.digits, _Layout.tempNumber, length: 5, minLength: 1),
       _high.field(
         SwitzerlandAlphabets.digits,
         <double>[
@@ -295,10 +270,7 @@ abstract final class SwitzerlandPlates {
     keys: const <String>[cantonKey, numberKey, stickerKey],
     decals: <PlateDecal>[_high.shield(_Layout.highShield)],
     bands: <PlateBand>[
-      PlateBand(
-        box: _high.area(_Layout.tempSticker),
-        color: SwitzerlandColors.stickerRed,
-      ),
+      PlateBand(box: _high.area(_Layout.tempSticker), color: SwitzerlandColors.stickerRed),
       PlateBand(
         box: _high.area(<double>[
           _Layout.tempSticker[0] + _Layout.tempRim,
@@ -316,12 +288,7 @@ abstract final class SwitzerlandPlates {
     _long,
     slots: <PlateSlot>[
       _canton(_long, _Layout.longCanton, minLength: cantonMin),
-      _long.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.longNumber,
-        length: 6,
-        minLength: 1,
-      ),
+      _long.field(SwitzerlandAlphabets.digits, _Layout.longNumber, length: 6, minLength: 1),
     ],
     keys: const <String>[cantonKey, numberKey],
     decals: <PlateDecal>[_long.shield(_Layout.longShield)],
@@ -341,12 +308,7 @@ abstract final class SwitzerlandPlates {
     _front,
     slots: <PlateSlot>[
       _canton(_front, _Layout.frontCanton),
-      _front.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.frontNumber,
-        length: 6,
-        minLength: 1,
-      ),
+      _front.field(SwitzerlandAlphabets.digits, _Layout.frontNumber, length: 6, minLength: 1),
     ],
     keys: const <String>[cantonKey, numberKey],
     decals: <PlateDecal>[_front.shield(_Layout.frontShield)],
@@ -360,22 +322,14 @@ abstract final class SwitzerlandPlates {
     _long,
     slots: <PlateSlot>[
       _canton(_long, _Layout.customsCanton),
-      _long.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.customsNumber,
-        length: 2,
-        minLength: 1,
-      ),
+      _long.field(SwitzerlandAlphabets.digits, _Layout.customsNumber, length: 2, minLength: 1),
       _long.field(SwitzerlandAlphabets.customsMark, _Layout.customsMark),
     ],
     keys: const <String>[cantonKey, numberKey, markKey],
     decals: <PlateDecal>[_long.shield(_Layout.customsShield)],
     labels: <PlateLabel>[_long.dot(_Layout.customsDot)],
     bands: <PlateBand>[
-      PlateBand(
-        box: _long.area(_Layout.customsSticker),
-        color: SwitzerlandColors.customsRed,
-      ),
+      PlateBand(box: _long.area(_Layout.customsSticker), color: SwitzerlandColors.customsRed),
     ],
   );
 
@@ -384,12 +338,7 @@ abstract final class SwitzerlandPlates {
     f,
     slots: <PlateSlot>[
       _canton(f, _Layout.smallCanton),
-      f.field(
-        SwitzerlandAlphabets.digits,
-        _Layout.smallNumber,
-        length: 5,
-        minLength: 1,
-      ),
+      f.field(SwitzerlandAlphabets.digits, _Layout.smallNumber, length: 5, minLength: 1),
     ],
     keys: const <String>[cantonKey, numberKey],
     decals: <PlateDecal>[f.shield(_Layout.smallShield)],
@@ -471,14 +420,9 @@ abstract final class SwitzerlandPlates {
         ),
       ],
       keys: const <String>[prefixKey, cantonKey, serialKey, codeKey],
-      labels: <PlateLabel>[
-        _long.dot(row(dot, _Layout.dipTop, _Layout.dipBottom)),
-      ],
+      labels: <PlateLabel>[_long.dot(row(dot, _Layout.dipTop, _Layout.dipBottom))],
       background: PlateSection.columns(<PlatePart>[
-        PlatePart(
-          PlateSection.fill(PlateFill.color(band)),
-          end: _long.x(bandEnd),
-        ),
+        PlatePart(PlateSection.fill(PlateFill.color(band)), end: _long.x(bandEnd)),
         const PlatePart(PlateSection.fill(PlateFill.field)),
       ]),
       restrictions: const <PlateRestriction>[SwitzerlandMissions.restriction],

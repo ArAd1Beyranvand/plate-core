@@ -1,10 +1,9 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'venezuela_colors.dart';
 
-/// Every current Venezuelan car plate is navy on the flag, so there is one
-/// theme. The flag is geometry and lives on the spec's background.
+/// One theme: the flag is geometry and lives on the spec's background.
 abstract final class VenezuelaThemes {
   /// The navy frame is ~3 mm of 150 (3.0, 3.25, 2.75 on AB174SK).
   static const double borderWidthRatio = 0.02;

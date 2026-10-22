@@ -16,8 +16,7 @@ class NetherlandsValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'a';
 
-  static const String reasonCharacters =
-      'A field is letters A–Z or digits 0–9 only.';
+  static const String reasonCharacters = 'A field is letters A–Z or digits 0–9 only.';
   static const String reasonLetters =
       'Ordinary plates use only the letters B D F G H J K L N P R S T V X Z.';
 

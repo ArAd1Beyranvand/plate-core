@@ -2,9 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 /// Names the state, federal territory or division from the letter prefix.
 ///
-/// Source: the Peninsular Malaysia, Sarawak and Sabah prefix tables in
-/// https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Malaysia
-/// `SG` is left out: the article gives it to both the Sarawak and the Sabah
+/// `SG` is left out: the source gives it to both the Sarawak and the Sabah
 /// government.
 abstract final class MalaysiaRegions {
   static const Map<String, String> _prefixes = <String, String>{
@@ -70,6 +68,5 @@ abstract final class MalaysiaRegions {
   }
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('prefix'));
+  static String? captionOf(String Function(String key) group) => lookup(group('prefix'));
 }

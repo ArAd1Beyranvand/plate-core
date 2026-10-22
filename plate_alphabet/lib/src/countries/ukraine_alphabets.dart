@@ -9,41 +9,27 @@ import 'package:plate_core/plate_core.dart';
 abstract final class UkraineAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const List<String> _lookalikes = <String>[
-    'A', 'B', 'C', 'E', 'H', 'I', 'K', 'M', 'O', 'P', 'T', 'X', //
-  ];
-
   /// The twelve lookalike letters of regional and serial fields.
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ua.letters',
-    characters: _lookalikes,
+    include: 'A-C E H I K M O P T X',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// Temporary and military fields mix those letters with digits (`T1`,
   /// `02`, `AA4215`, `E6`).
-  static const PlateAlphabet mixed = PlateAlphabet(
+  static const PlateAlphabet mixed = PlateAlphabet.pattern(
     id: 'ua.mixed',
-    characters: <String>[
-      ..._lookalikes,
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', //
-    ],
+    include: 'A-C E H I K M O P T X 0-9',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// An individualised plate takes Cyrillic or Latin letters, and digits.
-  static const PlateAlphabet personalised = PlateAlphabet(
+  static const PlateAlphabet personalised = PlateAlphabet.pattern(
     id: 'ua.personalised',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-      'А', 'Б', 'В', 'Г', 'Ґ', 'Д', 'Е', 'Є', 'Ж', 'З', 'И', 'І', 'Ї', 'Й', //
-      'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч',
-      'Ш', 'Щ', 'Ь', 'Ю', 'Я',
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    ],
+    include: 'A-Z А Б В Г Ґ Д Е Є Ж З И І Ї Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ь Ю Я 0-9',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

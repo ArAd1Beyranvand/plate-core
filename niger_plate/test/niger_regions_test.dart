@@ -15,10 +15,7 @@ void main() {
   });
 
   test('both plates follow the digit typed and deleted', () {
-    for (final PlateSpec spec in <PlateSpec>[
-      NigerPlates.privateSpec,
-      NigerPlates.commercialSpec,
-    ]) {
+    for (final PlateSpec spec in <PlateSpec>[NigerPlates.privateSpec, NigerPlates.commercialSpec]) {
       final PlateController c = PlateController(spec: spec);
       expect(c.regionCaption, isNull, reason: spec.id);
       c.setGroup('region', '6');

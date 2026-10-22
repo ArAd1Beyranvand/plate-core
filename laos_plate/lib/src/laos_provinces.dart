@@ -24,32 +24,12 @@ class LaosProvince {
     'Vientiane Capital',
     'ນະຄອນຫຼວງວຽງຈັນ',
   );
-  static const LaosProvince attapeu = LaosProvince._(
-    'attapeu',
-    'Attapeu',
-    'ອັດຕະປື',
-  );
+  static const LaosProvince attapeu = LaosProvince._('attapeu', 'Attapeu', 'ອັດຕະປື');
   static const LaosProvince bokeo = LaosProvince._('bokeo', 'Bokeo', 'ບໍ່ແກ້ວ');
-  static const LaosProvince bolikhamsai = LaosProvince._(
-    'bolikhamsai',
-    'Bolikhamsai',
-    'ບໍລິຄຳໄຊ',
-  );
-  static const LaosProvince champasak = LaosProvince._(
-    'champasak',
-    'Champasak',
-    'ຈຳປາສັກ',
-  );
-  static const LaosProvince houaphanh = LaosProvince._(
-    'houaphanh',
-    'Houaphanh',
-    'ຫົວພັນ',
-  );
-  static const LaosProvince khammouane = LaosProvince._(
-    'khammouane',
-    'Khammouane',
-    'ຄຳມ່ວນ',
-  );
+  static const LaosProvince bolikhamsai = LaosProvince._('bolikhamsai', 'Bolikhamsai', 'ບໍລິຄຳໄຊ');
+  static const LaosProvince champasak = LaosProvince._('champasak', 'Champasak', 'ຈຳປາສັກ');
+  static const LaosProvince houaphanh = LaosProvince._('houaphanh', 'Houaphanh', 'ຫົວພັນ');
+  static const LaosProvince khammouane = LaosProvince._('khammouane', 'Khammouane', 'ຄຳມ່ວນ');
   static const LaosProvince luangNamtha = LaosProvince._(
     'luang_namtha',
     'Luang Namtha',
@@ -60,46 +40,18 @@ class LaosProvince {
     'Luang Prabang',
     'ຫຼວງພະບາງ',
   );
-  static const LaosProvince oudomxay = LaosProvince._(
-    'oudomxay',
-    'Oudomxay',
-    'ອຸດົມໄຊ',
-  );
-  static const LaosProvince phongsaly = LaosProvince._(
-    'phongsaly',
-    'Phongsaly',
-    'ຜົ້ງສາລີ',
-  );
-  static const LaosProvince sainyabuli = LaosProvince._(
-    'sainyabuli',
-    'Sainyabuli',
-    'ໄຊຍະບູລີ',
-  );
-  static const LaosProvince salavan = LaosProvince._(
-    'salavan',
-    'Salavan',
-    'ສາລະວັນ',
-  );
+  static const LaosProvince oudomxay = LaosProvince._('oudomxay', 'Oudomxay', 'ອຸດົມໄຊ');
+  static const LaosProvince phongsaly = LaosProvince._('phongsaly', 'Phongsaly', 'ຜົ້ງສາລີ');
+  static const LaosProvince sainyabuli = LaosProvince._('sainyabuli', 'Sainyabuli', 'ໄຊຍະບູລີ');
+  static const LaosProvince salavan = LaosProvince._('salavan', 'Salavan', 'ສາລະວັນ');
   static const LaosProvince savannakhet = LaosProvince._(
     'savannakhet',
     'Savannakhet',
     'ສະຫວັນນະເຂດ',
   );
-  static const LaosProvince sekong = LaosProvince._(
-    'sekong',
-    'Sekong',
-    'ເຊກອງ',
-  );
-  static const LaosProvince vientiane = LaosProvince._(
-    'vientiane',
-    'Vientiane Province',
-    'ວຽງຈັນ',
-  );
-  static const LaosProvince xaisomboun = LaosProvince._(
-    'xaisomboun',
-    'Xaisomboun',
-    'ໄຊສົມບູນ',
-  );
+  static const LaosProvince sekong = LaosProvince._('sekong', 'Sekong', 'ເຊກອງ');
+  static const LaosProvince vientiane = LaosProvince._('vientiane', 'Vientiane Province', 'ວຽງຈັນ');
+  static const LaosProvince xaisomboun = LaosProvince._('xaisomboun', 'Xaisomboun', 'ໄຊສົມບູນ');
   static const LaosProvince xiangkhouang = LaosProvince._(
     'xiangkhouang',
     'Xiangkhouang',

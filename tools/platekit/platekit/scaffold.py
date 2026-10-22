@@ -12,17 +12,25 @@ from __future__ import annotations
 import json
 import re
 import shutil
+import unicodedata
 from pathlib import Path
 
 DONOR = 'vietnam_plate'  # the newest package; its boilerplate is current
 
 
+def _fold(text: str) -> str:
+    """Strip diacritics (Å -> A, ã -> a) so accented names keep their letters."""
+    return ''.join(
+        c for c in unicodedata.normalize('NFKD', text) if not unicodedata.combining(c)
+    )
+
+
 def snake(country: str) -> str:
-    return re.sub(r'[^a-z0-9]+', '_', country.lower()).strip('_')
+    return re.sub(r'[^a-z0-9]+', '_', _fold(country).lower()).strip('_')
 
 
 def pascal(country: str) -> str:
-    return ''.join(w.capitalize() for w in re.split(r'[^A-Za-z0-9]+', country) if w)
+    return ''.join(w.capitalize() for w in re.split(r'[^A-Za-z0-9]+', _fold(country)) if w)
 
 
 README = '''FREE PALESTINE 🇮🇷🇵🇸 پاینده ایران

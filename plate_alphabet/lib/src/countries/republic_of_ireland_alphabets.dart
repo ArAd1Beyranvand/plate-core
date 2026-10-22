@@ -8,12 +8,9 @@ import 'package:plate_core/plate_core.dart';
 abstract final class RepublicOfIrelandAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const PlateAlphabet countyLetters = PlateAlphabet(
+  static const PlateAlphabet countyLetters = PlateAlphabet.pattern(
     id: 'ie.county.letters',
-    characters: <String>[
-      'C', 'D', 'E', 'G', 'H', 'K', 'L', 'M', //
-      'N', 'O', 'R', 'S', 'T', 'W', 'X', 'Y',
-    ],
+    include: 'C-E G H K-O R-T W-Y',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

@@ -1,14 +1,13 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'bolivia_colors.dart';
 
 /// The Bolivian liveries: one ink on one field, framed in the ink.
 ///
-/// Measured off the PTA photo normalised to 300×152: the pressed rim is
-/// 3–4.4 mm, 0.023 of the height, and the outer corner ~6 mm, 0.04. The
-/// diplomatic plate's rim is an unpainted lip, so its frame is the field.
-/// The Mercosur plate (400×130) has a thin black edge, ~2.5 mm.
+/// Rim ratios are measured off the 300×152 PTA photo and the 400×130 Mercosur
+/// artwork. The diplomatic plate's rim is an unpainted lip, so its frame is
+/// the field.
 abstract final class BoliviaThemes {
   static PlateTheme _livery({
     required Color field,

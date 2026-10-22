@@ -7,24 +7,19 @@ abstract final class IndiaAlphabets {
 
   /// Any letter: state codes, the diplomatic mission type, the military
   /// check letter. Which combinations mean anything is `IndiaValidator`'s call.
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'in.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// RTO series letters, and the Bharat, vintage and temporary suffixes: I and
   /// O are never issued, to avoid confusion with 1 and 0.
-  static const PlateAlphabet series = PlateAlphabet(
+  static const PlateAlphabet series = PlateAlphabet.pattern(
     id: 'in.series',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', //
-      'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'I O',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

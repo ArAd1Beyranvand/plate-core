@@ -10,23 +10,20 @@ import 'package:plate_core/plate_core.dart';
 abstract final class SerbiaAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const List<String> _regionChars = <String>[
-    'A', 'B', 'C', 'Ć', 'Č', 'D', 'E', 'G', 'I', 'J', 'K', 'L', 'M', 'N', //
-    'O', 'P', 'R', 'S', 'Š', 'T', 'U', 'V', 'Z', 'Ž',
-  ];
-
-  static const PlateAlphabet regionLetters = PlateAlphabet(
+  static const PlateAlphabet regionLetters = PlateAlphabet.pattern(
     id: 'rs.region.letters',
-    characters: _regionChars,
+    include: 'A-C Ć Č D-S Š T-V Z Ž',
+    exclude: 'F H Q',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// The same letters, printed in Cyrillic: the echo of the area code under
   /// the crest.
-  static const PlateAlphabet regionCyrillic = PlateAlphabet(
+  static const PlateAlphabet regionCyrillic = PlateAlphabet.pattern(
     id: 'rs.region.cyrillic',
-    characters: _regionChars,
+    include: 'A-C Ć Č D-S Š T-V Z Ž',
+    exclude: 'F H Q',
     input: AlphabetInput.typed,
     isNumeric: false,
     glyphs: <String, String>{
@@ -37,12 +34,10 @@ abstract final class SerbiaAlphabets {
     },
   );
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'rs.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', //
-      'O', 'P', 'R', 'S', 'T', 'U', 'V', 'X', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'Q W Y',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

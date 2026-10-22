@@ -6,18 +6,16 @@ import 'lebanon_letters.dart';
 import 'lebanon_usage.dart';
 import 'lebanon_validators.dart';
 
-/// Generates valid plate values for fixtures and tests. Pure Dart, no widget.
-/// Returns a `List<String?>` ready for `PlateController` or `ShowPlate`.
-/// Pass [random] for repeatability: `generate(spec, random: Random(7))`.
+/// Generates valid plate values for fixtures and tests. Pure Dart.
+/// Pass a seeded `random` for repeatability.
 abstract final class LebanonSerialGenerator {
-  /// A value for [spec]: letter and number at the spec's text group indices.
-  /// Returns one string per slot.
+  /// One string per slot of [spec].
   ///
-  /// [letter] or [usage] fixes the letter; both is an error. [letter] omitted
-  /// draws from currently-issued letters (K excluded). MP numbers are 1..128;
-  /// others fill the slot, non-zero leading digit.
+  /// [letter] or [usage] fixes the letter; passing both is an error. Otherwise
+  /// the letter is drawn from those currently issued. MP numbers are 1..128;
+  /// others fill the slot with a non-zero leading digit.
   ///
-  /// Throws if spec has no `letter` and `serial` groups (not a Lebanon spec).
+  /// Throws if [spec] lacks `letter` and `serial` groups.
   static List<String?> generate(
     PlateSpec spec, {
     Random? random,
@@ -25,9 +23,7 @@ abstract final class LebanonSerialGenerator {
     LebanonUsage? usage,
   }) {
     if (letter != null && usage?.letter != null) {
-      throw ArgumentError(
-        'Pass letter: or usage:, not both — they would disagree.',
-      );
+      throw ArgumentError('Pass letter: or usage:, not both — they would disagree.');
     }
     final Random rnd = random ?? Random();
     final List<String?> values = List<String?>.filled(spec.slots.length, null);
@@ -35,14 +31,14 @@ abstract final class LebanonSerialGenerator {
     final List<int> letterSlots = _require(spec, 'letter');
     final List<int> serialSlots = _require(spec, 'serial');
 
+    final String? fixed = usage?.letter;
     final LebanonLetter chosen =
         letter ??
-        (usage?.letter != null
-            ? LebanonLetter.fromCharacter(usage!.letter!)!
+        (fixed != null
+            ? LebanonLetter.fromCharacter(fixed)!
             : _issued[rnd.nextInt(_issued.length)]);
 
     values[letterSlots.first] = chosen.character;
-
     values[serialSlots.first] = chosen == LebanonLetter.mp
         ? (1 + rnd.nextInt(LebanonValidator.maxParliamentNumber)).toString()
         : _number(spec.slots[serialSlots.first].length, rnd);
@@ -78,15 +74,10 @@ abstract final class LebanonSerialGenerator {
   }
 }
 
-/// Slot indices of [spec]'s text group [key]. Throws if not found.
 List<int> _require(PlateSpec spec, String key) {
   final List<int> indices = spec.indicesOfGroup(key);
   if (indices.isEmpty) {
-    throw ArgumentError.value(
-      spec.id,
-      'spec',
-      'has no text group named "$key"',
-    );
+    throw ArgumentError.value(spec.id, 'spec', 'has no text group named "$key"');
   }
   return indices;
 }

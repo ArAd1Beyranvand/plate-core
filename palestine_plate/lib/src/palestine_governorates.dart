@@ -1,6 +1,6 @@
-/// Governorates on modern West Bank plates (post-July-2018). Thirteen issued letters;
-/// closed set. Missing `I` and `O` (OCR confusion with digits). `P`–`T` reserved
-/// for pre-2012 Gaza (never issued West Bank). See [letters], [confusableLetters], [reservedGazaLetters].
+/// Governorates on modern West Bank plates (since July 2018): thirteen issued
+/// letters, closed. `I` and `O` are skipped as digit look-alikes; `P`–`T` belong
+/// to pre-2012 Gaza.
 enum PSGovernorate {
   jenin('A', 'جنين', 'Jenin'),
   tulkarm('B', 'طولكرم', 'Tulkarm'),
@@ -11,7 +11,7 @@ enum PSGovernorate {
   jericho('G', 'أريحا', 'Jericho'),
   ramallah('H', 'رام الله', 'Ramallah'),
 
-  /// The gap. `I` is not skipped between [ramallah] and here by accident.
+  /// `I` is skipped between [ramallah] and here.
   jerusalem('J', 'القدس', 'Jerusalem'),
   bethlehem('K', 'بيت لحم', 'Bethlehem'),
   hebron('L', 'الخليل', 'Hebron'),
@@ -20,39 +20,20 @@ enum PSGovernorate {
 
   const PSGovernorate(this.letter, this.arabicName, this.englishName);
 
-  /// The single Latin capital printed on the plate.
   final String letter;
   final String arabicName;
   final String englishName;
 
-  /// Issued letters in allocation order (same as PSAlphabets.governorateLetters).
   static const List<String> letters = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
-    'J',
-    'K',
-    'L',
-    'M',
-    'N',
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', //
   ];
 
-  /// Never issued; OCR misreads (I↔1/J, O↔0). See enum doc.
+  /// Never issued; misread as `1`/`J` and `0`.
   static const List<String> confusableLetters = ['I', 'O'];
 
-  /// Allocated to pre-2012 Gaza (never issued West Bank). Rejected by validator.
+  /// Pre-2012 Gaza letters, rejected on West Bank plates.
   static const List<String> reservedGazaLetters = ['P', 'Q', 'R', 'S', 'T'];
 
-  /// Governorate for [letter], or null if not issued.
-  static PSGovernorate? byLetter(String letter) {
-    for (final g in PSGovernorate.values) {
-      if (g.letter == letter) return g;
-    }
-    return null;
-  }
+  static PSGovernorate? byLetter(String letter) =>
+      values.where((g) => g.letter == letter).firstOrNull;
 }

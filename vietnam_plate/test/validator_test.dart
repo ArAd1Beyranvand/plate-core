@@ -46,10 +46,12 @@ void main() {
   });
 
   test('a series completes from one letter; the number needs all five', () {
-    final PlateController c = PlateController.fromValues(
-      VietnamPlates.long,
-      <String?>['30', 'F', '256', '58'],
-    );
+    final PlateController c = PlateController.fromValues(VietnamPlates.long, <String?>[
+      '30',
+      'F',
+      '256',
+      '58',
+    ]);
     expect(c.isCompleted, isTrue);
     c.setAt(1, 'LD');
     expect(c.isCompleted, isTrue);

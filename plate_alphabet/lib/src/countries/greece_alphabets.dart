@@ -9,11 +9,9 @@ import 'package:plate_core/plate_core.dart';
 abstract final class GreeceAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'gr.letters',
-    characters: <String>[
-      'A', 'B', 'E', 'Z', 'H', 'I', 'K', 'M', 'N', 'O', 'P', 'T', 'Y', 'X', //
-    ],
+    include: 'A B E Z H I K M-P T Y X',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

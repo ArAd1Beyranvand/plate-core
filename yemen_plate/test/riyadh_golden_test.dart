@@ -27,66 +27,26 @@ void main() {
   /// category id -> (spec, theme, space-separated sample value)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
-        'private': (
-          RiyadhPlates.private,
-          RiyadhThemes.standard,
-          'T N J 7 6 5 3',
-        ),
-        'public_transport': (
-          RiyadhPlates.publicTransport,
-          RiyadhThemes.standard,
-          'T N J 7 6 5 3',
-        ),
-        'commercial': (
-          RiyadhPlates.commercial,
-          RiyadhThemes.standard,
-          'T N J 7 6 5 3',
-        ),
-        'temporary': (
-          RiyadhPlates.temporary,
-          RiyadhThemes.standard,
-          'T N J 7 6 5 3',
-        ),
-        'diplomatic': (
-          RiyadhPlates.diplomatic,
-          RiyadhThemes.standard,
-          'T N J 7 6 5 3',
-        ),
-        'eu_private': (
-          RiyadhPlates.euPrivate,
-          RiyadhThemes.standard,
-          'T N J 7 3 5 6',
-        ),
+        'private': (RiyadhPlates.private, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'public_transport': (RiyadhPlates.publicTransport, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'commercial': (RiyadhPlates.commercial, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'temporary': (RiyadhPlates.temporary, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'diplomatic': (RiyadhPlates.diplomatic, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'eu_private': (RiyadhPlates.euPrivate, RiyadhThemes.standard, 'T N J 7 3 5 6'),
         'eu_public_transport': (
           RiyadhPlates.euPublicTransport,
           RiyadhThemes.standard,
           'T N J 7 3 5 6',
         ),
-        'eu_commercial': (
-          RiyadhPlates.euCommercial,
-          RiyadhThemes.standard,
-          'T N J 7 3 5 6',
-        ),
-        'eu_temporary': (
-          RiyadhPlates.euTemporary,
-          RiyadhThemes.standard,
-          'T N J 7 3 5 6',
-        ),
-        'eu_diplomatic': (
-          RiyadhPlates.euDiplomatic,
-          RiyadhThemes.standard,
-          'T N J 7 3 5 6',
-        ),
+        'eu_commercial': (RiyadhPlates.euCommercial, RiyadhThemes.standard, 'T N J 7 3 5 6'),
+        'eu_temporary': (RiyadhPlates.euTemporary, RiyadhThemes.standard, 'T N J 7 3 5 6'),
+        'eu_diplomatic': (RiyadhPlates.euDiplomatic, RiyadhThemes.standard, 'T N J 7 3 5 6'),
       };
 
-  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c
-      in cases.entries) {
+  for (final MapEntry<String, (PlateSpec, PlateTheme, String)> c in cases.entries) {
     testWidgets(c.key, (tester) async {
       final (PlateSpec spec, PlateTheme theme, String values) = c.value;
-      final PlateController controller = PlateController.fromValues(
-        spec,
-        values.split(' '),
-      );
+      final PlateController controller = PlateController.fromValues(spec, values.split(' '));
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
@@ -99,8 +59,7 @@ void main() {
                   child: PlateView(
                     controller: controller,
                     theme: theme,
-                    country: RiyadhCountry
-                        .byCategory[c.key.replaceFirst('eu_', '')]!,
+                    country: RiyadhCountry.byCategory[c.key.replaceFirst('eu_', '')]!,
                   ),
                 ),
               ),
@@ -109,10 +68,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/riyadh/${c.key}.png'),
-      );
+      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/riyadh/${c.key}.png'));
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });

@@ -6,8 +6,11 @@ import 'package:plate_core/plate_core.dart';
 abstract final class SudanSerialGenerator {
   static List<String?> generate(PlateSpec spec, {Random? random}) {
     final Random rnd = random ?? Random();
-    String pick(PlateSlot slot) =>
-        slot.alphabet.characters[rnd.nextInt(slot.alphabet.characters.length)];
+    String pick(PlateSlot slot) {
+      final List<String> chars = slot.alphabet.characters;
+      return chars[rnd.nextInt(chars.length)];
+    }
+
     return <String?>[
       for (final PlateSlot slot in spec.slots)
         List<String>.generate(

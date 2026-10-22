@@ -12,6 +12,7 @@ abstract final class ItalyThemes {
   static final PlateTheme private = _framed(0.0227, 0.055);
   static final PlateTheme twoLine = _framed(0.0114, 0.027);
   static final PlateTheme motorcycle = _framed(0.014, 0.034);
+  static final PlateTheme diplomatic = _framed(0.0227, 0.055);
 }
 
 PlateTheme _framed(double border, double radius) => PlateTheme.monochrome(

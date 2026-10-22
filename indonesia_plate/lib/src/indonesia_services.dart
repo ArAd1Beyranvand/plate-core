@@ -23,7 +23,6 @@ class IndonesiaService {
   final String id;
   final String name;
 
-  /// The yellow rim's width.
   final double rim;
 
   /// The x of the yellow upright between the crest square and the field.
@@ -74,10 +73,5 @@ class IndonesiaService {
     dividerWidth: 9,
   );
 
-  static const List<IndonesiaService> all = <IndonesiaService>[
-    army,
-    navy,
-    airForce,
-    armedForces,
-  ];
+  static const List<IndonesiaService> all = <IndonesiaService>[army, navy, airForce, armedForces];
 }

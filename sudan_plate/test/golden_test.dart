@@ -45,11 +45,7 @@ void main() {
               height: 2 * spec.canvasHeight,
               child: PlateThemeScope(
                 theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: SudanCountry.sudan,
-                ),
+                child: PlateView(controller: controller, theme: theme, country: SudanCountry.sudan),
               ),
             ),
           ),
@@ -57,43 +53,20 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
 
   final List<(String, PlateSpec, SudanUsage, List<String>)> cases = [
     // The Wikipedia artwork.
-    (
-      'sd_private',
-      SudanPlates.standard,
-      SudanUsage.private,
-      ['7', 'KH', '10346'],
-    ),
+    ('sd_private', SudanPlates.standard, SudanUsage.private, ['7', 'KH', '10346']),
     // worldlicenseplates' Al Jazirah plate.
-    (
-      'sd_private_g',
-      SudanPlates.standard,
-      SudanUsage.private,
-      ['1', 'G', '14349'],
-    ),
+    ('sd_private_g', SudanPlates.standard, SudanUsage.private, ['1', 'G', '14349']),
     // worldlicenseplates' bus/taxi plate.
-    (
-      'sd_transport',
-      SudanPlates.standard,
-      SudanUsage.transport,
-      ['4', 'KH', '1209'],
-    ),
+    ('sd_transport', SudanPlates.standard, SudanUsage.transport, ['4', 'KH', '1209']),
     // worldlicenseplates' commercial plate.
-    (
-      'sd_commercial',
-      SudanPlates.standard,
-      SudanUsage.commercial,
-      ['8', 'RS', '20368'],
-    ),
+    ('sd_commercial', SudanPlates.standard, SudanUsage.commercial, ['8', 'RS', '20368']),
   ];
   for (final (name, spec, usage, values) in cases) {
     testWidgets('$name ${values.join(' ')}', (tester) async {
@@ -116,7 +89,7 @@ void main() {
   test('one stored value prints in both scripts', () {
     expect(SudanAlphabets.stateArabic.render('KH'), 'خ');
     expect(SudanAlphabets.stateLatin.render('KH'), 'KH');
-    expect(SudanAlphabets.arabicDigits.render('7'), '٧');
+    expect(SudanAlphabets.iranshahrDigits.render('7'), '٧');
     expect(SudanAlphabets.stateArabic.canonical('خ'), 'KH');
   });
 
@@ -125,11 +98,7 @@ void main() {
     expect(spec.slots.length, 3);
     expect(spec.slots[2].minLength, 4);
     expect(spec.slots[2].length, 5);
-    final PlateController c = PlateController.fromValues(spec, [
-      '4',
-      'KH',
-      '120',
-    ]);
+    final PlateController c = PlateController.fromValues(spec, ['4', 'KH', '120']);
     expect(c.isCompleted, isFalse);
     c.setAt(2, '1209');
     expect(c.isCompleted, isTrue);

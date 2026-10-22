@@ -280,6 +280,8 @@ def measure(im: np.ndarray, cw: float, ch: float, *, win=None, gap: float = 2.5,
 
     def modal(mask):
         px = Counter(map(tuple, (rgb[mask] // 2 * 2).reshape(-1, 3)))
+        if not px:
+            return None
         return _hex(px.most_common(1)[0][0])
 
     x0, y0, x1, y1 = win or (cw * .04, ch * .07, cw * .96, ch * .93)
@@ -315,7 +317,14 @@ def colours(im: np.ndarray, white: str = 'auto', erode: int = 9) -> dict:
     core_ink = cv2.erode(ink.astype(np.uint8), k).astype(bool)
     core_field = cv2.erode((~ink).astype(np.uint8), k).astype(bool)
     rgb = cv2.cvtColor(im, cv2.COLOR_BGR2RGB).astype(np.float32)
-    f, i = np.median(rgb[core_field], 0), np.median(rgb[core_ink], 0)
+
+    def median(core, whole):
+        for m in (core, whole):
+            if m.any():
+                return np.median(rgb[m], 0)
+        return np.zeros(3, np.float32)
+
+    f, i = median(core_field, ~ink), median(core_ink, ink)
     ref = None
     if white == 'field':
         ref = f

@@ -3,7 +3,8 @@ import 'package:plate_core/plate_core.dart';
 import 'india_alphabets.dart';
 
 /// Judges any `IndiaPlates` value by the groups its spec has. Reports, never
-/// throws, never bars a keystroke; quiet until every field has reached its minimum length.
+/// throws, never bars a keystroke; quiet until every field has reached its
+/// minimum length.
 class IndiaValidator extends PlateValidator {
   const IndiaValidator();
 
@@ -19,19 +20,13 @@ class IndiaValidator extends PlateValidator {
   PlateValidation validate(PlateEntry entry) {
     final slots = entry.spec.slots;
     if (entry.values.length < slots.length ||
-        [
-          for (var i = 0; i < slots.length; i++)
-            slots[i].isComplete(entry.values[i]),
-        ].contains(false)) {
+        !slots.indexed.every((s) => s.$2.isComplete(entry.values[s.$1]))) {
       return const PlateValidation.valid();
     }
-    final keys = <String?>{
-      for (final g in entry.spec.effectiveTextGroups) g.key,
-    };
+    final keys = <String?>{for (final g in entry.spec.effectiveTextGroups) g.key};
     String g(String key) => entry.group(key);
 
-    if (keys.contains('state') &&
-        !IndiaAlphabets.stateNames.containsKey(g('state'))) {
+    if (keys.contains('state') && !IndiaAlphabets.stateNames.containsKey(g('state'))) {
       return const PlateValidation.invalid(reasonState);
     }
     if (keys.contains('rto') && g('rto') == '00') {
@@ -46,16 +41,13 @@ class IndiaValidator extends PlateValidator {
         return const PlateValidation.invalid(reasonMonth);
       }
     }
-    if (keys.contains('class') &&
-        !IndiaAlphabets.militaryClasses.containsKey(g('class'))) {
+    if (keys.contains('class') && !IndiaAlphabets.militaryClasses.containsKey(g('class'))) {
       return const PlateValidation.invalid(reasonClass);
     }
-    if (keys.contains('type') &&
-        !IndiaAlphabets.missions.containsKey(g('type'))) {
+    if (keys.contains('type') && !IndiaAlphabets.missions.containsKey(g('type'))) {
       return const PlateValidation.invalid(reasonMission);
     }
-    if (keys.contains('category') &&
-        !IndiaAlphabets.tradeCategories.containsKey(g('category'))) {
+    if (keys.contains('category') && !IndiaAlphabets.tradeCategories.containsKey(g('category'))) {
       return const PlateValidation.invalid(reasonCategory);
     }
     return const PlateValidation.valid();

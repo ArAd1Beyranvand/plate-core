@@ -17,26 +17,17 @@ abstract final class LaosThemes {
   static final PlateTheme amber = _ink(LaosColors.amber, LaosColors.black);
 
   /// Government plates.
-  static final PlateTheme government = _ink(
-    LaosColors.governmentBlue,
-    LaosColors.white,
-  );
+  static final PlateTheme government = _ink(LaosColors.governmentBlue, LaosColors.white);
 
   /// Company plates, with or without the EV badge, and temporary plates.
   static final PlateTheme white = _ink(LaosColors.white, LaosColors.black);
 
   /// Taxable-company plates.
-  static final PlateTheme taxable = _ink(
-    LaosColors.white,
-    LaosColors.taxableBlue,
-  );
+  static final PlateTheme taxable = _ink(LaosColors.white, LaosColors.taxableBlue);
 
   /// International-organisation plates: diplomatic, foreign guest, UN and
   /// international financial institution.
-  static final PlateTheme international = _ink(
-    LaosColors.silver,
-    LaosColors.paleBlue,
-  );
+  static final PlateTheme international = _ink(LaosColors.silver, LaosColors.paleBlue);
 
   /// Public-security and national-defence plates.
   static final PlateTheme security = _ink(LaosColors.red, LaosColors.white);

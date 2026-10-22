@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:plate_alphabet/plate_alphabet.dart';
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'bolivia_alphabets.dart';
 import 'bolivia_colors.dart';
@@ -39,8 +39,7 @@ import 'bolivia_regions.dart';
 /// is width-limited at about half the reference height. Labels are sized to
 /// the measured ink *width* for the same reason. `plate_core` is unchanged.
 ///
-/// **Not drawn.** The wiphala printed beside the diplomatic plate's
-/// `BOLIVIA`, the
+/// **Not drawn.** The wiphala beside the diplomatic plate's `BOLIVIA`, the
 /// six-digit control number under the department letter, and the Mercosur
 /// emblem.
 abstract final class _Layout {
@@ -57,12 +56,7 @@ abstract final class _Layout {
   /// `Flag_of_Bolivia_state.svg`. Measured x 12.3..50.5, y 18.1..42.8; the
   /// box keeps the SVG's 22:15 at the measured height, centred on the
   /// measured x, so the flag covers it and no panel colour shows.
-  static const PlateBox flag = PlateBox(
-    31.4 - 24.7 * 22 / 15 / 2,
-    18.1,
-    24.7 * 22 / 15,
-    24.7,
-  );
+  static const PlateBox flag = PlateBox(31.4 - 24.7 * 22 / 15 / 2, 18.1, 24.7 * 22 / 15, 24.7);
   static const PlateBox departmentBox = PlateBox(248, 14.4, 41.7, 30.9);
 
   /// Centred on the `L`'s ink (y 27.9); 19.9 mm of ink / 0.55.
@@ -111,18 +105,14 @@ List<PlateBand> _flag(PlateBox box) {
       BoliviaColors.flagYellow,
       BoliviaColors.flagGreen,
     ].indexed)
-      PlateBand(
-        box: PlateBox(box.left, box.top + i * h, box.width, h),
-        color: c,
-      ),
+      PlateBand(box: PlateBox(box.left, box.top + i * h, box.width, h), color: c),
   ];
 }
 
 /// `BOLIVIA` letter-spaced as stamped: thin spaces between the capitals.
 const String _bolivia = 'B\u2009O\u2009L\u2009I\u2009V\u2009I\u2009A';
 
-/// The service a PTA plate's department box declares by its fill: white for
-/// private, red for public service, yellow for government.
+/// The service a PTA plate's department box declares by its fill.
 @immutable
 class BoliviaService {
   const BoliviaService({required this.id, required this.fill, this.ink});
@@ -133,11 +123,7 @@ class BoliviaService {
   /// The letter's ink, or null for the plate's blue.
   final Color? ink;
 
-  /// Photographed: the box is the plate's own white.
-  static const BoliviaService private = BoliviaService(
-    id: 'priv',
-    fill: BoliviaColors.white,
-  );
+  static const BoliviaService private = BoliviaService(id: 'priv', fill: BoliviaColors.white);
 
   /// Not photographed: the flag's red, the letter in white to stay legible.
   static const BoliviaService public = BoliviaService(
@@ -152,15 +138,11 @@ class BoliviaService {
     fill: BoliviaColors.flagYellow,
   );
 
-  static const List<BoliviaService> values = <BoliviaService>[
-    private,
-    public,
-    government,
-  ];
+  static const List<BoliviaService> values = <BoliviaService>[private, public, government];
 }
 
-/// The status code between a special plate's two numbers. Every one is the
-/// same design; the colours are the theme's (see `BoliviaThemes`).
+/// The status code between a special plate's two numbers; colours come from
+/// the theme.
 @immutable
 class BoliviaMission {
   const BoliviaMission({
@@ -223,14 +205,9 @@ abstract final class BoliviaPlates {
     spacing: max(0, pitch - 0.6 * 0.72 * height),
   );
 
-  /// The PTA plate, `1234ABC` under BOLIVIA, and the department letter. Older
-  /// vehicles carry three digits; the row stays centred.
-  ///
+  /// The PTA plate, `1234ABC`; three-digit numbers stay centred.
   /// Slots: the digits, the three letters, then the department.
-  static PlateSpec standard({
-    int digits = 4,
-    BoliviaService service = BoliviaService.private,
-  }) {
+  static PlateSpec standard({int digits = 4, BoliviaService service = BoliviaService.private}) {
     assert(digits == 3 || digits == 4, 'A PTA number has 3 or 4 digits.');
     final int cells = digits + 3;
     final double left = _Layout.centre - cells * _Layout.pitch / 2;
@@ -241,15 +218,9 @@ abstract final class BoliviaPlates {
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
       panel: const PlatePanel(box: _Layout.flag, padding: EdgeInsets.zero),
-      bands: <PlateBand>[
-        PlateBand(box: _Layout.departmentBox, color: service.fill),
-      ],
+      bands: <PlateBand>[PlateBand(box: _Layout.departmentBox, color: service.fill)],
       labels: const <PlateLabel>[
-        PlateLabel(
-          text: _bolivia,
-          box: _Layout.caption,
-          glyphHeight: _Layout.captionGlyph,
-        ),
+        PlateLabel(text: _bolivia, box: _Layout.caption, glyphHeight: _Layout.captionGlyph),
       ],
       slots: <PlateSlot>[
         _field(
@@ -285,9 +256,7 @@ abstract final class BoliviaPlates {
 
   /// The special plate, `12-CD-34`: the mission's country, its status code,
   /// and the vehicle's rank. Slots: the two pairs, left to right.
-  static PlateSpec special([
-    BoliviaMission mission = BoliviaMission.diplomatic,
-  ]) => PlateSpec(
+  static PlateSpec special([BoliviaMission mission = BoliviaMission.diplomatic]) => PlateSpec(
     id: 'bo.${mission.id}',
     country: BoliviaCountry.bolivia,
     canvasWidth: _Layout.width,
@@ -298,25 +267,12 @@ abstract final class BoliviaPlates {
     rules: <PlateRule>[
       for (final double x in _Layout.dotX)
         PlateRule(
-          box: PlateBox(
-            x - _Layout.dotSize / 2,
-            _Layout.dotY,
-            _Layout.dotSize,
-            _Layout.dotSize,
-          ),
+          box: PlateBox(x - _Layout.dotSize / 2, _Layout.dotY, _Layout.dotSize, _Layout.dotSize),
         ),
     ],
     labels: <PlateLabel>[
-      const PlateLabel(
-        text: _bolivia,
-        box: _Layout.caption,
-        glyphHeight: _Layout.captionGlyph,
-      ),
-      PlateLabel(
-        text: mission.code,
-        box: _Layout.dipCode,
-        glyphHeight: _Layout.dipCodeGlyph,
-      ),
+      const PlateLabel(text: _bolivia, box: _Layout.caption, glyphHeight: _Layout.captionGlyph),
+      PlateLabel(text: mission.code, box: _Layout.dipCode, glyphHeight: _Layout.dipCodeGlyph),
     ],
     slots: <PlateSlot>[
       _field(
@@ -338,11 +294,7 @@ abstract final class BoliviaPlates {
     ],
     textGroups: <PlateTextGroup>[
       const PlateTextGroup(<int>[0], key: 'country'),
-      PlateTextGroup(
-        const <int>[1],
-        prefix: '-${mission.code}-',
-        key: 'rank',
-      ),
+      PlateTextGroup(const <int>[1], prefix: '-${mission.code}-', key: 'rank'),
     ],
   );
 
@@ -356,10 +308,7 @@ abstract final class BoliviaPlates {
     noPanel: true,
     panel: const PlatePanel(box: _Layout.mFlag),
     background: const PlateSection.rows(<PlatePart>[
-      PlatePart(
-        PlateSection.fill(PlateFill.color(BoliviaColors.mercosurBlue)),
-        end: _Layout.mBand,
-      ),
+      PlatePart(PlateSection.fill(PlateFill.color(BoliviaColors.mercosurBlue)), end: _Layout.mBand),
       PlatePart(PlateSection.plain),
     ]),
     bands: _flag(_Layout.mFlag),

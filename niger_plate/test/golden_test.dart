@@ -14,9 +14,7 @@ import 'package:niger_plate/niger_plate.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -24,37 +22,12 @@ void main() {
   });
 
   final List<(String, PlateSpec, NigerUsage, List<String>)> cases = [
-    (
-      'ne_private',
-      NigerPlates.privateSpec,
-      NigerUsage.private,
-      ['8', 'H', '7654'],
-    ),
-    (
-      'ne_commercial',
-      NigerPlates.commercialSpec,
-      NigerUsage.commercial,
-      ['1', 'E', '2345'],
-    ),
+    ('ne_private', NigerPlates.privateSpec, NigerUsage.private, ['8', 'H', '7654']),
+    ('ne_commercial', NigerPlates.commercialSpec, NigerUsage.commercial, ['1', 'E', '2345']),
     // The four below have no reference image; these goldens pin the layout.
-    (
-      'ne_state',
-      NigerOtherPlates.state,
-      NigerUsage.stateTransport,
-      ['12345', '6'],
-    ),
-    (
-      'ne_military',
-      NigerOtherPlates.military,
-      NigerUsage.military,
-      ['12345'],
-    ),
-    (
-      'ne_diplomatic_cmd',
-      NigerOtherPlates.diplomaticChief,
-      NigerUsage.diplomaticChief,
-      ['123'],
-    ),
+    ('ne_state', NigerOtherPlates.state, NigerUsage.stateTransport, ['12345', '6']),
+    ('ne_military', NigerOtherPlates.military, NigerUsage.military, ['12345']),
+    ('ne_diplomatic_cmd', NigerOtherPlates.diplomaticChief, NigerUsage.diplomaticChief, ['123']),
     (
       'ne_diplomatic_cd',
       NigerOtherPlates.diplomaticStaff,
@@ -64,10 +37,7 @@ void main() {
   ];
   for (final (name, spec, usage, values) in cases) {
     testWidgets('$name ${values.join(' ')}', (tester) async {
-      final PlateController controller = PlateController.fromValues(
-        spec,
-        values,
-      );
+      final PlateController controller = PlateController.fromValues(spec, values);
       final PlateTheme theme = NigerThemes.forUsage(usage);
       tester.view.physicalSize = const Size(1200, 300);
       tester.view.devicePixelRatio = 1;
@@ -81,11 +51,7 @@ void main() {
                 height: 2 * spec.canvasHeight,
                 child: PlateThemeScope(
                   theme: theme,
-                  child: PlateView(
-                    controller: controller,
-                    theme: theme,
-                    country: spec.country,
-                  ),
+                  child: PlateView(controller: controller, theme: theme, country: spec.country),
                 ),
               ),
             ),
@@ -93,10 +59,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/$name.png'),
-      );
+      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });

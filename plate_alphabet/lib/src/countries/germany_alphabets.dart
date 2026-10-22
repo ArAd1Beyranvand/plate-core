@@ -8,39 +8,9 @@ class GermanAlphabets {
   const GermanAlphabets._();
 
   /// A-Z plus Ä, Ö, Ü: legal area code letters. Umlauts group at end (picker UX).
-  static const PlateAlphabet districtLetters = PlateAlphabet(
+  static const PlateAlphabet districtLetters = PlateAlphabet.pattern(
     id: 'de.district',
-    characters: [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-      'Ä',
-      'Ö',
-      'Ü',
-    ],
+    include: 'A-Z Ä Ö Ü',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

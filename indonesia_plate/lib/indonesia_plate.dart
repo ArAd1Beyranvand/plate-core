@@ -7,12 +7,12 @@
 /// and police plates are a fourth and fifth geometry, measured off photographs.
 library;
 
-export 'src/indonesia_colors.dart';
 export 'src/indonesia_alphabets.dart';
+export 'src/indonesia_colors.dart';
 export 'src/indonesia_country.dart';
-export 'src/indonesia_themes.dart';
 export 'src/indonesia_plates.dart';
 export 'src/indonesia_regions.dart';
-export 'src/indonesia_services.dart';
-export 'src/indonesia_validators.dart';
 export 'src/indonesia_serial_generator.dart';
+export 'src/indonesia_services.dart';
+export 'src/indonesia_themes.dart';
+export 'src/indonesia_validators.dart';

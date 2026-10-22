@@ -93,6 +93,5 @@ abstract final class VietnamRegions {
   static String? lookup(String code) => _provinces[code];
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('province'));
+  static String? captionOf(String Function(String key) group) => lookup(group('province'));
 }

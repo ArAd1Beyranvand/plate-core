@@ -10,19 +10,17 @@ abstract final class PlateAlphabetOman {
   /// The letters seen on 2001-series plates: `A` (article photograph), `B`/`M`
   /// (private artwork), `K` (taxi artwork).
   // TODO(oman-letters): the rest of the issued letters; none are sourced.
-  static const List<String> _letters = <String>['A', 'B', 'K', 'M'];
-
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'om.letter.latin',
-    characters: _letters,
+    include: 'A B K M',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );
 
   /// [letters] as the upper row prints it.
-  static const PlateAlphabet arabic = PlateAlphabet(
+  static const PlateAlphabet arabic = PlateAlphabet.pattern(
     id: 'om.letter.arabic',
-    characters: _letters,
+    include: 'A B K M',
     input: AlphabetInput.chosen,
     isNumeric: false,
     direction: TextDirection.rtl,

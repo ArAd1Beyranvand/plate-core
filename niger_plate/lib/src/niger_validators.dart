@@ -2,9 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 import 'niger_alphabets.dart';
 
-/// Judges a `NigerPlates` value. Reports, never bars a keystroke.
-///
-/// What the article fixes: a region digit 1–8, one series letter, and a
+/// Judges a `NigerPlates` value: region digit 1–8, one series letter, a
 /// four-digit serial.
 class NigerValidator extends GatedPlateValidator {
   const NigerValidator();
@@ -60,7 +58,6 @@ class NigerStateValidator extends GatedPlateValidator {
   }
 }
 
-/// Five digits.
 class NigerMilitaryValidator extends GatedPlateValidator {
   const NigerMilitaryValidator();
 
@@ -68,8 +65,7 @@ class NigerMilitaryValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      isDigitsOfLength(entry.group('serial'), 5)
+  PlateValidation judge(PlateEntry entry) => isDigitsOfLength(entry.group('serial'), 5)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid('The serial is five digits.');
 }

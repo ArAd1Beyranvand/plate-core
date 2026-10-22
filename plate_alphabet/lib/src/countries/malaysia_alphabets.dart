@@ -11,21 +11,18 @@ import '../plate_alphabet.dart';
 abstract final class MalaysiaAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'my.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// The two-letter code ending a diplomatic plate: diplomatic corps,
   /// consular corps, United Nations, international organisation.
-  static const PlateAlphabet missionCodes = PlateAlphabet(
+  static const PlateAlphabet missionCodes = PlateAlphabet.pattern(
     id: 'my.missionCodes',
-    characters: <String>['DC', 'CC', 'UN', 'PA'],
+    include: 'DC CC UN PA',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

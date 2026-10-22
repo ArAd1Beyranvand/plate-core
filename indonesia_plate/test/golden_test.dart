@@ -14,9 +14,7 @@ import 'package:indonesia_plate/indonesia_plate.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -30,10 +28,7 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(
-      spec,
-      values.split(' '),
-    );
+    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -57,14 +52,9 @@ void main() {
     await tester.pumpAndSettle();
     // The crest and mark decals decode off the real event loop, which fake
     // time does not advance; runAsync gives them a real slice of time.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 100)),
-    );
+    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -259,13 +249,12 @@ void main() {
     );
   });
 
-  for (final (IndonesiaService service, PlateTheme theme)
-      in <(IndonesiaService, PlateTheme)>[
-        (IndonesiaService.army, IndonesiaThemes.army),
-        (IndonesiaService.navy, IndonesiaThemes.navy),
-        (IndonesiaService.airForce, IndonesiaThemes.airForce),
-        (IndonesiaService.armedForces, IndonesiaThemes.armedForces),
-      ]) {
+  for (final (IndonesiaService service, PlateTheme theme) in <(IndonesiaService, PlateTheme)>[
+    (IndonesiaService.army, IndonesiaThemes.army),
+    (IndonesiaService.navy, IndonesiaThemes.navy),
+    (IndonesiaService.airForce, IndonesiaThemes.airForce),
+    (IndonesiaService.armedForces, IndonesiaThemes.armedForces),
+  ]) {
     testWidgets('military ${service.name}', (tester) async {
       await render(
         tester,
@@ -299,9 +288,7 @@ void main() {
 
   test('service validator', () {
     PlateValidation judge(PlateSpec spec, String values) =>
-        const IndonesiaServiceValidator().judge(
-          PlateEntry(spec: spec, values: values.split(' ')),
-        );
+        const IndonesiaServiceValidator().judge(PlateEntry(spec: spec, values: values.split(' ')));
     final PlateSpec police = IndonesiaPlates.police;
     final PlateSpec army = IndonesiaPlates.military(IndonesiaService.army);
     expect(judge(police, 'XV 3705 40'), const PlateValidation.valid());
@@ -311,12 +298,7 @@ void main() {
   });
 
   test('validator', () {
-    bool ok(
-      String prefix,
-      String number, [
-      String suffix = '',
-      String month = '',
-    ]) =>
+    bool ok(String prefix, String number, [String suffix = '', String month = '']) =>
         IndonesiaValidator.validateFields(
           prefix: prefix,
           number: number,
@@ -337,10 +319,7 @@ void main() {
     expect(spec.slots[0].minLength, 1);
     expect(spec.slots[1].length, 4);
     expect(spec.slots[2].length, 3);
-    expect(
-      IndonesiaPlates.military(IndonesiaService.army).slots[0].minLength,
-      4,
-    );
+    expect(IndonesiaPlates.military(IndonesiaService.army).slots[0].minLength, 4);
     expect(spec.slots[1].isComplete('1'), isTrue);
     expect(spec.slots[1].isComplete(null), isFalse);
     expect(spec.slots[1].isFull('123'), isFalse);
@@ -348,24 +327,16 @@ void main() {
 
   test('generator fills every slot within its field', () {
     final Random rnd = Random(1);
-    for (final PlateSpec spec in <PlateSpec>[
-      IndonesiaPlates.car,
-      IndonesiaPlates.motorcycleEv,
-    ]) {
+    for (final PlateSpec spec in <PlateSpec>[IndonesiaPlates.car, IndonesiaPlates.motorcycleEv]) {
       for (int n = 0; n < 50; n++) {
-        final List<String?> v = IndonesiaSerialGenerator.generate(
-          spec,
-          random: rnd,
-        );
+        final List<String?> v = IndonesiaSerialGenerator.generate(spec, random: rnd);
         expect(v, everyElement(isNotNull));
         for (int i = 0; i < v.length; i++) {
           expect(spec.slots[i].accepts(v[i]!), isTrue, reason: '$v at $i');
           expect(spec.slots[i].isComplete(v[i]), isTrue);
         }
         expect(
-          IndonesiaValidator()
-              .validate(PlateEntry(spec: spec, values: v))
-              .isValid,
+          IndonesiaValidator().validate(PlateEntry(spec: spec, values: v)).isValid,
           isTrue,
           reason: '$v',
         );

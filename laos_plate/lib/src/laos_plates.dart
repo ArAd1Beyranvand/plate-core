@@ -137,22 +137,13 @@ class _Builder {
       slots.add(
         PlateSlot(
           alphabet: alphabet,
-          box: PlateBox(
-            firstCx - pitch / 2 + i * pitch,
-            cy - box / 2,
-            perSlot * pitch,
-            box,
-          ),
+          box: PlateBox(firstCx - pitch / 2 + i * pitch, cy - box / 2, perSlot * pitch, box),
           length: perSlot,
           spacing: max(0, pitch - 0.6 * 0.72 * box),
         ),
       );
     }
-    groups.add(
-      PlateTextGroup(<int>[
-        for (var i = start; i < slots.length; i++) i,
-      ], key: key),
-    );
+    groups.add(PlateTextGroup(<int>[for (var i = start; i < slots.length; i++) i], key: key));
     return firstCx + count * pitch;
   }
 
@@ -173,15 +164,7 @@ class _Builder {
         labels.add(_text('-', dashCx, cy, gap + pitch / 2, box, box));
         cx += gap;
       }
-      cx = run(
-        runs[i].$1,
-        LaosAlphabets.digits,
-        runs[i].$2,
-        cx,
-        pitch,
-        cy,
-        box,
-      );
+      cx = run(runs[i].$1, LaosAlphabets.digits, runs[i].$2, cx, pitch, cy, box);
     }
   }
 }
@@ -253,15 +236,12 @@ abstract final class LaosPlates {
   static PlateSpec get diplomatic => of(LaosCategory.diplomatic);
   static PlateSpec get foreignGuest => of(LaosCategory.foreignGuest);
   static PlateSpec get unitedNations => of(LaosCategory.unitedNations);
-  static PlateSpec get financialInstitution =>
-      of(LaosCategory.financialInstitution);
+  static PlateSpec get financialInstitution => of(LaosCategory.financialInstitution);
   static PlateSpec get publicSecurity => of(LaosCategory.publicSecurity);
   static PlateSpec get nationalDefence => of(LaosCategory.nationalDefence);
 
   /// Every category, provincial ones registered in Vientiane Capital.
-  static List<PlateSpec> get all => <PlateSpec>[
-    for (final c in LaosCategory.values) of(c),
-  ];
+  static List<PlateSpec> get all => <PlateSpec>[for (final c in LaosCategory.values) of(c)];
 
   static PlateSpec _spec(
     String id,
@@ -282,40 +262,13 @@ abstract final class LaosPlates {
     textGroups: b.groups,
   );
 
-  static PlateSpec _provincial(
-    String id,
-    LaosCategory category,
-    LaosProvince province,
-  ) {
+  static PlateSpec _provincial(String id, LaosCategory category, LaosProvince province) {
     const cy = _Layout.serialCy, box = _Layout.serialBox;
     final b = _Builder();
-    b.run(
-      'letters',
-      LaosAlphabets.letters,
-      2,
-      _Layout.letterCx,
-      _Layout.letterPitch,
-      cy,
-      box,
-    );
-    b.run(
-      'serial',
-      LaosAlphabets.digits,
-      4,
-      _Layout.digitCx,
-      _Layout.pitch,
-      cy,
-      box,
-    );
+    b.run('letters', LaosAlphabets.letters, 2, _Layout.letterCx, _Layout.letterPitch, cy, box);
+    b.run('serial', LaosAlphabets.digits, 4, _Layout.digitCx, _Layout.pitch, cy, box);
     b.labels.add(
-      _text(
-        province.caption,
-        _Layout.captionCx,
-        _Layout.captionCy,
-        260,
-        48,
-        _Layout.captionGlyph,
-      ),
+      _text(province.caption, _Layout.captionCx, _Layout.captionCy, 260, 48, _Layout.captionGlyph),
     );
     final bands = <PlateBand>[];
     if (category.ev) {
@@ -374,11 +327,7 @@ abstract final class LaosPlates {
       ),
     );
     b.dashed(
-      const <(String, int)>[
-        ('expiryLead', 2),
-        ('expiryYear', 4),
-        ('expiryTail', 2),
-      ],
+      const <(String, int)>[('expiryLead', 2), ('expiryYear', 4), ('expiryTail', 2)],
       _Layout.expiryDigitCx,
       _Layout.expiryPitch,
       _Layout.expiryDashGap,
@@ -408,20 +357,13 @@ abstract final class LaosPlates {
     );
     final runs = category.digitRuns;
     b.dashed(
-      <(String, int)>[
-        if (runs.length == 2) ('code', runs[0]),
-        ('serial', runs.last),
-      ],
+      <(String, int)>[if (runs.length == 2) ('code', runs[0]), ('serial', runs.last)],
       l.digitCx,
       _Layout.pitch,
       _Layout.dashGap,
       l.cy,
       _Layout.prefixedBox,
     );
-    return _spec(
-      id,
-      b,
-      rules: <PlateRule>[if (l.underline != null) PlateRule(box: l.underline!)],
-    );
+    return _spec(id, b, rules: <PlateRule>[if (l.underline != null) PlateRule(box: l.underline!)]);
   }
 }

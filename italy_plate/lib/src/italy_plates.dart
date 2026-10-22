@@ -1,24 +1,17 @@
 import 'dart:math';
 
-import 'package:flutter/widgets.dart' show EdgeInsets;
+import 'package:flutter/widgets.dart' show Color, EdgeInsets;
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:plate_core/plate_core.dart';
 
 import 'italy_colors.dart';
 import 'italy_country.dart';
+import 'italy_missions.dart';
 
 /// One field: [count] characters whose first is centred on [cx], at [pitch],
 /// in a box [top]..[top]+[height] tall.
 class _Run {
-  const _Run(
-    this.key,
-    this.alphabet,
-    this.count,
-    this.cx,
-    this.pitch,
-    this.top,
-    this.height,
-  );
+  const _Run(this.key, this.alphabet, this.count, this.cx, this.pitch, this.top, this.height);
 
   final String key;
   final PlateAlphabet alphabet;
@@ -86,7 +79,7 @@ class _Design {
 /// Not drawn: the Republic emblem between the groups, the year and province
 /// code in the ring, the 360×110 front plate, and every special series
 /// (trailer, police, military, Carabinieri, fire brigade, Red Cross, Port
-/// Authority, diplomatic, test, agricultural, moped, historic); the offline
+/// Authority, test, agricultural, moped, historic); the offline
 /// stage found no usable measurement for them.
 abstract final class _Layout {
   static const _Design car = _Design(
@@ -148,6 +141,20 @@ abstract final class _Layout {
   static const double panelWidth = 46, panelHeight = 70.4;
   static const double iTop = 62.2, iHeight = 27, iGlyph = 49, iWidth = 20;
 
+  /// The diplomatic plates (`CD_0213_XG` photo, flattened to 520×110): ink
+  /// y 33.8–93.6 (60 tall); `CD` centres 51.2, 104; digits first centre 176 at
+  /// pitch 53.3; `XG` first centre 408.7 at pitch 53.3. The box is 12–110
+  /// (98 tall) so its ~55% ink centres near 61, as close as a box inside the
+  /// canvas allows. The Republic emblem is not drawn.
+  static const double dipTop = 12, dipHeight = 98;
+
+  /// A label's ink is taller than a slot's at the same height; this brings
+  /// the prefix and dots to the digits' 60.
+  static const double dipLabelScale = 0.8;
+  static const double dipPrefixLeft = 24.8, dipPrefixPitch = 52.8;
+  static const double dipNumberCentre = 256, dipNumberPitch = 53.3;
+  static const double dipCodeCentre = 435.4, dipCodePitch = 53.3;
+
   /// Ring thickness as a share of its diameter.
   static const double ringStroke = 0.1;
 }
@@ -162,7 +169,115 @@ abstract final class ItalyPlates {
   static final PlateSpec twoLine = _spec(_Layout.twoLine);
   static final PlateSpec motorcycle = _spec(_Layout.motorcycle);
 
-  static List<PlateSpec> get all => <PlateSpec>[private, twoLine, motorcycle];
+  /// `CD 0213 XG`: diplomatic corps, blue prefix and country code.
+  static final PlateSpec diplomatic = _diplomatic('it.diplomatic', 'CD', 4);
+
+  /// `CC 0213 AF`: consular corps.
+  static final PlateSpec consular = _diplomatic('it.consular', 'CC', 4);
+
+  /// `UN 000 AA`: United Nations, permanent.
+  static final PlateSpec unitedNations = _diplomatic('it.un', 'UN', 3);
+
+  /// `UNP 147 AA`: United Nations, specialists.
+  static final PlateSpec unitedNationsSpecialists = _diplomatic('it.unp', 'UNP', 3);
+
+  /// `UNT 000 AA`: United Nations, transit.
+  static final PlateSpec unitedNationsTransit = _diplomatic('it.unt', 'UNT', 3);
+
+  static List<PlateSpec> get all => <PlateSpec>[
+    private,
+    twoLine,
+    motorcycle,
+    diplomatic,
+    consular,
+    unitedNations,
+    unitedNationsSpecialists,
+    unitedNationsTransit,
+  ];
+
+  /// A one-line plate with no bands: a fixed blue [prefix], a black number of
+  /// [digits] and a blue two-letter country code, joined by dots.
+  static PlateSpec _diplomatic(String id, String prefix, int digits) {
+    final bool un = prefix.startsWith('UN');
+    final Color blue = un ? ItalyColors.unBlue : ItalyColors.diplomaticBlue;
+    final double prefixPitch = prefix.length == 3 ? 46 : _Layout.dipPrefixPitch;
+    final double numberLeft = _Layout.dipNumberCentre - digits * _Layout.dipNumberPitch / 2;
+    final double top = _Layout.dipTop, h = _Layout.dipHeight;
+    return PlateSpec(
+      id: id,
+      country: ItalyCountry.italy,
+      canvasWidth: 520,
+      canvasHeight: 110,
+      noPanel: true,
+      panel: const PlatePanel(box: PlateBox(0, 0, 520, 110)),
+      bands: const <PlateBand>[
+        PlateBand(
+          box: PlateBox(380, 11.7, 46.8, 14.3),
+          color: ItalyColors.black,
+          topCornerRadius: 7.15,
+          bottomCornerRadius: 7.15,
+        ),
+        PlateBand(
+          box: PlateBox(381.2, 12.9, 44.4, 11.9),
+          color: ItalyColors.white,
+          topCornerRadius: 5.95,
+          bottomCornerRadius: 5.95,
+        ),
+      ],
+      slots: <PlateSlot>[
+        PlateSlot(
+          alphabet: ItalyAlphabets.digits,
+          box: PlateBox(numberLeft, top, digits * _Layout.dipNumberPitch, h),
+          length: digits,
+          spacing: max(0, _Layout.dipNumberPitch - 0.6 * 0.72 * h),
+        ),
+        PlateSlot(
+          alphabet: PlateAlphabet.latinUppercase,
+          box: PlateBox(
+            _Layout.dipCodeCentre - _Layout.dipCodePitch,
+            top,
+            2 * _Layout.dipCodePitch,
+            h,
+          ),
+          length: 2,
+          spacing: max(0, _Layout.dipCodePitch - 0.6 * 0.72 * h),
+          color: blue,
+        ),
+      ],
+      labels: <PlateLabel>[
+        for (int i = 0; i < prefix.length; i++)
+          PlateLabel(
+            text: prefix[i],
+            box: PlateBox(_Layout.dipPrefixLeft + i * prefixPitch, top, prefixPitch, h),
+            glyphHeight: h * _Layout.dipLabelScale,
+            color: blue,
+          ),
+        PlateLabel(
+          text: '·',
+          box: PlateBox(numberLeft - 16.5, top, 14, h),
+          glyphHeight: h * _Layout.dipLabelScale,
+          color: ItalyColors.black,
+        ),
+        PlateLabel(
+          text: '·',
+          box: PlateBox(numberLeft + digits * _Layout.dipNumberPitch + 2.2, top, 14, h),
+          glyphHeight: h * _Layout.dipLabelScale,
+          color: ItalyColors.black,
+        ),
+        const PlateLabel(
+          text: 'I',
+          box: PlateBox(398.5, 9.9, 8, 18),
+          glyphHeight: 18,
+          color: ItalyColors.black,
+        ),
+      ],
+      textGroups: <PlateTextGroup>[
+        PlateTextGroup(const <int>[0], key: 'number'),
+        PlateTextGroup(const <int>[1], key: 'code'),
+      ],
+      restrictions: const <PlateRestriction>[ItalyMissions.restriction],
+    );
+  }
 
   static PlateSpec _spec(_Design d) {
     final double s = d.bandScale;
@@ -214,12 +329,7 @@ abstract final class ItalyPlates {
           bottomCornerRadius: ring / 2,
         ),
         PlateBand(
-          box: PlateBox(
-            d.ringCx - inner / 2,
-            d.ringCy - inner / 2,
-            inner,
-            inner,
-          ),
+          box: PlateBox(d.ringCx - inner / 2, d.ringCy - inner / 2, inner, inner),
           color: ItalyColors.euroBlue,
           topCornerRadius: inner / 2,
           bottomCornerRadius: inner / 2,

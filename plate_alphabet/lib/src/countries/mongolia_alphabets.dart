@@ -16,13 +16,9 @@ abstract final class MongoliaAlphabets {
     'УА', 'УЕ', 'УК', 'УВ', 'ЗА',
   ];
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'mn.letters',
-    characters: <String>[
-      'А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', //
-      'Н', 'О', 'Ө', 'П', 'Р', 'С', 'Т', 'У', 'Ү', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', //
-      'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я',
-    ],
+    include: 'А Б В Г Д Е Ё Ж З И Й К Л М Н О Ө П Р С Т У Ү Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

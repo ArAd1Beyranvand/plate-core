@@ -1,13 +1,10 @@
 import 'package:plate_core/plate_core.dart';
 
-/// Judges a Malaysian registration on a `MalaysiaPlates.singleRow`, `twoRow`
-/// or `ev` spec. Reports, never bars a keystroke.
+/// Advisory validator for `MalaysiaPlates.singleRow`, `twoRow` and `ev`.
 ///
-/// Checks the series rules the article states: I and O are never issued; the
-/// number runs 1–9999 with no leading zero; a Sabah (`S…`) suffix is never Q
-/// or S. Z, the military prefix, is accepted — it is a real plate on the
-/// standard theme. Does not check which state letters exist, nor vanity
-/// series, which break every rule here.
+/// I and O are never issued; the number runs 1-9999 with no leading zero; a
+/// Sabah (`S...`) suffix is never Q or S. The military `Z` is accepted. State
+/// letters and vanity series (which break every rule here) are not checked.
 class MalaysiaValidator extends GatedPlateValidator {
   const MalaysiaValidator();
 
@@ -15,11 +12,12 @@ class MalaysiaValidator extends GatedPlateValidator {
   String get gateGroup => 'number';
 
   static const String reasonPrefixMissing = 'A plate starts with letters.';
-  static const String reasonNoIO =
-      'I and O are not issued on Malaysian plates.';
+  static const String reasonNoIO = 'I and O are not issued on Malaysian plates.';
   static const String reasonNumber = 'The number is 1 to 9999.';
   static const String reasonLeadingZero = 'The number has no leading zero.';
   static const String reasonSabahSuffix = 'A Sabah suffix is never Q or S.';
+
+  static final RegExp _notIssued = RegExp('[IO]');
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -36,7 +34,7 @@ class MalaysiaValidator extends GatedPlateValidator {
     if (prefix.isEmpty) {
       return const PlateValidation.invalid(reasonPrefixMissing);
     }
-    if (RegExp('[IO]').hasMatch(prefix + suffix)) {
+    if (_notIssued.hasMatch(prefix + suffix)) {
       return const PlateValidation.invalid(reasonNoIO);
     }
     if (number.isEmpty || number.length > 4 || !isDigits(number)) {
@@ -52,8 +50,8 @@ class MalaysiaValidator extends GatedPlateValidator {
   }
 }
 
-/// Judges a `MalaysiaPlates.diplomatic` value: two two-digit numbers and a
-/// mission code. The article documents no number ranges.
+/// Advisory validator for `MalaysiaPlates.diplomatic`: two two-digit numbers
+/// and a mission code. No number ranges are documented.
 class MalaysiaDiplomaticValidator extends GatedPlateValidator {
   const MalaysiaDiplomaticValidator();
 
@@ -63,22 +61,16 @@ class MalaysiaDiplomaticValidator extends GatedPlateValidator {
   static const String reasonDigits = 'Both numbers are two digits.';
   static const String reasonMission = 'The code is DC, CC, UN or PA.';
 
+  static const Set<String> _missions = <String>{'DC', 'CC', 'UN', 'PA'};
+
   @override
   PlateValidation judge(PlateEntry entry) {
     final String country = entry.group('country');
     final String serial = entry.group('serial');
-    if (country.length != 2 || serial.length != 2) {
+    if (country.length != 2 || serial.length != 2 || !isDigits(country) || !isDigits(serial)) {
       return const PlateValidation.invalid(reasonDigits);
     }
-    if (!isDigits(country) || !isDigits(serial)) {
-      return const PlateValidation.invalid(reasonDigits);
-    }
-    if (!const <String>[
-      'DC',
-      'CC',
-      'UN',
-      'PA',
-    ].contains(entry.group('mission'))) {
+    if (!_missions.contains(entry.group('mission'))) {
       return const PlateValidation.invalid(reasonMission);
     }
     return const PlateValidation.valid();

@@ -9,21 +9,18 @@ import 'package:plate_core/plate_core.dart';
 abstract final class ChileAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cl.letters',
-    characters: <String>[
-      'B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', //
-      'P', 'R', 'S', 'T', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'B-D F-H J-L P R-T V-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   static const PlateAlphabet anyLetters = PlateAlphabet.latinUppercase;
 
-  static const PlateAlphabet diplomaticLetters = PlateAlphabet(
+  static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'cl.diplomatic.letters',
-    characters: <String>['A', 'C', 'D', 'H', 'I', 'O', 'P', 'T'],
+    include: 'A C D H I O P T',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

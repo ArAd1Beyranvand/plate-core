@@ -2,8 +2,6 @@ import 'package:plate_core/plate_core.dart';
 
 import 'india_colors.dart';
 
-/// India as `plate_core`'s [PlateCountry].
-///
 /// No panel: the HSRP's chakra and IND are a decal and a label on the private
 /// specs, so every spec sets `noPanel`.
 abstract final class IndiaCountry {

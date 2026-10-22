@@ -1,20 +1,16 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'niger_alphabets.dart';
 import 'niger_colors.dart';
 import 'niger_country.dart';
 import 'niger_regions.dart';
 
-/// Where the ink sits, in plate coordinates. Measured off the Wikipedia
-/// artwork (`НІГЕР_НОМЕР_1.gif`, `НІГЕР_НОМЕР_2.gif`, 669×144) by normalising
-/// each image to the 520×110 mm the article gives. The artwork is drawn at
-/// 4.65, not 4.73, so x is stretched by 1.2%.
-///
-/// The plate is one row, no rules: region digit and series letter, a mark,
-/// four serial digits, and the map over `RN` at the right.
+/// Plate coordinates measured off the Wikipedia artwork (`НІГЕР_НОМЕР_1.gif`,
+/// `НІГЕР_НОМЕР_2.gif`, 669×144) normalised to 520×110 mm. The artwork is drawn
+/// at 4.65, not 4.73, so x is stretched by 1.2%.
 ///
 /// Measured ink, which the goldens are checked against (private / commercial):
 ///   digits           y 19.1..91.7 (cap 72.6) / 17.6..91.7 (74.1, outlined)
@@ -23,10 +19,9 @@ import 'niger_regions.dart';
 ///   map              x 442.3..488.1 y 17.6..55.0 / x 432.2..484.2 y 16.8..56.5
 ///   RN               x 450.0..483.5 y 71.8..91.7 / x 446.2..473.4 y 66.5..90.1
 ///
-/// core sets a glyph at `0.72 * box height`, so ink is about 52% of the box.
-/// The 72.6 of cap ink would need a 140-tall box on a 110 canvas; the box is
-/// the whole canvas height instead and the digits come out ~79% of the
-/// reference.
+/// A glyph is set at `0.72 * box height`, so ink is about 52% of the box. The
+/// 72.6 of cap ink would need a 140-tall box; the box is the canvas height
+/// instead and the digits come out ~79% of the reference.
 abstract final class _Layout {
   static const double width = 520;
   static const double height = 110;
@@ -39,9 +34,6 @@ abstract final class _Layout {
   static const int serialDigits = 4;
 }
 
-/// What differs between the two artworks: the country (and so the map the
-/// panel paints), the box that map and the `RN` under it occupy, and the
-/// mark between the series letter and the serial.
 class _Livery {
   const _Livery({
     required this.id,
@@ -107,18 +99,11 @@ abstract final class NigerPlates {
         bottomCornerRadius: livery.markRadius,
       ),
     ],
-    labels: <PlateLabel>[
-      PlateLabel(text: 'RN', box: livery.rn, glyphHeight: livery.rnGlyph),
-    ],
+    labels: <PlateLabel>[PlateLabel(text: 'RN', box: livery.rn, glyphHeight: livery.rnGlyph)],
     slots: <PlateSlot>[
       const PlateSlot(
         alphabet: NigerAlphabets.region,
-        box: PlateBox(
-          _Layout.regionLeft,
-          0,
-          _Layout.regionPitch,
-          _Layout.digitHeight,
-        ),
+        box: PlateBox(_Layout.regionLeft, 0, _Layout.regionPitch, _Layout.digitHeight),
       ),
       const PlateSlot(
         alphabet: NigerAlphabets.series,

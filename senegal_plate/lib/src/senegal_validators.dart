@@ -46,10 +46,7 @@ class SenegalValidator extends PlateValidator {
       final (RegExp, String)? rule = switch (g.key) {
         'number' when old => (_digits4, 'The number is 4 digits.'),
         'number' => (_digits3, 'The number is 3 digits.'),
-        'letters' when old => (
-          _letters1or2,
-          'The closing series is 1 or 2 letters.',
-        ),
+        'letters' when old => (_letters1or2, 'The closing series is 1 or 2 letters.'),
         'letters' => (_letters2, 'The closing series is 2 letters.'),
         'series' => (_letters2, 'The series is 2 letters.'),
         'department' => (_digits2, 'The department is 2 digits.'),

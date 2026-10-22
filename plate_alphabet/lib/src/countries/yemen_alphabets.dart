@@ -21,14 +21,14 @@ abstract final class YemenAlphabets {
     isNumeric: true,
   );
 
-  /// Same ten digits, printed as Eastern Arabic numerals. Storage stays ASCII;
+  /// Same ten digits, printed as Iranshahr numerals. Storage stays ASCII;
   /// the transform lives in [PlateAlphabet.glyphs]. Shares characters with [digits],
   /// differs only in glyphs (legal per debugValidateSpec).
   /// Use [PlateAlphabetDigits.iranshahr] instead of defining locally.
-  static const PlateAlphabet iranianDigits = PlateAlphabetDigits.iranshahr;
+  static const PlateAlphabet iranshahrDigits = PlateAlphabetDigits.iranshahr;
 
-  /// [governorateTens] in Eastern Arabic numerals (tens place on big row of northern plate).
-  /// Separate id from [iranianDigits] because restricted character set tells the pad
+  /// [governorateTens] in Iranshahr numerals (tens place on big row of northern plate).
+  /// Separate id from [iranshahrDigits] because restricted character set tells the pad
   /// which keys can never be right here.
   static const PlateAlphabet iranianGovernorateTens = PlateAlphabet(
     id: 'ye.iranianGovTens',

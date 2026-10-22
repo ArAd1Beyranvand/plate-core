@@ -1,5 +1,5 @@
-import 'package:plate_core/plate_core.dart';
 import 'package:plate_alphabet/plate_alphabet.dart' show IndonesiaAlphabets;
+import 'package:plate_core/plate_core.dart';
 
 /// The area codes the article lists as in use, by police region. Non-motorised
 /// codes (SB, YB, YK, KS) are included: they are issued plates.
@@ -124,9 +124,7 @@ class IndonesiaServiceValidator extends GatedPlateValidator {
       return const PlateValidation.invalid(reasonSuffix);
     }
     if (entry.spec.textGroups.any((g) => g.key == 'region') &&
-        !IndonesiaAlphabets.policeRegions.characters.contains(
-          entry.group('region'),
-        )) {
+        !IndonesiaAlphabets.policeRegions.characters.contains(entry.group('region'))) {
       return const PlateValidation.invalid(reasonRegion);
     }
     return const PlateValidation.valid();

@@ -3,9 +3,8 @@ import 'package:plate_core/plate_core.dart';
 import 'palestine_governorates.dart';
 import 'palestine_usage.dart';
 
-/// Modern West Bank plate validator (D·DDDD·L, post-July-2018).
-/// Different last group (letter vs digits) requires separate validator. Stays quiet
-/// until governorate group filled (avoid flashing red on incomplete entry).
+/// Modern West Bank plate validator (D·DDDD·L). Quiet until the governorate is
+/// filled, so incomplete entry does not flash red.
 class PSWestBankModernValidator extends GatedPlateValidator {
   const PSWestBankModernValidator();
 
@@ -15,11 +14,8 @@ class PSWestBankModernValidator extends GatedPlateValidator {
   static const String invalidRegion = 'Region code must be one digit.';
   static const String invalidSerial = 'Serial must be four digits.';
 
-  /// H→J gap; I,O never issued. See PSGovernorate.
-  static const String illegalLetterIO =
-      'The letters I and O are never issued; H is followed by J.';
+  static const String illegalLetterIO = 'The letters I and O are never issued; H is followed by J.';
 
-  /// P–T allocated to pre-2012 Gaza; never issued West Bank.
   static const String reservedGazaLetter =
       'P, Q, R, S and T were allocated to Gaza and never issued.';
 
@@ -33,7 +29,6 @@ class PSWestBankModernValidator extends GatedPlateValidator {
     governorate: entry.group('governorate'),
   );
 
-  /// Validation without spec (used by PSSerialGenerator and tests).
   static PlateValidation validateFields({
     required String region,
     required String serial,
@@ -51,23 +46,21 @@ class PSWestBankModernValidator extends GatedPlateValidator {
     if (PSGovernorate.reservedGazaLetters.contains(governorate)) {
       return const PlateValidation.invalid(reservedGazaLetter);
     }
-    if (governorate.length != 1 ||
-        !PSGovernorate.letters.contains(governorate)) {
+    if (governorate.length != 1 || !PSGovernorate.letters.contains(governorate)) {
       return const PlateValidation.invalid(invalidGovernorate);
     }
     return const PlateValidation.valid();
   }
 }
 
-/// Legacy West Bank plate validator (D·DDDD·DD, 1994–July-2018).
-/// Stays quiet until usage group filled (see PSWestBankModernValidator).
+/// Legacy West Bank plate validator (D·DDDD·DD). Quiet until the usage code is
+/// filled.
 class PSWestBankLegacyValidator extends GatedPlateValidator {
   const PSWestBankLegacyValidator();
 
   @override
   String get gateGroup => 'usage';
 
-  /// 0,2 not legal (see PSLegacyUsage.districts).
   static const String invalidDistrictCode =
       'District code must be 1 or 3-9 (0 and 2 are never issued).';
 
@@ -88,8 +81,7 @@ class PSWestBankLegacyValidator extends GatedPlateValidator {
     required String serial,
     required String usage,
   }) {
-    if (district.length != 1 ||
-        !PSLegacyUsage.districtCodes.contains(district)) {
+    if (district.length != 1 || !PSLegacyUsage.districtCodes.contains(district)) {
       return const PlateValidation.invalid(invalidDistrictCode);
     }
     if (!isDigitsOfLength(serial, 4)) {
@@ -102,8 +94,7 @@ class PSWestBankLegacyValidator extends GatedPlateValidator {
   }
 }
 
-/// Gaza plate validator (3·DDDD·DD).
-/// Stays quiet until usage group filled (see PSWestBankModernValidator).
+/// Gaza plate validator (3·DDDD·DD). Quiet until the usage code is filled.
 class PSGazaValidator extends GatedPlateValidator {
   const PSGazaValidator();
 
@@ -114,8 +105,7 @@ class PSGazaValidator extends GatedPlateValidator {
 
   static const String invalidSerial = 'Serial must be four digits.';
 
-  static const String invalidUsageCode =
-      'Usage code is not a legal Gaza class (00-29 or 40-59).';
+  static const String invalidUsageCode = 'Usage code is not a legal Gaza class (00-29 or 40-59).';
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(

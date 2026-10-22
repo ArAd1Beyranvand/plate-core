@@ -51,8 +51,7 @@ class SwitzerlandValidator extends GatedPlateValidator {
   String get gateGroup => 'number';
 
   static const String reasonCanton = 'The canton is a Swiss canton code.';
-  static const String reasonNumber =
-      'The number is digits without a leading 0.';
+  static const String reasonNumber = 'The number is digits without a leading 0.';
 
   @override
   PlateValidation judge(PlateEntry entry) {

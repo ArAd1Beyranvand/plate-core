@@ -2,10 +2,7 @@ import 'package:plate_core/plate_core.dart';
 
 import '../common/yemen_governorates.dart';
 
-/// Locates a northern-format Yemeni plate from its governorate register.
-///
-/// Source: the "Governorate codes" table of
-/// https://en.wikipedia.org/wiki/Vehicle_registration_plates_of_Yemen
+/// Locates a northern-format plate from its governorate register.
 abstract final class YemenRegions {
   /// The governorate whose code [digits] pins down, or null while a longer
   /// code could still follow (`1` may become `12`) or when unissued.
@@ -19,6 +16,5 @@ abstract final class YemenRegions {
   }
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('governorate'));
+  static String? captionOf(String Function(String key) group) => lookup(group('governorate'));
 }

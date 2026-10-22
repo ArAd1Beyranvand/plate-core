@@ -8,12 +8,10 @@ import 'package:plate_core/plate_core.dart';
 abstract final class NorwayAlphabets {
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'no.letters',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'H', 'J', 'K', 'L', 'N', //
-      'P', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-    ],
+    include: 'A-Z',
+    exclude: 'G I M O Q',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

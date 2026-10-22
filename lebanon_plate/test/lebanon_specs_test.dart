@@ -32,16 +32,8 @@ void main() {
 
     test('every spec is a letter slot followed by a digit slot', () {
       for (final PlateSpec spec in _allSpecs()) {
-        expect(
-          spec.slots.first.alphabet,
-          same(LebanonAlphabets.letters),
-          reason: spec.id,
-        );
-        expect(
-          spec.slots[1].alphabet,
-          same(LebanonAlphabets.digits),
-          reason: spec.id,
-        );
+        expect(spec.slots.first.alphabet, same(LebanonAlphabets.letters), reason: spec.id);
+        expect(spec.slots[1].alphabet, same(LebanonAlphabets.digits), reason: spec.id);
       }
     });
 
@@ -65,10 +57,10 @@ void main() {
       }
     });
 
-    test('no spec ships a flag, and no panel reserves room for one', () {
+    test('every panel reserves room for the cedar', () {
       for (final PlateSpec spec in _allSpecs()) {
-        expect(spec.country.flag, isNull, reason: spec.id);
-        expect(spec.panel.flagScale, 0, reason: spec.id);
+        expect(spec.country.flag, isNotNull, reason: spec.id);
+        expect(spec.panel.flagScale, greaterThan(0), reason: spec.id);
       }
     });
   });
@@ -91,66 +83,45 @@ void main() {
     test('fromCharacter is case-insensitive and round-trips every letter', () {
       for (final LebanonLetter letter in LebanonLetter.values) {
         expect(LebanonLetter.fromCharacter(letter.character), letter);
-        expect(
-          LebanonLetter.fromCharacter(letter.character.toLowerCase()),
-          letter,
-        );
+        expect(LebanonLetter.fromCharacter(letter.character.toLowerCase()), letter);
       }
       expect(LebanonLetter.fromCharacter('Q'), isNull);
       expect(LebanonLetter.fromCharacter(''), isNull);
     });
 
     test('K is the only letter documented as out of service', () {
-      expect(
-        LebanonLetter.values.where((LebanonLetter l) => !l.inUse),
-        <LebanonLetter>[LebanonLetter.k],
-      );
+      expect(LebanonLetter.values.where((LebanonLetter l) => !l.inUse), <LebanonLetter>[
+        LebanonLetter.k,
+      ]);
     });
 
-    test(
-      'a town code carries a governorate, and a class letter carries neither',
-      () {
-        for (final LebanonLetter letter in LebanonLetter.values) {
-          expect(
-            letter.governorate != null,
-            letter.isTownCode,
-            reason: letter.character,
-          );
-        }
-        expect(LebanonLetter.townCodes, isNot(contains(LebanonLetter.mp)));
-        expect(LebanonLetter.townCodes, contains(LebanonLetter.b));
-      },
-    );
+    test('a town code carries a governorate, and a class letter carries neither', () {
+      for (final LebanonLetter letter in LebanonLetter.values) {
+        expect(letter.governorate != null, letter.isTownCode, reason: letter.character);
+      }
+      expect(LebanonLetter.townCodes, isNot(contains(LebanonLetter.mp)));
+      expect(LebanonLetter.townCodes, contains(LebanonLetter.b));
+    });
   });
 
   group('themes', () {
-    test(
-      'every usage resolves to a theme, and private is the only white one',
-      () {
-        for (final LebanonUsage usage in LebanonUsage.values) {
-          expect(LebanonThemes.forUsage(usage).plateBackground, isNotNull);
-        }
+    test('every usage resolves to a theme, and private is the only white one', () {
+      for (final LebanonUsage usage in LebanonUsage.values) {
+        expect(LebanonThemes.forUsage(usage).plateBackground, isNotNull);
+      }
+      expect(LebanonThemes.forUsage(LebanonUsage.private).plateBackground, LebanonColors.white);
+      for (final LebanonUsage usage in LebanonUsage.coloured) {
         expect(
-          LebanonThemes.forUsage(LebanonUsage.private).plateBackground,
-          LebanonColors.white,
+          LebanonThemes.forUsage(usage).plateBackground,
+          isNot(LebanonColors.white),
+          reason: usage.name,
         );
-        for (final LebanonUsage usage in LebanonUsage.coloured) {
-          expect(
-            LebanonThemes.forUsage(usage).plateBackground,
-            isNot(LebanonColors.white),
-            reason: usage.name,
-          );
-        }
-      },
-    );
+      }
+    });
 
     test('the frame is black on every field, including the dark ones', () {
       for (final LebanonUsage usage in LebanonUsage.values) {
-        expect(
-          LebanonThemes.forUsage(usage).plateBorder,
-          LebanonColors.frame,
-          reason: usage.name,
-        );
+        expect(LebanonThemes.forUsage(usage).plateBorder, LebanonColors.frame, reason: usage.name);
       }
     });
 
@@ -165,9 +136,7 @@ void main() {
       for (final LebanonUsage usage in LebanonUsage.values) {
         expect(
           LebanonThemes.forUsage(usage).ink,
-          lightInk.contains(usage)
-              ? LebanonColors.lightInk
-              : LebanonColors.darkInk,
+          lightInk.contains(usage) ? LebanonColors.lightInk : LebanonColors.darkInk,
           reason: usage.name,
         );
       }
@@ -186,44 +155,31 @@ void main() {
 
   group('usage', () {
     test('private is the only white class', () {
-      expect(
-        LebanonUsage.values.where((LebanonUsage u) => u.isWhite),
-        <LebanonUsage>[LebanonUsage.private],
-      );
+      expect(LebanonUsage.values.where((LebanonUsage u) => u.isWhite), <LebanonUsage>[
+        LebanonUsage.private,
+      ]);
       expect(
         LebanonUsage.coloured,
-        LebanonUsage.values.toSet().difference(<LebanonUsage>{
-          LebanonUsage.private,
-        }),
+        LebanonUsage.values.toSet().difference(<LebanonUsage>{LebanonUsage.private}),
       );
     });
 
     test('every letter a usage fixes is a letter the alphabet accepts', () {
       for (final LebanonUsage usage in LebanonUsage.values) {
         if (usage.letter == null) continue;
-        expect(
-          LebanonLetter.fromCharacter(usage.letter!),
-          isNotNull,
-          reason: usage.name,
-        );
+        expect(LebanonLetter.fromCharacter(usage.letter!), isNotNull, reason: usage.name);
       }
     });
 
-    test(
-      'M is shared by two usages, which is why colour is the other axis',
-      () {
-        final List<LebanonUsage> m = LebanonUsage.values
-            .where((LebanonUsage u) => u.letter == 'M')
-            .toList();
-        expect(m, <LebanonUsage>[
-          LebanonUsage.publicInstitution,
-          LebanonUsage.drivingSchool,
-        ]);
-        expect(
-          LebanonThemes.forUsage(m.first).plateBackground,
-          isNot(LebanonThemes.forUsage(m.last).plateBackground),
-        );
-      },
-    );
+    test('M is shared by two usages, which is why colour is the other axis', () {
+      final List<LebanonUsage> m = LebanonUsage.values
+          .where((LebanonUsage u) => u.letter == 'M')
+          .toList();
+      expect(m, <LebanonUsage>[LebanonUsage.publicInstitution, LebanonUsage.drivingSchool]);
+      expect(
+        LebanonThemes.forUsage(m.first).plateBackground,
+        isNot(LebanonThemes.forUsage(m.last).plateBackground),
+      );
+    });
   });
 }

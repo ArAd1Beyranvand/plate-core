@@ -17,8 +17,7 @@ void main() {
     test('the validator waits for the suffix, then wants 2-4-2', () {
       const validator = MaliValidator();
       final spec = MaliPlates.all['standard']!();
-      bool valid(List<String?> v) =>
-          validator.validate(PlateEntry(spec: spec, values: v)).isValid;
+      bool valid(List<String?> v) => validator.validate(PlateEntry(spec: spec, values: v)).isValid;
       expect(valid(<String?>['AB', '1234', null]), isTrue, reason: 'quiet');
       expect(valid(<String?>['AB', '1234', 'MD']), isTrue);
       expect(valid(<String?>['AB', '123', 'MD']), isFalse);

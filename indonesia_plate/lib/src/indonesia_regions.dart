@@ -1,5 +1,3 @@
-import 'package:plate_core/plate_core.dart';
-
 /// Names the province (and, where a province has several codes, the area)
 /// from the one- or two-letter area code.
 ///
@@ -83,7 +81,5 @@ abstract final class IndonesiaRegions {
     return names.length == 1 ? names.single : null;
   }
 
-  /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('prefix'));
+  static String? captionOf(String Function(String key) group) => lookup(group('prefix'));
 }

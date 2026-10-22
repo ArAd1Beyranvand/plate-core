@@ -10,16 +10,12 @@ abstract final class IndonesiaColors {
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
 
-  /// Public transport and commercial vehicles.
   static const Color publicYellow = Color(0xFFFFBB00);
 
-  /// Government vehicles, fire service and government ambulances.
   static const Color governmentRed = Color(0xFFDD0000);
 
-  /// Free-trade-zone vehicles (Batam).
   static const Color ftzGreen = Color(0xFF00AA55);
 
-  /// The electric-vehicle band behind the expiry row.
   static const Color evBlue = Color(0xFF00AAEE);
 
   // The military and police plates have no artwork; these are the modal
@@ -43,9 +39,7 @@ abstract final class IndonesiaColors {
   /// Police: a near-black with a blue cast, not [black].
   static const Color policeBlack = Color(0xFF2A2930);
 
-  /// Placeholder ink for an empty slot on a dark field.
   static const Color inactiveOnDark = Color(0xFF8A8A8A);
 
-  /// Placeholder ink for an empty slot on a light field.
   static const Color inactiveOnLight = Color(0xFFB0B0B0);
 }

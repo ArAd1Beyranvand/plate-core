@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:plate_core/plate_core.dart';
 import 'package:flutter/widgets.dart';
+import 'package:plate_core/plate_core.dart';
 
 import 'algeria_alphabets.dart';
 import 'algeria_country.dart';
@@ -70,13 +70,8 @@ abstract final class _Layout {
   static const double roundelSize = 58;
 }
 
-/// Algeria's plate geometries.
-///
-/// * [singleLine] — the 520×110 plate, `NNNNN NNN NN`. White on black at the
-///   front, black on yellow at the rear: the theme, not the spec.
-/// * [twoLine] — the 275×200 plate: serial over class+year and wilaya.
-/// * [diplomatic] — `NNN-NN-NN`, black on teal.
-/// * [army] — nine silver digits on black, the flag in a roundel at the left.
+/// Algeria's plate geometries. Front and rear singleLine plates share a spec;
+/// the livery is the theme's.
 ///
 /// The civil specs have one field per text group: `serial` (5), `type` (3:
 /// vehicle class then year of manufacture) and `wilaya` (2); diplomatic has
@@ -92,9 +87,8 @@ abstract final class AlgeriaPlates {
     PlateTextGroup(<int>[2], key: 'wilaya'),
   ];
 
-  /// One field of [count] digits over [count] cells of [pitch]. The glyph is
-  /// set at 0.72 of the height and a digit advances ~0.6 em, so the spacing is
-  /// what is left of the pitch.
+  /// [count] digits over [count] cells of [pitch]; spacing is what remains of
+  /// the pitch after a digit's ~0.6 em advance at 0.72 of [height].
   static PlateSlot _field(
     int count, {
     required double left,
@@ -129,11 +123,7 @@ abstract final class AlgeriaPlates {
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[
-        group(5, _Layout.left),
-        group(3, typeLeft),
-        group(2, wilayaLeft),
-      ],
+      slots: <PlateSlot>[group(5, _Layout.left), group(3, typeLeft), group(2, wilayaLeft)],
       textGroups: _civilGroups,
       resolveRegion: AlgeriaRegions.captionOf,
     );
@@ -143,13 +133,8 @@ abstract final class AlgeriaPlates {
     const double p = _Layout.twoPitch;
     const double w = _Layout.twoWidth;
     const double lowerLeft = (w - (5 * p + _Layout.twoGap)) / 2;
-    PlateSlot group(int n, double left, double top) => _field(
-      n,
-      left: left,
-      top: top,
-      pitch: p,
-      height: _Layout.twoSlotHeight,
-    );
+    PlateSlot group(int n, double left, double top) =>
+        _field(n, left: left, top: top, pitch: p, height: _Layout.twoSlotHeight);
     return PlateSpec(
       id: 'dz.twoLine',
       country: AlgeriaCountry.algeria,
@@ -192,11 +177,7 @@ abstract final class AlgeriaPlates {
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[
-        group(3, left, minLength: 1),
-        group(2, statusLeft),
-        group(2, missionLeft),
-      ],
+      slots: <PlateSlot>[group(3, left, minLength: 1), group(2, statusLeft), group(2, missionLeft)],
       labels: <PlateLabel>[_hyphen(left + 3 * p), _hyphen(statusLeft + 2 * p)],
       textGroups: const <PlateTextGroup>[
         PlateTextGroup(<int>[0], key: 'serial'),
@@ -208,12 +189,7 @@ abstract final class AlgeriaPlates {
 
   static PlateLabel _hyphen(double left) => PlateLabel(
     text: '-',
-    box: PlateBox(
-      left,
-      _Layout.slotTop,
-      _Layout.hyphenWidth,
-      _Layout.slotHeight,
-    ),
+    box: PlateBox(left, _Layout.slotTop, _Layout.hyphenWidth, _Layout.slotHeight),
     glyphHeight: _Layout.hyphenGlyph,
   );
 

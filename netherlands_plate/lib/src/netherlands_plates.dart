@@ -50,9 +50,7 @@ class _Field {
     final double centre = (left + right) / 2;
     final double w = length * _Layout.pitch;
     return PlateSlot(
-      alphabet: kind == _Kind.letters
-          ? NetherlandsAlphabets.letters
-          : NetherlandsAlphabets.digits,
+      alphabet: kind == _Kind.letters ? NetherlandsAlphabets.letters : NetherlandsAlphabets.digits,
       box: PlateBox(centre - w / 2, 0, w, _Layout.height),
       length: length,
       minLength: minLength,
@@ -213,21 +211,14 @@ abstract final class NetherlandsPlates {
     bfg,
   ];
 
-  static PlateSpec _plate(
-    String id,
-    List<_Field> fields, {
-    bool panel = true,
-    bool dashes = true,
-  }) {
+  static PlateSpec _plate(String id, List<_Field> fields, {bool panel = true, bool dashes = true}) {
     final bool hasDash = dashes && fields.length > 1;
     return PlateSpec(
       id: id,
       country: NetherlandsCountry.netherlands,
       canvasWidth: _Layout.width,
       canvasHeight: _Layout.height,
-      panel: PlatePanel(
-        box: panel ? _Layout.panelBox : const PlateBox(0, 0, 0, 0),
-      ),
+      panel: PlatePanel(box: panel ? _Layout.panelBox : const PlateBox(0, 0, 0, 0)),
       noPanel: !panel,
       background: PlateSection.columns(<PlatePart>[
         if (panel) ...const <PlatePart>[
@@ -241,8 +232,7 @@ abstract final class NetherlandsPlates {
           for (int i = 0; i + 1 < fields.length; i++)
             PlateRule(
               box: PlateBox(
-                (fields[i].right + fields[i + 1].left) / 2 -
-                    _Layout.dashWidth / 2,
+                (fields[i].right + fields[i + 1].left) / 2 - _Layout.dashWidth / 2,
                 _Layout.dashTop,
                 _Layout.dashWidth,
                 _Layout.dashHeight,

@@ -11,13 +11,9 @@ import '../plate_alphabet.dart';
 abstract final class ThailandAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
 
-  static const PlateAlphabet letters = PlateAlphabet(
+  static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'th.letters',
-    characters: <String>[
-      'ก', 'ข', 'ค', 'ง', 'จ', 'ฉ', 'ช', 'ฌ', 'ฏ', 'ฐ', 'ณ', 'ด', 'ต', //
-      'ถ', 'ท', 'ธ', 'น', 'บ', 'ป', 'ผ', 'พ', 'ฟ', 'ภ', 'ม', 'ย', 'ร', //
-      'ล', 'ว', 'ศ', 'ษ', 'ส', 'ห', 'ฬ', 'อ', 'ฮ', 'ญ', 'ฒ', 'ฆ', 'ซ',
-    ],
+    include: 'ก ข ค ง จ ฉ ช ฌ ฏ ฐ ณ ด ต ถ ท ธ น บ ป ผ พ ฟ ภ ม ย ร ล ว ศ ษ ส ห ฬ อ ฮ ญ ฒ ฆ ซ',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

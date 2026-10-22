@@ -56,6 +56,9 @@ def _dump(obj) -> None:
 
 def cmd_fetch(a):
     work = ROOT / '.plateref' / a.code
+    owner = _owner(a.code)
+    if owner and owner != a.country:
+        sys.exit(f'.plateref/{a.code} already holds {owner}; pick another code (pk.py before --code XX)')
     f = fetch.run(a.country, work)
     print(f"{work}/facts.json: {len(f['tables'])} tables, {len(f['images'])} images, "
           f"size {f['size_mm']}, israel={f['mentions_israel']}")
@@ -361,8 +364,31 @@ def cmd_all(a):
 def _resolve(a) -> tuple[str, str, str]:
     """country, code, package for a `before`/`after` url."""
     country = fetch.country_from_url(a.url)
-    code = a.code or _saved_code(country) or fetch.iso2(country) or scaffold.snake(country)[:2]
+    code = a.code or _saved_code(country) or _free_code(country, fetch.iso2(country))
     return country, code, f'{scaffold.snake(country)}_plate'
+
+
+def _owner(code: str) -> str | None:
+    """The country whose data already sits in .plateref/<code>, if any."""
+    f = ROOT / '.plateref' / code / 'facts.json'
+    try:
+        return json.loads(f.read_text()).get('country') if f.exists() else None
+    except ValueError:
+        return None
+
+
+def _free_code(country: str, iso: str | None) -> str:
+    """The ISO code when there is one; else the shortest prefix, then initials,
+    then a number, that no other country already owns in .plateref."""
+    snake = scaffold.snake(country)
+    words = [w for w in snake.split('_') if w]
+    cands = [iso] if iso else []
+    cands += [snake[:2], snake[:3], ''.join(w[0] for w in words), snake[:4]]
+    cands += [f'{snake[:2]}{n}' for n in range(2, 100)]
+    for c in cands:
+        if c and _owner(c) in (None, country):
+            return c
+    return snake
 
 
 def _saved_code(country: str) -> str | None:

@@ -25,10 +25,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/ml_standard.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/ml_standard.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   });

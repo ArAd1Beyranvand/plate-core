@@ -1,5 +1,3 @@
-import 'package:plate_core/plate_core.dart';
-
 /// Locates a Nigerien plate from its leading regional digit.
 ///
 /// Source: the "Regional Codes" section of
@@ -16,10 +14,7 @@ abstract final class NigerRegions {
     '8': 'Niamey',
   };
 
-  /// The region of [code], or null when empty or unissued.
   static String? lookup(String code) => _regions[code];
 
-  /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) =>
-      lookup(group('region'));
+  static String? captionOf(String Function(String key) group) => lookup(group('region'));
 }

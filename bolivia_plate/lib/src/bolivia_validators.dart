@@ -13,10 +13,11 @@ class BoliviaValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'letters';
 
+  static final RegExp _letters = RegExp(r'^[A-Z]{3}$');
+
   static const String reasonNumber = 'The number is three or four digits.';
   static const String reasonLetters = 'The series is three letters.';
-  static const String reasonDepartment =
-      'The department is one of C H B L O N P S T.';
+  static const String reasonDepartment = 'The department is one of C H B L O N P S T.';
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -33,7 +34,7 @@ class BoliviaValidator extends GatedPlateValidator {
     if ((number.length != 3 && number.length != 4) || !isDigits(number)) {
       return const PlateValidation.invalid(reasonNumber);
     }
-    if (!RegExp(r'^[A-Z]{3}$').hasMatch(letters)) {
+    if (!_letters.hasMatch(letters)) {
       return const PlateValidation.invalid(reasonLetters);
     }
     if (!BoliviaAlphabets.departments.characters.contains(department)) {
@@ -55,8 +56,7 @@ class BoliviaSpecialValidator extends GatedPlateValidator {
 
   @override
   PlateValidation judge(PlateEntry entry) =>
-      isDigitsOfLength(entry.group('country'), 2) &&
-          isDigitsOfLength(entry.group('rank'), 2)
+      isDigitsOfLength(entry.group('country'), 2) && isDigitsOfLength(entry.group('rank'), 2)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid(reasonDigits);
 }
@@ -68,12 +68,14 @@ class BoliviaMercosurValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'number';
 
+  static final RegExp _letters = RegExp(r'^[A-Z]{2}$');
+
   static const String reasonLetters = 'The series is two letters.';
   static const String reasonNumber = 'The number is five digits.';
 
   @override
   PlateValidation judge(PlateEntry entry) {
-    if (!RegExp(r'^[A-Z]{2}$').hasMatch(entry.group('letters'))) {
+    if (!_letters.hasMatch(entry.group('letters'))) {
       return const PlateValidation.invalid(reasonLetters);
     }
     if (!isDigitsOfLength(entry.group('number'), 5)) {

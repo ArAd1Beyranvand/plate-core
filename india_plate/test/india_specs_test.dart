@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:india_plate/india_plate.dart';
 
 void main() {
-  PlateValidation judge(PlateSpec spec, String value) => const IndiaValidator()
-      .validate(PlateEntry(spec: spec, values: value.split(' ')));
+  PlateValidation judge(PlateSpec spec, String value) =>
+      const IndiaValidator().validate(PlateEntry(spec: spec, values: value.split(' ')));
 
   test('every spec passes debugValidateSpec', () {
     for (final spec in IndiaPlates.all) {
@@ -17,9 +17,7 @@ void main() {
     expect(spec.slotCount, 3);
     final values = <String?>['21', '2345', 'AA'];
     expect(
-      spec.effectiveTextGroups
-          .map((g) => spec.renderGroup(g, values))
-          .join(' '),
+      spec.effectiveTextGroups.map((g) => spec.renderGroup(g, values)).join(' '),
       '21 BH2345 AA',
     );
   });
@@ -29,11 +27,7 @@ void main() {
     expect(judge(IndiaPlates.private, 'XX 20 DV 2366').isValid, isFalse);
     expect(judge(IndiaPlates.private, 'MH 00 DV 2366').isValid, isFalse);
     expect(judge(IndiaPlates.private, 'MH 20 DV 0000').isValid, isFalse);
-    expect(
-      judge(IndiaPlates.private, 'XX 20').isValid,
-      isTrue,
-      reason: 'quiet until full',
-    );
+    expect(judge(IndiaPlates.private, 'XX 20').isValid, isTrue, reason: 'quiet until full');
     expect(judge(IndiaPlates.temporary, '1323 KL 5986 KA').isValid, isFalse);
     expect(judge(IndiaPlates.temporary, '1123 KL 5986 KA').isValid, isTrue);
     expect(judge(IndiaPlates.military, '02 B 084821 H').isValid, isTrue);

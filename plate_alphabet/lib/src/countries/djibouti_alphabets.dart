@@ -6,10 +6,10 @@ import '../plate_alphabet.dart';
 /// A Djiboutian plate prints its number twice: Latin on the left, and the same
 /// value mirrored in Arabic on the right (`683D30` against `٣٠ج٦٨٣`). Each
 /// value is stored once, in Latin, and the right half reads it through
-/// [arabicDigits] and [letterArabic].
+/// [iranshahrDigits] and [letterArabic].
 abstract final class DjiboutiAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
-  static const PlateAlphabet arabicDigits = PlateAlphabetDigits.iranshahr;
+  static const PlateAlphabet iranshahrDigits = PlateAlphabetDigits.iranshahr;
 
   /// The middle letter. Only `D` (ج) is on the reference plate; the article
   /// gives no list of others.

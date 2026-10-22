@@ -53,11 +53,10 @@ abstract final class _Layout {
     box: PlateBox(0, 0, 38, 110),
     padding: EdgeInsets.fromLTRB(9.5, 19, 3, 21),
   );
-  static const PlateSection currentBackground =
-      PlateSection.columns(<PlatePart>[
-        PlatePart(PlateSection.fill(PlateFill.panel), end: 38),
-        PlatePart(PlateSection.plain),
-      ]);
+  static const PlateSection currentBackground = PlateSection.columns(<PlatePart>[
+    PlatePart(PlateSection.fill(PlateFill.panel), end: 38),
+    PlatePart(PlateSection.plain),
+  ]);
 }
 
 /// One field: its group key, its alphabet, its first ink centre, its pitch,
@@ -110,16 +109,7 @@ abstract final class SenegalPlates {
     runs: const <_Run>[
       _Run('region', true, 55.4, 54.6, 2, _Layout.oldCy, _Layout.oldBox),
       _Run('number', false, 188.8, 43.3, 4, _Layout.oldCy, _Layout.oldBox),
-      _Run(
-        'letters',
-        true,
-        413.9,
-        53,
-        2,
-        _Layout.oldCy,
-        _Layout.oldBox,
-        min: 1,
-      ),
+      _Run('letters', true, 413.9, 53, 2, _Layout.oldCy, _Layout.oldBox, min: 1),
     ],
     marks: const <_Mark>[
       _Mark('-', 155.3, _Layout.oldCy, _Layout.oldBox),
@@ -132,24 +122,8 @@ abstract final class SenegalPlates {
     height: _Layout.currentHeight,
     runs: const <_Run>[
       _Run('series', true, 76, 52.4, 2, _Layout.currentCy, _Layout.currentBox),
-      _Run(
-        'number',
-        false,
-        201.2,
-        48,
-        3,
-        _Layout.currentCy,
-        _Layout.currentBox,
-      ),
-      _Run(
-        'letters',
-        true,
-        372.5,
-        48.3,
-        2,
-        _Layout.currentCy,
-        _Layout.currentBox,
-      ),
+      _Run('number', false, 201.2, 48, 3, _Layout.currentCy, _Layout.currentBox),
+      _Run('letters', true, 372.5, 48.3, 2, _Layout.currentCy, _Layout.currentBox),
       _Run('region', true, 483.6, 14.2, 2, 31.65, _Layout.codeBox),
       _Run('department', false, 483.6, 14.2, 2, 78.65, _Layout.codeBox),
     ],
@@ -171,10 +145,7 @@ abstract final class SenegalPlates {
       _Run('region', true, 448.2, 23.5, 2, 48.75, 60),
       _Run('department', false, 448.2, 23.5, 2, 124, 60),
     ],
-    marks: const <_Mark>[
-      _Mark('-', 334.8, 85.3, 140),
-      _Mark('-', 311.5, 238.6, 140),
-    ],
+    marks: const <_Mark>[_Mark('-', 334.8, 85.3, 140), _Mark('-', 311.5, 238.6, 140)],
     background: _twoRowBackground(62, 165),
     panel: const PlatePanel(
       box: PlateBox(0, 0, 62, 165),
@@ -200,12 +171,7 @@ abstract final class SenegalPlates {
     ),
   );
 
-  static List<PlateSpec> get all => <PlateSpec>[
-    old,
-    current,
-    truckRear,
-    motorcycle,
-  ];
+  static List<PlateSpec> get all => <PlateSpec>[old, current, truckRear, motorcycle];
 
   /// The theme each spec is drawn in.
   static PlateTheme themeOf(PlateSpec spec) => switch (spec.id) {
@@ -242,9 +208,7 @@ abstract final class SenegalPlates {
       final bool variable = run.min != null;
       slots.add(
         PlateSlot(
-          alphabet: run.letters
-              ? SenegalAlphabets.letters
-              : SenegalAlphabets.digits,
+          alphabet: run.letters ? SenegalAlphabets.letters : SenegalAlphabets.digits,
           box: PlateBox(
             run.firstCentre - run.pitch / 2,
             run.cy - run.box / 2,

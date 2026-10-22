@@ -6,13 +6,9 @@ abstract final class VenezuelaAlphabets {
   /// The first six cells. Which of them are letters depends on the vehicle
   /// category (`AB123CD` for a private car, `AB1C23D` for a motorcycle, ...),
   /// so the cells take either and `VenezuelaValidator` judges the pattern.
-  static const PlateAlphabet serial = PlateAlphabet(
+  static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 've.serial',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-    ],
+    include: 'A-Z 0-9',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
@@ -49,24 +45,20 @@ abstract final class VenezuelaAlphabets {
   };
 
   /// The last cell: a state code.
-  static const PlateAlphabet state = PlateAlphabet(
+  static const PlateAlphabet state = PlateAlphabet.pattern(
     id: 've.state',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-    ],
+    include: 'A-Y',
+    exclude: 'Q',
     input: AlphabetInput.typed,
     isNumeric: false,
   );
 
   /// [state] rendered as the name it stands for — the alphabet the caption
   /// under the serial mirrors the last cell through.
-  static const PlateAlphabet stateName = PlateAlphabet(
+  static const PlateAlphabet stateName = PlateAlphabet.pattern(
     id: 've.stateName',
-    characters: <String>[
-      'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', //
-      'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-    ],
+    include: 'A-Y',
+    exclude: 'Q',
     input: AlphabetInput.typed,
     isNumeric: false,
     glyphs: stateNames,

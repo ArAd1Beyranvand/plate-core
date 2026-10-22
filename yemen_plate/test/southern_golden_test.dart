@@ -32,10 +32,7 @@ void main() {
     PlateCountry country,
   ) async {
     assert(debugValidateSpec(spec));
-    final values = List<String?>.generate(
-      spec.slotCount,
-      (i) => '1023456'[i % 7],
-    );
+    final values = List<String?>.generate(spec.slotCount, (i) => '1023456'[i % 7]);
     final controller = PlateController.fromValues(spec, values);
     await tester.binding.setSurfaceSize(const Size(600, 600));
     await tester.pumpWidget(
@@ -49,11 +46,7 @@ void main() {
               height: 520 * spec.canvasHeight / spec.canvasWidth,
               child: PlateThemeScope(
                 theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: country,
-                ),
+                child: PlateView(controller: controller, theme: theme, country: country),
               ),
             ),
           ),
@@ -64,14 +57,12 @@ void main() {
     final context = tester.element(find.byType(PlateView));
     await tester.runAsync(() async {
       for (final decal in spec.decals) {
-        await precacheImage(decal.image, context);
+        final image = decal.image;
+        if (image != null) await precacheImage(image, context);
       }
     });
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/southern/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/southern/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -110,8 +101,7 @@ void main() {
         ('commercial', YemenCountry.southernCommercial),
         ('government', YemenCountry.southernGovernment),
       ])
-        if (!(g.banded && usage == 'government'))
-          ('${id}_$usage', car, t, country),
+        if (!(g.banded && usage == 'government')) ('${id}_$usage', car, t, country),
       ('${id}_motorcycle', moto, t, moto.country),
     ],
     (
@@ -132,42 +122,12 @@ void main() {
       t,
       YemenCountry.southernTemporary,
     ),
-    (
-      'hadhramaut_police',
-      YemenGovernoratePlates.hadhramautPolice,
-      t,
-      YemenCountry.southernPolice,
-    ),
-    (
-      'shabwah_police',
-      YemenGovernoratePlates.shabwahPolice,
-      t,
-      YemenCountry.southernPolice,
-    ),
-    (
-      'aden_520x110',
-      YemenAdenPlates.oneLine,
-      YemenThemes.aden,
-      YemenCountry.plain,
-    ),
-    (
-      'aden_335x170',
-      YemenAdenPlates.twoLine,
-      YemenThemes.aden,
-      YemenCountry.plain,
-    ),
-    (
-      'taiz_private',
-      YemenTaizPlates.temporary,
-      YemenThemes.taizPrivate,
-      YemenCountry.plain,
-    ),
-    (
-      'taiz_commercial',
-      YemenTaizPlates.temporary,
-      YemenThemes.taizCommercial,
-      YemenCountry.plain,
-    ),
+    ('hadhramaut_police', YemenGovernoratePlates.hadhramautPolice, t, YemenCountry.southernPolice),
+    ('shabwah_police', YemenGovernoratePlates.shabwahPolice, t, YemenCountry.southernPolice),
+    ('aden_520x110', YemenAdenPlates.oneLine, YemenThemes.aden, YemenCountry.plain),
+    ('aden_335x170', YemenAdenPlates.twoLine, YemenThemes.aden, YemenCountry.plain),
+    ('taiz_private', YemenTaizPlates.temporary, YemenThemes.taizPrivate, YemenCountry.plain),
+    ('taiz_commercial', YemenTaizPlates.temporary, YemenThemes.taizCommercial, YemenCountry.plain),
   ];
 
   for (final (name, spec, theme, country) in cases) {

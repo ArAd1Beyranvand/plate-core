@@ -58,11 +58,7 @@ void main() {
                 height: 300,
                 child: PlateThemeScope(
                   theme: theme,
-                  child: PlateView(
-                    controller: controller,
-                    theme: theme,
-                    country: LaosCountry.laos,
-                  ),
+                  child: PlateView(controller: controller, theme: theme, country: LaosCountry.laos),
                 ),
               ),
             ),
@@ -70,10 +66,7 @@ void main() {
         ),
       );
       await tester.pumpAndSettle();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/la_${category.id}.png'),
-      );
+      await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/la_${category.id}.png'));
       await tester.pumpWidget(const SizedBox.shrink());
       controller.dispose();
     });

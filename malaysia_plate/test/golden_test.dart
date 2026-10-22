@@ -13,9 +13,7 @@ import 'package:malaysia_plate/malaysia_plate.dart';
 void main() {
   setUpAll(() async {
     final FontLoader loader = FontLoader('Roboto');
-    final File face = File(
-      '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
-    );
+    final File face = File('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf');
     if (face.existsSync()) {
       loader.addFont(face.readAsBytes().then((b) => ByteData.view(b.buffer)));
     }
@@ -29,10 +27,7 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(
-      spec,
-      values.split(' '),
-    );
+    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
@@ -54,10 +49,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
+    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -124,11 +116,7 @@ void main() {
 
   test('validator', () {
     bool ok(String prefix, String number, [String suffix = '']) =>
-        MalaysiaValidator.validateFields(
-          prefix: prefix,
-          number: number,
-          suffix: suffix,
-        ) ==
+        MalaysiaValidator.validateFields(prefix: prefix, number: number, suffix: suffix) ==
         const PlateValidation.valid();
     expect(ok('QAB', '8557', 'K'), isTrue);
     expect(ok('WOA', '1'), isFalse);
