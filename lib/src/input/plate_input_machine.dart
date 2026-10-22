@@ -22,9 +22,7 @@ class PlateInputMachine implements PlateInputTarget {
     for (var i = 0; i < spec.slots.length; i++) {
       _focusNodes.add(FocusNode()..addListener(_handleFocusChange));
       _controllers.add(
-        spec.slots[i].alphabet.input == AlphabetInput.typed
-            ? TextEditingController()
-            : null,
+        spec.slots[i].alphabet.input == AlphabetInput.typed ? TextEditingController() : null,
       );
     }
     // An editable mirror is a second field over one slot, not a slot: its focus
@@ -93,10 +91,8 @@ class PlateInputMachine implements PlateInputTarget {
 
   FocusNode focusNodeAt(int index) => _focusNodes[index];
   TextEditingController? controllerAt(int index) => _controllers[index];
-  FocusNode? mirrorFocusNodeAt(int mirrorIndex) =>
-      _mirrorFocusNodes[mirrorIndex];
-  TextEditingController? mirrorControllerAt(int mirrorIndex) =>
-      _mirrorControllers[mirrorIndex];
+  FocusNode? mirrorFocusNodeAt(int mirrorIndex) => _mirrorFocusNodes[mirrorIndex];
+  TextEditingController? mirrorControllerAt(int mirrorIndex) => _mirrorControllers[mirrorIndex];
 
   @override
   int? get activeIndex => _activeIndex;
@@ -118,8 +114,7 @@ class PlateInputMachine implements PlateInputTarget {
       }
     }
     // Chosen slots and a plate without focus fall back to the keypad.
-    if (active == null ||
-        spec.slots[active].alphabet.input != AlphabetInput.typed) {
+    if (active == null || spec.slots[active].alphabet.input != AlphabetInput.typed) {
       _setSystemKeyboard(false);
     }
     if (active != _activeIndex) {
@@ -153,11 +148,8 @@ class PlateInputMachine implements PlateInputTarget {
 
   /// Syncs an editable mirror's field with its source slot's value, rendered
   /// through the mirror's [alphabet].
-  void syncMirrorController(
-    int mirrorIndex,
-    PlateAlphabet alphabet,
-    String? value,
-  ) => _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
+  void syncMirrorController(int mirrorIndex, PlateAlphabet alphabet, String? value) =>
+      _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
 
   static void _setText(
     TextEditingController? field,

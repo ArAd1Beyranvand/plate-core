@@ -37,18 +37,10 @@ const _spec = PlateSpec(
   canvasHeight: 100,
   panel: _panel,
   slots: [
-    PlateSlot(
-      alphabet: PlateAlphabet.latinDigits,
-      box: PlateBox(80, 20, 40, 60),
-    ),
-    PlateSlot(
-      alphabet: PlateAlphabet.latinDigits,
-      box: PlateBox(140, 20, 40, 60),
-    ),
+    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(80, 20, 40, 60)),
+    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(140, 20, 40, 60)),
   ],
-  labels: [
-    PlateLabel(text: 'LABEL', box: PlateBox(220, 20, 60, 30), glyphHeight: 20),
-  ],
+  labels: [PlateLabel(text: 'LABEL', box: PlateBox(220, 20, 60, 30), glyphHeight: 20)],
   rules: [PlateRule(box: PlateBox(200, 10, 2, 80))],
 );
 
@@ -58,16 +50,10 @@ Widget _host(Widget child) => MaterialApp(home: Scaffold(body: child));
 
 void main() {
   group('PlateCanvas.country', () {
-    testWidgets('paints the spec country when no override is passed', (
-      tester,
-    ) async {
+    testWidgets('paints the spec country when no override is passed', (tester) async {
       await tester.pumpWidget(
         _host(
-          const PlateCanvas(
-            spec: _spec,
-            mode: PlateMode.display,
-            onChooseCharacter: _noChooser,
-          ),
+          const PlateCanvas(spec: _spec, mode: PlateMode.display, onChooseCharacter: _noChooser),
         ),
       );
 
@@ -75,9 +61,7 @@ void main() {
       expect(find.text('QQCAPTION'), findsNothing);
     });
 
-    testWidgets('paints the override instead of the spec country', (
-      tester,
-    ) async {
+    testWidgets('paints the override instead of the spec country', (tester) async {
       await tester.pumpWidget(
         _host(
           const PlateCanvas(
@@ -91,34 +75,28 @@ void main() {
 
       expect(find.text('QQCAPTION'), findsOneWidget);
       expect(find.text('ZZCAPTION'), findsNothing);
-      expect(
-        tester.widget<CountryPanel>(find.byType(CountryPanel)).country,
-        _overrideCountry,
-      );
+      expect(tester.widget<CountryPanel>(find.byType(CountryPanel)).country, _overrideCountry);
     });
 
-    testWidgets(
-      'reaches the panel even when it compares equal to the spec\'s',
-      (tester) async {
-        // The whole point of the override: `_sameCodeOtherInk == _specCountry`,
-        // so a spec could never distinguish them — but the renderer must.
-        expect(_sameCodeOtherInk, _specCountry);
+    testWidgets('reaches the panel even when it compares equal to the spec\'s', (tester) async {
+      // The whole point of the override: `_sameCodeOtherInk == _specCountry`,
+      // so a spec could never distinguish them — but the renderer must.
+      expect(_sameCodeOtherInk, _specCountry);
 
-        await tester.pumpWidget(
-          _host(
-            const PlateCanvas(
-              spec: _spec,
-              mode: PlateMode.display,
-              country: _sameCodeOtherInk,
-              onChooseCharacter: _noChooser,
-            ),
+      await tester.pumpWidget(
+        _host(
+          const PlateCanvas(
+            spec: _spec,
+            mode: PlateMode.display,
+            country: _sameCodeOtherInk,
+            onChooseCharacter: _noChooser,
           ),
-        );
+        ),
+      );
 
-        final panel = tester.widget<CountryPanel>(find.byType(CountryPanel));
-        expect(panel.country.panelTextColor, const Color(0xFF00FF00));
-      },
-    );
+      final panel = tester.widget<CountryPanel>(find.byType(CountryPanel));
+      expect(panel.country.panelTextColor, const Color(0xFF00FF00));
+    });
 
     testWidgets('changes nothing but the panel', (tester) async {
       Future<void> pumpWith(PlateCountry? country) => tester.pumpWidget(
@@ -155,9 +133,7 @@ void main() {
       expect(find.byType(ColoredBox).evaluate().length, baseline.rules);
     });
 
-    testWidgets('swapping it on a live canvas does not rebuild the machine', (
-      tester,
-    ) async {
+    testWidgets('swapping it on a live canvas does not rebuild the machine', (tester) async {
       final controller = PlateController(spec: _spec);
       addTearDown(controller.dispose);
       var activeIndexCalls = 0;
@@ -203,9 +179,7 @@ void main() {
       expect(find.text('3'), findsOneWidget);
     });
 
-    testWidgets('a flagless override renders no flag but keeps its caption', (
-      tester,
-    ) async {
+    testWidgets('a flagless override renders no flag but keeps its caption', (tester) async {
       expect(_overrideCountry.flag, isNull);
 
       await tester.pumpWidget(
@@ -230,14 +204,9 @@ void main() {
       final controller = PlateController(spec: _spec)..setAt(0, '7');
       addTearDown(controller.dispose);
 
-      await tester.pumpWidget(
-        _host(PlateView(controller: controller, country: _overrideCountry)),
-      );
+      await tester.pumpWidget(_host(PlateView(controller: controller, country: _overrideCountry)));
 
-      expect(
-        tester.widget<PlateCanvas>(find.byType(PlateCanvas)).country,
-        _overrideCountry,
-      );
+      expect(tester.widget<PlateCanvas>(find.byType(PlateCanvas)).country, _overrideCountry);
       expect(find.text('QQCAPTION'), findsOneWidget);
       expect(find.text('ZZCAPTION'), findsNothing);
     });

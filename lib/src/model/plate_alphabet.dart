@@ -6,20 +6,66 @@ import 'package:flutter/widgets.dart';
 class PlateAlphabet {
   const PlateAlphabet({
     required this.id,
-    required this.characters,
+    required List<String> characters,
     required this.input,
     required this.isNumeric,
     this.glyphs = const <String, String>{},
     this.direction = TextDirection.ltr,
     this.placeholder = '?',
-  });
+  }) : _listed = characters,
+       _include = '',
+       _exclude = '';
+
+  /// An alphabet written as a pattern instead of a list. [include] and
+  /// [exclude] are space-separated tokens: `X-Y` is every single character from
+  /// `X` to `Y`, anything else is one literal character (or a multi-character
+  /// entry such as `MP`). Excluded tokens are removed from the included ones.
+  /// `include: 'A-Z', exclude: 'I O Q'` is the Latin capitals less three.
+  const PlateAlphabet.pattern({
+    required this.id,
+    required String include,
+    String exclude = '',
+    required this.input,
+    required this.isNumeric,
+    this.glyphs = const <String, String>{},
+    this.direction = TextDirection.ltr,
+    this.placeholder = '?',
+  }) : _listed = null,
+       _include = include,
+       _exclude = exclude;
+
+  final List<String>? _listed;
+  final String _include;
+  final String _exclude;
+
+  static final Map<String, List<String>> _expanded = <String, List<String>>{};
+
+  static List<String> _expand(String include, String exclude) {
+    final drop = _tokens(exclude).toSet();
+    return List<String>.unmodifiable(_tokens(include).where((c) => !drop.contains(c)));
+  }
+
+  static Iterable<String> _tokens(String pattern) sync* {
+    for (final token in pattern.split(' ')) {
+      if (token.isEmpty) continue;
+      final runes = token.runes.toList();
+      if (runes.length == 3 && runes[1] == 0x2D) {
+        for (var r = runes[0]; r <= runes[2]; r++) {
+          yield String.fromCharCode(r);
+        }
+      } else {
+        yield token;
+      }
+    }
+  }
 
   /// Equality key: two alphabets are equal iff their ids match, so ids must be
   /// unique across a spec.
   final String id;
 
   /// Every legal character in canonical (storage) form, in picker order.
-  final List<String> characters;
+  List<String> get characters =>
+      _listed ?? _expanded.putIfAbsent('$_include|$_exclude', () => _expand(_include, _exclude));
 
   final AlphabetInput input;
 
@@ -72,43 +118,16 @@ class PlateAlphabet {
   @override
   int get hashCode => id.hashCode;
 
-  static const PlateAlphabet latinDigits = PlateAlphabet(
+  static const PlateAlphabet latinDigits = PlateAlphabet.pattern(
     id: 'latin.digits',
-    characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
+    include: '0-9',
     input: AlphabetInput.typed,
     isNumeric: true,
   );
 
-  static const PlateAlphabet latinUppercase = PlateAlphabet(
+  static const PlateAlphabet latinUppercase = PlateAlphabet.pattern(
     id: 'latin.upper',
-    characters: [
-      'A',
-      'B',
-      'C',
-      'D',
-      'E',
-      'F',
-      'G',
-      'H',
-      'I',
-      'J',
-      'K',
-      'L',
-      'M',
-      'N',
-      'O',
-      'P',
-      'Q',
-      'R',
-      'S',
-      'T',
-      'U',
-      'V',
-      'W',
-      'X',
-      'Y',
-      'Z',
-    ],
+    include: 'A-Z',
     input: AlphabetInput.typed,
     isNumeric: false,
   );

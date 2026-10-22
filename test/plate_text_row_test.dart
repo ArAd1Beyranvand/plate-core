@@ -43,41 +43,32 @@ PlateSpec _spec({
   canvasWidth: 400,
   canvasHeight: 100,
   panel: _panel,
-  slots: [
-    for (var i = 0; i < alphabets.length; i++)
-      _slot(alphabets[i], 20 + i * 25.0),
-  ],
+  slots: [for (var i = 0; i < alphabets.length; i++) _slot(alphabets[i], 20 + i * 25.0)],
   textGroups: textGroups,
   textDirection: textDirection,
 );
 
-Future<void> _pump(WidgetTester tester, Widget child) => tester.pumpWidget(
-  Directionality(textDirection: TextDirection.ltr, child: child),
-);
+Future<void> _pump(WidgetTester tester, Widget child) =>
+    tester.pumpWidget(Directionality(textDirection: TextDirection.ltr, child: child));
 
 void main() {
-  testWidgets(
-    'empty group renders nothing; filled group renders through glyphs',
-    (tester) async {
-      final spec = _spec(
-        alphabets: const [_digits, _iranianDigits],
-        textGroups: const [
-          PlateTextGroup([0]),
-          PlateTextGroup([1]),
-        ],
-      );
-      await _pump(tester, PlateTextRow(spec: spec, values: const ['1', null]));
-      expect(find.text('1'), findsOneWidget);
-      expect(find.text('٢'), findsNothing);
+  testWidgets('empty group renders nothing; filled group renders through glyphs', (tester) async {
+    final spec = _spec(
+      alphabets: const [_digits, _iranianDigits],
+      textGroups: const [
+        PlateTextGroup([0]),
+        PlateTextGroup([1]),
+      ],
+    );
+    await _pump(tester, PlateTextRow(spec: spec, values: const ['1', null]));
+    expect(find.text('1'), findsOneWidget);
+    expect(find.text('٢'), findsNothing);
 
-      await _pump(tester, PlateTextRow(spec: spec, values: const ['1', '2']));
-      expect(find.text('٢'), findsOneWidget);
-    },
-  );
+    await _pump(tester, PlateTextRow(spec: spec, values: const ['1', '2']));
+    expect(find.text('٢'), findsOneWidget);
+  });
 
-  testWidgets('group order follows textDirection; prefix is prepended', (
-    tester,
-  ) async {
+  testWidgets('group order follows textDirection; prefix is prepended', (tester) async {
     final spec = _spec(
       textGroups: const [
         PlateTextGroup([0], prefix: 'A-'),
@@ -86,35 +77,26 @@ void main() {
       ],
       textDirection: TextDirection.rtl,
     );
-    await _pump(
-      tester,
-      PlateTextRow(spec: spec, values: const ['1', '2', '3']),
-    );
+    await _pump(tester, PlateTextRow(spec: spec, values: const ['1', '2', '3']));
     expect(find.text('A-1'), findsOneWidget);
     final row = tester.widget<Directionality>(
-      find.descendant(
-        of: find.byType(PlateTextRow),
-        matching: find.byType(Directionality),
-      ),
+      find.descendant(of: find.byType(PlateTextRow), matching: find.byType(Directionality)),
     );
     expect(row.textDirection, TextDirection.rtl);
   });
 
-  testWidgets(
-    'values shorter than slots renders what fits and does not throw',
-    (tester) async {
-      final spec = _spec(
-        textGroups: const [
-          PlateTextGroup([0]),
-          PlateTextGroup([1]),
-          PlateTextGroup([2]),
-        ],
-      );
-      await _pump(tester, PlateTextRow(spec: spec, values: const ['1']));
-      expect(find.text('1'), findsOneWidget);
-      expect(tester.takeException(), isNull);
-    },
-  );
+  testWidgets('values shorter than slots renders what fits and does not throw', (tester) async {
+    final spec = _spec(
+      textGroups: const [
+        PlateTextGroup([0]),
+        PlateTextGroup([1]),
+        PlateTextGroup([2]),
+      ],
+    );
+    await _pump(tester, PlateTextRow(spec: spec, values: const ['1']));
+    expect(find.text('1'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
 
   testWidgets('null textStyle gives black', (tester) async {
     final spec = _spec(
@@ -124,10 +106,7 @@ void main() {
     );
     await _pump(tester, PlateTextRow(spec: spec, values: const ['1']));
     final style = tester.widget<DefaultTextStyle>(
-      find.descendant(
-        of: find.byType(PlateTextRow),
-        matching: find.byType(DefaultTextStyle),
-      ),
+      find.descendant(of: find.byType(PlateTextRow), matching: find.byType(DefaultTextStyle)),
     );
     expect(style.style.color, const Color(0xFF000000));
   });

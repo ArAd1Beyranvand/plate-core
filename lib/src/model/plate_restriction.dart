@@ -13,11 +13,7 @@ import 'package:flutter/foundation.dart';
 /// through and refuses the `'9'` that completes it.
 @immutable
 class PlateRestriction {
-  const PlateRestriction({
-    required this.group,
-    required this.values,
-    required this.reason,
-  });
+  const PlateRestriction({required this.group, required this.values, required this.reason});
 
   /// The [PlateTextGroup.key] of the register this restriction watches.
   final String group;

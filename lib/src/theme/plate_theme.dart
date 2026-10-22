@@ -96,11 +96,7 @@ class PlateTheme {
     );
   }
 
-  TextStyle glyphStyle(
-    double slotHeight,
-    Color color, {
-    double letterSpacing = 0,
-  }) => TextStyle(
+  TextStyle glyphStyle(double slotHeight, Color color, {double letterSpacing = 0}) => TextStyle(
     color: color,
     fontWeight: FontWeight.w700,
     fontSize: slotHeight * 0.72,
@@ -128,8 +124,7 @@ class PlateTheme {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is PlateTheme && listEquals(other._props, _props);
+      identical(this, other) || other is PlateTheme && listEquals(other._props, _props);
 
   @override
   int get hashCode => Object.hashAll(_props);
@@ -141,6 +136,5 @@ class PlateThemeScope extends InheritedWidget {
   final PlateTheme theme;
 
   @override
-  bool updateShouldNotify(PlateThemeScope oldWidget) =>
-      theme != oldWidget.theme;
+  bool updateShouldNotify(PlateThemeScope oldWidget) => theme != oldWidget.theme;
 }

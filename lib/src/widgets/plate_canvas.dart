@@ -103,9 +103,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
   ThemeData? _selectionTheme;
   Color? _selectionThemeColor;
 
-  /// Cached face clip.
-  _PlateFaceClipper? _faceClipper;
-
   /// The characters last shown for [PlateCanvas.spec] — what the outgoing
   /// plate keeps showing while it leaves, since the controller has already
   /// moved on to the next spec by the time the canvas hears of it.
@@ -133,26 +130,24 @@ class _PlateCanvasState extends State<PlateCanvas> {
   void _startTransition(PlateCanvas old, List<String?> shown) {
     final from = old.spec, to = widget.spec;
     final toValues = _controller.values;
-    bool keeps(PlatePartId id) => widget.specTransition!.keeps(
-      id,
-      from,
-      to,
-      fromValues: shown,
-      toValues: toValues,
-    );
+    bool keeps(PlatePartId id) =>
+        widget.specTransition!.keeps(id, from, to, fromValues: shown, toValues: toValues);
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
     if (transition == null || anim == null) return;
-    final outDelays = PlateStagger.sequence(
-      from,
-      step: transition.step,
-      reverse: true,
-    )..removeWhere((id, _) => keeps(id));
+    final outDelays = PlateStagger.sequence(from, step: transition.step, reverse: true)
+      ..removeWhere((id, _) => keeps(id));
     // A morphing face takes its border with it: the incoming plate draws
     // both from the start, so the outline never wipes out and redraws.
     final morph = transition.morphBackground;
     final morphed = {
-      if (morph) ...[PlatePartId.background, PlatePartId.border],
+      if (morph) ...[
+        PlatePartId.background,
+        PlatePartId.corner,
+        PlatePartId.borderWidth,
+        PlatePartId.borderColor,
+        PlatePartId.border,
+      ],
     };
     outDelays.removeWhere((id, _) => morphed.contains(id));
     final outLength = plateCueLength(anim.style, outDelays.keys, outDelays);
@@ -161,7 +156,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
     _ghost = _Ghost(
       serial: ++_ghostSerial,
       spec: from,
-      theme: old.theme,
+      // The leaving plate takes the incoming plate's corner radius from the
+      // first frame, so what it prints is never clipped to a radius the plate
+      // is no longer drawn with.
+      theme: (old.theme ?? PlateTheme.of(context)).copyWith(
+        plateRadiusRatio: (widget.theme ?? PlateTheme.of(context)).plateRadiusRatio,
+      ),
       country: old.country,
       mode: old.mode,
       inputSource: old.inputSource,
@@ -177,10 +177,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
     );
     anim.comeInAll(
       delays: {
-        for (final e in PlateStagger.sequence(
-          to,
-          step: transition.step,
-        ).entries)
+        for (final e in PlateStagger.sequence(to, step: transition.step).entries)
           e.key: e.value + outLength,
       },
     );
@@ -217,14 +214,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
         selectionHandleColor: active,
       ),
     );
-  }
-
-  _PlateFaceClipper _faceClipperFor(double border, double radius) {
-    final cached = _faceClipper;
-    if (cached != null && cached.border == border && cached.radius == radius) {
-      return cached;
-    }
-    return _faceClipper = _PlateFaceClipper(border: border, radius: radius);
   }
 
   @override
@@ -303,8 +292,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       readValues: () => _controller.values,
       commit: _commit,
       onActiveIndexChanged: _reportActiveIndex,
-      onSystemKeyboardChanged: () =>
-          widget.controller?.notifyActiveSlotChanged(),
+      onSystemKeyboardChanged: () => widget.controller?.notifyActiveSlotChanged(),
     )..onSheetRequested = _openPicker;
     _machine = machine;
     widget.controller?.attach(machine);
@@ -322,11 +310,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
     widget.controller?.notifyActiveSlotChanged();
   }
 
-  PlateEntry _entryFor(List<String?> values) => PlateEntry(
-    spec: widget.spec,
-    values: values,
-    activeIndex: _machine.activeIndex,
-  );
+  PlateEntry _entryFor(List<String?> values) =>
+      PlateEntry(spec: widget.spec, values: values, activeIndex: _machine.activeIndex);
 
   PlateValidation? _probeValidation() {
     final entry = _entryFor(_controller.values);
@@ -377,12 +362,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       // The whole monochrome set, as [PlateSpec.inkOverride] documents: a plate
       // printed in green has a green rim and green rules, not black ones.
       final ink = spec.inkOverride!;
-      theme = theme.copyWith(
-        ink: ink,
-        plateBorder: ink,
-        dividerColor: ink,
-        activeColor: ink,
-      );
+      theme = theme.copyWith(ink: ink, plateBorder: ink, dividerColor: ink, activeColor: ink);
     }
     // Display mode renders inert slots whatever the configured source.
     _machine.inputSource = widget.mode == PlateMode.input
@@ -414,12 +394,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // poke square corners into the rounded plate. It derives from the base
     // theme: the alert recolours underlines only, so geometry never shifts on
     // a verdict flip.
-    final border = theme.borderWidthRatio * spec.canvasHeight;
-    final outerRadius = theme.plateRadiusRatio * spec.canvasHeight;
-    final innerRadius = (outerRadius - border).clamp(0.0, outerRadius);
-
-    final clipper = _faceClipperFor(border, innerRadius);
-
     // The face is two layers. Every typed slot is a TextField, whose
     // EditableText creates composited layers; beneath a FittedBox those force
     // a TransformLayer, so the compositor scales a recorded face and the
@@ -448,7 +422,6 @@ class _PlateCanvasState extends State<PlateCanvas> {
         country: country,
         controller: _controller,
         machine: _machine,
-        clipper: clipper,
         behaviors: behaviors,
         mode: widget.mode,
         morphDuration: _morphBackground ? _resizeDuration : Duration.zero,
@@ -479,10 +452,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
             curve: Curves.easeInOut,
             builder: (context, size, child) => _PlateSizeScope(
               size: size!,
-              child: CustomSingleChildLayout(
-                delegate: _PlateSizeDelegate(size),
-                child: child,
-              ),
+              child: CustomSingleChildLayout(delegate: _PlateSizeDelegate(size), child: child),
             ),
             child: face,
           ),
@@ -501,7 +471,6 @@ class _Face extends StatelessWidget {
     required this.country,
     required this.controller,
     required this.machine,
-    required this.clipper,
     required this.behaviors,
     required this.mode,
     required this.morphDuration,
@@ -518,7 +487,6 @@ class _Face extends StatelessWidget {
   final PlateCountry country;
   final PlateController controller;
   final PlateInputMachine machine;
-  final _PlateFaceClipper clipper;
   final List<SlotBehavior> behaviors;
   final PlateMode mode;
 
@@ -548,12 +516,9 @@ class _Face extends StatelessWidget {
           curve: Curves.easeInOut,
           builder: (context, face, _) => _PlateArtwork(
             spec: spec,
-            theme: face == theme.plateBackground
-                ? theme
-                : theme.copyWith(plateBackground: face),
+            theme: face == theme.plateBackground ? theme : theme.copyWith(plateBackground: face),
             country: country,
             controller: controller,
-            clipper: clipper,
           ),
         ),
         _ValidationBinding(
@@ -562,25 +527,18 @@ class _Face extends StatelessWidget {
           onVerdict: onVerdict,
           builder: (verdict) => _PlateInputs(
             spec: spec,
-            theme: verdict.isValid
-                ? theme
-                : theme.copyWith(activeColor: theme.alertColor),
+            theme: verdict.isValid ? theme : theme.copyWith(activeColor: theme.alertColor),
             behaviors: behaviors,
             machine: machine,
             controller: controller,
             mode: mode,
             onPick: onPick,
             commit: commit,
-            clipper: clipper,
           ),
         ),
         if (ghost != null)
           Positioned.fill(
-            child: _SpecGhost(
-              key: ValueKey<int>(ghost.serial),
-              ghost: ghost,
-              onDone: onGhostDone,
-            ),
+            child: _SpecGhost(key: ValueKey<int>(ghost.serial), ghost: ghost, onDone: onGhostDone),
           ),
       ],
     );
@@ -617,16 +575,12 @@ class _PlateArtwork extends StatelessWidget {
     required this.theme,
     required this.country,
     required this.controller,
-    required this.clipper,
   });
 
   final PlateSpec spec;
   final PlateTheme theme;
   final PlateCountry country;
   final PlateController controller;
-
-  /// Shared clip geometry with [_PlateInputs].
-  final _PlateFaceClipper clipper;
 
   @override
   Widget build(BuildContext context) {
@@ -644,13 +598,7 @@ class _PlateArtwork extends StatelessWidget {
             ),
           ),
         ),
-        _PlateContent(
-          spec: spec,
-          theme: theme,
-          country: country,
-          controller: controller,
-          clipper: clipper,
-        ),
+        _PlateContent(spec: spec, theme: theme, country: country, controller: controller),
       ],
     );
   }
@@ -700,14 +648,12 @@ class _PlateContent extends StatelessWidget {
     required this.theme,
     required this.country,
     required this.controller,
-    required this.clipper,
   });
 
   final PlateSpec spec;
   final PlateTheme theme;
   final PlateCountry country;
   final PlateController controller;
-  final _PlateFaceClipper clipper;
 
   @override
   Widget build(BuildContext context) {
@@ -721,8 +667,8 @@ class _PlateContent extends StatelessWidget {
           child: Stack(
             children: [
               Positioned.fill(
-                child: ClipRRect(
-                  clipper: clipper,
+                child: PlateRimClip(
+                  theme: theme,
                   child: Stack(
                     children: [
                       if (!spec.noPanel)
@@ -742,7 +688,11 @@ class _PlateContent extends StatelessWidget {
                           box: spec.bands[i].box,
                           child: PlatePartAnimator(
                             id: PlatePartId.band(i),
-                            child: _Band(band: spec.bands[i]),
+                            child: PlatePartAnimator(
+                              id: PlatePartId.bandCorner(i),
+                              selfPainted: true,
+                              child: _Band(band: spec.bands[i]),
+                            ),
                           ),
                         ),
                       for (var i = 0; i < spec.rules.length; i++)
@@ -772,10 +722,7 @@ class _PlateContent extends StatelessWidget {
                                 drawing: drawing,
                                 fit: BoxFit.contain,
                               ),
-                              null => Image(
-                                image: spec.decals[i].image!,
-                                fit: BoxFit.contain,
-                              ),
+                              null => Image(image: spec.decals[i].image!, fit: BoxFit.contain),
                             },
                           ),
                         ),
@@ -908,11 +855,7 @@ class _Label extends StatelessWidget {
     final resolve = l.resolve;
     final style = theme
         .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
-        .copyWith(
-          height: l.lineHeight,
-          fontFamily: l.fontFamily,
-          package: l.fontPackage,
-        );
+        .copyWith(height: l.lineHeight, fontFamily: l.fontFamily, package: l.fontPackage);
     return _Placed(
       box: l.box,
       child: PlatePartAnimator(
@@ -924,9 +867,7 @@ class _Label extends StatelessWidget {
                   listenable: controller,
                   builder: (context, _) {
                     final values = controller.values;
-                    final value =
-                        resolve((key) => spec.valueOfGroup(key, values)) ??
-                        l.text;
+                    final value = resolve((key) => spec.valueOfGroup(key, values)) ?? l.text;
                     return FittedBox(
                       fit: BoxFit.scaleDown,
                       child: _StaggeredText(value: value, style: style),
@@ -952,8 +893,7 @@ class _StaggeredText extends StatefulWidget {
   State<_StaggeredText> createState() => _StaggeredTextState();
 }
 
-class _StaggeredTextState extends State<_StaggeredText>
-    with SingleTickerProviderStateMixin {
+class _StaggeredTextState extends State<_StaggeredText> with SingleTickerProviderStateMixin {
   static const _charMs = 220;
   static const _stepMs = 55;
 
@@ -962,9 +902,8 @@ class _StaggeredTextState extends State<_StaggeredText>
   bool _leaving = false;
   bool _settled = true;
 
-  Duration _run(String text) => Duration(
-    milliseconds: _charMs + _stepMs * (text.length - 1).clamp(0, 99),
-  );
+  Duration _run(String text) =>
+      Duration(milliseconds: _charMs + _stepMs * (text.length - 1).clamp(0, 99));
 
   @override
   void didUpdateWidget(_StaggeredText old) {
@@ -1038,7 +977,6 @@ class _PlateInputs extends StatelessWidget {
     required this.mode,
     required this.onPick,
     required this.commit,
-    required this.clipper,
   });
 
   final PlateSpec spec;
@@ -1053,10 +991,8 @@ class _PlateInputs extends StatelessWidget {
   static bool _opensPicker(SlotBehavior behavior, PlateSlot slot) =>
       behavior == SlotBehavior.sheet ||
       (slot.alphabet.input == AlphabetInput.chosen &&
-          (behavior == SlotBehavior.externalField ||
-              behavior == SlotBehavior.keypadFirstField));
+          (behavior == SlotBehavior.externalField || behavior == SlotBehavior.keypadFirstField));
   final bool Function(int index, String value) commit;
-  final _PlateFaceClipper clipper;
 
   @override
   Widget build(BuildContext context) {
@@ -1067,8 +1003,8 @@ class _PlateInputs extends StatelessWidget {
         height: spec.canvasHeight,
         child: Directionality(
           textDirection: spec.textDirection,
-          child: ClipRRect(
-            clipper: clipper,
+          child: PlateRimClip(
+            theme: theme,
             child: Stack(
               children: [
                 for (var mi = 0; mi < spec.mirrors.length; mi++)
@@ -1086,17 +1022,13 @@ class _PlateInputs extends StatelessWidget {
                                 mirror: spec.mirrors[mi],
                                 alphabet:
                                     spec.mirrors[mi].alphabet ??
-                                    spec
-                                        .slots[spec.mirrors[mi].source]
-                                        .alphabet,
+                                    spec.slots[spec.mirrors[mi].source].alphabet,
                                 behavior: behaviors[spec.mirrors[mi].source],
                                 theme: theme,
                                 machine: machine,
                                 controller: controller,
                                 onCompleted: mode == PlateMode.input
-                                    ? () => machine.advanceFrom(
-                                        spec.mirrors[mi].source,
-                                      )
+                                    ? () => machine.advanceFrom(spec.mirrors[mi].source)
                                     : null,
                               ),
                             )
@@ -1173,22 +1105,15 @@ class _ValidationBinding extends StatelessWidget {
     return PlateSelector<PlateValidation>(
       controller: controller,
       selector: (c) => validate(c.values),
-      builder: (context, verdict) => _VerdictListener(
-        verdict: verdict,
-        onVerdict: onVerdict,
-        child: builder(verdict),
-      ),
+      builder: (context, verdict) =>
+          _VerdictListener(verdict: verdict, onVerdict: onVerdict, child: builder(verdict)),
     );
   }
 }
 
 /// Publishes verdict from lifecycle callbacks (not build).
 class _VerdictListener extends StatefulWidget {
-  const _VerdictListener({
-    required this.verdict,
-    required this.onVerdict,
-    required this.child,
-  });
+  const _VerdictListener({required this.verdict, required this.onVerdict, required this.child});
 
   final PlateValidation verdict;
   final ValueChanged<PlateValidation> onVerdict;
@@ -1281,13 +1206,8 @@ class _Placed extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => Positioned(
-    left: box.left,
-    top: box.top,
-    width: box.width,
-    height: box.height,
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      Positioned(left: box.left, top: box.top, width: box.width, height: box.height, child: child);
 }
 
 /// Border and face, subscribed to completion (repaints only when last slot fills).
@@ -1455,35 +1375,6 @@ class _EditableMirrorBinding extends StatelessWidget {
   }
 }
 
-/// Clips to white face's rounded rect; geometry mirrors [PlateFrame].
-class _PlateFaceClipper extends CustomClipper<RRect> {
-  const _PlateFaceClipper({required this.border, required this.radius});
-
-  final double border;
-  final double radius;
-
-  @override
-  RRect getClip(Size size) {
-    // Deflate slightly less than the border thickness: the content layer
-    // (country panel, dividers, slots) is painted on top of PlateFrame's own
-    // white face, which is deflated by the *full* border. Clipping content to
-    // that exact same rect leaves a hairline white seam at the border/panel
-    // boundary once the whole plate is scaled by the outer FittedBox — the
-    // two independently-rasterised anti-aliased edges don't composite
-    // pixel-for-pixel. Letting content bleed `_overlap` further out (under
-    // the border paint, which stays on top of nothing — it's the same
-    // layer's edge) removes the seam with no visible change to border width.
-    final inner = (Offset.zero & size).deflate(border - _overlap);
-    return RRect.fromRectAndRadius(inner, Radius.circular(radius));
-  }
-
-  static const _overlap = 0.75;
-
-  @override
-  bool shouldReclip(_PlateFaceClipper old) =>
-      old.border != border || old.radius != radius;
-}
-
 /// A [PlateBand]'s fill, rounded per [PlateBand.topCornerRadius] and
 /// [PlateBand.bottomCornerRadius]. A `BoxDecoration` border radius rather than
 /// a `ClipPath` — the clip-based version left a seam where it met the plate's
@@ -1495,14 +1386,21 @@ class _Band extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: band.color,
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(band.topCornerRadius),
-          bottom: Radius.circular(band.bottomCornerRadius),
-        ),
-      ),
+    final corner = PlatePartAnimator.of(context);
+    return AnimatedBuilder(
+      animation: corner.progress,
+      builder: (context, _) {
+        final grown = corner.shown.clamp(0.0, 1.0);
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            color: band.color,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(band.topCornerRadius * grown),
+              bottom: Radius.circular(band.bottomCornerRadius * grown),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -1570,13 +1468,18 @@ class _SpecGhostState extends State<_SpecGhost> {
     final g = widget.ghost;
     _controller = PlateController(spec: g.spec);
     if (g.values.length == g.spec.slotCount) _controller.setValues(g.values);
-    _anim = PlateAnimationController(style: g.style)
-      ..goOutAll(delays: g.outDelays);
+    _anim = PlateAnimationController(style: g.style)..goOutAll(delays: g.outDelays);
     for (final id in g.kept) {
       _anim.settle(id);
     }
     for (final id in g.dropped) {
-      _anim.hide(id);
+      // The corner and width draw nothing; they only shape the clip the
+      // leaving parts are held in, so they stay at full until the ghost goes.
+      if (id == PlatePartId.corner || id == PlatePartId.borderWidth) {
+        _anim.settle(id);
+      } else {
+        _anim.hide(id);
+      }
     }
     _done = Timer(g.length, () => widget.onDone(g.serial));
   }
@@ -1607,11 +1510,7 @@ class _SpecGhostState extends State<_SpecGhost> {
 }
 
 class _LabelText extends StatelessWidget {
-  const _LabelText({
-    required this.value,
-    required this.style,
-    required this.rotated,
-  });
+  const _LabelText({required this.value, required this.style, required this.rotated});
 
   final String value;
   final TextStyle style;

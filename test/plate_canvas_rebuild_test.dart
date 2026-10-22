@@ -29,10 +29,7 @@ final PlateSpec _spec = PlateSpec(
   panel: const PlatePanel(box: PlateBox(0, 0, 10, 40)),
   slots: <PlateSlot>[
     for (int i = 0; i < 3; i++)
-      PlateSlot(
-        alphabet: PlateAlphabet.latinDigits,
-        box: PlateBox(20 + i * 25.0, 5, 20, 30),
-      ),
+      PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(20 + i * 25.0, 5, 20, 30)),
   ],
 );
 
@@ -54,12 +51,7 @@ CountryPanel _panelOf(WidgetTester tester) =>
 /// The [ThemeData] the canvas scopes its slots' selection colours with: the
 /// outermost [Theme] the canvas itself builds.
 ThemeData _selectionThemeOf(WidgetTester tester) => tester
-    .widgetList<Theme>(
-      find.descendant(
-        of: find.byType(PlateCanvas),
-        matching: find.byType(Theme),
-      ),
-    )
+    .widgetList<Theme>(find.descendant(of: find.byType(PlateCanvas), matching: find.byType(Theme)))
     .first
     .data;
 
@@ -127,9 +119,7 @@ void main() {
     );
   });
 
-  testWidgets('the selection theme is rebuilt when the active colour changes', (
-    tester,
-  ) async {
+  testWidgets('the selection theme is rebuilt when the active colour changes', (tester) async {
     final PlateController controller = PlateController(spec: _spec);
     addTearDown(controller.dispose);
 
@@ -138,16 +128,10 @@ void main() {
     final ThemeData before = _selectionThemeOf(tester);
 
     await tester.pumpWidget(
-      _host(
-        controller,
-        theme: base.copyWith(activeColor: const Color(0xFFFF0000)),
-      ),
+      _host(controller, theme: base.copyWith(activeColor: const Color(0xFFFF0000))),
     );
 
     expect(identical(_selectionThemeOf(tester), before), isFalse);
-    expect(
-      _selectionThemeOf(tester).textSelectionTheme.cursorColor,
-      const Color(0xFFFF0000),
-    );
+    expect(_selectionThemeOf(tester).textSelectionTheme.cursorColor, const Color(0xFFFF0000));
   });
 }

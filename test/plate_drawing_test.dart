@@ -24,9 +24,7 @@ void main() {
     });
 
     test('star ring puts the first star straight above the centre', () {
-      final b = const PlateStarRingShape(50, 50, 20, 4, 12, red)
-          .toPath()
-          .getBounds();
+      final b = const PlateStarRingShape(50, 50, 20, 4, 12, red).toPath().getBounds();
       expect(b.top, closeTo(50 - 20 - 4, 1e-6));
     });
   });
@@ -34,15 +32,8 @@ void main() {
   group('PlateDecal', () {
     test('needs exactly one of image and drawing', () {
       const drawing = PlateDrawing(1, 1, []);
-      expect(
-        () => PlateDecal(box: const PlateBox(0, 0, 1, 1)),
-        throwsAssertionError,
-      );
-      expect(
-        PlateDecal(drawing: drawing, box: const PlateBox(0, 0, 1, 1))
-            .drawing,
-        drawing,
-      );
+      expect(() => PlateDecal(box: const PlateBox(0, 0, 1, 1)), throwsAssertionError);
+      expect(PlateDecal(drawing: drawing, box: const PlateBox(0, 0, 1, 1)).drawing, drawing);
     });
   });
 

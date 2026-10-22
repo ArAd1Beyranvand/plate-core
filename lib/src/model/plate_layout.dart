@@ -105,9 +105,7 @@ List<PlateRule> plateStipple({
   _checkCount(count, 'plateStipple');
   return List<PlateRule>.unmodifiable(<PlateRule>[
     for (var i = 0; i < count; i++)
-      PlateRule(
-        box: PlateBox(left + i * stepX, top + i * stepY, width, height),
-      ),
+      PlateRule(box: PlateBox(left + i * stepX, top + i * stepY, width, height)),
   ]);
 }
 

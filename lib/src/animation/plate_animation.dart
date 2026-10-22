@@ -14,11 +14,20 @@ enum PlatePartKind {
   /// The face's base colour.
   background,
 
+  /// The plate's outer corner radius, grown from square.
+  corner,
+
   /// One leaf of [PlateSpec.background], indexed in depth-first order.
   region,
 
   /// One [PlatePart.divider] of [PlateSpec.background], depth-first.
   divider,
+
+  /// The rim's thickness, grown from nothing.
+  borderWidth,
+
+  /// The rim's colour, blended in from the face.
+  borderColor,
 
   /// The rim.
   border,
@@ -34,6 +43,9 @@ enum PlatePartKind {
 
   /// One of [PlateSpec.bands].
   band,
+
+  /// The corner radius of one of [PlateSpec.bands], grown from square.
+  bandCorner,
 
   /// One of [PlateSpec.rules].
   rule,
@@ -60,6 +72,7 @@ class PlatePartId {
   const PlatePartId.region(int index) : this(PlatePartKind.region, index);
   const PlatePartId.divider(int index) : this(PlatePartKind.divider, index);
   const PlatePartId.band(int index) : this(PlatePartKind.band, index);
+  const PlatePartId.bandCorner(int index) : this(PlatePartKind.bandCorner, index);
   const PlatePartId.rule(int index) : this(PlatePartKind.rule, index);
   const PlatePartId.label(int index) : this(PlatePartKind.label, index);
   const PlatePartId.decal(int index) : this(PlatePartKind.decal, index);
@@ -67,6 +80,9 @@ class PlatePartId {
   const PlatePartId.mirror(int index) : this(PlatePartKind.mirror, index);
 
   static const PlatePartId background = PlatePartId(PlatePartKind.background);
+  static const PlatePartId corner = PlatePartId(PlatePartKind.corner);
+  static const PlatePartId borderColor = PlatePartId(PlatePartKind.borderColor);
+  static const PlatePartId borderWidth = PlatePartId(PlatePartKind.borderWidth);
   static const PlatePartId border = PlatePartId(PlatePartKind.border);
   static const PlatePartId panel = PlatePartId(PlatePartKind.panel);
   static const PlatePartId flag = PlatePartId(PlatePartKind.flag);
@@ -78,13 +94,15 @@ class PlatePartId {
   /// Every part [spec] renders, in painting order.
   static List<PlatePartId> allOf(PlateSpec spec) => <PlatePartId>[
     background,
-    for (var i = 0; i < plateRegionCount(spec.background); i++)
-      PlatePartId.region(i),
-    for (var i = 0; i < plateDividerCount(spec.background); i++)
-      PlatePartId.divider(i),
+    corner,
+    for (var i = 0; i < plateRegionCount(spec.background); i++) PlatePartId.region(i),
+    for (var i = 0; i < plateDividerCount(spec.background); i++) PlatePartId.divider(i),
+    borderWidth,
+    borderColor,
     border,
     if (!spec.noPanel) ...<PlatePartId>[panel, flag, caption],
     for (var i = 0; i < spec.bands.length; i++) PlatePartId.band(i),
+    for (var i = 0; i < spec.bands.length; i++) PlatePartId.bandCorner(i),
     for (var i = 0; i < spec.rules.length; i++) PlatePartId.rule(i),
     for (var i = 0; i < spec.labels.length; i++) PlatePartId.label(i),
     for (var i = 0; i < spec.decals.length; i++) PlatePartId.decal(i),
@@ -102,6 +120,9 @@ class PlatePartId {
   @override
   String toString() => switch (kind) {
     PlatePartKind.background ||
+    PlatePartKind.corner ||
+    PlatePartKind.borderWidth ||
+    PlatePartKind.borderColor ||
     PlatePartKind.border ||
     PlatePartKind.panel ||
     PlatePartKind.flag ||
@@ -111,9 +132,8 @@ class PlatePartId {
 }
 
 /// How many leaves [section] has — the [PlatePartKind.region] count.
-int plateRegionCount(PlateSection section) => section.isLeaf
-    ? 1
-    : section.parts.fold(0, (n, p) => n + plateRegionCount(p.section));
+int plateRegionCount(PlateSection section) =>
+    section.isLeaf ? 1 : section.parts.fold(0, (n, p) => n + plateRegionCount(p.section));
 
 /// How many dividers [section] draws — the [PlatePartKind.divider] count.
 int plateDividerCount(PlateSection section) {
@@ -218,15 +238,24 @@ class PlateAnimationStyle {
   final Map<PlatePartId, PlateMotion> overrides;
 
   static const Map<PlatePartKind, PlateMotion> defaults = {
-    PlatePartKind.background: PlateMotion(
-      effect: PlatePartEffect.wipe,
-      origin: Alignment.center,
-    ),
+    PlatePartKind.background: PlateMotion(effect: PlatePartEffect.wipe, origin: Alignment.center),
     PlatePartKind.region: PlateMotion(effect: PlatePartEffect.wipe),
     PlatePartKind.divider: PlateMotion(
       effect: PlatePartEffect.draw,
       origin: Alignment.topCenter,
       softEdge: true,
+    ),
+    PlatePartKind.corner: PlateMotion(
+      effect: PlatePartEffect.fade,
+      duration: Duration(milliseconds: 600),
+    ),
+    PlatePartKind.borderWidth: PlateMotion(
+      effect: PlatePartEffect.fade,
+      duration: Duration(milliseconds: 600),
+    ),
+    PlatePartKind.borderColor: PlateMotion(
+      effect: PlatePartEffect.fade,
+      duration: Duration(milliseconds: 600),
     ),
     PlatePartKind.border: PlateMotion(
       effect: PlatePartEffect.draw,
@@ -234,21 +263,16 @@ class PlateAnimationStyle {
     ),
     PlatePartKind.panel: PlateMotion(effect: PlatePartEffect.wipe),
     PlatePartKind.flag: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.caption: PlateMotion(
-      effect: PlatePartEffect.wipe,
-      origin: Alignment.topCenter,
-    ),
+    PlatePartKind.caption: PlateMotion(effect: PlatePartEffect.wipe, origin: Alignment.topCenter),
     PlatePartKind.band: PlateMotion(effect: PlatePartEffect.wipe),
+    PlatePartKind.bandCorner: PlateMotion(effect: PlatePartEffect.fade),
     PlatePartKind.rule: PlateMotion(
       effect: PlatePartEffect.draw,
       origin: Alignment.topCenter,
       softEdge: true,
     ),
     PlatePartKind.label: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.decal: PlateMotion(
-      effect: PlatePartEffect.fadeScale,
-      origin: Alignment.center,
-    ),
+    PlatePartKind.decal: PlateMotion(effect: PlatePartEffect.fadeScale, origin: Alignment.center),
     PlatePartKind.slot: PlateMotion(
       effect: PlatePartEffect.fadeSlide,
       origin: Alignment.bottomCenter,
@@ -259,8 +283,7 @@ class PlateAnimationStyle {
     ),
   };
 
-  PlateMotion motionFor(PlatePartId id) =>
-      overrides[id] ?? byKind[id.kind] ?? const PlateMotion();
+  PlateMotion motionFor(PlatePartId id) => overrides[id] ?? byKind[id.kind] ?? const PlateMotion();
 }
 
 /// One instruction to a part: go to [phase] after [delay]. [serial] tells a
@@ -291,9 +314,8 @@ class PlatePartCue {
 /// Each part listens only to its own cue, so cueing one part rebuilds nothing
 /// else. Every part starts [PlatePartPhase.settled].
 class PlateAnimationController extends ChangeNotifier {
-  PlateAnimationController({
-    PlateAnimationStyle style = const PlateAnimationStyle(),
-  }) : _style = style;
+  PlateAnimationController({PlateAnimationStyle style = const PlateAnimationStyle()})
+    : _style = style;
 
   PlateAnimationStyle _style;
   PlateAnimationStyle get style => _style;
@@ -312,23 +334,14 @@ class PlateAnimationController extends ChangeNotifier {
       _cues.putIfAbsent(id, () => ValueNotifier<PlatePartCue>(_fallback));
 
   /// The phase [id] was last told to take.
-  PlatePartPhase phaseOf(PlatePartId id) =>
-      (_cues[id]?.value ?? _fallback).phase;
+  PlatePartPhase phaseOf(PlatePartId id) => (_cues[id]?.value ?? _fallback).phase;
 
   ValueNotifier<PlatePartCue> _notifierOf(PlatePartId id) =>
       cueOf(id) as ValueNotifier<PlatePartCue>;
 
   /// Cues one part.
-  void cue(
-    PlatePartId id,
-    PlatePartPhase phase, {
-    Duration delay = Duration.zero,
-  }) {
-    _notifierOf(id).value = PlatePartCue(
-      phase,
-      delay: delay,
-      serial: ++_serial,
-    );
+  void cue(PlatePartId id, PlatePartPhase phase, {Duration delay = Duration.zero}) {
+    _notifierOf(id).value = PlatePartCue(phase, delay: delay, serial: ++_serial);
   }
 
   void comeIn(PlatePartId id, {Duration delay = Duration.zero}) =>
@@ -341,19 +354,12 @@ class PlateAnimationController extends ChangeNotifier {
 
   /// Takes [id] straight to gone, with no transition.
   void hide(PlatePartId id) {
-    _notifierOf(id).value = PlatePartCue(
-      PlatePartPhase.goingOut,
-      serial: ++_serial,
-      instant: true,
-    );
+    _notifierOf(id).value = PlatePartCue(PlatePartPhase.goingOut, serial: ++_serial, instant: true);
   }
 
   /// Cues every part — including ones not mounted yet — to [phase]. A part
   /// named in [delays] waits that long first; see [PlateStagger].
-  void cueAll(
-    PlatePartPhase phase, {
-    Map<PlatePartId, Duration> delays = const {},
-  }) {
+  void cueAll(PlatePartPhase phase, {Map<PlatePartId, Duration> delays = const {}}) {
     final serial = ++_serial;
     _fallback = PlatePartCue(phase, serial: serial);
     final ids = <PlatePartId>{..._cues.keys, ...delays.keys};
@@ -456,10 +462,18 @@ class PlateSpecTransition {
     List<String?>? fromValues,
     List<String?>? toValues,
   }) {
+    if (id.kind == PlatePartKind.bandCorner) {
+      return keeps(
+        PlatePartId.band(id.index),
+        from,
+        to,
+        fromValues: fromValues,
+        toValues: toValues,
+      );
+    }
     final decided = keep?.call(id, from, to);
     if (decided != null) return decided;
-    if (keepIdentical &&
-        samePart(id, from, to, fromValues: fromValues, toValues: toValues)) {
+    if (keepIdentical && samePart(id, from, to, fromValues: fromValues, toValues: toValues)) {
       return true;
     }
     return keepKinds.contains(id.kind) &&
@@ -479,8 +493,7 @@ class PlateSpecTransition {
     List<String?>? fromValues,
     List<String?>? toValues,
   }) {
-    if (from.canvasWidth != to.canvasWidth ||
-        from.canvasHeight != to.canvasHeight) {
+    if (from.canvasWidth != to.canvasWidth || from.canvasHeight != to.canvasHeight) {
       return false;
     }
     final i = id.index;
@@ -506,8 +519,7 @@ class PlateSpecTransition {
         return a.$2 == b.$2 &&
             identical(a.$1.shape, b.$1.shape) &&
             _sameFill(a.$1.fill!, b.$1.fill!) &&
-            (!a.$1.paintsPanel ||
-                from.country.panelColor == to.country.panelColor);
+            (!a.$1.paintsPanel || from.country.panelColor == to.country.panelColor);
       case PlatePartKind.divider:
         final a = _layout(from).dividers.elementAtOrNull(i);
         final b = _layout(to).dividers.elementAtOrNull(i);
@@ -531,8 +543,7 @@ class PlateSpecTransition {
             a.bottomCornerRadius == b.bottomCornerRadius;
       case PlatePartKind.rule:
         if (i >= from.rules.length || i >= to.rules.length) return false;
-        return _sameBox(from.rules[i].box, to.rules[i].box) &&
-            from.inkOverride == to.inkOverride;
+        return _sameBox(from.rules[i].box, to.rules[i].box) && from.inkOverride == to.inkOverride;
       case PlatePartKind.label:
         if (i >= from.labels.length || i >= to.labels.length) return false;
         final a = from.labels[i], b = to.labels[i];
@@ -559,35 +570,23 @@ class PlateSpecTransition {
         b.fog == null;
   }
 
-  static ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) _layout(
-    PlateSpec spec,
-  ) => spec.background.layout(
-    Rect.fromLTWH(0, 0, spec.canvasWidth, spec.canvasHeight),
-  );
+  static ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) _layout(PlateSpec spec) =>
+      spec.background.layout(Rect.fromLTWH(0, 0, spec.canvasWidth, spec.canvasHeight));
 
   static bool _sameBox(PlateBox a, PlateBox b) =>
-      a.left == b.left &&
-      a.top == b.top &&
-      a.width == b.width &&
-      a.height == b.height;
+      a.left == b.left && a.top == b.top && a.width == b.width && a.height == b.height;
 }
 
 /// Puts a [PlateAnimationController] above the plate parts beneath it. With
 /// none, every part is settled and costs nothing beyond its wrapper.
 class PlateAnimationScope extends InheritedWidget {
-  const PlateAnimationScope({
-    super.key,
-    required this.controller,
-    required super.child,
-  });
+  const PlateAnimationScope({super.key, required this.controller, required super.child});
 
   final PlateAnimationController? controller;
 
-  static PlateAnimationController? maybeOf(BuildContext context) => context
-      .dependOnInheritedWidgetOfExactType<PlateAnimationScope>()
-      ?.controller;
+  static PlateAnimationController? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<PlateAnimationScope>()?.controller;
 
   @override
-  bool updateShouldNotify(PlateAnimationScope oldWidget) =>
-      oldWidget.controller != controller;
+  bool updateShouldNotify(PlateAnimationScope oldWidget) => oldWidget.controller != controller;
 }

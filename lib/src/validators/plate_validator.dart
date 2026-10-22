@@ -14,8 +14,7 @@ class PlateValidation {
   bool get isValid => reason == null;
 
   @override
-  bool operator ==(Object other) =>
-      other is PlateValidation && other.reason == reason;
+  bool operator ==(Object other) => other is PlateValidation && other.reason == reason;
 
   @override
   int get hashCode => reason.hashCode;
@@ -24,11 +23,7 @@ class PlateValidation {
 /// A plate as it stands, for a validator to judge.
 @immutable
 class PlateEntry {
-  const PlateEntry({
-    required this.spec,
-    required this.values,
-    this.activeIndex,
-  });
+  const PlateEntry({required this.spec, required this.values, this.activeIndex});
 
   final PlateSpec spec;
   final List<String?> values;
@@ -40,15 +35,13 @@ class PlateEntry {
   /// Canonical value of the group named [key]; '' if none.
   String group(String key) => spec.valueOfGroup(key, values);
 
-  PlateTextGroup? get activeGroup =>
-      activeIndex == null ? null : spec.groupAt(activeIndex!);
+  PlateTextGroup? get activeGroup => activeIndex == null ? null : spec.groupAt(activeIndex!);
 }
 
 bool isDigits(String value) =>
     value.isNotEmpty && value.codeUnits.every((u) => u >= 0x30 && u <= 0x39);
 
-bool isDigitsOfLength(String value, int length) =>
-    value.length == length && isDigits(value);
+bool isDigitsOfLength(String value, int length) => value.length == length && isDigits(value);
 
 /// Judges a plate. It never prevents input; what to do with the verdict is the
 /// host's decision.
@@ -78,7 +71,5 @@ abstract class GatedPlateValidator extends PlateValidator {
   @override
   PlateValidation validate(PlateEntry entry) =>
       restrictionVerdict(entry) ??
-      (entry.group(gateGroup).isEmpty
-          ? const PlateValidation.valid()
-          : judge(entry));
+      (entry.group(gateGroup).isEmpty ? const PlateValidation.valid() : judge(entry));
 }

@@ -15,13 +15,7 @@ sealed class PlateShape {
 }
 
 class PlateRectShape extends PlateShape {
-  const PlateRectShape(
-    this.left,
-    this.top,
-    this.width,
-    this.height,
-    super.color,
-  );
+  const PlateRectShape(this.left, this.top, this.width, this.height, super.color);
 
   final double left;
   final double top;
@@ -49,8 +43,7 @@ class PlateCircleShape extends PlateShape {
   final double radius;
 
   @override
-  Path toPath() =>
-      Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius));
+  Path toPath() => Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius));
 }
 
 /// The outline of a circle: a band [width] wide centred on [radius].
@@ -65,14 +58,8 @@ class PlateRingShape extends PlateShape {
   @override
   Path toPath() => Path.combine(
     PathOperation.difference,
-    Path()
-      ..addOval(
-        Rect.fromCircle(center: Offset(cx, cy), radius: radius + width / 2),
-      ),
-    Path()
-      ..addOval(
-        Rect.fromCircle(center: Offset(cx, cy), radius: radius - width / 2),
-      ),
+    Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius + width / 2)),
+    Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius - width / 2)),
   );
 }
 
@@ -98,12 +85,8 @@ class PlateCrescentShape extends PlateShape {
   @override
   Path toPath() => Path.combine(
     PathOperation.difference,
-    Path()
-      ..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius)),
-    Path()
-      ..addOval(
-        Rect.fromCircle(center: Offset(cx + biteDx, cy), radius: biteRadius),
-      ),
+    Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius)),
+    Path()..addOval(Rect.fromCircle(center: Offset(cx + biteDx, cy), radius: biteRadius)),
   );
 }
 

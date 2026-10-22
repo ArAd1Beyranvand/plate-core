@@ -30,11 +30,8 @@ enum PlateValuePreservation {
 /// Listen at three grains: [slot] fires per position, [completed] on a
 /// full/not-full flip, and the controller itself on every change.
 class PlateController extends ChangeNotifier {
-  PlateController({required PlateSpec spec, List<String?>? values})
-    : _spec = spec {
-    _values = [
-      for (var i = 0; i < spec.slotCount; i++) _printedCharacter(spec, i),
-    ];
+  PlateController({required PlateSpec spec, List<String?>? values}) : _spec = spec {
+    _values = [for (var i = 0; i < spec.slotCount; i++) _printedCharacter(spec, i)];
     if (values != null) {
       for (var i = 0; i < spec.slotCount && i < values.length; i++) {
         final printed = _printedCharacter(spec, i);
@@ -81,8 +78,7 @@ class PlateController extends ChangeNotifier {
   List<String?> get values => List<String?>.unmodifiable(_values);
 
   /// Null when [index] is outside the plate.
-  String? valueAt(int index) =>
-      index >= 0 && index < _values.length ? _values[index] : null;
+  String? valueAt(int index) => index >= 0 && index < _values.length ? _values[index] : null;
 
   /// Stores [value] at [index]; '' or null clears the slot. A character the
   /// alphabet refuses, or a write to a printed slot, is a no-op rather than an
@@ -100,18 +96,14 @@ class PlateController extends ChangeNotifier {
   /// fixed character. A write that breaks a restriction is refused whole.
   bool setValues(List<String?> values) => _store({
     for (var i = 0; i < _values.length; i++)
-      i:
-          _printedCharacter(_spec, i) ??
-          (i < values.length ? _sanitize(_spec, i, values[i]) : null),
+      i: _printedCharacter(_spec, i) ?? (i < values.length ? _sanitize(_spec, i, values[i]) : null),
   });
 
   void clear() => setValues(List<String?>.filled(_values.length, null));
 
   /// Every text group rendered through its alphabets, joined by [sep].
-  String text({String sep = ' '}) => [
-    for (final group in _spec.effectiveTextGroups)
-      _spec.renderGroup(group, _values),
-  ].join(sep);
+  String text({String sep = ' '}) =>
+      [for (final group in _spec.effectiveTextGroups) _spec.renderGroup(group, _values)].join(sep);
 
   /// The group named [key] in canonical (storage) form; '' for an unknown key.
   String group(String key) => _spec.valueOfGroup(key, _values);
@@ -136,11 +128,7 @@ class PlateController extends ChangeNotifier {
       final take = slot.alphabet.input == AlphabetInput.chosen
           ? characters.length - offset
           : slot.length;
-      writes[index] = _sanitize(
-        _spec,
-        index,
-        characters.skip(offset).take(take).join(),
-      );
+      writes[index] = _sanitize(_spec, index, characters.skip(offset).take(take).join());
       offset += take;
     }
     return _store(writes);
@@ -154,9 +142,7 @@ class PlateController extends ChangeNotifier {
   /// The character at [index]. Out of range gives a listenable that stays null,
   /// so a widget outliving a shrinking spec paints an empty slot.
   ValueListenable<String?> slot(int index) =>
-      index >= 0 && index < _slots.length
-      ? _slots[index]
-      : const _AlwaysNull<String?>();
+      index >= 0 && index < _slots.length ? _slots[index] : const _AlwaysNull<String?>();
 
   /// Fires only when [isCompleted] flips.
   ValueListenable<bool> get completed => _completed;
@@ -184,10 +170,23 @@ class PlateController extends ChangeNotifier {
     }
     _foundSlots();
     _completed.value = _computeCompleted();
+    _notifyOutsideBuild();
+  }
+
+  /// A host swapping `spec:` or `controller:` lands here mid-layout; listeners
+  /// that setState would assert, so they hear of it after the frame.
+  void _notifyOutsideBuild() {
+    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (!_disposed) notifyListeners();
+      });
+      return;
+    }
     notifyListeners();
   }
 
   PlateInputTarget? _target;
+  bool _disposed = false;
   PlateValidation? Function()? _probe;
   PlateValidation? _lastVerdict;
 
@@ -219,8 +218,7 @@ class PlateController extends ChangeNotifier {
     _target = target;
     // Attached mid-build from the canvas's initState: listeners that setState
     // would assert, so they hear of it after the frame.
-    if (SchedulerBinding.instance.schedulerPhase ==
-        SchedulerPhase.persistentCallbacks) {
+    if (SchedulerBinding.instance.schedulerPhase == SchedulerPhase.persistentCallbacks) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (identical(_target, target)) notifyListeners();
       });
@@ -233,7 +231,7 @@ class PlateController extends ChangeNotifier {
   void detach(PlateInputTarget target) {
     if (identical(_target, target)) {
       _target = null;
-      notifyListeners();
+      _notifyOutsideBuild();
     }
   }
 
@@ -264,6 +262,7 @@ class PlateController extends ChangeNotifier {
 
   @override
   void dispose() {
+    _disposed = true;
     // Cleared first: a later detach from an outliving canvas must not notify a
     // disposed ChangeNotifier.
     _target = null;
@@ -277,10 +276,7 @@ class PlateController extends ChangeNotifier {
   }
 
   void _foundSlots() {
-    _slots = [
-      for (var i = 0; i < _spec.slotCount; i++)
-        ValueNotifier<String?>(_values[i]),
-    ];
+    _slots = [for (var i = 0; i < _spec.slotCount; i++) ValueNotifier<String?>(_values[i])];
   }
 
   /// Writes [changes] (slot index to value) unless they break a restriction,
@@ -313,10 +309,7 @@ class PlateController extends ChangeNotifier {
   /// Empties, in place, every register of [values] that breaks one of
   /// [spec]'s restrictions, for paths handed a whole value rather than asked
   /// to write one. Returns the last restriction broken.
-  static PlateRestriction? _clearRestricted(
-    PlateSpec spec,
-    List<String?> values,
-  ) {
+  static PlateRestriction? _clearRestricted(PlateSpec spec, List<String?> values) {
     PlateRestriction? broken;
     for (final r in spec.restrictions) {
       if (!r.matches(spec.valueOfGroup(r.group, values))) continue;
@@ -329,8 +322,7 @@ class PlateController extends ChangeNotifier {
   }
 
   bool _computeCompleted() =>
-      _values.isNotEmpty &&
-      _spec.slots.indexed.every((e) => e.$2.isComplete(_values[e.$1]));
+      _values.isNotEmpty && _spec.slots.indexed.every((e) => e.$2.isComplete(_values[e.$1]));
 
   /// [value] as the slot stores it: canonical, or null when cleared or refused.
   static String? _sanitize(PlateSpec spec, int index, String? value) {
@@ -345,13 +337,10 @@ class PlateController extends ChangeNotifier {
   static String? _printedCharacter(PlateSpec spec, int index) {
     final slot = spec.slots[index];
     final characters = slot.alphabet.characters;
-    return slot.length == 1 && characters.length == 1
-        ? characters.single
-        : null;
+    return slot.length == 1 && characters.length == 1 ? characters.single : null;
   }
 
-  static bool _hasKeyedGroups(PlateSpec spec) =>
-      spec.effectiveTextGroups.any((g) => g.key != null);
+  static bool _hasKeyedGroups(PlateSpec spec) => spec.effectiveTextGroups.any((g) => g.key != null);
 
   static List<String?> _migrate(
     PlateSpec from,
@@ -423,7 +412,5 @@ class _AlwaysNull<T> implements ValueListenable<T?> {
 
 extension on String {
   /// By rune, not code unit, which would split scripts outside the BMP.
-  List<String> get characters => [
-    for (final rune in runes) String.fromCharCode(rune),
-  ];
+  List<String> get characters => [for (final rune in runes) String.fromCharCode(rune)];
 }
