@@ -20,3 +20,5 @@ abstract final class EuropeanStars {
     PlateStarRingShape(450, 300, 200, 37.5, 12, _gold),
   ]);
 }
+
+//todo: i dont like these drawings to be inside 'model' folder.
