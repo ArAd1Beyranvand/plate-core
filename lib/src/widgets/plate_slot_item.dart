@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
 import '../model/plate_alphabet.dart';
@@ -55,7 +56,8 @@ class PlateSlotItem extends StatelessWidget {
     }
     final typed =
         behavior == SlotBehavior.imeField ||
-        (behavior != SlotBehavior.sheet && slot.alphabet.input == AlphabetInput.typed);
+        (behavior != SlotBehavior.sheet &&
+            slot.alphabet.input == AlphabetInput.typed);
     if (typed) {
       return _TypedField(
         slot: slot,
@@ -86,7 +88,11 @@ class PlateSlotItem extends StatelessWidget {
 
 /// Bare rendered character (glyph slot).
 class _GlyphSlot extends StatelessWidget {
-  const _GlyphSlot({required this.slot, required this.value, required this.theme});
+  const _GlyphSlot({
+    required this.slot,
+    required this.value,
+    required this.theme,
+  });
 
   final PlateSlot slot;
   final String? value;
@@ -160,7 +166,9 @@ class _TypedField extends StatelessWidget {
     final style = _fittedStyle();
     // A shrunk run keeps its bottom where a full-size one would sit, so its
     // baseline lines up with the neighbouring slots.
-    final shrink = theme.glyphStyle(slot.box.height, theme.ink).fontSize! - style.fontSize!;
+    final shrink =
+        theme.glyphStyle(slot.box.height, theme.ink).fontSize! -
+        style.fontSize!;
 
     return SizedBox(
       width: slot.box.width,
@@ -181,85 +189,98 @@ class _TypedField extends StatelessWidget {
           onBackspace?.call();
           return KeyEventResult.handled;
         },
-        child: Listener(
-          // Flips the keyboard type on pointer down so the rebuilt field is in
-          // place when the tap-up opens the input connection.
-          onPointerDown: behavior == SlotBehavior.keypadFirstField
-              ? (_) => onRequestSystemKeyboard?.call()
-              : null,
-          child: ListenableBuilder(
-            // The controller too: the underline darkens as the slot fills.
-            listenable: Listenable.merge([focusNode, controller]),
-            builder: (context, _) => TextField(
-              controller: controller,
-              focusNode: focusNode,
-              readOnly: readOnly,
-              onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
-              // A slot is filled from its end, so the cursor sits after what is
-              // already there whichever part of the field was tapped.
-              onTap: () =>
-                  controller.selection = TextSelection.collapsed(offset: controller.text.length),
-              showCursor: readOnly ? focusNode.hasFocus : null,
-              textAlign: TextAlign.center,
-              // The slot's script, not the plate's: Persian numerals run
-              // left to right inside an RTL plate, and the caret must follow.
-              textDirection: slot.alphabet.direction,
-              style: style,
-              cursorColor: theme.activeColor,
-              decoration: InputDecoration(
-                isDense: true,
-                // Left inset balances the letter spacing trailing the run.
-                contentPadding: EdgeInsets.only(
-                  left: slot.spacing,
-                  // A full-size run (0.72 of the box) centred, so the field
-                  // fills its box like a chosen slot: same baseline, underline
-                  // on the box's bottom edge.
-                  top: slot.box.height * 0.14 + shrink,
-                  bottom: slot.box.height * 0.14,
+        child: _HoldsPageStill(
+          child: Listener(
+            // Flips the keyboard type on pointer down so the rebuilt field is in
+            // place when the tap-up opens the input connection.
+            onPointerDown: behavior == SlotBehavior.keypadFirstField
+                ? (_) => onRequestSystemKeyboard?.call()
+                : null,
+            child: ListenableBuilder(
+              // The controller too: the underline darkens as the slot fills.
+              listenable: Listenable.merge([focusNode, controller]),
+              builder: (context, _) => TextField(
+                controller: controller,
+                focusNode: focusNode,
+                readOnly: readOnly,
+                onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
+                // A slot is filled from its end, so the cursor sits after what is
+                // already there whichever part of the field was tapped.
+                onTap: () => controller.selection = TextSelection.collapsed(
+                  offset: controller.text.length,
                 ),
-                filled: false,
-                counterText: '',
-                hintText: slot.alphabet.placeholder,
-                hintStyle: style.copyWith(color: theme.inactiveColor, letterSpacing: 0),
-                border: UnderlineInputBorder(borderSide: BorderSide(color: theme.inactiveColor)),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: controller.text.isEmpty ? theme.inactiveColor : theme.activeColor,
+                showCursor: readOnly ? focusNode.hasFocus : null,
+                textAlign: TextAlign.center,
+                // The slot's script, not the plate's: Persian numerals run
+                // left to right inside an RTL plate, and the caret must follow.
+                textDirection: slot.alphabet.direction,
+                style: style,
+                cursorColor: theme.activeColor,
+                decoration: InputDecoration(
+                  isDense: true,
+                  // Left inset balances the letter spacing trailing the run.
+                  contentPadding: EdgeInsets.only(
+                    left: slot.spacing,
+                    // A full-size run (0.72 of the box) centred, so the field
+                    // fills its box like a chosen slot: same baseline, underline
+                    // on the box's bottom edge.
+                    top: slot.box.height * 0.14 + shrink,
+                    bottom: slot.box.height * 0.14,
+                  ),
+                  filled: false,
+                  counterText: '',
+                  hintText: slot.alphabet.placeholder,
+                  hintStyle: style.copyWith(
+                    color: theme.inactiveColor,
+                    letterSpacing: 0,
+                  ),
+                  border: UnderlineInputBorder(
+                    borderSide: BorderSide(color: theme.inactiveColor),
+                  ),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: controller.text.isEmpty
+                          ? theme.inactiveColor
+                          : theme.activeColor,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: theme.activeColor),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: theme.activeColor),
-                ),
-              ),
-              onChanged: (typed) {
-                if (typed.isEmpty || slot.accepts(typed)) {
-                  final canonical = slot.canonical(typed);
-                  if (slot.alphabet.glyphs.isEmpty && canonical != typed) {
+                onChanged: (typed) {
+                  if (typed.isEmpty || slot.accepts(typed)) {
+                    final canonical = slot.canonical(typed);
+                    if (slot.alphabet.glyphs.isEmpty && canonical != typed) {
+                      controller.value = TextEditingValue(
+                        text: canonical,
+                        selection: TextSelection.collapsed(
+                          offset: canonical.length,
+                        ),
+                      );
+                    }
+                    if (!onChanged(canonical)) return;
+                    if (slot.isFull(canonical)) onCompleted?.call();
+                  } else {
+                    // A run keeps what was already valid in it; a stray character
+                    // only costs itself.
+                    final kept = slot.render(value ?? '');
                     controller.value = TextEditingValue(
-                      text: canonical,
-                      selection: TextSelection.collapsed(offset: canonical.length),
+                      text: kept,
+                      selection: TextSelection.collapsed(offset: kept.length),
                     );
                   }
-                  if (!onChanged(canonical)) return;
-                  if (slot.isFull(canonical)) onCompleted?.call();
-                } else {
-                  // A run keeps what was already valid in it; a stray character
-                  // only costs itself.
-                  final kept = slot.render(value ?? '');
-                  controller.value = TextEditingValue(
-                    text: kept,
-                    selection: TextSelection.collapsed(offset: kept.length),
-                  );
-                }
-              },
-              maxLength: slot.length,
-              keyboardType:
-                  behavior == SlotBehavior.hardwareField ||
-                      (behavior == SlotBehavior.keypadFirstField && !systemKeyboard)
-                  ? TextInputType.none
-                  : slot.alphabet.isNumeric
-                  ? TextInputType.number
-                  : TextInputType.text,
+                },
+                maxLength: slot.length,
+                keyboardType:
+                    behavior == SlotBehavior.hardwareField ||
+                        (behavior == SlotBehavior.keypadFirstField &&
+                            !systemKeyboard)
+                    ? TextInputType.none
+                    : slot.alphabet.isNumeric
+                    ? TextInputType.number
+                    : TextInputType.text,
+              ),
             ),
           ),
         ),
@@ -280,7 +301,10 @@ class _TypedField extends StatelessWidget {
     final painter = TextPainter(textDirection: alphabet.direction, maxLines: 1);
     var widest = 0.0;
     for (final c in alphabet.characters) {
-      painter.text = TextSpan(text: alphabet.render(c) * slot.length, style: base);
+      painter.text = TextSpan(
+        text: alphabet.render(c) * slot.length,
+        style: base,
+      );
       painter.layout();
       if (painter.width > widest) widest = painter.width;
     }
@@ -289,7 +313,10 @@ class _TypedField extends StatelessWidget {
     final available = slot.box.width - slot.spacing - 4;
     if (widest <= available || widest == 0) return base;
     final scale = available / widest;
-    return base.copyWith(fontSize: base.fontSize! * scale, letterSpacing: slot.spacing * scale);
+    return base.copyWith(
+      fontSize: base.fontSize! * scale,
+      letterSpacing: slot.spacing * scale,
+    );
   }
 }
 
@@ -336,12 +363,17 @@ class _ChosenSlot extends StatelessWidget {
     if (behavior == SlotBehavior.sheet) {
       return InkWell(
         onTap: onPressed,
-        child: _SlotBox(slot: slot, underlineColor: restingColor, child: letter),
+        child: _SlotBox(
+          slot: slot,
+          underlineColor: restingColor,
+          child: letter,
+        ),
       );
     }
 
     final consumesKeys =
-        behavior == SlotBehavior.hardwareField || behavior == SlotBehavior.keypadFirstField;
+        behavior == SlotBehavior.hardwareField ||
+        behavior == SlotBehavior.keypadFirstField;
     return Focus(
       focusNode: focusNode,
       onKeyEvent: consumesKeys
@@ -381,7 +413,11 @@ class _ChosenSlot extends StatelessWidget {
 }
 
 class _SlotBox extends StatelessWidget {
-  const _SlotBox({required this.slot, required this.underlineColor, required this.child});
+  const _SlotBox({
+    required this.slot,
+    required this.underlineColor,
+    required this.child,
+  });
 
   final PlateSlot slot;
   final Color underlineColor;
@@ -400,4 +436,25 @@ class _SlotBox extends StatelessWidget {
       ),
     ),
   );
+}
+
+/// Swallows the request to scroll a focused slot into view, so editing the
+/// plate itself never moves the page. Fields outside the plate keep the
+/// default behaviour.
+class _HoldsPageStill extends SingleChildRenderObjectWidget {
+  const _HoldsPageStill({required super.child});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderHoldsPageStill();
+}
+
+class _RenderHoldsPageStill extends RenderProxyBox {
+  @override
+  void showOnScreen({
+    RenderObject? descendant,
+    Rect? rect,
+    Duration duration = Duration.zero,
+    Curve curve = Curves.ease,
+  }) {}
 }
