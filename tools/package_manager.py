@@ -9,11 +9,13 @@ tools/package_state.json.
 Usage: python3 tools/package_manager.py
 """
 import json
+import os
 import queue
 import re
 import subprocess
 import shutil
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 import tkinter as tk
 import unicodedata
@@ -25,6 +27,8 @@ ROOT = Path(__file__).resolve().parent.parent
 STATE_FILE = ROOT / "tools" / "package_state.json"
 LOG_DIR = ROOT / "tools" / "manager_logs"
 REPORT_DIR = ROOT / "reports"
+OWNER = "ArAd1Beyranvand"
+PROXY = ""  # set from the GUI; empty = inherit environment / git config
 STEPS = ("commit", "push", "check", "publish")
 CHECK_MODES = ("dry-run", "pana", "both")
 
@@ -125,23 +129,53 @@ def now():
     return datetime.now().strftime("%Y-%m-%d %H:%M")
 
 
+def default_proxy():
+    """The proxy git is configured with (what works for you), else the env one."""
+    p = subprocess.run(["git", "config", "--global", "http.proxy"], capture_output=True, text=True)
+    return p.stdout.strip() or os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
+
+
 def pana_cmd():
     if shutil.which("pana"):
         return ["pana"]
     return ["dart", "pub", "global", "run", "pana"]
 
 
-def run(cmd, cwd, log):
-    log(f"$ {' '.join(cmd)}   [{cwd.name}]")
+def run(cmd, cwd, log, quiet=False, timeout=1800):
+    """Run cmd, streaming its output to log live; heartbeat while it is silent."""
+    log(f"$ {' '.join(cmd)}")
+    env = {**os.environ, "GIT_TERMINAL_PROMPT": "0", "GIT_ASKPASS": "true", "CI": "1"}
+    if PROXY:
+        for k in ("HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "http_proxy", "https_proxy", "all_proxy"):
+            env[k] = PROXY
+        env.update(GIT_CONFIG_COUNT="1", GIT_CONFIG_KEY_0="http.proxy", GIT_CONFIG_VALUE_0=PROXY)
+    start = time.time()
     try:
-        p = subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=1800)
-    except (OSError, subprocess.TimeoutExpired) as e:
+        p = subprocess.Popen(cmd, cwd=cwd, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
+                             stderr=subprocess.STDOUT, text=True, env=env)
+    except OSError as e:
         log(f"  error: {e}")
         return 1, ""
-    out = (p.stdout + p.stderr).strip()
-    if out:
-        log("\n".join("  " + l for l in out.splitlines()[-15:]))
-    return p.returncode, out
+    lines = []
+
+    def reader():
+        for l in p.stdout:
+            lines.append(l)
+            if not quiet:
+                log("  " + l.rstrip())
+
+    t = threading.Thread(target=reader, daemon=True)
+    t.start()
+    while t.is_alive():
+        t.join(15)
+        if t.is_alive():
+            log(f"  ... still running ({int(time.time() - start)}s, {len(lines)} lines so far)")
+            if time.time() - start > timeout:
+                p.kill()
+                log(f"  timeout after {timeout}s, killed")
+    p.wait()
+    log(f"  -> exit {p.returncode} in {time.time() - start:.1f}s")
+    return p.returncode, "".join(lines).strip()
 
 
 def git_info(path):
@@ -194,6 +228,9 @@ class App(tk.Tk):
         ttk.Combobox(top, textvariable=self.check_mode, values=CHECK_MODES, width=8,
                      state="readonly").pack(side="left")
         ttk.Button(top, text="Refresh git status", command=self.refresh_git).pack(side="left", padx=12)
+        ttk.Label(top, text="Proxy:").pack(side="left", padx=(12, 2))
+        self.proxy = tk.StringVar(value=default_proxy())
+        ttk.Entry(top, textvariable=self.proxy, width=24).pack(side="left")
         ttk.Label(top, text="Parallel:").pack(side="left", padx=(12, 2))
         self.workers = tk.IntVar(value=4)
         ttk.Spinbox(top, from_=1, to=16, textvariable=self.workers, width=3).pack(side="left")
@@ -318,6 +355,10 @@ class App(tk.Tk):
 
     def start(self, limit):
         todo = [p for p in self.pkgs if any(self.opts[p].values())]
+        nogit = [p for p in todo if not (ROOT / p / ".git").exists()]
+        todo = [p for p in todo if p not in nogit]
+        if nogit:
+            self.q.put(("log", f"Skipping {len(nogit)} package(s) without git: {', '.join(nogit)}"))
         if limit:
             todo = [p for p in todo if not self.state_data.get(p, {}).get("batch_done")][:limit]
         if not todo:
@@ -328,6 +369,7 @@ class App(tk.Tk):
                 f"{len(pubs)} package(s) will be REALLY published to pub.dev "
                 "(irreversible). Continue?"):
             return
+        self.proxy_value = self.proxy.get().strip()
         self.stop_flag.clear()
         self.run_btn.configure(state="disabled")
         self.batch_btn.configure(state="disabled")
@@ -352,6 +394,17 @@ class App(tk.Tk):
             self.q.put(("log", s))
 
         self.q.put(("log", f"Running {len(todo)} package(s), {workers} in parallel: {', '.join(todo)}"))
+        global PROXY
+        PROXY = self.proxy_value
+        log(f"Proxy: {PROXY or '(inherited from environment/git config)'}")
+        if any(opts[p]["push"] for p in todo):
+            rc, out = run(["gh", "api", "user", "-q", ".login"], ROOT, log, quiet=True, timeout=30)
+            if rc:
+                log("ABORT: cannot reach GitHub (gh api user failed). Nothing was pushed or created.\n"
+                    f"  {out}\n  Fix the Proxy field (or your network) and run again.")
+                fh.close()
+                self.q.put(("done", "Aborted: GitHub unreachable"))
+                return
         failed = []
 
         def one(p):
@@ -390,7 +443,7 @@ class App(tk.Tk):
         (REPORT_DIR / f"{p}.txt").write_text(header + "\n\n".join(parts) + "\n")
 
     def run_pana(self, path, log):
-        rc, out = run(pana_cmd() + ["--no-warning", "--json", "."], path, lambda s: None)
+        rc, out = run(pana_cmd() + ["--no-warning", "--json", "."], path, log, quiet=True)
         try:
             data = json.loads(out[out.index("{"):])
         except ValueError:
@@ -404,10 +457,33 @@ class App(tk.Tk):
         log(lines[0])
         return rc, "\n".join(lines)
 
+    def ensure_remote(self, p, path, log):
+        """Make sure origin exists and the GitHub repo behind it exists (public)."""
+        rc, url = run(["git", "remote", "get-url", "origin"], path, log)
+        if rc != 0:
+            url = ""
+        if url:
+            repo = re.sub(r"(\.git)?/?$", "", url)
+            repo = re.sub(r".*github\.com[:/]", "", repo)
+        else:
+            repo = f"{OWNER}/{p}"
+        rc, out = run(["gh", "repo", "view", repo], path, log, quiet=True, timeout=60)
+        if rc != 0 and not re.search(r"Could not resolve to a Repository|HTTP 404|not found", out, re.I):
+            log(f"cannot check {repo} (network/proxy problem, not creating it): {out}")
+            return False
+        if rc != 0:
+            log(f"GitHub repo {repo} not found, creating it (public)")
+            rc, _ = run(["gh", "repo", "create", repo, "--public"], path, log)
+            if rc:
+                return False
+        if not url:
+            rc, _ = run(["git", "remote", "add", "origin", f"https://github.com/{repo}.git"], path, log)
+        return rc == 0 or bool(url)
+
     def step_all(self, p, path, o, mode, st, log):
-        if not (path / ".git").exists() and (o["commit"] or o["push"]):
-            log("no git repo, skipping commit/push")
-            o = {**o, "commit": False, "push": False}
+        if not (path / ".git").exists():
+            log("no git repo, skipping package")
+            return True
         if o["commit"]:
             rc, out = run(["git", "status", "--short"], path, log)
             if out:
@@ -421,10 +497,15 @@ class App(tk.Tk):
             else:
                 log("nothing to commit")
         if o["push"]:
+            if not self.ensure_remote(p, path, log):
+                log("NO GITHUB REMOTE")
+                return False
             # -u sets the upstream on a first push and is harmless afterwards.
             _, br = run(["git", "branch", "--show-current"], path, log)
-            rc, _ = run(["git", "push", "-u", "origin", br or "HEAD"], path, log)
+            rc, out = run(["git", "push", "-u", "origin", br or "HEAD"], path, log)
             if rc:
+                if "imeout" in out or "imed out" in out:
+                    log("HINT: GitHub over IPv6 times out; prefer IPv4 system-wide (gai.conf)")
                 log("PUSH FAILED")
                 return False
             st["last_push"] = now()
