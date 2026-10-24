@@ -1007,8 +1007,7 @@ class _PlateInputs extends StatelessWidget {
   /// A chosen slot opens the picker on tap even when a keypad drives input.
   static bool _opensPicker(SlotBehavior behavior, PlateSlot slot) =>
       behavior == SlotBehavior.sheet ||
-      (slot.alphabet.input == AlphabetInput.chosen &&
-          (behavior == SlotBehavior.externalField || behavior == SlotBehavior.keypadFirstField));
+      (slot.alphabet.input == AlphabetInput.chosen && behavior == SlotBehavior.externalField);
   final bool Function(int index, String value) commit;
 
   @override
@@ -1287,6 +1286,9 @@ class _SlotBinding extends StatelessWidget {
     return ValueListenableBuilder<String?>(
       valueListenable: controller.slot(index),
       builder: (context, value, _) {
+        final field = behavior == SlotBehavior.keypadFirstField
+            ? machine.fieldAt(index)
+            : machine.controllerAt(index);
         machine.syncController(index, value);
         return ValueListenableBuilder<bool>(
           valueListenable: machine.systemKeyboard,
@@ -1295,7 +1297,7 @@ class _SlotBinding extends StatelessWidget {
             behavior: behavior,
             theme: theme,
             value: value,
-            controller: machine.controllerAt(index),
+            controller: field,
             focusNode: machine.focusNodeAt(index),
             onChanged: (v) => commit(index, v),
             onCompleted: onCompleted,

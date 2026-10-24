@@ -45,7 +45,7 @@ class PlateSlotItem extends StatelessWidget {
   /// the platform keyboard.
   final bool systemKeyboard;
 
-  /// [SlotBehavior.keypadFirstField] only: fired when a typed slot is tapped.
+  /// [SlotBehavior.keypadFirstField] only: fired when the slot is tapped.
   final VoidCallback? onRequestSystemKeyboard;
 
   @override
@@ -56,6 +56,7 @@ class PlateSlotItem extends StatelessWidget {
     }
     final typed =
         behavior == SlotBehavior.imeField ||
+        behavior == SlotBehavior.keypadFirstField ||
         (behavior != SlotBehavior.sheet &&
             slot.alphabet.input == AlphabetInput.typed);
     if (typed) {

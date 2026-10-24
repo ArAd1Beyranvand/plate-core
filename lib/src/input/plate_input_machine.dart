@@ -66,8 +66,8 @@ class PlateInputMachine implements PlateInputTarget {
   @override
   bool get systemKeyboardActive => systemKeyboard.value;
 
-  /// Typed slots take the platform keyboard until a keypad key is pressed,
-  /// focus reaches a chosen slot, or focus leaves the plate.
+  /// The plate takes the platform keyboard until a keypad key is pressed or
+  /// focus leaves the plate.
   void requestSystemKeyboard() => _setSystemKeyboard(true);
 
   void _setSystemKeyboard(bool value) {
@@ -91,6 +91,10 @@ class PlateInputMachine implements PlateInputTarget {
 
   FocusNode focusNodeAt(int index) => _focusNodes[index];
   TextEditingController? controllerAt(int index) => _controllers[index];
+
+  /// [controllerAt], created on demand for a chosen slot, which under
+  /// [PlateInputSource.keypadFirst] takes the platform keyboard too.
+  TextEditingController fieldAt(int index) => _controllers[index] ??= TextEditingController();
   FocusNode? mirrorFocusNodeAt(int mirrorIndex) => _mirrorFocusNodes[mirrorIndex];
   TextEditingController? mirrorControllerAt(int mirrorIndex) => _mirrorControllers[mirrorIndex];
 
@@ -113,10 +117,8 @@ class PlateInputMachine implements PlateInputTarget {
         }
       }
     }
-    // Chosen slots and a plate without focus fall back to the keypad.
-    if (active == null || spec.slots[active].alphabet.input != AlphabetInput.typed) {
-      _setSystemKeyboard(false);
-    }
+    // A plate without focus falls back to the keypad.
+    if (active == null) _setSystemKeyboard(false);
     if (active != _activeIndex) {
       _activeIndex = active;
       onActiveIndexChanged?.call(active);
@@ -128,19 +130,12 @@ class PlateInputMachine implements PlateInputTarget {
   void advanceFrom(int index) {
     final next = spec.nextIndex(index);
     if (next == null) return;
-    final fromKeyboard = systemKeyboard.value;
     final nextBehavior = resolveSlotBehavior(
       mode: PlateMode.input,
       input: spec.slots[next].alphabet.input,
       source: inputSource,
     );
-    final chosenNext = spec.slots[next].alphabet.input == AlphabetInput.chosen;
     if (nextBehavior == SlotBehavior.sheet) {
-      onSheetRequested?.call(next);
-    } else if (fromKeyboard && chosenNext) {
-      // Typed on the platform keyboard: hand over to the keypad (focusing a
-      // chosen slot drops the keyboard) and open the picker the keypad skips.
-      _focusNodes[next].requestFocus();
       onSheetRequested?.call(next);
     } else {
       _focusNodes[next].requestFocus();

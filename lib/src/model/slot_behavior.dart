@@ -18,8 +18,8 @@ enum SlotBehavior {
   /// claims focus.
   externalField,
 
-  /// [PlateInputSource.keypadFirst]: a tap on a typed slot asks for the
-  /// platform keyboard.
+  /// [PlateInputSource.keypadFirst]: a text field for every slot, chosen ones
+  /// included; a tap asks for the platform keyboard.
   keypadFirstField,
 
   /// Tapping opens the character picker.
