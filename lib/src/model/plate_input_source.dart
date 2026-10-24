@@ -19,8 +19,8 @@ enum PlateInputSource {
 
   /// The on-screen keypad, with physical keys always accepted. Tapping a typed
   /// slot asks for the platform keyboard instead; it stays up while focus
-  /// moves between typed slots and drops back when focus reaches a chosen slot
-  /// or leaves the plate. The host shows its keypad unless
+  /// moves between typed slots and drops back when a keypad key is pressed,
+  /// focus reaches a chosen slot, or focus leaves the plate. The host shows its keypad unless
   /// [PlateController.systemKeyboardActive].
   keypadFirst,
 }

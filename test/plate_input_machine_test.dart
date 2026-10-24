@@ -387,4 +387,34 @@ void main() {
       );
     });
   });
+
+  group('keypadFirst system keyboard', () {
+    for (final (name, press) in <(String, void Function(PlateInputMachine))>[
+      ('submitCharacter', (m) => m.submitCharacter('7')),
+      ('backspaceCharacter', (m) => m.backspaceCharacter()),
+    ]) {
+      testWidgets('$name drops the platform keyboard', (tester) async {
+        final h = _Harness(
+          spec: _spec(),
+          values: ['1', null, null],
+          inputSource: PlateInputSource.keypadFirst,
+        );
+        await h.mount(tester);
+        await h.focus(tester, 1);
+        h.machine.requestSystemKeyboard();
+        expect(h.machine.systemKeyboardActive, isTrue);
+
+        press(h.machine);
+        await tester.pump();
+
+        expect(
+          h.machine.systemKeyboardActive,
+          isFalse,
+          reason: 'a keypad key means the keypad is wanted',
+        );
+
+        await h.retire(tester);
+      });
+    }
+  });
 }

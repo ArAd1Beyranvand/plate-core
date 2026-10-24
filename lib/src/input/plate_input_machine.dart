@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/plate_alphabet.dart';
@@ -66,13 +67,16 @@ class PlateInputMachine implements PlateInputTarget {
   @override
   bool get systemKeyboardActive => systemKeyboard.value;
 
-  /// Typed slots take the platform keyboard until focus reaches a chosen slot
-  /// or leaves the plate.
+  /// Typed slots take the platform keyboard until a keypad key is pressed,
+  /// focus reaches a chosen slot, or focus leaves the plate.
   void requestSystemKeyboard() => _setSystemKeyboard(true);
 
   void _setSystemKeyboard(bool value) {
     if (systemKeyboard.value == value) return;
     systemKeyboard.value = value;
+    // The focused field only switches to TextInputType.none on its rebuild,
+    // which leaves an already open keyboard up; close it now.
+    if (!value) SystemChannels.textInput.invokeMethod<void>('TextInput.hide');
     onSystemKeyboardChanged?.call();
   }
 
@@ -128,12 +132,19 @@ class PlateInputMachine implements PlateInputTarget {
   void advanceFrom(int index) {
     final next = spec.nextIndex(index);
     if (next == null) return;
+    final fromKeyboard = systemKeyboard.value;
     final nextBehavior = resolveSlotBehavior(
       mode: PlateMode.input,
       input: spec.slots[next].alphabet.input,
       source: inputSource,
     );
+    final chosenNext = spec.slots[next].alphabet.input == AlphabetInput.chosen;
     if (nextBehavior == SlotBehavior.sheet) {
+      onSheetRequested?.call(next);
+    } else if (fromKeyboard && chosenNext) {
+      // Typed on the platform keyboard: hand over to the keypad (focusing a
+      // chosen slot drops the keyboard) and open the picker the keypad skips.
+      _focusNodes[next].requestFocus();
       onSheetRequested?.call(next);
     } else {
       _focusNodes[next].requestFocus();
@@ -185,6 +196,8 @@ class PlateInputMachine implements PlateInputTarget {
 
   @override
   void submitCharacter(String c) {
+    // A keypad key means the keypad is wanted, not the platform keyboard.
+    _setSystemKeyboard(false);
     final index = _activeIndex;
     if (index == null) return;
     final slot = spec.slots[index];
@@ -197,9 +210,12 @@ class PlateInputMachine implements PlateInputTarget {
 
   @override
   void backspaceCharacter() {
-    final index = _activeIndex;
-    if (index == null) return;
+    _setSystemKeyboard(false);
     final values = readValues();
+    // Focus can drop once the plate is complete; the keypad still deletes
+    // from the end.
+    final index = _activeIndex ?? values.lastIndexWhere((v) => v != null && v.isNotEmpty);
+    if (index < 0) return;
     final current = values[index];
     final empty = current == null || current.isEmpty;
     final target = empty ? spec.previousIndex(index) : index;
