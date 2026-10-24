@@ -1,4 +1,3 @@
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import '../model/plate_alphabet.dart';
@@ -74,9 +73,6 @@ class PlateInputMachine implements PlateInputTarget {
   void _setSystemKeyboard(bool value) {
     if (systemKeyboard.value == value) return;
     systemKeyboard.value = value;
-    // The focused field only switches to TextInputType.none on its rebuild,
-    // which leaves an already open keyboard up; close it now.
-    if (!value) SystemChannels.textInput.invokeMethod<void>('TextInput.hide');
     onSystemKeyboardChanged?.call();
   }
 

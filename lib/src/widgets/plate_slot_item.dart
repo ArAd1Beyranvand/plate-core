@@ -133,7 +133,13 @@ class _GlyphSlot extends StatelessWidget {
 }
 
 /// TextField restyled to a bare glyph with thin underline.
-class _TypedField extends StatelessWidget {
+///
+/// Under [SlotBehavior.keypadFirstField] the slot's [focusNode] sits on a
+/// wrapper and the field has its own node, focused only while [systemKeyboard]
+/// holds. On the keypad no field is focused, so no text input connection is
+/// open: an open one, even with [TextInputType.none], makes the web engine
+/// read the keyboard closing as an inset and leave its space blank.
+class _TypedField extends StatefulWidget {
   const _TypedField({
     required this.slot,
     required this.value,
@@ -161,7 +167,81 @@ class _TypedField extends StatelessWidget {
   final VoidCallback? onRequestSystemKeyboard;
 
   @override
+  State<_TypedField> createState() => _TypedFieldState();
+}
+
+class _TypedFieldState extends State<_TypedField> {
+  final FocusNode _fieldNode = FocusNode();
+
+  bool get _split => widget.behavior == SlotBehavior.keypadFirstField;
+
+  @override
+  void initState() {
+    super.initState();
+    widget.focusNode.addListener(_forwardFocus);
+  }
+
+  @override
+  void didUpdateWidget(_TypedField old) {
+    super.didUpdateWidget(old);
+    if (old.focusNode != widget.focusNode) {
+      old.focusNode.removeListener(_forwardFocus);
+      widget.focusNode.addListener(_forwardFocus);
+    }
+    if (!_split) return;
+    if (!widget.systemKeyboard && _fieldNode.hasFocus) {
+      // Back on the keypad: the wrapper takes focus, closing the connection.
+      widget.focusNode.requestFocus();
+    } else {
+      _forwardFocus();
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.focusNode.removeListener(_forwardFocus);
+    _fieldNode.dispose();
+    super.dispose();
+  }
+
+  /// Focus put on the slot reaches the field while the keyboard is wanted.
+  void _forwardFocus() {
+    if (_split && widget.systemKeyboard && widget.focusNode.hasPrimaryFocus) {
+      _fieldNode.requestFocus();
+    }
+  }
+
+  /// Physical keys while the wrapper holds focus, which no field sees.
+  KeyEventResult _keypadKey(KeyEvent event) {
+    final slot = widget.slot;
+    final held = widget.value ?? '';
+    if (event.logicalKey == LogicalKeyboardKey.backspace) {
+      if (held.isEmpty) {
+        widget.onBackspace?.call();
+      } else {
+        widget.onChanged(String.fromCharCodes(held.runes.take(held.runes.length - 1)));
+      }
+      return KeyEventResult.handled;
+    }
+    final ch = event.character;
+    if (ch == null || ch.runes.length != 1) return KeyEventResult.ignored;
+    final next = held + slot.canonical(ch);
+    if (!slot.accepts(next)) return KeyEventResult.ignored;
+    if (widget.onChanged(next) && slot.isFull(next)) widget.onCompleted?.call();
+    return KeyEventResult.handled;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final slot = widget.slot;
+    final behavior = widget.behavior;
+    final controller = widget.controller;
+    final focusNode = widget.focusNode;
+    final theme = widget.theme;
+    final value = widget.value;
+    final onChanged = widget.onChanged;
+    final onCompleted = widget.onCompleted;
+    final fieldNode = _split ? _fieldNode : focusNode;
     final readOnly = behavior == SlotBehavior.externalField;
     final style = _fittedStyle();
     // A shrunk run keeps its bottom where a full-size one would sit, so its
@@ -174,19 +254,21 @@ class _TypedField extends StatelessWidget {
       width: slot.box.width,
       height: slot.box.height,
       child: Focus(
-        canRequestFocus: false,
-        skipTraversal: true,
+        focusNode: _split ? focusNode : null,
+        canRequestFocus: _split,
+        skipTraversal: !_split,
         onKeyEvent: (node, event) {
           if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
             return KeyEventResult.ignored;
           }
+          if (_split && focusNode.hasPrimaryFocus) return _keypadKey(event);
           if (event.logicalKey != LogicalKeyboardKey.backspace) {
             return KeyEventResult.ignored;
           }
           if (!readOnly && controller.text.isNotEmpty) {
             return KeyEventResult.ignored;
           }
-          onBackspace?.call();
+          widget.onBackspace?.call();
           return KeyEventResult.handled;
         },
         child: _HoldsPageStill(
@@ -194,14 +276,14 @@ class _TypedField extends StatelessWidget {
             // Flips the keyboard type on pointer down so the rebuilt field is in
             // place when the tap-up opens the input connection.
             onPointerDown: behavior == SlotBehavior.keypadFirstField
-                ? (_) => onRequestSystemKeyboard?.call()
+                ? (_) => widget.onRequestSystemKeyboard?.call()
                 : null,
             child: ListenableBuilder(
               // The controller too: the underline darkens as the slot fills.
               listenable: Listenable.merge([focusNode, controller]),
               builder: (context, _) => TextField(
                 controller: controller,
-                focusNode: focusNode,
+                focusNode: fieldNode,
                 readOnly: readOnly,
                 onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
                 // A slot is filled from its end, so the cursor sits after what is
@@ -239,7 +321,8 @@ class _TypedField extends StatelessWidget {
                   ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
-                      color: controller.text.isEmpty
+                      // Under the keypad the wrapper, not the field, is focused.
+                      color: controller.text.isEmpty && !focusNode.hasFocus
                           ? theme.inactiveColor
                           : theme.activeColor,
                     ),
@@ -272,10 +355,7 @@ class _TypedField extends StatelessWidget {
                   }
                 },
                 maxLength: slot.length,
-                keyboardType:
-                    behavior == SlotBehavior.hardwareField ||
-                        (behavior == SlotBehavior.keypadFirstField &&
-                            !systemKeyboard)
+                keyboardType: behavior == SlotBehavior.hardwareField
                     ? TextInputType.none
                     : slot.alphabet.isNumeric
                     ? TextInputType.number
@@ -292,6 +372,8 @@ class _TypedField extends StatelessWidget {
   /// character fits the slot. Display slots get this from a [FittedBox]; an
   /// editable field cannot be scaled that way, so it is sized up front.
   TextStyle _fittedStyle() {
+    final slot = widget.slot;
+    final theme = widget.theme;
     final base = theme.glyphStyle(
       slot.box.height,
       slot.color ?? theme.ink,
