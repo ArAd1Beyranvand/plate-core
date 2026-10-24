@@ -193,6 +193,16 @@ class _PlateCanvasState extends State<PlateCanvas> {
     }
   }
 
+  void _morphTheme() {
+    final transition = widget.specTransition;
+    final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
+    if (transition == null || anim == null || !transition.morphBackground) return;
+    final spec = widget.spec;
+    final delays = PlateStagger.sequence(spec, step: transition.step, reverse: true);
+    _resizeDuration = plateCueLength(anim.style, delays.keys, delays);
+    _morphBackground = true;
+  }
+
   void _ghostDone(int serial) {
     final ghost = _ghost;
     if (!mounted || ghost?.serial != serial) return;
@@ -239,7 +249,14 @@ class _PlateCanvasState extends State<PlateCanvas> {
       widget.controller?.detach(_machine);
       _machine.dispose();
       _installMachine();
-    } else if (widget.controller != oldWidget.controller) {
+      return;
+    }
+    // Same spec in a new livery (two entries sharing one spec): no ghost
+    // plays, but the face still tweens, over what a spec swap would take.
+    if (widget.theme?.plateBackground != oldWidget.theme?.plateBackground) {
+      _morphTheme();
+    }
+    if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.installValidation(null);
       oldWidget.controller?.detach(_machine);
       widget.controller?.attach(_machine);
