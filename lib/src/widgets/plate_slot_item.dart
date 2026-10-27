@@ -6,6 +6,7 @@ import '../model/plate_alphabet.dart';
 import '../model/plate_spec.dart';
 import '../model/slot_behavior.dart';
 import '../theme/plate_theme.dart';
+import 'plate_glyph_run.dart';
 
 /// One plate position, rendered per [SlotBehavior].
 class PlateSlotItem extends StatelessWidget {
@@ -105,30 +106,25 @@ class _GlyphSlot extends StatelessWidget {
     return SizedBox(
       width: slot.box.width,
       height: slot.box.height,
-      child: v.isEmpty
-          ? null
-          : Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                // Letter spacing trails the last glyph too; the same space
-                // before the first keeps the run centred.
-                child: Padding(
-                  padding: EdgeInsets.only(left: slot.spacing),
-                  child: Text(
-                    slot.render(v),
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    softWrap: false,
-                    overflow: TextOverflow.clip,
-                    style: theme.glyphStyle(
-                      slot.box.height,
-                      slot.color ?? theme.ink,
-                      letterSpacing: slot.spacing,
-                    ),
-                  ),
-                ),
+      child: Center(
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          // Letter spacing trails the last glyph too; the same space
+          // before the first keeps the run centred.
+          child: Padding(
+            padding: EdgeInsets.only(left: slot.spacing),
+            child: PlateGlyphRun(
+              text: v.isEmpty ? '' : slot.render(v),
+              textDirection: slot.alphabet.direction,
+              style: theme.glyphStyle(
+                slot.box.height,
+                slot.color ?? theme.ink,
+                letterSpacing: slot.spacing,
               ),
             ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -282,85 +278,116 @@ class _TypedFieldState extends State<_TypedField> {
             child: ListenableBuilder(
               // The controller too: the underline darkens as the slot fills.
               listenable: Listenable.merge([focusNode, controller]),
-              builder: (context, _) => TextField(
-                controller: controller,
-                focusNode: fieldNode,
-                readOnly: readOnly,
-                onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
-                // A slot is filled from its end, so the cursor sits after what is
-                // already there whichever part of the field was tapped.
-                onTap: () => controller.selection = TextSelection.collapsed(
-                  offset: controller.text.length,
-                ),
-                showCursor: readOnly ? focusNode.hasFocus : null,
-                textAlign: TextAlign.center,
-                // The slot's script, not the plate's: Persian numerals run
-                // left to right inside an RTL plate, and the caret must follow.
-                textDirection: slot.alphabet.direction,
-                style: style,
-                cursorColor: theme.activeColor,
-                decoration: InputDecoration(
-                  isDense: true,
-                  // Left inset balances the letter spacing trailing the run.
-                  contentPadding: EdgeInsets.only(
-                    left: slot.spacing,
-                    // A full-size run (0.72 of the box) centred, so the field
-                    // fills its box like a chosen slot: same baseline, underline
-                    // on the box's bottom edge.
-                    top: slot.box.height * 0.14 + shrink,
-                    bottom: slot.box.height * 0.14,
+              builder: (context, _) => Stack(
+                fit: StackFit.passthrough,
+                children: [
+                  TextField(
+                    controller: controller,
+                    focusNode: fieldNode,
+                    readOnly: readOnly,
+                    onTapOutside: readOnly ? (PointerDownEvent _) {} : null,
+                    // A slot is filled from its end, so the cursor sits after what is
+                    // already there whichever part of the field was tapped.
+                    onTap: () => controller.selection = TextSelection.collapsed(
+                      offset: controller.text.length,
+                    ),
+                    showCursor: readOnly ? focusNode.hasFocus : null,
+                    textAlign: TextAlign.center,
+                    // The slot's script, not the plate's: Persian numerals run
+                    // left to right inside an RTL plate, and the caret must follow.
+                    textDirection: slot.alphabet.direction,
+                    // The field keeps the caret, selection and IME; the glyphs
+                    // are drawn by the animated run laid over it.
+                    style: style.copyWith(color: const Color(0x00000000)),
+                    cursorColor: theme.activeColor,
+                    decoration: InputDecoration(
+                      isDense: true,
+                      // Left inset balances the letter spacing trailing the run.
+                      contentPadding: EdgeInsets.only(
+                        left: slot.spacing,
+                        // A full-size run (0.72 of the box) centred, so the field
+                        // fills its box like a chosen slot: same baseline, underline
+                        // on the box's bottom edge.
+                        top: slot.box.height * 0.14 + shrink,
+                        bottom: slot.box.height * 0.14,
+                      ),
+                      filled: false,
+                      counterText: '',
+                      hintText: slot.alphabet.placeholder,
+                      hintStyle: style.copyWith(color: const Color(0x00000000)),
+                      border: UnderlineInputBorder(
+                        borderSide: BorderSide(color: theme.inactiveColor),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          // Under the keypad the wrapper, not the field, is focused.
+                          color: controller.text.isEmpty && !focusNode.hasFocus
+                              ? theme.inactiveColor
+                              : theme.activeColor,
+                        ),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: theme.activeColor),
+                      ),
+                    ),
+                    onChanged: (typed) {
+                      if (typed.isEmpty || slot.accepts(typed)) {
+                        final canonical = slot.canonical(typed);
+                        if (slot.alphabet.glyphs.isEmpty &&
+                            canonical != typed) {
+                          controller.value = TextEditingValue(
+                            text: canonical,
+                            selection: TextSelection.collapsed(
+                              offset: canonical.length,
+                            ),
+                          );
+                        }
+                        if (!onChanged(canonical)) return;
+                        if (slot.isFull(canonical)) onCompleted?.call();
+                      } else {
+                        // A run keeps what was already valid in it; a stray character
+                        // only costs itself.
+                        final kept = slot.render(value ?? '');
+                        controller.value = TextEditingValue(
+                          text: kept,
+                          selection: TextSelection.collapsed(
+                            offset: kept.length,
+                          ),
+                        );
+                      }
+                    },
+                    maxLength: slot.length,
+                    keyboardType: behavior == SlotBehavior.hardwareField
+                        ? TextInputType.none
+                        : slot.alphabet.isNumeric
+                        ? TextInputType.number
+                        : TextInputType.text,
                   ),
-                  filled: false,
-                  counterText: '',
-                  hintText: slot.alphabet.placeholder,
-                  hintStyle: style.copyWith(
-                    color: theme.inactiveColor,
-                    letterSpacing: 0,
-                  ),
-                  border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: theme.inactiveColor),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      // Under the keypad the wrapper, not the field, is focused.
-                      color: controller.text.isEmpty && !focusNode.hasFocus
-                          ? theme.inactiveColor
-                          : theme.activeColor,
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Padding(
+                        // The field's content padding.
+                        padding: EdgeInsets.only(
+                          left: slot.spacing,
+                          top: slot.box.height * 0.14 + shrink,
+                        ),
+                        child: Align(
+                          alignment: Alignment.topCenter,
+                          child: PlateGlyphRun(
+                            text: controller.text,
+                            textDirection: slot.alphabet.direction,
+                            style: style,
+                            placeholder: slot.alphabet.placeholder,
+                            placeholderStyle: style.copyWith(
+                              color: theme.inactiveColor,
+                              letterSpacing: 0,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: theme.activeColor),
-                  ),
-                ),
-                onChanged: (typed) {
-                  if (typed.isEmpty || slot.accepts(typed)) {
-                    final canonical = slot.canonical(typed);
-                    if (slot.alphabet.glyphs.isEmpty && canonical != typed) {
-                      controller.value = TextEditingValue(
-                        text: canonical,
-                        selection: TextSelection.collapsed(
-                          offset: canonical.length,
-                        ),
-                      );
-                    }
-                    if (!onChanged(canonical)) return;
-                    if (slot.isFull(canonical)) onCompleted?.call();
-                  } else {
-                    // A run keeps what was already valid in it; a stray character
-                    // only costs itself.
-                    final kept = slot.render(value ?? '');
-                    controller.value = TextEditingValue(
-                      text: kept,
-                      selection: TextSelection.collapsed(offset: kept.length),
-                    );
-                  }
-                },
-                maxLength: slot.length,
-                keyboardType: behavior == SlotBehavior.hardwareField
-                    ? TextInputType.none
-                    : slot.alphabet.isNumeric
-                    ? TextInputType.number
-                    : TextInputType.text,
+                ],
               ),
             ),
           ),
@@ -429,16 +456,12 @@ class _ChosenSlot extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEmpty = value == null || value!.isEmpty;
 
-    final letter = Text(
-      isEmpty ? slot.alphabet.placeholder : slot.alphabet.render(value!),
-      textAlign: TextAlign.center,
-      maxLines: 1,
-      softWrap: false,
-      overflow: TextOverflow.clip,
-      style: theme.glyphStyle(
-        slot.box.height,
-        isEmpty ? theme.inactiveColor : slot.color ?? theme.ink,
-      ),
+    final letter = PlateGlyphRun(
+      text: isEmpty ? '' : slot.alphabet.render(value!),
+      textDirection: slot.alphabet.direction,
+      style: theme.glyphStyle(slot.box.height, slot.color ?? theme.ink),
+      placeholder: slot.alphabet.placeholder,
+      placeholderStyle: theme.glyphStyle(slot.box.height, theme.inactiveColor),
     );
 
     final restingColor = isEmpty ? theme.inactiveColor : theme.activeColor;

@@ -143,14 +143,18 @@ void main() {
     await tester.enterText(persianField, '۵');
     await tester.pump();
     expect(controller.valueAt(0), '5');
-    expect(find.text('۵'), findsOneWidget); // primary row, Persian
-    expect(find.text('5'), findsOneWidget); // mirror row, Latin
+    expect(_glyph('۵'), findsOneWidget); // primary row, Persian
+    expect(_glyph('5'), findsOneWidget); // mirror row, Latin
 
     // Typing into the mirror (Latin) writes the same one value back.
     await tester.enterText(latinField, '7');
     await tester.pump();
     expect(controller.valueAt(0), '7');
-    expect(find.text('۷'), findsOneWidget);
-    expect(find.text('7'), findsOneWidget);
+    expect(_glyph('۷'), findsOneWidget);
+    expect(_glyph('7'), findsOneWidget);
   });
 }
+
+/// The painted glyph. A typed slot also holds its text in a transparent
+/// field under it, which [find.text] would count too.
+Finder _glyph(String text) => find.byWidgetPredicate((w) => w is Text && w.data == text);

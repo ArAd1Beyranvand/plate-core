@@ -175,8 +175,8 @@ void main() {
       expect(controller.activeIndex, activeBefore);
       expect(controller.values, ['7', '3']);
       expect(find.text('QQCAPTION'), findsOneWidget);
-      expect(find.text('7'), findsOneWidget);
-      expect(find.text('3'), findsOneWidget);
+      expect(_glyph('7'), findsOneWidget);
+      expect(_glyph('3'), findsOneWidget);
     });
 
     testWidgets('a flagless override renders no flag but keeps its caption', (tester) async {
@@ -221,3 +221,7 @@ void main() {
     });
   });
 }
+
+/// The painted glyph. A typed slot also holds its text in a transparent
+/// field under it, which [find.text] would count too.
+Finder _glyph(String text) => find.byWidgetPredicate((w) => w is Text && w.data == text);
