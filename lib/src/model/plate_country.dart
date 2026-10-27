@@ -33,7 +33,10 @@ class PlateCountry {
   final List<String> headingLines;
 
   final Color panelColor;
-  final Color panelTextColor;
+
+  /// Null prints the wording in the theme's ink, for a block printed straight
+  /// on the field whose livery a resolver may change.
+  final Color? panelTextColor;
 
   /// Width over height; sizes the flag without distortion.
   final double flagAspectRatio;

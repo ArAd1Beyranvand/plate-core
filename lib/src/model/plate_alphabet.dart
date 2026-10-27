@@ -102,11 +102,16 @@ class PlateAlphabet {
   /// The display form of [value].
   String render(String value) => glyphs[value] ?? value;
 
-  /// [render] over every character of a multi-character [value].
-  String renderAll(String value) => _each(value, render);
+  /// [render] over every character of a multi-character [value], or over
+  /// [value] whole when it is one multi-character token (`'HRT'` -> `'هرات'`).
+  String renderAll(String value) => glyphs[value] ?? _each(value, render);
 
-  /// [canonical] over every character of a multi-character [value].
-  String canonicalAll(String value) => _each(value, canonical);
+  /// [canonical] over every character of a multi-character [value], or over
+  /// [value] whole when it is one token in either form.
+  String canonicalAll(String value) {
+    final whole = canonical(value);
+    return characters.contains(whole) ? whole : _each(value, canonical);
+  }
 
   static String _each(String value, String Function(String) f) =>
       value.runes.map((r) => f(String.fromCharCode(r))).join();

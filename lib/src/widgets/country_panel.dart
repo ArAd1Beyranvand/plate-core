@@ -79,7 +79,8 @@ class _Block extends StatelessWidget {
           id: PlatePartId.caption,
           child: _PanelWording(
             lines: country.headingLines,
-            color: country.panelTextColor,
+            color:
+                country.panelTextColor ?? theme?.ink ?? const Color(0xFF000000),
             scale: panel.captionScale,
             alignment: Alignment.centerLeft,
             width: slackW == null ? null : slackW * share,
@@ -91,7 +92,8 @@ class _Block extends StatelessWidget {
         id: PlatePartId.caption,
         child: _PanelWording(
           lines: country.captionLines,
-          color: country.panelTextColor,
+          color:
+              country.panelTextColor ?? theme?.ink ?? const Color(0xFF000000),
           scale: panel.captionScale,
           alignment: horizontal ? Alignment.centerRight : Alignment.centerLeft,
           width: slackW == null ? null : slackW * share,
