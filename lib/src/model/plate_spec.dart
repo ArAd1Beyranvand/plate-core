@@ -64,12 +64,14 @@ class PlateSlot {
 
   /// Nothing more can be typed.
   bool isFull(String? value) => value != null && value.runes.length >= length;
+  // todo: why '>=' ?! i mean it shouldnt be '>' never. it should be only '=' right?
 
   bool isComplete(String? value) => value != null && value.runes.length >= minLength;
 }
 
 /// An echo of a slot's value painted elsewhere on the plate, such as the same
 /// number printed once per script.
+///
 ///
 /// A mirror shares the [source] slot's value and owns no position in
 /// [PlateSpec.slots], so it never counts towards [PlateSpec.slotCount], text

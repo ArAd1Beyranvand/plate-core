@@ -814,7 +814,11 @@ class _LiveryState extends State<_Livery> {
       widget.controller.addListener(_onChanged);
     }
     _theme = _resolve();
+    _specChanged = old.spec.id != widget.spec.id;
   }
+
+  /// A spec swap snaps the livery; the face's own morph tweens the colour.
+  bool _specChanged = false;
 
   @override
   void dispose() {
@@ -822,15 +826,17 @@ class _LiveryState extends State<_Livery> {
     super.dispose();
   }
 
+  // Always the same tree, resolver or not: switching shape between specs
+  // would remount the face and drop its background morph.
   @override
-  Widget build(BuildContext context) => widget.spec.resolveTheme == null
-      ? widget.builder(widget.base)
-      : TweenAnimationBuilder<PlateTheme>(
-          tween: _ThemeTween(end: _theme),
-          duration: const Duration(milliseconds: 350),
-          curve: Curves.easeInOut,
-          builder: (context, theme, _) => widget.builder(theme),
-        );
+  Widget build(BuildContext context) => TweenAnimationBuilder<PlateTheme>(
+    tween: _ThemeTween(end: _theme),
+    duration: widget.spec.resolveTheme == null || _specChanged
+        ? Duration.zero
+        : const Duration(milliseconds: 350),
+    curve: Curves.easeInOut,
+    builder: (context, theme, _) => widget.builder(theme),
+  );
 }
 
 class _ThemeTween extends Tween<PlateTheme> {
@@ -1330,11 +1336,17 @@ class _MirrorBinding extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<String?>(
       valueListenable: controller.slot(mirror.source),
+      // Scaled down, never wrapped: a code like `DUPL` may outrun its box.
       builder: (context, value, _) => Center(
-        child: Text(
-          alphabet.renderAll(value ?? ''),
-          textAlign: TextAlign.center,
-          style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            alphabet.renderAll(value ?? ''),
+            maxLines: 1,
+            softWrap: false,
+            textAlign: TextAlign.center,
+            style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
+          ),
         ),
       ),
     );
