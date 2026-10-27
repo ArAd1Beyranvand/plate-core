@@ -973,7 +973,7 @@ class _StaggeredTextState extends State<_StaggeredText> with SingleTickerProvide
           ),
           style: widget.style,
           textAlign: TextAlign.center,
-          maxLines: 1,
+          maxLines: '\n'.allMatches(_shown).length + 1,
           softWrap: false,
           overflow: TextOverflow.visible,
         );
