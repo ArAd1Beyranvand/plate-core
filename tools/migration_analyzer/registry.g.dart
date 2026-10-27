@@ -1264,20 +1264,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.iraq',
-    source: "IraqPlates.largeKurdistan",
-    read: () => iranshahr_plate.IraqPlates.largeKurdistan,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.iraq',
     source: "IraqPlates.small",
     read: () => iranshahr_plate.IraqPlates.small,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.iraq',
-    source: "IraqPlates.smallKurdistan",
-    read: () => iranshahr_plate.IraqPlates.smallKurdistan,
   ),
   (
     package: 'iranshahr_plate',
@@ -1342,62 +1330,14 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.government",
-    read: () => iranshahr_plate.KuwaitPlates.government,
+    source: "KuwaitPlates.standard",
+    read: () => iranshahr_plate.KuwaitPlates.standard,
   ),
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.kuwait',
     source: "KuwaitPlates.nationalGuard",
     read: () => iranshahr_plate.KuwaitPlates.nationalGuard,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.army",
-    read: () => iranshahr_plate.KuwaitPlates.army,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.commercial",
-    read: () => iranshahr_plate.KuwaitPlates.commercial,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.construction",
-    read: () => iranshahr_plate.KuwaitPlates.construction,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.firefighting",
-    read: () => iranshahr_plate.KuwaitPlates.firefighting,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.exportPlate",
-    read: () => iranshahr_plate.KuwaitPlates.exportPlate,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.customs",
-    read: () => iranshahr_plate.KuwaitPlates.customs,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.emiri",
-    read: () => iranshahr_plate.KuwaitPlates.emiri,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.kuwait',
-    source: "KuwaitPlates.emiriGuard",
-    read: () => iranshahr_plate.KuwaitPlates.emiriGuard,
   ),
   (
     package: 'iranshahr_plate',
@@ -1482,12 +1422,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
     key: 'iranshahr.tajikistan',
     source: "TajikistanPlates.trailer",
     read: () => iranshahr_plate.TajikistanPlates.trailer,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.tajikistan',
-    source: "TajikistanPlates.publicTransport",
-    read: () => iranshahr_plate.TajikistanPlates.publicTransport,
   ),
   (
     package: 'iranshahr_plate',

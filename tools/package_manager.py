@@ -135,6 +135,24 @@ def default_proxy():
     return p.stdout.strip() or os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy") or ""
 
 
+MAX_REPORT_CHARS = 3000
+
+
+def clip(text, limit=MAX_REPORT_CHARS):
+    """Keep the tail of a long output; the verdict is at the end."""
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    return f"[... {len(text) - limit} chars cut ...]\n" + text[-limit:]
+
+
+def squeeze_dry_run(out):
+    """Drop the file tree and 'newer version available' noise from pub's dry-run."""
+    keep = [l for l in out.splitlines()
+            if not l.lstrip().startswith(("├", "└", "│")) and "available)" not in l]
+    return clip("\n".join(keep))
+
+
 def pana_cmd():
     if shutil.which("pana"):
         return ["pana"]
@@ -161,13 +179,13 @@ def run(cmd, cwd, log, quiet=False, timeout=1800):
     def reader():
         for l in p.stdout:
             lines.append(l)
-            if not quiet:
+            if not quiet and not l.lstrip().startswith(("├", "└", "│")) and "available)" not in l:
                 log("  " + l.rstrip())
 
     t = threading.Thread(target=reader, daemon=True)
     t.start()
     while t.is_alive():
-        t.join(15)
+        t.join(60)
         if t.is_alive():
             log(f"  ... still running ({int(time.time() - start)}s, {len(lines)} lines so far)")
             if time.time() - start > timeout:
@@ -440,20 +458,25 @@ class App(tk.Tk):
 
     def write_report(self, p, mode, parts):
         header = f"{p} - check report {now()} (mode: {mode})\n{'=' * 60}\n"
+        REPORT_DIR.mkdir(exist_ok=True)
         (REPORT_DIR / f"{p}.txt").write_text(header + "\n\n".join(parts) + "\n")
 
     def run_pana(self, path, log):
         rc, out = run(pana_cmd() + ["--no-warning", "--json", "."], path, log, quiet=True)
         try:
-            data = json.loads(out[out.index("{"):])
+            # stderr log lines are JSON too; the report is the pretty-printed object on its own line
+            data = json.loads(out[out.index("\n{\n") + 1:] if "\n{\n" in out else out[out.index("{"):])
         except ValueError:
-            return rc, "pana output (could not parse JSON):\n" + out
+            return rc, "pana output (could not parse JSON):\n" + clip(out)
         lines = []
         rep = data.get("report") or {}
-        lines.append(f"PUB POINTS: {rep.get('grantedPoints', '?')} / {rep.get('maxPoints', '?')}")
+        secs = rep.get("sections") or []
+        granted = sum(s.get("grantedPoints") or 0 for s in secs)
+        total = sum(s.get("maxPoints") or 0 for s in secs)
+        lines.append(f"PUB POINTS: {granted} / {total}")
         for sec in (rep.get("sections") or []):
             lines.append(f"\n[{sec.get('grantedPoints')}/{sec.get('maxPoints')}] {sec.get('title')} ({sec.get('status')})")
-            lines.append(sec.get("summary", "").strip())
+            lines.append(clip(sec.get("summary", ""), 600))
         log(lines[0])
         return rc, "\n".join(lines)
 
@@ -514,7 +537,7 @@ class App(tk.Tk):
             if mode in ("dry-run", "both"):
                 rc, out = run(["flutter", "pub", "publish", "--dry-run"], path, log)
                 ok = ok and rc == 0
-                parts.append(f"## flutter pub publish --dry-run (exit {rc})\n{out}")
+                parts.append(f"## flutter pub publish --dry-run (exit {rc})\n{squeeze_dry_run(out)}")
             if mode in ("pana", "both"):
                 rc, out = self.run_pana(path, log)
                 ok = ok and rc == 0
