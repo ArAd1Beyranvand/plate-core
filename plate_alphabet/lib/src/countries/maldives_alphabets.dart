@@ -6,10 +6,17 @@ import '../plate_alphabet.dart';
 ///
 /// [letters] is all of A–Z: the article restricts nothing but the category
 /// code, and that rule lives in `MaldivesPlateValidator`, which reports rather
-/// than bars. The type letter (`P`, `C`, `G`, `S`, `T`, `D`) is fixed by the
-/// plate's category, so it is a label on the spec, not a slot.
+/// than bars.
 abstract final class MaldivesAlphabets {
   static const PlateAlphabet digits = PlateAlphabetDigits.english;
+
+  /// The category's type letter before the serial.
+  static const PlateAlphabet type = PlateAlphabet(
+    id: 'mv.type',
+    characters: <String>['P', 'C', 'G', 'S', 'T', 'D'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'mv.letters',

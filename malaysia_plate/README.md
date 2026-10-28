@@ -10,40 +10,54 @@ https://platexample.ir/#/discover/malaysia
 
 # malaysia_plate
 
-Malaysia's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the single-row and two-row JPJ plates, the diplomatic plate and the JPJePlate, with their themes, alphabets and advisory validator.
+Malaysia's licence plates for the `plate_core` library. Four geometries: single-row (width follows the registration), two-row, diplomatic `NN-NN-DC` and the 2024 JPJePlate. Taxi, military and consular plates are the single-row geometry on another theme.
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  malaysia_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
 import 'package:malaysia_plate/malaysia_plate.dart';
 
 PlateCanvas(
-  spec: MalaysiaPlates.jpjPlate,
+  spec: MalaysiaPlates.diplomatic,
   theme: MalaysiaThemes.standard,
   validator: const MalaysiaValidator(),
   autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- `MalaysiaCountry` — country panel: `malaysia`.
+- `MalaysiaPlates` — 4 plate specs: `diplomatic`, `singleRow()`, `twoRow()`, `ev()`.
+- `MalaysiaThemes` — 5 themes: `standard`, `taxi`, `diplomatic`, `consular`, `ev`.
+- `MalaysiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `MalaysiaDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `MalaysiaSerialGenerator` — random plate generator.
+- `MalaysiaRegions` — code table.
+
+## Plates
+
+* `singleRow`: the standard plate; colour is the theme's. The canvas width
+  is derived from the content, since plates are made to the registration.
+* `twoRow`: the 247×173 rear/motorcycle plate, prefix over number.
+* `diplomatic`: `NN-NN-DC`, condensed characters, one row 236 wide.
+* `ev`: the 2024 JPJePlate, 520×110, green strip with flag and `MAL`, then
+  a grey security strip.
+
+Text groups are `prefix`, `number` and, when present, `suffix` (diplomatic:
+`country`, `serial`, `mission`).
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

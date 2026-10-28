@@ -10,7 +10,17 @@ https://platexample.ir/#/discover/sudan
 
 # sudan_plate
 
-Sudan's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the bilingual 2009 plate (class digit, state code, serial in Arabic over a Latin echo) in its private, bus-and-taxi and commercial liveries, with themes, alphabets and advisory validators.
+Sudan's licence plates for the `plate_core` library. The 2009 bilingual plate: SUDAN / السودان over a rule, then a class digit and state code beside a four- or five-digit serial, each printed in Arabic over a Latin echo of the same value. Private, bus-and-taxi and commercial liveries.
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  sudan_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -18,32 +28,33 @@ import 'package:sudan_plate/sudan_plate.dart';
 
 PlateCanvas(
   spec: SudanPlates.standard,
-  theme: SudanThemes.standard,
+  theme: SudanThemes.private,
   validator: const SudanValidator(),
   autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- `SudanCountry` — country panel: `sudan`.
+- `SudanPlates` — 1 plate spec: `standard`.
+- `SudanThemes` — 3 themes: `private`, `transport`, `commercial`.
+- `SudanValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `SudanSerialGenerator` — random plate generator.
+
+## Plates
+
+The 2009 bilingual plate; every livery is this design, themed by
+`SudanThemes`.
+
+The value is `class · state · serial`, stored in Latin (`7 KH 10346`). Each
+slot prints in Arabic above a Latin echo; both rows are editable.
+
+Not built: the newer print with the hologram replaced by embossed text, and
+the pre-2009 series.
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

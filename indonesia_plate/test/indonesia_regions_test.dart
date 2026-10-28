@@ -18,9 +18,7 @@ void main() {
   test('every serial layout follows the prefix typed and deleted', () {
     for (final PlateSpec spec in <PlateSpec>[
       IndonesiaPlates.car,
-      IndonesiaPlates.carEv,
       IndonesiaPlates.motorcycle,
-      IndonesiaPlates.motorcycleEv,
     ]) {
       final PlateController c = PlateController(spec: spec);
       expect(c.regionCaption, isNull, reason: spec.id);

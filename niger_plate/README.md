@@ -10,40 +10,43 @@ https://platexample.ir/#/discover/niger
 
 # niger_plate
 
-Niger's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the 2005 series (region digit, series letter, four-digit serial, country map and RN) in its private and commercial liveries, with themes, alphabets and advisory validators.
+Niger's licence plates for the `plate_core` library. The 2005 series: a region digit and series letter, a hologram mark, a four-digit serial, and the country's map over `RN` at the right. Private (black on white, black map) and commercial (black on orange, map in the national colours).
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  niger_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
 import 'package:niger_plate/niger_plate.dart';
 
 PlateCanvas(
-  spec: NigerPlates.privatePlate,
-  theme: NigerThemes.standard,
-  validator: const NigerValidator(),
-  autoValidate: true,
+  spec: NigerOtherPlates.state,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- `NigerCountry` — country panels: `private`, `commercial`, `plain`, `military`.
+- `NigerOtherPlates` — 4 plate specs: `state`, `military`, `diplomaticChief`, `diplomaticStaff`.
+- `NigerPlates` — 2 plate specs: `privateSpec`, `commercialSpec`.
+- `NigerThemes` — 5 themes: `private`, `commercial`, `stateTransport`, `military`, `diplomatic`.
+- `NigerValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `NigerStateValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `NigerMilitaryValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `NigerDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `NigerSerialGenerator` — random plate generator.
+- `NigerRegions` — code table.
+- 2 bundled assets (`niger_map.svg`, `niger_map_flag.svg`).
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

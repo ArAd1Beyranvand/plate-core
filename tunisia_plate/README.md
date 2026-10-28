@@ -10,7 +10,17 @@ https://platexample.ir/#/discover/tunisia
 
 # tunisia_plate
 
-Tunisia's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the `NNN تونس NNNN` plate in one and two lines, rental, government, diplomatic, military and temporary plates, with their themes, alphabets and advisory validators.
+Tunisia's licence plates for the `plate_core` library. The ordinary plate is `NNN تونس NNNN` — series, the word "Tunisia", registration — on one line or, at the rear, on two. Rental, government, diplomatic, military and temporary plates complete the set.
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  tunisia_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -21,29 +31,36 @@ PlateCanvas(
   theme: TunisiaThemes.standard,
   validator: const TunisiaValidator(),
   autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- `TunisiaCountry` — country panel: `tunisia`.
+- `TunisiaPlates` — 6 plate specs: `standard`, `square`, `government`, `military`, `diplomatic()`, `temporary()`.
+- `TunisiaThemes` — 5 themes: `standard`, `rental`, `government`, `diplomatic`, `military`.
+- `TunisiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `TunisiaGovernmentValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `TunisiaDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `TunisiaSerialValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `TunisiaSerialGenerator` — random plate generator.
+
+## Plates
+
+* `standard`: 520x110, `NNN تونس NNNN`. Ordinary and rental cars differ
+  by theme.
+* `square`: the 275x200 two-line rear plate, number over series and تونس.
+* `government`: `NN - NNNNNN`, ministry and vehicle.
+* `diplomatic`: `NN CD س د NN`; `MD` and `CMD` by `TunisiaMission`.
+* `military`: five digits with the flag at the left.
+* `temporary`: `NNNNN - ن ت`, or `ع ع` for a dealer (`TunisiaSuffix`).
+
+Not implemented: the motorcycle plate (its one photo is too small and
+shows an undocumented format), the pre-1975 series, and the sticker on the
+military photo. Screw holes are not printed.
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

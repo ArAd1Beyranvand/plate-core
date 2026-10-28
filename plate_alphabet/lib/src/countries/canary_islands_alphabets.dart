@@ -10,6 +10,14 @@ abstract final class CanaryIslandsAlphabets {
   /// blue `OI`.
   static const List<String> diplomaticCodes = <String>['CD', 'CC', 'TA', 'OI'];
 
+  /// The `R` (trailer) or `P` (provisional) before the number.
+  static const PlateAlphabet towedClass = PlateAlphabet(
+    id: 'ic.towedClass',
+    characters: <String>['R', 'P'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
+
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(

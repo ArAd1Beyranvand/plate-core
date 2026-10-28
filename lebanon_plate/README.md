@@ -10,165 +10,50 @@ https://platexample.ir/#/discover/lebanon
 
 # lebanon_plate
 
-Lebanon's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — two plate shapes, many plate colours. It's data, not code: 2 standard `PlateSpec`s (12 with short-number variants), one country family, two alphabets, eight themes, one validator and one generator. `plate_core` paints everything.
+Lebanon's licence plates for the `plate_core` library. Usage (the field colour) and `LebanonLetter` (town or class code) are separate axes by design: `B 123456` and `Z 123456` are the same usage with different letters, while a red and a yellow `M` plate share a letter but differ in usage. A usage selects a theme and band via `LebanonThemes.forUsage` and `LebanonCountry.forUsage`, not a spec.
 
-A usage class is **not** a spec. It is a `PlateTheme` (the field colour) and a
-`PlateCountry` (the Arabic word on the band), and both are handed to the canvas
-at render time beside the spec.
+## Install
 
-## Two shapes, many colours
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  lebanon_plate: ^0.1.0
+```
 
-This is the thing to read first, because it is the opposite of most of the
-systems this workspace models. Lebanon does not cut a new geometry per class of
-vehicle. Every plate is **a letter, then up to six digits, with a blue
-identification band carrying the cedar and لبنان**. What changes is the colour
-it is printed on.
-
-**`LebanonPlates.oneLine`** - the long plate, European 520 x 110 proportions,
-band down the left edge.
-
-**`LebanonPlates.twoLine`** - the shorter, taller plate, band across the top.
-
-Both are current. Which one a vehicle carries is a matter of what fits its
-mounting, not of what it is for, so there is deliberately no enum selecting
-between them.
-
-## The two axes, and why they are two types
-
-| | what it is | where it lands |
-| --- | --- | --- |
-| `LebanonUsage` | the **field colour** | `LebanonThemes.forUsage` |
-| `LebanonLetter` | the **letter** before the number | the first slot's value |
-
-They cross rather than nest, which is why one enum could not do the job:
-
-- `B 123456` and `Z 123456` are the same usage (private, white) and different
-  letters (Beirut, Zahleh).
-- A red مؤسسات plate and a yellow driving-school plate both carry `M`.
-
-### The colours
-
-| usage | field | letter |
-| --- | --- | --- |
-| `private` | white | the town - see below |
-| `consular` | purple | `C` |
-| `diplomatic` | orange | `D` |
-| `publicInstitution` | red | `M` |
-| `publicTransport` | red † | `P` |
-| `drivingSchool` | yellow | `M` |
-| `transit` | green | - |
-| `temporary` | brown | - |
-| `tourism` | pink | - |
-
-† Inherited, not attested: `P` plates were split out of the red `M` series and
-no source consulted names their current field. See the TODO on that enum value.
-
-### The letters
-
-`A` is the pre-1998 general series (and trades as a vanity plate). `B` Beirut,
-`Y` Aley, `G` Jounieh, `N` Nabatieh, `O` Ouzai, `S` Sidon, `T` Tripoli,
-`K` Baalbek (documented, no longer issued), `Z` Zahleh. `J` judicial,
-`R` religious official, `M` motorcycle/commercial, `MP` parliament (numbered
-1..128), plus the `C` / `D` / `P` class letters above.
-
-`MP` is one character in `LebanonAlphabets.letters` and two glyphs on the face,
-which is why that alphabet is `AlphabetInput.chosen` and why the letter cell is
-wider than a digit cell.
-
-## Using it
+## Use
 
 ```dart
-const usage = LebanonUsage.diplomatic;
+import 'package:plate_core/plate_core.dart';
+import 'package:lebanon_plate/lebanon_plate.dart';
 
 PlateCanvas(
   spec: LebanonPlates.oneLine,
-  country: LebanonCountry.forUsage(usage), // the band's caption
-  theme: LebanonThemes.forUsage(usage),    // the field colour
+  theme: LebanonThemes.private,
   validator: const LebanonValidator(),
   autoValidate: true,
-  onChooseCharacter: (alphabet) async => null, // a real host shows a picker
-)
+  onChooseCharacter: noCharacterChooser,
+);
 ```
 
-The number is one slot of one to six digits, so a short number - a motorcycle
-`M` plate, a parliament `MP` plate - is the same face with fewer digits:
+## Contains
 
-```dart
-PlateController.fromValues(LebanonPlates.oneLine, ['MP', '128']);
-```
+- `LebanonCountry` — country panels: `band`, `private`, `publicInstitution`.
+- `LebanonPlates` — 2 plate specs: `oneLine`, `twoLine`.
+- `LebanonThemes` — 8 themes: `private`, `consular`, `diplomatic`, `publicInstitution`, `drivingSchool`, `transit`, `temporary`, `tourism`.
+- `LebanonValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `LebanonSerialGenerator` — random plate generator.
+- `LebanonRegions` — code table.
+- 1 bundled asset (`cedar.svg`).
 
-The digits centre in the number's box.
+## Plates
 
-## Validation
+`oneLine` (1040×220, band left) and `twoLine` (520×288, band top). The
+number is one slot of one to six digits.
 
-`LebanonValidator` is advisory, gated on the `serial` group (quiet until the
-number has something in it), and never bars a keystroke. Lebanon's grammar gives
-it very little: a closed letter set, a one-to-six digit number, and the single
-documented range in the system - `MP` is 1..128. There is no published block
-allocation, no check digit and no per-town range, so `B 000001` and `B 999999`
-are equally well-formed as far as anything public says.
+The one-line band text runs vertically on the real plate; here it prints
+horizontally (core limitation).
 
-It deliberately does **not** reject the out-of-service `K` letter (those plates
-are on the road) or a leading zero (nothing establishes the padding rule).
+## Part of plate
 
-## Depends on
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
-`plate_core` alone - not `plate_keypad`, not any other country's package, not
-`plate_core_bloc`.
-
-## What it does not ship
-
-**The cedar.** It is the signature of a Lebanese plate and it is not in this
-package. No public-domain vector of the plate's cedar was sourced, and drawing
-an approximation of a state emblem and shipping it as the real thing is not
-something this package will do. Every `PlateCountry` here has `flag: null` and
-every `PlatePanel` has `flagScale: 0`, which gives the band's height to its text
-instead of reserving a strip for an image that does not exist. A host with
-rights to a cedar asset can pass its own `PlateCountry`.
-
-**A font.** `PlateTheme` names no font family and `plate_core` offers no hook to
-give one to a label, so a font bundled here could not reach the لبنان on the
-band. Supplying a face to the subtree is the host's job, via its own `Theme` or
-`DefaultTextStyle`. Without one, Arabic band text falls back to whatever the
-platform has - which on a CI runner is often nothing, and is why the goldens in
-`test/` show boxes.
-
-**Rotated band text.** On a real one-line plate the band's text runs vertically.
-`plate_core` has no rotation, on a label or on a caption, so this package prints
-it horizontally and scaled to fit. It is the one place where these specs
-knowingly do not reproduce the plate, and no number in `lebanon_plates.dart`
-would fix it.
-
-**Measurements.** Every dimension and every colour here is marked `// CALIBRATE`.
-The canvases are proportioned from photographs and the colours are named in
-prose by the sources - "purple", "orange", "brown" - with no hex or ink
-reference anywhere. Each value is the right hue family at roughly the right
-value, and none of them is a measurement.
-
-**The diplomatic numbering.** A `D` plate's number encodes a country code and a
-car number rather than being a plain serial. This package draws it as six
-digits and says nothing about the encoding.
-
-## Also available
-
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - venezuela_ licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.

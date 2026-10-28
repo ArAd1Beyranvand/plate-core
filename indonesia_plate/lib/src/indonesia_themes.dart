@@ -6,7 +6,7 @@ import 'indonesia_colors.dart';
 /// The Indonesian liveries: one ink on one field, a rim in the ink, and —
 /// for the banded specs — a band colour. The band is a background region
 /// filled with `PlateFill.divider`, so [PlateTheme.dividerColor] *is* the band:
-/// [IndonesiaColors.evBlue] on an EV, black on the diplomatic trim. No spec
+/// [IndonesiaColors.evBlue] on an EV, the field colour (invisible) otherwise, black on the diplomatic trim. No spec
 /// draws a divider rule, so the colour is used for nothing else.
 ///
 /// **Rim drawn at the edge.** The artwork's rim is inset: 1.5 mm of field,
@@ -28,7 +28,7 @@ abstract final class IndonesiaThemes {
     plateBackground: field,
     plateBorder: ink,
     ink: ink,
-    dividerColor: band ?? ink,
+    dividerColor: band ?? field,
     borderWidthRatio: borderWidthRatio,
     plateRadiusRatio: _plateRadiusRatio,
     activeColor: ink,

@@ -10,65 +10,56 @@ https://platexample.ir/#/discover/venezuela
 
 # venezuela_plate
 
-Venezuela's 2008 licence plate for [`plate_core`](https://pub.dev/packages/plate_core).
+Venezuela's 2008 licence plate for the `plate_core` library. One spec, one theme: the car plate, navy on the flag, with the state name under the serial following the last letter.
 
-| Spec | Size (mm) | Format | Notes |
-|---|---|---|---|
-| `VenezuelaPlates.car` | 300 × 150 | `AB174SK` | Navy on the flag; the last letter is the state |
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  venezuela_plate: ^0.1.0
+```
+
+## Use
+
+```dart
+import 'package:plate_core/plate_core.dart';
+import 'package:venezuela_plate/venezuela_plate.dart';
+
+PlateCanvas(
+  spec: VenezuelaPlates.car,
+  theme: VenezuelaPlates.theme,
+  validator: const VenezuelaValidator(),
+  autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
+);
+```
+
+## Contains
+
+- `VenezuelaCountry` — country panel: `venezuela`.
+- `VenezuelaPlates` — 1 plate spec: `car`.
+- `VenezuelaPlates` — 1 theme: `theme`.
+- `VenezuelaThemes` — 1 theme: `standard`.
+- `VenezuelaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+
+## Plates
+
+One design for every category of the 2008 plate. The categories differ
+only in which of the first six cells are letters (see
+`VenezuelaValidator`), so the cells take either. The last letter is the
+state, and the state name printed under the serial is a mirror of it
+through `VenezuelaAlphabets.stateName` — it follows whatever is typed.
 
 The flag is the background: white, then yellow, blue and red bands rising
-5.7° to the right, painted with `PlateFill.stripes` (plate_core 0.11.2). The
-state name under the serial is a mirror of the last cell through
-`VenezuelaAlphabets.stateName`, so it follows whatever letter is typed.
+across the lower plate, under the characters.
 
-`VenezuelaValidator` is advisory: it checks the last letter names a state and
-the six serial cells follow one of the article's 19 seven-character category
-patterns (`LLDDDL` private car, `7LDLDL` taxi, ...). `categoryOf` names the
-category.
+Not implemented: the 1955–2008 series; the motorcycle plate (smaller, and
+the article gives no size); the yellow provisional plate and the Free Port
+plate, which are different designs; the eight stars on the blue band and
+the VENEZUELA microprint on the characters.
 
-## Sources and accuracy
+## Part of plate
 
-Measured from three photographs on Wikimedia Commons (AB174SK Lara, AA064ST
-Trujillo, AE328KG Carabobo), each perspective-corrected to 300 × 150.
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
-- Positions match to ~2 mm: caption x 30.5..273.2 against 31.2..272.8; flag
-  boundaries within 2 mm at both ends; the state name at the measured height.
-- **The serial is about 55% of reference height** (40 against 74 mm). The real
-  face is very condensed; `plate_core` scales each glyph down to its cell
-  width, and the fallback font is too wide to stand 74 mm tall in a 38.9 mm
-  cell. The caption is ~60% for the same reason. A condensed font in the theme
-  would fix both; plate_core has no per-theme font today.
-- The real bands fan and wave slightly; one angle is the fit.
-- The white airbrushing is a `PlateFog`: saturated colours at the ends, pale
-  in the middle. The photographs' fade is sharper at the red band's ends than
-  one ellipse can be.
-- Colours marked `// CALIBRATE` are from photographs, white-balanced on the
-  field.
-
-Not implemented: the pre-2008 series; the motorcycle plate (smaller, size not
-documented); the yellow provisional and Free Port plates; the eight stars, the
-microprint.
-
-## Also available
-
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.

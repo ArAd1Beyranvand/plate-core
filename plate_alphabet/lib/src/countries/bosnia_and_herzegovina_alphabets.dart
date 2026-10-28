@@ -15,6 +15,14 @@ abstract final class BosniaAndHerzegovinaAlphabets {
     isNumeric: false,
   );
 
+  /// The `A` (taxi) or `T` (temporary) after the fixed `T`.
+  static const PlateAlphabet shortTermClass = PlateAlphabet(
+    id: 'ba.shortTermClass',
+    characters: <String>['A', 'T'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
+
   /// First character of a serial: a digit or one of [letters].
   static const PlateAlphabet first = PlateAlphabet.pattern(
     id: 'ba.first',

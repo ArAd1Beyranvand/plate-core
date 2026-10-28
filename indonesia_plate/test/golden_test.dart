@@ -102,7 +102,7 @@ void main() {
   testWidgets('private EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.carEv,
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.privateEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_car_private_ev',
@@ -112,7 +112,7 @@ void main() {
   testWidgets('public EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.carEv,
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.publicEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_car_public_ev',
@@ -122,7 +122,7 @@ void main() {
   testWidgets('government EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.carEv,
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.governmentEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_car_govt_ev',
@@ -132,7 +132,7 @@ void main() {
   testWidgets('FTZ EV car', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.carEv,
+      spec: IndonesiaPlates.car,
       theme: IndonesiaThemes.freeTradeZoneEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_car_ftz_ev',
@@ -192,7 +192,7 @@ void main() {
   testWidgets('private EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycleEv,
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.privateEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_moto_private_ev',
@@ -202,7 +202,7 @@ void main() {
   testWidgets('public EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycleEv,
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.publicEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_moto_public_ev',
@@ -212,7 +212,7 @@ void main() {
   testWidgets('government EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycleEv,
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.governmentEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_moto_govt_ev',
@@ -222,7 +222,7 @@ void main() {
   testWidgets('FTZ EV motorcycle', (tester) async {
     await render(
       tester,
-      spec: IndonesiaPlates.motorcycleEv,
+      spec: IndonesiaPlates.motorcycle,
       theme: IndonesiaThemes.freeTradeZoneEv,
       values: 'XX 1234 ABC 08 28',
       name: 'id_moto_ftz_ev',
@@ -327,7 +327,7 @@ void main() {
 
   test('generator fills every slot within its field', () {
     final Random rnd = Random(1);
-    for (final PlateSpec spec in <PlateSpec>[IndonesiaPlates.car, IndonesiaPlates.motorcycleEv]) {
+    for (final PlateSpec spec in <PlateSpec>[IndonesiaPlates.car, IndonesiaPlates.motorcycle]) {
       for (int n = 0; n < 50; n++) {
         final List<String?> v = IndonesiaSerialGenerator.generate(spec, random: rnd);
         expect(v, everyElement(isNotNull));

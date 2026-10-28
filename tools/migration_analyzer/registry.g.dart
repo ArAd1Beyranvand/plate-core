@@ -212,14 +212,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'benin_plate',
     key: 'benin',
-    source: "BeninPlates.private",
-    read: () => benin_plate.BeninPlates.private,
-  ),
-  (
-    package: 'benin_plate',
-    key: 'benin',
-    source: "BeninPlates.commercial",
-    read: () => benin_plate.BeninPlates.commercial,
+    source: "BeninPlates.standard",
+    read: () => benin_plate.BeninPlates.standard,
   ),
   (
     package: 'benin_plate',
@@ -296,14 +290,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'bosnia_and_herzegovina_plate',
     key: 'bosnia_and_herzegovina',
-    source: "BosniaAndHerzegovinaPlates.taxi",
-    read: () => bosnia_and_herzegovina_plate.BosniaAndHerzegovinaPlates.taxi,
-  ),
-  (
-    package: 'bosnia_and_herzegovina_plate',
-    key: 'bosnia_and_herzegovina',
-    source: "BosniaAndHerzegovinaPlates.temporary",
-    read: () => bosnia_and_herzegovina_plate.BosniaAndHerzegovinaPlates.temporary,
+    source: "BosniaAndHerzegovinaPlates.taxiTemporary",
+    read: () => bosnia_and_herzegovina_plate.BosniaAndHerzegovinaPlates.taxiTemporary,
   ),
   (
     package: 'bosnia_and_herzegovina_plate',
@@ -332,14 +320,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'botswana_plate',
     key: 'botswana',
-    source: "BotswanaPlates.private",
-    read: () => botswana_plate.BotswanaPlates.private,
-  ),
-  (
-    package: 'botswana_plate',
-    key: 'botswana',
-    source: "BotswanaPlates.publicService",
-    read: () => botswana_plate.BotswanaPlates.publicService,
+    source: "BotswanaPlates.civil",
+    read: () => botswana_plate.BotswanaPlates.civil,
   ),
   (
     package: 'botswana_plate',
@@ -554,30 +536,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
     key: 'chile',
     source: "ChilePlates.private",
     read: () => chile_plate.ChilePlates.private,
-  ),
-  (
-    package: 'chile_plate',
-    key: 'chile',
-    source: "ChilePlates.taxi",
-    read: () => chile_plate.ChilePlates.taxi,
-  ),
-  (
-    package: 'chile_plate',
-    key: 'chile',
-    source: "ChilePlates.collectiveTaxi",
-    read: () => chile_plate.ChilePlates.collectiveTaxi,
-  ),
-  (
-    package: 'chile_plate',
-    key: 'chile',
-    source: "ChilePlates.radiotaxi",
-    read: () => chile_plate.ChilePlates.radiotaxi,
-  ),
-  (
-    package: 'chile_plate',
-    key: 'chile',
-    source: "ChilePlates.freeZone",
-    read: () => chile_plate.ChilePlates.freeZone,
   ),
   (
     package: 'chile_plate',
@@ -990,20 +948,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'indonesia_plate',
     key: 'indonesia',
-    source: "IndonesiaPlates.carEv",
-    read: () => indonesia_plate.IndonesiaPlates.carEv,
-  ),
-  (
-    package: 'indonesia_plate',
-    key: 'indonesia',
     source: "IndonesiaPlates.motorcycle",
     read: () => indonesia_plate.IndonesiaPlates.motorcycle,
-  ),
-  (
-    package: 'indonesia_plate',
-    key: 'indonesia',
-    source: "IndonesiaPlates.motorcycleEv",
-    read: () => indonesia_plate.IndonesiaPlates.motorcycleEv,
   ),
   (
     package: 'indonesia_plate',
@@ -2124,60 +2070,14 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'maldives_plate',
     key: 'maldives',
-    source: "MaldivesPlates.private",
-    read: () => maldives_plate.MaldivesPlates.private,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.commercial",
-    read: () => maldives_plate.MaldivesPlates.commercial,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.government",
-    read: () => maldives_plate.MaldivesPlates.government,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.police",
-    read: () => maldives_plate.MaldivesPlates.police,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.taxi",
-    read: () => maldives_plate.MaldivesPlates.taxi,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.diplomatic",
-    read: () => maldives_plate.MaldivesPlates.diplomatic,
+    source: "MaldivesPlates.standard",
+    read: () => maldives_plate.MaldivesPlates.standard,
   ),
   (
     package: 'maldives_plate',
     key: 'maldives',
     source: "MaldivesPlates.all",
     read: () => maldives_plate.MaldivesPlates.all,
-  ),
-  (
-    package: 'maldives_plate',
-    key: 'maldives',
-    source: "MaldivesPlates.of(*)",
-    read: () => <Object?>[
-      for (final a0 in [
-        maldives_plate.MaldivesCategory.private,
-        maldives_plate.MaldivesCategory.commercial,
-        maldives_plate.MaldivesCategory.government,
-        maldives_plate.MaldivesCategory.police,
-        maldives_plate.MaldivesCategory.taxi,
-        maldives_plate.MaldivesCategory.diplomatic,
-      ])
-        maldives_plate.MaldivesPlates.of(a0),
-    ],
   ),
   (
     package: 'mali_plate',
@@ -2230,26 +2130,14 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'malta_plate',
     key: 'malta',
-    source: "MaltaPlates.vintage",
-    read: () => malta_plate.MaltaPlates.vintage,
-  ),
-  (
-    package: 'malta_plate',
-    key: 'malta',
     source: "MaltaPlates.all",
     read: () => malta_plate.MaltaPlates.all,
   ),
   (
     package: 'mauritania_plate',
     key: 'mauritania',
-    source: "MauritaniaPlates.blue",
-    read: () => mauritania_plate.MauritaniaPlates.blue,
-  ),
-  (
-    package: 'mauritania_plate',
-    key: 'mauritania',
-    source: "MauritaniaPlates.red",
-    read: () => mauritania_plate.MauritaniaPlates.red,
+    source: "MauritaniaPlates.standard",
+    read: () => mauritania_plate.MauritaniaPlates.standard,
   ),
   (
     package: 'mauritania_plate',
@@ -2326,56 +2214,20 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'myanmar_plate',
     key: 'myanmar',
-    source: "MyanmarPlates.taxi",
-    read: () => myanmar_plate.MyanmarPlates.taxi,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
     source: "MyanmarPlates.hearse",
     read: () => myanmar_plate.MyanmarPlates.hearse,
   ),
   (
     package: 'myanmar_plate',
     key: 'myanmar',
-    source: "MyanmarPlates.religious",
-    read: () => myanmar_plate.MyanmarPlates.religious,
+    source: "MyanmarPlates.embossed",
+    read: () => myanmar_plate.MyanmarPlates.embossed,
   ),
   (
     package: 'myanmar_plate',
     key: 'myanmar',
-    source: "MyanmarPlates.embossedPrivate",
-    read: () => myanmar_plate.MyanmarPlates.embossedPrivate,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
-    source: "MyanmarPlates.embossedCommercial",
-    read: () => myanmar_plate.MyanmarPlates.embossedCommercial,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
-    source: "MyanmarPlates.embossedTouring",
-    read: () => myanmar_plate.MyanmarPlates.embossedTouring,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
-    source: "MyanmarPlates.organisation",
-    read: () => myanmar_plate.MyanmarPlates.organisation,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
-    source: "MyanmarPlates.motorcycle",
-    read: () => myanmar_plate.MyanmarPlates.motorcycle,
-  ),
-  (
-    package: 'myanmar_plate',
-    key: 'myanmar',
-    source: "MyanmarPlates.rickshaw",
-    read: () => myanmar_plate.MyanmarPlates.rickshaw,
+    source: "MyanmarPlates.burmese",
+    read: () => myanmar_plate.MyanmarPlates.burmese,
   ),
   (
     package: 'myanmar_plate',
@@ -3178,12 +3030,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'uruguay_plate',
     key: 'uruguay',
-    source: "UruguayPlates.doctor",
-    read: () => uruguay_plate.UruguayPlates.doctor,
-  ),
-  (
-    package: 'uruguay_plate',
-    key: 'uruguay',
     source: "UruguayPlates.assembly",
     read: () => uruguay_plate.UruguayPlates.assembly,
   ),
@@ -3208,12 +3054,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'uruguay_plate',
     key: 'uruguay',
-    source: "UruguayPlates.publicTransport",
-    read: () => uruguay_plate.UruguayPlates.publicTransport,
-  ),
-  (
-    package: 'uruguay_plate',
-    key: 'uruguay',
     source: "UruguayPlates.school",
     read: () => uruguay_plate.UruguayPlates.school,
   ),
@@ -3234,12 +3074,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
     key: 'uruguay',
     source: "UruguayPlates.rental",
     read: () => uruguay_plate.UruguayPlates.rental,
-  ),
-  (
-    package: 'uruguay_plate',
-    key: 'uruguay',
-    source: "UruguayPlates.diplomatic",
-    read: () => uruguay_plate.UruguayPlates.diplomatic,
   ),
   (
     package: 'uruguay_plate',
@@ -3655,8 +3489,6 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
     "malaysia_plate/lib/src/malaysia_plates.dart: MalaysiaPlates builds specs at runtime into a private cache",
   ],
   'maldives': <String>[
-    "maldives_plate/lib/src/maldives_plates.dart: private catalogue MaldivesPlates._cache (specs in it are dumped only if also reachable publicly)",
-    "maldives_plate/lib/src/maldives_plates.dart: MaldivesPlates builds specs at runtime into a private cache",
   ],
   'namibia': <String>[
     "namibia_plate/lib/src/namibia_plates.dart: lookup function NamibiaPlates.standard({required int digits, int regionLetters = 1}) has non-enumerable parameters; only its default/catalogued results are dumped",
@@ -3668,8 +3500,6 @@ const Map<String, List<String>> discoveryWarnings = <String, List<String>>{
     "norway_plate/lib/src/norway_plates.dart: lookup function NorwayPlates.privateFor(int digits) has non-enumerable parameters; only its default/catalogued results are dumped",
   ],
   'republic_of_ireland': <String>[
-    "republic_of_ireland_plate/lib/src/republic_of_ireland_plates.dart: lookup function RepublicOfIrelandPlates.standardFor(String county) has non-enumerable parameters; only its default/catalogued results are dumped",
-    "republic_of_ireland_plate/lib/src/republic_of_ireland_plates.dart: lookup function RepublicOfIrelandPlates.electricFor(String county) has non-enumerable parameters; only its default/catalogued results are dumped",
   ],
   'suriname': <String>["no public PlateSpec catalogue found by discovery"],
   'thailand': <String>[

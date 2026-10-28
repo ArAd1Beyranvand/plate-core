@@ -186,10 +186,9 @@ abstract final class _Layout {
 /// red-on-white dealer plate, which has no reference artwork. The faint
 /// Korlantas watermark at bottom left is omitted.
 abstract final class IndonesiaPlates {
-  static final PlateSpec car = _serialSpec(band: false, motorcycle: false);
-  static final PlateSpec carEv = _serialSpec(band: true, motorcycle: false);
-  static final PlateSpec motorcycle = _serialSpec(band: false, motorcycle: true);
-  static final PlateSpec motorcycleEv = _serialSpec(band: true, motorcycle: true);
+  /// The band is always laid out; only the EV themes colour it.
+  static final PlateSpec car = _serialSpec(motorcycle: false);
+  static final PlateSpec motorcycle = _serialSpec(motorcycle: true);
 
   static final PlateSpec diplomatic = _diplomaticSpec();
 
@@ -410,7 +409,7 @@ abstract final class IndonesiaPlates {
     PlateTextGroup(<int>[first + 1], key: 'year'),
   ];
 
-  static PlateSpec _serialSpec({required bool band, required bool motorcycle}) {
+  static PlateSpec _serialSpec({required bool motorcycle}) {
     final double width = motorcycle ? _Layout.motoWidth : _Layout.carWidth;
     final double height = motorcycle ? _Layout.motoHeight : _Layout.carHeight;
     final double pitch = motorcycle ? _Layout.motoPitch : _Layout.carPitch;
@@ -445,15 +444,13 @@ abstract final class IndonesiaPlates {
           );
 
     return PlateSpec(
-      id: 'id.${motorcycle ? 'motorcycle' : 'car'}${band ? '.band' : ''}',
+      id: 'id.${motorcycle ? 'motorcycle' : 'car'}',
       country: IndonesiaCountry.indonesia,
       canvasWidth: width,
       canvasHeight: height,
       noPanel: true,
       panel: PlatePanel(box: PlateBox(0, 0, 0, height)),
-      background: band
-          ? _background(motorcycle ? _Layout.motoBandTop : _Layout.carBandTop)
-          : PlateSection.plain,
+      background: _background(motorcycle ? _Layout.motoBandTop : _Layout.carBandTop),
       slots: <PlateSlot>[
         PlateSlot(
           alphabet: IndonesiaAlphabets.letters,

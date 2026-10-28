@@ -10,81 +10,55 @@ https://platexample.ir/#/discover/india
 
 # india_plate
 
-India's current licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the 1989 format on the HSRP plate, in every colour class.
+India's licence plates for the `plate_core` library. One 500×120 layout for every current format; the colour class (private, transport, rental, electric, diplomatic, ...) is a theme, never a spec.
 
-## What is here
+## Install
 
-One 500 × 120 layout (the article's light-motor-vehicle size). The format is
-the spec, the colour class is the theme:
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  india_plate: ^0.1.0
+```
 
-| Spec | Format | Themes |
-|---|---|---|
-| `private` | MH 20 DV 2366 + chakra and IND | `private` |
-| `standard` | MH 12 DV 4353 | `transport`, `rental`, `electric`, `electricTransport` |
-| `bharat` | 21 BH 2345 AA + badge | `private` |
-| `vintage` | MH VA AA 0000 + badge | `private` |
-| `diplomatic` | 52 CD 19 | `diplomatic`, `consular` |
-| `military` | ↑ 02 B 084821 H | `military`, `militaryPolice`, `electric` |
-| `temporary` | T 1123 KL 5986 KA | `temporary` |
-| `trade` | UP 16 C 0002 TC 0073 | `trade` |
+## Use
 
-Printed letters that are part of a format (BH, VA, TC, T, ↑) are labels, not
-cells. `IndiaValidator` judges any of the specs by the groups it has.
+```dart
+import 'package:plate_core/plate_core.dart';
+import 'package:india_plate/india_plate.dart';
 
-## Sources and measurements
+PlateCanvas(
+  spec: IndiaPlates.private,
+  theme: IndiaThemes.private,
+  validator: const IndiaValidator(),
+  autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
+);
+```
 
-Geometry and every colour come from the colour-class artwork that came with the
-task (private, commercial, rental, embassy, electric). Each plate in it is
-850 × 183 px (4.65:1). It is normalised to 500 × 120 with x read
-proportionally. Wikipedia's colour table gives only CSS keywords, so it decides
-which colour goes where but never the value. Trade, temporary and military
-police use the artwork's own red, `DB351F`.
+## Contains
 
-| | reference | golden |
-|---|---|---|
-| plain row ink x | 48.2..450.6 | 47.4..447.4 |
-| private row ink x | 71.8..474.1 | 70.4..470.4 |
-| row ink centre y | 60.3 | 60.2 |
-| IND x / y | 15.9..44.1 / 57.0..71.5 | 16.4..43.4 / 57.2..67.8 |
-| chakra x / y | 14.7..42.4 / 21.0..52.5 | 15.1..41.4 / 23.0..49.3 |
-| row ink height | 78.7 | 29.6 |
+- `IndiaCountry` — country panel: `india`.
+- `IndiaPlates` — 8 plate specs: `private`, `standard`, `bharat`, `vintage`, `military`, `diplomatic`, `temporary`, `trade`.
+- `IndiaThemes` — 11 themes: `private`, `transport`, `rental`, `electric`, `electricTransport`, `diplomatic`, `consular`, `military`, `militaryPolice`, `temporary` and 1 more.
+- `IndiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `IndiaMissions` — code table.
+- `IndiaRegions` — code table.
+- 1 bundled asset (`in_ashoka_chakra.png`).
 
-### The characters are ~38% of reference height
+## Plates
 
-The plate's face is a tall condensed one. Each cell is 41.4 wide. A cell scales
-down any glyph wider than itself, and the fallback bold M is about 0.86 em, so
-55 is the largest slot where every capital keeps the same height. Getting to
-78.7 would need a condensed face in the theme. `plate_core` has no hook for
-that, and changing `glyphStyle` would move every country.
+India's current (1989 Motor Vehicles Act, HSRP) plates.
 
-## Not implemented
+One layout for every format; colour class is the theme (`IndiaThemes`), so
+a yellow transport plate is `standard` in `IndiaThemes.transport`.
 
-- Plates before 1989, and the president's and governors' emblem plates.
-- One- and three-letter RTO series, and the three-letter IOD mission type.
-  Each of these needs a different number of cells.
-- The laser-etched serial under IND, and the hologram's shimmer.
-- Two-wheeler and commercial-vehicle plate sizes.
+Fixed for the cell row: the RTO series is two letters, as on the artwork.
+One- and three-letter series and the IOD mission type need a different
+cell count and are not specced. Not implemented: the pre-1989 series, the
+president's and governors' emblem plates, the laser-etched serial under
+IND, and the two-wheeler and commercial-vehicle plate sizes.
 
-## Also available
+## Part of plate
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - venezuela_ licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

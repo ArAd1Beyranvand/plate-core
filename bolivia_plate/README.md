@@ -10,40 +10,44 @@ https://platexample.ir/#/discover/bolivia
 
 # bolivia_plate
 
-Bolivia's licence plates for [`plate_core`](https://pub.dev/packages/plate_core) — the blue-on-white `1234ABC` plate with its department box, the diplomatic and consular `12-CD-34` plates and the Mercosur `AB 12345` plate, with their themes, alphabets and advisory validators.
+Bolivia's licence plates for the `plate_core` library. The ordinary plate is the PTA number `1234ABC` in blue on white under BOLIVIA, with the flag at the left and the department's letter in a box at the right. Diplomatic, consular and international plates (`12-CD-34`) and the Mercosur plate (`AB 12345`) complete the set.
+
+## Install
+
+```yaml
+dependencies:
+  plate_core: ^0.12.0
+  bolivia_plate: ^0.1.0
+```
+
+## Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
 import 'package:bolivia_plate/bolivia_plate.dart';
 
 PlateCanvas(
-  spec: BoliviaPlates.currentPlate,
+  spec: BoliviaPlates.mercosur,
   theme: BoliviaThemes.standard,
   validator: const BoliviaValidator(),
   autoValidate: true,
+  onChooseCharacter: noCharacterChooser,
 );
 ```
 
-## Also available
+## Contains
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- `BoliviaCountry` — country panel: `bolivia`.
+- `BoliviaPlates` — 3 plate specs: `mercosur`, `standard()`, `special()`.
+- `BoliviaThemes` — 6 themes: `standard`, `diplomatic`, `consular`, `mission`, `organization`, `mercosur`.
+- `BoliviaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `BoliviaSpecialValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `BoliviaMercosurValidator` — advisory validator; flags the frame, never blocks a keystroke.
+- `BoliviaSerialGenerator` — random plate generator.
+- `BoliviaRegions` — code table.
+- 1 bundled asset (`Flag_of_Bolivia_state.svg`).
+
+## Part of plate
+
+Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
+

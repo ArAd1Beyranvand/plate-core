@@ -6,37 +6,39 @@ GO VEGAN 🌱
 
 # plate_alphabet
 
-Ready-made digit and letter alphabets for licence plate keypads — shared across countries, subset by each as needed.
+The alphabets plates are typed from: digit sets, letter sets and per-country character tables, shared by every country package so none restates ten digits or twenty-six letters.
+
+Each alphabet is a const `PlateAlphabet` from [`plate_core`](https://pub.dev/packages/plate_core) — which characters a slot accepts, how each is drawn (`glyphs`), and whether it is typed or chosen from a picker.
+
+## Install
+
+```yaml
+dependencies:
+  plate_alphabet: ^0.1.1
+```
+
+## Use
 
 ```dart
 import 'package:plate_alphabet/plate_alphabet.dart';
 
-// Access predefined alphabets
-final digits = PlateAlphabets.digits;        // 0–9
-final latins = PlateAlphabets.latins;        // A–Z
-final persians = PlateAlphabets.persians;    // Persian letters
+PlateAlphabetDigits.iranian;      // 0–9, stored as ASCII, drawn as ۰–۹
+PlateAlphabetLatin.letters;       // A–Z from the keyboard
+PlateAlphabetLetters.latinAll;    // A–Z for a picker
+PersianAlphabets.privateLetters;  // the 13 series letters of an Iranian private plate
+GermanAlphabets.districtLetters;  // a country's own table
 ```
 
-## Also available
+## What is in it
 
-- [`plate_core`](https://pub.dev/packages/plate-core) - Paint license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - Venezuela's licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+- **Shared sets** — `PlateAlphabetDigits` (`english`, `iranian`, `iranshahr`), `PlateAlphabetLetters` (`latinAll`, `persianAll`), `PlateAlphabetLatin` (`typed`, `letters`, `region`).
+- **Script sets** — `PersianAlphabets`, and the Hangul, Belarusian and Namibian tables (`PlateAlphabetKorea`, `PlateAlphabetBelarus`, `PlateAlphabetNamibia`) and the country classes that print other scripts.
+- **Per-country tables** — one `<Country>Alphabets` class per country, in `lib/src/countries/`: district and region codes, fixed class letters, forbidden letters left out. A country package re-exports only its own.
+
+Digits are always stored as ASCII `0-9`; only rendering differs, so a value typed in one script validates and converts in any other.
+
+Where a country restricts a set (Peru's special series, Namibia's town codes), the alphabet carries the restriction, so the keypad never offers a combination that cannot exist.
+
+## Part of plate
+
+[`plate_core`](https://pub.dev/packages/plate_core) paints plates; [`plate_keypad`](https://pub.dev/packages/plate_keypad) renders these alphabets as a keypad or picker; each `*_plate` country package depends on this one.
