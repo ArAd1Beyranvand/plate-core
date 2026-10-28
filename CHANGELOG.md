@@ -1,3 +1,7 @@
+## 0.12.1
+
+- Brace the early return in `PlateCanvas` (lint).
+
 ## 0.12.0
 
 - **Code-drawn flags.** `PlateDrawing` (a width, a height and a list of const `PlateShape`s: rect, polygon, circle, crescent, star, star ring) is a `PlateGraphic`, as `SvgPlateAsset` and `RasterPlateAsset` now are, so `PlateCountry.flag` takes it and `PlateFlag` paints it with `PlateDrawingView`. `PlateDecal` takes a `drawing:` instead of an `image:`. A drawing ships no file and needs no pubspec entry.

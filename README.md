@@ -14,7 +14,7 @@ Data-driven vehicle licence plates for Flutter. A plate is a `const PlateSpec` â
 
 ```yaml
 dependencies:
-  plate_core: ^0.12.0
+  plate_core: ^0.12.1
   iran_plate: ^0.6.0   # any country package
 ```
 
