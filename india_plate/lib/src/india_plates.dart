@@ -57,8 +57,14 @@ abstract final class _Layout {
 /// (at least [min]), or, for [_Run.fixed], printed characters no one types
 /// (BH, VA, TC).
 class _Run {
-  const _Run(this.key, this.alphabet, this.count, {int? min}) : text = '', min = min ?? count;
-  const _Run.fixed(this.text) : key = '', alphabet = null, count = text.length, min = text.length;
+  const _Run(this.key, this.alphabet, this.count, {int? min})
+    : text = '',
+      min = min ?? count;
+  const _Run.fixed(this.text)
+    : key = '',
+      alphabet = null,
+      count = text.length,
+      min = text.length;
 
   final String key;
   final int min;
@@ -89,7 +95,12 @@ PlateSpec _plate(
 
   final slots = <PlateSlot>[];
   final labels = <PlateLabel>[
-    if (badge) const PlateLabel(text: 'IND', box: _Layout.ind, glyphHeight: _Layout.indGlyph),
+    if (badge)
+      const PlateLabel(
+        text: 'IND',
+        box: _Layout.ind,
+        glyphHeight: _Layout.indGlyph,
+      ),
   ];
   final groups = <PlateTextGroup>[];
   var prefix = '';
@@ -106,7 +117,9 @@ PlateSpec _plate(
       }
       prefix += run.text;
     } else {
-      groups.add(PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key));
+      groups.add(
+        PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key),
+      );
       slots.add(
         PlateSlot(
           alphabet: run.alphabet!,
@@ -131,7 +144,10 @@ PlateSpec _plate(
     decals: <PlateDecal>[
       if (badge)
         const PlateDecal(
-          image: AssetImage('assets/in_ashoka_chakra.png', package: 'india_plate'),
+          image: AssetImage(
+            'assets/in_ashoka_chakra.png',
+            package: 'india_plate',
+          ),
           box: _Layout.chakra,
         ),
     ],
@@ -165,7 +181,11 @@ abstract final class IndiaPlates {
     _Run('number', _d, 4),
   ];
 
-  static final PlateSpec private = _plate('in.private', _registration, badge: true);
+  static final PlateSpec private = _plate(
+    'in.private',
+    _registration,
+    badge: true,
+  );
 
   /// The same registration without the badge, as the artwork draws the
   /// transport, rental and electric plates.

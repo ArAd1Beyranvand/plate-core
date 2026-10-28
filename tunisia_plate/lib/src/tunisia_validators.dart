@@ -14,11 +14,19 @@ class TunisiaValidator extends GatedPlateValidator {
   static const String reasonZero = 'The registration is 0001 to 9999.';
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      validateFields(series: entry.group('series'), number: entry.group('number'));
+  PlateValidation judge(PlateEntry entry) => validateFields(
+    series: entry.group('series'),
+    number: entry.group('number'),
+  );
 
-  static PlateValidation validateFields({required String series, required String number}) {
-    if (series.isEmpty || series.length > 3 || !isDigits(series) || series.startsWith('0')) {
+  static PlateValidation validateFields({
+    required String series,
+    required String number,
+  }) {
+    if (series.isEmpty ||
+        series.length > 3 ||
+        !isDigits(series) ||
+        series.startsWith('0')) {
       return const PlateValidation.invalid(reasonSeries);
     }
     if (!isDigitsOfLength(number, 4)) {
@@ -70,7 +78,8 @@ class TunisiaDiplomaticValidator extends GatedPlateValidator {
   @override
   PlateValidation judge(PlateEntry entry) {
     final String serial = entry.group('serial');
-    if (!isDigitsOfLength(entry.group('country'), 2) || !isDigitsOfLength(serial, 2)) {
+    if (!isDigitsOfLength(entry.group('country'), 2) ||
+        !isDigitsOfLength(serial, 2)) {
       return const PlateValidation.invalid(reasonDigits);
     }
     if (chief && serial != '01') {
@@ -90,7 +99,8 @@ class TunisiaSerialValidator extends GatedPlateValidator {
   static const String reasonSerial = 'The serial is five digits.';
 
   @override
-  PlateValidation judge(PlateEntry entry) => isDigitsOfLength(entry.group('serial'), 5)
+  PlateValidation judge(PlateEntry entry) =>
+      isDigitsOfLength(entry.group('serial'), 5)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid(reasonSerial);
 }

@@ -16,7 +16,10 @@ abstract final class PSGazaPlates {
 
   // Same cells as PSWestBankPlates.legacyCar.
   static final List<PlateSlot> _sevenCellSlots = [
-    const PlateSlot(alphabet: PSAlphabets.gazaPrefix, box: PlateBox(20, 9, 47, 92)),
+    const PlateSlot(
+      alphabet: PSAlphabets.gazaPrefix,
+      box: PlateBox(20, 9, 47, 92),
+    ),
     psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
@@ -38,8 +41,16 @@ abstract final class PSGazaPlates {
   ];
 
   static const List<PlateLabel> _sevenCellLabels = [
-    PlateLabel(text: '-', box: PlateBox(64.9, 36.6, 32.2, 36.8), glyphHeight: 50.6),
-    PlateLabel(text: '-', box: PlateBox(292.9, 36.6, 32.2, 36.8), glyphHeight: 50.6),
+    PlateLabel(
+      text: '-',
+      box: PlateBox(64.9, 36.6, 32.2, 36.8),
+      glyphHeight: 50.6,
+    ),
+    PlateLabel(
+      text: '-',
+      box: PlateBox(292.9, 36.6, 32.2, 36.8),
+      glyphHeight: 50.6,
+    ),
   ];
 
   /// 2012–2021: the flag rotated, filling the right strip.
@@ -48,7 +59,11 @@ abstract final class PSGazaPlates {
     country: PSCountries.gaza2012,
     canvasWidth: 520,
     canvasHeight: 110,
-    panel: PlatePanel(box: PlateBox(455, 0, 55, 110), flagScale: 1, padding: EdgeInsets.zero),
+    panel: PlatePanel(
+      box: PlateBox(455, 0, 55, 110),
+      flagScale: 1,
+      padding: EdgeInsets.zero,
+    ),
     borderWidthRatioOverride: 0.027,
     slots: _sevenCellSlots,
     labels: _sevenCellLabels,
@@ -58,13 +73,19 @@ abstract final class PSGazaPlates {
   /// A raster, since decals cannot be SVG, pre-faded to ~12% grey. Decals paint
   /// under the slots.
   static const PlateDecal _watermark = PlateDecal(
-    image: AssetImage('assets/marks/palestine_watermark.png', package: 'palestine_plate'),
+    image: AssetImage(
+      'assets/marks/palestine_watermark.png',
+      package: 'palestine_plate',
+    ),
     box: PlateBox(10, 9, 380, 92),
   );
 
   // CALIBRATE — proportions from the car layout.
   static final List<PlateSlot> _motoSlots = [
-    const PlateSlot(alphabet: PSAlphabets.gazaPrefix, box: PlateBox(14, 9, 48, 92)),
+    const PlateSlot(
+      alphabet: PSAlphabets.gazaPrefix,
+      box: PlateBox(14, 9, 48, 92),
+    ),
     psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
@@ -87,7 +108,11 @@ abstract final class PSGazaPlates {
 
   static const List<PlateLabel> _motoLabels = [
     PlateLabel(text: '-', box: PlateBox(56, 36.6, 18, 36.8), glyphHeight: 50.6),
-    PlateLabel(text: '-', box: PlateBox(272, 36.6, 18, 36.8), glyphHeight: 50.6),
+    PlateLabel(
+      text: '-',
+      box: PlateBox(272, 36.6, 18, 36.8),
+      glyphHeight: 50.6,
+    ),
   ];
 
   /// One-line motorcycle with the upright flag and watermark.
@@ -96,7 +121,11 @@ abstract final class PSGazaPlates {
     country: PSCountries.gaza2021,
     canvasWidth: 520,
     canvasHeight: 110,
-    panel: PlatePanel(box: PlateBox(400, 27.5, 110, 55), flagScale: 1, padding: EdgeInsets.zero),
+    panel: PlatePanel(
+      box: PlateBox(400, 27.5, 110, 55),
+      flagScale: 1,
+      padding: EdgeInsets.zero,
+    ),
     borderWidthRatioOverride: 0.027,
     slots: _motoSlots,
     labels: _motoLabels,
@@ -113,7 +142,10 @@ abstract final class PSGazaPlates {
 
   // Same lines as PSWestBankPlates.legacyCarTwoLine.
   static final List<PlateSlot> _twoLineSlots = [
-    const PlateSlot(alphabet: PSAlphabets.gazaPrefix, box: PlateBox(16.5, 53, 34, 42)),
+    const PlateSlot(
+      alphabet: PSAlphabets.gazaPrefix,
+      box: PlateBox(16.5, 53, 34, 42),
+    ),
     psRun(
       alphabet: PSAlphabets.digits,
       count: 4,
@@ -135,7 +167,11 @@ abstract final class PSGazaPlates {
   ];
 
   static const List<PlateLabel> _twoLineLabels = [
-    PlateLabel(text: '-', box: PlateBox(49.5, 65.6, 21, 16.8), glyphHeight: 23.1),
+    PlateLabel(
+      text: '-',
+      box: PlateBox(49.5, 65.6, 21, 16.8),
+      glyphHeight: 23.1,
+    ),
   ];
 
   /// Car 2012–2021 on two lines.
@@ -163,12 +199,20 @@ abstract final class PSGazaPlates {
     labels: _twoLineLabels,
     decals: [
       PlateDecal(
-        image: AssetImage('assets/marks/palestine_watermark.png', package: 'palestine_plate'),
+        image: AssetImage(
+          'assets/marks/palestine_watermark.png',
+          package: 'palestine_plate',
+        ),
         box: PlateBox(10, 50, 282, 96),
       ),
     ],
     textGroups: _groups,
   );
 
-  static final List<PlateSpec> all = [car2012, car2012TwoLine, car2021TwoLine, moto];
+  static final List<PlateSpec> all = [
+    car2012,
+    car2012TwoLine,
+    car2021TwoLine,
+    moto,
+  ];
 }

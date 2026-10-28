@@ -95,7 +95,11 @@ abstract final class CubaPlates {
   static final PlateSpec car = _car(
     id: 'cu.car',
     strip: const PlateSection.columns(<PlatePart>[
-      PlatePart(PlateSection.plain, end: _Layout.carStripEnd, divider: _Layout.carStripRule),
+      PlatePart(
+        PlateSection.plain,
+        end: _Layout.carStripEnd,
+        divider: _Layout.carStripRule,
+      ),
       PlatePart(PlateSection.plain),
     ]),
     captionInk: null,
@@ -122,7 +126,9 @@ abstract final class CubaPlates {
     canvasWidth: _Layout.carWidth,
     canvasHeight: _Layout.carHeight,
     noPanel: true,
-    panel: const PlatePanel(box: PlateBox(0, 0, _Layout.carStripEnd, _Layout.carHeight)),
+    panel: const PlatePanel(
+      box: PlateBox(0, 0, _Layout.carStripEnd, _Layout.carHeight),
+    ),
     background: strip,
     labels: <PlateLabel>[
       PlateLabel(
@@ -143,7 +149,10 @@ abstract final class CubaPlates {
           _Layout.carSlotHeight,
         ),
       ),
-      for (final double left in const <double>[_Layout.carHighLeft, _Layout.carLowLeft])
+      for (final double left in const <double>[
+        _Layout.carHighLeft,
+        _Layout.carLowLeft,
+      ])
         ...plateRegister(
           alphabet: CubaAlphabets.digits,
           count: 3,
@@ -167,7 +176,9 @@ abstract final class CubaPlates {
     canvasWidth: _Layout.motoWidth,
     canvasHeight: _Layout.motoHeight,
     noPanel: true,
-    panel: const PlatePanel(box: PlateBox(0, 0, _Layout.motoBoxRight, _Layout.motoBoxBottom)),
+    panel: const PlatePanel(
+      box: PlateBox(0, 0, _Layout.motoBoxRight, _Layout.motoBoxBottom),
+    ),
     borderWidthRatioOverride: _Layout.motoBorderRatio,
     // The top row stops at the far edge of the bottom rule, so the vertical
     // rule runs down to meet it and no further; the bottom rule lives inside
@@ -177,7 +188,11 @@ abstract final class CubaPlates {
         PlateSection.columns(<PlatePart>[
           PlatePart(
             PlateSection.rows(<PlatePart>[
-              PlatePart(PlateSection.plain, end: _Layout.motoBoxBottom, divider: _Layout.motoRule),
+              PlatePart(
+                PlateSection.plain,
+                end: _Layout.motoBoxBottom,
+                divider: _Layout.motoRule,
+              ),
               PlatePart(PlateSection.plain),
             ]),
             end: _Layout.motoBoxRight,
@@ -200,7 +215,12 @@ abstract final class CubaPlates {
     slots: <PlateSlot>[
       const PlateSlot(
         alphabet: CubaAlphabets.letters,
-        box: PlateBox(_Layout.motoLetterLeft, 0, _Layout.motoPitch, _Layout.motoRowHeight),
+        box: PlateBox(
+          _Layout.motoLetterLeft,
+          0,
+          _Layout.motoPitch,
+          _Layout.motoRowHeight,
+        ),
       ),
       ...plateRegister(
         alphabet: CubaAlphabets.digits,
@@ -217,7 +237,11 @@ abstract final class CubaPlates {
     ],
   );
 
-  static List<PlateSpec> get all => <PlateSpec>[car, carLegalEntity, motorcycle];
+  static List<PlateSpec> get all => <PlateSpec>[
+    car,
+    carLegalEntity,
+    motorcycle,
+  ];
 
   static const PlateTheme theme = CubaThemes.standard;
 }

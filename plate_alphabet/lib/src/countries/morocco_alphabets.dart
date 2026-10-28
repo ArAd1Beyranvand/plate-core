@@ -19,6 +19,14 @@ abstract final class MoroccoAlphabets {
     isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
-    glyphs: <String, String>{'A': 'أ', 'B': 'ب', 'D': 'د', 'H': 'ه', 'E': 'و', 'T': 'ط', 'Y': 'ي'},
+    glyphs: <String, String>{
+      'A': 'أ',
+      'B': 'ب',
+      'D': 'د',
+      'H': 'ه',
+      'E': 'و',
+      'T': 'ط',
+      'Y': 'ي',
+    },
   );
 }

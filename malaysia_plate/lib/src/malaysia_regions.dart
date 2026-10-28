@@ -68,5 +68,6 @@ abstract final class MalaysiaRegions {
   }
 
   /// A [PlateLabelResolver] for [PlateSpec.resolveRegion].
-  static String? captionOf(String Function(String key) group) => lookup(group('prefix'));
+  static String? captionOf(String Function(String key) group) =>
+      lookup(group('prefix'));
 }

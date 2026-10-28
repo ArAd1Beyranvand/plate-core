@@ -17,7 +17,8 @@ class BoliviaValidator extends GatedPlateValidator {
 
   static const String reasonNumber = 'The number is three or four digits.';
   static const String reasonLetters = 'The series is three letters.';
-  static const String reasonDepartment = 'The department is one of C H B L O N P S T.';
+  static const String reasonDepartment =
+      'The department is one of C H B L O N P S T.';
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -56,7 +57,8 @@ class BoliviaSpecialValidator extends GatedPlateValidator {
 
   @override
   PlateValidation judge(PlateEntry entry) =>
-      isDigitsOfLength(entry.group('country'), 2) && isDigitsOfLength(entry.group('rank'), 2)
+      isDigitsOfLength(entry.group('country'), 2) &&
+          isDigitsOfLength(entry.group('rank'), 2)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid(reasonDigits);
 }

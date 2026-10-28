@@ -11,7 +11,11 @@ void main() {
         // canvas or an alphabet id reused for two character lists.
         var ok = false;
         assert(ok = debugValidateSpec(spec));
-        expect(ok, isTrue, reason: 'assertions must be enabled to run this test');
+        expect(
+          ok,
+          isTrue,
+          reason: 'assertions must be enabled to run this test',
+        );
       });
     }
 
@@ -19,7 +23,11 @@ void main() {
       test(spec.id, () {
         var ok = false;
         assert(ok = debugValidateSpec(spec));
-        expect(ok, isTrue, reason: 'assertions must be enabled to run this test');
+        expect(
+          ok,
+          isTrue,
+          reason: 'assertions must be enabled to run this test',
+        );
       });
     }
   });
@@ -37,9 +45,17 @@ void main() {
       final keys = spec.effectiveTextGroups.map((g) => g.key).toSet();
       final isModern = keys.contains('region');
       if (isModern) {
-        expect(keys, containsAll(<String>{'region', 'serial', 'governorate'}), reason: spec.id);
+        expect(
+          keys,
+          containsAll(<String>{'region', 'serial', 'governorate'}),
+          reason: spec.id,
+        );
       } else {
-        expect(keys, containsAll(<String>{'district', 'serial', 'usage'}), reason: spec.id);
+        expect(
+          keys,
+          containsAll(<String>{'district', 'serial', 'usage'}),
+          reason: spec.id,
+        );
       }
     }
   });
@@ -47,18 +63,25 @@ void main() {
   test('Gaza specs declare prefix/serial/usage groups', () {
     for (final spec in PSGazaPlates.all) {
       final keys = spec.effectiveTextGroups.map((g) => g.key).toSet();
-      expect(keys, containsAll(<String>{'prefix', 'serial', 'usage'}), reason: spec.id);
+      expect(
+        keys,
+        containsAll(<String>{'prefix', 'serial', 'usage'}),
+        reason: spec.id,
+      );
     }
   });
 
-  test('a serial is one four-digit field and a plate is complete only when full', () {
-    final spec = PSWestBankPlates.modernCar;
-    expect(spec.slots.map((s) => s.length), [1, 4, 1]);
-    final partial = PlateController.fromValues(spec, ['1', '023', 'H']);
-    final full = PlateController.fromValues(spec, ['1', '0234', 'H']);
-    expect(partial.isCompleted, isFalse);
-    expect(full.isCompleted, isTrue);
-    partial.dispose();
-    full.dispose();
-  });
+  test(
+    'a serial is one four-digit field and a plate is complete only when full',
+    () {
+      final spec = PSWestBankPlates.modernCar;
+      expect(spec.slots.map((s) => s.length), [1, 4, 1]);
+      final partial = PlateController.fromValues(spec, ['1', '023', 'H']);
+      final full = PlateController.fromValues(spec, ['1', '0234', 'H']);
+      expect(partial.isCompleted, isFalse);
+      expect(full.isCompleted, isTrue);
+      partial.dispose();
+      full.dispose();
+    },
+  );
 }

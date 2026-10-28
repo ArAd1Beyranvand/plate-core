@@ -52,7 +52,8 @@ abstract final class JapanAlphabets {
   /// article lists no set for them, and the reference plates print `あ` and `ゆ`.
   static const PlateAlphabet kanaAny = PlateAlphabet.pattern(
     id: 'jp.kana.any',
-    include: 'あ い う え か き く け こ さ す せ そ た ち つ て と な に ぬ ね の は ひ ふ ほ ま み む め も や ゆ よ ら り る れ ろ わ を',
+    include:
+        'あ い う え か き く け こ さ す せ そ た ち つ て と な に ぬ ね の は ひ ふ ほ ま み む め も や ゆ よ ら り る れ ろ わ を',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

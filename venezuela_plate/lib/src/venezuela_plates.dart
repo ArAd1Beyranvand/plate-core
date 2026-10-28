@@ -110,7 +110,12 @@ abstract final class VenezuelaPlates {
     slots: <PlateSlot>[
       PlateSlot(
         alphabet: VenezuelaAlphabets.serial,
-        box: PlateBox(_Layout.serialLeft, _Layout.slotTop, 6 * _Layout.pitch, _Layout.slotHeight),
+        box: PlateBox(
+          _Layout.serialLeft,
+          _Layout.slotTop,
+          6 * _Layout.pitch,
+          _Layout.slotHeight,
+        ),
         length: 6,
         spacing: math.max(0, _Layout.pitch - 0.6 * 0.72 * _Layout.slotHeight),
       ),

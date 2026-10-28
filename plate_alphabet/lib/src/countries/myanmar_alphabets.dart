@@ -46,7 +46,8 @@ abstract final class MyanmarAlphabets {
 
   static const PlateAlphabet burmeseLetters = PlateAlphabet.pattern(
     id: 'mm.burmese.letters',
-    include: 'က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
+    include:
+        'က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );
@@ -54,7 +55,8 @@ abstract final class MyanmarAlphabets {
   /// A cell that is a numeral or a consonant (`၂၃ ယ`).
   static const PlateAlphabet burmeseMixed = PlateAlphabet.pattern(
     id: 'mm.burmese.mixed',
-    include: '0-9 က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
+    include:
+        '0-9 က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
     isNumeric: false,
     glyphs: _burmeseNumerals,

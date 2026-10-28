@@ -10,7 +10,8 @@ import 'riyadh_country.dart';
 /// height. [glyph] is the printed size for an echo row, which is free of its
 /// box; a slot's glyph is its box height.
 class _Row {
-  const _Row(this.cx, this.pitch, this.top, this.height, [double? glyph]) : glyph = glyph ?? height;
+  const _Row(this.cx, this.pitch, this.top, this.height, [double? glyph])
+    : glyph = glyph ?? height;
 
   final double cx, pitch, top, height, glyph;
   double get left => cx - pitch.abs() / 2;
@@ -149,7 +150,11 @@ abstract final class _Layout {
 /// Unicode glyph.
 abstract final class RiyadhPlates {
   static final PlateSpec us = _build('ye.riyadh.us', _Layout.us);
-  static final PlateSpec diplomatic = _build('ye.riyadh.us.diplomatic', _Layout.us, symbol: false);
+  static final PlateSpec diplomatic = _build(
+    'ye.riyadh.us.diplomatic',
+    _Layout.us,
+    symbol: false,
+  );
   static final PlateSpec eu = _build('ye.riyadh.eu', _Layout.eu);
   static final PlateSpec euDiplomatic = _build(
     'ye.riyadh.eu.diplomatic',
@@ -157,13 +162,19 @@ abstract final class RiyadhPlates {
     symbol: false,
   );
 
-  static List<PlateSpec> get all => <PlateSpec>[us, diplomatic, eu, euDiplomatic];
+  static List<PlateSpec> get all => <PlateSpec>[
+    us,
+    diplomatic,
+    eu,
+    euDiplomatic,
+  ];
 
   /// Two stacked rows, split by the thin rule across the row's whole width.
-  static PlateSection _rows(double end, double rule) => PlateSection.rows(<PlatePart>[
-    PlatePart(PlateSection.plain, end: end, divider: rule),
-    const PlatePart(PlateSection.plain),
-  ]);
+  static PlateSection _rows(double end, double rule) =>
+      PlateSection.rows(<PlatePart>[
+        PlatePart(PlateSection.plain, end: end, divider: rule),
+        const PlatePart(PlateSection.plain),
+      ]);
 
   /// US: digits | letters | strip.
   static final PlateSection _usBackground = PlateSection.columns(<PlatePart>[
@@ -207,17 +218,18 @@ abstract final class RiyadhPlates {
       height: r.height,
       pitch: r.pitch,
     );
-    List<PlateMirror> echo(PlateAlphabet a, _Row r, Iterable<int> sources) => plateEcho(
-      sources: sources,
-      left: r.left,
-      top: r.top,
-      width: r.width,
-      height: r.height,
-      pitch: r.pitch,
-      glyphHeight: r.glyph,
-      alphabet: a,
-      editable: true,
-    );
+    List<PlateMirror> echo(PlateAlphabet a, _Row r, Iterable<int> sources) =>
+        plateEcho(
+          sources: sources,
+          left: r.left,
+          top: r.top,
+          width: r.width,
+          height: r.height,
+          pitch: r.pitch,
+          glyphHeight: r.glyph,
+          alphabet: a,
+          editable: true,
+        );
 
     return PlateSpec(
       id: id,
@@ -244,7 +256,9 @@ abstract final class RiyadhPlates {
         ...echo(RiyadhAlphabets.lettersArabic, d.lettersAr, <int>[0, 1, 2]),
         ...echo(RiyadhAlphabets.iranshahrDigits, d.digitsAr, <int>[3, 4, 5, 6]),
       ],
-      bands: <PlateBand>[PlateBand(box: s.hologram, color: RiyadhColors.hologram)],
+      bands: <PlateBand>[
+        PlateBand(box: s.hologram, color: RiyadhColors.hologram),
+      ],
       labels: <PlateLabel>[
         PlateLabel(text: 'السعودية', box: s.name, glyphHeight: s.nameGlyph),
         PlateLabel(

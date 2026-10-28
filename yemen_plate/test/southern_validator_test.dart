@@ -25,7 +25,10 @@ void main() {
 
   test('the Hadhramaut serial is four or five digits', () {
     for (final serial in <String>['1234', '12345']) {
-      final entry = PlateEntry(spec: YemenGovernoratePlates.hadhramaut, values: <String>[serial]);
+      final entry = PlateEntry(
+        spec: YemenGovernoratePlates.hadhramaut,
+        values: <String>[serial],
+      );
       expect(v.validate(entry).isValid, isTrue, reason: serial);
     }
     expect(YemenGovernoratePlates.hadhramaut.slots.single.minLength, 4);

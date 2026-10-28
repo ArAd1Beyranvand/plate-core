@@ -44,7 +44,11 @@ abstract final class YemenUnifiedPlates {
   // taller for its ascender and tail.
   static const List<PlateLabel> _carLabels = <PlateLabel>[
     PlateLabel(text: 'اليمن', box: PlateBox(28, 60, 255, 96), glyphHeight: 118),
-    PlateLabel(text: 'YEMEN', box: PlateBox(28, 156, 255, 76), glyphHeight: 100),
+    PlateLabel(
+      text: 'YEMEN',
+      box: PlateBox(28, 156, 255, 76),
+      glyphHeight: 100,
+    ),
   ];
 
   // Zone C1: the strip is measured, the 12-unit dot pitch is not; 24 dots

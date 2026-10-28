@@ -13,5 +13,6 @@ abstract final class IndiaRegions {
 
   static String? lookup(String code) => _states[code.toUpperCase()];
 
-  static String? captionOf(String Function(String key) group) => lookup(group('state'));
+  static String? captionOf(String Function(String key) group) =>
+      lookup(group('state'));
 }

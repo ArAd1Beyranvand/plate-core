@@ -55,7 +55,8 @@ abstract final class PlateAlphabetLetters {
   /// Every Persian and Arabic-script letter used on plates.
   static const PlateAlphabet persianAll = PlateAlphabet.pattern(
     id: 'alphabet.fa.all',
-    include: 'ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ة ی',
+    include:
+        'ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ة ی',
     input: AlphabetInput.chosen,
     isNumeric: false,
     direction: TextDirection.rtl,

@@ -18,6 +18,9 @@ abstract final class BoliviaSerialGenerator {
 
   static String _fill(PlateSlot slot, Random rnd) {
     final List<String> chars = slot.alphabet.characters;
-    return List<String>.generate(slot.length, (_) => chars[rnd.nextInt(chars.length)]).join();
+    return List<String>.generate(
+      slot.length,
+      (_) => chars[rnd.nextInt(chars.length)],
+    ).join();
   }
 }

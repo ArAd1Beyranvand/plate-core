@@ -74,14 +74,20 @@ abstract final class PSSerialGenerator {
   static List<int> _require(PlateSpec spec, String key) {
     final indices = spec.indicesOfGroup(key);
     if (indices.isEmpty) {
-      throw ArgumentError.value(spec.id, 'spec', 'has no text group named "$key"');
+      throw ArgumentError.value(
+        spec.id,
+        'spec',
+        'has no text group named "$key"',
+      );
     }
     return indices;
   }
 
-  static String toFilename(List<String?> values) => values.map((v) => v ?? '').join();
+  static String toFilename(List<String?> values) =>
+      values.map((v) => v ?? '').join();
 
   static String _digit(Random rng) => rng.nextInt(10).toString();
 
-  static String _digits(Random rng, int n) => List.generate(n, (_) => _digit(rng)).join();
+  static String _digits(Random rng, int n) =>
+      List.generate(n, (_) => _digit(rng)).join();
 }

@@ -24,7 +24,11 @@ enum LebanonUsage {
 
   tourism(arabic: null, latin: 'TOURISM', letter: null);
 
-  const LebanonUsage({required this.arabic, required this.latin, required this.letter});
+  const LebanonUsage({
+    required this.arabic,
+    required this.latin,
+    required this.letter,
+  });
 
   /// The Arabic word printed in the band, or null when no source names one.
   /// Null means "not attested", not "blank by rule"; nothing is printed rather

@@ -23,10 +23,13 @@ class IndiaValidator extends PlateValidator {
         !slots.indexed.every((s) => s.$2.isComplete(entry.values[s.$1]))) {
       return const PlateValidation.valid();
     }
-    final keys = <String?>{for (final g in entry.spec.effectiveTextGroups) g.key};
+    final keys = <String?>{
+      for (final g in entry.spec.effectiveTextGroups) g.key,
+    };
     String g(String key) => entry.group(key);
 
-    if (keys.contains('state') && !IndiaAlphabets.stateNames.containsKey(g('state'))) {
+    if (keys.contains('state') &&
+        !IndiaAlphabets.stateNames.containsKey(g('state'))) {
       return const PlateValidation.invalid(reasonState);
     }
     if (keys.contains('rto') && g('rto') == '00') {
@@ -41,13 +44,16 @@ class IndiaValidator extends PlateValidator {
         return const PlateValidation.invalid(reasonMonth);
       }
     }
-    if (keys.contains('class') && !IndiaAlphabets.militaryClasses.containsKey(g('class'))) {
+    if (keys.contains('class') &&
+        !IndiaAlphabets.militaryClasses.containsKey(g('class'))) {
       return const PlateValidation.invalid(reasonClass);
     }
-    if (keys.contains('type') && !IndiaAlphabets.missions.containsKey(g('type'))) {
+    if (keys.contains('type') &&
+        !IndiaAlphabets.missions.containsKey(g('type'))) {
       return const PlateValidation.invalid(reasonMission);
     }
-    if (keys.contains('category') && !IndiaAlphabets.tradeCategories.containsKey(g('category'))) {
+    if (keys.contains('category') &&
+        !IndiaAlphabets.tradeCategories.containsKey(g('category'))) {
       return const PlateValidation.invalid(reasonCategory);
     }
     return const PlateValidation.valid();

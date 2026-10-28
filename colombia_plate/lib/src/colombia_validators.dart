@@ -16,8 +16,11 @@ class ColombiaValidator extends GatedPlateValidator {
   String get gateGroup => series.digitsFirst ? 'letters' : 'number';
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      validateFields(series, letters: entry.group('letters'), number: entry.group('number'));
+  PlateValidation judge(PlateEntry entry) => validateFields(
+    series,
+    letters: entry.group('letters'),
+    number: entry.group('number'),
+  );
 
   static PlateValidation validateFields(
     ColombiaSeries series, {
@@ -30,7 +33,9 @@ class ColombiaValidator extends GatedPlateValidator {
       );
     }
     if (!letters.startsWith(series.fixed)) {
-      return PlateValidation.invalid('${series.english} plates start with ${series.fixed}.');
+      return PlateValidation.invalid(
+        '${series.english} plates start with ${series.fixed}.',
+      );
     }
     if (!isDigitsOfLength(number, series.digits)) {
       return PlateValidation.invalid('The number is ${series.digits} digits.');
@@ -50,7 +55,8 @@ class ColombiaPoliceValidator extends GatedPlateValidator {
 
   @override
   PlateValidation judge(PlateEntry entry) =>
-      isDigitsOfLength(entry.group('unit'), 2) && isDigitsOfLength(entry.group('number'), 4)
+      isDigitsOfLength(entry.group('unit'), 2) &&
+          isDigitsOfLength(entry.group('number'), 4)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid(reason);
 }

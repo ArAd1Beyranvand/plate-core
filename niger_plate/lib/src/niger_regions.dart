@@ -16,5 +16,6 @@ abstract final class NigerRegions {
 
   static String? lookup(String code) => _regions[code];
 
-  static String? captionOf(String Function(String key) group) => lookup(group('region'));
+  static String? captionOf(String Function(String key) group) =>
+      lookup(group('region'));
 }

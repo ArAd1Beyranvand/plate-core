@@ -99,11 +99,18 @@ abstract final class NigerPlates {
         bottomCornerRadius: livery.markRadius,
       ),
     ],
-    labels: <PlateLabel>[PlateLabel(text: 'RN', box: livery.rn, glyphHeight: livery.rnGlyph)],
+    labels: <PlateLabel>[
+      PlateLabel(text: 'RN', box: livery.rn, glyphHeight: livery.rnGlyph),
+    ],
     slots: <PlateSlot>[
       const PlateSlot(
         alphabet: NigerAlphabets.region,
-        box: PlateBox(_Layout.regionLeft, 0, _Layout.regionPitch, _Layout.digitHeight),
+        box: PlateBox(
+          _Layout.regionLeft,
+          0,
+          _Layout.regionPitch,
+          _Layout.digitHeight,
+        ),
       ),
       const PlateSlot(
         alphabet: NigerAlphabets.series,

@@ -25,28 +25,58 @@ abstract final class IndiaThemes {
   );
 
   /// Also Bharat- and vintage-series plates.
-  static final PlateTheme private = _theme(IndiaColors.white, IndiaColors.black);
+  static final PlateTheme private = _theme(
+    IndiaColors.white,
+    IndiaColors.black,
+  );
 
-  static final PlateTheme transport = _theme(IndiaColors.yellow, IndiaColors.black);
+  static final PlateTheme transport = _theme(
+    IndiaColors.yellow,
+    IndiaColors.black,
+  );
 
   /// Self-drive rental.
-  static final PlateTheme rental = _theme(IndiaColors.black, IndiaColors.yellow);
+  static final PlateTheme rental = _theme(
+    IndiaColors.black,
+    IndiaColors.yellow,
+  );
 
   /// Private and armed-forces electric.
-  static final PlateTheme electric = _theme(IndiaColors.green, IndiaColors.white);
+  static final PlateTheme electric = _theme(
+    IndiaColors.green,
+    IndiaColors.white,
+  );
 
-  static final PlateTheme electricTransport = _theme(IndiaColors.green, IndiaColors.yellow);
+  static final PlateTheme electricTransport = _theme(
+    IndiaColors.green,
+    IndiaColors.yellow,
+  );
 
   /// Embassy, UN and international organisation.
-  static final PlateTheme diplomatic = _theme(IndiaColors.blue, IndiaColors.white);
+  static final PlateTheme diplomatic = _theme(
+    IndiaColors.blue,
+    IndiaColors.white,
+  );
 
-  static final PlateTheme consular = _theme(IndiaColors.blue, IndiaColors.yellow);
+  static final PlateTheme consular = _theme(
+    IndiaColors.blue,
+    IndiaColors.yellow,
+  );
 
-  static final PlateTheme military = _theme(IndiaColors.black, IndiaColors.white);
+  static final PlateTheme military = _theme(
+    IndiaColors.black,
+    IndiaColors.white,
+  );
 
-  static final PlateTheme militaryPolice = _theme(IndiaColors.white, IndiaColors.red);
+  static final PlateTheme militaryPolice = _theme(
+    IndiaColors.white,
+    IndiaColors.red,
+  );
 
-  static final PlateTheme temporary = _theme(IndiaColors.yellow, IndiaColors.red);
+  static final PlateTheme temporary = _theme(
+    IndiaColors.yellow,
+    IndiaColors.red,
+  );
 
   static final PlateTheme trade = _theme(IndiaColors.red, IndiaColors.white);
 }

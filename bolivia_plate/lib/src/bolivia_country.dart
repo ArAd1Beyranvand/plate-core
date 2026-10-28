@@ -12,6 +12,9 @@ abstract final class BoliviaCountry {
     panelColor: BoliviaColors.flagGreen,
     panelTextColor: BoliviaColors.white,
     flagAspectRatio: 22 / 15,
-    flag: SvgPlateAsset('assets/flags/Flag_of_Bolivia_state.svg', package: 'bolivia_plate'),
+    flag: SvgPlateAsset(
+      'assets/flags/Flag_of_Bolivia_state.svg',
+      package: 'bolivia_plate',
+    ),
   );
 }

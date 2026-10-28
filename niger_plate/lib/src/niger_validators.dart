@@ -65,7 +65,8 @@ class NigerMilitaryValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   @override
-  PlateValidation judge(PlateEntry entry) => isDigitsOfLength(entry.group('serial'), 5)
+  PlateValidation judge(PlateEntry entry) =>
+      isDigitsOfLength(entry.group('serial'), 5)
       ? const PlateValidation.valid()
       : const PlateValidation.invalid('The serial is five digits.');
 }

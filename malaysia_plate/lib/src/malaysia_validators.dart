@@ -12,7 +12,8 @@ class MalaysiaValidator extends GatedPlateValidator {
   String get gateGroup => 'number';
 
   static const String reasonPrefixMissing = 'A plate starts with letters.';
-  static const String reasonNoIO = 'I and O are not issued on Malaysian plates.';
+  static const String reasonNoIO =
+      'I and O are not issued on Malaysian plates.';
   static const String reasonNumber = 'The number is 1 to 9999.';
   static const String reasonLeadingZero = 'The number has no leading zero.';
   static const String reasonSabahSuffix = 'A Sabah suffix is never Q or S.';
@@ -67,7 +68,10 @@ class MalaysiaDiplomaticValidator extends GatedPlateValidator {
   PlateValidation judge(PlateEntry entry) {
     final String country = entry.group('country');
     final String serial = entry.group('serial');
-    if (country.length != 2 || serial.length != 2 || !isDigits(country) || !isDigits(serial)) {
+    if (country.length != 2 ||
+        serial.length != 2 ||
+        !isDigits(country) ||
+        !isDigits(serial)) {
       return const PlateValidation.invalid(reasonDigits);
     }
     if (!_missions.contains(entry.group('mission'))) {

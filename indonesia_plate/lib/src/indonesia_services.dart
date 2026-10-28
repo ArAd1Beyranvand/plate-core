@@ -73,5 +73,10 @@ class IndonesiaService {
     dividerWidth: 9,
   );
 
-  static const List<IndonesiaService> all = <IndonesiaService>[army, navy, airForce, armedForces];
+  static const List<IndonesiaService> all = <IndonesiaService>[
+    army,
+    navy,
+    airForce,
+    armedForces,
+  ];
 }

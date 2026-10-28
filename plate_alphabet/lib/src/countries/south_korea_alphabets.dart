@@ -15,7 +15,8 @@ abstract final class SouthKoreaAlphabets {
   /// then the rental-car syllables 하 허 호.
   static const PlateAlphabet privateLetters = PlateAlphabet.pattern(
     id: 'kr.letter.private',
-    include: '가 나 다 라 마 거 너 더 러 머 버 서 어 저 고 노 도 로 모 보 소 오 조 구 누 두 루 무 부 수 우 주 하 허 호',
+    include:
+        '가 나 다 라 마 거 너 더 러 머 버 서 어 저 고 노 도 로 모 보 소 오 조 구 누 두 루 무 부 수 우 주 하 허 호',
     input: AlphabetInput.chosen,
     isNumeric: false,
   );

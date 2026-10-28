@@ -2,7 +2,12 @@
 /// coloured ones. [inUse] is advisory; `K` is not current but never rejected.
 enum LebanonLetter {
   /// Pre-1998 general series.
-  a('A', town: null, governorate: null, description: 'General series, pre-1998'),
+  a(
+    'A',
+    town: null,
+    governorate: null,
+    description: 'General series, pre-1998',
+  ),
   b('B', town: 'Beirut', governorate: 'Beirut', description: 'Beirut'),
   y('Y', town: 'Aley', governorate: 'Mount Lebanon', description: 'Aley'),
   g('G', town: 'Jounieh', governorate: 'Mount Lebanon', description: 'Jounieh'),
@@ -12,7 +17,13 @@ enum LebanonLetter {
   t('T', town: 'Tripoli', governorate: 'North Lebanon', description: 'Tripoli'),
 
   /// Baalbek, not currently issued.
-  k('K', town: 'Baalbek', governorate: 'Beqaa', description: 'Baalbek', inUse: false),
+  k(
+    'K',
+    town: 'Baalbek',
+    governorate: 'Beqaa',
+    description: 'Baalbek',
+    inUse: false,
+  ),
   z('Z', town: 'Zahleh', governorate: 'Beqaa', description: 'Zahleh'),
   j('J', town: null, governorate: null, description: 'Judicial'),
   r('R', town: null, governorate: null, description: 'Religious official'),

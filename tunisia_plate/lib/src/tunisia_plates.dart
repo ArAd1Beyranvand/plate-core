@@ -86,7 +86,8 @@ abstract final class _Layout {
   static const double tmpDashY = 56.5;
   static const double tmpCaptionWidth = 102;
   static const double tmpGapBefore = 65.7 - tmpPitch / 2 - tmpDashWidth / 2;
-  static const double tmpGapAfter = 106.9 - tmpDashWidth / 2 - tmpCaptionWidth / 2;
+  static const double tmpGapAfter =
+      106.9 - tmpDashWidth / 2 - tmpCaptionWidth / 2;
 
   static const double labelSlack = 40;
 
@@ -212,7 +213,11 @@ class TunisiaMission {
     arabicGlyph: 80,
   );
 
-  static const List<TunisiaMission> values = <TunisiaMission>[corps, mission, chief];
+  static const List<TunisiaMission> values = <TunisiaMission>[
+    corps,
+    mission,
+    chief,
+  ];
 }
 
 /// The word after a temporary plate's serial: `ن ت` for a vehicle under
@@ -224,8 +229,14 @@ class TunisiaSuffix {
   final String id;
   final String arabic;
 
-  static const TunisiaSuffix suspended = TunisiaSuffix(id: 'rs', arabic: 'ن\u200Cت');
-  static const TunisiaSuffix dealer = TunisiaSuffix(id: 'ww', arabic: 'ع\u200Cع');
+  static const TunisiaSuffix suspended = TunisiaSuffix(
+    id: 'rs',
+    arabic: 'ن\u200Cت',
+  );
+  static const TunisiaSuffix dealer = TunisiaSuffix(
+    id: 'ww',
+    arabic: 'ع\u200Cع',
+  );
 }
 
 /// * [standard]: 520x110, `NNN تونس NNNN`. Ordinary and rental cars differ
@@ -245,15 +256,18 @@ class TunisiaSuffix {
 /// military photo. Screw holes are not printed.
 abstract final class TunisiaPlates {
   /// The flag cropped to the disc, as the military plate prints it.
-  static const PlateDrawing _militaryFlag = PlateDrawing(55.2, 46.9, <PlateShape>[
-    PlateRectShape(0, 0, 55.2, 46.9, TunisiaColors.flagRed),
-    PlateCircleShape(27.6, 23.45, 20, Color(0xFFFFFFFF)),
-    PlateCrescentShape(27.6, 23.45, 15, 4, 12, TunisiaColors.flagRed),
-    PlateStarShape(31.6, 23.45, 9, TunisiaColors.flagRed, rotation: 270),
-  ]);
+  static const PlateDrawing _militaryFlag =
+      PlateDrawing(55.2, 46.9, <PlateShape>[
+        PlateRectShape(0, 0, 55.2, 46.9, TunisiaColors.flagRed),
+        PlateCircleShape(27.6, 23.45, 20, Color(0xFFFFFFFF)),
+        PlateCrescentShape(27.6, 23.45, 15, 4, 12, TunisiaColors.flagRed),
+        PlateStarShape(31.6, 23.45, 9, TunisiaColors.flagRed, rotation: 270),
+      ]);
 
-  static final Map<TunisiaMission, PlateSpec> _diplomatic = <TunisiaMission, PlateSpec>{};
-  static final Map<TunisiaSuffix, PlateSpec> _temporary = <TunisiaSuffix, PlateSpec>{};
+  static final Map<TunisiaMission, PlateSpec> _diplomatic =
+      <TunisiaMission, PlateSpec>{};
+  static final Map<TunisiaSuffix, PlateSpec> _temporary =
+      <TunisiaSuffix, PlateSpec>{};
 
   /// The series is one field of 1-3 digits, printed without leading zeros.
   static final PlateSpec standard = _standardSpec();
@@ -263,11 +277,13 @@ abstract final class TunisiaPlates {
   /// A ministry code and a vehicle number of 1-6 digits.
   static final PlateSpec government = _governmentSpec();
 
-  static PlateSpec diplomatic([TunisiaMission mission = TunisiaMission.corps]) =>
-      _diplomatic[mission] ??= _diplomaticSpec(mission);
+  static PlateSpec diplomatic([
+    TunisiaMission mission = TunisiaMission.corps,
+  ]) => _diplomatic[mission] ??= _diplomaticSpec(mission);
 
-  static PlateSpec temporary([TunisiaSuffix suffix = TunisiaSuffix.suspended]) =>
-      _temporary[suffix] ??= _temporarySpec(suffix);
+  static PlateSpec temporary([
+    TunisiaSuffix suffix = TunisiaSuffix.suspended,
+  ]) => _temporary[suffix] ??= _temporarySpec(suffix);
 
   /// Lays [runs] out left to right, centred on [centre]. Group indices start
   /// at [first], for a spec whose earlier row already holds slots.
@@ -296,7 +312,9 @@ abstract final class TunisiaPlates {
             box: PlateBox(x, top, r.count * pitch, height),
             length: r.count,
             minLength: r.minLength,
-            spacing: r.minLength == null ? max(0, pitch - 0.6 * 0.72 * height) : 0,
+            spacing: r.minLength == null
+                ? max(0, pitch - 0.6 * 0.72 * height)
+                : 0,
           ),
         );
         groups.add(PlateTextGroup(<int>[index], key: r.key));
@@ -306,7 +324,11 @@ abstract final class TunisiaPlates {
         // overflows to the right. Arabic advances run well past the ink, so
         // the box gets as much slack on both sides as the canvas allows and
         // reaches the nearer edge vertically.
-        final double slack = <double>[_Layout.labelSlack, x, canvasWidth - x - r.width].reduce(min);
+        final double slack = <double>[
+          _Layout.labelSlack,
+          x,
+          canvasWidth - x - r.width,
+        ].reduce(min);
         final double half = r.y < canvasHeight / 2 ? r.y : canvasHeight - r.y;
         labels.add(
           PlateLabel(
@@ -318,7 +340,11 @@ abstract final class TunisiaPlates {
           ),
         );
       } else if (r.thickness > 0) {
-        rules.add(PlateRule(box: PlateBox(x, r.y - r.thickness / 2, r.width, r.thickness)));
+        rules.add(
+          PlateRule(
+            box: PlateBox(x, r.y - r.thickness / 2, r.width, r.thickness),
+          ),
+        );
       }
       x += extent(r);
     }
@@ -421,7 +447,11 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('ministry', 2),
         const _Run.gap(_Layout.govGapBefore),
-        const _Run.dash(_Layout.govDashWidth, _Layout.govDashThickness, _Layout.govDashY),
+        const _Run.dash(
+          _Layout.govDashWidth,
+          _Layout.govDashThickness,
+          _Layout.govDashY,
+        ),
         const _Run.gap(_Layout.govGapAfter),
         const _Run.digits('number', 6, minLength: 1),
       ],
@@ -437,9 +467,19 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('country', 2),
         const _Run.gap(_Layout.dipGap1),
-        _Run.text(m.latin, _Layout.dipLatinWidth, m.latinGlyph, _Layout.dipLatinY),
+        _Run.text(
+          m.latin,
+          _Layout.dipLatinWidth,
+          m.latinGlyph,
+          _Layout.dipLatinY,
+        ),
         const _Run.gap(_Layout.dipGap2),
-        _Run.text(m.arabic, _Layout.dipArabicWidth, m.arabicGlyph, _Layout.dipArabicY),
+        _Run.text(
+          m.arabic,
+          _Layout.dipArabicWidth,
+          m.arabicGlyph,
+          _Layout.dipArabicY,
+        ),
         const _Run.gap(_Layout.dipGap3),
         const _Run.digits('serial', 2),
       ],
@@ -458,7 +498,9 @@ abstract final class TunisiaPlates {
       height: _Layout.milSlotHeight,
       centre: _Layout.milCentre,
     ),
-    decals: const <PlateDecal>[PlateDecal(drawing: _militaryFlag, box: _Layout.milFlag)],
+    decals: const <PlateDecal>[
+      PlateDecal(drawing: _militaryFlag, box: _Layout.milFlag),
+    ],
   );
 
   static PlateSpec _temporarySpec(TunisiaSuffix s) => _spec(
@@ -467,9 +509,18 @@ abstract final class TunisiaPlates {
       <_Run>[
         const _Run.digits('serial', 5),
         const _Run.gap(_Layout.tmpGapBefore),
-        const _Run.dash(_Layout.tmpDashWidth, _Layout.tmpDashThickness, _Layout.tmpDashY),
+        const _Run.dash(
+          _Layout.tmpDashWidth,
+          _Layout.tmpDashThickness,
+          _Layout.tmpDashY,
+        ),
         const _Run.gap(_Layout.tmpGapAfter),
-        _Run.text(s.arabic, _Layout.tmpCaptionWidth, _Layout.tmpCaptionGlyph, _Layout.tmpCaptionY),
+        _Run.text(
+          s.arabic,
+          _Layout.tmpCaptionWidth,
+          _Layout.tmpCaptionGlyph,
+          _Layout.tmpCaptionY,
+        ),
       ],
       pitch: _Layout.tmpPitch,
       top: _Layout.slotTop,

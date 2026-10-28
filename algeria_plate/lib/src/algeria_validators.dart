@@ -59,7 +59,8 @@ class AlgeriaValidator extends GatedPlateValidator {
 
   static const String reasonSerial = 'The serial is five digits.';
   static const String reasonClass = 'The vehicle class is 1 to 9.';
-  static const String reasonType = 'The middle group is a class digit and two year digits.';
+  static const String reasonType =
+      'The middle group is a class digit and two year digits.';
   static const String reasonWilaya = 'The wilaya code is 01 to 69.';
 
   @override
@@ -98,7 +99,8 @@ class AlgeriaDiplomaticValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'mission';
 
-  static const String reasonDigits = 'A diplomatic plate is a serial and two two-digit codes.';
+  static const String reasonDigits =
+      'A diplomatic plate is a serial and two two-digit codes.';
 
   @override
   PlateValidation judge(PlateEntry entry) {

@@ -48,15 +48,15 @@ PlateSpec maliStandardPlate() {
   );
 }
 
-PlateSlot _field(PlateAlphabet alphabet, int count, double left, double top) => PlateSlot(
-  alphabet: alphabet,
-  box: PlateBox(left, top, count * _Layout.cellWidth, _Layout.glyphHeight),
-  length: count,
-  spacing: max(0, _Layout.cellWidth - 0.6 * 0.72 * _Layout.glyphHeight),
-);
+PlateSlot _field(PlateAlphabet alphabet, int count, double left, double top) =>
+    PlateSlot(
+      alphabet: alphabet,
+      box: PlateBox(left, top, count * _Layout.cellWidth, _Layout.glyphHeight),
+      length: count,
+      spacing: max(0, _Layout.cellWidth - 0.6 * 0.72 * _Layout.glyphHeight),
+    );
 
 abstract final class MaliPlates {
-  static final Map<String, PlateSpec Function()> all = <String, PlateSpec Function()>{
-    'standard': maliStandardPlate,
-  };
+  static final Map<String, PlateSpec Function()> all =
+      <String, PlateSpec Function()>{'standard': maliStandardPlate};
 }

@@ -42,7 +42,10 @@ void main() {
     required String values,
     required String name,
   }) async {
-    final PlateController controller = PlateController.fromValues(spec, values.split(' '));
+    final PlateController controller = PlateController.fromValues(
+      spec,
+      values.split(' '),
+    );
     tester.view.physicalSize = const Size(1200, 600);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.reset);
@@ -68,9 +71,14 @@ void main() {
     );
     // The military flag is decoded off the real event loop, which fake time
     // does not advance; runAsync gives it a real slice of time.
-    await tester.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 50)));
+    await tester.runAsync(
+      () => Future<void>.delayed(const Duration(milliseconds: 50)),
+    );
     await tester.pumpAndSettle();
-    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/$name.png'));
+    await expectLater(
+      find.byType(PlateView),
+      matchesGoldenFile('goldens/$name.png'),
+    );
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -184,7 +192,10 @@ void main() {
     expect(TunisiaPlates.standard.slots.first.minLength, 1);
     expect(TunisiaPlates.standard.slots.first.length, 3);
     expect(TunisiaPlates.government.slots.last.length, 6);
-    final PlateController c = PlateController.fromValues(TunisiaPlates.standard, ['7', '3294']);
+    final PlateController c = PlateController.fromValues(
+      TunisiaPlates.standard,
+      ['7', '3294'],
+    );
     expect(c.isCompleted, isTrue);
     c.setAt(1, '329');
     expect(c.isCompleted, isFalse);

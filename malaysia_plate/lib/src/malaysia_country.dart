@@ -17,7 +17,14 @@ abstract final class MalaysiaCountry {
     PlateRectShape(0, 12, 28, 1, Color(0xFFCC0000)),
     PlateRectShape(0, 0, 14, 8.5, Color(0xFF000066)),
     PlateCrescentShape(8.5815, 4, 2.667, 0.6674, 3, Color(0xFFFFCC00)),
-    PlateStarShape(8.75, 4, 2.5, Color(0xFFFFCC00), points: 14, innerRatio: 0.4),
+    PlateStarShape(
+      8.75,
+      4,
+      2.5,
+      Color(0xFFFFCC00),
+      points: 14,
+      innerRatio: 0.4,
+    ),
   ]);
 
   static const PlateCountry malaysia = PlateCountry(

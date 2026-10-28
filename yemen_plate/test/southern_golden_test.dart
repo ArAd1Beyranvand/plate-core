@@ -35,7 +35,12 @@ void main() {
     // Hadhramaut's serial is one field of 4-5 digits; `_5` fills all five.
     final slot = spec.slots.first;
     final values = slot.length > 1
-        ? <String?>['1023456'.substring(0, name.endsWith('_5') ? slot.length : slot.minLength)]
+        ? <String?>[
+            '1023456'.substring(
+              0,
+              name.endsWith('_5') ? slot.length : slot.minLength,
+            ),
+          ]
         : List<String?>.generate(spec.slotCount, (i) => '1023456'[i % 7]);
     final controller = PlateController.fromValues(spec, values);
     await tester.binding.setSurfaceSize(const Size(600, 600));
@@ -50,7 +55,11 @@ void main() {
               height: 520 * spec.canvasHeight / spec.canvasWidth,
               child: PlateThemeScope(
                 theme: theme,
-                child: PlateView(controller: controller, theme: theme, country: country),
+                child: PlateView(
+                  controller: controller,
+                  theme: theme,
+                  country: country,
+                ),
               ),
             ),
           ),
@@ -66,7 +75,10 @@ void main() {
       }
     });
     await tester.pumpAndSettle();
-    await expectLater(find.byType(PlateView), matchesGoldenFile('goldens/southern/$name.png'));
+    await expectLater(
+      find.byType(PlateView),
+      matchesGoldenFile('goldens/southern/$name.png'),
+    );
     await tester.pumpWidget(const SizedBox.shrink());
     controller.dispose();
   }
@@ -105,10 +117,16 @@ void main() {
         ('commercial', YemenCountry.southernCommercial),
         ('government', YemenCountry.southernGovernment),
       ])
-        if (!(g.banded && usage == 'government')) ('${id}_$usage', car, t, country),
+        if (!(g.banded && usage == 'government'))
+          ('${id}_$usage', car, t, country),
       ('${id}_motorcycle', moto, t, moto.country),
     ],
-    ('hadhramaut_private_5', YemenGovernoratePlates.hadhramaut, t, YemenCountry.southernPrivate),
+    (
+      'hadhramaut_private_5',
+      YemenGovernoratePlates.hadhramaut,
+      t,
+      YemenCountry.southernPrivate,
+    ),
     (
       'hadhramaut_temporary',
       YemenGovernoratePlates.hadhramautTemporary,
@@ -121,12 +139,42 @@ void main() {
       t,
       YemenCountry.southernTemporary,
     ),
-    ('hadhramaut_police', YemenGovernoratePlates.hadhramautPolice, t, YemenCountry.southernPolice),
-    ('shabwah_police', YemenGovernoratePlates.shabwahPolice, t, YemenCountry.southernPolice),
-    ('aden_520x110', YemenAdenPlates.oneLine, YemenThemes.aden, YemenCountry.plain),
-    ('aden_335x170', YemenAdenPlates.twoLine, YemenThemes.aden, YemenCountry.plain),
-    ('taiz_private', YemenTaizPlates.temporary, YemenThemes.taizPrivate, YemenCountry.plain),
-    ('taiz_commercial', YemenTaizPlates.temporary, YemenThemes.taizCommercial, YemenCountry.plain),
+    (
+      'hadhramaut_police',
+      YemenGovernoratePlates.hadhramautPolice,
+      t,
+      YemenCountry.southernPolice,
+    ),
+    (
+      'shabwah_police',
+      YemenGovernoratePlates.shabwahPolice,
+      t,
+      YemenCountry.southernPolice,
+    ),
+    (
+      'aden_520x110',
+      YemenAdenPlates.oneLine,
+      YemenThemes.aden,
+      YemenCountry.plain,
+    ),
+    (
+      'aden_335x170',
+      YemenAdenPlates.twoLine,
+      YemenThemes.aden,
+      YemenCountry.plain,
+    ),
+    (
+      'taiz_private',
+      YemenTaizPlates.temporary,
+      YemenThemes.taizPrivate,
+      YemenCountry.plain,
+    ),
+    (
+      'taiz_commercial',
+      YemenTaizPlates.temporary,
+      YemenThemes.taizCommercial,
+      YemenCountry.plain,
+    ),
   ];
 
   for (final (name, spec, theme, country) in cases) {

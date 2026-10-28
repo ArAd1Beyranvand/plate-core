@@ -11,11 +11,17 @@ abstract final class TunisiaSerialGenerator {
     final List<String?> values = List<String?>.filled(spec.slots.length, null);
     for (final PlateTextGroup group in spec.textGroups) {
       final PlateSlot slot = spec.slots[group.indices.single];
-      final int n = slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
+      final int n =
+          slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
       final String digits = switch (group.key) {
-        'series' when slot.length == 3 && n == 3 => (131 + rnd.nextInt(131)).toString(),
-        'series' => (pow(10, n - 1) + rnd.nextInt(9 * pow(10, n - 1).toInt())).toString(),
-        _ => (1 + rnd.nextInt(pow(10, n).toInt() - 1)).toString().padLeft(n, '0'),
+        'series' when slot.length == 3 && n == 3 =>
+          (131 + rnd.nextInt(131)).toString(),
+        'series' =>
+          (pow(10, n - 1) + rnd.nextInt(9 * pow(10, n - 1).toInt())).toString(),
+        _ => (1 + rnd.nextInt(pow(10, n).toInt() - 1)).toString().padLeft(
+          n,
+          '0',
+        ),
       };
       values[group.indices.single] = digits;
     }

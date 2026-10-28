@@ -23,7 +23,11 @@ abstract final class YemenUnifiedSerialGenerator {
   }
 
   /// [count] values for [spec], each one independently generated.
-  static List<List<String?>> generateMany(PlateSpec spec, int count, {Random? random}) {
+  static List<List<String?>> generateMany(
+    PlateSpec spec,
+    int count, {
+    Random? random,
+  }) {
     return _many(spec, count, random, generate);
   }
 }
@@ -42,21 +46,29 @@ abstract final class YemenNorthernSerialGenerator {
 
     final String code =
         (YemenGovernorate.minCode +
-                rnd.nextInt(YemenGovernorate.maxCode - YemenGovernorate.minCode + 1))
+                rnd.nextInt(
+                  YemenGovernorate.maxCode - YemenGovernorate.minCode + 1,
+                ))
             .toString();
     values[governorate.single] = code;
 
     final PlateSlot field = spec.slots[serial.single];
-    final int length = field.minLength + rnd.nextInt(field.length - field.minLength + 1);
+    final int length =
+        field.minLength + rnd.nextInt(field.length - field.minLength + 1);
     values[serial.single] = [
-      for (int i = 0; i < length; i++) (i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10)).toString(),
+      for (int i = 0; i < length; i++)
+        (i == 0 ? 1 + rnd.nextInt(9) : rnd.nextInt(10)).toString(),
     ].join();
 
     return values;
   }
 
   /// [count] values for [spec], each one independently generated.
-  static List<List<String?>> generateMany(PlateSpec spec, int count, {Random? random}) {
+  static List<List<String?>> generateMany(
+    PlateSpec spec,
+    int count, {
+    Random? random,
+  }) {
     return _many(spec, count, random, generate);
   }
 }
@@ -68,15 +80,25 @@ List<List<String?>> _many(
   List<String?> Function(PlateSpec, {Random? random}) generate,
 ) {
   final Random rnd = random ?? Random();
-  return List<List<String?>>.generate(count, (_) => generate(spec, random: rnd), growable: false);
+  return List<List<String?>>.generate(
+    count,
+    (_) => generate(spec, random: rnd),
+    growable: false,
+  );
 }
 
 // Fills each slot in [indices] with random digits of a random length from the
 // slot's minLength to its length.
-void _fill(PlateSpec spec, List<String?> values, List<int> indices, Random rnd) {
+void _fill(
+  PlateSpec spec,
+  List<String?> values,
+  List<int> indices,
+  Random rnd,
+) {
   for (final int i in indices) {
     final PlateSlot slot = spec.slots[i];
-    final int length = slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
+    final int length =
+        slot.minLength + rnd.nextInt(slot.length - slot.minLength + 1);
     values[i] = [for (int c = 0; c < length; c++) rnd.nextInt(10)].join();
   }
 }
@@ -84,7 +106,11 @@ void _fill(PlateSpec spec, List<String?> values, List<int> indices, Random rnd) 
 List<int> _require(PlateSpec spec, String key) {
   final List<int> indices = spec.indicesOfGroup(key);
   if (indices.isEmpty) {
-    throw ArgumentError.value(spec.id, 'spec', 'has no text group named "$key"');
+    throw ArgumentError.value(
+      spec.id,
+      'spec',
+      'has no text group named "$key"',
+    );
   }
   return indices;
 }

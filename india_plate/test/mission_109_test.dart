@@ -8,7 +8,10 @@ void main() {
 
   test('spec refuses mission 109', () {
     expect(spec.restrictions, contains(IndiaMissions.restriction));
-    expect(spec.restrictionViolatedBy(<String?>['109', 'CD', '19'])?.reason, notFound);
+    expect(
+      spec.restrictionViolatedBy(<String?>['109', 'CD', '19'])?.reason,
+      notFound,
+    );
     expect(
       () => spec.checkRestrictions(<String?>['109', 'CD', '19']),
       throwsA(isA<PlateRestrictionException>()),

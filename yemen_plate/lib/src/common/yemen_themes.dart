@@ -86,7 +86,8 @@ abstract final class YemenThemes {
     YemenMilitaryStyle style = YemenMilitaryStyle.classic,
     bool whiteBackground = false,
   }) => switch (usage) {
-    YemenUsage.private => whiteBackground ? northernPrivateWhite : northernPrivate,
+    YemenUsage.private =>
+      whiteBackground ? northernPrivateWhite : northernPrivate,
     YemenUsage.forHire => northernForHire,
     YemenUsage.transport => northernTransport,
     YemenUsage.government || YemenUsage.police => northernGovernment,

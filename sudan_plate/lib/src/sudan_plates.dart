@@ -42,8 +42,18 @@ abstract final class _Layout {
   // its column.
   static const double codeEchoTop = 105;
   static const double codeEchoGlyph = 52;
-  static const PlateBox classEchoBox = PlateBox(7, codeEchoTop, 32, codeEchoGlyph);
-  static const PlateBox stateEchoBox = PlateBox(36, codeEchoTop, 75, codeEchoGlyph);
+  static const PlateBox classEchoBox = PlateBox(
+    7,
+    codeEchoTop,
+    32,
+    codeEchoGlyph,
+  );
+  static const PlateBox stateEchoBox = PlateBox(
+    36,
+    codeEchoTop,
+    75,
+    codeEchoGlyph,
+  );
 
   static const double serialLeft = 132;
   static const double serialRight = 306;
@@ -64,7 +74,11 @@ abstract final class _Layout {
 /// the pre-2009 series.
 abstract final class SudanPlates {
   static const PlateSection _background = PlateSection.rows(<PlatePart>[
-    PlatePart(PlateSection.plain, end: _Layout.ruleY, divider: _Layout.ruleThickness),
+    PlatePart(
+      PlateSection.plain,
+      end: _Layout.ruleY,
+      divider: _Layout.ruleThickness,
+    ),
     PlatePart(
       PlateSection.columns(<PlatePart>[
         PlatePart(PlateSection.plain, end: _Layout.hologramLeft),
@@ -100,7 +114,10 @@ abstract final class SudanPlates {
     background: _background,
     labels: _labels,
     slots: const <PlateSlot>[
-      PlateSlot(alphabet: SudanAlphabets.iranshahrDigits, box: _Layout.classBox),
+      PlateSlot(
+        alphabet: SudanAlphabets.iranshahrDigits,
+        box: _Layout.classBox,
+      ),
       PlateSlot(alphabet: SudanAlphabets.stateArabic, box: _Layout.stateBox),
       PlateSlot(
         alphabet: SudanAlphabets.iranshahrDigits,

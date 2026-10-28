@@ -7,18 +7,21 @@ import 'sudan_usage.dart';
 /// One ink on one field; frame and rule are both in the ink. Ratios are
 /// measured off the artwork normalised to 320x160.
 abstract final class SudanThemes {
-  static PlateTheme _livery({required Color field, required Color ink, required Color inactive}) =>
-      PlateTheme(
-        plateBackground: field,
-        plateBorder: ink,
-        ink: ink,
-        dividerColor: ink,
-        borderWidthRatio: 0.019,
-        plateRadiusRatio: 0.055,
-        activeColor: ink,
-        inactiveColor: inactive,
-        alertColor: const Color(0xFFD32F2F),
-      );
+  static PlateTheme _livery({
+    required Color field,
+    required Color ink,
+    required Color inactive,
+  }) => PlateTheme(
+    plateBackground: field,
+    plateBorder: ink,
+    ink: ink,
+    dividerColor: ink,
+    borderWidthRatio: 0.019,
+    plateRadiusRatio: 0.055,
+    activeColor: ink,
+    inactiveColor: inactive,
+    alertColor: const Color(0xFFD32F2F),
+  );
 
   static final PlateTheme private = _livery(
     field: SudanColors.privateWhite,

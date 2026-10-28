@@ -28,10 +28,11 @@ abstract final class LebanonPlates {
   );
 
   /// The band as the first column, run out under the frame.
-  static const PlateSection _oneLineBackground = PlateSection.columns(<PlatePart>[
-    PlatePart(PlateSection.fill(PlateFill.panel), end: 126),
-    PlatePart(PlateSection.plain),
-  ]);
+  static const PlateSection _oneLineBackground =
+      PlateSection.columns(<PlatePart>[
+        PlatePart(PlateSection.fill(PlateFill.panel), end: 126),
+        PlatePart(PlateSection.plain),
+      ]);
 
   static const List<PlateLabel> _oneLineLabels = <PlateLabel>[
     PlateLabel(

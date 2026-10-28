@@ -14,7 +14,8 @@ class CubaValidator extends GatedPlateValidator {
   String get gateGroup => 'serial';
 
   static const String reasonLetterMissing = 'A plate starts with a letter.';
-  static const String reasonLetterUnissued = 'I, O, Q, S, W and Z are not issued.';
+  static const String reasonLetterUnissued =
+      'I, O, Q, S, W and Z are not issued.';
   static const String reasonSerialNotNumeric = 'The number is digits only.';
   static const String reasonSerialLength = 'The number fills every cell.';
 

@@ -123,7 +123,11 @@ abstract final class AlgeriaPlates {
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[group(5, _Layout.left), group(3, typeLeft), group(2, wilayaLeft)],
+      slots: <PlateSlot>[
+        group(5, _Layout.left),
+        group(3, typeLeft),
+        group(2, wilayaLeft),
+      ],
       textGroups: _civilGroups,
       resolveRegion: AlgeriaRegions.captionOf,
     );
@@ -133,8 +137,13 @@ abstract final class AlgeriaPlates {
     const double p = _Layout.twoPitch;
     const double w = _Layout.twoWidth;
     const double lowerLeft = (w - (5 * p + _Layout.twoGap)) / 2;
-    PlateSlot group(int n, double left, double top) =>
-        _field(n, left: left, top: top, pitch: p, height: _Layout.twoSlotHeight);
+    PlateSlot group(int n, double left, double top) => _field(
+      n,
+      left: left,
+      top: top,
+      pitch: p,
+      height: _Layout.twoSlotHeight,
+    );
     return PlateSpec(
       id: 'dz.twoLine',
       country: AlgeriaCountry.algeria,
@@ -177,7 +186,11 @@ abstract final class AlgeriaPlates {
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[group(3, left, minLength: 1), group(2, statusLeft), group(2, missionLeft)],
+      slots: <PlateSlot>[
+        group(3, left, minLength: 1),
+        group(2, statusLeft),
+        group(2, missionLeft),
+      ],
       labels: <PlateLabel>[_hyphen(left + 3 * p), _hyphen(statusLeft + 2 * p)],
       textGroups: const <PlateTextGroup>[
         PlateTextGroup(<int>[0], key: 'serial'),
@@ -189,7 +202,12 @@ abstract final class AlgeriaPlates {
 
   static PlateLabel _hyphen(double left) => PlateLabel(
     text: '-',
-    box: PlateBox(left, _Layout.slotTop, _Layout.hyphenWidth, _Layout.slotHeight),
+    box: PlateBox(
+      left,
+      _Layout.slotTop,
+      _Layout.hyphenWidth,
+      _Layout.slotHeight,
+    ),
     glyphHeight: _Layout.hyphenGlyph,
   );
 

@@ -272,7 +272,8 @@ abstract final class ColombiaPlates {
     final String caption = series.caption ?? city;
     final int cells = series.letters + series.digits;
     final int split = series.digitsFirst ? series.digits : series.letters;
-    final double left = _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
+    final double left =
+        _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
     final double splitX = left + split * _Layout.pitch;
     final double secondLeft = splitX + _Layout.gap;
 
@@ -292,7 +293,10 @@ abstract final class ColombiaPlates {
       panel: _noPanel,
       background: series.antique
           ? const PlateSection.columns(<PlatePart>[
-              PlatePart(PlateSection.fill(PlateFill.divider), end: _Layout.stripLeftEnd),
+              PlatePart(
+                PlateSection.fill(PlateFill.divider),
+                end: _Layout.stripLeftEnd,
+              ),
               PlatePart(PlateSection.plain, end: _Layout.stripRightStart),
               PlatePart(PlateSection.fill(PlateFill.divider)),
             ])
@@ -301,13 +305,20 @@ abstract final class ColombiaPlates {
       labels: <PlateLabel>[
         PlateLabel(
           text: '◉',
-          box: PlateBox(splitX, _Layout.roundelY - _Layout.gap / 2, _Layout.gap, _Layout.gap),
+          box: PlateBox(
+            splitX,
+            _Layout.roundelY - _Layout.gap / 2,
+            _Layout.gap,
+            _Layout.gap,
+          ),
           glyphHeight: _Layout.roundelGlyph,
         ),
         PlateLabel(
           text: caption,
           box: _Layout.caption,
-          glyphHeight: _Layout.captionGlyph * min(1, _Layout.captionFit / caption.length),
+          glyphHeight:
+              _Layout.captionGlyph *
+              min(1, _Layout.captionFit / caption.length),
         ),
         if (series.antique)
           const PlateLabel(
@@ -318,7 +329,14 @@ abstract final class ColombiaPlates {
           ),
       ],
       slots: <PlateSlot>[
-        _field(firstAlphabet, split, left, _Layout.pitch, _Layout.serialTop, _Layout.serialHeight),
+        _field(
+          firstAlphabet,
+          split,
+          left,
+          _Layout.pitch,
+          _Layout.serialTop,
+          _Layout.serialHeight,
+        ),
         _field(
           secondAlphabet,
           cells - split,
@@ -329,8 +347,14 @@ abstract final class ColombiaPlates {
         ),
       ],
       textGroups: <PlateTextGroup>[
-        PlateTextGroup(const <int>[0], key: series.digitsFirst ? 'number' : 'letters'),
-        PlateTextGroup(const <int>[1], prefix: ' ', key: series.digitsFirst ? 'letters' : 'number'),
+        PlateTextGroup(const <int>[
+          0,
+        ], key: series.digitsFirst ? 'number' : 'letters'),
+        PlateTextGroup(
+          const <int>[1],
+          prefix: ' ',
+          key: series.digitsFirst ? 'letters' : 'number',
+        ),
       ],
     );
   }
@@ -338,7 +362,8 @@ abstract final class ColombiaPlates {
   /// The National Police plate, `60-0007`, between `COLOMBIA` and
   /// `POLICIA NACIONAL`. Slots: the two digits, then the four.
   static final PlateSpec police = () {
-    final double left = _Layout.centre - (6 * _Layout.policePitch + _Layout.policeGap) / 2;
+    final double left =
+        _Layout.centre - (6 * _Layout.policePitch + _Layout.policeGap) / 2;
     final double split = left + 2 * _Layout.policePitch;
     return PlateSpec(
       id: 'co.police',
@@ -349,7 +374,11 @@ abstract final class ColombiaPlates {
       panel: _noPanel,
       rules: const <PlateRule>[PlateRule(box: _Layout.policeDash)],
       labels: const <PlateLabel>[
-        PlateLabel(text: 'COLOMBIA', box: _Layout.policeTop, glyphHeight: _Layout.policeTopGlyph),
+        PlateLabel(
+          text: 'COLOMBIA',
+          box: _Layout.policeTop,
+          glyphHeight: _Layout.policeTopGlyph,
+        ),
         PlateLabel(
           text: 'POLICIA NACIONAL',
           box: _Layout.policeBottom,
@@ -404,7 +433,9 @@ abstract final class ColombiaPlates {
           box: PlateBox(
             _Layout.dashLeft +
                 i *
-                    (_Layout.dashRight - _Layout.dashLeft - _Layout.dashLength) /
+                    (_Layout.dashRight -
+                        _Layout.dashLeft -
+                        _Layout.dashLength) /
                     (_Layout.dashCount - 1),
             _Layout.dashY,
             _Layout.dashLength,

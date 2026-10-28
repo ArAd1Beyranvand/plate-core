@@ -71,34 +71,35 @@ abstract final class ArmeniaAlphabets {
   /// `G` and `I` carry their 2015 state-only date; see [stateVehiclesOnly].
   ///
   /// Months, not [DateTime]s, which cannot be `const`.
-  static const Map<String, (int year, int month)> introduced = <String, (int, int)>{
-    'L': (1996, 1),
-    'U': (1996, 1), // Ս
-    'S': (1996, 1), // Տ
-    'O': (1996, 1), // Օ
-    'P': (2008, 12),
-    'D': (2012, 7),
-    'N': (2012, 7),
-    'T': (2012, 7),
-    'V': (2012, 7),
-    'A': (2012, 5),
-    'M': (2012, 5),
-    'Q': (2012, 5),
-    'R': (2012, 5),
-    'C': (2013, 10),
-    'F': (2013, 10),
-    'Z': (2013, 10),
-    'G': (2015, 1),
-    'I': (2015, 1),
-    'X': (2016, 1),
-    'B': (2017, 1),
-    'H': (2017, 1),
-    'J': (2018, 1),
-    'W': (2019, 1),
-    'Y': (2019, 1),
-    'K': (2019, 1),
-    'E': (2019, 1),
-  };
+  static const Map<String, (int year, int month)> introduced =
+      <String, (int, int)>{
+        'L': (1996, 1),
+        'U': (1996, 1), // Ս
+        'S': (1996, 1), // Տ
+        'O': (1996, 1), // Օ
+        'P': (2008, 12),
+        'D': (2012, 7),
+        'N': (2012, 7),
+        'T': (2012, 7),
+        'V': (2012, 7),
+        'A': (2012, 5),
+        'M': (2012, 5),
+        'Q': (2012, 5),
+        'R': (2012, 5),
+        'C': (2013, 10),
+        'F': (2013, 10),
+        'Z': (2013, 10),
+        'G': (2015, 1),
+        'I': (2015, 1),
+        'X': (2016, 1),
+        'B': (2017, 1),
+        'H': (2017, 1),
+        'J': (2018, 1),
+        'W': (2019, 1),
+        'Y': (2019, 1),
+        'K': (2019, 1),
+        'E': (2019, 1),
+      };
 
   /// Whether [letter] (case-insensitive) was issued by [month] of [year].
   /// [month] defaults to December: the letters in use by the end of that year.

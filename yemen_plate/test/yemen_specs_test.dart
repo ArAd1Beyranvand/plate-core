@@ -39,7 +39,11 @@ void main() {
         // register.
         var ok = false;
         assert(ok = debugValidateSpec(spec));
-        expect(ok, isTrue, reason: 'assertions must be enabled to run this test');
+        expect(
+          ok,
+          isTrue,
+          reason: 'assertions must be enabled to run this test',
+        );
       });
     }
   });
@@ -69,7 +73,11 @@ void main() {
         final Set<String?> keys = <String?>{
           for (final PlateTextGroup g in spec.effectiveTextGroups) g.key,
         };
-        expect(keys, containsAll(<String>['number', 'sideCode']), reason: spec.id);
+        expect(
+          keys,
+          containsAll(<String>['number', 'sideCode']),
+          reason: spec.id,
+        );
       }
     });
 
@@ -78,7 +86,11 @@ void main() {
         final Set<String?> keys = <String?>{
           for (final PlateTextGroup g in spec.effectiveTextGroups) g.key,
         };
-        expect(keys, containsAll(<String>['governorate', 'serial']), reason: spec.id);
+        expect(
+          keys,
+          containsAll(<String>['governorate', 'serial']),
+          reason: spec.id,
+        );
       }
     });
   });
@@ -106,7 +118,10 @@ void main() {
     });
 
     test('a short value completes once every field reaches its minimum', () {
-      final controller = PlateController.fromValues(YemenNorthernPlates.car, ['7', '123']);
+      final controller = PlateController.fromValues(YemenNorthernPlates.car, [
+        '7',
+        '123',
+      ]);
       expect(controller.isCompleted, isFalse);
       controller.setAt(1, '1234');
       expect(controller.isCompleted, isTrue);
@@ -126,10 +141,15 @@ void main() {
       const YemenNorthernValidator validator = YemenNorthernValidator();
       for (final PlateSpec spec in _northernSpecs) {
         for (int i = 0; i < draws; i++) {
-          final List<String?> values = YemenNorthernSerialGenerator.generate(spec, random: rng);
+          final List<String?> values = YemenNorthernSerialGenerator.generate(
+            spec,
+            random: rng,
+          );
           expect(values.length, spec.slots.length, reason: spec.id);
           expect(values, isNot(contains(null)), reason: spec.id);
-          final PlateValidation v = validator.validate(PlateEntry(spec: spec, values: values));
+          final PlateValidation v = validator.validate(
+            PlateEntry(spec: spec, values: values),
+          );
           expect(v.isValid, isTrue, reason: '${spec.id} $values: ${v.reason}');
         }
       }
@@ -140,10 +160,15 @@ void main() {
       const YemenUnifiedValidator validator = YemenUnifiedValidator();
       for (final PlateSpec spec in _unifiedSpecs) {
         for (int i = 0; i < draws; i++) {
-          final List<String?> values = YemenUnifiedSerialGenerator.generate(spec, random: rng);
+          final List<String?> values = YemenUnifiedSerialGenerator.generate(
+            spec,
+            random: rng,
+          );
           expect(values.length, spec.slots.length, reason: spec.id);
           expect(values, isNot(contains(null)), reason: spec.id);
-          final PlateValidation v = validator.validate(PlateEntry(spec: spec, values: values));
+          final PlateValidation v = validator.validate(
+            PlateEntry(spec: spec, values: values),
+          );
           expect(v.isValid, isTrue, reason: '${spec.id} $values: ${v.reason}');
         }
       }
@@ -170,10 +195,18 @@ void main() {
 
     test('a spec defaults to private, so an un-overridden canvas is sane', () {
       for (final PlateSpec spec in _unifiedSpecs) {
-        expect(spec.country, same(YemenCountry.unifiedPrivate), reason: spec.id);
+        expect(
+          spec.country,
+          same(YemenCountry.unifiedPrivate),
+          reason: spec.id,
+        );
       }
       for (final PlateSpec spec in _northernSpecs) {
-        expect(spec.country, same(YemenCountry.northernPrivate), reason: spec.id);
+        expect(
+          spec.country,
+          same(YemenCountry.northernPrivate),
+          reason: spec.id,
+        );
       }
     });
   });

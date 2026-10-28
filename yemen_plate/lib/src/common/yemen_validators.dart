@@ -10,11 +10,14 @@ class YemenUnifiedValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'sideCode';
 
-  static const String reasonNumberNotNumeric = 'The vehicle number is digits only.';
+  static const String reasonNumberNotNumeric =
+      'The vehicle number is digits only.';
 
-  static const String reasonNumberLength = 'The vehicle number is four to six digits.';
+  static const String reasonNumberLength =
+      'The vehicle number is four to six digits.';
 
-  static const String reasonSideCodeNotNumeric = 'The side code is digits only.';
+  static const String reasonSideCodeNotNumeric =
+      'The side code is digits only.';
 
   static const String reasonSideCodeLength = 'The side code is two digits.';
 
@@ -22,11 +25,16 @@ class YemenUnifiedValidator extends GatedPlateValidator {
   static const int maxNumberLength = 6;
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      validateFields(number: entry.group('number'), sideCode: entry.group('sideCode'));
+  PlateValidation judge(PlateEntry entry) => validateFields(
+    number: entry.group('number'),
+    sideCode: entry.group('sideCode'),
+  );
 
   // TODO(side-code): no source pins down which digit encodes what; stay opaque.
-  static PlateValidation validateFields({required String number, required String sideCode}) {
+  static PlateValidation validateFields({
+    required String number,
+    required String sideCode,
+  }) {
     if (number.isNotEmpty && !isDigits(number)) {
       return const PlateValidation.invalid(reasonNumberNotNumeric);
     }
@@ -54,27 +62,36 @@ class YemenNorthernValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'serial';
 
-  static const String reasonGovernorateNotNumeric = 'The governorate code is digits only.';
+  static const String reasonGovernorateNotNumeric =
+      'The governorate code is digits only.';
 
-  static const String reasonGovernorateLength = 'The governorate code is one or two digits.';
+  static const String reasonGovernorateLength =
+      'The governorate code is one or two digits.';
 
-  static const String reasonGovernorateRange = 'The governorate code is 1 to 22.';
+  static const String reasonGovernorateRange =
+      'The governorate code is 1 to 22.';
 
   static const String reasonSerialNotNumeric = 'The serial is digits only.';
 
   static const String reasonSerialLength = 'The serial is four to six digits.';
 
-  static const String reasonSerialLeadingZero = 'The serial is not padded with leading zeros.';
+  static const String reasonSerialLeadingZero =
+      'The serial is not padded with leading zeros.';
 
   static const int minSerialLength = 4;
   static const int maxSerialLength = 6;
 
   @override
-  PlateValidation judge(PlateEntry entry) =>
-      validateFields(governorate: entry.group('governorate'), serial: entry.group('serial'));
+  PlateValidation judge(PlateEntry entry) => validateFields(
+    governorate: entry.group('governorate'),
+    serial: entry.group('serial'),
+  );
 
   /// `'05'` and `'5'` are the same governorate (two-cell padding).
-  static PlateValidation validateFields({required String governorate, required String serial}) {
+  static PlateValidation validateFields({
+    required String governorate,
+    required String serial,
+  }) {
     if (governorate.isEmpty || governorate.length > 2) {
       return const PlateValidation.invalid(reasonGovernorateLength);
     }
@@ -111,13 +128,15 @@ class YemenSouthernValidator extends GatedPlateValidator {
 
   static const String reasonSerialNotNumeric = 'The number is digits only.';
 
-  static const String reasonSerialLength = 'The number is three to five digits.';
+  static const String reasonSerialLength =
+      'The number is three to five digits.';
 
   static const int minSerialLength = 3;
   static const int maxSerialLength = 5;
 
   @override
-  PlateValidation judge(PlateEntry entry) => validateFields(serial: entry.group('serial'));
+  PlateValidation judge(PlateEntry entry) =>
+      validateFields(serial: entry.group('serial'));
 
   static PlateValidation validateFields({required String serial}) {
     if (serial.length < minSerialLength || serial.length > maxSerialLength) {

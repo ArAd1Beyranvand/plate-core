@@ -3,17 +3,29 @@
 /// the plate's own text, and [forHire] spells its Arabic word differently on
 /// each system.
 enum YemenUsage {
-  private(unifiedArabic: 'خصوصي', unifiedLatin: 'PRIV.', northernArabic: 'خصوصي'),
+  private(
+    unifiedArabic: 'خصوصي',
+    unifiedLatin: 'PRIV.',
+    northernArabic: 'خصوصي',
+  ),
 
   /// Taxis and buses.
   forHire(unifiedArabic: 'أجرة', unifiedLatin: 'TAXI', northernArabic: 'اجرة'),
 
   /// Goods vehicles.
-  transport(unifiedArabic: 'نقل', unifiedLatin: 'TRANS.', northernArabic: 'نقل'),
+  transport(
+    unifiedArabic: 'نقل',
+    unifiedLatin: 'TRANS.',
+    northernArabic: 'نقل',
+  ),
 
   /// State-owned vehicles; no source names the northern Arabic word.
   // TODO(northern-labels): source the Arabic usage word on northern green plate.
-  government(unifiedArabic: 'حكومي', unifiedLatin: 'GOV.', northernArabic: null),
+  government(
+    unifiedArabic: 'حكومي',
+    unifiedLatin: 'GOV.',
+    northernArabic: null,
+  ),
 
   /// Police vehicles. System A only.
   police(unifiedArabic: 'شرطة', unifiedLatin: 'POLICE', northernArabic: null),

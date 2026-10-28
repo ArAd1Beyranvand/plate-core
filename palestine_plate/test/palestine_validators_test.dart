@@ -23,15 +23,27 @@ void main() {
         isTrue,
       );
       expect(
-        PSWestBankModernValidator.validateFields(region: '1', serial: '0234', governorate: 'I'),
-        const PlateValidation.invalid(PSWestBankModernValidator.illegalLetterIO),
+        PSWestBankModernValidator.validateFields(
+          region: '1',
+          serial: '0234',
+          governorate: 'I',
+        ),
+        const PlateValidation.invalid(
+          PSWestBankModernValidator.illegalLetterIO,
+        ),
       );
     });
 
     test('O is rejected as a confusable letter', () {
       expect(
-        PSWestBankModernValidator.validateFields(region: '1', serial: '0234', governorate: 'O'),
-        const PlateValidation.invalid(PSWestBankModernValidator.illegalLetterIO),
+        PSWestBankModernValidator.validateFields(
+          region: '1',
+          serial: '0234',
+          governorate: 'O',
+        ),
+        const PlateValidation.invalid(
+          PSWestBankModernValidator.illegalLetterIO,
+        ),
       );
     });
 
@@ -43,7 +55,9 @@ void main() {
             serial: '0234',
             governorate: letter,
           ),
-          const PlateValidation.invalid(PSWestBankModernValidator.reservedGazaLetter),
+          const PlateValidation.invalid(
+            PSWestBankModernValidator.reservedGazaLetter,
+          ),
           reason: letter,
         );
       }
@@ -51,14 +65,22 @@ void main() {
 
     test('region must be one digit', () {
       expect(
-        PSWestBankModernValidator.validateFields(region: '12', serial: '0234', governorate: 'H'),
+        PSWestBankModernValidator.validateFields(
+          region: '12',
+          serial: '0234',
+          governorate: 'H',
+        ),
         const PlateValidation.invalid(PSWestBankModernValidator.invalidRegion),
       );
     });
 
     test('serial must be four digits', () {
       expect(
-        PSWestBankModernValidator.validateFields(region: '1', serial: '234', governorate: 'H'),
+        PSWestBankModernValidator.validateFields(
+          region: '1',
+          serial: '234',
+          governorate: 'H',
+        ),
         const PlateValidation.invalid(PSWestBankModernValidator.invalidSerial),
       );
     });
@@ -85,8 +107,14 @@ void main() {
     test('district 0 and 2 are rejected', () {
       for (final d in ['0', '2']) {
         expect(
-          PSWestBankLegacyValidator.validateFields(district: d, serial: '0234', usage: '41'),
-          const PlateValidation.invalid(PSWestBankLegacyValidator.invalidDistrictCode),
+          PSWestBankLegacyValidator.validateFields(
+            district: d,
+            serial: '0234',
+            usage: '41',
+          ),
+          const PlateValidation.invalid(
+            PSWestBankLegacyValidator.invalidDistrictCode,
+          ),
           reason: d,
         );
       }
@@ -106,8 +134,14 @@ void main() {
     test('an out-of-range usage code is invalid', () {
       for (final u in ['00', '33', '89']) {
         expect(
-          PSWestBankLegacyValidator.validateFields(district: '4', serial: '0234', usage: u),
-          const PlateValidation.invalid(PSWestBankLegacyValidator.invalidUsageCode),
+          PSWestBankLegacyValidator.validateFields(
+            district: '4',
+            serial: '0234',
+            usage: u,
+          ),
+          const PlateValidation.invalid(
+            PSWestBankLegacyValidator.invalidUsageCode,
+          ),
           reason: u,
         );
       }
@@ -123,7 +157,11 @@ void main() {
   group('PSGazaValidator', () {
     test('valid plate', () {
       expect(
-        PSGazaValidator.validateFields(prefix: '3', serial: '0234', usage: '05').isValid,
+        PSGazaValidator.validateFields(
+          prefix: '3',
+          serial: '0234',
+          usage: '05',
+        ).isValid,
         isTrue,
       );
     });
@@ -131,7 +169,11 @@ void main() {
     test('prefix must be 3', () {
       for (final p in ['1', '0', '9']) {
         expect(
-          PSGazaValidator.validateFields(prefix: p, serial: '0234', usage: '05'),
+          PSGazaValidator.validateFields(
+            prefix: p,
+            serial: '0234',
+            usage: '05',
+          ),
           const PlateValidation.invalid(PSGazaValidator.gazaPrefixNotThree),
           reason: p,
         );
@@ -151,7 +193,11 @@ void main() {
     test('every legal Gaza usage code validates', () {
       for (final u in PSGazaUsage.codes) {
         expect(
-          PSGazaValidator.validateFields(prefix: '3', serial: '0234', usage: u).isValid,
+          PSGazaValidator.validateFields(
+            prefix: '3',
+            serial: '0234',
+            usage: u,
+          ).isValid,
           isTrue,
           reason: u,
         );

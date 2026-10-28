@@ -14,7 +14,8 @@ class PSWestBankModernValidator extends GatedPlateValidator {
   static const String invalidRegion = 'Region code must be one digit.';
   static const String invalidSerial = 'Serial must be four digits.';
 
-  static const String illegalLetterIO = 'The letters I and O are never issued; H is followed by J.';
+  static const String illegalLetterIO =
+      'The letters I and O are never issued; H is followed by J.';
 
   static const String reservedGazaLetter =
       'P, Q, R, S and T were allocated to Gaza and never issued.';
@@ -46,7 +47,8 @@ class PSWestBankModernValidator extends GatedPlateValidator {
     if (PSGovernorate.reservedGazaLetters.contains(governorate)) {
       return const PlateValidation.invalid(reservedGazaLetter);
     }
-    if (governorate.length != 1 || !PSGovernorate.letters.contains(governorate)) {
+    if (governorate.length != 1 ||
+        !PSGovernorate.letters.contains(governorate)) {
       return const PlateValidation.invalid(invalidGovernorate);
     }
     return const PlateValidation.valid();
@@ -81,7 +83,8 @@ class PSWestBankLegacyValidator extends GatedPlateValidator {
     required String serial,
     required String usage,
   }) {
-    if (district.length != 1 || !PSLegacyUsage.districtCodes.contains(district)) {
+    if (district.length != 1 ||
+        !PSLegacyUsage.districtCodes.contains(district)) {
       return const PlateValidation.invalid(invalidDistrictCode);
     }
     if (!isDigitsOfLength(serial, 4)) {
@@ -105,7 +108,8 @@ class PSGazaValidator extends GatedPlateValidator {
 
   static const String invalidSerial = 'Serial must be four digits.';
 
-  static const String invalidUsageCode = 'Usage code is not a legal Gaza class (00-29 or 40-59).';
+  static const String invalidUsageCode =
+      'Usage code is not a legal Gaza class (00-29 or 40-59).';
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(

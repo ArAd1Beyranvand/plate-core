@@ -46,7 +46,8 @@ enum YemenGovernorate {
 
   /// The governorate with [code], or null outside 1..22 (including half-typed
   /// input such as the `0` of `07`).
-  static YemenGovernorate? fromCode(int code) => values.where((g) => g.code == code).firstOrNull;
+  static YemenGovernorate? fromCode(int code) =>
+      values.where((g) => g.code == code).firstOrNull;
 
   /// The governorate the register [digits] name, zero-padded or bare, or null if
   /// non-numeric or outside 1..22.

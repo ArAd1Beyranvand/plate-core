@@ -13,18 +13,21 @@ abstract final class LebanonThemes {
 
   static const double _plateRadiusRatio = 0.045; // CALIBRATE
 
-  static PlateTheme _field({required Color field, required Color ink, required Color inactive}) =>
-      PlateTheme(
-        plateBackground: field,
-        plateBorder: LebanonColors.frame,
-        ink: ink,
-        dividerColor: LebanonColors.frame,
-        borderWidthRatio: _borderWidthRatio,
-        plateRadiusRatio: _plateRadiusRatio,
-        activeColor: ink,
-        inactiveColor: inactive,
-        alertColor: const Color(0xFFD32F2F),
-      );
+  static PlateTheme _field({
+    required Color field,
+    required Color ink,
+    required Color inactive,
+  }) => PlateTheme(
+    plateBackground: field,
+    plateBorder: LebanonColors.frame,
+    ink: ink,
+    dividerColor: LebanonColors.frame,
+    borderWidthRatio: _borderWidthRatio,
+    plateRadiusRatio: _plateRadiusRatio,
+    activeColor: ink,
+    inactiveColor: inactive,
+    alertColor: const Color(0xFFD32F2F),
+  );
 
   static final PlateTheme private = _field(
     field: LebanonColors.white,

@@ -124,7 +124,9 @@ class IndonesiaServiceValidator extends GatedPlateValidator {
       return const PlateValidation.invalid(reasonSuffix);
     }
     if (entry.spec.textGroups.any((g) => g.key == 'region') &&
-        !IndonesiaAlphabets.policeRegions.characters.contains(entry.group('region'))) {
+        !IndonesiaAlphabets.policeRegions.characters.contains(
+          entry.group('region'),
+        )) {
       return const PlateValidation.invalid(reasonRegion);
     }
     return const PlateValidation.valid();

@@ -10,15 +10,27 @@ abstract final class PSCountries {
     PlateRectShape(0, 0, 1200, 600, Color(0xFF007A3D)),
     PlateRectShape(0, 0, 1200, 400, Color(0xFFFFFFFF)),
     PlateRectShape(0, 0, 1200, 200, Color(0xFF000000)),
-    PlatePolygonShape(<Offset>[Offset(0, 0), Offset(400, 300), Offset(0, 600)], Color(0xFFCE1126)),
+    PlatePolygonShape(<Offset>[
+      Offset(0, 0),
+      Offset(400, 300),
+      Offset(0, 600),
+    ], Color(0xFFCE1126)),
   ]);
 
-  static const PlateDrawing _flagVertical = PlateDrawing(600, 1200, <PlateShape>[
-    PlateRectShape(0, 0, 600, 1200, Color(0xFF000000)),
-    PlateRectShape(0, 0, 400, 1200, Color(0xFFFFFFFF)),
-    PlateRectShape(0, 0, 200, 1200, Color(0xFF007A3D)),
-    PlatePolygonShape(<Offset>[Offset(0, 0), Offset(600, 0), Offset(300, 400)], Color(0xFFCE1126)),
-  ]);
+  static const PlateDrawing _flagVertical = PlateDrawing(
+    600,
+    1200,
+    <PlateShape>[
+      PlateRectShape(0, 0, 600, 1200, Color(0xFF000000)),
+      PlateRectShape(0, 0, 400, 1200, Color(0xFFFFFFFF)),
+      PlateRectShape(0, 0, 200, 1200, Color(0xFF007A3D)),
+      PlatePolygonShape(<Offset>[
+        Offset(0, 0),
+        Offset(600, 0),
+        Offset(300, 400),
+      ], Color(0xFFCE1126)),
+    ],
+  );
 
   /// `ف / P` in green. The rule between the lines lives on the spec;
   /// [CountryPanel] paints only the caption.
