@@ -10,8 +10,6 @@ void main() {
 
   test('every southern spec accepts a full number', () {
     for (final spec in <PlateSpec>[
-      YemenGovernoratePlates.hadhramaut,
-      YemenGovernoratePlates.hadhramautFiveDigit,
       YemenGovernoratePlates.hadhramautTemporary,
       YemenGovernoratePlates.hadhramautPolice,
       YemenGovernoratePlates.shabwahMotorcycle,
@@ -23,6 +21,14 @@ void main() {
       final full = '1234567'.substring(0, spec.slotCount);
       expect(judge(spec, full).isValid, isTrue, reason: spec.id);
     }
+  });
+
+  test('the Hadhramaut serial is four or five digits', () {
+    for (final serial in <String>['1234', '12345']) {
+      final entry = PlateEntry(spec: YemenGovernoratePlates.hadhramaut, values: <String>[serial]);
+      expect(v.validate(entry).isValid, isTrue, reason: serial);
+    }
+    expect(YemenGovernoratePlates.hadhramaut.slots.single.minLength, 4);
   });
 
   test('length and digits are judged', () {

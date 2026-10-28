@@ -31,6 +31,15 @@ abstract final class ArmeniaAlphabets {
     isNumeric: false,
   );
 
+  /// The country code a diplomatic plate ends with: `AM`, or `ARM` on newer
+  /// plates.
+  static const PlateAlphabet diplomaticCountry = PlateAlphabet(
+    id: 'am.diplomaticCountry',
+    characters: <String>['AM', 'ARM'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
+
   /// Bus class: `S` city bus, `L` long-range coach.
   static const PlateAlphabet busClass = PlateAlphabet(
     id: 'am.busClass',

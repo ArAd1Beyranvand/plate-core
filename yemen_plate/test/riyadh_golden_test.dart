@@ -27,19 +27,15 @@ void main() {
   /// category id -> (spec, theme, space-separated sample value)
   final Map<String, (PlateSpec, PlateTheme, String)> cases =
       <String, (PlateSpec, PlateTheme, String)>{
-        'private': (RiyadhPlates.private, RiyadhThemes.standard, 'T N J 7 6 5 3'),
-        'public_transport': (RiyadhPlates.publicTransport, RiyadhThemes.standard, 'T N J 7 6 5 3'),
-        'commercial': (RiyadhPlates.commercial, RiyadhThemes.standard, 'T N J 7 6 5 3'),
-        'temporary': (RiyadhPlates.temporary, RiyadhThemes.standard, 'T N J 7 6 5 3'),
+        'private': (RiyadhPlates.us, RiyadhThemes.standard, 'T N J 7 6 5 3 ●'),
+        'public_transport': (RiyadhPlates.us, RiyadhThemes.standard, 'T N J 7 6 5 3 ▲'),
+        'commercial': (RiyadhPlates.us, RiyadhThemes.standard, 'T N J 7 6 5 3 ▼'),
+        'temporary': (RiyadhPlates.us, RiyadhThemes.standard, 'T N J 7 6 5 3 ◀'),
         'diplomatic': (RiyadhPlates.diplomatic, RiyadhThemes.standard, 'T N J 7 6 5 3'),
-        'eu_private': (RiyadhPlates.euPrivate, RiyadhThemes.standard, 'T N J 7 3 5 6'),
-        'eu_public_transport': (
-          RiyadhPlates.euPublicTransport,
-          RiyadhThemes.standard,
-          'T N J 7 3 5 6',
-        ),
-        'eu_commercial': (RiyadhPlates.euCommercial, RiyadhThemes.standard, 'T N J 7 3 5 6'),
-        'eu_temporary': (RiyadhPlates.euTemporary, RiyadhThemes.standard, 'T N J 7 3 5 6'),
+        'eu_private': (RiyadhPlates.eu, RiyadhThemes.standard, 'T N J 7 3 5 6 ●'),
+        'eu_public_transport': (RiyadhPlates.eu, RiyadhThemes.standard, 'T N J 7 3 5 6 ▲'),
+        'eu_commercial': (RiyadhPlates.eu, RiyadhThemes.standard, 'T N J 7 3 5 6 ▼'),
+        'eu_temporary': (RiyadhPlates.eu, RiyadhThemes.standard, 'T N J 7 3 5 6 ◀'),
         'eu_diplomatic': (RiyadhPlates.euDiplomatic, RiyadhThemes.standard, 'T N J 7 3 5 6'),
       };
 

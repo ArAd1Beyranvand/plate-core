@@ -11,6 +11,14 @@ abstract final class UzbekistanAlphabets {
   /// Series letters.
   static const PlateAlphabet letters = PlateAlphabet.latinUppercase;
 
+  /// The `H` (foreign citizen) or `M` (foreign company) after the region.
+  static const PlateAlphabet foreignClass = PlateAlphabet(
+    id: 'uz.foreignClass',
+    characters: <String>['H', 'M'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
+
   /// The `D` (diplomat) or `T` (technical staff) a diplomatic plate opens with.
   static const PlateAlphabet diplomaticStatus = PlateAlphabet(
     id: 'uz.diplomaticStatus',

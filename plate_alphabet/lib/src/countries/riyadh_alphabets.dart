@@ -18,6 +18,15 @@ abstract final class RiyadhAlphabets {
   /// `0-9` printed as Iranshahr numerals, for the large row.
   static const PlateAlphabet iranshahrDigits = PlateAlphabetDigits.iranshahr;
 
+  /// The car-type symbol at the foot of the strip: private, public transport,
+  /// commercial, temporary. Diplomatic plates print none.
+  static const PlateAlphabet symbol = PlateAlphabet(
+    id: 'ye.riyadh.symbol',
+    characters: <String>['●', '▲', '▼', '◀'],
+    input: AlphabetInput.chosen,
+    isNumeric: false,
+  );
+
   /// The Latin row of the letters.
   static const PlateAlphabet lettersLatin = PlateAlphabet.pattern(
     id: 'ye.riyadh.letters.latin',

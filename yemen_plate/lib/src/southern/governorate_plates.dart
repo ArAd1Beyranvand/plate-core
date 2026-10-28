@@ -236,8 +236,9 @@ abstract final class YemenGovernoratePlates {
   static const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 1, 1));
 
   /// The car plate: strip, name, [count]-digit serial. [count] is 4 on every
-  /// published plate but Hadhramaut's private, which shows 5.
-  static PlateSpec car(YemenSouthernGovernorate g, {int count = 4}) {
+  /// published plate but Hadhramaut's, which shows 4 or 5: given [minCount],
+  /// the serial is one field of [minCount] to [count] digits, centred.
+  static PlateSpec car(YemenSouthernGovernorate g, {int count = 4, int? minCount}) {
     const span = _Layout.serialRight - _Layout.serialLeft;
     const cx = (_Layout.serialLeft + _Layout.serialRight) / 2;
     return PlateSpec(
@@ -259,8 +260,22 @@ abstract final class YemenGovernoratePlates {
         ),
         _centred(g.name, 306, _Layout.nameCy, _Layout.nameGlyph),
       ],
-      slots: _serial(count, cx, _pitch(count, span)),
-      textGroups: _groups(count),
+      slots: minCount == null
+          ? _serial(count, cx, _pitch(count, span))
+          : <PlateSlot>[
+              PlateSlot(
+                alphabet: YemenAlphabets.digits,
+                box: const PlateBox(
+                  _Layout.serialLeft,
+                  _Layout.serialTop,
+                  span,
+                  _Layout.serialHeight,
+                ),
+                length: count,
+                minLength: minCount,
+              ),
+            ],
+      textGroups: _groups(minCount == null ? count : 1),
     );
   }
 
@@ -350,8 +365,12 @@ abstract final class YemenGovernoratePlates {
 
   // One spec per published layout; rows differing only in strip colour share it.
 
-  static final PlateSpec hadhramaut = car(YemenSouthernGovernorate.hadhramaut);
-  static final PlateSpec hadhramautFiveDigit = car(YemenSouthernGovernorate.hadhramaut, count: 5);
+  /// Four or five digits; the five-digit serial is the private one's.
+  static final PlateSpec hadhramaut = car(
+    YemenSouthernGovernorate.hadhramaut,
+    count: 5,
+    minCount: 4,
+  );
   static final PlateSpec hadhramautTemporary = temporary(YemenSouthernGovernorate.hadhramaut);
   static final PlateSpec hadhramautPolice = police(YemenSouthernGovernorate.hadhramaut);
   static final PlateSpec hadhramautMotorcycle = motorcycle(YemenSouthernGovernorate.hadhramaut);

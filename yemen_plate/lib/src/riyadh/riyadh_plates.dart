@@ -137,68 +137,27 @@ abstract final class _Layout {
   static const double euDigitsEnd = 249.6, euStripEnd = 332.7;
 }
 
-/// The mark under the strip that tells the category apart.
-enum _Symbol {
-  circle('●'),
-  triangleUp('▲'),
-  triangleDown('▼'),
-  triangleLeft('◀'),
-  none('');
-
-  const _Symbol(this.glyph);
-  final String glyph;
-}
-
-/// Three letters and up to four digits, in the US size ([private] ...) or the
-/// EU size ([euPrivate] ...), one per category. The category is the strip: its colour is the country's panel colour
-/// (`RiyadhCountry.byCategory`) and its symbol is a label here, so pair
-/// each spec with the matching country at the canvas. Groups `letters`,
-/// `serial`; values are stored in Latin (`T N J 7 6 5 3`).
+/// Three letters and up to four digits, in the US size ([us]) or the EU size
+/// ([eu]). The category is the strip: its colour is the country's panel colour
+/// (`RiyadhCountry.byCategory`), and its car-type symbol is the last slot, so
+/// values are `[T, N, J, 7, 6, 5, 3, ●]`, stored in Latin. Diplomatic plates
+/// print no symbol and keep their own specs. Groups `letters`, `serial`,
+/// `symbol`.
 ///
 /// Not implemented: the pre-2006 and pre-2014 plates (the latter carries a
 /// flag, not the strip), and the car-type symbol's exact artwork — it is the
 /// Unicode glyph.
 abstract final class RiyadhPlates {
-  static final PlateSpec private = _build('ye.riyadh.us.private', _Layout.us, _Symbol.circle);
-  static final PlateSpec publicTransport = _build(
-    'ye.riyadh.us.public_transport',
-    _Layout.us,
-    _Symbol.triangleUp,
+  static final PlateSpec us = _build('ye.riyadh.us', _Layout.us);
+  static final PlateSpec diplomatic = _build('ye.riyadh.us.diplomatic', _Layout.us, symbol: false);
+  static final PlateSpec eu = _build('ye.riyadh.eu', _Layout.eu);
+  static final PlateSpec euDiplomatic = _build(
+    'ye.riyadh.eu.diplomatic',
+    _Layout.eu,
+    symbol: false,
   );
-  static final PlateSpec commercial = _build(
-    'ye.riyadh.us.commercial',
-    _Layout.us,
-    _Symbol.triangleDown,
-  );
-  static final PlateSpec temporary = _build(
-    'ye.riyadh.us.temporary',
-    _Layout.us,
-    _Symbol.triangleLeft,
-  );
-  static final PlateSpec diplomatic = _build('ye.riyadh.us.diplomatic', _Layout.us, _Symbol.none);
 
-  static final PlateSpec euPrivate = _build('ye.riyadh.eu.private', _Layout.eu, _Symbol.circle);
-  static final PlateSpec euPublicTransport = _build(
-    'ye.riyadh.eu.public_transport',
-    _Layout.eu,
-    _Symbol.triangleUp,
-  );
-  static final PlateSpec euCommercial = _build(
-    'ye.riyadh.eu.commercial',
-    _Layout.eu,
-    _Symbol.triangleDown,
-  );
-  static final PlateSpec euTemporary = _build(
-    'ye.riyadh.eu.temporary',
-    _Layout.eu,
-    _Symbol.triangleLeft,
-  );
-  static final PlateSpec euDiplomatic = _build('ye.riyadh.eu.diplomatic', _Layout.eu, _Symbol.none);
-
-  static List<PlateSpec> get all => <PlateSpec>[
-    private, publicTransport, commercial, temporary, diplomatic, //
-    euPrivate, euPublicTransport, euCommercial, euTemporary, euDiplomatic,
-  ];
+  static List<PlateSpec> get all => <PlateSpec>[us, diplomatic, eu, euDiplomatic];
 
   /// Two stacked rows, split by the thin rule across the row's whole width.
   static PlateSection _rows(double end, double rule) => PlateSection.rows(<PlatePart>[
@@ -236,7 +195,7 @@ abstract final class RiyadhPlates {
     PlatePart(_rows(_Layout.euRowEnd, _Layout.euRowRule)),
   ]);
 
-  static PlateSpec _build(String id, _Design d, _Symbol symbol) {
+  static PlateSpec _build(String id, _Design d, {bool symbol = true}) {
     final bool us = identical(d, _Layout.us);
     final _Strip s = d.strip;
     List<PlateSlot> slots(PlateAlphabet a, _Row r, int n) => plateRegister(
@@ -270,6 +229,16 @@ abstract final class RiyadhPlates {
       slots: <PlateSlot>[
         ...slots(RiyadhAlphabets.lettersLatin, d.lettersEn, 3),
         ...slots(RiyadhAlphabets.digits, d.digitsEn, 4),
+        if (symbol)
+          PlateSlot(
+            alphabet: RiyadhAlphabets.symbol,
+            box: PlateBox(
+              s.symbol.left,
+              s.symbol.top + (s.symbol.height - s.symbolGlyph) / 2,
+              s.symbol.width,
+              s.symbolGlyph,
+            ),
+          ),
       ],
       mirrors: <PlateMirror>[
         ...echo(RiyadhAlphabets.lettersArabic, d.lettersAr, <int>[0, 1, 2]),
@@ -284,12 +253,11 @@ abstract final class RiyadhPlates {
           glyphHeight: s.ksaGlyph,
           lineHeight: s.ksaLineHeight,
         ),
-        if (symbol != _Symbol.none)
-          PlateLabel(text: symbol.glyph, box: s.symbol, glyphHeight: s.symbolGlyph),
       ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0, 1, 2], key: 'letters'),
-        PlateTextGroup(<int>[3, 4, 5, 6], key: 'serial'),
+      textGroups: <PlateTextGroup>[
+        const PlateTextGroup(<int>[0, 1, 2], key: 'letters'),
+        const PlateTextGroup(<int>[3, 4, 5, 6], key: 'serial'),
+        if (symbol) const PlateTextGroup(<int>[7], key: 'symbol'),
       ],
     );
   }

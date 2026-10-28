@@ -61,9 +61,9 @@ Validate them with `YemenSouthernValidator`. Their digits are ~80-87% of the
 reference height (the tallest box that fits); the doc comments give the numbers.
 
 **Riyadh - `RiyadhPlates`.** Three letters and up to four digits, each printed
-twice (Arabic above, Latin below), in the US and EU sizes; five categories
-(private, public transport, commercial, temporary, diplomatic) told apart by
-the strip colour, which rides on `RiyadhCountry.byCategory`. Theme
+twice (Arabic above, Latin below), in the US (`us`) and EU (`eu`) sizes. The
+category is the strip colour, which rides on `RiyadhCountry.byCategory`, and
+the car-type symbol, a slot; `diplomatic` and `euDiplomatic` print none. Theme
 `RiyadhThemes.standard`, validator `RiyadhValidator`, alphabets
 `RiyadhAlphabets` (from `plate_alphabet`).
 

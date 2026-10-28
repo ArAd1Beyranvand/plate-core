@@ -9,6 +9,11 @@ every field reaches its minimum. Removed: `car4`/`car5`/`car6`, `moto4`/`moto5`/
 `car({...})`/`moto({...})` and `numberLengths`. `YemenNorthernValidator` now
 requires a serial of at least four digits.
 
+`YemenGovernoratePlates.hadhramautFiveDigit` folded into `hadhramaut` (serial
+4–5). The eight Riyadh specs are `RiyadhPlates.us` / `.eu` plus the two
+diplomatic ones; the car-type symbol is a chosen slot and the strip colour is
+the `RiyadhCountry` passed at render time.
+
 ## 0.3.0
 
 **Breaking. A usage class no longer selects a spec.** It selects a country block

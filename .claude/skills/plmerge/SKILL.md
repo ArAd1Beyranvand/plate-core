@@ -37,6 +37,8 @@ Classify each difference:
 | Region inferable from typed characters but not printed | keep spec, add `resolveRegion` | `PlateSpec.resolveRegion` |
 | A region code range adds/changes a fixed print (Iraq 21–24 → `KR`) | one spec; labels for both variants with `resolve:` returning `''` (hide) or `null` (keep text) from the code group. Multi-line labels work | `PlateLabel.resolve` |
 | Class shown only by a colour that nothing typed decides (Iraq's band) | one spec; holder entry gets `bands:` chips that swap the `PlateCountry` | `GalleryEntry.bands` |
+| Same, but the class also has its own field livery (Yemen northern) | `bands:` chips whose third field is a `PlateTheme` (null keeps the entry's theme) | `GalleryBand = (label, PlateCountry, PlateTheme?)` |
+| A fixed symbol/code printed per class from a closed set (Riyadh `●▲▼◀`, Armenia `AM`/`ARM`, Uzbek `H`/`M`) | a chosen slot in that box; `resolveTheme` if it also decides the colour | chosen `PlateAlphabet` |
 
 **Check the real value set first** (Wikipedia page from `wikipedia_plate_pages.txt` / the package docs). Never widen a field (`minLength:`, a broader alphabet) just to make two classes fit: the keypad then offers combinations that don't exist and the cursor jumps on ambiguous lengths. If the classes are a closed list of codes, make a chosen slot of exactly those codes (like Afghanistan's class letters).
 
@@ -53,7 +55,7 @@ Classify each difference:
 ## 4. Holder refactor
 - One `GalleryEntry` per remaining spec; `sampleValues` must match `spec.slotCount` (checked by `test/*_gallery_render_test.dart`).
 - Drop `country:` when the spec default is right.
-- Entries that differ only by `country:` (band colour) collapse into one entry with `bands: [(label, PlateCountry), …]`; the playground shows them as chips.
+- Entries that differ only by `country:` (band colour) collapse into one entry with `bands: [(label, PlateCountry, PlateTheme?), …]`; the playground shows them as chips. The first band is the default.
 - Look for duplicated sections (umbrella source + per-country source): share one top-level `_<country>Section()` function returning a fresh `GallerySection` (entries are resolved by identity, so don't share instances).
 - Rewrite the section note to match the new count; no "now"/"previously".
 
@@ -87,3 +89,13 @@ Append to "Lessons" anything this country taught (a new merge pattern, a trap). 
 - Kuwait (user's idea): 16 specs → 8. Nine `_standard` specs differing only by caption + colour became `KuwaitPlates.standard` with the caption as a chosen slot in the caption's box; `KuwaitThemes.byCaption` maps caption → livery, and that one map also builds the alphabet. Their eight `KuwaitCountry` constants were dead (noPanel) and deleted. National guard (no band), police (two labels) and the other sizes stay. −79 package lines. Look for a private builder (`_standard(caption:)`) called many times: its parameters are your merge candidates.
 - Turkey: too many plates to judge from code alone — read `.plateref/tr/` and `geometry.txt` first, then propose a table before touching anything.
 - Iraq: 5 specs → 3, 10 holder entries → 3. `largeKurdistan`/`smallKurdistan` folded into `large`/`small` via `PlateLabel.resolve` on the governorate group (`IraqGovernorates.isKurdistan`): the KR stack and the plain stack are two labels, each hidden by the other's condition. The five band classes became `bands:` chips. Core fix: resolved labels drew `maxLines: 1`, cutting `I\nR\nQ` to `I` — check multi-line resolved labels in the golden. `tools/migration_analyzer/registry.g.dart` lists every public spec: prune removed ones (full regeneration currently fails on unrelated deps).
+- Qatar was holder-only: the package already had one `civilian` spec (serial 3–5); only the gallery entries collapsed.
+- Turkey: 14 class specs → `strip`/`plain`. The letters group picks the livery (`TurkeyThemes` resolver); classes that print no divider use a transparent divider colour in their theme, so geometry stays shared. Read `.plateref/tr/` first — the letter→class table is not in the code.
+- Oman: one- and two-letter codes → one `standard` spec. Two-letter codes are a closed list of tokens from the article (not every pair), as a chosen alphabet; each token's glyph is the spaced pair, so it draws like two letters.
+- Armenia: `diplomaticArm` folded into `diplomatic` — the printed `AM`/`ARM` country code is a chosen slot.
+- Uzbekistan: foreign citizen/company → `foreign`; `H`/`M` is a chosen slot (`UzbekistanAlphabets.foreignClass`) and `UzbekistanThemes.byClass` picks yellow/green. Widen a one-letter cell if `M` squeezes.
+- Riyadh: 8 specs → 4. The car-type symbol became a chosen slot; the strip colour comes only from `PlateCountry.panelColor`, which a resolver can't change, so it's band chips (like Iraq). Diplomatic prints no symbol: own spec.
+- Yemen northern: usage sets both country *and* theme, so `GalleryBand` gained an optional theme. Hadhramaut 4/5 digits: `car(g, count: 5, minCount: 4)` becomes one variable serial slot when `minCount` is set.
+- Trap: all `YemenCountry`/`RiyadhCountry` constants share code `ye` and compare equal — select bands by index, never by `==`.
+- Trap: `--update-goldens` rewrites every golden in the file with anti-aliasing noise; revert goldens of unchanged specs. Test runs also modify tracked `iranshahr_plate/test/failures/*.png`: `git checkout -- test/failures` before stash/commit.
+- Holder `test/newdesign` fails on a `startup_splash.dart` overflow unrelated to plates — not yours.

@@ -32,7 +32,11 @@ void main() {
     PlateCountry country,
   ) async {
     assert(debugValidateSpec(spec));
-    final values = List<String?>.generate(spec.slotCount, (i) => '1023456'[i % 7]);
+    // Hadhramaut's serial is one field of 4-5 digits; `_5` fills all five.
+    final slot = spec.slots.first;
+    final values = slot.length > 1
+        ? <String?>['1023456'.substring(0, name.endsWith('_5') ? slot.length : slot.minLength)]
+        : List<String?>.generate(spec.slotCount, (i) => '1023456'[i % 7]);
     final controller = PlateController.fromValues(spec, values);
     await tester.binding.setSurfaceSize(const Size(600, 600));
     await tester.pumpWidget(
@@ -104,12 +108,7 @@ void main() {
         if (!(g.banded && usage == 'government')) ('${id}_$usage', car, t, country),
       ('${id}_motorcycle', moto, t, moto.country),
     ],
-    (
-      'hadhramaut_private_5',
-      YemenGovernoratePlates.hadhramautFiveDigit,
-      t,
-      YemenCountry.southernPrivate,
-    ),
+    ('hadhramaut_private_5', YemenGovernoratePlates.hadhramaut, t, YemenCountry.southernPrivate),
     (
       'hadhramaut_temporary',
       YemenGovernoratePlates.hadhramautTemporary,

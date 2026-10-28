@@ -1168,12 +1168,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.armenia',
-    source: "ArmeniaPlates.diplomaticArm",
-    read: () => iranshahr_plate.ArmeniaPlates.diplomaticArm,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.armenia',
     source: "ArmeniaPlates.un",
     read: () => iranshahr_plate.ArmeniaPlates.un,
   ),
@@ -1360,14 +1354,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.oman',
-    source: "OmanPlates.oneLetter",
-    read: () => iranshahr_plate.OmanPlates.oneLetter,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.oman',
-    source: "OmanPlates.twoLetters",
-    read: () => iranshahr_plate.OmanPlates.twoLetters,
+    source: "OmanPlates.standard",
+    read: () => iranshahr_plate.OmanPlates.standard,
   ),
   (
     package: 'iranshahr_plate',
@@ -1474,54 +1462,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.turkey',
-    source: "TurkeyPlates.private",
-    read: () => iranshahr_plate.TurkeyPlates.private,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.internationalOrganization",
-    read: () => iranshahr_plate.TurkeyPlates.internationalOrganization,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.diplomatic",
-    read: () => iranshahr_plate.TurkeyPlates.diplomatic,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.temporaryCustoms",
-    read: () => iranshahr_plate.TurkeyPlates.temporaryCustoms,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.foreignResident",
-    read: () => iranshahr_plate.TurkeyPlates.foreignResident,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.syrianResident",
-    read: () => iranshahr_plate.TurkeyPlates.syrianResident,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.istanbulTaxi",
-    read: () => iranshahr_plate.TurkeyPlates.istanbulTaxi,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.taxi",
-    read: () => iranshahr_plate.TurkeyPlates.taxi,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
     source: "TurkeyPlates.temporary",
     read: () => iranshahr_plate.TurkeyPlates.temporary,
   ),
@@ -1530,42 +1470,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
     key: 'iranshahr.turkey',
     source: "TurkeyPlates.temporaryWithStrip",
     read: () => iranshahr_plate.TurkeyPlates.temporaryWithStrip,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.police",
-    read: () => iranshahr_plate.TurkeyPlates.police,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.gendarmerie",
-    read: () => iranshahr_plate.TurkeyPlates.gendarmerie,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.coastGuard",
-    read: () => iranshahr_plate.TurkeyPlates.coastGuard,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.consulate",
-    read: () => iranshahr_plate.TurkeyPlates.consulate,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.provincialGovernment",
-    read: () => iranshahr_plate.TurkeyPlates.provincialGovernment,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.turkey',
-    source: "TurkeyPlates.official",
-    read: () => iranshahr_plate.TurkeyPlates.official,
   ),
   (
     package: 'iranshahr_plate',
@@ -1750,14 +1654,8 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'iranshahr_plate',
     key: 'iranshahr.uzbekistan',
-    source: "UzbekistanPlates.foreignCitizen",
-    read: () => iranshahr_plate.UzbekistanPlates.foreignCitizen,
-  ),
-  (
-    package: 'iranshahr_plate',
-    key: 'iranshahr.uzbekistan',
-    source: "UzbekistanPlates.foreignCompany",
-    read: () => iranshahr_plate.UzbekistanPlates.foreignCompany,
+    source: "UzbekistanPlates.foreign",
+    read: () => iranshahr_plate.UzbekistanPlates.foreign,
   ),
   (
     package: 'iranshahr_plate',
@@ -3478,56 +3376,20 @@ final List<RegistryEntry> registry = <RegistryEntry>[
   (
     package: 'yemen_plate',
     key: 'yemen',
-    source: "RiyadhPlates.private",
-    read: () => yemen_plate.RiyadhPlates.private,
+    source: "RiyadhPlates.us",
+    read: () => yemen_plate.RiyadhPlates.us,
   ),
   (
     package: 'yemen_plate',
     key: 'yemen',
-    source: "RiyadhPlates.publicTransport",
-    read: () => yemen_plate.RiyadhPlates.publicTransport,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.commercial",
-    read: () => yemen_plate.RiyadhPlates.commercial,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.temporary",
-    read: () => yemen_plate.RiyadhPlates.temporary,
+    source: "RiyadhPlates.eu",
+    read: () => yemen_plate.RiyadhPlates.eu,
   ),
   (
     package: 'yemen_plate',
     key: 'yemen',
     source: "RiyadhPlates.diplomatic",
     read: () => yemen_plate.RiyadhPlates.diplomatic,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.euPrivate",
-    read: () => yemen_plate.RiyadhPlates.euPrivate,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.euPublicTransport",
-    read: () => yemen_plate.RiyadhPlates.euPublicTransport,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.euCommercial",
-    read: () => yemen_plate.RiyadhPlates.euCommercial,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "RiyadhPlates.euTemporary",
-    read: () => yemen_plate.RiyadhPlates.euTemporary,
   ),
   (
     package: 'yemen_plate',
@@ -3564,12 +3426,6 @@ final List<RegistryEntry> registry = <RegistryEntry>[
     key: 'yemen',
     source: "YemenGovernoratePlates.hadhramaut",
     read: () => yemen_plate.YemenGovernoratePlates.hadhramaut,
-  ),
-  (
-    package: 'yemen_plate',
-    key: 'yemen',
-    source: "YemenGovernoratePlates.hadhramautFiveDigit",
-    read: () => yemen_plate.YemenGovernoratePlates.hadhramautFiveDigit,
   ),
   (
     package: 'yemen_plate',
