@@ -461,7 +461,7 @@ class App(tk.Tk):
         REPORT_DIR.mkdir(exist_ok=True)
         (REPORT_DIR / f"{p}.txt").write_text(header + "\n\n".join(parts) + "\n")
 
-    def run_pana(self, path, log):
+    def run_pana(self, path, log, st):
         rc, out = run(pana_cmd() + ["--no-warning", "--json", "."], path, log, quiet=True)
         try:
             # stderr log lines are JSON too; the report is the pretty-printed object on its own line
@@ -478,6 +478,7 @@ class App(tk.Tk):
             lines.append(f"\n[{sec.get('grantedPoints')}/{sec.get('maxPoints')}] {sec.get('title')} ({sec.get('status')})")
             lines.append(clip(sec.get("summary", ""), 600))
         log(lines[0])
+        st['points'] = f'{granted}/{total}'
         return rc, "\n".join(lines)
 
     def ensure_remote(self, p, path, log):
@@ -504,6 +505,7 @@ class App(tk.Tk):
         return rc == 0 or bool(url)
 
     def step_all(self, p, path, o, mode, st, log):
+        st.pop('points', None)
         if not (path / ".git").exists():
             log("no git repo, skipping package")
             return True
@@ -539,7 +541,7 @@ class App(tk.Tk):
                 ok = ok and rc == 0
                 parts.append(f"## flutter pub publish --dry-run (exit {rc})\n{squeeze_dry_run(out)}")
             if mode in ("pana", "both"):
-                rc, out = self.run_pana(path, log)
+                rc, out = self.run_pana(path, log, st)
                 ok = ok and rc == 0
                 parts.append(f"## pana (exit {rc})\n{out}")
             self.write_report(p, mode, parts)
@@ -548,6 +550,12 @@ class App(tk.Tk):
                 log("CHECK FAILED (publish skipped)")
                 return False
         if o["publish"]:
+            if mode not in ("pana", "both") or not o["check"]:
+                self.run_pana(path, log, st)
+            g, _, t = st.get('points', '0/0').partition('/')
+            if t in ('', '0') or g != t:
+                log(f"PUBLISH SKIPPED: pub points {st.get('points')}, need full score")
+                return False
             rc, _ = run(["flutter", "pub", "publish", "--force"], path, log)
             if rc:
                 log("PUBLISH FAILED")
