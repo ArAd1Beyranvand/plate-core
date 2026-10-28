@@ -30,6 +30,8 @@ REPORT_DIR = ROOT / "reports"
 OWNER = "ArAd1Beyranvand"
 PROXY = ""  # set from the GUI; empty = inherit environment / git config
 STEPS = ("commit", "push", "check", "publish")
+EXCLUDED = {"plate_number_holder", "core_plate"}
+NOT_FULL_FILE = ROOT / "reports" / "not_160.txt"
 CHECK_MODES = ("dry-run", "pana", "both")
 
 # Countries / territories and their sub-areas, after
@@ -222,9 +224,11 @@ class App(tk.Tk):
         self.state_data = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
         self.opts = {}
         self.q = queue.Queue()
+        self.points_lock = threading.Lock()
         self.stop_flag = threading.Event()
         self.worker = None
-        self.pkgs = sorted(p.parent.name for p in ROOT.glob("*/pubspec.yaml"))
+        self.pkgs = sorted(p.parent.name for p in ROOT.glob("*/pubspec.yaml")
+                           if p.parent.name not in EXCLUDED)
         for p in self.pkgs:
             self.opts[p] = {s: s != "publish" for s in STEPS}
         self.check_mode = tk.StringVar(value="both")
@@ -479,7 +483,20 @@ class App(tk.Tk):
             lines.append(clip(sec.get("summary", ""), 600))
         log(lines[0])
         st['points'] = f'{granted}/{total}'
+        self.log_points(Path(path).name, granted, total)
         return rc, "\n".join(lines)
+
+    def log_points(self, p, granted, total):
+        """Keep reports/not_160.txt = one line per package that is below full points."""
+        with self.points_lock:
+            rows = dict(l.split(": ", 1) for l in NOT_FULL_FILE.read_text().splitlines() if ": " in l) \
+                if NOT_FULL_FILE.exists() else {}
+            if granted == total and total:
+                rows.pop(p, None)
+            else:
+                rows[p] = f"{granted}/{total}  ({now()})"
+            REPORT_DIR.mkdir(exist_ok=True)
+            NOT_FULL_FILE.write_text("".join(f"{k}: {v}\n" for k, v in sorted(rows.items())))
 
     def ensure_remote(self, p, path, log):
         """Make sure origin exists and the GitHub repo behind it exists (public)."""
