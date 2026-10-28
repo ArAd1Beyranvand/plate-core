@@ -1,3 +1,7 @@
+## 0.1.2
+
+- Requires `plate_core: ^0.12.1`.
+
 ## 0.1.1
 
 - Adds the per-country alphabets (`AlgeriaAlphabets` and the rest) that the
