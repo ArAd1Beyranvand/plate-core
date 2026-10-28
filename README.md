@@ -4,50 +4,19 @@ GO VEGAN 🌱
 
 ==================================
 
-<!-- METADATA: plate_core
-packages: 9
-countries: 8
--->
-
-The backbone of license plate packages for countries that actually exist (we checked).
-
-## Available plates
-
-### Core
-- [`plate_core`](https://pub.dev/packages/plate_core) - Paint license plates.
-- [`plate_core_bloc`](https://pub.dev/packages/plate_core_bloc) - The optional bloc layer, for hosts already bloc-shaped.
-
-### Countries
-- [`iran_plate`](https://pub.dev/packages/iran_plate) - Iran's license plates.
-- [`germany_plate`](https://pub.dev/packages/germany_plate) - Germany's license plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine_plate) - Palestine's license plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen_plate) - Yemen's license plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr_plate) - Bahrain's, Azerbaijan's and Afghanistan's license plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon_plate) - Lebanon's license plates.
-
-### Utilities
-- [`plate_keypad`](https://pub.dev/packages/plate_keypad) - A character picker for license plates.
-
 # plate_core
 
-A plate here is just a `const PlateSpec`: some geometry, a country panel, and a row of
-slots over alphabets. The widget layer paints whatever the spec says, so adding a plate
-means adding a const - never a widget, never a subclass, never a meeting.
+Data-driven vehicle licence plates for Flutter. A plate is a `const PlateSpec` — canvas geometry, a country panel, slots over alphabets, optional chrome — and the widget layer paints whatever the spec says. Adding a plate means adding a const, never a widget.
 
-`plate_core` knows no country and ships no assets. It hands you the plate face, the
-slots, the input machine, and a `PlateValidator` that gives opinions but never blocks a
-keystroke. The actual countries live in their own packages.
+`plate_core` knows no country and ships no assets. Countries live in their own packages (`iran_plate`, `germany_plate`, … 180+ of them); this package is the engine they all share.
 
 ## Install
 
 ```yaml
 dependencies:
-  plate_core: ^0.5.0
+  plate_core: ^0.12.0
+  iran_plate: ^0.6.0   # any country package
 ```
-
-Then pick a country package (`iran_plate`, `germany_plate`, `palestine_plate`,
-`yemen_plate`) and, if you want the on-screen keyboard, `plate_keypad`. The repo's
-`plate_gallery/` app draws every plate all four of them ship, in one place.
 
 ## Use
 
@@ -57,55 +26,39 @@ import 'package:iran_plate/iran_plate.dart';
 
 PlateCanvas(
   spec: IranPlates.civil,
-  onChooseCharacter: (alphabet) async => null,
-)
+  theme: IranThemes.blackOnWhite,
+  onChooseCharacter: noCharacterChooser,
+);
 ```
 
-That is a complete, editable plate. It needs **nothing above it** — no provider, no
-bloc. A `PlateCanvas` owns its characters in a `PlateController` (a `ChangeNotifier`,
-no dependency beyond Flutter); pass `controller:` when you want to read or write the
-value, track the active slot, or feed characters from your own keypad. It brings its
-own `Material`, so it survives outside a `Scaffold`.
+That is a complete, editable plate: no provider, no bloc, no `Scaffold`. A `PlateCanvas` owns its characters in a `PlateController` (a `ChangeNotifier`); pass `controller:` to read or write the value, follow the active slot, or feed characters from your own keypad. Swapping `spec:` on a live canvas carries the value across, matching registers by group key (`onSpecChange` tunes that).
 
-Swapping `spec:` on a live canvas now **carries the value across** to the new spec,
-matching registers by group key — `onSpecChange` tunes that.
+`onChooseCharacter` is called for slots whose alphabet is *chosen* rather than typed. Pass `PlateCharacterPicker.show` from [`plate_keypad`](https://pub.dev/packages/plate_keypad), or `noCharacterChooser` when no slot needs one.
 
-If the code around your plate is already bloc-shaped, `plate_core_bloc` provides a
-`PlateCardBloc` mirrored onto the controller; nothing in `plate_core` depends on it.
+## The model
 
-## Things it refuses to do
+| Type | Role |
+| --- | --- |
+| `PlateSpec` | the plate: size, panel, slots, text groups, labels, mirrors |
+| `PlateSlot` + `PlateAlphabet` | one run of characters and what it may hold (`typed` or `chosen`) |
+| `PlateCountry` | the panel: flag (`PlateDrawing`, SVG or raster), wording |
+| `PlateTheme` | colours; a spec can `resolveTheme` / `resolveRegion` from what was typed |
+| `PlateValidator` | judges a plate — advisory, never blocks a keystroke |
+| `PlateRestriction` | the one exception: values a spec refuses outright |
+| `PlateController` | the characters, the active slot, validation, `rejection` |
+| `PlateInputSource` | lets the host push characters in from its own UI |
 
-- Know a country. Grep `lib/` for a country name; a hit is a bug.
-- Police input. The validator can paint the frame red. It cannot stop you typing.
-- Own your keyboard. Feed it characters from wherever you like.
-- Choose your state management. A plate holds its own characters in a
-  `PlateController`. Bloc-shaped hosts add `plate_core_bloc`; core neither knows nor
-  asks.
+One spec per *shape*: what varies per vehicle is a slot, what varies by value is a resolver. A taxi and a private car are one spec with two themes, not two specs.
 
-## API
+## Rules of the package
 
-Whatever `package:plate_core/plate_core.dart` exports is API. Anything under
-`lib/src/` that the barrel doesn't re-export is ours to change without warning.
-## Also available
+- No country knowledge. A country name anywhere in `lib/`, even in a comment, is a bug.
+- No input policing beyond a spec's own `PlateRestriction`.
+- No keyboard, no state-management opinion.
+- Flags can be drawn in code (`PlateDrawing`, `EuropeanStars`) so a country package ships no file for them.
 
-- [`plate_alphabet`](https://pub.dev/packages/plate-alphabet) - A library of alphabets for license plates.
-- [`plate_keypad`](https://pub.dev/packages/plate-keypad) - A character picker for license plates.
-- [`plate_number_holder`](https://pub.dev/packages/plate-number-holder) - A frame to hold license plate numbers.
-- [`algeria_plate`](https://pub.dev/packages/algeria-plate) - Algeria's licence plates.
-- [`bolivia_plate`](https://pub.dev/packages/bolivia-plate) - Bolivia's licence plates.
-- [`colombia_plate`](https://pub.dev/packages/colombia-plate) - Colombia's licence plates.
-- [`cuba_plate`](https://pub.dev/packages/cuba-plate) - Cuba's licence plates.
-- [`germany_plate`](https://pub.dev/packages/germany-plate) - Germany's licence plates.
-- [`india_plate`](https://pub.dev/packages/india-plate) - India's licence plates.
-- [`indonesia_plate`](https://pub.dev/packages/indonesia-plate) - Indonesia's licence plates.
-- [`iran_plate`](https://pub.dev/packages/iran-plate) - Iran's licence plates.
-- [`iranshahr_plate`](https://pub.dev/packages/iranshahr-plate) - Iranshahr region's licence plates.
-- [`lebanon_plate`](https://pub.dev/packages/lebanon-plate) - Lebanon's licence plates.
-- [`malaysia_plate`](https://pub.dev/packages/malaysia-plate) - Malaysia's licence plates.
-- [`mali_plate`](https://pub.dev/packages/mali-plate) - Mali's licence plates.
-- [`niger_plate`](https://pub.dev/packages/niger-plate) - Niger's licence plates.
-- [`palestine_plate`](https://pub.dev/packages/palestine-plate) - Palestine's licence plates.
-- [`sudan_plate`](https://pub.dev/packages/sudan-plate) - Sudan's licence plates.
-- [`tunisia_plate`](https://pub.dev/packages/tunisia-plate) - Tunisia's licence plates.
-- [`venezuela_plate`](https://pub.dev/packages/venezuela-plate) - venezuela_ licence plates.
-- [`yemen_plate`](https://pub.dev/packages/yemen-plate) - Yemen's licence plates.
+Whatever `package:plate_core/plate_core.dart` exports is API; everything else under `lib/src/` may change without notice. See `CHANGELOG.md` for the history.
+
+## Part of plate
+
+[`plate_alphabet`](https://pub.dev/packages/plate_alphabet) — shared digit and letter alphabets. [`plate_keypad`](https://pub.dev/packages/plate_keypad) — on-screen keypad and slot picker. Demo gallery of every plate: `plate_number_holder`.
