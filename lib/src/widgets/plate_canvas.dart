@@ -208,8 +208,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
   void _morphTheme() {
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
-    if (transition == null || anim == null || !transition.morphBackground)
+    if (transition == null || anim == null || !transition.morphBackground) {
       return;
+    }
     final spec = widget.spec;
     final delays = PlateStagger.sequence(
       spec,
