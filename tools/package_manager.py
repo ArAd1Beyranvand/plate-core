@@ -486,6 +486,21 @@ class App(tk.Tk):
         self.log_points(Path(path).name, granted, total)
         return rc, "\n".join(lines)
 
+    def bump_version(self, path, log):
+        """Raise the patch number in pubspec.yaml and add a CHANGELOG entry; return the new version."""
+        f = Path(path) / "pubspec.yaml"
+        m = re.search(r"^version:\s*(\d+)\.(\d+)\.(\d+)\s*$", f.read_text(), re.M)
+        if not m:
+            log("cannot bump: no plain x.y.z version in pubspec.yaml")
+            return None
+        v = f"{m[1]}.{m[2]}.{int(m[3]) + 1}"
+        f.write_text(f.read_text()[:m.start()] + f"version: {v}" + f.read_text()[m.end():])
+        cl = Path(path) / "CHANGELOG.md"
+        old = cl.read_text() if cl.exists() else ""
+        cl.write_text(f"## {v}\n\n- Version bump; {m[0].split(':')[1].strip()} was already on pub.dev.\n\n{old}")
+        log(f"version already on pub.dev, bumped to {v}")
+        return v
+
     def log_points(self, p, granted, total):
         """Keep reports/not_160.txt = one line per package that is below full points."""
         with self.points_lock:
@@ -573,7 +588,16 @@ class App(tk.Tk):
             if t in ('', '0') or g != t:
                 log(f"PUBLISH SKIPPED: pub points {st.get('points')}, need full score")
                 return False
-            rc, _ = run(["flutter", "pub", "publish", "--force"], path, log)
+            rc, out = run(["flutter", "pub", "publish", "--force"], path, log)
+            if rc and re.search(r"version \S+ of package \S+ already exists", out, re.I):
+                v = self.bump_version(path, log)
+                if v:
+                    run(["git", "add", "-A"], path, log)
+                    run(["git", "commit", "-qm", f"Bump version to {v}"], path, log)
+                    if o["push"]:
+                        _, br = run(["git", "branch", "--show-current"], path, log)
+                        run(["git", "push", "origin", br or "HEAD"], path, log)
+                    rc, out = run(["flutter", "pub", "publish", "--force"], path, log)
             if rc:
                 log("PUBLISH FAILED")
                 return False
