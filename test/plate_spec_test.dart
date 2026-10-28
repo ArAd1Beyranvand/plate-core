@@ -49,7 +49,10 @@ PlateSpec _spec({
   canvasWidth: 400,
   canvasHeight: 100,
   panel: _panel,
-  slots: [for (var i = 0; i < alphabets.length; i++) _slot(alphabets[i], 20 + i * 25.0)],
+  slots: [
+    for (var i = 0; i < alphabets.length; i++)
+      _slot(alphabets[i], 20 + i * 25.0),
+  ],
   textGroups: textGroups,
 );
 
@@ -129,23 +132,38 @@ void main() {
           PlateTextGroup([0, 1, 2], prefix: 'ZZ-'),
         ],
       );
-      expect(spec.renderGroup(spec.effectiveTextGroups.single, ['1', '2', '3']), 'ZZ-1٢3');
+      expect(
+        spec.renderGroup(spec.effectiveTextGroups.single, ['1', '2', '3']),
+        'ZZ-1٢3',
+      );
     });
 
     test('unset slots render as the empty string', () {
       final spec = _spec();
-      expect(spec.renderGroup(const PlateTextGroup([0, 1, 2]), ['1', null, '3']), '13');
+      expect(
+        spec.renderGroup(const PlateTextGroup([0, 1, 2]), ['1', null, '3']),
+        '13',
+      );
     });
 
-    test('an index past values.length renders as empty rather than throwing', () {
-      final spec = _spec();
-      expect(spec.renderGroup(const PlateTextGroup([0, 1, 2]), ['1']), '1');
-    });
+    test(
+      'an index past values.length renders as empty rather than throwing',
+      () {
+        final spec = _spec();
+        expect(spec.renderGroup(const PlateTextGroup([0, 1, 2]), ['1']), '1');
+      },
+    );
 
-    test('an index outside the plate renders as empty rather than throwing', () {
-      final spec = _spec();
-      expect(spec.renderGroup(const PlateTextGroup([0, 9]), ['1', '2', '3']), '1');
-    });
+    test(
+      'an index outside the plate renders as empty rather than throwing',
+      () {
+        final spec = _spec();
+        expect(
+          spec.renderGroup(const PlateTextGroup([0, 9]), ['1', '2', '3']),
+          '1',
+        );
+      },
+    );
   });
 
   group('valueOfGroup', () {
@@ -305,7 +323,11 @@ void main() {
 
     test('chrome elements are plate-space geometry plus content', () {
       const rule = PlateRule(box: PlateBox(0, 0, 2, 40));
-      const label = PlateLabel(text: 'ZZ', box: PlateBox(5, 5, 20, 10), glyphHeight: 10);
+      const label = PlateLabel(
+        text: 'ZZ',
+        box: PlateBox(5, 5, 20, 10),
+        glyphHeight: 10,
+      );
       const decal = PlateDecal(
         image: AssetImage('badges/zz.png', package: 'zz_plate'),
         box: PlateBox(5, 20, 10, 10),

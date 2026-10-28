@@ -6,14 +6,20 @@ import '../model/plate_asset.dart';
 /// stretches it to the box, as a flag is; [BoxFit.contain] keeps its
 /// proportions and centres it, as a decal is.
 class PlateDrawingView extends StatelessWidget {
-  const PlateDrawingView({super.key, required this.drawing, this.fit = BoxFit.fill});
+  const PlateDrawingView({
+    super.key,
+    required this.drawing,
+    this.fit = BoxFit.fill,
+  });
 
   final PlateDrawing drawing;
   final BoxFit fit;
 
   @override
-  Widget build(BuildContext context) =>
-      CustomPaint(painter: _DrawingPainter(drawing, fit), child: const SizedBox.expand());
+  Widget build(BuildContext context) => CustomPaint(
+    painter: _DrawingPainter(drawing, fit),
+    child: const SizedBox.expand(),
+  );
 }
 
 class _DrawingPainter extends CustomPainter {

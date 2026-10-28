@@ -22,7 +22,9 @@ class PlateInputMachine implements PlateInputTarget {
     for (var i = 0; i < spec.slots.length; i++) {
       _focusNodes.add(FocusNode()..addListener(_handleFocusChange));
       _controllers.add(
-        spec.slots[i].alphabet.input == AlphabetInput.typed ? TextEditingController() : null,
+        spec.slots[i].alphabet.input == AlphabetInput.typed
+            ? TextEditingController()
+            : null,
       );
     }
     // An editable mirror is a second field over one slot, not a slot: its focus
@@ -94,9 +96,12 @@ class PlateInputMachine implements PlateInputTarget {
 
   /// [controllerAt], created on demand for a chosen slot, which under
   /// [PlateInputSource.keypadFirst] takes the platform keyboard too.
-  TextEditingController fieldAt(int index) => _controllers[index] ??= TextEditingController();
-  FocusNode? mirrorFocusNodeAt(int mirrorIndex) => _mirrorFocusNodes[mirrorIndex];
-  TextEditingController? mirrorControllerAt(int mirrorIndex) => _mirrorControllers[mirrorIndex];
+  TextEditingController fieldAt(int index) =>
+      _controllers[index] ??= TextEditingController();
+  FocusNode? mirrorFocusNodeAt(int mirrorIndex) =>
+      _mirrorFocusNodes[mirrorIndex];
+  TextEditingController? mirrorControllerAt(int mirrorIndex) =>
+      _mirrorControllers[mirrorIndex];
 
   @override
   int? get activeIndex => _activeIndex;
@@ -150,8 +155,11 @@ class PlateInputMachine implements PlateInputTarget {
 
   /// Syncs an editable mirror's field with its source slot's value, rendered
   /// through the mirror's [alphabet].
-  void syncMirrorController(int mirrorIndex, PlateAlphabet alphabet, String? value) =>
-      _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
+  void syncMirrorController(
+    int mirrorIndex,
+    PlateAlphabet alphabet,
+    String? value,
+  ) => _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
 
   static void _setText(
     TextEditingController? field,
@@ -205,7 +213,8 @@ class PlateInputMachine implements PlateInputTarget {
     final values = readValues();
     // Focus can drop once the plate is complete; the keypad still deletes
     // from the end.
-    final index = _activeIndex ?? values.lastIndexWhere((v) => v != null && v.isNotEmpty);
+    final index =
+        _activeIndex ?? values.lastIndexWhere((v) => v != null && v.isNotEmpty);
     if (index < 0) return;
     final current = values[index];
     final empty = current == null || current.isEmpty;

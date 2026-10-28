@@ -14,10 +14,13 @@ Widget _run(String text) => Directionality(
   ),
 );
 
-Finder _glyph(String text) => find.byWidgetPredicate((w) => w is Text && w.data == text);
+Finder _glyph(String text) =>
+    find.byWidgetPredicate((w) => w is Text && w.data == text);
 
 double _opacityOf(WidgetTester tester, String text) => tester
-    .widget<Opacity>(find.ancestor(of: _glyph(text), matching: find.byType(Opacity)).first)
+    .widget<Opacity>(
+      find.ancestor(of: _glyph(text), matching: find.byType(Opacity)).first,
+    )
     .opacity;
 
 void main() {
@@ -49,22 +52,32 @@ void main() {
     expect(_glyph('1'), findsOneWidget);
   });
 
-  testWidgets('a replaced character leaves while its successor enters', (tester) async {
+  testWidgets('a replaced character leaves while its successor enters', (
+    tester,
+  ) async {
     await tester.pumpWidget(_run('12'));
     await tester.pumpWidget(_run('13'));
     await tester.pump(PlateGlyphRun.leave ~/ 2);
     expect(_glyph('2'), findsOneWidget);
     expect(_glyph('3'), findsOneWidget);
-    expect(tester.getCenter(_glyph('2')).dx, lessThan(tester.getCenter(_glyph('3')).dx));
+    expect(
+      tester.getCenter(_glyph('2')).dx,
+      lessThan(tester.getCenter(_glyph('3')).dx),
+    );
     await tester.pumpAndSettle();
     expect(_glyph('2'), findsNothing);
     expect(_opacityOf(tester, '3'), 1);
   });
 
-  testWidgets('the placeholder fades out as the first character arrives', (tester) async {
+  testWidgets('the placeholder fades out as the first character arrives', (
+    tester,
+  ) async {
     double placeholder() => tester
         .widget<AnimatedOpacity>(
-          find.ancestor(of: _glyph('?'), matching: find.byType(AnimatedOpacity)),
+          find.ancestor(
+            of: _glyph('?'),
+            matching: find.byType(AnimatedOpacity),
+          ),
         )
         .opacity;
     await tester.pumpWidget(_run(''));

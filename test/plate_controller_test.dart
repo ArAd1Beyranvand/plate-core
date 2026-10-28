@@ -43,7 +43,10 @@ PlateSpec _spec({
   panel: _panel,
   slots: [
     for (var i = 0; i < alphabets.length; i++)
-      PlateSlot(alphabet: alphabets[i], box: PlateBox(20 + i * 25.0, 5, 20, 30)),
+      PlateSlot(
+        alphabet: alphabets[i],
+        box: PlateBox(20 + i * 25.0, 5, 20, 30),
+      ),
   ],
   textGroups: textGroups,
 );
@@ -207,7 +210,9 @@ void main() {
     });
 
     test('refused characters land as null', () {
-      final c = PlateController(spec: _spec(alphabets: const [_digits, _letters]));
+      final c = PlateController(
+        spec: _spec(alphabets: const [_digits, _letters]),
+      );
       addTearDown(c.dispose);
       c.setValues(['A', 'B']);
       expect(c.values, [null, 'B']);
@@ -246,7 +251,11 @@ void main() {
       final c = build();
       addTearDown(c.dispose);
       c.setGroup('pair', '4867');
-      expect(c.values, ['4', '8', null], reason: 'extra characters are dropped');
+      expect(c.values, [
+        '4',
+        '8',
+        null,
+      ], reason: 'extra characters are dropped');
     });
 
     test('a short value clears the trailing slots of the group', () {
@@ -469,7 +478,10 @@ void main() {
     });
 
     test('a half-typed register carries as far as it got, gaps closed', () {
-      final c = PlateController(spec: from, values: ['9', '1', null, '3', null]);
+      final c = PlateController(
+        spec: from,
+        values: ['9', '1', null, '3', null],
+      );
       addTearDown(c.dispose);
       c.adoptSpec(to);
       // The '3' moves up behind the '1' rather than holding position 2.

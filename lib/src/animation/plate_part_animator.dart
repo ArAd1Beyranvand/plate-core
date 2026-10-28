@@ -9,7 +9,11 @@ import 'plate_animation.dart';
 /// already applied; it is complete while [phase] is settled.
 @immutable
 class PlatePartFrame {
-  const PlatePartFrame({required this.phase, required this.progress, required this.motion});
+  const PlatePartFrame({
+    required this.phase,
+    required this.progress,
+    required this.motion,
+  });
 
   static const PlatePartFrame settled = PlatePartFrame(
     phase: PlatePartPhase.settled,
@@ -103,13 +107,15 @@ class PlatePartAnimator extends StatefulWidget {
 
   /// The frame of the nearest animated part; settled outside one.
   static PlatePartFrame of(BuildContext context) =>
-      context.dependOnInheritedWidgetOfExactType<_PartScope>()?.frame ?? PlatePartFrame.settled;
+      context.dependOnInheritedWidgetOfExactType<_PartScope>()?.frame ??
+      PlatePartFrame.settled;
 
   @override
   State<PlatePartAnimator> createState() => _PlatePartAnimatorState();
 }
 
-class _PlatePartAnimatorState extends State<PlatePartAnimator> with SingleTickerProviderStateMixin {
+class _PlatePartAnimatorState extends State<PlatePartAnimator>
+    with SingleTickerProviderStateMixin {
   PlateAnimationController? _host;
   ValueListenable<PlatePartCue>? _cue;
   AnimationController? _ticker;
@@ -126,12 +132,17 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator> with SingleTicker
   @override
   void didUpdateWidget(PlatePartAnimator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.id != widget.id || oldWidget.selfPainted != widget.selfPainted) {
+    if (oldWidget.id != widget.id ||
+        oldWidget.selfPainted != widget.selfPainted) {
       _subscribe(_host, widget.id, force: true);
     }
   }
 
-  void _subscribe(PlateAnimationController? host, PlatePartId id, {bool force = false}) {
+  void _subscribe(
+    PlateAnimationController? host,
+    PlatePartId id, {
+    bool force = false,
+  }) {
     if (!force && identical(host, _host)) return;
     _cue?.removeListener(_onCue);
     _host = host;
@@ -159,15 +170,24 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator> with SingleTicker
     final motion = host.style.motionFor(widget.id);
     final wait = motion.delay + cue.delay;
     final total = wait + motion.duration;
-    final ticker = _ticker ??= AnimationController(vsync: this)..addStatusListener(_onStatus);
-    ticker.duration = total.inMicroseconds == 0 ? const Duration(microseconds: 1) : total;
-    final start = total.inMicroseconds == 0 ? 0.0 : wait.inMicroseconds / total.inMicroseconds;
+    final ticker = _ticker ??= AnimationController(vsync: this)
+      ..addStatusListener(_onStatus);
+    ticker.duration = total.inMicroseconds == 0
+        ? const Duration(microseconds: 1)
+        : total;
+    final start = total.inMicroseconds == 0
+        ? 0.0
+        : wait.inMicroseconds / total.inMicroseconds;
     _curved?.dispose();
     _curved = CurvedAnimation(
       parent: ticker,
       curve: Interval(start, 1, curve: motion.curve),
     );
-    _frame = PlatePartFrame(phase: cue.phase, progress: _curved!, motion: motion);
+    _frame = PlatePartFrame(
+      phase: cue.phase,
+      progress: _curved!,
+      motion: motion,
+    );
     _chain = widget.selfPainted ? _Chain.identity : _Chain.of(_frame);
     if (cue.instant) {
       ticker.value = 1;
@@ -246,7 +266,11 @@ class _Chain {
         : frame.progress;
     final origin = frame.motion.origin;
     return switch (frame.motion.effect) {
-      PlatePartEffect.fade => _Chain(opacity: shown, slide: identity.slide, scale: identity.scale),
+      PlatePartEffect.fade => _Chain(
+        opacity: shown,
+        slide: identity.slide,
+        scale: identity.scale,
+      ),
       PlatePartEffect.wipe || PlatePartEffect.draw => _Chain(
         // A step, not a fade: skips painting a fully wiped part, paints the
         // rest without a layer.
@@ -264,7 +288,10 @@ class _Chain {
       PlatePartEffect.fadeSlide => _Chain(
         opacity: shown,
         slide: shown.drive(
-          Tween<Offset>(begin: Offset(origin.x * 0.6, origin.y * 0.6), end: Offset.zero),
+          Tween<Offset>(
+            begin: Offset(origin.x * 0.6, origin.y * 0.6),
+            end: Offset.zero,
+          ),
         ),
         scale: identity.scale,
       ),
@@ -291,7 +318,8 @@ class _WipeClipper extends CustomClipper<Rect> {
   final PlatePartFrame frame;
 
   @override
-  Rect getClip(Size size) => plateRevealRect(Offset.zero & size, frame.motion.origin, frame);
+  Rect getClip(Size size) =>
+      plateRevealRect(Offset.zero & size, frame.motion.origin, frame);
 
   @override
   bool shouldReclip(_WipeClipper old) => !identical(old.frame, frame);
@@ -303,5 +331,6 @@ class _PartScope extends InheritedWidget {
   final PlatePartFrame frame;
 
   @override
-  bool updateShouldNotify(_PartScope oldWidget) => !identical(oldWidget.frame, frame);
+  bool updateShouldNotify(_PartScope oldWidget) =>
+      !identical(oldWidget.frame, frame);
 }

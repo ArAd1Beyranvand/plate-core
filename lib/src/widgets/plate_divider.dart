@@ -89,7 +89,10 @@ class PlateDividerPainter extends CustomPainter {
   void _paintSpan(Canvas canvas, Rect r) {
     final vertical = r.height > r.width;
     final fromEnd =
-        (origin ?? _originOf(vertical ? frame.motion.origin.y : frame.motion.origin.x)) ==
+        (origin ??
+            _originOf(
+              vertical ? frame.motion.origin.y : frame.motion.origin.x,
+            )) ==
         DividerOrigin.end;
     var (a, b) = frame.span;
     if (fromEnd) (a, b) = (1 - b, 1 - a);
@@ -117,7 +120,9 @@ class PlateDividerPainter extends CustomPainter {
     canvas.drawRect(towardLo ? along(a + ramp, b) : along(a, b - ramp), _paint);
     final step = ramp / _rampSteps;
     for (var i = 0; i < _rampSteps; i++) {
-      _paint.color = color.withValues(alpha: color.a * (_rampSteps - i) / (_rampSteps + 1));
+      _paint.color = color.withValues(
+        alpha: color.a * (_rampSteps - i) / (_rampSteps + 1),
+      );
       final f = i * step;
       canvas.drawRect(
         towardLo
@@ -128,7 +133,8 @@ class PlateDividerPainter extends CustomPainter {
     }
   }
 
-  static DividerOrigin _originOf(double o) => o > 0 ? DividerOrigin.end : DividerOrigin.start;
+  static DividerOrigin _originOf(double o) =>
+      o > 0 ? DividerOrigin.end : DividerOrigin.start;
 
   @override
   bool shouldRepaint(PlateDividerPainter old) =>

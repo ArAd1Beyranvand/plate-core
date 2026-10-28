@@ -22,10 +22,22 @@ const _spec = PlateSpec(
   panel: PlatePanel(box: PlateBox(0, 0, 40, 110)),
   textDirection: TextDirection.ltr,
   slots: [
-    PlateSlot(alphabet: PlateAlphabet.latinUppercase, box: PlateBox(70, 17, 60, 76)),
-    PlateSlot(alphabet: PlateAlphabet.latinUppercase, box: PlateBox(136, 17, 60, 76)),
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(212, 17, 60, 76)),
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(278, 17, 60, 76)),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinUppercase,
+      box: PlateBox(70, 17, 60, 76),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinUppercase,
+      box: PlateBox(136, 17, 60, 76),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(212, 17, 60, 76),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(278, 17, 60, 76),
+    ),
   ],
 );
 
@@ -39,7 +51,10 @@ class ExampleApp extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: PlateCanvas(spec: _spec, onChooseCharacter: (alphabet) async => null),
+            child: PlateCanvas(
+              spec: _spec,
+              onChooseCharacter: (alphabet) async => null,
+            ),
           ),
         ),
       ),

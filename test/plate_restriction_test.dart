@@ -9,7 +9,11 @@ const _country = PlateCountry(
   panelTextColor: Color(0xFFFFFFFF),
 );
 
-const _never = PlateRestriction(group: 'code', values: ['42'], reason: 'NO SUCH CODE');
+const _never = PlateRestriction(
+  group: 'code',
+  values: ['42'],
+  reason: 'NO SUCH CODE',
+);
 
 /// Two-digit `code` register, then a one-digit `serial`.
 const _spec = PlateSpec(
@@ -19,9 +23,18 @@ const _spec = PlateSpec(
   canvasHeight: 40,
   panel: PlatePanel(box: PlateBox(0, 0, 10, 40)),
   slots: [
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(20, 0, 30, 40)),
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(50, 0, 30, 40)),
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(80, 0, 30, 40)),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(20, 0, 30, 40),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(50, 0, 30, 40),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(80, 0, 30, 40),
+    ),
   ],
   textGroups: [
     PlateTextGroup([0, 1], key: 'code'),
@@ -50,7 +63,11 @@ void main() {
       expect(
         () => _spec.checkRestrictions(['4', '2', '1']),
         throwsA(
-          isA<PlateRestrictionException>().having((e) => e.toString(), 'reason', 'NO SUCH CODE'),
+          isA<PlateRestrictionException>().having(
+            (e) => e.toString(),
+            'reason',
+            'NO SUCH CODE',
+          ),
         ),
       );
       _spec.checkRestrictions(['4', '3', '1']);
@@ -117,9 +134,18 @@ void main() {
         canvasHeight: 40,
         panel: PlatePanel(box: PlateBox(0, 0, 10, 40)),
         slots: [
-          PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(20, 0, 30, 40)),
-          PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(50, 0, 30, 40)),
-          PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(80, 0, 30, 40)),
+          PlateSlot(
+            alphabet: PlateAlphabet.latinDigits,
+            box: PlateBox(20, 0, 30, 40),
+          ),
+          PlateSlot(
+            alphabet: PlateAlphabet.latinDigits,
+            box: PlateBox(50, 0, 30, 40),
+          ),
+          PlateSlot(
+            alphabet: PlateAlphabet.latinDigits,
+            box: PlateBox(80, 0, 30, 40),
+          ),
         ],
         textGroups: [
           PlateTextGroup([0, 1], key: 'code'),
@@ -139,7 +165,9 @@ void main() {
     expect(const _Serial().validate(entry).reason, 'NO SUCH CODE');
   });
 
-  testWidgets('canvas refuses typing, does not advance, shows the reason', (tester) async {
+  testWidgets('canvas refuses typing, does not advance, shows the reason', (
+    tester,
+  ) async {
     final c = PlateController(spec: _spec);
     await tester.pumpWidget(
       MaterialApp(

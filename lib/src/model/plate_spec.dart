@@ -66,7 +66,8 @@ class PlateSlot {
   bool isFull(String? value) => value != null && value.runes.length >= length;
   // todo: why '>=' ?! i mean it shouldnt be '>' never. it should be only '=' right?
 
-  bool isComplete(String? value) => value != null && value.runes.length >= minLength;
+  bool isComplete(String? value) =>
+      value != null && value.runes.length >= minLength;
 }
 
 /// An echo of a slot's value painted elsewhere on the plate, such as the same
@@ -168,13 +169,16 @@ class PlateFill {
   bool get paintsPanel => isPanel || (stripes?.any((s) => s.isPanel) ?? false);
 
   /// The paint colour; not meaningful for [isStripes], paint each stripe.
-  Color resolve({required Color field, required Color panel, required Color divider}) =>
-      switch (_role) {
-        _FillRole.field => field,
-        _FillRole.panel => panel,
-        _FillRole.divider => divider,
-        null => color!,
-      };
+  Color resolve({
+    required Color field,
+    required Color panel,
+    required Color divider,
+  }) => switch (_role) {
+    _FillRole.field => field,
+    _FillRole.panel => panel,
+    _FillRole.divider => divider,
+    null => color!,
+  };
 }
 
 enum _FillRole { field, panel, divider }
@@ -184,7 +188,12 @@ enum _FillRole { field, panel, divider }
 /// edge. It pales the stripes behind the characters.
 @immutable
 class PlateFog {
-  const PlateFog({required this.center, required this.radii, this.opacity = 1, this.plateau = 0.5});
+  const PlateFog({
+    required this.center,
+    required this.radii,
+    this.opacity = 1,
+    this.plateau = 0.5,
+  });
 
   /// In plate coordinates.
   final Offset center;
@@ -215,10 +224,16 @@ class PlateSection {
       parts = const <PlatePart>[];
 
   /// Side-by-side regions, split along x.
-  const PlateSection.columns(this.parts) : axis = Axis.horizontal, fill = null, shape = null;
+  const PlateSection.columns(this.parts)
+    : axis = Axis.horizontal,
+      fill = null,
+      shape = null;
 
   /// Stacked regions, split along y.
-  const PlateSection.rows(this.parts) : axis = Axis.vertical, fill = null, shape = null;
+  const PlateSection.rows(this.parts)
+    : axis = Axis.vertical,
+      fill = null,
+      shape = null;
 
   /// The plain face: one region in the theme's field colour.
   static const PlateSection plain = PlateSection.fill(PlateFill.field);
@@ -233,11 +248,14 @@ class PlateSection {
   /// Whether any leaf is filled with the panel colour, in which case the
   /// background owns the panel block and [CountryPanel] lays out only the flag
   /// and caption on it.
-  bool get paintsPanel => isLeaf ? fill!.paintsPanel : parts.any((p) => p.section.paintsPanel);
+  bool get paintsPanel =>
+      isLeaf ? fill!.paintsPanel : parts.any((p) => p.section.paintsPanel);
 
   /// The leaves and dividers of this tree laid over [bounds], depth-first.
   /// Indices match [PlatePartId.region] and [PlatePartId.divider].
-  ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) layout(Rect bounds) {
+  ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) layout(
+    Rect bounds,
+  ) {
     final leaves = <(PlateSection, Rect)>[];
     final dividers = <Rect>[];
     void walk(PlateSection s, Rect r) {
@@ -337,7 +355,8 @@ class PlateDecal {
 /// Picks a [PlateLabel]'s wording from what is typed. [group] reads a
 /// [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does. Null keeps
 /// [PlateLabel.text].
-typedef PlateLabelResolver = String? Function(String Function(String key) group);
+typedef PlateLabelResolver =
+    String? Function(String Function(String key) group);
 
 /// Picks a plate's colours from what is typed, so one spec can be several
 /// liveries. [base] is the host's theme (return it to leave it alone); [group]
@@ -515,7 +534,8 @@ class PlateSpec {
   int get slotCount => slots.length;
 
   /// The slot at [index], or null when [index] is outside the plate.
-  PlateSlot? slotAt(int index) => index >= 0 && index < slots.length ? slots[index] : null;
+  PlateSlot? slotAt(int index) =>
+      index >= 0 && index < slots.length ? slots[index] : null;
 
   /// [textGroups], or one group per slot when none are declared.
   List<PlateTextGroup> get effectiveTextGroups => textGroups.isNotEmpty
@@ -542,10 +562,12 @@ class PlateSpec {
   }
 
   /// The slot focus advances to from [index], or null at the end.
-  int? nextIndex(int index) => index >= 0 && index + 1 < slots.length ? index + 1 : null;
+  int? nextIndex(int index) =>
+      index >= 0 && index + 1 < slots.length ? index + 1 : null;
 
   /// The slot focus steps back to from [index], or null at the start.
-  int? previousIndex(int index) => index > 0 && index < slots.length ? index - 1 : null;
+  int? previousIndex(int index) =>
+      index > 0 && index < slots.length ? index - 1 : null;
 
   /// The raw (unrendered) values of the group named [key], concatenated; ''
   /// for an unknown key or unset slots.
@@ -570,7 +592,8 @@ class PlateSpec {
   }
 
   /// Empty for an unknown key.
-  List<int> indicesOfGroup(String key) => groupNamed(key)?.indices ?? const <int>[];
+  List<int> indicesOfGroup(String key) =>
+      groupNamed(key)?.indices ?? const <int>[];
 
   @override
   bool operator ==(Object other) => other is PlateSpec && other.id == id;
@@ -585,7 +608,10 @@ class PlateSpec {
 bool debugValidateSpec(PlateSpec spec) {
   void checkInCanvas(PlateBox b, String what) {
     assert(
-      b.left >= 0 && b.top >= 0 && b.right <= spec.canvasWidth && b.bottom <= spec.canvasHeight,
+      b.left >= 0 &&
+          b.top >= 0 &&
+          b.right <= spec.canvasWidth &&
+          b.bottom <= spec.canvasHeight,
       '$what in spec "${spec.id}" has a rect outside the '
       'canvas (${spec.canvasWidth}x${spec.canvasHeight}).',
     );
@@ -615,7 +641,8 @@ bool debugValidateSpec(PlateSpec spec) {
       if (stripes == null) return;
       final stops = s.fill!.stops;
       assert(
-        stripes.length == stops.length + 1 && stripes.every((f) => !f.isStripes),
+        stripes.length == stops.length + 1 &&
+            stripes.every((f) => !f.isStripes),
         'Background leaf $path in spec "${spec.id}" has ${stripes.length} stripes '
         'and ${stops.length} stops; give one stop between each pair, and do not '
         'nest stripes.',
@@ -636,7 +663,9 @@ bool debugValidateSpec(PlateSpec spec) {
       final part = s.parts[i];
       final last = i == s.parts.length - 1;
       assert(
-        last ? part.end == null : part.end != null && part.end! > previous && part.end! < end,
+        last
+            ? part.end == null
+            : part.end != null && part.end! > previous && part.end! < end,
         'Background part $path.$i in spec "${spec.id}" ends at ${part.end}; '
         '${last ? "the last part runs to its parent's end, so leave it null" : 'expected a value in ($previous, $end)'}.',
       );
@@ -664,7 +693,9 @@ bool debugValidateSpec(PlateSpec spec) {
         if (spec.slotAt(i) != null) spec.slots[i].box,
     ];
     if (boxes.length != g.indices.length) continue;
-    final sameRow = boxes.every((b) => b.top == boxes.first.top && b.height == boxes.first.height);
+    final sameRow = boxes.every(
+      (b) => b.top == boxes.first.top && b.height == boxes.first.height,
+    );
     if (!sameRow) continue;
     final pitch = boxes[1].left - boxes[0].left;
     for (var n = 1; n < boxes.length; n++) {
@@ -716,4 +747,5 @@ bool debugValidateSpec(PlateSpec spec) {
   return true;
 }
 
-String _contentKey(PlateAlphabet a) => a.characters.map((c) => '$c=${a.render(c)}').join(' ');
+String _contentKey(PlateAlphabet a) =>
+    a.characters.map((c) => '$c=${a.render(c)}').join(' ');

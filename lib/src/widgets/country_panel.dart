@@ -28,7 +28,12 @@ class CountryPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final block = _Block(panel: panel, theme: theme, country: country, paintBlock: paintBlock);
+    final block = _Block(
+      panel: panel,
+      theme: theme,
+      country: country,
+      paintBlock: paintBlock,
+    );
     // Outside the ColoredBox, so the shape cuts the block's own colour too.
     final shape = panel.shape;
     return shape == null ? block : ClipPath(clipper: shape, child: block);
@@ -56,13 +61,20 @@ class _Block extends StatelessWidget {
     final resolvedPadding = panel.padding ?? EdgeInsets.all(box.height * 0.10);
     final innerW = box.width - resolvedPadding.horizontal;
     final innerH = box.height - resolvedPadding.vertical;
-    final flag = _flagSize(panel: panel, country: country, innerW: innerW, innerH: innerH);
+    final flag = _flagSize(
+      panel: panel,
+      country: country,
+      innerW: innerW,
+      innerH: innerH,
+    );
     final horizontal = panel.direction == Axis.horizontal;
     // The room the flag leaves: a heading and a caption split it
     // evenly, either alone takes all of it.
     final hasHeading = country.headingLines.isNotEmpty;
     final slackW = horizontal ? (innerW - flag.width).clamp(0.0, innerW) : null;
-    final slackH = horizontal ? null : (innerH - flag.height).clamp(0.0, innerH);
+    final slackH = horizontal
+        ? null
+        : (innerH - flag.height).clamp(0.0, innerH);
     final share = hasHeading ? 0.5 : 1.0;
 
     final flagBox = SizedBox(
@@ -104,7 +116,10 @@ class _Block extends StatelessWidget {
     final content = Padding(
       padding: resolvedPadding,
       child: horizontal
-          ? Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: children)
+          ? Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: children,
+            )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,7 +156,8 @@ class _BlockFill extends StatelessWidget {
 }
 
 class _BlockPainter extends CustomPainter {
-  _BlockPainter({required this.frame, required this.color}) : super(repaint: frame.progress);
+  _BlockPainter({required this.frame, required this.color})
+    : super(repaint: frame.progress);
 
   final PlatePartFrame frame;
   final Color color;
@@ -153,16 +169,22 @@ class _BlockPainter extends CustomPainter {
     final bounds = Offset.zero & size;
     _paint.color = color;
     switch (frame.motion.effect) {
-      case PlatePartEffect.fade || PlatePartEffect.fadeScale || PlatePartEffect.fadeSlide:
+      case PlatePartEffect.fade ||
+          PlatePartEffect.fadeScale ||
+          PlatePartEffect.fadeSlide:
         _paint.color = color.withValues(alpha: color.a * frame.shown);
         canvas.drawRect(bounds, _paint);
       case PlatePartEffect.wipe || PlatePartEffect.draw:
-        canvas.drawRect(plateRevealRect(bounds, frame.motion.origin, frame), _paint);
+        canvas.drawRect(
+          plateRevealRect(bounds, frame.motion.origin, frame),
+          _paint,
+        );
     }
   }
 
   @override
-  bool shouldRepaint(_BlockPainter old) => !identical(old.frame, frame) || old.color != color;
+  bool shouldRepaint(_BlockPainter old) =>
+      !identical(old.frame, frame) || old.color != color;
 }
 
 Size _flagSize({

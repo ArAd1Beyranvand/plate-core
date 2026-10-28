@@ -42,7 +42,9 @@ class PlateAlphabet {
 
   static List<String> _expand(String include, String exclude) {
     final drop = _tokens(exclude).toSet();
-    return List<String>.unmodifiable(_tokens(include).where((c) => !drop.contains(c)));
+    return List<String>.unmodifiable(
+      _tokens(include).where((c) => !drop.contains(c)),
+    );
   }
 
   static Iterable<String> _tokens(String pattern) sync* {
@@ -65,7 +67,11 @@ class PlateAlphabet {
 
   /// Every legal character in canonical (storage) form, in picker order.
   List<String> get characters =>
-      _listed ?? _expanded.putIfAbsent('$_include|$_exclude', () => _expand(_include, _exclude));
+      _listed ??
+      _expanded.putIfAbsent(
+        '$_include|$_exclude',
+        () => _expand(_include, _exclude),
+      );
 
   final AlphabetInput input;
 

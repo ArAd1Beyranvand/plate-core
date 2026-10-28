@@ -216,7 +216,9 @@ class _TypedFieldState extends State<_TypedField> {
       if (held.isEmpty) {
         widget.onBackspace?.call();
       } else {
-        widget.onChanged(String.fromCharCodes(held.runes.take(held.runes.length - 1)));
+        widget.onChanged(
+          String.fromCharCodes(held.runes.take(held.runes.length - 1)),
+        );
       }
       return KeyEventResult.handled;
     }

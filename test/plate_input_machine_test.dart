@@ -34,7 +34,10 @@ PlateSpec _spec({
   panel: _panel,
   slots: [
     for (var i = 0; i < alphabets.length; i++)
-      PlateSlot(alphabet: alphabets[i], box: PlateBox(20 + i * 25.0, 5, 20, 30)),
+      PlateSlot(
+        alphabet: alphabets[i],
+        box: PlateBox(20 + i * 25.0, 5, 20, 30),
+      ),
   ],
 );
 
@@ -101,7 +104,9 @@ class _Harness {
 
 void main() {
   group('construction', () {
-    testWidgets('seeds activeIndex to 0 and does not announce it', (tester) async {
+    testWidgets('seeds activeIndex to 0 and does not announce it', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec());
       expect(h.machine.activeIndex, 0);
       expect(
@@ -119,16 +124,24 @@ void main() {
       h.machine.dispose();
     });
 
-    testWidgets('controllerAt is a field for typed slots and null for chosen', (tester) async {
-      final h = _Harness(spec: _spec(alphabets: const [_digits, _chosen, _digits]));
+    testWidgets('controllerAt is a field for typed slots and null for chosen', (
+      tester,
+    ) async {
+      final h = _Harness(
+        spec: _spec(alphabets: const [_digits, _chosen, _digits]),
+      );
       expect(h.machine.controllerAt(0), isA<TextEditingController>());
       expect(h.machine.controllerAt(1), isNull);
       expect(h.machine.controllerAt(2), isA<TextEditingController>());
       h.machine.dispose();
     });
 
-    testWidgets('focusNodeAt is never null, and one node per slot', (tester) async {
-      final h = _Harness(spec: _spec(alphabets: const [_digits, _chosen, _digits]));
+    testWidgets('focusNodeAt is never null, and one node per slot', (
+      tester,
+    ) async {
+      final h = _Harness(
+        spec: _spec(alphabets: const [_digits, _chosen, _digits]),
+      );
       final nodes = {for (var i = 0; i < 3; i++) h.machine.focusNodeAt(i)};
       expect(nodes, hasLength(3));
       h.machine.dispose();
@@ -151,7 +164,9 @@ void main() {
       await h.retire(tester);
     });
 
-    testWidgets('a character the active slot refuses is a no-op', (tester) async {
+    testWidgets('a character the active slot refuses is a no-op', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec());
       await h.mount(tester);
 
@@ -189,7 +204,9 @@ void main() {
       await h.retire(tester);
     });
 
-    testWidgets('steps back and clears the previous slot when already empty', (tester) async {
+    testWidgets('steps back and clears the previous slot when already empty', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec(), values: ['1', null, null]);
       await h.mount(tester);
       await h.focus(tester, 1);
@@ -236,21 +253,26 @@ void main() {
       await h.retire(tester);
     });
 
-    testWidgets('stays on the last slot rather than wrapping or dropping focus', (tester) async {
-      final h = _Harness(spec: _spec());
-      await h.mount(tester);
-      await h.focus(tester, 2);
+    testWidgets(
+      'stays on the last slot rather than wrapping or dropping focus',
+      (tester) async {
+        final h = _Harness(spec: _spec());
+        await h.mount(tester);
+        await h.focus(tester, 2);
 
-      h.machine.advanceFrom(2);
-      await tester.pump();
+        h.machine.advanceFrom(2);
+        await tester.pump();
 
-      expect(h.machine.activeIndex, 2);
-      expect(h.machine.focusNodeAt(2).hasFocus, isTrue);
+        expect(h.machine.activeIndex, 2);
+        expect(h.machine.focusNodeAt(2).hasFocus, isTrue);
 
-      await h.retire(tester);
-    });
+        await h.retire(tester);
+      },
+    );
 
-    testWidgets('requests the sheet for a chosen slot and does not focus it', (tester) async {
+    testWidgets('requests the sheet for a chosen slot and does not focus it', (
+      tester,
+    ) async {
       // chosen + system is the one combination that resolves to a sheet.
       final h = _Harness(
         spec: _spec(alphabets: const [_digits, _chosen, _digits]),
@@ -269,10 +291,14 @@ void main() {
       await h.retire(tester);
     });
 
-    testWidgets('focuses a chosen slot when the host supplies characters', (tester) async {
+    testWidgets('focuses a chosen slot when the host supplies characters', (
+      tester,
+    ) async {
       // Under host/packageKeypad the same slot is an externalField, not a
       // sheet: it takes focus and waits to be fed.
-      final h = _Harness(spec: _spec(alphabets: const [_digits, _chosen, _digits]));
+      final h = _Harness(
+        spec: _spec(alphabets: const [_digits, _chosen, _digits]),
+      );
       await h.mount(tester);
       await h.focus(tester, 0);
 
@@ -312,7 +338,9 @@ void main() {
   });
 
   group('focusSlot', () {
-    testWidgets('focuses the slot at index, and ignores out of range', (tester) async {
+    testWidgets('focuses the slot at index, and ignores out of range', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec());
       await h.mount(tester);
 
@@ -348,7 +376,9 @@ void main() {
       h.machine.dispose();
     });
 
-    testWidgets('sets a collapsed selection at the end otherwise', (tester) async {
+    testWidgets('sets a collapsed selection at the end otherwise', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec());
       final field = h.machine.controllerAt(0)!;
 
@@ -363,15 +393,21 @@ void main() {
       h.machine.dispose();
     });
 
-    testWidgets('is a no-op for a chosen slot, which has no field', (tester) async {
-      final h = _Harness(spec: _spec(alphabets: const [_digits, _chosen, _digits]));
+    testWidgets('is a no-op for a chosen slot, which has no field', (
+      tester,
+    ) async {
+      final h = _Harness(
+        spec: _spec(alphabets: const [_digits, _chosen, _digits]),
+      );
       expect(() => h.machine.syncController(1, 'ا'), returnsNormally);
       h.machine.dispose();
     });
   });
 
   group('dispose', () {
-    testWidgets('drops the focus listener before disposing the nodes', (tester) async {
+    testWidgets('drops the focus listener before disposing the nodes', (
+      tester,
+    ) async {
       final h = _Harness(spec: _spec());
       await h.mount(tester);
       await h.focus(tester, 1);

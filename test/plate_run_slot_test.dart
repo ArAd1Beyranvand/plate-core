@@ -18,9 +18,20 @@ final _spec = PlateSpec(
   canvasHeight: 60,
   panel: const PlatePanel(box: PlateBox(0, 0, 10, 60)),
   slots: const [
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(20, 5, 40, 50), length: 2),
-    PlateSlot(alphabet: PlateAlphabet.latinUppercase, box: PlateBox(70, 5, 20, 50)),
-    PlateSlot(alphabet: PlateAlphabet.latinDigits, box: PlateBox(100, 5, 60, 50), length: 3),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(20, 5, 40, 50),
+      length: 2,
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinUppercase,
+      box: PlateBox(70, 5, 20, 50),
+    ),
+    PlateSlot(
+      alphabet: PlateAlphabet.latinDigits,
+      box: PlateBox(100, 5, 60, 50),
+      length: 3,
+    ),
   ],
 );
 

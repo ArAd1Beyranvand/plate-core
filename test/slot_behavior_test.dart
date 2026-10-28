@@ -62,23 +62,35 @@ void main() {
       expect(
         combinations,
         hasLength(
-          PlateMode.values.length * AlphabetInput.values.length * PlateInputSource.values.length,
+          PlateMode.values.length *
+              AlphabetInput.values.length *
+              PlateInputSource.values.length,
         ),
         reason: 'a dropped or duplicated row would silently stop being checked',
       );
     });
 
     for (final (mode, input, source, expected) in _table) {
-      test('${mode.name} + ${input.name} + ${source.name} -> ${expected.name}', () {
-        expect(resolveSlotBehavior(mode: mode, input: input, source: source), expected);
-      });
+      test(
+        '${mode.name} + ${input.name} + ${source.name} -> ${expected.name}',
+        () {
+          expect(
+            resolveSlotBehavior(mode: mode, input: input, source: source),
+            expected,
+          );
+        },
+      );
     }
   });
 
   group('defaultInputSource', () {
     tearDown(() => debugDefaultTargetPlatformOverride = null);
 
-    const desktop = {TargetPlatform.windows, TargetPlatform.linux, TargetPlatform.macOS};
+    const desktop = {
+      TargetPlatform.windows,
+      TargetPlatform.linux,
+      TargetPlatform.macOS,
+    };
 
     for (final platform in TargetPlatform.values) {
       final expected = desktop.contains(platform)

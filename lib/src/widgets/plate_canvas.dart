@@ -130,13 +130,21 @@ class _PlateCanvasState extends State<PlateCanvas> {
   void _startTransition(PlateCanvas old, List<String?> shown) {
     final from = old.spec, to = widget.spec;
     final toValues = _controller.values;
-    bool keeps(PlatePartId id) =>
-        widget.specTransition!.keeps(id, from, to, fromValues: shown, toValues: toValues);
+    bool keeps(PlatePartId id) => widget.specTransition!.keeps(
+      id,
+      from,
+      to,
+      fromValues: shown,
+      toValues: toValues,
+    );
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
     if (transition == null || anim == null) return;
-    final outDelays = PlateStagger.sequence(from, step: transition.step, reverse: true)
-      ..removeWhere((id, _) => keeps(id));
+    final outDelays = PlateStagger.sequence(
+      from,
+      step: transition.step,
+      reverse: true,
+    )..removeWhere((id, _) => keeps(id));
     // A morphing face takes its border with it: the incoming plate draws
     // both from the start, so the outline never wipes out and redraws.
     final morph = transition.morphBackground;
@@ -160,7 +168,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
       // first frame, so what it prints is never clipped to a radius the plate
       // is no longer drawn with.
       theme: (old.theme ?? PlateTheme.of(context)).copyWith(
-        plateRadiusRatio: (widget.theme ?? PlateTheme.of(context)).plateRadiusRatio,
+        plateRadiusRatio:
+            (widget.theme ?? PlateTheme.of(context)).plateRadiusRatio,
       ),
       country: old.country,
       mode: old.mode,
@@ -177,7 +186,10 @@ class _PlateCanvasState extends State<PlateCanvas> {
     );
     anim.comeInAll(
       delays: {
-        for (final e in PlateStagger.sequence(to, step: transition.step).entries)
+        for (final e in PlateStagger.sequence(
+          to,
+          step: transition.step,
+        ).entries)
           e.key: e.value + outLength,
       },
     );
@@ -196,9 +208,14 @@ class _PlateCanvasState extends State<PlateCanvas> {
   void _morphTheme() {
     final transition = widget.specTransition;
     final anim = widget.animation ?? PlateAnimationScope.maybeOf(context);
-    if (transition == null || anim == null || !transition.morphBackground) return;
+    if (transition == null || anim == null || !transition.morphBackground)
+      return;
     final spec = widget.spec;
-    final delays = PlateStagger.sequence(spec, step: transition.step, reverse: true);
+    final delays = PlateStagger.sequence(
+      spec,
+      step: transition.step,
+      reverse: true,
+    );
     _resizeDuration = plateCueLength(anim.style, delays.keys, delays);
     _morphBackground = true;
   }
@@ -309,7 +326,8 @@ class _PlateCanvasState extends State<PlateCanvas> {
       readValues: () => _controller.values,
       commit: _commit,
       onActiveIndexChanged: _reportActiveIndex,
-      onSystemKeyboardChanged: () => widget.controller?.notifyActiveSlotChanged(),
+      onSystemKeyboardChanged: () =>
+          widget.controller?.notifyActiveSlotChanged(),
     )..onSheetRequested = _openPicker;
     _machine = machine;
     widget.controller?.attach(machine);
@@ -327,8 +345,11 @@ class _PlateCanvasState extends State<PlateCanvas> {
     widget.controller?.notifyActiveSlotChanged();
   }
 
-  PlateEntry _entryFor(List<String?> values) =>
-      PlateEntry(spec: widget.spec, values: values, activeIndex: _machine.activeIndex);
+  PlateEntry _entryFor(List<String?> values) => PlateEntry(
+    spec: widget.spec,
+    values: values,
+    activeIndex: _machine.activeIndex,
+  );
 
   PlateValidation? _probeValidation() {
     final entry = _entryFor(_controller.values);
@@ -379,7 +400,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
       // The whole monochrome set, as [PlateSpec.inkOverride] documents: a plate
       // printed in green has a green rim and green rules, not black ones.
       final ink = spec.inkOverride!;
-      theme = theme.copyWith(ink: ink, plateBorder: ink, dividerColor: ink, activeColor: ink);
+      theme = theme.copyWith(
+        ink: ink,
+        plateBorder: ink,
+        dividerColor: ink,
+        activeColor: ink,
+      );
     }
     // Display mode renders inert slots whatever the configured source.
     _machine.inputSource = widget.mode == PlateMode.input
@@ -469,7 +495,10 @@ class _PlateCanvasState extends State<PlateCanvas> {
             curve: Curves.easeInOut,
             builder: (context, size, child) => _PlateSizeScope(
               size: size!,
-              child: CustomSingleChildLayout(delegate: _PlateSizeDelegate(size), child: child),
+              child: CustomSingleChildLayout(
+                delegate: _PlateSizeDelegate(size),
+                child: child,
+              ),
             ),
             child: face,
           ),
@@ -533,7 +562,9 @@ class _Face extends StatelessWidget {
           curve: Curves.easeInOut,
           builder: (context, face, _) => _PlateArtwork(
             spec: spec,
-            theme: face == theme.plateBackground ? theme : theme.copyWith(plateBackground: face),
+            theme: face == theme.plateBackground
+                ? theme
+                : theme.copyWith(plateBackground: face),
             country: country,
             controller: controller,
           ),
@@ -544,7 +575,9 @@ class _Face extends StatelessWidget {
           onVerdict: onVerdict,
           builder: (verdict) => _PlateInputs(
             spec: spec,
-            theme: verdict.isValid ? theme : theme.copyWith(activeColor: theme.alertColor),
+            theme: verdict.isValid
+                ? theme
+                : theme.copyWith(activeColor: theme.alertColor),
             behaviors: behaviors,
             machine: machine,
             controller: controller,
@@ -555,7 +588,11 @@ class _Face extends StatelessWidget {
         ),
         if (ghost != null)
           Positioned.fill(
-            child: _SpecGhost(key: ValueKey<int>(ghost.serial), ghost: ghost, onDone: onGhostDone),
+            child: _SpecGhost(
+              key: ValueKey<int>(ghost.serial),
+              ghost: ghost,
+              onDone: onGhostDone,
+            ),
           ),
       ],
     );
@@ -615,7 +652,12 @@ class _PlateArtwork extends StatelessWidget {
             ),
           ),
         ),
-        _PlateContent(spec: spec, theme: theme, country: country, controller: controller),
+        _PlateContent(
+          spec: spec,
+          theme: theme,
+          country: country,
+          controller: controller,
+        ),
       ],
     );
   }
@@ -739,7 +781,10 @@ class _PlateContent extends StatelessWidget {
                                 drawing: drawing,
                                 fit: BoxFit.contain,
                               ),
-                              null => Image(image: spec.decals[i].image!, fit: BoxFit.contain),
+                              null => Image(
+                                image: spec.decals[i].image!,
+                                fit: BoxFit.contain,
+                              ),
                             },
                           ),
                         ),
@@ -878,7 +923,11 @@ class _Label extends StatelessWidget {
     final resolve = l.resolve;
     final style = theme
         .glyphStyle(l.glyphHeight, l.color ?? theme.ink)
-        .copyWith(height: l.lineHeight, fontFamily: l.fontFamily, package: l.fontPackage);
+        .copyWith(
+          height: l.lineHeight,
+          fontFamily: l.fontFamily,
+          package: l.fontPackage,
+        );
     return _Placed(
       box: l.box,
       child: PlatePartAnimator(
@@ -890,7 +939,9 @@ class _Label extends StatelessWidget {
                   listenable: controller,
                   builder: (context, _) {
                     final values = controller.values;
-                    final value = resolve((key) => spec.valueOfGroup(key, values)) ?? l.text;
+                    final value =
+                        resolve((key) => spec.valueOfGroup(key, values)) ??
+                        l.text;
                     return FittedBox(
                       fit: BoxFit.scaleDown,
                       child: _StaggeredText(value: value, style: style),
@@ -916,7 +967,8 @@ class _StaggeredText extends StatefulWidget {
   State<_StaggeredText> createState() => _StaggeredTextState();
 }
 
-class _StaggeredTextState extends State<_StaggeredText> with SingleTickerProviderStateMixin {
+class _StaggeredTextState extends State<_StaggeredText>
+    with SingleTickerProviderStateMixin {
   static const _charMs = 220;
   static const _stepMs = 55;
 
@@ -925,8 +977,9 @@ class _StaggeredTextState extends State<_StaggeredText> with SingleTickerProvide
   bool _leaving = false;
   bool _settled = true;
 
-  Duration _run(String text) =>
-      Duration(milliseconds: _charMs + _stepMs * (text.length - 1).clamp(0, 99));
+  Duration _run(String text) => Duration(
+    milliseconds: _charMs + _stepMs * (text.length - 1).clamp(0, 99),
+  );
 
   @override
   void didUpdateWidget(_StaggeredText old) {
@@ -1013,7 +1066,8 @@ class _PlateInputs extends StatelessWidget {
   /// A chosen slot opens the picker on tap even when a keypad drives input.
   static bool _opensPicker(SlotBehavior behavior, PlateSlot slot) =>
       behavior == SlotBehavior.sheet ||
-      (slot.alphabet.input == AlphabetInput.chosen && behavior == SlotBehavior.externalField);
+      (slot.alphabet.input == AlphabetInput.chosen &&
+          behavior == SlotBehavior.externalField);
   final bool Function(int index, String value) commit;
 
   @override
@@ -1044,13 +1098,17 @@ class _PlateInputs extends StatelessWidget {
                                 mirror: spec.mirrors[mi],
                                 alphabet:
                                     spec.mirrors[mi].alphabet ??
-                                    spec.slots[spec.mirrors[mi].source].alphabet,
+                                    spec
+                                        .slots[spec.mirrors[mi].source]
+                                        .alphabet,
                                 behavior: behaviors[spec.mirrors[mi].source],
                                 theme: theme,
                                 machine: machine,
                                 controller: controller,
                                 onCompleted: mode == PlateMode.input
-                                    ? () => machine.advanceFrom(spec.mirrors[mi].source)
+                                    ? () => machine.advanceFrom(
+                                        spec.mirrors[mi].source,
+                                      )
                                     : null,
                               ),
                             )
@@ -1127,15 +1185,22 @@ class _ValidationBinding extends StatelessWidget {
     return PlateSelector<PlateValidation>(
       controller: controller,
       selector: (c) => validate(c.values),
-      builder: (context, verdict) =>
-          _VerdictListener(verdict: verdict, onVerdict: onVerdict, child: builder(verdict)),
+      builder: (context, verdict) => _VerdictListener(
+        verdict: verdict,
+        onVerdict: onVerdict,
+        child: builder(verdict),
+      ),
     );
   }
 }
 
 /// Publishes verdict from lifecycle callbacks (not build).
 class _VerdictListener extends StatefulWidget {
-  const _VerdictListener({required this.verdict, required this.onVerdict, required this.child});
+  const _VerdictListener({
+    required this.verdict,
+    required this.onVerdict,
+    required this.child,
+  });
 
   final PlateValidation verdict;
   final ValueChanged<PlateValidation> onVerdict;
@@ -1228,8 +1293,13 @@ class _Placed extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) =>
-      Positioned(left: box.left, top: box.top, width: box.width, height: box.height, child: child);
+  Widget build(BuildContext context) => Positioned(
+    left: box.left,
+    top: box.top,
+    width: box.width,
+    height: box.height,
+    child: child,
+  );
 }
 
 /// Border and face, subscribed to completion (repaints only when last slot fills).
@@ -1499,7 +1569,8 @@ class _SpecGhostState extends State<_SpecGhost> {
     final g = widget.ghost;
     _controller = PlateController(spec: g.spec);
     if (g.values.length == g.spec.slotCount) _controller.setValues(g.values);
-    _anim = PlateAnimationController(style: g.style)..goOutAll(delays: g.outDelays);
+    _anim = PlateAnimationController(style: g.style)
+      ..goOutAll(delays: g.outDelays);
     for (final id in g.kept) {
       _anim.settle(id);
     }
@@ -1541,7 +1612,11 @@ class _SpecGhostState extends State<_SpecGhost> {
 }
 
 class _LabelText extends StatelessWidget {
-  const _LabelText({required this.value, required this.style, required this.rotated});
+  const _LabelText({
+    required this.value,
+    required this.style,
+    required this.rotated,
+  });
 
   final String value;
   final TextStyle style;
