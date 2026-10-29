@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'niger_alphabets.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `NigerPlates` value: region digit 1–8, one series letter, a
 /// four-digit serial.
 class NigerValidator extends GatedPlateValidator {

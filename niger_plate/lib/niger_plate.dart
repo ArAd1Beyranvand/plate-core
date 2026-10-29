@@ -6,6 +6,9 @@
 /// national colours).
 library;
 
+// TODO(py): [D5] one module `plates.countries.niger`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/niger`; tree-shakable.
+// TODO(kt): [D5] package `countries.niger` in the countries module.
 export 'src/niger_alphabets.dart';
 export 'src/niger_colors.dart';
 export 'src/niger_country.dart';

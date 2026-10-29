@@ -20,6 +20,9 @@ abstract final class NigerCountry {
     panelColor: NigerColors.privateWhite,
     panelTextColor: NigerColors.black,
     flagAspectRatio: 45.8 / 37.4,
+    // TODO(py): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(ts): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(kt): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
     flag: SvgPlateAsset('assets/maps/niger_map.svg', package: 'niger_plate'),
   );
 
