@@ -368,11 +368,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
 
   PlateValidation? _probeValidation() {
     final entry = _entryFor(_controller.values);
-    final restricted = restrictionVerdict(entry);
-    if (restricted != null) return restricted;
-    final validator = widget.validator;
-    if (validator == null) return null;
-    return validator.validate(entry);
+    return restrictionVerdict(entry) ?? widget.validator?.validate(entry);
   }
 
   /// Stores [value] at [index]; when the controller refuses it, puts the slot's
@@ -423,9 +419,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
       );
     }
     // Display mode renders inert slots whatever the configured source.
-    _machine.inputSource = widget.mode == PlateMode.input
+    _machine.inputSource = widget.mode == .input
         ? widget.inputSource ?? defaultInputSource()
-        : PlateInputSource.system;
+        : .system;
 
     // Resolved once; everything downstream switches on it.
     final behaviors = <SlotBehavior>[
@@ -500,7 +496,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       child: Theme(
         data: selectionTheme,
         child: Material(
-          type: MaterialType.transparency,
+          type: .transparency,
           // Sizes the face as the FittedBoxes inside it would, from a plate
           // size that tweens between specs, so a switch resizes the canvas
           // smoothly instead of snapping to the next plate's proportions.
@@ -569,7 +565,7 @@ class _Face extends StatelessWidget {
     final validate = this.validate;
     final ghost = this.ghost;
     return Stack(
-      fit: StackFit.passthrough,
+      fit: .passthrough,
       children: [
         TweenAnimationBuilder<Color?>(
           tween: ColorTween(end: theme.plateBackground),
@@ -615,7 +611,7 @@ class _Face extends StatelessWidget {
 }
 
 /// Lays the face out at [plateSize] scaled to fit the incoming constraints,
-/// exactly the size a `FittedBox(fit: BoxFit.contain)` around it would take.
+/// exactly the size a `FittedBox(fit: .contain)` around it would take.
 class _PlateSizeDelegate extends SingleChildLayoutDelegate {
   const _PlateSizeDelegate(this.plateSize);
 
@@ -652,30 +648,28 @@ class _PlateArtwork extends StatelessWidget {
   final PlateController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.passthrough,
-      children: [
-        Positioned.fill(
-          child: _MorphingFrame(
-            textDirection: spec.textDirection,
-            child: _FrameBinding(
-              theme: theme,
-              controller: controller,
-              background: spec.background,
-              panelColor: country.panelColor,
-            ),
+  Widget build(BuildContext context) => Stack(
+    fit: .passthrough,
+    children: [
+      Positioned.fill(
+        child: _MorphingFrame(
+          textDirection: spec.textDirection,
+          child: _FrameBinding(
+            theme: theme,
+            controller: controller,
+            background: spec.background,
+            panelColor: country.panelColor,
           ),
         ),
-        _PlateContent(
-          spec: spec,
-          theme: theme,
-          country: country,
-          controller: controller,
-        ),
-      ],
-    );
-  }
+      ),
+      _PlateContent(
+        spec: spec,
+        theme: theme,
+        country: country,
+        controller: controller,
+      ),
+    ],
+  );
 }
 
 /// The face and border, laid out at the canvas's current plate size rather
@@ -691,7 +685,7 @@ class _MorphingFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = _PlateSizeScope.of(context);
     return FittedBox(
-      fit: BoxFit.fill,
+      fit: .fill,
       child: SizedBox(
         width: size.width,
         height: size.height,
@@ -730,89 +724,87 @@ class _PlateContent extends StatelessWidget {
   final PlateController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: SizedBox(
-        width: spec.canvasWidth,
-        height: spec.canvasHeight,
-        child: Directionality(
-          textDirection: spec.textDirection,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: PlateRimClip(
-                  theme: theme,
-                  child: Stack(
-                    children: [
-                      if (!spec.noPanel)
-                        _Placed(
-                          box: spec.panel.box,
-                          child: CountryPanel(
-                            country: country,
-                            theme: theme,
-                            panel: spec.panel,
-                            paintBlock: !spec.background.paintsPanel,
-                          ),
-                        ),
-                      // Under the rules, labels and decals: a band is the field
-                      // the ink is printed on, not something printed over them.
-                      for (var i = 0; i < spec.bands.length; i++)
-                        _Placed(
-                          box: spec.bands[i].box,
-                          child: PlatePartAnimator(
-                            id: PlatePartId.band(i),
-                            child: PlatePartAnimator(
-                              id: PlatePartId.bandCorner(i),
-                              selfPainted: true,
-                              child: _Band(band: spec.bands[i]),
-                            ),
-                          ),
-                        ),
-                      for (var i = 0; i < spec.rules.length; i++)
-                        _Placed(
-                          box: spec.rules[i].box,
-                          child: PlatePartAnimator(
-                            id: PlatePartId.rule(i),
-                            selfPainted: true,
-                            child: PlateDivider(color: theme.dividerColor),
-                          ),
-                        ),
-                      for (var i = 0; i < spec.labels.length; i++)
-                        _Label(
-                          index: i,
-                          label: spec.labels[i],
+  Widget build(BuildContext context) => FittedBox(
+    fit: .contain,
+    child: SizedBox(
+      width: spec.canvasWidth,
+      height: spec.canvasHeight,
+      child: Directionality(
+        textDirection: spec.textDirection,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: PlateRimClip(
+                theme: theme,
+                child: Stack(
+                  children: [
+                    if (!spec.noPanel)
+                      _Placed(
+                        box: spec.panel.box,
+                        child: CountryPanel(
+                          country: country,
                           theme: theme,
-                          spec: spec,
-                          controller: controller,
+                          panel: spec.panel,
+                          paintBlock: !spec.background.paintsPanel,
                         ),
-                      for (var i = 0; i < spec.decals.length; i++)
-                        _Placed(
-                          box: spec.decals[i].box,
+                      ),
+                    // Under the rules, labels and decals: a band is the field
+                    // the ink is printed on, not something printed over them.
+                    for (var i = 0; i < spec.bands.length; i++)
+                      _Placed(
+                        box: spec.bands[i].box,
+                        child: PlatePartAnimator(
+                          id: PlatePartId.band(i),
                           child: PlatePartAnimator(
-                            id: PlatePartId.decal(i),
-                            child: switch (spec.decals[i].drawing) {
-                              final drawing? => PlateDrawingView(
-                                drawing: drawing,
-                                fit: BoxFit.contain,
-                              ),
-                              null => Image(
-                                image: spec.decals[i].image!,
-                                fit: BoxFit.contain,
-                              ),
-                            },
+                            id: PlatePartId.bandCorner(i),
+                            selfPainted: true,
+                            child: _Band(band: spec.bands[i]),
                           ),
                         ),
-                    ],
-                  ),
+                      ),
+                    for (var i = 0; i < spec.rules.length; i++)
+                      _Placed(
+                        box: spec.rules[i].box,
+                        child: PlatePartAnimator(
+                          id: PlatePartId.rule(i),
+                          selfPainted: true,
+                          child: PlateDivider(color: theme.dividerColor),
+                        ),
+                      ),
+                    for (var i = 0; i < spec.labels.length; i++)
+                      _Label(
+                        index: i,
+                        label: spec.labels[i],
+                        theme: theme,
+                        spec: spec,
+                        controller: controller,
+                      ),
+                    for (var i = 0; i < spec.decals.length; i++)
+                      _Placed(
+                        box: spec.decals[i].box,
+                        child: PlatePartAnimator(
+                          id: PlatePartId.decal(i),
+                          child: switch (spec.decals[i].drawing) {
+                            final drawing? => PlateDrawingView(
+                              drawing: drawing,
+                              fit: .contain,
+                            ),
+                            null => Image(
+                              image: spec.decals[i].image!,
+                              fit: .contain,
+                            ),
+                          },
+                        ),
+                      ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 /// Resolves [PlateSpec.resolveTheme] against the typed characters and
@@ -849,7 +841,7 @@ class _LiveryState extends State<_Livery> {
     final next = _resolve();
     if (next == _theme) return;
     final phase = SchedulerBinding.instance.schedulerPhase;
-    if (phase == SchedulerPhase.persistentCallbacks) {
+    if (phase == .persistentCallbacks) {
       // Notified mid-build (the canvas attaching its controller): settle next frame.
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (mounted) _onChanged();
@@ -958,7 +950,7 @@ class _Label extends StatelessWidget {
                         resolve((key) => spec.valueOfGroup(key, values)) ??
                         l.text;
                     return FittedBox(
-                      fit: BoxFit.scaleDown,
+                      fit: .scaleDown,
                       child: _StaggeredText(value: value, style: style),
                     );
                   },
@@ -1046,10 +1038,10 @@ class _StaggeredTextState extends State<_StaggeredText>
             ],
           ),
           style: widget.style,
-          textAlign: TextAlign.center,
+          textAlign: .center,
           maxLines: '\n'.allMatches(_shown).length + 1,
           softWrap: false,
-          overflow: TextOverflow.visible,
+          overflow: .visible,
         );
       },
     );
@@ -1080,101 +1072,97 @@ class _PlateInputs extends StatelessWidget {
 
   /// A chosen slot opens the picker on tap even when a keypad drives input.
   static bool _opensPicker(SlotBehavior behavior, PlateSlot slot) =>
-      behavior == SlotBehavior.sheet ||
+      behavior == .sheet ||
       (slot.alphabet.input == AlphabetInput.chosen &&
-          behavior == SlotBehavior.externalField);
+          behavior == .externalField);
   final bool Function(int index, String value) commit;
 
   @override
-  Widget build(BuildContext context) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: SizedBox(
-        width: spec.canvasWidth,
-        height: spec.canvasHeight,
-        child: Directionality(
-          textDirection: spec.textDirection,
-          child: PlateRimClip(
-            theme: theme,
-            child: Stack(
-              children: [
-                for (var mi = 0; mi < spec.mirrors.length; mi++)
-                  _Placed(
-                    box: spec.mirrors[mi].box,
-                    child: PlatePartAnimator(
-                      id: PlatePartId.mirror(mi),
-                      child:
-                          mode == PlateMode.input &&
-                              spec.mirrors[mi].editable &&
-                              machine.mirrorControllerAt(mi) != null
-                          ? Center(
-                              child: _EditableMirrorBinding(
-                                mirrorIndex: mi,
-                                mirror: spec.mirrors[mi],
-                                alphabet:
-                                    spec.mirrors[mi].alphabet ??
-                                    spec
-                                        .slots[spec.mirrors[mi].source]
-                                        .alphabet,
-                                behavior: behaviors[spec.mirrors[mi].source],
-                                theme: theme,
-                                machine: machine,
-                                controller: controller,
-                                onCompleted: mode == PlateMode.input
-                                    ? () => machine.advanceFrom(
-                                        spec.mirrors[mi].source,
-                                      )
-                                    : null,
-                              ),
-                            )
-                          : _MirrorBinding(
+  Widget build(BuildContext context) => FittedBox(
+    fit: .contain,
+    child: SizedBox(
+      width: spec.canvasWidth,
+      height: spec.canvasHeight,
+      child: Directionality(
+        textDirection: spec.textDirection,
+        child: PlateRimClip(
+          theme: theme,
+          child: Stack(
+            children: [
+              for (var mi = 0; mi < spec.mirrors.length; mi++)
+                _Placed(
+                  box: spec.mirrors[mi].box,
+                  child: PlatePartAnimator(
+                    id: PlatePartId.mirror(mi),
+                    child:
+                        mode == .input &&
+                            spec.mirrors[mi].editable &&
+                            machine.mirrorControllerAt(mi) != null
+                        ? Center(
+                            child: _EditableMirrorBinding(
+                              mirrorIndex: mi,
                               mirror: spec.mirrors[mi],
                               alphabet:
                                   spec.mirrors[mi].alphabet ??
                                   spec.slots[spec.mirrors[mi].source].alphabet,
+                              behavior: behaviors[spec.mirrors[mi].source],
                               theme: theme,
+                              machine: machine,
                               controller: controller,
+                              onCompleted: mode == .input
+                                  ? () => machine.advanceFrom(
+                                      spec.mirrors[mi].source,
+                                    )
+                                  : null,
                             ),
-                    ),
+                          )
+                        : _MirrorBinding(
+                            mirror: spec.mirrors[mi],
+                            alphabet:
+                                spec.mirrors[mi].alphabet ??
+                                spec.slots[spec.mirrors[mi].source].alphabet,
+                            theme: theme,
+                            controller: controller,
+                          ),
                   ),
-                for (var i = 0; i < spec.slots.length; i++)
-                  _Placed(
-                    box: spec.slots[i].box,
-                    child: PlatePartAnimator(
-                      id: PlatePartId.slot(i),
-                      child: Center(
-                        child: _SlotBinding(
-                          index: i,
-                          slot: spec.slots[i],
-                          behavior: behaviors[i],
-                          theme: theme,
-                          machine: machine,
-                          controller: controller,
-                          commit: commit,
-                          onCompleted: mode == PlateMode.input
-                              ? () => machine.advanceFrom(i)
-                              : null,
-                          onPressed: _opensPicker(behaviors[i], spec.slots[i])
-                              ? () => onPick(i)
-                              : null,
-                        ),
+                ),
+              for (var i = 0; i < spec.slots.length; i++)
+                _Placed(
+                  box: spec.slots[i].box,
+                  child: PlatePartAnimator(
+                    id: PlatePartId.slot(i),
+                    child: Center(
+                      child: _SlotBinding(
+                        index: i,
+                        slot: spec.slots[i],
+                        behavior: behaviors[i],
+                        theme: theme,
+                        machine: machine,
+                        controller: controller,
+                        commit: commit,
+                        onCompleted: mode == .input
+                            ? () => machine.advanceFrom(i)
+                            : null,
+                        onPressed: _opensPicker(behaviors[i], spec.slots[i])
+                            ? () => onPick(i)
+                            : null,
                       ),
                     ),
                   ),
-                Positioned.fill(
-                  child: _RestrictionBanner(
-                    controller: controller,
-                    theme: theme,
-                    canvasHeight: spec.canvasHeight,
-                  ),
                 ),
-              ],
-            ),
+              Positioned.fill(
+                child: _RestrictionBanner(
+                  controller: controller,
+                  theme: theme,
+                  canvasHeight: spec.canvasHeight,
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 /// Subscribed to verdict, not value, so rebuilds only on valid/invalid flip.
@@ -1235,9 +1223,7 @@ class _VerdictListenerState extends State<_VerdictListener> {
   @override
   void didUpdateWidget(_VerdictListener oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.verdict != oldWidget.verdict) {
-      widget.onVerdict(widget.verdict);
-    }
+    if (widget.verdict != oldWidget.verdict) widget.onVerdict(widget.verdict);
   }
 
   @override
@@ -1264,40 +1250,39 @@ class _RestrictionBanner extends StatelessWidget {
   final double canvasHeight;
 
   @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<PlateRestriction?>(
-      valueListenable: controller.rejection,
-      builder: (context, rejection, _) {
-        if (rejection == null) return const SizedBox.shrink();
-        return IgnorePointer(
-          child: Center(
-            child: Container(
-              key: const ValueKey<String>('plate-restriction-banner'),
-              width: double.infinity,
-              height: canvasHeight * 0.42,
-              color: theme.alertColor,
-              alignment: Alignment.center,
-              padding: EdgeInsets.symmetric(horizontal: canvasHeight * 0.1),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  rejection.reason,
-                  maxLines: 1,
-                  softWrap: false,
-                  style: TextStyle(
-                    color: const Color(0xFFFFFFFF),
-                    fontWeight: FontWeight.w800,
-                    fontSize: canvasHeight * 0.26,
-                    height: 1.0,
+  Widget build(BuildContext context) =>
+      ValueListenableBuilder<PlateRestriction?>(
+        valueListenable: controller.rejection,
+        builder: (context, rejection, _) {
+          if (rejection == null) return const SizedBox.shrink();
+          return IgnorePointer(
+            child: Center(
+              child: Container(
+                key: const ValueKey<String>('plate-restriction-banner'),
+                width: double.infinity,
+                height: canvasHeight * 0.42,
+                color: theme.alertColor,
+                alignment: .center,
+                padding: EdgeInsets.symmetric(horizontal: canvasHeight * 0.1),
+                child: FittedBox(
+                  fit: .scaleDown,
+                  child: Text(
+                    rejection.reason,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: TextStyle(
+                      color: const Color(0xFFFFFFFF),
+                      fontWeight: FontWeight.w800,
+                      fontSize: canvasHeight * 0.26,
+                      height: 1.0,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        );
-      },
-    );
-  }
+          );
+        },
+      );
 }
 
 /// Positions a child from a [PlateBox].
@@ -1332,17 +1317,15 @@ class _FrameBinding extends StatelessWidget {
   final Color panelColor;
 
   @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: controller.completed,
-      builder: (context, isCompleted, _) => PlateFrame(
-        isCompleted: isCompleted,
-        theme: theme,
-        background: background,
-        panelColor: panelColor,
-      ),
-    );
-  }
+  Widget build(BuildContext context) => ValueListenableBuilder<bool>(
+    valueListenable: controller.completed,
+    builder: (context, isCompleted, _) => PlateFrame(
+      isCompleted: isCompleted,
+      theme: theme,
+      background: background,
+      panelColor: panelColor,
+    ),
+  );
 }
 
 /// One slot, subscribed only to its own character (keeps keystrokes local).
@@ -1373,38 +1356,36 @@ class _SlotBinding extends StatelessWidget {
   final VoidCallback? onPressed;
 
   @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<String?>(
-      valueListenable: controller.slot(index),
-      builder: (context, value, _) {
-        final field = behavior == SlotBehavior.keypadFirstField
-            ? machine.fieldAt(index)
-            : machine.controllerAt(index);
-        machine.syncController(index, value);
-        return ListenableBuilder(
-          listenable: Listenable.merge([
-            machine.systemKeyboard,
-            controller.hints,
-          ]),
-          builder: (context, _) => PlateSlotItem(
-            slot: slot,
-            behavior: behavior,
-            theme: theme,
-            value: value,
-            hint: controller.hintAt(index),
-            controller: field,
-            focusNode: machine.focusNodeAt(index),
-            onChanged: (v) => commit(index, v),
-            onCompleted: onCompleted,
-            onBackspace: machine.backspaceCharacter,
-            onPressed: onPressed,
-            systemKeyboard: machine.systemKeyboard.value,
-            onRequestSystemKeyboard: machine.requestSystemKeyboard,
-          ),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => ValueListenableBuilder<String?>(
+    valueListenable: controller.slot(index),
+    builder: (context, value, _) {
+      final field = behavior == .keypadFirstField
+          ? machine.fieldAt(index)
+          : machine.controllerAt(index);
+      machine.syncController(index, value);
+      return ListenableBuilder(
+        listenable: Listenable.merge([
+          machine.systemKeyboard,
+          controller.hints,
+        ]),
+        builder: (context, _) => PlateSlotItem(
+          slot: slot,
+          behavior: behavior,
+          theme: theme,
+          value: value,
+          hint: controller.hintAt(index),
+          controller: field,
+          focusNode: machine.focusNodeAt(index),
+          onChanged: (v) => commit(index, v),
+          onCompleted: onCompleted,
+          onBackspace: machine.backspaceCharacter,
+          onPressed: onPressed,
+          systemKeyboard: machine.systemKeyboard.value,
+          onRequestSystemKeyboard: machine.requestSystemKeyboard,
+        ),
+      );
+    },
+  );
 }
 
 /// Read-only echo of a slot's character (no focus, no controller).
@@ -1422,30 +1403,28 @@ class _MirrorBinding extends StatelessWidget {
   final PlateController controller;
 
   @override
-  Widget build(BuildContext context) {
-    return ListenableBuilder(
-      listenable: Listenable.merge([
-        controller.slot(mirror.source),
-        controller.hints,
-      ]),
-      // Scaled down, never wrapped: a code like `DUPL` may outrun its box.
-      builder: (context, _) => Center(
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: PlateGlyphRun(
-            text: alphabet.renderAll(controller.valueAt(mirror.source) ?? ''),
-            textDirection: alphabet.direction,
-            style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
-            placeholder: controller.hintAt(mirror.source, alphabet) ?? '',
-            placeholderStyle: theme.glyphStyle(
-              mirror.glyphHeight,
-              theme.inactiveColor,
-            ),
+  Widget build(BuildContext context) => ListenableBuilder(
+    listenable: Listenable.merge([
+      controller.slot(mirror.source),
+      controller.hints,
+    ]),
+    // Scaled down, never wrapped: a code like `DUPL` may outrun its box.
+    builder: (context, _) => Center(
+      child: FittedBox(
+        fit: .scaleDown,
+        child: PlateGlyphRun(
+          text: alphabet.renderAll(controller.valueAt(mirror.source) ?? ''),
+          textDirection: alphabet.direction,
+          style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
+          placeholder: controller.hintAt(mirror.source, alphabet) ?? '',
+          placeholderStyle: theme.glyphStyle(
+            mirror.glyphHeight,
+            theme.inactiveColor,
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
 /// Editable mirror: a second input field bound to the source slot's value.
@@ -1660,12 +1639,12 @@ class _LabelText extends StatelessWidget {
     quarterTurns: rotated ? 3 : 0,
     child: Text(
       value,
-      textAlign: TextAlign.center,
+      textAlign: .center,
       // A label is placed by its box, not laid out by it: a caption too long
       // for its box must overflow, never reflow onto a second line.
       maxLines: '\n'.allMatches(value).length + 1,
       softWrap: false,
-      overflow: TextOverflow.visible,
+      overflow: .visible,
       style: style,
     ),
   );
