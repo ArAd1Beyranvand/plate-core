@@ -26,6 +26,9 @@ class VenezuelaCategory {
       c.length == 1 && c.codeUnitAt(0) >= 0x41 && c.codeUnitAt(0) <= 0x5A;
 }
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Reports, never throws, never bars a keystroke. Quiet until the state
 /// letter is in; then the six serial cells must match one of [categories]
 /// and the last letter must name a state.
