@@ -3,6 +3,9 @@ import 'package:flutter/widgets.dart';
 
 import 'plate_animation.dart';
 
+// TODO(ts): [D1] {phase, progress: number, motion}; progress is a plain number per frame.
+// TODO(kt): [D1] progress: Float read from an Animatable in Compose; model holds no Animation.
+// TODO(py): [D1] progress float from QVariantAnimation.valueChanged.
 /// Where one part is right now: what its painter or transition reads.
 ///
 /// [progress] runs 0→1 across the current transition, delay and curve
@@ -48,6 +51,9 @@ class PlatePartFrame {
   }
 }
 
+// TODO(ts): [D1][D9] pure render math; vector (bounds, origin, phase, t) -> rect.
+// TODO(kt): [D1][D9] same, in render.
+// TODO(py): [D1][D9] same.
 /// The part of [bounds] a wipe from [origin] leaves visible. An axis on
 /// which [origin] is centred grows from the middle.
 Rect plateRevealRect(Rect bounds, Alignment origin, PlatePartFrame frame) {
@@ -75,6 +81,9 @@ Rect plateRevealRect(Rect bounds, Alignment origin, PlatePartFrame frame) {
   );
 }
 
+// TODO(ts): [D1] no widget: render() reads each part frame and applies opacity/clip/translate/scale.
+// TODO(kt): [D1] Modifier.graphicsLayer {alpha, translation, scale, clip} per part; one Animatable each.
+// TODO(py): [D1] painter applies opacity/clip/transform per display-list group; one QVariantAnimation each.
 /// The one primitive behind every animated plate part. It owns the part's
 /// controller, follows the part's cue from the nearest
 /// [PlateAnimationScope], and either applies the part's [PlateMotion] to
@@ -153,6 +162,9 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
 
   void _onCue() => setState(() => _apply(_cue!.value));
 
+  // TODO(ts): [H11] delay is the head of the curve interval: t<start -> 0, then curve((t-start)/(1-start)).
+  // TODO(kt): [H11] same Interval math; don't use tween(delayMillis), it skips the instant cue.
+  // TODO(py): [H11] same Interval math over a linear QVariantAnimation.
   void _apply(PlatePartCue cue) {
     final host = _host;
     if (host == null || cue.phase == .settled) {
@@ -237,6 +249,9 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
   }
 }
 
+// TODO(ts): [D1] fade=opacity, wipe/draw=clip+gate, fadeScale=scale 0.4→1, fadeSlide=translate 0.6 size.
+// TODO(kt): [D1] same table in render.
+// TODO(py): [D1] same table in render.
 /// The animations one phase plugs into the fixed transition chain. Built on a
 /// phase change, never per frame.
 class _Chain {
@@ -307,6 +322,9 @@ class _WipeClipper extends CustomClipper<Rect> {
   bool shouldReclip(_WipeClipper old) => !identical(old.frame, frame);
 }
 
+// TODO(ts): [H14] drop.
+// TODO(kt): [H14] drop — pass the frame down.
+// TODO(py): [H14] drop.
 class _PartScope extends InheritedWidget {
   const _PartScope({required this.frame, required super.child});
 
