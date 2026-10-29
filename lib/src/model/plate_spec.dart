@@ -51,8 +51,8 @@ class PlateSlot {
   /// characters, each in [alphabet] in either form.
   bool accepts(String value) {
     // A chosen symbol may span several characters ('CD'); it is judged whole.
-    if (alphabet.input == AlphabetInput.chosen) return alphabet.accepts(value);
-    final characters = value.runes.map(String.fromCharCode).toList();
+    if (alphabet.input == .chosen) return alphabet.accepts(value);
+    final characters = splitRunes(value);
     return characters.isNotEmpty &&
         characters.length <= length &&
         characters.every(alphabet.accepts);
@@ -71,7 +71,6 @@ class PlateSlot {
 
 /// An echo of a slot's value painted elsewhere on the plate, such as the same
 /// number printed once per script.
-///
 ///
 /// A mirror shares the [source] slot's value and owns no position in
 /// [PlateSpec.slots], so it never counts towards [PlateSpec.slotCount], text
@@ -224,13 +223,13 @@ class PlateSection {
 
   /// Side-by-side regions, split along x.
   const PlateSection.columns(this.parts)
-    : axis = Axis.horizontal,
+    : axis = .horizontal,
       fill = null,
       shape = null;
 
   /// Stacked regions, split along y.
   const PlateSection.rows(this.parts)
-    : axis = Axis.vertical,
+    : axis = .vertical,
       fill = null,
       shape = null;
 
@@ -262,7 +261,7 @@ class PlateSection {
         leaves.add((s, r));
         return;
       }
-      final across = s.axis == Axis.horizontal;
+      final across = s.axis == .horizontal;
       var start = across ? r.left : r.top;
       final last = s.parts.length - 1;
       for (var i = 0; i <= last; i++) {
@@ -413,7 +412,7 @@ class PlatePanel {
     this.flagScale = 1.0,
     this.captionScale = 1.0,
     this.padding,
-    this.direction = Axis.vertical,
+    this.direction = .vertical,
     this.shape,
   });
 
@@ -464,7 +463,7 @@ class PlateSpec {
     this.labels = const <PlateLabel>[],
     this.decals = const <PlateDecal>[],
     this.mirrors = const <PlateMirror>[],
-    this.textDirection = TextDirection.ltr,
+    this.textDirection = .ltr,
     this.borderWidthRatioOverride,
     this.inkOverride,
     this.textGroups = const <PlateTextGroup>[],

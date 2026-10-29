@@ -23,7 +23,7 @@ export 'src/animation/plate_part_animator.dart'
     show PlatePartAnimator, PlatePartFrame, plateRevealRect;
 export 'src/input/plate_controller.dart';
 export 'src/input/plate_input_controller.dart';
-export 'src/model/plate_alphabet.dart';
+export 'src/model/plate_alphabet.dart' hide splitRunes;
 export 'src/model/plate_asset.dart';
 export 'src/model/plate_box.dart';
 export 'src/drawings/european_stars.dart';

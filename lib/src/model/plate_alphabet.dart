@@ -10,7 +10,7 @@ class PlateAlphabet {
     required this.input,
     required this.isNumeric,
     this.glyphs = const <String, String>{},
-    this.direction = TextDirection.ltr,
+    this.direction = .ltr,
     this.placeholder = '?',
   }) : _listed = characters,
        _include = '',
@@ -28,7 +28,7 @@ class PlateAlphabet {
     required this.input,
     required this.isNumeric,
     this.glyphs = const <String, String>{},
-    this.direction = TextDirection.ltr,
+    this.direction = .ltr,
     this.placeholder = '?',
   }) : _listed = null,
        _include = include,
@@ -120,7 +120,7 @@ class PlateAlphabet {
   }
 
   static String _each(String value, String Function(String) f) =>
-      value.runes.map((r) => f(String.fromCharCode(r))).join();
+      splitRunes(value).map(f).join();
 
   @override
   bool operator ==(Object other) =>
@@ -132,17 +132,22 @@ class PlateAlphabet {
   static const PlateAlphabet latinDigits = PlateAlphabet.pattern(
     id: 'latin.digits',
     include: '0-9',
-    input: AlphabetInput.typed,
+    input: .typed,
     isNumeric: true,
   );
 
   static const PlateAlphabet latinUppercase = PlateAlphabet.pattern(
     id: 'latin.upper',
     include: 'A-Z',
-    input: AlphabetInput.typed,
+    input: .typed,
     isNumeric: false,
   );
 }
+
+/// [value] one string per code point.
+List<String> splitRunes(String value) => [
+  for (final r in value.runes) String.fromCharCode(r),
+];
 
 enum AlphabetInput {
   /// Typed into a TextField.
