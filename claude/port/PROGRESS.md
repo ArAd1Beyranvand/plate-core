@@ -11,3 +11,5 @@ Resume from the first line without a commit hash. Format:
 - P2 · plate_core/lib/src/input · shortened: -31 · core 37ce55f
 - P2 · same · todos: 19/19/19 · core e7c4b0e
 - P2 · deferred: PlateInputMachine pure/focus split (adds a class, no line win; D8 TODOs instead); fromValues kept (used by country golden tests)
+- P3 · plate_core/lib/src/animation · shortened: -59 · core 46646c8 e511b62
+- P3 · same · todos: 16/16/16 · core 9c1750d
