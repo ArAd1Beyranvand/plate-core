@@ -24,11 +24,15 @@ class PlateSlotItem extends StatelessWidget {
     this.onPressed,
     this.systemKeyboard = false,
     this.onRequestSystemKeyboard,
+    this.hint,
   });
 
   final PlateSlot slot;
   final SlotBehavior behavior;
   final String? value;
+
+  /// Rendered sample shown faintly in place of the alphabet's placeholder.
+  final String? hint;
   final TextEditingController? controller;
   final FocusNode focusNode;
 
@@ -53,7 +57,12 @@ class PlateSlotItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? PlateTheme.of(context);
     if (behavior == SlotBehavior.glyph) {
-      return _GlyphSlot(slot: slot, value: value, theme: effectiveTheme);
+      return _GlyphSlot(
+        slot: slot,
+        value: value,
+        hint: hint,
+        theme: effectiveTheme,
+      );
     }
     final typed =
         behavior == SlotBehavior.imeField ||
@@ -73,6 +82,7 @@ class PlateSlotItem extends StatelessWidget {
         theme: effectiveTheme,
         systemKeyboard: systemKeyboard,
         onRequestSystemKeyboard: onRequestSystemKeyboard,
+        hint: hint,
       );
     }
     return _ChosenSlot(
@@ -84,6 +94,7 @@ class PlateSlotItem extends StatelessWidget {
       onPressed: onPressed,
       onBackspace: onBackspace,
       theme: effectiveTheme,
+      hint: hint,
     );
   }
 }
@@ -94,11 +105,13 @@ class _GlyphSlot extends StatelessWidget {
     required this.slot,
     required this.value,
     required this.theme,
+    this.hint,
   });
 
   final PlateSlot slot;
   final String? value;
   final PlateTheme theme;
+  final String? hint;
 
   @override
   Widget build(BuildContext context) {
@@ -119,6 +132,12 @@ class _GlyphSlot extends StatelessWidget {
               style: theme.glyphStyle(
                 slot.box.height,
                 slot.color ?? theme.ink,
+                letterSpacing: slot.spacing,
+              ),
+              placeholder: hint ?? '',
+              placeholderStyle: theme.glyphStyle(
+                slot.box.height,
+                theme.inactiveColor,
                 letterSpacing: slot.spacing,
               ),
             ),
@@ -149,10 +168,12 @@ class _TypedField extends StatefulWidget {
     required this.theme,
     this.systemKeyboard = false,
     this.onRequestSystemKeyboard,
+    this.hint,
   });
 
   final PlateSlot slot;
   final String? value;
+  final String? hint;
   final SlotBehavior behavior;
   final TextEditingController controller;
   final FocusNode focusNode;
@@ -315,7 +336,7 @@ class _TypedFieldState extends State<_TypedField> {
                       ),
                       filled: false,
                       counterText: '',
-                      hintText: slot.alphabet.placeholder,
+                      hintText: widget.hint ?? slot.alphabet.placeholder,
                       hintStyle: style.copyWith(color: const Color(0x00000000)),
                       border: UnderlineInputBorder(
                         borderSide: BorderSide(color: theme.inactiveColor),
@@ -379,10 +400,11 @@ class _TypedFieldState extends State<_TypedField> {
                             text: controller.text,
                             textDirection: slot.alphabet.direction,
                             style: style,
-                            placeholder: slot.alphabet.placeholder,
+                            placeholder:
+                                widget.hint ?? slot.alphabet.placeholder,
                             placeholderStyle: style.copyWith(
                               color: theme.inactiveColor,
-                              letterSpacing: 0,
+                              letterSpacing: widget.hint == null ? 0 : null,
                             ),
                           ),
                         ),
@@ -443,11 +465,13 @@ class _ChosenSlot extends StatelessWidget {
     required this.onPressed,
     required this.onBackspace,
     required this.theme,
+    this.hint,
   });
 
   final PlateSlot slot;
   final SlotBehavior behavior;
   final String? value;
+  final String? hint;
   final FocusNode focusNode;
   final bool Function(String value) onChanged;
   final VoidCallback? onPressed;
@@ -462,7 +486,7 @@ class _ChosenSlot extends StatelessWidget {
       text: isEmpty ? '' : slot.alphabet.render(value!),
       textDirection: slot.alphabet.direction,
       style: theme.glyphStyle(slot.box.height, slot.color ?? theme.ink),
-      placeholder: slot.alphabet.placeholder,
+      placeholder: hint ?? slot.alphabet.placeholder,
       placeholderStyle: theme.glyphStyle(slot.box.height, theme.inactiveColor),
     );
 

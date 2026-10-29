@@ -76,6 +76,22 @@ class PlateController extends ChangeNotifier {
   /// Changed only through [adoptSpec].
   PlateSpec get spec => _spec;
 
+  /// A sample value per slot, drawn faintly in place of the alphabet's
+  /// placeholder and kept under the typed characters while they match it.
+  final ValueNotifier<List<String?>?> hints = ValueNotifier(null);
+
+  /// [hints] at slot [index], rendered through [alphabet] (a mirror's) or
+  /// the slot's own; null for none.
+  String? hintAt(int index, [PlateAlphabet? alphabet]) {
+    final hint = hints.value;
+    if (hint == null || index >= hint.length || index >= _spec.slotCount) {
+      return null;
+    }
+    final v = hint[index];
+    if (v == null || v.isEmpty) return null;
+    return alphabet?.renderAll(v) ?? _spec.slots[index].render(v);
+  }
+
   /// A snapshot in slot order; write through [setAt], [setValues], [setGroup]
   /// or [clear].
   List<String?> get values => List<String?>.unmodifiable(_values);
@@ -288,6 +304,7 @@ class PlateController extends ChangeNotifier {
     }
     _completed.dispose();
     _rejection.dispose();
+    hints.dispose();
     super.dispose();
   }
 

@@ -22,6 +22,7 @@ import 'plate_divider.dart';
 import 'plate_drawing_view.dart';
 import 'plate_frame.dart';
 import 'plate_selector.dart';
+import 'plate_glyph_run.dart';
 import 'plate_slot_item.dart';
 import 'plate_text_row.dart';
 
@@ -107,6 +108,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
   /// plate keeps showing while it leaves, since the controller has already
   /// moved on to the next spec by the time the canvas hears of it.
   List<String?> _shownValues = const <String?>[];
+  List<String?>? _shownHints;
 
   /// The outgoing plate, while it goes out.
   _Ghost? _ghost;
@@ -124,10 +126,15 @@ class _PlateCanvasState extends State<PlateCanvas> {
   void _recordValues() {
     if (_controller.spec.id == widget.spec.id) {
       _shownValues = _controller.values;
+      _shownHints = _controller.hints.value;
     }
   }
 
-  void _startTransition(PlateCanvas old, List<String?> shown) {
+  void _startTransition(
+    PlateCanvas old,
+    List<String?> shown,
+    List<String?>? shownHints,
+  ) {
     final from = old.spec, to = widget.spec;
     final toValues = _controller.values;
     bool keeps(PlatePartId id) => widget.specTransition!.keeps(
@@ -175,6 +182,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
       mode: old.mode,
       inputSource: old.inputSource,
       values: shown,
+      hints: shownHints,
       outDelays: outDelays,
       kept: {
         for (final id in PlatePartId.allOf(from))
@@ -258,11 +266,12 @@ class _PlateCanvasState extends State<PlateCanvas> {
     // old spec's slots, must be rebuilt here.
     if (widget.spec.id != oldWidget.spec.id) {
       final shown = _shownValues;
+      final shownHints = _shownHints;
       // The controller migrates its values per [PlateCanvas.onSpecChange].
       _controller.adoptSpec(widget.spec, preserve: widget.onSpecChange);
       _resizeDuration = Duration.zero;
       _morphBackground = false;
-      _startTransition(oldWidget, shown);
+      _startTransition(oldWidget, shown, shownHints);
       oldWidget.controller?.detach(_machine);
       widget.controller?.detach(_machine);
       _machine.dispose();
@@ -286,6 +295,7 @@ class _PlateCanvasState extends State<PlateCanvas> {
   @override
   void dispose() {
     _controller.removeListener(_recordValues);
+    _controller.hints.removeListener(_recordValues);
     widget.controller?.installValidation(null);
     widget.controller?.detach(_machine);
     _machine.dispose();
@@ -297,9 +307,13 @@ class _PlateCanvasState extends State<PlateCanvas> {
   /// [replacing] marks a live canvas handed a different controller: a private
   /// one stood down is disposed, the host's never is.
   void _adoptController({bool replacing = false}) {
-    if (replacing) _controller.removeListener(_recordValues);
+    if (replacing) {
+      _controller.removeListener(_recordValues);
+      _controller.hints.removeListener(_recordValues);
+    }
     _adoptControllerOnly(replacing: replacing);
     _controller.addListener(_recordValues);
+    _controller.hints.addListener(_recordValues);
     _recordValues();
   }
 
@@ -1367,20 +1381,24 @@ class _SlotBinding extends StatelessWidget {
             ? machine.fieldAt(index)
             : machine.controllerAt(index);
         machine.syncController(index, value);
-        return ValueListenableBuilder<bool>(
-          valueListenable: machine.systemKeyboard,
-          builder: (context, systemKeyboard, _) => PlateSlotItem(
+        return ListenableBuilder(
+          listenable: Listenable.merge([
+            machine.systemKeyboard,
+            controller.hints,
+          ]),
+          builder: (context, _) => PlateSlotItem(
             slot: slot,
             behavior: behavior,
             theme: theme,
             value: value,
+            hint: controller.hintAt(index),
             controller: field,
             focusNode: machine.focusNodeAt(index),
             onChanged: (v) => commit(index, v),
             onCompleted: onCompleted,
             onBackspace: machine.backspaceCharacter,
             onPressed: onPressed,
-            systemKeyboard: systemKeyboard,
+            systemKeyboard: machine.systemKeyboard.value,
             onRequestSystemKeyboard: machine.requestSystemKeyboard,
           ),
         );
@@ -1405,18 +1423,26 @@ class _MirrorBinding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<String?>(
-      valueListenable: controller.slot(mirror.source),
+    return ListenableBuilder(
+      listenable: Listenable.merge([
+        controller.slot(mirror.source),
+        controller.hints,
+      ]),
       // Scaled down, never wrapped: a code like `DUPL` may outrun its box.
-      builder: (context, value, _) => Center(
+      builder: (context, _) => Center(
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: Text(
-            alphabet.renderAll(value ?? ''),
-            maxLines: 1,
-            softWrap: false,
-            textAlign: TextAlign.center,
+          child: PlateGlyphRun(
+            text: alphabet.renderAll(
+              controller.valueAt(mirror.source) ?? '',
+            ),
+            textDirection: alphabet.direction,
             style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
+            placeholder: controller.hintAt(mirror.source, alphabet) ?? '',
+            placeholderStyle: theme.glyphStyle(
+              mirror.glyphHeight,
+              theme.inactiveColor,
+            ),
           ),
         ),
       ),
@@ -1451,9 +1477,13 @@ class _EditableMirrorBinding extends StatelessWidget {
     // The mirror takes the source field's run lengths, so a mirror over a
     // four-to-six digit serial accepts the whole run.
     final source = controller.spec.slots[mirror.source];
-    return ValueListenableBuilder<String?>(
-      valueListenable: controller.slot(mirror.source),
-      builder: (context, value, _) {
+    return ListenableBuilder(
+      listenable: Listenable.merge([
+        controller.slot(mirror.source),
+        controller.hints,
+      ]),
+      builder: (context, _) {
+        final value = controller.valueAt(mirror.source);
         machine.syncMirrorController(mirrorIndex, alphabet, value);
         return PlateSlotItem(
           slot: PlateSlot(
@@ -1466,6 +1496,7 @@ class _EditableMirrorBinding extends StatelessWidget {
           behavior: behavior,
           theme: theme,
           value: value,
+          hint: controller.hintAt(mirror.source, alphabet),
           controller: machine.mirrorControllerAt(mirrorIndex),
           focusNode: machine.mirrorFocusNodeAt(mirrorIndex)!,
           onChanged: (v) => controller.setAt(mirror.source, v),
@@ -1517,6 +1548,7 @@ class _Ghost {
     required this.mode,
     required this.inputSource,
     required this.values,
+    required this.hints,
     required this.outDelays,
     required this.kept,
     required this.dropped,
@@ -1535,6 +1567,7 @@ class _Ghost {
   final PlateMode mode;
   final PlateInputSource? inputSource;
   final List<String?> values;
+  final List<String?>? hints;
   final Map<PlatePartId, Duration> outDelays;
 
   /// Parts both plates share: held in the ghost, then handed to the
@@ -1568,7 +1601,7 @@ class _SpecGhostState extends State<_SpecGhost> {
   void initState() {
     super.initState();
     final g = widget.ghost;
-    _controller = PlateController(spec: g.spec);
+    _controller = PlateController(spec: g.spec)..hints.value = g.hints;
     if (g.values.length == g.spec.slotCount) _controller.setValues(g.values);
     _anim = PlateAnimationController(style: g.style)
       ..goOutAll(delays: g.outDelays);
