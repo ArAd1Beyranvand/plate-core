@@ -1,5 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// An ordinary registration on `TunisiaPlates.standard` or `square`: a series
 /// of up to three digits with no leading zero (older series stay on the
 /// road), then a registration of 0001-9999. Reports, never bars a keystroke.
