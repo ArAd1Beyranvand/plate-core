@@ -7,6 +7,9 @@
 /// (`A FR 000`) and the National Police plate (`60-0007`) complete the set.
 library;
 
+// TODO(py): [D5] one module `plates.countries.colombia`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/colombia`; tree-shakable.
+// TODO(kt): [D5] package `countries.colombia` in the countries module.
 export 'src/colombia_alphabets.dart';
 export 'src/colombia_colors.dart';
 export 'src/colombia_country.dart';
