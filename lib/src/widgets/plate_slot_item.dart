@@ -8,6 +8,9 @@ import '../model/slot_behavior.dart';
 import '../theme/plate_theme.dart';
 import 'plate_glyph_run.dart';
 
+// TODO(ts): [D8] the typed/chosen/glyph pick is pure: move it to the input machine and vector it.
+// TODO(kt): [D8] same.
+// TODO(py): [D8] same.
 /// One plate position, rendered per [SlotBehavior].
 class PlateSlotItem extends StatelessWidget {
   const PlateSlotItem({
@@ -148,6 +151,9 @@ class _GlyphSlot extends StatelessWidget {
   }
 }
 
+// TODO(ts): [D8] <input> with transparent text and the glyph run overlaid; keypad mode = inputmode=none.
+// TODO(kt): [D8] BasicTextField with transparent text and an overlay; keypad mode = no IME session.
+// TODO(py): [D8] QLineEdit with transparent text; keypad mode = no focus on the edit.
 /// TextField restyled to a bare glyph with thin underline.
 ///
 /// Under [SlotBehavior.keypadFirstField] the slot's [focusNode] sits on a
@@ -420,6 +426,9 @@ class _TypedFieldState extends State<_TypedField> {
     );
   }
 
+  // TODO(ts): [H12] measure widest run with measureText; same 4px caret room.
+  // TODO(kt): [H12] TextMeasurer; same formula.
+  // TODO(py): [H12] QFontMetricsF.horizontalAdvance; same formula.
   /// [PlateTheme.glyphStyle], shrunk so a full run of the widest legal
   /// character fits the slot. Display slots get this from a [FittedBox]; an
   /// editable field cannot be scaled that way, so it is sized up front.
@@ -570,6 +579,9 @@ class _SlotBox extends StatelessWidget {
   );
 }
 
+// TODO(ts): [H14] drop — preventScroll: true on focus().
+// TODO(kt): [H14] drop — no BringIntoViewRequester.
+// TODO(py): [H14] drop — Qt does not scroll on focus.
 /// Swallows the request to scroll a focused slot into view, so editing the
 /// plate itself never moves the page. Fields outside the plate keep the
 /// default behaviour.

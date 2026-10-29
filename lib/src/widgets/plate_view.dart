@@ -9,6 +9,9 @@ import 'plate_canvas.dart';
 import 'plate_selector.dart';
 import 'plate_text_row.dart';
 
+// TODO(ts): [D1] ui layer: <plate-view> renders spec+values read-only; no controller needed.
+// TODO(kt): [D1] @Composable PlateView(spec, values).
+// TODO(py): [D1] PlateView(QWidget) over the same canvas, editing off.
 /// Read-only plate view driven by a [PlateController], with optional theme
 /// and country overrides. For text-only rendering, use [PlateTextView].
 class PlateView extends StatelessWidget {
@@ -47,6 +50,9 @@ class PlateView extends StatelessWidget {
   }
 }
 
+// TODO(ts): [D1] a text formatter in the model layer, not a widget; vector the output.
+// TODO(kt): same.
+// TODO(py): same.
 /// Text-only rendering of a [PlateController]'s plate characters.
 class PlateTextView extends StatelessWidget {
   const PlateTextView({

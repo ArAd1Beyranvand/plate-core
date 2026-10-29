@@ -2,6 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import '../model/plate_asset.dart';
 
+// TODO(ts): [D6][H13] paint PlateDrawing to canvas/SVG; fill vs contain is the only fit.
+// TODO(kt): [D6][H13] DrawScope painter; Path.op for differences.
+// TODO(py): [D6][H13] QPainter; QPainterPath.subtracted for differences.
 /// Paints a [PlateDrawing] into whatever box it is given. [BoxFit.fill]
 /// stretches it to the box, as a flag is; [BoxFit.contain] keeps its
 /// proportions and centres it, as a decal is.

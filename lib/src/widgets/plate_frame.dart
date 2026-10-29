@@ -9,6 +9,9 @@ import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
 import 'plate_divider.dart';
 
+// TODO(ts): [D1] paint order face, regions, dividers, border on one canvas; parts are layers.
+// TODO(kt): [D1] one Canvas, same order.
+// TODO(py): [D1] one QPainter pass, same order.
 /// The plate's background: the face divided into [PlateSection] regions, the
 /// dividers between them, and the border drawn last over all of it.
 ///
@@ -80,6 +83,9 @@ class PlateFrame extends StatelessWidget {
   }
 }
 
+// TODO(ts): [H14] drop — the scope chain; read the three rim cues from the store directly.
+// TODO(kt): [H14] drop — CompositionLocal not needed; collect three flows.
+// TODO(py): [H14] drop — read the observables.
 /// The frames of the rim parts that are not painters of their own: the corner
 /// radius, the border colour and the border width.
 @immutable
@@ -233,6 +239,9 @@ class _RimClipper extends CustomClipper<RRect> {
   bool shouldReclip(_RimClipper old) => old.theme != theme || old.rim != rim;
 }
 
+// TODO(ts): [D1] pure: border, radii, face rrect from theme+size+rim; move to core and vector it.
+// TODO(kt): same.
+// TODO(py): same.
 /// The outer rim, its inner edge, and the face the regions are clipped to.
 class _Geometry {
   _Geometry(PlateTheme theme, Size size, _RimFrames rim)
@@ -579,6 +588,9 @@ class _BorderPaint extends StatelessWidget {
   );
 }
 
+// TODO(ts): [H13] draw effect needs path length: build the centreline path, getPointAtLength/dash.
+// TODO(kt): [H13] PathMeasure.getSegment.
+// TODO(py): [H13] QPainterPath.percentAtLength + a dash pattern.
 /// Settled: the rim as a filled ring between the outer and inner rounded
 /// rects. Drawing: a stroke along the ring's centreline, grown from
 /// [PlateMotion.startPoint] and erased from it in the same direction.

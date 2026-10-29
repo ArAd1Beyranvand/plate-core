@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+// TODO(ts): [H7] diff old/new runs by code point; each glyph is a span animated with WAAPI.
+// TODO(kt): [H7] AnimatedContent per glyph keyed by index.
+// TODO(py): [H7] one QPropertyAnimation per glyph item.
 /// A slot's characters, each animated in as it is added and out as it is
 /// removed. The characters present when the run mounts show at once.
 ///
@@ -199,6 +202,9 @@ class _GlyphCell extends StatelessWidget {
   }
 }
 
+// TODO(ts): [H12] line-height 1 and fixed baseline; strut has no CSS twin, set line-height explicitly.
+// TODO(kt): [H12] LineHeightStyle(trim = Both) and lineHeight = fontSize.
+// TODO(py): [H12] place by QFontMetrics.ascent; no strut.
 /// The line box an editable field forces on its text, so every glyph and the
 /// placeholder stand on the same baseline as the field they cover.
 StrutStyle _strutOf(TextStyle style) =>

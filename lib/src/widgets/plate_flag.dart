@@ -5,6 +5,9 @@ import '../model/plate_asset.dart';
 import '../model/plate_country.dart';
 import 'plate_drawing_view.dart';
 
+// TODO(ts): [D6] SVG <img>/inline svg with preserveAspectRatio="none" (BoxFit.fill); drawings via canvas.
+// TODO(kt): [D6] Image(ContentScale.FillBounds); drawings via Canvas.
+// TODO(py): [D6] QSvgRenderer into the rect, aspect ignored.
 /// A country's flag, or nothing when it has none.
 class PlateFlag extends StatelessWidget {
   const PlateFlag({super.key, required this.country, this.borderRadius});
