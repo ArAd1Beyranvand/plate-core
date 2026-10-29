@@ -7,6 +7,9 @@ import '../model/plate_spec.dart';
 import '../validators/plate_validator.dart';
 import 'plate_input_controller.dart';
 
+// TODO(ts): [D9] _migrate under each mode is a vector (from spec, to spec, values -> values).
+// TODO(kt): [D9] same vectors.
+// TODO(py): [D9] same vectors.
 /// What happens to the characters on a plate when [PlateController.adoptSpec]
 /// swaps its [PlateSpec].
 enum PlateValuePreservation {
@@ -22,6 +25,9 @@ enum PlateValuePreservation {
   byGroupKey,
 }
 
+// TODO(ts): [D7] plain class + tiny store: subscribe(cb) for whole, slot(i), completed, rejection.
+// TODO(kt): [D7] StateFlow per grain: values, slot(i) via map+distinctUntilChanged, completed, rejection.
+// TODO(py): [D7] minimal Observable per grain (subscribe/unsubscribe); no Qt signals in model.
 /// Owns a plate's characters and drives focus and navigation. Pass it to
 /// [PlateCanvas] as `controller:` to read or write the value, track the active
 /// slot, or feed characters from a keypad.
@@ -47,9 +53,15 @@ class PlateController extends ChangeNotifier {
     _rejection = ValueNotifier<PlateRestriction?>(refused);
   }
 
+  // TODO(ts): drop — country golden tests use it; ports take the main constructor only.
+  // TODO(kt): drop — default args cover it.
+  // TODO(py): drop — keyword arguments cover it.
   factory PlateController.fromValues(PlateSpec spec, List<String?> values) =>
       PlateController(spec: spec, values: values);
 
+  // TODO(ts): [H7][D9] iterate Array.from(text); fromText(spec, text) -> values is a vector.
+  // TODO(kt): [H7][D9] iterate code points.
+  // TODO(py): [H7][D9] iterate the str.
   /// Pours [text] into the slots in order, each taking up to its
   /// [PlateSlot.length]. Characters the current slot refuses, such as
   /// separators, are skipped without consuming it.
@@ -75,6 +87,9 @@ class PlateController extends ChangeNotifier {
   /// Changed only through [adoptSpec].
   PlateSpec get spec => _spec;
 
+  // TODO(ts): [D7] a fourth store; hints never touch values or completion.
+  // TODO(kt): [D7] MutableStateFlow<List<String?>?>.
+  // TODO(py): [D7] Observable.
   /// A sample value per slot, drawn faintly in place of the alphabet's
   /// placeholder and kept under the typed characters while they match it.
   final ValueNotifier<List<String?>?> hints = ValueNotifier(null);
@@ -135,6 +150,9 @@ class PlateController extends ChangeNotifier {
   /// or the region cannot be told yet.
   String? get regionCaption => _spec.resolveRegion?.call(group);
 
+  // TODO(ts): [H7][D9] split by code point; a chosen slot takes the rest whole. Vector it.
+  // TODO(kt): [H7][D9] code points.
+  // TODO(py): [D9] list(value).
   /// Pours [value] across the slots of the group named [key] in group order,
   /// each taking up to its [PlateSlot.length] (a chosen symbol is taken whole).
   /// A slot whose alphabet refuses its share is cleared. No-op for an unknown
@@ -164,6 +182,9 @@ class PlateController extends ChangeNotifier {
   bool get isCompleted => _completed.value;
   bool get isEmpty => !_values.any((v) => v != null && v.isNotEmpty);
 
+  // TODO(ts): [D7] out of range returns a store that is null forever, never throws.
+  // TODO(kt): [D7] out of range returns MutableStateFlow(null) that nobody writes.
+  // TODO(py): [D7] same: an Observable fixed at None.
   /// The character at [index]. Out of range gives a listenable that stays null,
   /// so a widget outliving a shrinking spec paints an empty slot.
   ValueListenable<String?> slot(int index) =>
@@ -200,6 +221,9 @@ class PlateController extends ChangeNotifier {
     _notifyOutsideBuild();
   }
 
+  // TODO(ts): [H14] drop — notify synchronously; no build phase to dodge.
+  // TODO(kt): [H14] drop — StateFlow emission is safe during composition.
+  // TODO(py): [H14] drop — or QTimer.singleShot(0, …) if a slot re-enters painting.
   /// A host swapping `spec:` or `controller:`, or a canvas attaching from
   /// initState, lands here mid-build; listeners that setState would assert, so
   /// they hear of it after the frame, if [still] holds then.
@@ -219,6 +243,9 @@ class PlateController extends ChangeNotifier {
   PlateValidation? Function()? _probe;
   PlateValidation? _lastVerdict;
 
+  // TODO(ts): [D9] rejection outranks the validator; the probe is the render layer asking.
+  // TODO(kt): [D9] same precedence.
+  // TODO(py): [D9] same precedence.
   /// The verdict on the plate as it stands; null without an attached validator.
   /// Computed on demand, so it works with or without `autoValidate`.
   ///
@@ -230,6 +257,9 @@ class PlateController extends ChangeNotifier {
     return _probe?.call();
   }
 
+  // TODO(ts): drop the canvas-only probe/report pair; the controller takes a validator directly.
+  // TODO(kt): same: PlateController(validator = …).
+  // TODO(py): same.
   /// For [PlateCanvas] only.
   void installValidation(PlateValidation? Function()? probe) {
     _probe = probe;
@@ -374,6 +404,9 @@ class PlateController extends ChangeNotifier {
   static bool _hasKeyedGroups(PlateSpec spec) =>
       spec.effectiveTextGroups.any((g) => g.key != null);
 
+  // TODO(ts): [H7] pour code points, not UTF-16 units.
+  // TODO(kt): [H7] code points.
+  // TODO(py): pure; port line for line.
   static List<String?> _migrate(
     PlateSpec from,
     PlateSpec to,
@@ -428,6 +461,9 @@ class PlateController extends ChangeNotifier {
   }
 }
 
+// TODO(ts): drop — a shared frozen null store.
+// TODO(kt): drop — MutableStateFlow(null).asStateFlow().
+// TODO(py): drop — a shared Observable(None).
 @immutable
 class _AlwaysNull<T> implements ValueListenable<T?> {
   const _AlwaysNull();
