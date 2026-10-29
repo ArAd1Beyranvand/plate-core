@@ -103,6 +103,18 @@ the rationale lives here once. Ids are stable: refine wording, never renumber.
   TS `export const X = {…} as const`, Kotlin `object`.
 - **H20** Package-relative asset resolution (`SvgPlateAsset(path, package:)`) — each port needs its
   own resolver (D5/D6).
+- **H21** Ordered maps. `PlateAlphabet.canonical` folds a shared glyph to the first key in
+  `glyphs` insertion order. TS plain objects move integer-like keys (`'5'`) to the front — use
+  `Map`; Kotlin `mapOf` / `LinkedHashMap` keep order (`HashMap` does not); Python `dict` does.
+- **H22** Pattern alphabets (`include: 'A-Z'`) expand a three-code-point `X-Y` token over code
+  points. TS `String.fromCodePoint`; Kotlin common has no `appendCodePoint` — write a two-line
+  UTF-16 encoder; Python `chr`. Codegen should emit the expanded list anyway (D3).
+- **H23** Validation without asserts. `specProblems(spec)` returns the problem list; ports call
+  it from tests and a debug flag (Python `-O` strips asserts, TS has none). Export runs it on
+  every spec and refuses to write a broken one.
+- **H24** Length units. `String.length` is UTF-16 code units in Dart, TS and Kotlin, code points
+  in Python. Every `.length` on user text must be read as either code units (only safe for
+  ASCII, e.g. `isDigitsOfLength`) or `runes.length`; the TODO says which.
 
 ## Inventory
 
