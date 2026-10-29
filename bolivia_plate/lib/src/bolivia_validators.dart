@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'bolivia_alphabets.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `BoliviaPlates.standard` value. Reports, never bars a keystroke.
 ///
 /// Checks what the article states: the PTA number is three or four digits
@@ -13,6 +16,9 @@ class BoliviaValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'letters';
 
+  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
+  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
+  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _letters = RegExp(r'^[A-Z]{3}$');
 
   static const String reasonNumber = 'The number is three or four digits.';
@@ -70,6 +76,9 @@ class BoliviaMercosurValidator extends GatedPlateValidator {
   @override
   String get gateGroup => 'number';
 
+  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
+  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
+  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _letters = RegExp(r'^[A-Z]{2}$');
 
   static const String reasonLetters = 'The series is two letters.';

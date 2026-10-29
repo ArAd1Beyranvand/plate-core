@@ -6,6 +6,9 @@
 /// diplomatic `NNN-NN-NN` plate and the army plate complete the set.
 library;
 
+// TODO(py): [D5] one module `plates.countries.algeria`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/algeria`; tree-shakable.
+// TODO(kt): [D5] package `countries.algeria` in the countries module.
 export 'src/algeria_alphabets.dart';
 export 'src/algeria_colors.dart';
 export 'src/algeria_country.dart';

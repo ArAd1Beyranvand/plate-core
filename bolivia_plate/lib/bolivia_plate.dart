@@ -6,6 +6,9 @@
 /// (`12-CD-34`) and the Mercosur plate (`AB 12345`) complete the set.
 library;
 
+// TODO(py): [D5] one module `plates.countries.bolivia`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/bolivia`; tree-shakable.
+// TODO(kt): [D5] package `countries.bolivia` in the countries module.
 export 'src/bolivia_alphabets.dart';
 export 'src/bolivia_colors.dart';
 export 'src/bolivia_country.dart';

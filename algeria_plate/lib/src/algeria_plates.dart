@@ -232,6 +232,9 @@ abstract final class AlgeriaPlates {
     ],
     decals: const <PlateDecal>[
       PlateDecal(
+        // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+        // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+        // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
         image: AssetImage('assets/dz_roundel.png', package: 'algeria_plate'),
         box: PlateBox(
           _Layout.roundelLeft,
