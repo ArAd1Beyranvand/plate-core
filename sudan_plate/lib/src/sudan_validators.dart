@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'sudan_alphabets.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `SudanPlates` value. Reports, never bars a keystroke.
 ///
 /// A single class digit (its meaning is undocumented and is not the usage), a
