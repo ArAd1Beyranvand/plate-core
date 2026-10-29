@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'cuba_alphabets.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a 2013 Cuban plate value. Reports, never bars a keystroke.
 ///
 /// Quiet until the first serial group has a digit. Checks the letter is an
