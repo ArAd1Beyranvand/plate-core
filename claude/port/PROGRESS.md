@@ -13,3 +13,9 @@ Resume from the first line without a commit hash. Format:
 - P2 · deferred: PlateInputMachine pure/focus split (adds a class, no line win; D8 TODOs instead); fromValues kept (used by country golden tests)
 - P3 · plate_core/lib/src/animation · shortened: -59 · core 46646c8 e511b62
 - P3 · same · todos: 16/16/16 · core 9c1750d
+- P4 · plate_core/lib/src/widgets (canvas excluded) · shortened: -9 · core a485a94
+- P4 · same · todos: 21/21/21 · core 88451c6
+- P4 · plate_canvas.dart · shortened: -21 · core 76a76b7
+- P4 · plate_canvas.dart · todos: 18/18/18 · core 4a638be
+- P5 · plate_core/test · todos: 11/11/11 (non-vector tests only) · core e8afb5d
+- Stopped after P5 as instructed; P6+ not started.
