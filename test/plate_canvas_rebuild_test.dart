@@ -63,6 +63,9 @@ ThemeData _selectionThemeOf(WidgetTester tester) => tester
     .first
     .data;
 
+// TODO(ts): [H14] drop — counts Flutter rebuilds; no equivalent.
+// TODO(kt): [H14] drop — or a recomposition counter if worth it.
+// TODO(py): [H14] drop.
 void main() {
   testWidgets('a keystroke does not rebuild the canvas', (tester) async {
     final PlateController controller = PlateController(spec: _spec);

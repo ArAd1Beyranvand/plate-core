@@ -23,6 +23,9 @@ double _opacityOf(WidgetTester tester, String text) => tester
     )
     .opacity;
 
+// TODO(ts): [H7] the old/new glyph diff is vectorable; the timing assertions stay ui tests.
+// TODO(kt): [H7] same.
+// TODO(py): [H7] same.
 void main() {
   testWidgets('characters present at mount show at once', (tester) async {
     await tester.pumpWidget(_run('12'));

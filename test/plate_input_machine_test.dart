@@ -102,6 +102,9 @@ class _Harness {
   }
 }
 
+// TODO(ts): [D8] testWidgets only for FocusNodes: the state half becomes vectors, focus half ui tests.
+// TODO(kt): [D8] same split.
+// TODO(py): [D8] same split.
 void main() {
   group('construction', () {
     testWidgets('seeds activeIndex to 0 and does not announce it', (

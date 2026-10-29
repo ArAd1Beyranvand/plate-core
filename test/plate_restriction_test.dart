@@ -165,6 +165,9 @@ void main() {
     expect(const _Serial().validate(entry).reason, 'NO SUCH CODE');
   });
 
+  // TODO(ts): ui test: banner shown, focus kept; the refusal itself is in the controller vectors.
+  // TODO(kt): ui test: same.
+  // TODO(py): ui test: same.
   testWidgets('canvas refuses typing, does not advance, shows the reason', (
     tester,
   ) async {

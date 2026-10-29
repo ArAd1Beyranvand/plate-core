@@ -50,6 +50,9 @@ void main() {
     });
   });
 
+  // TODO(ts): [D6] paint smoke test; compare an SVG snapshot instead.
+  // TODO(kt): [D6] screenshot test.
+  // TODO(py): [D6] QImage render test.
   testWidgets('PlateDrawingView paints a drawing', (tester) async {
     await tester.pumpWidget(
       const Directionality(

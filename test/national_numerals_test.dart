@@ -91,6 +91,9 @@ void main() {
     });
   });
 
+  // TODO(ts): ui test: typing a national numeral through the canvas; port as a DOM test.
+  // TODO(kt): ui test: compose UI test.
+  // TODO(py): ui test: pytest-qt.
   testWidgets(
     'an editable mirror shares one value with its source slot in two scripts',
     (tester) async {

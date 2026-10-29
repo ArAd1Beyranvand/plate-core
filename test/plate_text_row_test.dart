@@ -55,6 +55,9 @@ Future<void> _pump(WidgetTester tester, Widget child) => tester.pumpWidget(
   Directionality(textDirection: TextDirection.ltr, child: child),
 );
 
+// TODO(ts): [D1] group order and prefix are vectorable; colour default is a ui test.
+// TODO(kt): same.
+// TODO(py): same.
 void main() {
   testWidgets(
     'empty group renders nothing; filled group renders through glyphs',
