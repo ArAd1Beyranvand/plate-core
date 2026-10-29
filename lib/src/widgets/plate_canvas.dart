@@ -1433,9 +1433,7 @@ class _MirrorBinding extends StatelessWidget {
         child: FittedBox(
           fit: BoxFit.scaleDown,
           child: PlateGlyphRun(
-            text: alphabet.renderAll(
-              controller.valueAt(mirror.source) ?? '',
-            ),
+            text: alphabet.renderAll(controller.valueAt(mirror.source) ?? ''),
             textDirection: alphabet.direction,
             style: theme.glyphStyle(mirror.glyphHeight, theme.ink),
             placeholder: controller.hintAt(mirror.source, alphabet) ?? '',

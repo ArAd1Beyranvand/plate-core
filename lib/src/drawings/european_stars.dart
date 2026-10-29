@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'plate_asset.dart';
-import 'plate_shape.dart';
+import '../model/plate_asset.dart';
+import '../model/plate_shape.dart';
 
 /// The EU's twelve gold stars, drawn rather than shipped, for every EU country
 /// package to share.
@@ -20,5 +20,3 @@ abstract final class EuropeanStars {
     PlateStarRingShape(450, 300, 200, 37.5, 12, _gold),
   ]);
 }
-
-//todo: i dont like these drawings to be inside 'model' folder.
