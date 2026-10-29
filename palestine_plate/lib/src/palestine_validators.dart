@@ -3,6 +3,9 @@ import 'package:plate_core/plate_core.dart';
 import 'palestine_governorates.dart';
 import 'palestine_usage.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Modern West Bank plate validator (D·DDDD·L). Quiet until the governorate is
 /// filled, so incomplete entry does not flash red.
 class PSWestBankModernValidator extends GatedPlateValidator {

@@ -73,6 +73,9 @@ abstract final class PSGazaPlates {
   /// A raster, since decals cannot be SVG, pre-faded to ~12% grey. Decals paint
   /// under the slots.
   static const PlateDecal _watermark = PlateDecal(
+    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage(
       'assets/marks/palestine_watermark.png',
       package: 'palestine_plate',
@@ -199,6 +202,9 @@ abstract final class PSGazaPlates {
     labels: _twoLineLabels,
     decals: [
       PlateDecal(
+        // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+        // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+        // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
         image: AssetImage(
           'assets/marks/palestine_watermark.png',
           package: 'palestine_plate',
