@@ -127,7 +127,7 @@ class _Block extends StatelessWidget {
             ),
     );
     return Directionality(
-      textDirection: TextDirection.ltr,
+      textDirection: .ltr,
       child: PlatePartAnimator(
         id: PlatePartId.panel,
         selfPainted: true,
@@ -169,12 +169,10 @@ class _BlockPainter extends CustomPainter {
     final bounds = Offset.zero & size;
     _paint.color = color;
     switch (frame.motion.effect) {
-      case PlatePartEffect.fade ||
-          PlatePartEffect.fadeScale ||
-          PlatePartEffect.fadeSlide:
+      case .fade || .fadeScale || .fadeSlide:
         _paint.color = color.withValues(alpha: color.a * frame.shown);
         canvas.drawRect(bounds, _paint);
-      case PlatePartEffect.wipe || PlatePartEffect.draw:
+      case .wipe || .draw:
         canvas.drawRect(
           plateRevealRect(bounds, frame.motion.origin, frame),
           _paint,

@@ -74,10 +74,8 @@ class PlateDividerPainter extends CustomPainter {
       canvas.clipRRect(clip);
     }
     final motion = frame.motion;
-    if (frame.phase == PlatePartPhase.settled ||
-        motion.effect == PlatePartEffect.fade ||
-        motion.effect == PlatePartEffect.fadeScale ||
-        motion.effect == PlatePartEffect.fadeSlide) {
+    if (frame.phase == .settled ||
+        (motion.effect != .wipe && motion.effect != .draw)) {
       _paint.color = color.withValues(alpha: color.a * frame.shown);
       canvas.drawRect(r, _paint);
     } else {
@@ -106,7 +104,7 @@ class PlateDividerPainter extends CustomPainter {
         : Rect.fromLTRB(lo + len * f0, r.top, lo + len * f1, r.bottom);
 
     // The moving edge: the head on the way in, the tail on the way out.
-    final comingIn = frame.phase == PlatePartPhase.comingIn;
+    final comingIn = frame.phase == .comingIn;
     final moving = comingIn != fromEnd ? b : a;
     final ramp = frame.motion.softEdge && !whole
         ? ((vertical ? r.width : r.height) * 3 / len).clamp(0.0, b - a)

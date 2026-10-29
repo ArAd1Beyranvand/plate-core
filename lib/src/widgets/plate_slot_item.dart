@@ -56,7 +56,7 @@ class PlateSlotItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final effectiveTheme = theme ?? PlateTheme.of(context);
-    if (behavior == SlotBehavior.glyph) {
+    if (behavior == .glyph) {
       return _GlyphSlot(
         slot: slot,
         value: value,
@@ -65,8 +65,8 @@ class PlateSlotItem extends StatelessWidget {
       );
     }
     final typed =
-        behavior == SlotBehavior.imeField ||
-        behavior == SlotBehavior.keypadFirstField ||
+        behavior == .imeField ||
+        behavior == .keypadFirstField ||
         (behavior != SlotBehavior.sheet &&
             slot.alphabet.input == AlphabetInput.typed);
     if (typed) {
@@ -121,7 +121,7 @@ class _GlyphSlot extends StatelessWidget {
       height: slot.box.height,
       child: Center(
         child: FittedBox(
-          fit: BoxFit.scaleDown,
+          fit: .scaleDown,
           // Letter spacing trails the last glyph too; the same space
           // before the first keeps the run centred.
           child: Padding(
@@ -191,7 +191,7 @@ class _TypedField extends StatefulWidget {
 class _TypedFieldState extends State<_TypedField> {
   final FocusNode _fieldNode = FocusNode();
 
-  bool get _split => widget.behavior == SlotBehavior.keypadFirstField;
+  bool get _split => widget.behavior == .keypadFirstField;
 
   @override
   void initState() {
@@ -241,14 +241,14 @@ class _TypedFieldState extends State<_TypedField> {
           String.fromCharCodes(held.runes.take(held.runes.length - 1)),
         );
       }
-      return KeyEventResult.handled;
+      return .handled;
     }
     final ch = event.character;
-    if (ch == null || ch.runes.length != 1) return KeyEventResult.ignored;
+    if (ch == null || ch.runes.length != 1) return .ignored;
     final next = held + slot.canonical(ch);
-    if (!slot.accepts(next)) return KeyEventResult.ignored;
+    if (!slot.accepts(next)) return .ignored;
     if (widget.onChanged(next) && slot.isFull(next)) widget.onCompleted?.call();
-    return KeyEventResult.handled;
+    return .handled;
   }
 
   @override
@@ -262,7 +262,7 @@ class _TypedFieldState extends State<_TypedField> {
     final onChanged = widget.onChanged;
     final onCompleted = widget.onCompleted;
     final fieldNode = _split ? _fieldNode : focusNode;
-    final readOnly = behavior == SlotBehavior.externalField;
+    final readOnly = behavior == .externalField;
     final style = _fittedStyle();
     // A shrunk run keeps its bottom where a full-size one would sit, so its
     // baseline lines up with the neighbouring slots.
@@ -279,30 +279,30 @@ class _TypedFieldState extends State<_TypedField> {
         skipTraversal: !_split,
         onKeyEvent: (node, event) {
           if (event is! KeyDownEvent && event is! KeyRepeatEvent) {
-            return KeyEventResult.ignored;
+            return .ignored;
           }
           if (_split && focusNode.hasPrimaryFocus) return _keypadKey(event);
           if (event.logicalKey != LogicalKeyboardKey.backspace) {
-            return KeyEventResult.ignored;
+            return .ignored;
           }
           if (!readOnly && controller.text.isNotEmpty) {
-            return KeyEventResult.ignored;
+            return .ignored;
           }
           widget.onBackspace?.call();
-          return KeyEventResult.handled;
+          return .handled;
         },
         child: _HoldsPageStill(
           child: Listener(
             // Flips the keyboard type on pointer down so the rebuilt field is in
             // place when the tap-up opens the input connection.
-            onPointerDown: behavior == SlotBehavior.keypadFirstField
+            onPointerDown: behavior == .keypadFirstField
                 ? (_) => widget.onRequestSystemKeyboard?.call()
                 : null,
             child: ListenableBuilder(
               // The controller too: the underline darkens as the slot fills.
               listenable: Listenable.merge([focusNode, controller]),
               builder: (context, _) => Stack(
-                fit: StackFit.passthrough,
+                fit: .passthrough,
                 children: [
                   TextField(
                     controller: controller,
@@ -315,7 +315,7 @@ class _TypedFieldState extends State<_TypedField> {
                       offset: controller.text.length,
                     ),
                     showCursor: readOnly ? focusNode.hasFocus : null,
-                    textAlign: TextAlign.center,
+                    textAlign: .center,
                     // The slot's script, not the plate's: Persian numerals run
                     // left to right inside an RTL plate, and the caret must follow.
                     textDirection: slot.alphabet.direction,
@@ -380,7 +380,7 @@ class _TypedFieldState extends State<_TypedField> {
                       }
                     },
                     maxLength: slot.length,
-                    keyboardType: behavior == SlotBehavior.hardwareField
+                    keyboardType: behavior == .hardwareField
                         ? TextInputType.none
                         : slot.alphabet.isNumeric
                         ? TextInputType.number
@@ -395,7 +395,7 @@ class _TypedFieldState extends State<_TypedField> {
                           top: slot.box.height * 0.14 + shrink,
                         ),
                         child: Align(
-                          alignment: Alignment.topCenter,
+                          alignment: .topCenter,
                           child: PlateGlyphRun(
                             text: controller.text,
                             textDirection: slot.alphabet.direction,
@@ -492,7 +492,7 @@ class _ChosenSlot extends StatelessWidget {
 
     final restingColor = isEmpty ? theme.inactiveColor : theme.activeColor;
 
-    if (behavior == SlotBehavior.sheet) {
+    if (behavior == .sheet) {
       return InkWell(
         onTap: onPressed,
         child: _SlotBox(
@@ -504,27 +504,27 @@ class _ChosenSlot extends StatelessWidget {
     }
 
     final consumesKeys =
-        behavior == SlotBehavior.hardwareField ||
-        behavior == SlotBehavior.keypadFirstField;
+        behavior == .hardwareField ||
+        behavior == .keypadFirstField;
     return Focus(
       focusNode: focusNode,
       onKeyEvent: consumesKeys
           ? (node, event) {
-              if (event is! KeyDownEvent) return KeyEventResult.ignored;
+              if (event is! KeyDownEvent) return .ignored;
               if (event.logicalKey == LogicalKeyboardKey.backspace) {
                 if (isEmpty) {
                   onBackspace?.call();
                 } else {
                   onChanged('');
                 }
-                return KeyEventResult.handled;
+                return .handled;
               }
               final ch = event.character;
               if (ch != null && ch.length == 1 && slot.alphabet.accepts(ch)) {
                 onChanged(slot.alphabet.canonical(ch));
-                return KeyEventResult.handled;
+                return .handled;
               }
-              return KeyEventResult.ignored;
+              return .ignored;
             }
           : null,
       child: Builder(

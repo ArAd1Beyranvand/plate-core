@@ -41,7 +41,7 @@ class PlateFrame extends StatelessWidget {
     final dividers = plateDividerCount(background);
     return _RimParts(
       child: Stack(
-        fit: StackFit.expand,
+        fit: .expand,
         children: [
           PlatePartAnimator(
             id: PlatePartId.background,
@@ -265,12 +265,8 @@ class _Geometry {
   late final RRect face;
 }
 
-bool _fades(PlatePartFrame frame) => switch (frame.motion.effect) {
-  PlatePartEffect.fade ||
-  PlatePartEffect.fadeScale ||
-  PlatePartEffect.fadeSlide => true,
-  PlatePartEffect.wipe || PlatePartEffect.draw => false,
-};
+bool _fades(PlatePartFrame frame) =>
+    frame.motion.effect != .wipe && frame.motion.effect != .draw;
 
 class _FacePaint extends StatelessWidget {
   const _FacePaint({required this.theme});
@@ -302,7 +298,7 @@ class _FacePainter extends CustomPainter {
     final g = _Geometry(theme, size, rim);
     final color = theme.plateBackground;
     canvas.save();
-    if (frame.phase != PlatePartPhase.settled && !_fades(frame)) {
+    if (frame.phase != .settled && !_fades(frame)) {
       canvas.clipRect(
         plateRevealRect(Offset.zero & size, frame.motion.origin, frame),
       );
@@ -389,7 +385,7 @@ class _RegionPainter extends CustomPainter {
     final fades = _fades(frame);
     canvas.save();
     canvas.clipRRect(g.face);
-    if (frame.phase != PlatePartPhase.settled && !fades) {
+    if (frame.phase != .settled && !fades) {
       canvas.clipRect(plateRevealRect(r, frame.motion.origin, frame));
     }
     final opacity = fades ? frame.shown : 1.0;
@@ -596,7 +592,6 @@ class _BorderPainter extends CustomPainter {
 
   final PlatePartFrame frame;
   final _RimFrames rim;
-
   final PlateTheme theme;
   final bool isCompleted;
 
@@ -618,7 +613,7 @@ class _BorderPainter extends CustomPainter {
     final motion = frame.motion;
     final (a, b) = frame.span;
     final whole = a <= 0 && b >= 1;
-    if (whole || motion.effect != PlatePartEffect.draw) {
+    if (whole || motion.effect != .draw) {
       _fill.color = whole || !_fades(frame)
           ? color
           : color.withValues(alpha: color.a * frame.shown);

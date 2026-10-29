@@ -44,7 +44,7 @@ class _PlateGlyphRunState extends State<PlateGlyphRun>
 
   List<String> _unitsOf(String text) {
     if (text.isEmpty) return const [];
-    return widget.textDirection == TextDirection.ltr
+    return widget.textDirection == .ltr
         ? text.characters.toList()
         : [text];
   }
