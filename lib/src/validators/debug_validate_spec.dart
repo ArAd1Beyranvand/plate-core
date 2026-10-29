@@ -4,12 +4,25 @@ import '../model/plate_alphabet.dart';
 import '../model/plate_box.dart';
 import '../model/plate_spec.dart';
 
-/// Debug-only consistency check: every rect fits the canvas, every mirror
-/// echoes a real slot, registers are evenly pitched, and alphabet ids key
-/// content one-to-one. Always returns true; call it inside `assert(...)`.
+/// Debug-only consistency check over [specProblems]: asserts there are none.
+/// Always returns true; call it inside `assert(...)`.
 bool debugValidateSpec(PlateSpec spec) {
+  final problems = specProblems(spec);
+  assert(problems.isEmpty, problems.join('\n'));
+  return true;
+}
+
+/// Everything wrong with [spec], empty for a sound one: every rect fits the
+/// canvas, every mirror echoes a real slot, registers are evenly pitched, and
+/// alphabet ids key content one-to-one.
+List<String> specProblems(PlateSpec spec) {
+  final problems = <String>[];
+  void check(bool ok, String problem) {
+    if (!ok) problems.add(problem);
+  }
+
   void checkInCanvas(PlateBox b, String what) {
-    assert(
+    check(
       b.left >= 0 &&
           b.top >= 0 &&
           b.right <= spec.canvasWidth &&
@@ -26,7 +39,7 @@ bool debugValidateSpec(PlateSpec spec) {
   for (var i = 0; i < spec.mirrors.length; i++) {
     final m = spec.mirrors[i];
     checkInCanvas(m.box, 'PlateMirror $i');
-    assert(
+    check(
       m.source >= 0 && m.source < spec.slots.length,
       'PlateMirror $i in spec "${spec.id}" echoes slot ${m.source}, which is '
       'not a slot index (0..${spec.slots.length - 1}).',
@@ -42,7 +55,7 @@ bool debugValidateSpec(PlateSpec spec) {
       final stripes = s.fill!.stripes;
       if (stripes == null) return;
       final stops = s.fill!.stops;
-      assert(
+      check(
         stripes.length == stops.length + 1 &&
             stripes.every((f) => !f.isStripes),
         'Background leaf $path in spec "${spec.id}" has ${stripes.length} stripes '
@@ -50,7 +63,7 @@ bool debugValidateSpec(PlateSpec spec) {
         'nest stripes.',
       );
       for (var i = 1; i < stops.length; i++) {
-        assert(
+        check(
           stops[i] > stops[i - 1],
           'Background leaf $path in spec "${spec.id}" has stops out of order: '
           '${stops[i]} after ${stops[i - 1]}.',
@@ -64,7 +77,7 @@ bool debugValidateSpec(PlateSpec spec) {
     for (var i = 0; i < s.parts.length; i++) {
       final part = s.parts[i];
       final last = i == s.parts.length - 1;
-      assert(
+      check(
         last
             ? part.end == null
             : part.end != null && part.end! > previous && part.end! < end,
@@ -101,7 +114,7 @@ bool debugValidateSpec(PlateSpec spec) {
     if (!sameRow) continue;
     final pitch = boxes[1].left - boxes[0].left;
     for (var n = 1; n < boxes.length; n++) {
-      assert(
+      check(
         (boxes[n].left - boxes[0].left - n * pitch).abs() < 0.01,
         'Register "${g.key}" in spec "${spec.id}" is unevenly pitched: cell $n '
         'sits at ${boxes[n].left}, but a pitch of $pitch puts it at '
@@ -112,7 +125,7 @@ bool debugValidateSpec(PlateSpec spec) {
   }
 
   for (final r in spec.restrictions) {
-    assert(
+    check(
       spec.textGroups.any((g) => g.key == r.group),
       'Restriction "${r.reason}" in spec "${spec.id}" watches group '
       '"${r.group}", which no text group carries — it would never fire.',
@@ -131,22 +144,21 @@ bool debugValidateSpec(PlateSpec spec) {
   ]) {
     final contentKey = _contentKey(a);
     final seenContent = byId[a.id];
-    assert(
+    check(
       seenContent == null || seenContent == contentKey,
       'Alphabet id "${a.id}" in spec "${spec.id}" appears with two different '
       'character/glyph sets.',
     );
     byId[a.id] = contentKey;
     final seenId = byContent[contentKey];
-    assert(
+    check(
       seenId == null || seenId == a.id,
       'Spec "${spec.id}" has two distinct alphabet ids ("$seenId", "${a.id}") '
       'sharing the same characters and glyphs.',
     );
     byContent[contentKey] = a.id;
   }
-
-  return true;
+  return problems;
 }
 
 String _contentKey(PlateAlphabet a) =>
