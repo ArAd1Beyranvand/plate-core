@@ -380,15 +380,6 @@ void main() {
     });
   });
 
-  group('plateNumber', () {
-    test('carries the values across', () {
-      final c = PlateController(spec: _spec(), values: ['1', '2', '3']);
-      addTearDown(c.dispose);
-      expect(c.plateNumber, PlateNumber(values: const ['1', '2', '3']));
-      expect(c.plateNumber.isCompleted, isTrue);
-    });
-  });
-
   group('adoptSpec', () {
     // Same registers, different positions: 'serial' moves from [1,2,3,4] to
     // [0,1,2,3] and 'region' from [0] to [4].

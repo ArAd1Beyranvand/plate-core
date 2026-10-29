@@ -1,3 +1,10 @@
+## Unreleased
+
+- Removed `PlateNumber` and `PlateController.plateNumber`: nothing used them;
+  read `PlateController.values` / `isCompleted` / `isEmpty`. `PlateMode` now
+  lives in `slot_behavior.dart` (still exported from the barrel).
+- `specProblems(spec)` lists what `debugValidateSpec` asserts on.
+
 ## 0.12.1
 
 - Brace the early return in `PlateCanvas` (lint).

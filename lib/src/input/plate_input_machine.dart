@@ -2,9 +2,8 @@ import 'package:flutter/widgets.dart';
 
 import '../model/plate_alphabet.dart';
 import '../model/plate_input_source.dart';
-import '../model/plate_number.dart';
-import '../model/plate_spec.dart';
 import '../model/slot_behavior.dart';
+import '../model/plate_spec.dart';
 import 'plate_input_controller.dart';
 
 /// Focus nodes and text controllers for one plate. Reads values through

@@ -298,19 +298,6 @@ void main() {
       );
     });
 
-    test('PlateNumber has value equality over its characters', () {
-      final a = PlateNumber(values: const ['1', '2']);
-      final b = PlateNumber(values: const ['1', '2']);
-      expect(a, equals(b));
-      expect(a.hashCode, b.hashCode);
-      expect(a, equals(a));
-      expect(a, isNot(equals(PlateNumber(values: const ['1', '3']))));
-      expect(a.isCompleted, isTrue);
-      expect(a.isEmpty, isFalse);
-      expect(PlateNumber(values: const [null, null]).isEmpty, isTrue);
-      expect(PlateNumber(values: const ['1', null]).isCompleted, isFalse);
-    });
-
     test('PlateAsset carries the owning package, not the rendering one', () {
       const svg = SvgPlateAsset('flags/zz.svg', package: 'zz_plate');
       const raster = RasterPlateAsset('badges/zz.png', package: 'zz_plate');

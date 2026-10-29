@@ -1,6 +1,8 @@
 import 'plate_alphabet.dart';
 import 'plate_input_source.dart';
-import 'plate_number.dart';
+
+/// [input] shows editable fields; [display] shows bare glyphs, as printed.
+enum PlateMode { input, display }
 
 /// What a slot does about input, resolved once per build; rendering and
 /// gestures switch on it rather than re-deriving it.

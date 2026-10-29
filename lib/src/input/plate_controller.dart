@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../model/plate_alphabet.dart';
-import '../model/plate_number.dart';
 import '../model/plate_restriction.dart';
 import '../model/plate_spec.dart';
 import '../validators/plate_validator.dart';
@@ -164,8 +163,6 @@ class PlateController extends ChangeNotifier {
 
   bool get isCompleted => _completed.value;
   bool get isEmpty => !_values.any((v) => v != null && v.isNotEmpty);
-
-  PlateNumber get plateNumber => PlateNumber(values: _values);
 
   /// The character at [index]. Out of range gives a listenable that stays null,
   /// so a widget outliving a shrinking spec paints an empty slot.

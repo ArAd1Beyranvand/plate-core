@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../input/plate_controller.dart';
 import '../model/plate_country.dart';
-import '../model/plate_number.dart';
+import '../model/slot_behavior.dart';
 import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
 import 'plate_canvas.dart';
