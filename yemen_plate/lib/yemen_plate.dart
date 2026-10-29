@@ -9,6 +9,9 @@
 /// proportioned from photographs.
 library;
 
+// TODO(py): [D5] one module `plates.countries.yemen`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/yemen`; tree-shakable.
+// TODO(kt): [D5] package `countries.yemen` in the countries module.
 export 'package:plate_alphabet/plate_alphabet.dart' show RiyadhAlphabets;
 export 'src/common/yemen_alphabets.dart';
 export 'src/common/yemen_colors.dart';

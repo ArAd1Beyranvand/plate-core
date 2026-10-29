@@ -26,6 +26,9 @@ import '../common/yemen_country.dart';
 /// The lighthouse is a decal cropped from the CC0 artwork — a drawing, not a
 /// shape an algorithm can paint.
 abstract final class YemenAdenPlates {
+  // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+  // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+  // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
   static const AssetImage _lighthouse = AssetImage(
     'assets/southern/aden_lighthouse.png',
     package: 'yemen_plate',

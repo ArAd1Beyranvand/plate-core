@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'yemen_governorates.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a System A (2026 unified) plate, gated on the side code so it stays
 /// quiet until the number is entered. The side code is checked for shape only.
 class YemenUnifiedValidator extends GatedPlateValidator {

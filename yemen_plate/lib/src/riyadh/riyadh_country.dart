@@ -28,6 +28,9 @@ PlateCountry _strip(Color color) => PlateCountry(
   captionLines: const <String>[],
   panelColor: color,
   panelTextColor: RiyadhColors.ink,
+  // TODO(py): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+  // TODO(ts): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+  // TODO(kt): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
   flag: const SvgPlateAsset('assets/riyadh/emblem.svg', package: 'yemen_plate'),
   flagAspectRatio: 610 / 662.42,
 );
