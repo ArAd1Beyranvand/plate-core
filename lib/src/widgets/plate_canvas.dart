@@ -16,6 +16,7 @@ import '../model/plate_restriction.dart';
 import '../model/plate_spec.dart';
 import '../model/slot_behavior.dart';
 import '../theme/plate_theme.dart';
+import '../validators/debug_validate_spec.dart';
 import '../validators/plate_validator.dart';
 import 'country_panel.dart';
 import 'plate_divider.dart';
