@@ -135,22 +135,12 @@ class PlatePartId {
 }
 
 /// How many leaves [section] has — the [PlatePartKind.region] count.
-int plateRegionCount(PlateSection section) => section.isLeaf
-    ? 1
-    : section.parts.fold(0, (n, p) => n + plateRegionCount(p.section));
+int plateRegionCount(PlateSection section) =>
+    section.layout(Rect.zero).leaves.length;
 
 /// How many dividers [section] draws — the [PlatePartKind.divider] count.
-int plateDividerCount(PlateSection section) {
-  if (section.isLeaf) return 0;
-  var n = 0;
-  final last = section.parts.length - 1;
-  for (var i = 0; i <= last; i++) {
-    final part = section.parts[i];
-    n += plateDividerCount(part.section);
-    if (part.divider > 0 && i != last) n++;
-  }
-  return n;
-}
+int plateDividerCount(PlateSection section) =>
+    section.layout(Rect.zero).dividers.length;
 
 /// How a part appears and disappears.
 enum PlatePartEffect {
@@ -176,11 +166,11 @@ enum PlatePartEffect {
 @immutable
 class PlateMotion {
   const PlateMotion({
-    this.effect = PlatePartEffect.fade,
+    this.effect = .fade,
     this.duration = const Duration(milliseconds: 420),
     this.curve = Curves.easeInOutCubic,
     this.delay = Duration.zero,
-    this.origin = Alignment.centerLeft,
+    this.origin = .centerLeft,
     this.startPoint = 0,
     this.clockwise = true,
     this.softEdge = false,
@@ -242,58 +232,29 @@ class PlateAnimationStyle {
   final Map<PlatePartId, PlateMotion> overrides;
 
   static const Map<PlatePartKind, PlateMotion> defaults = {
-    PlatePartKind.background: PlateMotion(
-      effect: PlatePartEffect.wipe,
-      origin: Alignment.center,
-    ),
-    PlatePartKind.region: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.divider: PlateMotion(
-      effect: PlatePartEffect.draw,
-      origin: Alignment.topCenter,
-      softEdge: true,
-    ),
-    PlatePartKind.corner: PlateMotion(
-      effect: PlatePartEffect.fade,
+    .background: PlateMotion(effect: .wipe, origin: .center),
+    .region: PlateMotion(effect: .wipe),
+    .divider: PlateMotion(effect: .draw, origin: .topCenter, softEdge: true),
+    .corner: PlateMotion(effect: .fade, duration: Duration(milliseconds: 600)),
+    .borderWidth: PlateMotion(
+      effect: .fade,
       duration: Duration(milliseconds: 600),
     ),
-    PlatePartKind.borderWidth: PlateMotion(
-      effect: PlatePartEffect.fade,
+    .borderColor: PlateMotion(
+      effect: .fade,
       duration: Duration(milliseconds: 600),
     ),
-    PlatePartKind.borderColor: PlateMotion(
-      effect: PlatePartEffect.fade,
-      duration: Duration(milliseconds: 600),
-    ),
-    PlatePartKind.border: PlateMotion(
-      effect: PlatePartEffect.draw,
-      duration: Duration(milliseconds: 900),
-    ),
-    PlatePartKind.panel: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.flag: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.caption: PlateMotion(
-      effect: PlatePartEffect.wipe,
-      origin: Alignment.topCenter,
-    ),
-    PlatePartKind.band: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.bandCorner: PlateMotion(effect: PlatePartEffect.fade),
-    PlatePartKind.rule: PlateMotion(
-      effect: PlatePartEffect.draw,
-      origin: Alignment.topCenter,
-      softEdge: true,
-    ),
-    PlatePartKind.label: PlateMotion(effect: PlatePartEffect.wipe),
-    PlatePartKind.decal: PlateMotion(
-      effect: PlatePartEffect.fadeScale,
-      origin: Alignment.center,
-    ),
-    PlatePartKind.slot: PlateMotion(
-      effect: PlatePartEffect.fadeSlide,
-      origin: Alignment.bottomCenter,
-    ),
-    PlatePartKind.mirror: PlateMotion(
-      effect: PlatePartEffect.fadeSlide,
-      origin: Alignment.bottomCenter,
-    ),
+    .border: PlateMotion(effect: .draw, duration: Duration(milliseconds: 900)),
+    .panel: PlateMotion(effect: .wipe),
+    .flag: PlateMotion(effect: .wipe),
+    .caption: PlateMotion(effect: .wipe, origin: .topCenter),
+    .band: PlateMotion(effect: .wipe),
+    .bandCorner: PlateMotion(effect: .fade),
+    .rule: PlateMotion(effect: .draw, origin: .topCenter, softEdge: true),
+    .label: PlateMotion(effect: .wipe),
+    .decal: PlateMotion(effect: .fadeScale, origin: .center),
+    .slot: PlateMotion(effect: .fadeSlide, origin: .bottomCenter),
+    .mirror: PlateMotion(effect: .fadeSlide, origin: .bottomCenter),
   };
 
   PlateMotion motionFor(PlatePartId id) =>
@@ -369,12 +330,12 @@ class PlateAnimationController extends ChangeNotifier {
   }
 
   void comeIn(PlatePartId id, {Duration delay = Duration.zero}) =>
-      cue(id, PlatePartPhase.comingIn, delay: delay);
+      cue(id, .comingIn, delay: delay);
 
   void goOut(PlatePartId id, {Duration delay = Duration.zero}) =>
-      cue(id, PlatePartPhase.goingOut, delay: delay);
+      cue(id, .goingOut, delay: delay);
 
-  void settle(PlatePartId id) => cue(id, PlatePartPhase.settled);
+  void settle(PlatePartId id) => cue(id, .settled);
 
   /// Takes [id] straight to gone, with no transition.
   void hide(PlatePartId id) {
@@ -404,12 +365,12 @@ class PlateAnimationController extends ChangeNotifier {
   }
 
   void comeInAll({Map<PlatePartId, Duration> delays = const {}}) =>
-      cueAll(PlatePartPhase.comingIn, delays: delays);
+      cueAll(.comingIn, delays: delays);
 
   void goOutAll({Map<PlatePartId, Duration> delays = const {}}) =>
-      cueAll(PlatePartPhase.goingOut, delays: delays);
+      cueAll(.goingOut, delays: delays);
 
-  void settleAll() => cueAll(PlatePartPhase.settled);
+  void settleAll() => cueAll(.settled);
 
   @override
   void dispose() {
@@ -531,9 +492,7 @@ class PlateSpecTransition {
     }
     final i = id.index;
     switch (id.kind) {
-      case PlatePartKind.panel:
-      case PlatePartKind.flag:
-      case PlatePartKind.caption:
+      case .panel || .flag || .caption:
         final a = from.panel, b = to.panel;
         return !from.noPanel &&
             !to.noPanel &&
@@ -545,7 +504,7 @@ class PlateSpecTransition {
             a.padding == b.padding &&
             a.direction == b.direction &&
             identical(a.shape, b.shape);
-      case PlatePartKind.region:
+      case .region:
         final a = _layout(from).leaves.elementAtOrNull(i);
         final b = _layout(to).leaves.elementAtOrNull(i);
         if (a == null || b == null) return false;
@@ -554,11 +513,11 @@ class PlateSpecTransition {
             _sameFill(a.$1.fill!, b.$1.fill!) &&
             (!a.$1.paintsPanel ||
                 from.country.panelColor == to.country.panelColor);
-      case PlatePartKind.divider:
+      case .divider:
         final a = _layout(from).dividers.elementAtOrNull(i);
         final b = _layout(to).dividers.elementAtOrNull(i);
         return a != null && a == b && from.inkOverride == to.inkOverride;
-      case PlatePartKind.slot:
+      case .slot:
         if (fromValues == null || toValues == null) return false;
         if (i >= from.slots.length || i >= to.slots.length) return false;
         if (i >= fromValues.length || i >= toValues.length) return false;
@@ -568,18 +527,18 @@ class PlateSpecTransition {
             _sameBox(a.box, b.box) &&
             a.color == b.color &&
             from.inkOverride == to.inkOverride;
-      case PlatePartKind.band:
+      case .band:
         if (i >= from.bands.length || i >= to.bands.length) return false;
         final a = from.bands[i], b = to.bands[i];
         return _sameBox(a.box, b.box) &&
             a.color == b.color &&
             a.topCornerRadius == b.topCornerRadius &&
             a.bottomCornerRadius == b.bottomCornerRadius;
-      case PlatePartKind.rule:
+      case .rule:
         if (i >= from.rules.length || i >= to.rules.length) return false;
         return _sameBox(from.rules[i].box, to.rules[i].box) &&
             from.inkOverride == to.inkOverride;
-      case PlatePartKind.label:
+      case .label:
         if (i >= from.labels.length || i >= to.labels.length) return false;
         final a = from.labels[i], b = to.labels[i];
         return _sameBox(a.box, b.box) &&
