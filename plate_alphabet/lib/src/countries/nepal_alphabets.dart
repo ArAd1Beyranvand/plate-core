@@ -44,6 +44,9 @@ abstract final class NepalAlphabets {
     glyphs: _devanagariNumerals,
   );
 
+  // TODO(py): [H7] entries like 'मे' are consonant+matra clusters; split the include string on spaces only, never per code point.
+  // TODO(ts): [H7] same: split on ' ' only; Array.from would detach the matra. [D6-font] bundle Devanagari.
+  // TODO(kt): [H7] same: split on ' ' only; codePoints() would detach the matra. [D6-font] bundle Devanagari.
   /// The zone codes of the 1983–2019 plates: Mechi, Kosi, Sagarmatha,
   /// Janakpur, Bagmati, Narayani, Gandaki, Lumbini, Dhawalagiri, Rapti, Bheri,
   /// Karnali, Seti, Mahakali.

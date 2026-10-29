@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
+// TODO(py): [H19] module-level constants, one per alphabet; same for the other holder classes below.
+// TODO(ts): [H19] export const PlateAlphabetDigits = {...} as const; the D3 export carries the expanded characters.
+// TODO(kt): [H19] object PlateAlphabetDigits; pattern alphabets expand per instance (H5, H22).
 /// Digit alphabets shared by all plate packages. Each stores ASCII `0-9` and
 /// differs only in rendering, so country packages reference these instead of
 /// restating the ten glyphs.
@@ -8,6 +11,9 @@ abstract final class PlateAlphabetDigits {
   /// ASCII `0-9`, rendered as itself.
   static const PlateAlphabet english = PlateAlphabet.latinDigits;
 
+  // TODO(py): [H21] glyphs is an ordered dict; canonical() folds to the first key. [D6-font] Persian digits need a bundled font.
+  // TODO(ts): [H21] glyphs must be a Map, not an object: '0'..'9' are integer-like keys and get reordered. [D6-font] bundle Persian digits.
+  // TODO(kt): [H21] use mapOf/LinkedHashMap, never HashMap, for glyphs. [D6-font] bundle a font with Persian digits.
   /// ASCII `0-9` rendered as Persian numerals `۰..۹`.
   static const PlateAlphabet iranian = PlateAlphabet.pattern(
     id: 'alphabet.fa.digits',
@@ -133,6 +139,9 @@ abstract final class PlateAlphabetBelarus {
 /// regions, then the seven South Korean provinces still coded; 링김 is an
 /// observed 1990s code absent from any list.
 abstract final class PlateAlphabetKorea {
+  // TODO(py): [H7] each entry is two Hangul syllables (precomposed, 1 code point each). [D6-font] bundle a Hangul font.
+  // TODO(ts): [H7] precomposed syllables, safe for Array.from; keep NFC in the export. [D6-font] bundle Hangul.
+  // TODO(kt): [H7] precomposed syllables, safe for codePoints(); keep NFC in generated sources. [D6-font] bundle Hangul.
   static const PlateAlphabet northRegions = PlateAlphabet.pattern(
     id: 'kp.region',
     include: '평양 라선 평남 평북 자강 황남 황북 강원 함남 함북 량강 남포 개성 충남 충북 경기 경남 경북 전남 전북 링김',

@@ -18,6 +18,9 @@ abstract final class BangladeshAlphabets {
     },
   );
 
+  // TODO(py): [H7] one entry, 'DHAKA' -> 11 code points incl. Bengali vowel signs (grapheme clusters); never split the glyph.
+  // TODO(ts): [H7] glyph is a multi-cluster string: measure/render whole, not by Array.from. [D6-font] bundle Bengali.
+  // TODO(kt): [H7] glyph has combining vowel signs; don't iterate chars. [D6-font] bundle a Bengali font.
   /// The registration city. The article shows only Dhaka Metro.
   static const PlateAlphabet city = PlateAlphabet(
     id: 'bd.city',

@@ -84,6 +84,9 @@ abstract final class PersianAlphabets {
     placeholder: '؟',
   );
 
+  // TODO(py): [H7] one slot value of three code points (الف); restriction counts values, not len(). RTL: H10.
+  // TODO(ts): [H7] value length is 3 code units but one slot; never use .length to decide fullness.
+  // TODO(kt): [H7] value length is 3 chars but one slot; never use length to decide fullness.
   /// `الف`, how a government plate prints its letter: three code points, one
   /// plate position.
   static const PlateAlphabet governmentLetter = PlateAlphabet(

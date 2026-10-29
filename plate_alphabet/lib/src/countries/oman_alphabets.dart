@@ -11,6 +11,9 @@ abstract final class PlateAlphabetOman {
   /// as one value: `A` (article photograph), `B`/`M` and `BM` (private
   /// artwork), `K` and `KK` (taxi artwork).
   // TODO(oman-letters): the rest of the issued codes; none are sourced.
+  // TODO(py): [H7] 'BM' -> 'B   M' pads with spaces to spread two letters over one slot; export must not collapse whitespace.
+  // TODO(ts): [H7] glyph padding is literal spaces; render in white-space: pre or the pair collapses.
+  // TODO(kt): [H7] glyph padding is literal spaces; Compose Text keeps them, a trim() would not.
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'om.letter.latin',
     include: 'A B K M BM KK',

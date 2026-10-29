@@ -18,4 +18,6 @@ Resume from the first line without a commit hash. Format:
 - P4 · plate_canvas.dart · shortened: -21 · core 76a76b7
 - P4 · plate_canvas.dart · todos: 18/18/18 · core 4a638be
 - P5 · plate_core/test · todos: 11/11/11 (non-vector tests only) · core e8afb5d
-- Stopped after P5 as instructed; P6+ not started.
+
+- P6 · plate_alphabet · shortened: 0 (no real win; re-export-only `*_alphabets.dart` in ~30 country packages deferred to P8) · todos: 8/8/8 · alphabet 831a265
+- P7 · plate_keypad · shortened: 0 (nothing dead or duplicated) · todos: 13/13/13 · keypad 59c9898
