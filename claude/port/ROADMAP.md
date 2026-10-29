@@ -133,4 +133,22 @@ clusters); `nonBmp` counts literals outside the BMP (UTF-16 surrogate pairs in T
 
 ## Holder spec
 
-Filled in P9.
+One screen per language, nothing else. Reference: `plate_number_holder/lib/minimal/main.dart` and
+`lib/newdesign/plate/live_plate.dart` (`LivePlate`, `SlotKeypad`, `verdictOf`, `firstEmpty`).
+
+1. **Country list → spec list.** Two pickers from the exported catalogue (D3): countries, then that
+   country's specs. Switching spec calls `adoptSpec` with `PlateSpecTransition(keepIdentical: true,
+   morphBackground: true)`: stagger out, swap at the midpoint, stagger in.
+2. **The plate.** Editable slots placed at the slot boxes (D2/D8), the region caption under it when the
+   spec has a `resolveRegion` (line height reserved, 200 ms cross-fade).
+3. **Animation buttons.** "Play in" / "Play out" → `PlateAnimationController.comeInAll/goOutAll`;
+   "Stagger" → `PlateStagger.sequence(spec, step: 60 ms, reverse: out)`, cue length = out + in.
+4. **Keypad.** The language's own keypad (`plate_keypad` port): digit grid in the digit alphabet,
+   letters grid in the focused slot's alphabet, the focused slot's alphabet disables the rest; letters
+   panel only while the next slot takes a letter. Chosen alphabets (Persian series letter, provinces)
+   open a picker that returns the canonical character.
+5. **Verdict line under the plate.** `verdictOf`: entry validator, else restriction verdict, else valid.
+   Incomplete plate → "Type <n digits|a letter A–Z> to start / Now <…>" from `describeSlots`; refused
+   keystroke → 1.8 s hint "Slot k takes …"; complete → "Valid · <name>" or "Not valid · <reason>".
+   Validators report only; they never bar a key.
+6. **Out of scope:** landing page, gallery, playground, hero tour, code samples, theme tokens.
