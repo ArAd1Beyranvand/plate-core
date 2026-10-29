@@ -15,6 +15,9 @@ abstract final class LebanonCountry {
     captionLines: <String>[],
     panelColor: LebanonColors.band,
     panelTextColor: LebanonColors.bandInk,
+    // TODO(py): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(ts): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(kt): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
     flag: SvgPlateAsset('assets/cedar.svg', package: 'lebanon_plate'),
     flagAspectRatio: 1.0,
   );
@@ -33,6 +36,9 @@ abstract final class LebanonCountry {
     captionLines: <String>['مؤسسات'],
     panelColor: LebanonColors.band,
     panelTextColor: LebanonColors.bandInk,
+    // TODO(py): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(ts): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
+    // TODO(kt): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
     flag: SvgPlateAsset('assets/cedar.svg', package: 'lebanon_plate'),
     flagAspectRatio: 1.0,
   );

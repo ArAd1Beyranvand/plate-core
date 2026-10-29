@@ -1,5 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Advisory validator for `MalaysiaPlates.singleRow`, `twoRow` and `ev`.
 ///
 /// I and O are never issued; the number runs 1-9999 with no leading zero; a
@@ -18,6 +21,9 @@ class MalaysiaValidator extends GatedPlateValidator {
   static const String reasonLeadingZero = 'The number has no leading zero.';
   static const String reasonSabahSuffix = 'A Sabah suffix is never Q or S.';
 
+  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
+  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
+  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _notIssued = RegExp('[IO]');
 
   @override

@@ -2,6 +2,9 @@ import 'package:plate_core/plate_core.dart';
 
 import 'lebanon_letters.dart';
 
+// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
+// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Advisory validator; never bars a keystroke. Waits for a non-empty serial.
 ///
 /// Checks the letter against the closed set, a 1-6 digit serial, and 1-128 for

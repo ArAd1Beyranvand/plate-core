@@ -8,6 +8,9 @@
 /// `// CALIBRATE` come from photographs, not standards.
 library;
 
+// TODO(py): [D5] one module `plates.countries.lebanon`; assets via importlib.resources.
+// TODO(ts): [D5] one subpath export `./countries/lebanon`; tree-shakable.
+// TODO(kt): [D5] package `countries.lebanon` in the countries module.
 export 'package:plate_alphabet/plate_alphabet.dart' show LebanonAlphabets;
 export 'src/lebanon_alphabets.dart';
 export 'src/lebanon_colors.dart';
