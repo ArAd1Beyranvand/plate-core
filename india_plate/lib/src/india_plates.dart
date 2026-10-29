@@ -144,6 +144,9 @@ PlateSpec _plate(
     decals: <PlateDecal>[
       if (badge)
         const PlateDecal(
+          // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+          // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+          // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
           image: AssetImage(
             'assets/in_ashoka_chakra.png',
             package: 'india_plate',

@@ -13,6 +13,9 @@ abstract final class IndiaRegions {
 
   static String? lookup(String code) => _states[code.toUpperCase()];
 
+  // TODO(py): [D4-table] lookup table: becomes a dict in the export, no code.
+  // TODO(ts): [D4-table] lookup table: becomes data in the export, no code.
+  // TODO(kt): [D4-table] lookup table: becomes a map in the export, no code.
   static String? captionOf(String Function(String key) group) =>
       lookup(group('state'));
 }

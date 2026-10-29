@@ -207,6 +207,9 @@ abstract final class IndonesiaPlates {
       max(0, pitch - 0.6 * 0.72 * height);
 
   static PlateDecal _asset(String file, PlateBox box) => PlateDecal(
+    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
+    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
+    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage('assets/$file', package: 'indonesia_plate'),
     box: box,
   );
