@@ -26,6 +26,9 @@ import 'plate_glyph_run.dart';
 import 'plate_slot_item.dart';
 import 'plate_text_row.dart';
 
+// TODO(ts): [D1] ui root: <plate-canvas> custom element over core state; same props, callbacks as events.
+// TODO(kt): [D1] @Composable PlateCanvas(spec, controller, …); state hoisted into PlateController.
+// TODO(py): [D1] PlateCanvas(QWidget); a QGraphicsScene at spec canvas size, view fit-in-view.
 /// The editable plate for a [PlateSpec], holding characters in a
 /// [PlateController] (its own or passed via [controller]). Provides its own
 /// [Material], needs no state management, and preserves characters when [spec]
@@ -130,6 +133,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     }
   }
 
+  // TODO(ts): [D1][D9] which parts go out/in and their delays is pure: move to core, vector it.
+  // TODO(kt): same.
+  // TODO(py): same.
   void _startTransition(
     PlateCanvas old,
     List<String?> shown,
@@ -239,6 +245,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     setState(() => _ghost = null);
   }
 
+  // TODO(ts): drop — ::selection and caret-color CSS from activeColor.
+  // TODO(kt): drop — LocalTextSelectionColors.
+  // TODO(py): drop — QPalette.Highlight on the edits.
   ThemeData _selectionThemeFor(Color active) {
     final cached = _selectionTheme;
     if (cached != null && _selectionThemeColor == active) return cached;
@@ -317,6 +326,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     _recordValues();
   }
 
+  // TODO(ts): [D7] own-vs-host controller: dispose only what we created.
+  // TODO(kt): drop — remember { } a default controller.
+  // TODO(py): [D7] same as ts.
   void _adoptControllerOnly({required bool replacing}) {
     final host = widget.controller;
     if (host == null) {
@@ -380,6 +392,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
     return stored;
   }
 
+  // TODO(ts): [H14] drop — post-frame defer; emit after render via queueMicrotask.
+  // TODO(kt): [H14] drop — LaunchedEffect(verdict).
+  // TODO(py): [H14] drop — emit directly; Qt has no build phase.
   /// Publishes verdict after the frame (called from build).
   void _publishVerdict(PlateValidation verdict) {
     final controller = widget.controller;
@@ -519,6 +534,9 @@ class _PlateCanvasState extends State<PlateCanvas> {
   }
 }
 
+// TODO(ts): [H14] drop — the two-layer split exists for Flutter raster caching; one SVG/DOM tree.
+// TODO(kt): [H14] drop — one Box.
+// TODO(py): [H14] drop — one scene.
 /// The two-layer face: printed artwork under live inputs, plus the outgoing
 /// plate's ghost while a spec change plays.
 class _Face extends StatelessWidget {
@@ -610,6 +628,9 @@ class _Face extends StatelessWidget {
   }
 }
 
+// TODO(ts): contain-fit of the tweened plate size; CSS aspect-ratio + transition on the box.
+// TODO(kt): Modifier.aspectRatio with animateSizeAsState.
+// TODO(py): fitInView on resize; animate the scene rect.
 /// Lays the face out at [plateSize] scaled to fit the incoming constraints,
 /// exactly the size a `FittedBox(fit: .contain)` around it would take.
 class _PlateSizeDelegate extends SingleChildLayoutDelegate {
@@ -695,6 +716,9 @@ class _MorphingFrame extends StatelessWidget {
   }
 }
 
+// TODO(ts): [H14] drop — InheritedWidget; pass the size down.
+// TODO(kt): [H14] drop.
+// TODO(py): [H14] drop.
 /// The plate size the canvas is laid out at this frame (see
 /// [_PlateSizeDelegate]).
 class _PlateSizeScope extends InheritedWidget {
@@ -709,6 +733,9 @@ class _PlateSizeScope extends InheritedWidget {
   bool updateShouldNotify(_PlateSizeScope old) => old.size != size;
 }
 
+// TODO(ts): [D1] paint order panel, bands, rules, labels, decals; boxes in spec coords, one transform.
+// TODO(kt): [D1] same order; Modifier.offset/size in spec units under one graphicsLayer scale.
+// TODO(py): [D1] same order as scene items with z values.
 /// Everything printed on the face, in the spec's own coordinates.
 class _PlateContent extends StatelessWidget {
   const _PlateContent({
@@ -827,6 +854,9 @@ class _Livery extends StatefulWidget {
   State<_Livery> createState() => _LiveryState();
 }
 
+// TODO(ts): [H4][H15] resolveTheme runs in core on each change; ui tweens 350ms between results.
+// TODO(kt): [H4][H15] same; animateColorAsState per field.
+// TODO(py): [H4][H15] same; QVariantAnimation over a theme lerp.
 class _LiveryState extends State<_Livery> {
   late PlateTheme _theme;
 
@@ -891,6 +921,9 @@ class _LiveryState extends State<_Livery> {
   );
 }
 
+// TODO(ts): [H15] lerpTheme(a, b, t) in core over the six colours; vector it.
+// TODO(kt): [H15] same with lerp(Color).
+// TODO(py): [H15] same.
 class _ThemeTween extends Tween<PlateTheme> {
   _ThemeTween({required PlateTheme super.end});
 
@@ -961,6 +994,9 @@ class _Label extends StatelessWidget {
   }
 }
 
+// TODO(ts): [H24] per-char alpha indexes UTF-16 units like Dart; keep 220ms/55ms.
+// TODO(kt): [H24] same units; keep timings.
+// TODO(py): [H24] str indexes code points: index by UTF-16 to match, or accept the difference.
 /// A caption whose characters leave one after another, and the next wording's
 /// arrive the same way, when [value] changes. One [Text.rich], so the letters
 /// keep joining across the per-character alpha spans.
@@ -1048,6 +1084,9 @@ class _StaggeredTextState extends State<_StaggeredText>
   }
 }
 
+// TODO(ts): [D8] mirror editability and picker choice are pure: compute per slot in core.
+// TODO(kt): same.
+// TODO(py): same.
 /// Live characters: typed slots and mirrors. TextFields composite here; a
 /// keystroke repaints only this layer, not the flag above.
 class _PlateInputs extends StatelessWidget {
@@ -1165,6 +1204,9 @@ class _PlateInputs extends StatelessWidget {
   );
 }
 
+// TODO(ts): [D7] subscribe to the verdict, not values; recolour on flips only.
+// TODO(kt): [D7] derivedStateOf { validate(values) }.
+// TODO(py): [D7] verdict observable with change-only signal.
 /// Subscribed to verdict, not value, so rebuilds only on valid/invalid flip.
 class _ValidationBinding extends StatelessWidget {
   const _ValidationBinding({
@@ -1230,6 +1272,9 @@ class _VerdictListenerState extends State<_VerdictListener> {
   Widget build(BuildContext context) => widget.child;
 }
 
+// TODO(ts): [H12] banner geometry 0.42/0.1/0.26 of canvas height; scale-down fit by measureText.
+// TODO(kt): same ratios.
+// TODO(py): same ratios.
 /// The error a refused write leaves, painted over the plate face: a band in
 /// the theme's alert colour carrying the restriction's reason. Watches
 /// [PlateController.rejection] alone, so it appears on the refusal and goes
@@ -1328,6 +1373,9 @@ class _FrameBinding extends StatelessWidget {
   );
 }
 
+// TODO(ts): [D7] per-slot subscription keeps keystrokes local; same in each port.
+// TODO(kt): [D7] collect slot(i) flow only.
+// TODO(py): [D7] connect to slot(i) signal only.
 /// One slot, subscribed only to its own character (keeps keystrokes local).
 class _SlotBinding extends StatelessWidget {
   const _SlotBinding({
@@ -1515,6 +1563,9 @@ class _Band extends StatelessWidget {
   }
 }
 
+// TODO(ts): [D1] ghost = a second display canvas over the new one until the out stagger ends.
+// TODO(kt): same; key the ghost by serial.
+// TODO(py): same; a second scene layer.
 /// An outgoing plate: what it showed, and how it leaves.
 class _Ghost {
   const _Ghost({
@@ -1569,6 +1620,9 @@ class _SpecGhost extends StatefulWidget {
   State<_SpecGhost> createState() => _SpecGhostState();
 }
 
+// TODO(ts): drop — Timer; setTimeout cleared on unmount.
+// TODO(kt): drop — LaunchedEffect + delay.
+// TODO(py): drop — QTimer.singleShot.
 class _SpecGhostState extends State<_SpecGhost> {
   late final PlateController _controller;
   late final PlateAnimationController _anim;
