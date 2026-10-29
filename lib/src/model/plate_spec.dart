@@ -47,6 +47,9 @@ class PlateSlot {
   /// [PlateLabel.color].
   final Color? color;
 
+  // TODO(ts): [H7] split with Array.from; a chosen symbol is judged whole.
+  // TODO(kt): [H7] code points, not Chars.
+  // TODO(py): [H7] list(value).
   /// Whether [value] is a legal, possibly partial, content: at most [length]
   /// characters, each in [alphabet] in either form.
   bool accepts(String value) {
@@ -62,6 +65,9 @@ class PlateSlot {
 
   String render(String value) => alphabet.renderAll(value);
 
+  // TODO(ts): [H24] runes.length is Array.from(v).length, not v.length.
+  // TODO(kt): [H24] codePointCount, not length.
+  // TODO(py): [H24] len(v) is already code points.
   /// Nothing more can be typed.
   bool isFull(String? value) => value != null && value.runes.length >= length;
 
@@ -107,6 +113,9 @@ class PlateRule {
   final PlateBox box;
 }
 
+// TODO(ts): [H18] union: {kind:"color"}, {kind:"stripes"}, and three role singletons field/panel/divider.
+// TODO(kt): [H18] sealed interface: ColorFill, StripesFill, object Field/Panel/Divider.
+// TODO(py): [H18] ColorFill/StripesFill dataclasses + a Role enum for the three singletons.
 /// What a [PlateSection] leaf is painted in.
 ///
 /// [field], [panel] and [divider] resolve at render time to the theme's
@@ -181,6 +190,9 @@ class PlateFill {
 
 enum _FillRole { field, panel, divider }
 
+// TODO(ts): [H10] center/radii as plain {x,y}/{width,height}.
+// TODO(kt): [H10] own Point/Size in commonMain.
+// TODO(py): [H10] tuples.
 /// The theme's field colour airbrushed over a [PlateFill.stripes] leaf: an
 /// ellipse at [opacity] out to [plateau] of its radii, fading to nothing at its
 /// edge. It pales the stripes behind the characters.
@@ -205,6 +217,9 @@ class PlateFog {
   final double plateau;
 }
 
+// TODO(ts): [H18] union leaf {fill, shape?} | split {axis, parts}; layout() moves to render ([D1]).
+// TODO(kt): [H18] sealed interface Leaf/Split; layout is pure and stays in model.
+// TODO(py): [H18] Leaf/Split dataclasses; layout returns a NamedTuple ([H17]).
 /// The plate face divided into regions: a guillotine tree of columns and rows
 /// whose leaves are [PlateFill]s.
 ///
@@ -237,6 +252,9 @@ class PlateSection {
   static const PlateSection plain = PlateSection.fill(PlateFill.field);
 
   final PlateFill? fill;
+  // TODO(ts): [H1][D3] an SVG path string in leaf-local units, exported from the clipper at leaf size.
+  // TODO(kt): [H1][D3] path data string parsed with PathParser; not a lambda.
+  // TODO(py): [H1][D3] path data string; QPainterPath built in render.
   final CustomClipper<Path>? shape;
   final Axis? axis;
   final List<PlatePart> parts;
@@ -249,6 +267,9 @@ class PlateSection {
   bool get paintsPanel =>
       isLeaf ? fill!.paintsPanel : parts.any((p) => p.section.paintsPanel);
 
+  // TODO(ts): [H17] return {leaves: [section, rect][], dividers: Rect[]}; it is a D9 vector.
+  // TODO(kt): [H17] data class SectionLayout(leaves: List<Pair<PlateSection, Rect>>, dividers).
+  // TODO(py): [H17] NamedTuple(leaves, dividers).
   /// The leaves and dividers of this tree laid over [bounds], depth-first.
   /// Indices match [PlatePartId.region] and [PlatePartId.divider].
   ({List<(PlateSection, Rect)> leaves, List<Rect> dividers}) layout(
@@ -333,6 +354,9 @@ class PlateBand {
   final double bottomCornerRadius;
 }
 
+// TODO(ts): [H2][D3] image is an asset reference {package, path}, not an ImageProvider.
+// TODO(kt): [H2][D3] asset reference; painter loads it with Compose resources.
+// TODO(py): [H2][D3] asset reference; QImage from importlib.resources in ui.
 /// A fixed image on the plate face, such as a sticker or badge: a raster
 /// [image], or a [drawing] of const shapes that needs no file.
 @immutable
@@ -350,12 +374,18 @@ class PlateDecal {
   final PlateBox box;
 }
 
+// TODO(ts): [H4][D4-table] most resolvers are key -> caption tables: export them as data, hand-port the rest.
+// TODO(kt): [H4][D4-table] (group: (String) -> String) -> String?; table resolvers become maps.
+// TODO(py): [H4][D4-table] Callable[[Callable[[str], str]], str | None]; tables become dicts.
 /// Picks a [PlateLabel]'s wording from what is typed. [group] reads a
 /// [PlateTextGroup] by key, as [PlateSpec.valueOfGroup] does. Null keeps
 /// [PlateLabel.text].
 typedef PlateLabelResolver =
     String? Function(String Function(String key) group);
 
+// TODO(ts): [H4][D4-table] letter -> theme tables become data; only real logic stays a function.
+// TODO(kt): [H4][D4-table] same; the export records which resolvers are tables.
+// TODO(py): [H4][D4-table] same.
 /// Picks a plate's colours from what is typed, so one spec can be several
 /// liveries. [base] is the host's theme (return it to leave it alone); [group]
 /// reads a [PlateTextGroup] by key. Changes cross-fade.
@@ -397,6 +427,9 @@ class PlateLabel {
   /// label so it fills a tall box.
   final double? lineHeight;
 
+  // TODO(ts): [D6-font] @font-face per family from the countries package; fontPackage picks the subpath.
+  // TODO(kt): [D6-font] FontFamily(Font(Res.font.x)) from the countries module.
+  // TODO(py): [D6-font] QFontDatabase.addApplicationFont from importlib.resources at import time.
   /// Face for this label, or null for the theme's.
   final String? fontFamily;
 
@@ -421,12 +454,18 @@ class PlatePanel {
   final double flagScale;
   final double captionScale;
 
+  // TODO(ts): [H10] {left, top, right, bottom}; null means 10% of the panel height on every side.
+  // TODO(kt): [H10] own Insets in commonMain, not PaddingValues.
+  // TODO(py): [H10] NamedTuple Insets.
   /// Null means a uniform inset of 10% of the panel's height.
   final EdgeInsets? padding;
 
   /// [Axis.vertical] puts the flag above the caption, horizontal beside it.
   final Axis direction;
 
+  // TODO(ts): [H1][D3] SVG path string in panel-box units, exported from the clipper at box size.
+  // TODO(kt): [H1][D3] path data string, not a lambda.
+  // TODO(py): [H1][D3] path data string.
   /// Clips the panel to a non-rectangular block. Handed [box]'s size in plate
   /// coordinates, returns the shape to keep. Null adds no clip to the tree.
   final CustomClipper<Path>? shape;
@@ -445,6 +484,9 @@ class PlateTextGroup {
   final String? key;
 }
 
+// TODO(ts): [H3] equality by id only (no identical() short-cut needed); Maps keyed by spec.id.
+// TODO(kt): [H3] equals/hashCode on id; not a data class.
+// TODO(py): [H3] eq=False dataclass, __eq__/__hash__ on id.
 /// A complete plate design. Adding a plate means adding a const of this type,
 /// never a widget.
 @immutable
@@ -480,6 +522,9 @@ class PlateSpec {
   final double canvasWidth, canvasHeight;
   final PlatePanel panel;
 
+  // TODO(ts): make panel optional (panel?: PlatePanel) instead of porting noPanel.
+  // TODO(kt): panel: PlatePanel? instead of noPanel.
+  // TODO(py): panel: PlatePanel | None instead of no_panel.
   /// Suppresses [panel] for a plate with no country block. A bool rather than a
   /// nullable [panel] because callers read `spec.panel.box` unconditionally.
   final bool noPanel;

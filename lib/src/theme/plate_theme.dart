@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+// TODO(ts): [H15] structural equality and a lerp(a, b, t) over every field for the cross-fade.
+// TODO(kt): [H15] a data class is right here (equality is structural); add lerp.
+// TODO(py): [H15] frozen dataclass (structural eq is right) + lerp; replace() is copyWith.
 /// Chrome colours and ratios, sampled from real plates; never tint them with a
 /// host accent. Only [activeColor] and [inactiveColor], used solely for
 /// input-mode outlines, are chrome-free.
@@ -92,6 +95,9 @@ class PlateTheme {
     alertColor: alertColor ?? this.alertColor,
   );
 
+  // TODO(ts): [H12][D6-font] font-size slotHeight*0.72, line-height 1, weight 700, explicit family.
+  // TODO(kt): [H12][D6-font] fontSize in px→sp via LocalDensity, lineHeight = 1.em, Bold.
+  // TODO(py): [H12][D6-font] QFont pixel size h*0.72, bold; QFontMetricsF for the box, not point size.
   TextStyle glyphStyle(
     double slotHeight,
     Color color, {
@@ -104,6 +110,9 @@ class PlateTheme {
     letterSpacing: letterSpacing,
   );
 
+  // TODO(ts): [H14] drop — the theme is an explicit argument to render().
+  // TODO(kt): [H14] CompositionLocal LocalPlateTheme, default standard().
+  // TODO(py): [H14] drop — pass the theme to the widget.
   /// The enclosing [PlateThemeScope]'s theme, else [PlateTheme.standard].
   static PlateTheme of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<PlateThemeScope>()?.theme ??
@@ -130,6 +139,9 @@ class PlateTheme {
   int get hashCode => Object.hashAll(_props);
 }
 
+// TODO(ts): [H14] drop — no scope; see PlateTheme.of.
+// TODO(kt): [H14] CompositionLocalProvider(LocalPlateTheme provides theme).
+// TODO(py): [H14] drop.
 class PlateThemeScope extends InheritedWidget {
   const PlateThemeScope({super.key, required this.theme, required super.child});
 

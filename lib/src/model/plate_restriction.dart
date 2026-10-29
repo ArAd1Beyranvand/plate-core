@@ -30,6 +30,9 @@ class PlateRestriction {
   bool matches(String groupValue) => values.contains(groupValue);
 }
 
+// TODO(ts): extends Error with name "PlateRestrictionError"; message is the reason.
+// TODO(kt): class PlateRestrictionException(val restriction) : Exception(restriction.reason).
+// TODO(py): class PlateRestrictionError(ValueError); str() is the reason.
 /// Thrown by [PlateSpec.checkRestrictions]. [toString] is the restriction's
 /// reason.
 class PlateRestrictionException implements Exception {

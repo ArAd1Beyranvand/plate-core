@@ -2,6 +2,9 @@ import 'package:flutter/foundation.dart';
 
 import '../input/plate_controller.dart';
 
+// TODO(ts): [D8] inputmode="none"+virtualkeyboardpolicy="manual" for every source but system.
+// TODO(kt): [D8] KeyboardOptions + LocalSoftwareKeyboardController.hide() for non-system sources.
+// TODO(py): [D8] hardware keys only; system and keypadFirst collapse to hardwareKeyboard on desktop.
 /// How characters get into a plate slot.
 enum PlateInputSource {
   /// The platform keyboard (IME).
@@ -25,6 +28,9 @@ enum PlateInputSource {
   keypadFirst,
 }
 
+// TODO(ts): [H16] desktop when !matchMedia("(pointer: coarse)").matches, not by user agent.
+// TODO(kt): [H16] expect/actual: desktop -> hardwareKeyboard, android -> system.
+// TODO(py): [H16] always hardwareKeyboard (PySide6 desktop).
 /// Hardware keyboard on desktop, the system IME elsewhere (on web
 /// [defaultTargetPlatform] reports the underlying OS).
 PlateInputSource defaultInputSource() => switch (defaultTargetPlatform) {

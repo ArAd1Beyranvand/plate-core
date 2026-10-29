@@ -2,6 +2,9 @@ import 'package:flutter/widgets.dart';
 
 import 'plate_asset.dart';
 
+// TODO(ts): [H3] equality by code only.
+// TODO(kt): [H3] equals/hashCode on code; not a data class.
+// TODO(py): [H3] eq=False dataclass, __eq__/__hash__ on code.
 /// The country chrome of a plate: flag, caption and panel colours. Concrete
 /// constants live in each country's own package.
 ///
@@ -32,6 +35,9 @@ class PlateCountry {
   /// text. [CountryPanel] splits the room the flag leaves between the two.
   final List<String> headingLines;
 
+  // TODO(ts): [H10] colours stay 0xAARRGGBB numbers in model; convert to rgba() in the painter.
+  // TODO(kt): [H10] ARGB Long in model; Color(argb) in Compose.
+  // TODO(py): [H10] ARGB int; QColor.fromRgba in ui.
   final Color panelColor;
 
   /// Null prints the wording in the theme's ink, for a block printed straight

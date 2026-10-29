@@ -3,6 +3,9 @@ import 'dart:ui';
 import '../model/plate_asset.dart';
 import '../model/plate_shape.dart';
 
+// TODO(ts): [H19] export const EuropeanStars = {band, flag} as const.
+// TODO(kt): [H19] object EuropeanStars.
+// TODO(py): [H19] module-level BAND, FLAG.
 /// The EU's twelve gold stars, drawn rather than shipped, for every EU country
 /// package to share.
 abstract final class EuropeanStars {

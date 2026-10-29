@@ -3,6 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 
+// TODO(ts): [H18][D1] union by kind; toPath moves to render and emits an SVG path string.
+// TODO(kt): [H18][D1] sealed interface in model; path building lives in render, not on the shape.
+// TODO(py): [H18][D1] dataclasses + match in render; no Qt types in model.
 /// One filled shape of a [PlateDrawing], in the drawing's own coordinate
 /// space. Shapes paint in list order, so a later one covers an earlier one.
 @immutable
@@ -35,6 +38,9 @@ class PlateRectShape extends PlateShape {
 class PlatePolygonShape extends PlateShape {
   const PlatePolygonShape(this.points, super.color);
 
+  // TODO(ts): [H10] points as [x, y] pairs; flatten in the JSON export.
+  // TODO(kt): [H10] own Point(x, y) in commonMain, not Compose Offset.
+  // TODO(py): [H10] tuple[float, float].
   final List<Offset> points;
 
   @override
@@ -53,6 +59,9 @@ class PlateCircleShape extends PlateShape {
       Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius));
 }
 
+// TODO(ts): [H13] two circles in one path with fill-rule="evenodd" equals the difference here.
+// TODO(kt): [H13] Path.combine(PathOperation.Difference) or PathFillType.EvenOdd.
+// TODO(py): [H13] QPainterPath.subtracted, or OddEvenFill with both ellipses.
 /// The outline of a circle: a band [width] wide centred on [radius].
 class PlateRingShape extends PlateShape {
   const PlateRingShape(this.cx, this.cy, this.radius, this.width, super.color);
@@ -74,6 +83,9 @@ class PlateRingShape extends PlateShape {
   );
 }
 
+// TODO(ts): [H13] evenodd is wrong when the bite pokes outside the disc: clip-path or real difference.
+// TODO(kt): [H13] PathOperation.Difference (evenodd would paint the bite outside the disc).
+// TODO(py): [H13] QPainterPath.subtracted.
 /// A circle with a second circle taken out of it: a crescent. The bite is
 /// [biteRadius] wide and sits [biteDx] to the right of the disc's centre (left
 /// when negative).

@@ -14,6 +14,9 @@ import 'plate_alphabet.dart';
 import 'plate_box.dart';
 import 'plate_spec.dart';
 
+// TODO(ts): [H6] codegen emits the expanded slots; port these builders only for hand-written specs.
+// TODO(kt): [H6] same; builders return List (read-only), not MutableList.
+// TODO(py): [H6] same; return tuples.
 /// [count] equal cells over [alphabet] from [left], each [width] by [height] at
 /// [top], stepping by [pitch] (default [width]: flush cells). Pass [pitch] for a
 /// gapped register. [color] is every cell's [PlateSlot.color].

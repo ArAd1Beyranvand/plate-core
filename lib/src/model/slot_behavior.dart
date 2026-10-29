@@ -28,6 +28,9 @@ enum SlotBehavior {
   sheet,
 }
 
+// TODO(ts): [D9] pure; every (mode, input, source) triple is a vector.
+// TODO(kt): [D9] pure; same vectors.
+// TODO(py): [D9][D8] pure; keypadFirst/imeField fall back to hardwareField in PySide6.
 /// A [AlphabetInput.chosen] alphabet reaches [SlotBehavior.sheet] only under
 /// [PlateInputSource.system]; every other source drives its own field type.
 SlotBehavior resolveSlotBehavior({

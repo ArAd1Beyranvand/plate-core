@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+// TODO(ts): [H3] equality by id only; key Maps/Sets by alphabet.id, never compare structurally.
+// TODO(kt): [H3] plain class with equals/hashCode on id, not a data class.
+// TODO(py): [H3] @dataclass(frozen=True, eq=False) with __eq__/__hash__ on id.
 /// The characters a slot accepts and how they are rendered. Digits and letters
 /// differ only in [characters] and [input].
 @immutable
@@ -38,6 +41,9 @@ class PlateAlphabet {
   final String _include;
   final String _exclude;
 
+  // TODO(ts): [H5] per-instance lazy getter, not a module-level cache keyed by pattern.
+  // TODO(kt): [H5] `val characters by lazy`; no companion cache.
+  // TODO(py): [H5] functools.cached_property (needs __dict__) or set in __post_init__.
   static final Map<String, List<String>> _expanded = <String, List<String>>{};
 
   static List<String> _expand(String include, String exclude) {
@@ -47,6 +53,9 @@ class PlateAlphabet {
     );
   }
 
+  // TODO(ts): [H22] range tokens are code points: Array.from(token), String.fromCodePoint.
+  // TODO(kt): [H22] split by codePoints, not chars; encode back to UTF-16 by hand in commonMain.
+  // TODO(py): [H22] list(token) is code points already; chr() for the range.
   static Iterable<String> _tokens(String pattern) sync* {
     for (final token in pattern.split(' ')) {
       if (token.isEmpty) continue;
@@ -79,6 +88,9 @@ class PlateAlphabet {
   /// live here.
   final Map<String, String> glyphs;
 
+  // TODO(ts): [H10] "ltr" | "rtl" string union.
+  // TODO(kt): [H10] own enum in commonMain; map to LayoutDirection in Compose.
+  // TODO(py): [H10] own Enum; Qt.LayoutDirection only in the ui layer.
   /// A property of the script, not inferable from [characters].
   final TextDirection direction;
 
@@ -93,6 +105,9 @@ class PlateAlphabet {
   /// Whether [value] is legal in storage (`'5'`) or display (`'۵'`) form.
   bool accepts(String value) => characters.contains(canonical(value));
 
+  // TODO(ts): [H21][H8] glyphs must be a Map (first-key-wins); toUpperCase is locale-free, keep it so.
+  // TODO(kt): [H21][H8] uppercase() not uppercase(Locale); LinkedHashMap order for the reverse lookup.
+  // TODO(py): [H8] str.upper() turns ß into SS; Dart keeps it two chars too, vectors pin it.
   /// [value] folded to storage form (`'۵'` -> `'5'`). A lowercase letter whose
   /// uppercase is legal folds to it; anything else is returned unchanged.
   String canonical(String value) {
@@ -144,6 +159,9 @@ class PlateAlphabet {
   );
 }
 
+// TODO(ts): [H7] Array.from(value): code points, not UTF-16 units and not graphemes.
+// TODO(kt): [H7] iterate codePoints(); a String.toList() of Chars splits surrogate pairs.
+// TODO(py): [H7] list(value).
 /// [value] one string per code point.
 List<String> splitRunes(String value) => [
   for (final r in value.runes) String.fromCharCode(r),
