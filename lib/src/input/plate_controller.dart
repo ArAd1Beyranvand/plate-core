@@ -56,7 +56,7 @@ class PlateController extends ChangeNotifier {
   factory PlateController.fromText(PlateSpec spec, String text) {
     final values = List<String?>.filled(spec.slotCount, null);
     var index = 0;
-    for (final character in text.characters) {
+    for (final character in splitRunes(text)) {
       if (index >= spec.slotCount) break;
       final slot = spec.slots[index];
       if (!slot.accepts(character)) continue;
@@ -142,13 +142,13 @@ class PlateController extends ChangeNotifier {
   bool setGroup(String key, String value) {
     final group = _spec.groupNamed(key);
     if (group == null) return false;
-    final characters = value.characters;
+    final characters = splitRunes(value);
     final writes = <int, String?>{};
     var offset = 0;
     for (final index in group.indices) {
       if (_printedCharacter(_spec, index) != null) continue;
       final slot = _spec.slots[index];
-      final take = slot.alphabet.input == AlphabetInput.chosen
+      final take = slot.alphabet.input == .chosen
           ? characters.length - offset
           : slot.length;
       writes[index] = _sanitize(
@@ -185,7 +185,7 @@ class PlateController extends ChangeNotifier {
   /// old spec stops updating: call [slot] per build rather than caching it.
   void adoptSpec(
     PlateSpec next, {
-    PlateValuePreservation preserve = PlateValuePreservation.byGroupKey,
+    PlateValuePreservation preserve = .byGroupKey,
   }) {
     final migrated = _migrate(_spec, next, _values, preserve);
     final refused = _clearRestricted(next, migrated);
@@ -200,13 +200,14 @@ class PlateController extends ChangeNotifier {
     _notifyOutsideBuild();
   }
 
-  /// A host swapping `spec:` or `controller:` lands here mid-layout; listeners
-  /// that setState would assert, so they hear of it after the frame.
-  void _notifyOutsideBuild() {
+  /// A host swapping `spec:` or `controller:`, or a canvas attaching from
+  /// initState, lands here mid-build; listeners that setState would assert, so
+  /// they hear of it after the frame, if [still] holds then.
+  void _notifyOutsideBuild([bool Function()? still]) {
     if (SchedulerBinding.instance.schedulerPhase ==
         SchedulerPhase.persistentCallbacks) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (!_disposed) notifyListeners();
+        if (!_disposed && (still?.call() ?? true)) notifyListeners();
       });
       return;
     }
@@ -244,16 +245,7 @@ class PlateController extends ChangeNotifier {
 
   void attach(PlateInputTarget target) {
     _target = target;
-    // Attached mid-build from the canvas's initState: listeners that setState
-    // would assert, so they hear of it after the frame.
-    if (SchedulerBinding.instance.schedulerPhase ==
-        SchedulerPhase.persistentCallbacks) {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (identical(_target, target)) notifyListeners();
-      });
-      return;
-    }
-    notifyListeners();
+    _notifyOutsideBuild(() => identical(_target, target));
   }
 
   /// Guarded: an old canvas's detach runs after the new one has attached.
@@ -388,12 +380,12 @@ class PlateController extends ChangeNotifier {
     List<String?> values,
     PlateValuePreservation preserve,
   ) {
-    if (preserve == PlateValuePreservation.none) {
+    if (preserve == .none) {
       return List<String?>.filled(to.slotCount, null);
     }
 
     final byKey =
-        preserve == PlateValuePreservation.byGroupKey &&
+        preserve == .byGroupKey &&
         (_hasKeyedGroups(from) || _hasKeyedGroups(to));
     if (!byKey) {
       return [
@@ -420,7 +412,7 @@ class PlateController extends ChangeNotifier {
       // become two cells.
       final characters = <String>[
         for (final i in source.indices)
-          if (i < values.length) ...(values[i] ?? '').characters,
+          if (i < values.length) ...splitRunes(values[i] ?? ''),
       ];
 
       var next = 0;
@@ -448,11 +440,4 @@ class _AlwaysNull<T> implements ValueListenable<T?> {
 
   @override
   void removeListener(VoidCallback listener) {}
-}
-
-extension on String {
-  /// By rune, not code unit, which would split scripts outside the BMP.
-  List<String> get characters => [
-    for (final rune in runes) String.fromCharCode(rune),
-  ];
 }

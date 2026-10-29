@@ -21,9 +21,7 @@ class PlateInputMachine implements PlateInputTarget {
     for (var i = 0; i < spec.slots.length; i++) {
       _focusNodes.add(FocusNode()..addListener(_handleFocusChange));
       _controllers.add(
-        spec.slots[i].alphabet.input == AlphabetInput.typed
-            ? TextEditingController()
-            : null,
+        spec.slots[i].alphabet.input == .typed ? TextEditingController() : null,
       );
     }
     // An editable mirror is a second field over one slot, not a slot: its focus
@@ -31,7 +29,7 @@ class PlateInputMachine implements PlateInputTarget {
     for (var i = 0; i < spec.mirrors.length; i++) {
       final mirror = spec.mirrors[i];
       final alphabet = mirror.alphabet ?? spec.slots[mirror.source].alphabet;
-      if (mirror.editable && alphabet.input == AlphabetInput.typed) {
+      if (mirror.editable && alphabet.input == .typed) {
         _mirrorFocusNodes.add(FocusNode()..addListener(_handleFocusChange));
         _mirrorControllers.add(TextEditingController());
       } else {
@@ -106,21 +104,13 @@ class PlateInputMachine implements PlateInputTarget {
   int? get activeIndex => _activeIndex;
 
   void _handleFocusChange() {
-    int? active;
-    for (var i = 0; i < _focusNodes.length; i++) {
-      if (_focusNodes[i].hasFocus) {
-        active = i;
-        break;
-      }
-    }
-    if (active == null) {
-      for (var i = 0; i < _mirrorFocusNodes.length; i++) {
-        if (_mirrorFocusNodes[i]?.hasFocus ?? false) {
-          active = spec.mirrors[i].source;
-          break;
-        }
-      }
-    }
+    final slot = _focusNodes.indexWhere((f) => f.hasFocus);
+    final mirror = _mirrorFocusNodes.indexWhere((f) => f?.hasFocus ?? false);
+    final active = slot >= 0
+        ? slot
+        : mirror >= 0
+        ? spec.mirrors[mirror].source
+        : null;
     // A plate without focus falls back to the keypad.
     if (active == null) _setSystemKeyboard(false);
     if (active != _activeIndex) {
@@ -135,11 +125,11 @@ class PlateInputMachine implements PlateInputTarget {
     final next = spec.nextIndex(index);
     if (next == null) return;
     final nextBehavior = resolveSlotBehavior(
-      mode: PlateMode.input,
+      mode: .input,
       input: spec.slots[next].alphabet.input,
       source: inputSource,
     );
-    if (nextBehavior == SlotBehavior.sheet) {
+    if (nextBehavior == .sheet) {
       onSheetRequested?.call(next);
     } else {
       _focusNodes[next].requestFocus();
@@ -176,19 +166,13 @@ class PlateInputMachine implements PlateInputTarget {
 
   void dispose() {
     systemKeyboard.dispose();
-    for (final c in _controllers) {
+    for (final c in [..._controllers, ..._mirrorControllers]) {
       c?.dispose();
     }
-    for (final f in _focusNodes) {
-      f.removeListener(_handleFocusChange);
-      f.dispose();
-    }
-    for (final c in _mirrorControllers) {
-      c?.dispose();
-    }
-    for (final f in _mirrorFocusNodes) {
-      f?.removeListener(_handleFocusChange);
-      f?.dispose();
+    for (final f in [..._focusNodes, ..._mirrorFocusNodes.nonNulls]) {
+      f
+        ..removeListener(_handleFocusChange)
+        ..dispose();
     }
   }
 
