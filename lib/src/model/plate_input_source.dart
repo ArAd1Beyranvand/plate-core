@@ -27,13 +27,7 @@ enum PlateInputSource {
 
 /// Hardware keyboard on desktop, the system IME elsewhere (on web
 /// [defaultTargetPlatform] reports the underlying OS).
-PlateInputSource defaultInputSource() {
-  switch (defaultTargetPlatform) {
-    case TargetPlatform.windows:
-    case TargetPlatform.linux:
-    case TargetPlatform.macOS:
-      return PlateInputSource.hardwareKeyboard;
-    default:
-      return PlateInputSource.system;
-  }
-}
+PlateInputSource defaultInputSource() => switch (defaultTargetPlatform) {
+  .windows || .linux || .macOS => .hardwareKeyboard,
+  _ => .system,
+};

@@ -52,14 +52,12 @@ List<PlateSlot> plateRegisterAcross({
   Color? color,
 }) {
   _checkCount(count, 'plateRegisterAcross');
-  if (count == 0) return const <PlateSlot>[];
-  final width = (right - left) / count;
   return plateRegister(
     alphabet: alphabet,
     count: count,
     left: left,
     top: top,
-    width: width,
+    width: count == 0 ? 0 : (right - left) / count,
     height: height,
     color: color,
   );

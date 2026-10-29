@@ -32,19 +32,11 @@ SlotBehavior resolveSlotBehavior({
   required PlateMode mode,
   required AlphabetInput input,
   required PlateInputSource source,
-}) {
-  if (mode == PlateMode.display) return SlotBehavior.glyph;
-  switch (source) {
-    case PlateInputSource.system:
-      return input == AlphabetInput.typed
-          ? SlotBehavior.imeField
-          : SlotBehavior.sheet;
-    case PlateInputSource.hardwareKeyboard:
-      return SlotBehavior.hardwareField;
-    case PlateInputSource.packageKeypad:
-    case PlateInputSource.host:
-      return SlotBehavior.externalField;
-    case PlateInputSource.keypadFirst:
-      return SlotBehavior.keypadFirstField;
-  }
-}
+}) => mode == .display
+    ? .glyph
+    : switch (source) {
+        .system => input == .typed ? .imeField : .sheet,
+        .hardwareKeyboard => .hardwareField,
+        .packageKeypad || .host => .externalField,
+        .keypadFirst => .keypadFirstField,
+      };
