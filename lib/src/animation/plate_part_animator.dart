@@ -27,9 +27,9 @@ class PlatePartFrame {
 
   /// How much of the part shows, 0 (gone) to 1 (as settled).
   double get shown => switch (phase) {
-    PlatePartPhase.settled => 1,
-    PlatePartPhase.comingIn => progress.value,
-    PlatePartPhase.goingOut => 1 - progress.value,
+    .settled => 1,
+    .comingIn => progress.value,
+    .goingOut => 1 - progress.value,
   };
 
   /// True once a part has nothing left to paint.
@@ -41,9 +41,9 @@ class PlatePartFrame {
   (double, double) get span {
     final t = progress.value;
     return switch (phase) {
-      PlatePartPhase.settled => (0, 1),
-      PlatePartPhase.comingIn => (0, t),
-      PlatePartPhase.goingOut => (t, 1),
+      .settled => (0, 1),
+      .comingIn => (0, t),
+      .goingOut => (t, 1),
     };
   }
 }
@@ -155,12 +155,12 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
 
   void _apply(PlatePartCue cue) {
     final host = _host;
-    if (host == null || cue.phase == PlatePartPhase.settled) {
+    if (host == null || cue.phase == .settled) {
       _ticker?.stop();
       _frame = host == null
           ? PlatePartFrame.settled
           : PlatePartFrame(
-              phase: PlatePartPhase.settled,
+              phase: .settled,
               progress: kAlwaysCompleteAnimation,
               motion: host.style.motionFor(widget.id),
             );
@@ -197,15 +197,9 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
   }
 
   void _onStatus(AnimationStatus status) {
-    if (status != AnimationStatus.completed) return;
-    switch (_frame.phase) {
-      case PlatePartPhase.comingIn:
-        widget.onComeInEnd?.call();
-      case PlatePartPhase.goingOut:
-        widget.onGoOutEnd?.call();
-      case PlatePartPhase.settled:
-        break;
-    }
+    if (status != .completed) return;
+    if (_frame.phase == .comingIn) widget.onComeInEnd?.call();
+    if (_frame.phase == .goingOut) widget.onGoOutEnd?.call();
   }
 
   @override
@@ -222,7 +216,7 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
     return _PartScope(
       frame: _frame,
       child: IgnorePointer(
-        ignoring: _frame.phase == PlatePartPhase.goingOut,
+        ignoring: _frame.phase == .goingOut,
         child: FadeTransition(
           opacity: chain.opacity,
           child: ClipRect(
@@ -248,44 +242,33 @@ class _PlatePartAnimatorState extends State<PlatePartAnimator>
 class _Chain {
   const _Chain({
     required this.opacity,
-    required this.slide,
-    required this.scale,
+    this.slide = const AlwaysStoppedAnimation<Offset>(Offset.zero),
+    this.scale = kAlwaysCompleteAnimation,
     this.scaleAlignment = Alignment.center,
     this.clipper,
   });
 
-  static const _Chain identity = _Chain(
-    opacity: kAlwaysCompleteAnimation,
-    slide: AlwaysStoppedAnimation<Offset>(Offset.zero),
-    scale: kAlwaysCompleteAnimation,
-  );
+  static const _Chain identity = _Chain(opacity: kAlwaysCompleteAnimation);
 
   factory _Chain.of(PlatePartFrame frame) {
-    final shown = frame.phase == PlatePartPhase.goingOut
+    final shown = frame.phase == .goingOut
         ? ReverseAnimation(frame.progress)
         : frame.progress;
     final origin = frame.motion.origin;
     return switch (frame.motion.effect) {
-      PlatePartEffect.fade => _Chain(
-        opacity: shown,
-        slide: identity.slide,
-        scale: identity.scale,
-      ),
-      PlatePartEffect.wipe || PlatePartEffect.draw => _Chain(
+      .fade => _Chain(opacity: shown),
+      .wipe || .draw => _Chain(
         // A step, not a fade: skips painting a fully wiped part, paints the
         // rest without a layer.
         opacity: shown.drive(const _Gate()),
-        slide: identity.slide,
-        scale: identity.scale,
         clipper: _WipeClipper(frame),
       ),
-      PlatePartEffect.fadeScale => _Chain(
+      .fadeScale => _Chain(
         opacity: shown,
-        slide: identity.slide,
         scale: shown.drive(Tween<double>(begin: 0.4, end: 1)),
         scaleAlignment: origin,
       ),
-      PlatePartEffect.fadeSlide => _Chain(
+      .fadeSlide => _Chain(
         opacity: shown,
         slide: shown.drive(
           Tween<Offset>(
@@ -293,7 +276,6 @@ class _Chain {
             end: Offset.zero,
           ),
         ),
-        scale: identity.scale,
       ),
     };
   }
