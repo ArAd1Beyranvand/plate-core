@@ -17,6 +17,23 @@ QWEN_CTX = 6144                # unit median ~500 tokens; prompt with exemplar ~
 # Seeds for the rate estimate; replaced by measurements after the first call.
 QWEN_RATES = {QWEN_SMALL: (51.0, 16.0), QWEN_LARGE: (23.0, 9.0)}  # (prompt tok/s, output tok/s)
 
+# 'manual': Claude tasks become copiable prompts with a suggested model and effort; you run them in
+# Claude Code and press Done, then portctl verifies. 'auto': portctl runs `claude -p` itself.
+CLAUDE_MODE = 'manual'
+HANDOFFS = ROOT / 'claude' / 'port' / 'handoffs'   # every handed-off prompt is also written here
+MANUAL_ROUNDS = 5              # red-oracle fix prompts before a task fails (auto mode: 2)
+# Suggested (model, effort) per template, or per template:part. Dynamic cases live in engine.hint().
+HINTS = {
+    's1_export': ('opus', 'high'), 's1_vectors': ('opus', 'high'),
+    's2_setup': ('sonnet', 'medium'),
+    's2_core:values': ('sonnet', 'medium'), 's2_core:alphabet': ('opus', 'high'),
+    's2_core:layout': ('opus', 'high'), 's2_core:input': ('opus', 'high'), 's2_core:timing': ('sonnet', 'medium'),
+    's3_part:render': ('opus', 'high'), 's3_part:ui': ('opus', 'high'), 's3_part:keypad': ('sonnet', 'high'),
+    's4_codegen': ('opus', 'high'),
+    's5_holder': ('sonnet', 'high'),
+    'repair': ('sonnet', 'low'),
+}
+
 CLAUDE = 'claude'
 CLAUDE_MODEL = None            # None: the CLI default
 CLAUDE_MAX_TURNS = 200

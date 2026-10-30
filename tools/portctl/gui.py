@@ -3,9 +3,9 @@ engine thread never touches Qt."""
 import html, json, time
 
 from PySide6.QtCore import Qt, QTimer
-from PySide6.QtGui import QColor, QFont, QTextCursor, QBrush
+from PySide6.QtGui import QBrush, QColor, QGuiApplication, QKeySequence, QShortcut, QTextCursor
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QHBoxLayout, QHeaderView, QLabel,
-                               QLineEdit, QMainWindow, QPlainTextEdit, QPushButton, QSplitter, QTableWidget,
+                               QLineEdit, QListWidget, QListWidgetItem, QMainWindow, QPlainTextEdit, QPushButton, QSplitter, QTableWidget,
                                QTableWidgetItem, QTabWidget, QTextEdit, QTreeWidget, QTreeWidgetItem,
                                QVBoxLayout, QWidget, QFrame)
 
@@ -15,10 +15,12 @@ BG, PANEL, LINE, TEXT, DIM = '#09090b', '#111114', '#24252c', '#d8dae2', '#6b6f7
 SOURCE = {'python': '#9aa0a6', 'oracle': '#7fd18b', 'qwen': '#3fd4dc', 'qwen.out': '#8fe9ee',
           'claude': '#f5b041', 'claude.out': '#ffd38a', 'claude.tool': '#d49a3a', 'claude.result': '#8a7a5c',
           'router': '#b48cff', 'engine': '#e6e6e6', 'gate': '#ff7ad9'}
-STATUS = {'pending': DIM, 'running': '#3fd4dc', 'done': '#7fd18b', 'failed': '#ff5c6c',
+STATUS = {'pending': DIM, 'running': '#3fd4dc', 'awaiting': '#ffb454', 'done': '#7fd18b', 'failed': '#ff5c6c',
           'escalated': '#f5b041', 'batched': '#ff9f43', 'skipped': '#4a4d57'}
-GLYPH = {'pending': '○', 'running': '◐', 'done': '●', 'failed': '✕', 'escalated': '▲', 'batched': '◆',
-         'skipped': '–'}
+GLYPH = {'pending': '○', 'running': '◐', 'awaiting': '⧉', 'done': '●', 'failed': '✕', 'escalated': '▲',
+         'batched': '◆', 'skipped': '–'}
+MODEL = {'opus': '#f5b041', 'sonnet': '#b48cff', 'haiku': '#3fd4dc'}
+EFFORT = {'low': '#7fd18b', 'medium': '#d8dae2', 'high': '#ff7a59'}
 GATE = {'closed': '·', 'open': '▶', 'waiting': '⏳', 'approved': '✓'}
 
 QSS = f'''
@@ -49,6 +51,10 @@ QScrollBar::handle:vertical {{ background: #2a2c34; border-radius: 4px; min-heig
 QScrollBar::add-line, QScrollBar::sub-line {{ height: 0; }}
 QCheckBox::indicator {{ width: 14px; height: 14px; border: 1px solid {LINE}; border-radius: 3px; }}
 QCheckBox::indicator:checked {{ background: #3fd4dc; }}
+QListWidget {{ background: {PANEL}; border: 1px solid {LINE}; border-radius: 8px; padding: 4px; }}
+QListWidget::item {{ padding: 7px 6px; border-bottom: 1px solid #1a1b20; }}
+QListWidget::item:selected {{ background: #1d2a33; color: #ffffff; }}
+QPushButton#big {{ border-color: #2c6b45; color: #7fd18b; padding: 8px 18px; font-weight: 600; }}
 '''
 
 
@@ -89,6 +95,8 @@ class Window(QMainWindow):
         bar.addWidget(QLabel('portctl', objectName='title'))
         self.state = QLabel('')
         bar.addWidget(self.state)
+        self.badge = QLabel('')
+        bar.addWidget(self.badge)
         bar.addStretch(1)
         def button(text, fn, name=None, tip=''):
             b = QPushButton(text, objectName=name or '')
@@ -120,7 +128,7 @@ class Window(QMainWindow):
         self.filter = QLineEdit(placeholderText='filter tasks…')
         self.filter.textChanged.connect(self.refresh_tree)
         self.status_filter = QComboBox()
-        self.status_filter.addItems(['all', 'pending', 'running', 'done', 'failed', 'escalated', 'batched',
+        self.status_filter.addItems(['all', 'pending', 'running', 'awaiting', 'done', 'failed', 'escalated', 'batched',
                                      'skipped', 'not done'])
         self.status_filter.currentTextChanged.connect(self.refresh_tree)
         frow.addWidget(self.filter, 1); frow.addWidget(self.status_filter)
@@ -160,7 +168,7 @@ class Window(QMainWindow):
         self.attempts.verticalHeader().hide()
         self.attempts.itemSelectionChanged.connect(self.on_attempt)
         att = QSplitter(Qt.Vertical); att.addWidget(self.attempts); att.addWidget(self.output)
-        for w, name in ((self.live, 'Live'), (self.prompt, 'Prompt'), (att, 'Attempts'),
+        for w, name in ((self.build_handoffs(), 'Handoffs'), (self.live, 'Live'), (self.prompt, 'Prompt'), (att, 'Attempts'),
                         (self.oracle, 'Oracle'), (self.result, 'Task')):
             self.tabs.addTab(w, name)
         cv.addWidget(self.tabs, 1)
@@ -192,6 +200,92 @@ class Window(QMainWindow):
         self.refresh_all()
         self.reload_live()
 
+    # ---- handoffs: Claude prompts you run yourself ----------------------------------------------
+    def build_handoffs(self):
+        w = QSplitter(Qt.Horizontal)
+        self.hlist = QListWidget()
+        self.hlist.itemSelectionChanged.connect(self.on_handoff)
+        w.addWidget(self.hlist)
+        right = QWidget(); v = QVBoxLayout(right); v.setContentsMargins(6, 0, 0, 0)
+        self.hhead = QLabel('no prompt waiting — Claude tasks appear here when the scheduler reaches them')
+        self.hhead.setTextFormat(Qt.RichText); self.hhead.setWordWrap(True)
+        self.hprompt = mono()
+        self.hprompt.setLineWrapMode(QPlainTextEdit.NoWrap)
+        row = QHBoxLayout()
+        self.copy_btn = QPushButton('⧉ Copy prompt', objectName='big')
+        self.copy_btn.setToolTip('Ctrl+Shift+C')
+        self.copy_btn.clicked.connect(self.copy_prompt)
+        done = QPushButton('✓ Done in Claude Code — verify', objectName='big')
+        done.setToolTip('Ctrl+Return: portctl runs the oracle; red gives you a fix prompt')
+        done.clicked.connect(lambda: self.on_handoff_task(self.engine.returned))
+        regen = QPushButton('↻ Regenerate')
+        regen.clicked.connect(lambda: self.on_handoff_task(self.engine.retry))
+        skip = QPushButton('⤼ Skip', objectName='warn')
+        skip.clicked.connect(lambda: self.on_handoff_task(self.engine.skip))
+        for b in (self.copy_btn, done): row.addWidget(b)
+        row.addStretch(1); row.addWidget(regen); row.addWidget(skip)
+        v.addWidget(self.hhead); v.addWidget(self.hprompt, 1); v.addLayout(row)
+        w.addWidget(right)
+        w.setSizes([260, 600])
+        QShortcut(QKeySequence('Ctrl+Shift+C'), self, self.copy_prompt)
+        QShortcut(QKeySequence('Ctrl+Return'), self, lambda: self.on_handoff_task(self.engine.returned))
+        self.handoff_ids = []
+        return w
+
+    def refresh_handoffs(self):
+        rows = self.store.tasks("status='awaiting'")
+        ids = [t['id'] for t in rows]
+        if ids != self.handoff_ids:
+            cur = self.current_handoff()
+            grew = len(ids) > len(self.handoff_ids)
+            self.handoff_ids = ids
+            self.hlist.blockSignals(True); self.hlist.clear()
+            for t in rows:
+                r = t['result']
+                it = QListWidgetItem(f'⧉ {t["id"]}\n   {r.get("model")} · {r.get("effort")}'
+                                     + (f' · fix round {r["round"]}' if r.get('round') else ''))
+                it.setData(Qt.UserRole, t['id'])
+                it.setForeground(QBrush(QColor(MODEL.get(r.get('model'), TEXT))))
+                self.hlist.addItem(it)
+                if t['id'] == cur: it.setSelected(True)
+            self.hlist.blockSignals(False)
+            if ids and not self.hlist.selectedItems(): self.hlist.item(0).setSelected(True)
+            if not ids:
+                self.hhead.setText('no prompt waiting'); self.hprompt.clear()
+            if grew: self.tabs.setCurrentIndex(0)
+        n = len(ids)
+        self.badge.setText(f'<span style="color:#ffb454">  ⧉ {n} prompt{"s" if n > 1 else ""} waiting for you</span>'
+                           if n else '')
+
+    def current_handoff(self):
+        sel = self.hlist.selectedItems()
+        return sel[0].data(Qt.UserRole) if sel else None
+
+    def on_handoff(self):
+        tid = self.current_handoff()
+        t = tid and self.store.task(tid)
+        if not t: return
+        r = t['result']
+        m, e = r.get('model', '?'), r.get('effort', '?')
+        chip = lambda text, col: (f'<span style="color:{col}; border:1px solid {col}">&nbsp;{text}&nbsp;</span>')
+        self.hhead.setText(
+            f'<span style="font-size:14px; font-weight:600">{html.escape(t["id"])}</span>'
+            f'&nbsp;&nbsp;{chip("model: " + m, MODEL.get(m, TEXT))}&nbsp;&nbsp;{chip("effort: " + e, EFFORT.get(e, TEXT))}'
+            f'<br><span style="color:{DIM}">{html.escape(t["title"] or "")} · ~{len(r.get("prompt", "")) // 4} tokens'
+            f' · {html.escape(r.get("file", ""))}'
+            + (f' · fix round {r["round"]}' if r.get('round') else '') + '</span>')
+        self.hprompt.setPlainText(r.get('prompt', ''))
+
+    def copy_prompt(self):
+        if not self.hprompt.toPlainText(): return
+        QGuiApplication.clipboard().setText(self.hprompt.toPlainText())
+        self.copy_btn.setText('✓ copied')
+        QTimer.singleShot(1200, lambda: self.copy_btn.setText('⧉ Copy prompt'))
+
+    def on_handoff_task(self, fn):
+        tid = self.current_handoff()
+        if tid: fn(tid)
+
     # ---- controls -----------------------------------------------------------------------------
     def approve(self):
         for ph in self.store.q("select id from phases where gate='waiting' order by ord"):
@@ -208,7 +302,7 @@ class Window(QMainWindow):
 
     # ---- tree ---------------------------------------------------------------------------------
     def refresh_all(self):
-        self.refresh_tree(); self.refresh_dash()
+        self.refresh_tree(); self.refresh_dash(); self.refresh_handoffs()
         if self.selected and self.selected.startswith('task:'): self.show_task(self.selected[5:], tabs_only=True)
 
     def refresh_tree(self, *_):
@@ -259,6 +353,8 @@ class Window(QMainWindow):
         self.selected = sel[0].data(0, Qt.UserRole)
         if self.selected.startswith('task:'):
             self.follow_all.setChecked(False)
+            if self.selected[5:] in self.handoff_ids:
+                self.hlist.item(self.handoff_ids.index(self.selected[5:])).setSelected(True)
             self.show_task(self.selected[5:])
         else:
             self.task_title.setText(self.selected[6:])
@@ -337,8 +433,12 @@ class Window(QMainWindow):
     def refresh_dash(self):
         eng = self.engine
         lanes = []
+        manual = C.CLAUDE_MODE == 'manual'
         for lane, size in (('python', 3), ('qwen', 1), ('claude', 1)):
             ids = [t for t, l in list(eng.inflight.items()) if l == lane]
+            if lane == 'claude' and manual:
+                lanes.append(f'<span style="color:{SOURCE[lane]}">■ claude</span> you · '
+                             f'{len(self.handoff_ids)} waiting'); continue
             col = SOURCE[lane]
             lanes.append(f'<span style="color:{col}">■ {lane}</span> {len(ids)}/{size} '
                          f'<span style="color:{DIM}">{html.escape(", ".join(ids)) or "idle"}</span>')
@@ -354,10 +454,19 @@ class Window(QMainWindow):
             rows.append(f'<span style="color:#3fd4dc">{m}</span><br>&nbsp;&nbsp;in {r[0]:.1f} tok/s · out {r[1]:.1f} tok/s'
                         f'<br>&nbsp;&nbsp;{stats["n"]} calls · {stats["ok"] or 0} ok · avg {stats["s"] or 0:.0f}s')
         self.rates.setText('<br>'.join(rows))
+        if manual:
+            h = self.store.q("select count(*) n, count(distinct task) t from attempts where worker='handoff'")[0]
+            self.spend.setText(f'<span style="color:#f5b041">manual</span> · {h["n"]} prompts handed off for '
+                               f'{h["t"]} tasks<br><span style="color:{DIM}">{len(self.handoff_ids)} waiting · '
+                               f'batch {C.CLAUDE_BATCH} · prompts also in claude/port/handoffs/</span>')
+            return self.refresh_families()
         c = self.store.q("select count(*) n, sum(cost) c from attempts where worker='claude'")[0]
         self.spend.setText(f'<span style="color:#f5b041">${self.store.get("claude_spend", 0.0):.2f}</span> spent · '
                            f'{c["n"]} sessions<br><span style="color:{DIM}">budget/task ${C.CLAUDE_BUDGET_USD:.0f} · '
                            f'batch {C.CLAUDE_BATCH}</span>')
+        self.refresh_families()
+
+    def refresh_families(self):
         fs = sorted(self.store.family_stats().items())
         self.families.setRowCount(len(fs))
         for r, ((fam, lang), s) in enumerate(fs):

@@ -1,7 +1,7 @@
 """Scheduler: phase gates, lanes, the router, the qwen ladder, the escalation batcher and the
 handlers for every task kind. Runs in its own thread; the GUI only reads the store and calls the
 control methods."""
-import json, re, threading, time, traceback
+import json, os, re, threading, time, traceback
 from pathlib import Path
 
 import config as C
@@ -10,6 +10,7 @@ import plan
 from context import render, cited, compact_error, tokens
 
 DONE = ('done', 'skipped')
+OPEN = ('pending', 'running', 'awaiting')
 LANE_OF = {'python': 'python', 'claude': 'claude', 'fixlist': 'claude', 'repair': 'claude', 'question': 'qwen'}
 LANE_SIZE = {'python': 3, 'qwen': 1, 'claude': 1}
 
@@ -69,6 +70,13 @@ class Engine:
         self.last_route.pop(tid, None)
         self.say(tid, 'router', f'forced → {route or "auto"}')
 
+    def returned(self, tid):
+        """You ran a handed-off prompt in Claude Code: verify it on the next tick."""
+        t = self.store.task(tid)
+        if t['status'] != 'awaiting': return
+        self.store.set_task(tid, status='pending', result={**t['result'], 'stage': 'returned'})
+        self.say(tid, 'claude', f'✓ marked done in Claude Code → verifying')
+
     def kill(self, tid):
         lane = self.inflight.get(tid)
         self.stops.add(tid)
@@ -118,6 +126,8 @@ class Engine:
             if t['kind'] == 'unit':
                 lane = self.route(t)
                 if lane in (None, 'batch'): continue
+            # Manual Claude tasks only prepare a prompt or verify your work: cheap, so the python lane.
+            if lane == 'claude' and C.CLAUDE_MODE == 'manual': lane = 'python'
             if sum(1 for l in self.inflight.values() if l == lane) >= LANE_SIZE[lane]: continue
             self.dispatch(t, lane)
             if self.step_once:
@@ -143,7 +153,7 @@ class Engine:
             if status != 'done': status = 'failed'
         self.store.set_task(tid, status=status, result=result)
         self.say(tid, 'engine', f'{"✓" if status == "done" else "•"} {status} · {time.time() - start:.1f}s',
-                 'info' if status in DONE + ('escalated',) else 'error')
+                 'info' if status in DONE + ('escalated', 'awaiting', 'pending') else 'error')
         with self.lock: self.inflight.pop(tid, None)
 
     # ---- router -------------------------------------------------------------------------------
@@ -167,10 +177,12 @@ class Engine:
                 self.store.set_task(t['id'], status='escalated', route='claude', result={'reason': reason})
             return lane
         if t['forced'] == 'qwen': return decide('qwen', 'forced')
-        if t['forced'] == 'claude': return decide('claude', 'forced')
+        if t['forced'] == 'claude':
+            if t['route'] != 'exemplar': self.store.set_task(t['id'], route='claude')
+            return decide('claude', 'forced')
         ex = len(self.store.exemplars(fam, lang))
         busy = self.store.q("select count(*) n from tasks where kind='unit' and family=? and lang=? and "
-                            "status='running' and route='exemplar'", fam, lang)[0]['n']
+                            "status in ('running', 'awaiting') and route='exemplar'", fam, lang)[0]['n']
         if ex + busy < C.EXEMPLARS_PER_FAMILY:
             self.store.set_task(t['id'], route='exemplar')
             return decide('claude', f'exemplar {ex + busy + 1}/{C.EXEMPLARS_PER_FAMILY} for {fam}·{lang}')
@@ -195,7 +207,7 @@ class Engine:
         for u in units: groups.setdefault(u['family'], []).append(u)
         for fam, us in groups.items():
             esc = [u for u in us if u['status'] == 'escalated']
-            open_ = [u for u in us if u['status'] in ('pending', 'running') and u['id'] not in self.last_route_wait()]
+            open_ = [u for u in us if u['status'] in OPEN and u['id'] not in self.last_route_wait()]
             if not esc or (len(esc) < C.CLAUDE_BATCH and open_): continue
             pack = esc[:C.CLAUDE_BATCH]
             lang = pack[0]['lang']
@@ -262,38 +274,73 @@ class Engine:
     def spend(self, cost):
         self.store.put('claude_spend', self.store.get('claude_spend', 0.0) + (cost or 0.0))
 
-    def claude_session(self, t, prompt, log, verify=None):
-        """A Claude run plus the oracle; on a red oracle the same session gets the compacted error,
-        up to twice."""
-        n = len(self.store.attempts(t['id']))
-        res = self.claude.run(prompt, log)
+    def hint(self, t, template):
+        """Suggested (model, effort) for a Claude prompt."""
+        if template == 'fixlist':
+            return ('haiku', 'medium') if t['result'].get('items', 99) <= 6 else ('sonnet', 'medium')
+        if template == 'unit_claude':
+            return ('opus', 'medium') if t['route'] == 'exemplar' else ('haiku', 'medium')
+        part = t['payload'].get('vars', {}).get('part')
+        return C.HINTS.get(f'{template}:{part}') or C.HINTS.get(template) or ('sonnet', 'medium')
+
+    def handoff(self, t, log, template, make_prompt, finish):
+        """One Claude step. Manual: write the prompt for you and wait ('awaiting'); after you press
+        Done, `finish` verifies. Auto: run `claude -p` (resuming on fix rounds), then `finish`."""
+        r = t['result'] or {}
+        if r.get('stage') == 'returned': return finish(t, log)
+        prompt = r.get('next_prompt') or make_prompt()
+        model, effort = r.get('next_hint') or self.hint(t, template)
+        n = len(self.store.attempts(t['id'])) + 1
+        if C.CLAUDE_MODE == 'manual':
+            C.HANDOFFS.mkdir(parents=True, exist_ok=True)
+            f = C.HANDOFFS / f'{t["id"]}.r{r.get("round", 0)}.md'
+            f.write_text(f'<!-- portctl {t["id"]} · model: {model} · effort: {effort} -->\n\n{prompt}', 'utf8')
+            self.store.add_attempt(task=t['id'], n=n, worker='handoff', model=f'{model} · {effort}', prompt=prompt,
+                                   output='', ok=0)
+            log('claude', f'⧉ prompt ready · {model} · effort {effort} · {tokens(prompt)} tokens · '
+                          f'{os.path.relpath(f, C.ROOT)} — run it in Claude Code, then press Done')
+            return 'awaiting', {**r, 'stage': 'awaiting', 'prompt': prompt, 'model': model, 'effort': effort,
+                                'file': os.path.relpath(f, C.ROOT), 'template': template}
+        res = self.claude.run(prompt, log, resume=r.get('session'))
         self.spend(res['cost'])
-        self.store.add_attempt(task=t['id'], n=n + 1, worker='claude', model=C.CLAUDE_MODEL or 'default',
+        self.store.add_attempt(task=t['id'], n=n, worker='claude', model=C.CLAUDE_MODEL or 'default',
                                prompt=prompt, output=res['text'], ok=int(res['ok']), cost=res['cost'])
         if t['id'] in self.stops: return 'failed', {'error': 'stopped'}
         if not res['ok']: return 'failed', {'error': res['text'][:2000] or 'claude session failed'}
+        return finish({**t, 'result': {**r, 'session': res['session'], 'summary': res['text'][-3000:]}}, log)
+
+    def again(self, t, log, error, oracle):
+        """Red oracle: queue a fix prompt for the same task (a new handoff, or a resumed session)."""
+        r = t['result'] or {}
+        rnd = r.get('round', 0) + 1
+        if rnd > (C.MANUAL_ROUNDS if C.CLAUDE_MODE == 'manual' else 2):
+            return 'failed', {'error': error}
+        model = r.get('model') or self.hint(t, r.get('template', ''))[0]
+        fix = render('verify_fix', task=t['id'], title=t['title'], error=error, oracle=oracle,
+                     lang=t['lang'], lang_name=plan.NAMES.get(t['lang'], ''))
+        log('engine', f'oracle red → fix prompt, round {rnd}')
+        return 'pending', {**{k: v for k, v in r.items() if k in ('session', 'template', 'model')},
+                           'round': rnd, 'next_prompt': fix, 'next_hint': (model, 'medium'), 'error': error}
+
+    def finish_all(self, t, log):
+        """Done when the language's whole oracle is green (or when the task has no oracle)."""
         if t['lang'] and not (C.PORTS / t['lang'] / 'portctl.json').exists():
-            return 'failed', {'error': f'ports/{t["lang"]}/portctl.json missing after the session'}
-        if verify != 'all': return 'done', {'summary': res['text'][-3000:], 'cost': res['cost']}
-        for round in range(3):
-            ok, out = X.oracle_all(t['lang'], log)
-            self.store.add_attempt(task=t['id'], n=n + 2 + round, worker='oracle', model='', prompt='',
-                                   output='', oracle=out[-20000:], ok=int(ok))
-            if ok: return 'done', {'summary': res['text'][-3000:], 'cost': res['cost']}
-            if round == 2 or t['id'] in self.stops: break
-            fix = render('verify_fix', error=compact_error(out, 60), oracle=X.contract(t['lang'])['oracle_all'])
-            log('engine', f'oracle red → back to the same session (round {round + 1}/2)')
-            res = self.claude.run(fix, log, resume=res['session'])
-            self.spend(res['cost'])
-            self.store.add_attempt(task=t['id'], n=n + 2 + round, worker='claude', model='resume', prompt=fix,
-                                   output=res['text'], ok=int(res['ok']), cost=res['cost'])
-        return 'failed', {'error': compact_error(out)}
+            return self.again(t, log, f'ports/{t["lang"]}/portctl.json does not exist yet', '(the contract)')
+        if t['payload'].get('verify') != 'all': return 'done', {'summary': t['result'].get('summary', '')}
+        ok, out = X.oracle_all(t['lang'], log)
+        self.store.add_attempt(task=t['id'], n=len(self.store.attempts(t['id'])) + 1, worker='oracle', model='',
+                               prompt='', output='', oracle=out[-20000:], ok=int(ok))
+        if ok: return 'done', {'summary': t['result'].get('summary', ''), 'rounds': t['result'].get('round', 0)}
+        return self.again(t, log, compact_error(out, 60), X.contract(t['lang'])['oracle_all'])
 
     def do_claude(self, t, log, lane):
         p = t['payload']
-        return self.claude_session(t, render(p['template'], **self.claude_vars(t)), log, p.get('verify'))
+        return self.handoff(t, log, p['template'], lambda: render(p['template'], **self.claude_vars(t)),
+                            self.finish_all)
 
     def do_fixlist(self, t, log, lane):
+        if t['result'].get('stage') == 'returned' or t['result'].get('next_prompt'):
+            return self.handoff(t, log, 'fixlist', None, self.finish_all)
         items = []
         for qid in t['deps']:
             q = self.store.task(qid)
@@ -304,8 +351,9 @@ class Engine:
                          f'  target: {where}' + (f'\n  qwen: {r["why"]}' if r.get('why') else ''))
         log('engine', f'{len(items)} of {len(t["deps"])} audit items need a fix')
         if not items: return 'done', {'fixes': 0}
-        v = self.claude_vars(t)
-        return self.claude_session(t, render('fixlist', items='\n'.join(items), **v), log, 'all')
+        t = {**t, 'result': {**t['result'], 'items': len(items)}}
+        return self.handoff(t, log, 'fixlist',
+                            lambda: render('fixlist', items='\n'.join(items), **self.claude_vars(t)), self.finish_all)
 
     def do_question(self, t, log, lane):
         p = t['payload']
@@ -326,24 +374,8 @@ class Engine:
     def do_unit(self, t, log, lane):
         lang, rel = t['lang'], t['payload']['dart']
         target, test = X.unit_paths(lang, rel)
-        if lane == 'claude':
-            v = self.claude_vars(t)
-            ex = self.exemplar(t)
-            v.update(dart_path=rel, target_path=target.relative_to(C.ROOT), test_path=test.relative_to(C.ROOT),
-                     oracle=X.fill(X.contract(lang)['oracle_unit'], {**X.unit_vars(rel),
-                                   'unit_test': test.relative_to(C.PORTS / lang)}),
-                     exemplar=f'{ex["dart"]} → its port (already accepted)' if ex else
-                     'none yet: this unit becomes the exemplar for every later unit of the family, so keep it '
-                     'idiomatic and minimal.')
-            st, res = self.claude_session(t, render('unit_claude', **v), log)
-            if st != 'done': return st, res
-            ok, out = X.oracle_unit(lang, rel, log)
-            if not ok: return 'failed', {'error': compact_error(out)}
-            if len(self.store.exemplars(t['family'], lang)) < C.EXEMPLARS_PER_FAMILY:
-                self.store.add_exemplar(t['family'], lang, rel, target.read_text('utf8'))
-                log('engine', f'★ exemplar for {t["family"]}·{lang}: {rel}')
-            if t['route'] != 'exemplar': self.store.set_task(t['id'], route='claude')
-            return 'done', res
+        if t['route'] in ('exemplar', 'claude'):
+            return self.handoff(t, log, 'unit_claude', lambda: self.unit_claude_prompt(t), self.finish_unit)
         # qwen ladder
         self.store.set_task(t['id'], route='qwen')
         stub = target.read_text('utf8') if target.exists() else None
@@ -370,7 +402,37 @@ class Engine:
         self.store.set_task(t['id'], route='escalated')
         return 'escalated', {'last_code': previous, 'error': error}
 
+    def unit_claude_prompt(self, t):
+        lang, rel = t['lang'], t['payload']['dart']
+        target, test = X.unit_paths(lang, rel)
+        ex = self.exemplar(t)
+        v = self.claude_vars(t)
+        v.update(dart_path=rel, target_path=target.relative_to(C.ROOT), test_path=test.relative_to(C.ROOT),
+                 oracle=self.unit_oracle(lang, rel),
+                 exemplar=f'{ex["dart"]} → its port (already accepted)' if ex else
+                 'none yet: this unit becomes the exemplar for every later unit of the family, so keep it '
+                 'idiomatic and minimal.')
+        return render('unit_claude', **v)
+
+    @staticmethod
+    def unit_oracle(lang, rel):
+        _, test = X.unit_paths(lang, rel)
+        return X.fill(X.contract(lang)['oracle_unit'], {**X.unit_vars(rel), 'unit_test': test.relative_to(C.PORTS / lang)})
+
+    def finish_unit(self, t, log):
+        lang, rel = t['lang'], t['payload']['dart']
+        target, _ = X.unit_paths(lang, rel)
+        ok, out = X.oracle_unit(lang, rel, log)
+        if not ok: return self.again(t, log, compact_error(out), self.unit_oracle(lang, rel))
+        if len(self.store.exemplars(t['family'], lang)) < C.EXEMPLARS_PER_FAMILY:
+            self.store.add_exemplar(t['family'], lang, rel, target.read_text('utf8'))
+            log('engine', f'★ exemplar for {t["family"]}·{lang}: {rel}')
+        return 'done', {'rounds': t['result'].get('round', 0)}
+
     def do_repair(self, t, log, lane):
+        return self.handoff(t, log, 'repair', lambda: self.repair_prompt(t), self.finish_repair)
+
+    def repair_prompt(self, t):
         lang = t['lang']
         blocks = []
         for uid in t['payload']['units']:
@@ -389,14 +451,22 @@ class Engine:
         ex = self.exemplar({'family': t['family'], 'lang': lang})
         v.update(units='\n'.join(blocks), n=len(blocks), oracle_unit=X.contract(lang)['oracle_unit'],
                  exemplar=ex['dart'] if ex else '(none)')
-        st, res = self.claude_session(t, render('repair', **v), log)
-        if st != 'done': return st, res
+        return render('repair', **v)
+
+    def finish_repair(self, t, log):
         bad = []
         for uid in t['payload']['units']:
             u = self.store.task(uid)
-            ok, out = X.oracle_unit(lang, u['payload']['dart'], self.logger(uid))
-            self.store.set_task(uid, status='done' if ok else 'failed',
+            if u['status'] == 'done': continue
+            ok, out = X.oracle_unit(t['lang'], u['payload']['dart'], self.logger(uid))
+            self.store.set_task(uid, status='done' if ok else 'batched',
                                 result={**u['result'], **({} if ok else {'error': compact_error(out)})})
-            if not ok: bad.append(uid)
-        log('engine', f'{len(blocks) - len(bad)}/{len(blocks)} repaired' + (f'; still red: {bad}' if bad else ''))
-        return 'done', {**res, 'still_red': bad}
+            if not ok: bad.append(f'{u["payload"]["dart"]}:\n{compact_error(out, 15)}')
+        n = len(t['payload']['units'])
+        log('engine', f'{n - len(bad)}/{n} units green')
+        if not bad: return 'done', {}
+        st, res = self.again(t, log, '\n\n'.join(bad), X.contract(t['lang'])['oracle_unit'])
+        if st == 'failed':   # give the still-red units back to the router (force them as you like)
+            for uid in t['payload']['units']:
+                if self.store.task(uid)['status'] == 'batched': self.store.set_task(uid, status='failed')
+        return st, res

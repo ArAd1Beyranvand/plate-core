@@ -10,7 +10,7 @@ the work spread so Claude spends tokens only where judgement is needed.
 |---|---|---|---|
 | **python** | free | instant | anything deterministic: run tools, codegen from JSON, tests, context packing, diff/stat, error compaction |
 | **qwen** (ollama) | free | 4b: 51 tok/s in, 16 out · 9b: 23 in, 9 out | *small, checkable* units: one validator, one resolver, a TODO audit answer. Context ≤ ~1.5k tokens, output ≤ ~500 |
-| **claude** (`claude -p`) | $ | fast | architecture, a language's core, render/UI, codegen scripts, the **first units of every family** (exemplars), units qwen failed |
+| **claude** (you, in Claude Code) | $ | fast | architecture, a language's core, render/UI, codegen scripts, the **first units of every family** (exemplars), units qwen failed |
 
 Two rules follow from the table:
 
@@ -103,12 +103,39 @@ prompt, every attempt and the oracle output. On the right, lane status, measured
 spend, success rate per family, and the router's decision log with its reason. Controls: start, pause,
 step once, approve gate, retry, skip, force route.
 
+## Claude is manual by default
+
+`CLAUDE_MODE = 'manual'` in `config.py`. A Claude task does not run `claude -p`. portctl writes its
+prompt, with a suggested model and effort, to the **Handoffs** tab and to `claude/port/handoffs/<task>.r<n>.md`,
+and waits (`awaiting`). You copy it into Claude Code, run it, and press **Done**. portctl then
+verifies the work: the whole oracle for phase tasks, or the unit's test for units. If that is green, the task is
+done. If it is red, you get a short follow-up fix prompt (round n+1, at most `MANUAL_ROUNDS`). Several
+handoffs can wait at once whenever the task graph allows.
+
+Suggested model and effort (`HINTS` in `config.py`, and `engine.hint()` for the dynamic cases):
+
+| prompt | model · effort | why |
+|---|---|---|
+| s1 export, s1 vectors, s4 codegen | opus · high | everything downstream depends on them |
+| core alphabet / layout / input, render, ui | opus · high | hazards H21/H9/D7/D1: subtle and cross-cutting |
+| core values / timing, setup | sonnet · medium | mechanical |
+| keypad, holder | sonnet · high | sizeable but well specified |
+| unit exemplar | opus · medium | sets the style that qwen copies 200+ times |
+| unit forced to Claude | haiku · medium | small, and the test decides |
+| fix list ≤ 6 items / more | haiku · medium / sonnet · medium | |
+| repair batch | sonnet · low | the code is small; the errors are given |
+| oracle fix round | the task's model · medium | |
+
+`CLAUDE_MODE = 'auto'` restores the `claude -p` worker (stream-parsed, budgeted, and resuming the same
+session on fix rounds).
+
 ## Running it
 
 ```
 python3 tools/portctl/portctl.py            # GUI
 python3 tools/portctl/portctl.py --headless --auto   # terminal, gates auto-approved
 python3 tools/portctl/portctl.py --reset    # start over (deletes claude/port/portctl.db)
+python3 tools/portctl/portctl.py --done s2.ts.setup   # headless: you ran that handoff
 ```
 
 Needs `ollama serve` with the models in `config.py`, the `claude` CLI logged in, and PySide6. Thresholds,

@@ -1,6 +1,6 @@
 You are one task of an orchestrated port of a Flutter plate-input/display library to TypeScript,
-Kotlin and Python. A Python scheduler (portctl) runs you via `claude -p`; local qwen models handle
-small units after you. Ground rules:
+Kotlin and Python. A Python scheduler (portctl) hands tasks out; local qwen models handle small units
+after you, and portctl verifies your work with the oracle when you are done. Ground rules:
 
 - Read `claude/port/ROADMAP.md` first: decisions D1–D10 are binding, hazards H1–H24 are what goes
   wrong. Dart files carry `TODO(ts|kt|py): [Dn|Hn] …` notes; the ones for your language are
@@ -12,5 +12,5 @@ small units after you. Ground rules:
   you touch the project layout.
 - Keep code small, idiomatic and close to the Dart structure (same names, adapted to the
   language's casing), so later units can be ported file by file.
-- Before you finish, run the oracle yourself and leave it green. Your final message is a short summary
-  of what you did and anything left open; the scheduler logs it.
+- Before you finish, run the oracle yourself and leave it green. End with a short summary of what you
+  did and anything left open.

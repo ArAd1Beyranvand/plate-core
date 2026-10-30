@@ -22,15 +22,16 @@ TASK_COLS = ('id', 'phase', 'lang', 'kind', 'family', 'title', 'payload', 'deps'
 
 
 class Store:
-    def __init__(self, path):
+    def __init__(self, path, recover=True):
         path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(str(path), check_same_thread=False)
         self.db.row_factory = sqlite3.Row
         self.lock = threading.RLock()
         with self.lock:
             self.db.executescript(SCHEMA)
-            # A task that was running when the app died starts over.
-            self.db.execute("update tasks set status='pending' where status='running'")
+            # A task that was running when the app died starts over (not when a second process,
+            # like `--done`, opens the store next to a live one).
+            if recover: self.db.execute("update tasks set status='pending' where status='running'")
             self.db.commit()
 
     def q(self, sql, *args):
@@ -107,7 +108,7 @@ class Store:
         out = {}
         for r in rows:
             s = out.setdefault((r['family'], r['lang']), {'qwen_ok': 0, 'qwen_tried': 0, 'claude': 0, 'left': 0})
-            if r['status'] in ('pending', 'running'): s['left'] += 1
+            if r['status'] in ('pending', 'running', 'awaiting'): s['left'] += 1
             elif r['route'] == 'qwen':
                 s['qwen_tried'] += 1; s['qwen_ok'] += r['status'] == 'done'
             elif r['route'] == 'escalated':
