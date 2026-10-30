@@ -1,6 +1,13 @@
 """Black PySide6 front end. It only reads the store (polling) and calls Engine control methods, so the
 engine thread never touches Qt."""
-import html, json, time
+import html, json, sys, time
+
+import PySide6
+# PySide6 6.12 drops a reference to None on every void call; harmless only where None is immortal
+# (Python 3.12+). On 3.10 the GUI aborts with "none_dealloc" after a few thousand calls. 6.9.3 is fine.
+if sys.version_info < (3, 12) and tuple(map(int, PySide6.__version__.split('.')[:2])) >= (6, 12):
+    sys.exit(f'PySide6 {PySide6.__version__} crashes on Python {sys.version.split()[0]}: '
+             'pip install --user "PySide6==6.9.3"')
 
 from PySide6.QtCore import Qt, QTimer
 from PySide6.QtGui import QBrush, QColor, QGuiApplication, QKeySequence, QShortcut, QTextCursor

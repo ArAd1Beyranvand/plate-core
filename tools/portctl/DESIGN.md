@@ -138,7 +138,8 @@ python3 tools/portctl/portctl.py --reset    # start over (deletes claude/port/po
 python3 tools/portctl/portctl.py --done s2.ts.setup   # headless: you ran that handoff
 ```
 
-Needs `ollama serve` with the models in `config.py`, the `claude` CLI logged in, and PySide6. Thresholds,
+Needs `ollama serve` with the models in `config.py` and PySide6 (6.9.3 on Python 3.10: 6.12 aborts with
+"none_dealloc"). Thresholds,
 models, budget and oracle defaults are all in `config.py`. Each language's real commands come from
 `ports/<lang>/portctl.json`, which its S2 setup task writes.
 
