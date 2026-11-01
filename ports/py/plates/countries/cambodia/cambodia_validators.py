@@ -1,7 +1,7 @@
 """Port of cambodia_plate/lib/src/cambodia_validators.dart. Hand-ported; codegen never overwrites this file."""
 from __future__ import annotations
 
-from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation
+from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation, is_digits
 
 
 class CambodiaValidator(GatedPlateValidator):
@@ -18,7 +18,7 @@ class CambodiaValidator(GatedPlateValidator):
             letters = len(entry.group("letters"))
             if letters < 1 or letters > 2:
                 return PlateValidation.invalid(self.reason_letters)
-        if not entry.group("serial").isdigit() or len(entry.group("serial")) != 4:
+        if not is_digits(entry.group("serial")) or len(entry.group("serial")) != 4:
             return PlateValidation.invalid(self.reason_serial)
         return PlateValidation.valid()
 
@@ -37,8 +37,8 @@ class CambodiaStackedValidator(GatedPlateValidator):
         for key in ("mission", "org", "code"):
             if entry.spec.indices_of_group(key):
                 length = 3 if key == "org" else 2
-                if not entry.group(key).isdigit() or len(entry.group(key)) != length:
+                if not is_digits(entry.group(key)) or len(entry.group(key)) != length:
                     return PlateValidation.invalid(self.reason_code)
-        if not entry.group("serial").isdigit() or len(entry.group("serial")) != 3:
+        if not is_digits(entry.group("serial")) or len(entry.group("serial")) != 3:
             return PlateValidation.invalid(self.reason_serial)
         return PlateValidation.valid()

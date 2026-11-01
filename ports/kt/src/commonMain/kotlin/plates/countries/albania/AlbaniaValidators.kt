@@ -4,9 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letters2 = Regex("^[A-Z]{2}$")
 private val letter = Regex("^[A-Z]$")
 
 /** Judges a private, repetitive or motorcycle plate (`AB 123 CD`; the motorcycle has no suffix). Reports, never bars a keystroke. */
@@ -14,10 +14,10 @@ class AlbaniaPrivateValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
         val suffix = entry.group("suffix")
-        if (suffix.isNotEmpty() && !letters2.matches(suffix)) return PlateValidation.invalid(REASON_SUFFIX)
+        if (suffix.isNotEmpty() && !isLetters(suffix, 2)) return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
     }
 
@@ -33,7 +33,7 @@ class AlbaniaAgriculturalValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid(REASON_SERIES)
         val kind = entry.group("class")
         if (kind !in classes) return PlateValidation.invalid(REASON_CLASS)
         if (!isDigitsOfLength(entry.group("number"), if (kind == "R") 3 else 2)) {
@@ -99,7 +99,7 @@ class AlbaniaPoliceValidator : GatedPlateValidator() {
     override fun judge(entry: PlateEntry): PlateValidation {
         if (entry.group("prefix") != "MB") return PlateValidation.invalid(REASON_PREFIX)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
-        if (!letters2.matches(entry.group("suffix"))) return PlateValidation.invalid(REASON_SUFFIX)
+        if (!isLetters(entry.group("suffix"), 2)) return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
     }
 
@@ -115,7 +115,7 @@ class AlbaniaTaxiValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
         if (entry.group("suffix") != "T") return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
@@ -133,7 +133,7 @@ class AlbaniaProvisionalValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 1)) return PlateValidation.invalid(REASON_NUMBER)
         val word = entry.group("word")
         if (word != "PRK" && word != "PROV") return PlateValidation.invalid(REASON_WORD)

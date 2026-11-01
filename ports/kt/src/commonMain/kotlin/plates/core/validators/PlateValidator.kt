@@ -27,6 +27,9 @@ fun isDigits(value: String) = value.isNotEmpty() && value.all { it in '0'..'9' }
 // Code units, safe because isDigits passes ASCII alone (H24).
 fun isDigitsOfLength(value: String, length: Int) = value.length == length && isDigits(value)
 
+// ASCII A-Z only, min..max long (H9).
+fun isLetters(value: String, min: Int, max: Int = min) = value.length in min..max && value.all { it in 'A'..'Z' }
+
 /** Judges a plate. It never prevents input; what to do with the verdict is the host's decision. */
 fun interface PlateValidator {
     fun validate(entry: PlateEntry): PlateValidation

@@ -4,10 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letters2 = Regex("^[A-Z]{2}$")
-private val letters3 = Regex("^[A-Z]{3}$")
 
 // ArgentinaAlphabets.missionClass / mission1985Class characters.
 private val missionClass = listOf("D", "C", "M", "I", "A")
@@ -18,9 +17,9 @@ class ArgentinaStandardValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
-        if (!letters2.matches(entry.group("suffix"))) return PlateValidation.invalid(REASON_SUFFIX)
+        if (!isLetters(entry.group("suffix"), 2)) return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
     }
 
@@ -36,7 +35,7 @@ class ArgentinaLegacyValidator : GatedPlateValidator() {
     override val gateGroup = "series"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters3.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 3)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
         return PlateValidation.valid
     }
@@ -53,7 +52,7 @@ class ArgentinaTrailerValidator : GatedPlateValidator() {
 
     override fun judge(entry: PlateEntry): PlateValidation {
         if (!isDigitsOfLength(entry.group("trailer"), 3)) return PlateValidation.invalid(REASON_TRAILER)
-        if (!letters3.matches(entry.group("series"))) return PlateValidation.invalid(REASON_SERIES)
+        if (!isLetters(entry.group("series"), 3)) return PlateValidation.invalid(REASON_SERIES)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
         return PlateValidation.valid
     }
@@ -72,7 +71,7 @@ class ArgentinaMissionValidator : GatedPlateValidator() {
     override fun judge(entry: PlateEntry): PlateValidation {
         if (entry.group("prefix") !in missionClass) return PlateValidation.invalid("The category is D, C, M, I or A.")
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
-        if (!letters3.matches(entry.group("suffix"))) return PlateValidation.invalid(REASON_SUFFIX)
+        if (!isLetters(entry.group("suffix"), 3)) return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
     }
 

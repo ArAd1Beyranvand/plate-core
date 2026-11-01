@@ -4,6 +4,7 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 /**
  * Judges an Andorran plate by its groups. Reports, never bars a keystroke.
@@ -26,7 +27,7 @@ class AndorraValidator : GatedPlateValidator() {
                 PlateValidation.invalid(REASON_TEMPORARY)
             }
         }
-        return if (isDigitsOfLength(digits, 4) && LETTER.matches(entry.group("letter"))) {
+        return if (isDigitsOfLength(digits, 4) && isLetters(entry.group("letter"), 1)) {
             PlateValidation.valid
         } else {
             PlateValidation.invalid(REASON_STANDARD)
@@ -38,6 +39,5 @@ class AndorraValidator : GatedPlateValidator() {
         const val REASON_TEMPORARY = "A temporary plate is four digits, a month (I to XII) and a year."
 
         private val MONTH = Regex("^(I{1,3}|IV|IX|VI{0,3}|XI{0,2})$")
-        private val LETTER = Regex("^[A-Z]$")
     }
 }

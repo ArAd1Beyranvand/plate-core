@@ -15,7 +15,7 @@ class AntiguaAndBarbudaValidator(GatedPlateValidator):
     _letter = re.compile(r"^[A-Z]$")
 
     def judge(self, entry: PlateEntry) -> PlateValidation:
-        if not self._letter.match(entry.group("letter")):
+        if not self._letter.fullmatch(entry.group("letter")):
             return PlateValidation.invalid(self.reason_letter)
         serial = entry.group("serial")
         if not serial or len(serial) > self.max_digits or not is_digits(serial):

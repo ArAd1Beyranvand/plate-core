@@ -1,9 +1,7 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
-const lettersRe = /^[A-Z]{2}$/;
-const letterRe = /^[A-Z]$/;
 const mixedRe = /^[A-Z][0-9]$/;
-const isPair = (v: string): boolean => lettersRe.test(v) || isDigitsOfLength(v, 2);
+const isPair = (v: string): boolean => isLetters(v, 2) || isDigitsOfLength(v, 2);
 
 /**
  * Judges a Portuguese plate by the groups its spec carries.
@@ -34,10 +32,10 @@ export class PortugalValidator implements PlateValidator {
     const district = entry.group('district');
     if (district !== '') {
       const number = entry.group('number');
-      return lettersRe.test(district.padEnd(2, 'A')) && isDigits(number) && number.length <= 6 ? valid : invalid(V.reasonTrailer);
+      return isLetters(district.padEnd(2, 'A'), 2) && isDigits(number) && number.length <= 6 ? valid : invalid(V.reasonTrailer);
     }
     const letter = entry.group('letter');
-    if (letter !== '') return letterRe.test(letter) && isDigitsOfLength(entry.group('number'), 4) ? valid : invalid(V.reasonGnr);
+    if (letter !== '') return isLetters(letter, 1) && isDigitsOfLength(entry.group('number'), 4) ? valid : invalid(V.reasonGnr);
     const first = entry.group('first');
     if (first === '') return valid;
     if (!(isPair(first) || mixedRe.test(first)) || !isPair(entry.group('second')) || !isPair(entry.group('third'))) return invalid(V.reasonShape);

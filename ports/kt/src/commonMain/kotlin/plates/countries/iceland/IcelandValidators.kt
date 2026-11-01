@@ -3,6 +3,7 @@ package plates.countries.iceland
 import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
+import plates.core.validators.isLetters
 
 /** The third character of a diplomatic plate, by mission. From the article's table; `Q` is unassigned. */
 object IcelandMissions {
@@ -30,7 +31,6 @@ object IcelandMissions {
 }
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letters2 = Regex("^[A-Z]{2}$")
 private val threeDigits = Regex("^[0-9]{3}$")
 private val letterTwoDigits = Regex("^[A-Z][0-9]{2}$")
 
@@ -41,7 +41,7 @@ class IcelandValidator : GatedPlateValidator() {
     override fun judge(entry: PlateEntry): PlateValidation {
         val letters = entry.group("letters")
         val serial = entry.group("serial")
-        if (!letters2.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(letters, 2)) return PlateValidation.invalid(REASON_LETTERS)
         if (letters == "CD") {
             if (!letterTwoDigits.matches(serial) || serial.substring(0, 1) !in IcelandMissions.names) {
                 return PlateValidation.invalid(REASON_MISSION)

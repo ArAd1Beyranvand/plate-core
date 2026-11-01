@@ -1,7 +1,6 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
 const letter = /^[A-Z]$/;
-const letterPair = /^[A-Z]{2}$/;
 
 /**
  * Judges a `DominicanRepublicPlates.private1990`, `passenger1980` or
@@ -44,6 +43,6 @@ export class DominicanRepublicExemptValidator extends GatedPlateValidator {
   static readonly reason = 'A plate is two letters and five digits.';
 
   judge(entry: PlateEntry): PlateValidation {
-    return letterPair.test(entry.group('letters')) && isDigitsOfLength(entry.group('digits'), 5) ? valid : invalid(DominicanRepublicExemptValidator.reason);
+    return isLetters(entry.group('letters'), 2) && isDigitsOfLength(entry.group('digits'), 5) ? valid : invalid(DominicanRepublicExemptValidator.reason);
   }
 }

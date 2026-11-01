@@ -458,10 +458,15 @@ class Engine:
             self.note_rates(model, st)
             code = X.tidy(lang, X.code_block(text))
             target.parent.mkdir(parents=True, exist_ok=True)
-            with self.oracle_lock:
-                target.write_text(code, 'utf8')
-                ok, out = X.oracle_unit(lang, rel, log)
-                if not ok and stub is not None: target.write_text(stub, 'utf8')
+            bad = X.lint(lang, code)
+            if bad:
+                ok, out = False, 'Rejected before the tests ran:\n' + bad
+                log('engine', 'lint: ' + bad.replace('\n', ' '))
+            else:
+                with self.oracle_lock:
+                    target.write_text(code, 'utf8')
+                    ok, out = X.oracle_unit(lang, rel, log)
+                    if not ok and stub is not None: target.write_text(stub, 'utf8')
             self.store.add_attempt(task=t['id'], n=n + 1, worker='qwen', model=model, prompt=prompt, output=text,
                                    oracle=out[-20000:], ok=int(ok), seconds=st['seconds'], tok_in=st['tok_in'],
                                    tok_out=st['tok_out'])

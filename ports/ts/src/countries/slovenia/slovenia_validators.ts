@@ -1,6 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
-const twoLetters = /^[A-Z]{2}$/;
 const regionCodes = ['CE', 'GO', 'KK', 'KP', 'KR', 'LJ', 'MB', 'MS', 'NM', 'PO', 'SG'];
 
 /** Judges a Slovenian plate by its three groups, `region`, `a`, `b`.
@@ -31,7 +30,7 @@ export class SloveniaValidator extends GatedPlateValidator {
       [ok, reason] = [false, SloveniaValidator.reasonRegion];
     } else {
       [ok, reason] = [
-        (isDigitsOfLength(a, 3) && twoLetters.test(b)) || (twoLetters.test(a) && isDigitsOfLength(b, 3)),
+        (isDigitsOfLength(a, 3) && isLetters(b, 2)) || (isLetters(a, 2) && isDigitsOfLength(b, 3)),
         SloveniaValidator.reasonSerial,
       ];
     }

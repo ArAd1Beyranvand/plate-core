@@ -1,7 +1,6 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
 const serialRe = /^(?:[A-Z][0-9]{3}|[0-9]{4}|[0-9]{3}[A-Z])$/;
-const lettersRe = /^[A-Z]{2}$/;
 const digitsRe = /^[0-9]{2}$/;
 
 /**
@@ -21,7 +20,7 @@ export class MonacoValidator implements PlateValidator {
     if (serial !== '') return serialRe.test(serial) ? valid : invalid(MonacoValidator.reasonSerial);
     const digits = entry.group('digits');
     if (digits === '') return valid;
-    if (!lettersRe.test(entry.group('letters'))) return invalid(MonacoValidator.reasonLetters);
+    if (!isLetters(entry.group('letters'), 2)) return invalid(MonacoValidator.reasonLetters);
     return digitsRe.test(digits) ? valid : invalid(MonacoValidator.reasonDigits);
   }
 }

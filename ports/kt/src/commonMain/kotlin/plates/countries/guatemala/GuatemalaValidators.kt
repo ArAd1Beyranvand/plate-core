@@ -3,9 +3,9 @@ package plates.countries.guatemala
 import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val classLetter = Regex("^[A-Z]$")
 private val digits = Regex("^[0-9]{3}$")
 private val letters = Regex("^[A-Z]{3}$")
 
@@ -14,7 +14,7 @@ class GuatemalaValidator : GatedPlateValidator() {
     override val gateGroup = "letters"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!classLetter.matches(entry.group("class"))) return PlateValidation.invalid(REASON_CLASS)
+        if (!isLetters(entry.group("class"), 1)) return PlateValidation.invalid(REASON_CLASS)
         if (!digits.matches(entry.group("digits"))) return PlateValidation.invalid(REASON_DIGITS)
         if (!letters.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
         return PlateValidation.valid

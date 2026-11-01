@@ -4,10 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letters3 = Regex("^[A-Z]{3}$")
-private val letters2 = Regex("^[A-Z]{2}$")
 private val run = Regex("^[A-Z0-9]{1,6}$")
 
 /** Judges a standard plate: three letters and three digits (`ABC 123`). Reports, never bars a keystroke. */
@@ -15,7 +14,7 @@ class NewZealandValidator : GatedPlateValidator() {
     override val gateGroup = "serial"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters3.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 3)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(entry.group("serial"), 3)) return PlateValidation.invalid(REASON_SERIAL)
         return PlateValidation.valid
     }
@@ -31,7 +30,7 @@ class NewZealandLegacyValidator : GatedPlateValidator() {
     override val gateGroup = "serial"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 2)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(entry.group("serial"), 4)) return PlateValidation.invalid(REASON_SERIAL)
         return PlateValidation.valid
     }

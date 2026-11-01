@@ -4,8 +4,8 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
-private val threeLetters = Regex("^[A-Z]{3}$")
 
 /** Judges a plate: four digits (car) or three letters over three digits (motorcycle). */
 class CookIslandsValidator : GatedPlateValidator() {
@@ -17,7 +17,7 @@ class CookIslandsValidator : GatedPlateValidator() {
         if (entry.spec.slots.size == 1) {
             return if (isDigitsOfLength(serial, 4)) PlateValidation.valid else PlateValidation.invalid(REASON_CAR)
         }
-        if (!threeLetters.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(letters, 3)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(serial, 3)) return PlateValidation.invalid(REASON_MOTORCYCLE)
         return PlateValidation.valid
     }

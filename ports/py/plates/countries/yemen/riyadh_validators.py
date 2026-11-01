@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import re
-from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation
+from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation, is_digits
 
 
 class RiyadhValidator(GatedPlateValidator):
@@ -12,9 +12,9 @@ class RiyadhValidator(GatedPlateValidator):
     _letters = re.compile(r"^[ABJDRSXTEGKLZNHUV]{3}$")
 
     def judge(self, entry: PlateEntry) -> PlateValidation:
-        if not self._letters.match(entry.group("letters")):
+        if not self._letters.fullmatch(entry.group("letters")):
             return PlateValidation.invalid(self.reason_letters)
         serial = entry.group("serial")
-        if not serial.isdigit() or len(serial) > 4:
+        if not is_digits(serial) or len(serial) > 4:
             return PlateValidation.invalid(self.reason_serial)
         return PlateValidation.valid()

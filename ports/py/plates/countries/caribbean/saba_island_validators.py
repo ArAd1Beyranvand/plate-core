@@ -21,7 +21,7 @@ class SabaIslandValidator(GatedPlateValidator):
         return f"The number is {self.min_digits} to {self.max_digits} digits."
 
     def judge(self, entry: PlateEntry) -> PlateValidation:
-        if not self._prefix_re.match(entry.group("prefix")):
+        if not self._prefix_re.fullmatch(entry.group("prefix")):
             return PlateValidation.invalid(self.reason_prefix)
         number = entry.group("number")
         if len(number) < self.min_digits or len(number) > self.max_digits or not re.fullmatch(r"[0-9]+", number):

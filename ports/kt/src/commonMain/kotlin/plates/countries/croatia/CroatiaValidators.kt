@@ -4,10 +4,10 @@ import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.PlateValidator
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 import plates.core.validators.restrictionVerdict
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val classLetter = Regex("^[A-Z]$")
 private val word = Regex("^[A-Z]{4,5}$")
 private val suffix = Regex("^[0-9]{1,2}$")
 private val number = Regex("^[0-9]{3,4}$")
@@ -31,7 +31,7 @@ class CroatiaValidator : PlateValidator {
     private fun reason(e: PlateEntry): String? {
         val first = e.spec.textGroups.first().key
         if (first == "mission") {
-            return if (isDigitsOfLength(e.group("mission"), 3) && classLetter.matches(e.group("class")) &&
+            return if (isDigitsOfLength(e.group("mission"), 3) && isLetters(e.group("class"), 1) &&
                 isDigitsOfLength(e.group("serial"), 3)
             ) null else REASON_DIPLOMATIC
         }

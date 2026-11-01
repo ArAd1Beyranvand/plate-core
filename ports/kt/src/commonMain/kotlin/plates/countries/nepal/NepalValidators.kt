@@ -4,10 +4,10 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
 private val classRe = Regex("^[A-K][1-5]?$")
-private val series2 = Regex("^[A-Z]{2}$")
 private val digits12 = Regex("^[0-9]{1,2}$")
 
 /** Judges a plate of the 2020 series: `BAGMATI B AB 0123`. Reports, never bars a keystroke. */
@@ -19,7 +19,7 @@ class NepalValidator : GatedPlateValidator() {
         if (!classRe.matches(entry.group("class"))) {
             return PlateValidation.invalid("The class is a letter A to K, with a digit for a sub-class.")
         }
-        if (!series2.matches(entry.group("series"))) return PlateValidation.invalid("The series is two letters.")
+        if (!isLetters(entry.group("series"), 2)) return PlateValidation.invalid("The series is two letters.")
         if (!isDigitsOfLength(entry.group("number"), 4)) return PlateValidation.invalid("The number is 4 digits.")
         return PlateValidation.valid
     }

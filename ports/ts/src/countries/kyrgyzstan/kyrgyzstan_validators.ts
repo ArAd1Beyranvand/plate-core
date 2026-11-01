@@ -1,6 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
-const twoOrThreeLetters = /^[A-Z]{2,3}$/;
 const regionCodes: readonly string[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11'];
 const foreignClasses: readonly string[] = ['H', 'K', 'M', 'P'];
 const diplomaticClasses: readonly string[] = ['C', 'D', 'T'];
@@ -20,7 +19,7 @@ export class KyrgyzstanValidator extends GatedPlateValidator {
   judge(entry: PlateEntry): PlateValidation {
     if (!regionCodes.includes(entry.group('region'))) return invalid(KyrgyzstanValidator.reasonRegion);
     if (!isDigitsOfLength(entry.group('number'), 3)) return invalid(KyrgyzstanValidator.reasonNumber);
-    return twoOrThreeLetters.test(entry.group('letters')) ? valid : invalid(KyrgyzstanValidator.reasonLetters);
+    return isLetters(entry.group('letters'), 2, 3) ? valid : invalid(KyrgyzstanValidator.reasonLetters);
   }
 }
 

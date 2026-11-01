@@ -4,10 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val typeLetter = Regex("^[A-Z]$")
-private val countryInitials = Regex("^[A-Z]{2}$")
 
 /** The shape of one Colombian series: letters (with their fixed prefix) and digits. */
 class ColombiaSeries(
@@ -74,7 +73,7 @@ class ColombiaDiplomaticValidator : GatedPlateValidator() {
     override val gateGroup = "number"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!typeLetter.matches(entry.group("type")) || !countryInitials.matches(entry.group("country"))) {
+        if (!isLetters(entry.group("type"), 1) || !isLetters(entry.group("country"), 2)) {
             return PlateValidation.invalid(REASON_LETTERS)
         }
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)

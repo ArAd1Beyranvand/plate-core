@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
 /**
  * Validates a German (Kennzeichen) car plate. Demo-scoped: checks format and
@@ -24,7 +24,6 @@ const forbiddenNumbers: ReadonlySet<string> = new Set(['88', '18', '14']);
  * it would reject a quarter-century of real plates.
  */
 const districtPattern = /^[A-ZÄÖÜ]{1,3}$/;
-const identifierLetterPattern = /^[A-Z]{1,2}$/;
 
 /** The issued identifier shapes: letters, then the digit-count range. */
 const identifierShapes: readonly (readonly [number, number, number])[] = [
@@ -75,7 +74,7 @@ export class GermanPlateValidator extends GatedPlateValidator {
     const letters = identifierLetters.toUpperCase();
     const digits = identifierDigits;
     if (!districtPattern.test(d)) return invalid('District code must be 1-3 letters.');
-    if (!identifierLetterPattern.test(letters)) return invalid('Identifier letters must be 1-2 letters.');
+    if (!isLetters(letters, 1, 2)) return invalid('Identifier letters must be 1-2 letters.');
     if (digits !== '' && !(isDigits(digits) && digits.length <= 4)) return invalid('Identifier digits must be 1-4 digits.');
     if (digits.startsWith('0')) return invalid('The serial cannot start with 0.');
     if (d.length + letters.length + digits.length > 8) return invalid('Plate exceeds the 8-character maximum.');

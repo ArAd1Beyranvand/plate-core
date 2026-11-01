@@ -4,15 +4,15 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
-private val lettersRe = Regex("^[A-Z]{1,2}$")
 
 /** Advisory validator for `A 1705`: one or two letters, four digits. */
 class LesothoValidator : GatedPlateValidator() {
     override val gateGroup = "serial"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!lettersRe.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 1, 2)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(entry.group("serial"), 4)) return PlateValidation.invalid(REASON_SERIAL)
         return PlateValidation.valid
     }

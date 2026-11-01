@@ -5,9 +5,9 @@ import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigits
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 private val counter = Regex("^[BCDFGHJKLMNPRSTVWXYZ]{3}$")
-private val prefixLetters = Regex("^[A-Z]{1,3}$")
 private val diplomaticCodes = listOf("CD", "CC", "TA", "OI")
 
 /** Judges a Ceuta plate: registration (`1234 BCD`), diplomatic (code, embassy, car) or police (letters and four digits). */
@@ -26,7 +26,7 @@ class CeutaValidator : GatedPlateValidator() {
         if (!isDigitsOfLength(entry.group("number"), 4)) return PlateValidation.invalid(REASON_NUMBER)
         val prefix = entry.group("prefix")
         if (prefix.isNotEmpty()) {
-            return if (prefixLetters.matches(prefix)) PlateValidation.valid else PlateValidation.invalid(REASON_PREFIX)
+            return if (isLetters(prefix, 1, 3)) PlateValidation.valid else PlateValidation.invalid(REASON_PREFIX)
         }
         if (!counter.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
         return PlateValidation.valid

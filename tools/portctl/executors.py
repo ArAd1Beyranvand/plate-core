@@ -360,6 +360,24 @@ def tidy(lang, code):
     return re.sub(r'\bextends PlateValidator\b', 'implements PlateValidator', code)
 
 
+PY_BANNED = [
+    (r'\.(isdigit|isnumeric|isdecimal|isalpha|isalnum|isupper|islower)\(',
+     'str.isdigit()/isalpha()/... accept Unicode (H9): use is_digits / is_digits_of_length from '
+     'plates.core.validators.plate_validator, or an explicit [0-9] / [A-Z] regex'),
+    (r'\\[dwsDWS]', r'regex \d \w \s match Unicode (H9): write explicit [0-9] / [A-Za-z0-9] classes'),
+    (r'\.match\(', 'Pattern.match() accepts a trailing newline before `$`: use .fullmatch() (or .search() if the '
+                    'Dart pattern is unanchored)'),
+]
+
+
+def lint(lang, code):
+    """Hazards the tests cannot see, rejected before the oracle runs. Returns an error text or ''."""
+    if lang != 'py': return ''
+    found = [msg for pat, msg in PY_BANNED if re.search(pat, code)]
+    if code.count('"""') > 2: found.append('only the stub\'s one-line module docstring: no other docstrings')
+    return '\n'.join('- ' + m for m in found)
+
+
 # ---- claude ---------------------------------------------------------------------------------
 
 class Claude:

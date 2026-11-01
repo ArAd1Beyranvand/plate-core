@@ -4,10 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
-private val prefixLetters = Regex("^[A-Z]{1,3}$")
 private val serial34 = Regex("^[0-9]{3,4}$")
-private val oneLetter = Regex("^[A-Z]$")
 
 /** Judges a `BermudaPlates.private` value: five digits. */
 class BermudaValidator : GatedPlateValidator() {
@@ -26,7 +25,7 @@ class BermudaPrefixedValidator : GatedPlateValidator() {
     override val gateGroup = "serial"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!prefixLetters.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 1, 3)) return PlateValidation.invalid(REASON_LETTERS)
         if (!serial34.matches(entry.group("serial"))) return PlateValidation.invalid(REASON_SERIAL)
         return PlateValidation.valid
     }
@@ -43,7 +42,7 @@ class BermudaSuffixedValidator : GatedPlateValidator() {
 
     override fun judge(entry: PlateEntry): PlateValidation {
         if (!isDigitsOfLength(entry.group("serial"), 3)) return PlateValidation.invalid(REASON_SERIAL)
-        if (!oneLetter.matches(entry.group("letter"))) return PlateValidation.invalid(REASON_LETTER)
+        if (!isLetters(entry.group("letter"), 1)) return PlateValidation.invalid(REASON_LETTER)
         return PlateValidation.valid
     }
 

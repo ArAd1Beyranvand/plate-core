@@ -1,6 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
-const letters2 = /^[A-Z]{2}$/;
 const letter = /^[A-Z]$/;
 
 /** Judges a private, repetitive or motorcycle plate (`AB 123 CD`; the motorcycle has no suffix). Reports, never bars a keystroke. */
@@ -12,14 +11,14 @@ export class AlbaniaPrivateValidator extends GatedPlateValidator {
   static readonly reasonSuffix = 'The suffix is two letters.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters2.test(entry.group('series'))) {
+    if (!isLetters(entry.group('series'), 2)) {
       return invalid(AlbaniaPrivateValidator.reasonSeries);
     }
     if (!isDigitsOfLength(entry.group('number'), 3)) {
       return invalid(AlbaniaPrivateValidator.reasonNumber);
     }
     const suffix = entry.group('suffix');
-    if (suffix !== '' && !letters2.test(suffix)) {
+    if (suffix !== '' && !isLetters(suffix, 2)) {
       return invalid(AlbaniaPrivateValidator.reasonSuffix);
     }
     return valid;
@@ -37,7 +36,7 @@ export class AlbaniaAgriculturalValidator extends GatedPlateValidator {
   static readonly reasonNumber = 'The number is three digits after R, two after the others.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters2.test(entry.group('series'))) {
+    if (!isLetters(entry.group('series'), 2)) {
       return invalid(AlbaniaAgriculturalValidator.reasonSeries);
     }
     const kind = entry.group('class');
@@ -117,7 +116,7 @@ export class AlbaniaPoliceValidator extends GatedPlateValidator {
     if (!isDigitsOfLength(entry.group('number'), 3)) {
       return invalid(AlbaniaPoliceValidator.reasonNumber);
     }
-    if (!letters2.test(entry.group('suffix'))) {
+    if (!isLetters(entry.group('suffix'), 2)) {
       return invalid(AlbaniaPoliceValidator.reasonSuffix);
     }
     return valid;
@@ -133,7 +132,7 @@ export class AlbaniaTaxiValidator extends GatedPlateValidator {
   static readonly reasonSuffix = 'A taxi plate ends in T.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters2.test(entry.group('series'))) {
+    if (!isLetters(entry.group('series'), 2)) {
       return invalid(AlbaniaTaxiValidator.reasonSeries);
     }
     if (!isDigitsOfLength(entry.group('number'), 3)) {
@@ -155,7 +154,7 @@ export class AlbaniaProvisionalValidator extends GatedPlateValidator {
   static readonly reasonWord = 'The word is PRK (temporary) or PROV (test).';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters2.test(entry.group('series'))) {
+    if (!isLetters(entry.group('series'), 2)) {
       return invalid(AlbaniaProvisionalValidator.reasonSeries);
     }
     if (!isDigitsOfLength(entry.group('number'), 1)) {

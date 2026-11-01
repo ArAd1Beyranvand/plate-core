@@ -4,7 +4,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 
-from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation
+from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation, is_digits
 
 
 class BonaireValidator(GatedPlateValidator):
@@ -16,10 +16,10 @@ class BonaireValidator(GatedPlateValidator):
     reason_number = "The number is three to five digits."
 
     def judge(self, entry: PlateEntry) -> PlateValidation:
-        if not self._prefix.match(entry.group("prefix")):
+        if not self._prefix.fullmatch(entry.group("prefix")):
             return PlateValidation.invalid(self.reason_prefix)
         number = entry.group("number")
-        if len(number) < 3 or len(number) > 5 or not entry.group("number").isdigit():
+        if len(number) < 3 or len(number) > 5 or not is_digits(entry.group("number")):
             return PlateValidation.invalid(self.reason_number)
         return PlateValidation.valid()
 
@@ -39,6 +39,6 @@ class BonaireIslandValidator(GatedPlateValidator):
         if entry.group("prefix") != self.island:
             return PlateValidation.invalid(self.reason_island())
         number = entry.group("number")
-        if len(number) < self.min_digits or len(number) > 4 or not number.isdigit():
+        if len(number) < self.min_digits or len(number) > 4 or not is_digits(number):
             return PlateValidation.invalid(self.reason_number)
         return PlateValidation.valid()

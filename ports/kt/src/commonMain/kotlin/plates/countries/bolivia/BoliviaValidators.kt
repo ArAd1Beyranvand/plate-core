@@ -5,10 +5,9 @@ import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigits
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letters3 = Regex("^[A-Z]{3}$")
-private val letters2 = Regex("^[A-Z]{2}$")
 
 /** The department letter in the PTA plate's box (BoliviaAlphabets.departments). */
 private val departments = "C H B L O N P S T".split(" ")
@@ -30,7 +29,7 @@ class BoliviaValidator : GatedPlateValidator() {
 
         fun validateFields(number: String, letters: String, department: String): PlateValidation {
             if ((number.length != 3 && number.length != 4) || !isDigits(number)) return PlateValidation.invalid(REASON_NUMBER)
-            if (!letters3.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+            if (!isLetters(letters, 3)) return PlateValidation.invalid(REASON_LETTERS)
             if (department !in departments) return PlateValidation.invalid(REASON_DEPARTMENT)
             return PlateValidation.valid
         }
@@ -55,7 +54,7 @@ class BoliviaMercosurValidator : GatedPlateValidator() {
     override val gateGroup = "number"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!letters2.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 2)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(entry.group("number"), 5)) return PlateValidation.invalid(REASON_NUMBER)
         return PlateValidation.valid
     }

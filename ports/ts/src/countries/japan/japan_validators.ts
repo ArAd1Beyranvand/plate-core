@@ -1,8 +1,6 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
 const classPattern = /^[0-9]{2}[0-9A-Z]?$/;
-const officeLatin = /^[A-Z]{2,3}$/;
-const kanaLatin = /^[A-Z]{1,2}$/;
 const serialPattern = /^(・・|・[0-9]|[0-9]{2})[0-9]{2}$/;
 
 /** Judges a Japanese plate: office, class code, kana and a four-place serial; export and diplomatic plates have their own shapes. Reports, never bars a keystroke. */
@@ -21,7 +19,7 @@ export class JapanValidator extends GatedPlateValidator {
     const kana = entry.group('kana');
     if (office === '') return isDigitsOfLength(serial, 5) ? valid : invalid(JapanValidator.reasonDiplomatic);
     if (/^[A-Za-z]$/.test(office[0])) {
-      return officeLatin.test(office) && kanaLatin.test(kana) && isDigitsOfLength(serial, 4) ? valid : invalid(JapanValidator.reasonExport);
+      return isLetters(office, 2, 3) && isLetters(kana, 1, 2) && isDigitsOfLength(serial, 4) ? valid : invalid(JapanValidator.reasonExport);
     }
     if (kana === '') return invalid(JapanValidator.reasonCar);
     if (entry.spec.indicesOfGroup('class').length > 0 && !classPattern.test(entry.group('class'))) return invalid(JapanValidator.reasonClass);

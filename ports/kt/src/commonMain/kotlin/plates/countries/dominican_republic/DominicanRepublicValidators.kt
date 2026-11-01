@@ -4,9 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 private val letter = Regex("^[A-Z]$")
-private val letterPair = Regex("^[A-Z]{2}$")
 
 private fun verdict(ok: Boolean, reason: String) = if (ok) PlateValidation.valid else PlateValidation.invalid(reason)
 
@@ -43,7 +43,7 @@ class DominicanRepublicExemptValidator : GatedPlateValidator() {
     override val gateGroup = "digits"
 
     override fun judge(entry: PlateEntry) = verdict(
-        letterPair.matches(entry.group("letters")) && isDigitsOfLength(entry.group("digits"), 5),
+        isLetters(entry.group("letters"), 2) && isDigitsOfLength(entry.group("digits"), 5),
         REASON,
     )
 

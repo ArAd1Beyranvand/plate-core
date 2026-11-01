@@ -4,9 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val letterRe = Regex("^[A-Z]$")
 
 /** A two-digit code and a five-digit serial; no code table is published, so any two digits pass. */
 class SyriaTransitionalValidator : GatedPlateValidator() {
@@ -51,7 +51,7 @@ class AanesMotorcycleValidator : GatedPlateValidator() {
         const val REASON_SERIAL = "The number is four digits."
 
         fun validateFields(letter: String, serial: String): PlateValidation {
-            if (!letterRe.matches(letter)) return PlateValidation.invalid(REASON_LETTER)
+            if (!isLetters(letter, 1)) return PlateValidation.invalid(REASON_LETTER)
             if (!isDigitsOfLength(serial, 4)) return PlateValidation.invalid(REASON_SERIAL)
             return PlateValidation.valid
         }

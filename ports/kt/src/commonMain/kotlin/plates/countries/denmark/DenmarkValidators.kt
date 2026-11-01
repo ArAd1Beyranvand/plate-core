@@ -4,8 +4,8 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
-private val letterPair = Regex("^[A-Z]{2}$")
 private val vanity = Regex("^[A-ZÆØÅ0-9]{2,7}$")
 
 /** Judges a Danish serial plate field by field. [allowedLetters] narrows the letters, as Greenland's GR and GL. */
@@ -20,7 +20,7 @@ class DenmarkValidator(
     override fun judge(entry: PlateEntry): PlateValidation {
         val letters = entry.group("letters")
         val hasLetters = yearDigits == 0
-        if (hasLetters && !letterPair.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+        if (hasLetters && !isLetters(letters, 2)) return PlateValidation.invalid(REASON_LETTERS)
         if (hasLetters && allowedLetters != null && letters !in allowedLetters) {
             return PlateValidation.invalid(REASON_GREENLAND)
         }

@@ -1,7 +1,6 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
 const numberRe = /^[0-9]{1,5}$/;
-const seriesRe = /^[A-Z]{1,3}$/;
 const countryRe = /^[0-9]{3}$/;
 
 /**
@@ -31,7 +30,7 @@ export class MadagascarValidator implements PlateValidator {
       if (!countryRe.test(country)) return invalid(V.reasonCountry);
       if (series !== '' && !V.diplomaticSeries.has(series)) return invalid(V.reasonDiplomatic);
     } else if (series !== '') {
-      if (!seriesRe.test(series)) return invalid(V.reasonSeries);
+      if (!isLetters(series, 1, 3)) return invalid(V.reasonSeries);
       // The province letter leads a standard series; the dealer plate prints
       // only the province, and the temporary series leads with `WW`.
       const province = series.startsWith('WW') ? series.slice(-1) : series[0];

@@ -5,11 +5,11 @@ import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigits
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
 private val melillaConsonants = Regex("^[BCDFGHJKLMNPRSTVWXYZ]{3}$")
 private val melillaDiplomaticCodes = listOf("CD", "CC", "TA", "OI")
-private val melillaPrefix = Regex("^[A-Z]{1,3}$")
 
 /** Judges a Melilla plate. Reports, never bars a keystroke; the one refusal is the restriction the diplomatic specs carry. */
 class MelillaValidator : GatedPlateValidator() {
@@ -27,7 +27,7 @@ class MelillaValidator : GatedPlateValidator() {
         if (!isDigitsOfLength(entry.group("number"), 4)) return PlateValidation.invalid(REASON_NUMBER)
         val prefix = entry.group("prefix")
         if (prefix.isNotEmpty()) {
-            return if (melillaPrefix.matches(prefix)) PlateValidation.valid else PlateValidation.invalid(REASON_PREFIX)
+            return if (isLetters(prefix, 1, 3)) PlateValidation.valid else PlateValidation.invalid(REASON_PREFIX)
         }
         if (!melillaConsonants.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
         return PlateValidation.valid

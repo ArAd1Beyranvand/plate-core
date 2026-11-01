@@ -17,7 +17,7 @@ LANG_RULES = {
           'Wasm when WasmGC validates, JS otherwise.',
     'py': 'Python runs in the browser under Pyodide (CPython 3.13), and on the host for tests (3.10, so '
           'keep 3.10 syntax). `plates/` is pure Python, stdlib only: no PySide6/Qt, threads, '
-          'subprocess, sockets or file I/O; data arrives as text. The UI is `plates.ui` (svg.py paints the '
+          'subprocess, sockets or file I/O; never `str.isdigit()`/`isalpha()` or regex `\\d \\w \\s` (Unicode, H9): use is_digits / is_digits_of_length from core or explicit [0-9]/[A-Z] classes, and `.fullmatch`, never `.match`;  data arrives as text. The UI is `plates.ui` (svg.py paints the '
           'display list, plate_canvas.py is headless, dom.py binds to the page through injected '
           '`document`/proxy fakes so it is host-testable); timers and animation go through that seam '
           '(setTimeout/requestAnimationFrame). Dart `TODO(py)` notes that name Qt keep their behaviour, '
@@ -39,7 +39,17 @@ UNIT_IDIOMS = {
            '`PlateValidation.invalid(reason)`; helpers `isDigits`, `isDigitsOfLength` already exist in '
            '`plates.core.validators`.'],
     'ts': [],
-    'py': [],
+    'py': ['Keep the stub\'s module docstring line and add no other docstring or comment the Dart lacks.',
+           'Digits: `is_digits(s)` / `is_digits_of_length(s, n)` from `plates.core.validators.plate_validator` '
+           '(already imported in the example). NEVER `str.isdigit()/isalpha()/isalnum()`: they accept Unicode (H9).',
+           'Regex: module-level `_NAME = re.compile(r"^[A-Z]{2}$")` with explicit `[0-9]`/`[A-Z]` classes, never '
+           '`\\d \\w \\s`; test with `.fullmatch(s)` (Dart `hasMatch` on an unanchored pattern = `.search(s)`), '
+           'never `.match(s)`.',
+           'Dart `static const`/`static final` members become class attributes read as `self.x` or `ClassName.x`; '
+           'file-level `final` becomes a module-level `_name`. Return `PlateValidation.valid()` and '
+           '`PlateValidation.invalid(reason)`; use `if`/`return` chains like the Dart, never `a and b or c`.',
+           'Gated validators set `gate_group` and implement `judge`, not `validate`; a helper two files share '
+           'is imported from core, not copied.'],
 }
 
 # S2 is split along the Dart source so each Claude task has one testable slice.

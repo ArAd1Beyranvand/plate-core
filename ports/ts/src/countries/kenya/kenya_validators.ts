@@ -1,8 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
-const threeLetters = /^[A-Z]{3}$/;
-const oneLetter = /^[A-Z]$/;
-const twoLetters = /^[A-Z]{2}$/;
 const oneToThreeDigits = /^[0-9]{1,3}$/;
 
 /** Judges a Kenyan plate: three letters, three digits and a letter. Reports, never bars a keystroke. */
@@ -14,9 +11,9 @@ export class KenyaValidator extends GatedPlateValidator {
   static readonly reasonSuffix = 'The number ends in a letter.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!threeLetters.test(entry.group('letters'))) return invalid(KenyaValidator.reasonLetters);
+    if (!isLetters(entry.group('letters'), 3)) return invalid(KenyaValidator.reasonLetters);
     if (!isDigitsOfLength(entry.group('digits'), 3)) return invalid(KenyaValidator.reasonDigits);
-    return oneLetter.test(entry.group('suffix')) ? valid : invalid(KenyaValidator.reasonSuffix);
+    return isLetters(entry.group('suffix'), 1) ? valid : invalid(KenyaValidator.reasonSuffix);
   }
 }
 
@@ -40,6 +37,6 @@ export class KenyaDiplomaticValidator extends GatedPlateValidator {
     if (!oneToThreeDigits.test(entry.group('mission'))) return invalid(KenyaDiplomaticValidator.reasonMission);
     if (entry.group('type') === '') return invalid(KenyaDiplomaticValidator.reasonType);
     if (!oneToThreeDigits.test(entry.group('digits'))) return invalid(KenyaDiplomaticValidator.reasonDigits);
-    return twoLetters.test(entry.group('letters')) ? valid : invalid(KenyaDiplomaticValidator.reasonLetters);
+    return isLetters(entry.group('letters'), 2) ? valid : invalid(KenyaDiplomaticValidator.reasonLetters);
   }
 }

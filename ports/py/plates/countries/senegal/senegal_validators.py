@@ -63,7 +63,7 @@ class SenegalValidator:
             else:
                 rule = None
 
-            if rule is not None and not rule[0].match(value):
+            if rule is not None and not rule[0].fullmatch(value):
                 return PlateValidation.invalid(rule[1])
 
         if entry.group("region") not in self.regions:

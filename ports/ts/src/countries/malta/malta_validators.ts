@@ -1,7 +1,6 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
 const personalised = /^[A-Z0-9]{1,10}$/;
-const lettersRe = /^[A-Z]{3}$/;
 
 /**
  * Judges a Maltese plate by its groups. Reports, never bars a keystroke.
@@ -29,7 +28,7 @@ export class MaltaValidator extends GatedPlateValidator {
     const V = MaltaValidator;
     if (text !== '') return personalised.test(text) ? valid : invalid(V.reasonPersonalised);
     if (island !== '') return isDigitsOfLength(digits, 3) && (island === 'M' || island === 'G') ? valid : invalid(V.reasonTaxi);
-    if (letters !== '') return isDigitsOfLength(digits, 3) && lettersRe.test(letters) ? valid : invalid(V.reasonPrivate);
+    if (letters !== '') return isDigitsOfLength(digits, 3) && isLetters(letters, 3) ? valid : invalid(V.reasonPrivate);
     return isDigitsOfLength(digits, 3) || isDigitsOfLength(digits, 4) ? valid : invalid(V.reasonBus);
   }
 }

@@ -1,7 +1,7 @@
 """Port of nicaragua_plate/lib/src/nicaragua_validators.dart."""
 from __future__ import annotations
 
-from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation
+from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation, is_digits
 
 
 class NicaraguaValidator(GatedPlateValidator):
@@ -45,4 +45,4 @@ class NicaraguaValidator(GatedPlateValidator):
 
     @staticmethod
     def _is_digits(s: str) -> bool:
-        return s.isdigit()
+        return is_digits(s)

@@ -1,10 +1,10 @@
 package plates.countries.monaco
 
 import plates.core.validators.*
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
 private val serialRe = Regex("^(?:[A-Z][0-9]{3}|[0-9]{4}|[0-9]{3}[A-Z])$")
-private val lettersRe = Regex("^[A-Z]{2}$")
 private val digitsRe = Regex("^[0-9]{2}$")
 
 /**
@@ -20,7 +20,7 @@ class MonacoValidator : PlateValidator {
         }
         val digits = entry.group("digits")
         if (digits.isEmpty()) return PlateValidation.valid
-        if (!lettersRe.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 2)) return PlateValidation.invalid(REASON_LETTERS)
         return if (digitsRe.matches(digits)) PlateValidation.valid else PlateValidation.invalid(REASON_DIGITS)
     }
 

@@ -1,7 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigitsOfLength, valid, isLetters } from '../../core/validators/plate_validator';
 
-const letters2 = /^[A-Z]{2}$/;
-const letters3 = /^[A-Z]{3}$/;
 const missionClass = ['D', 'C', 'M', 'I', 'A'];
 const mission1985Class = ['CD', 'CC', 'ME', 'OI', 'PA'];
 
@@ -14,9 +12,9 @@ export class ArgentinaStandardValidator extends GatedPlateValidator {
   static readonly reasonSuffix = 'The suffix is two letters.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters2.test(entry.group('series'))) return invalid(ArgentinaStandardValidator.reasonSeries);
+    if (!isLetters(entry.group('series'), 2)) return invalid(ArgentinaStandardValidator.reasonSeries);
     if (!isDigitsOfLength(entry.group('number'), 3)) return invalid(ArgentinaStandardValidator.reasonNumber);
-    if (!letters2.test(entry.group('suffix'))) return invalid(ArgentinaStandardValidator.reasonSuffix);
+    if (!isLetters(entry.group('suffix'), 2)) return invalid(ArgentinaStandardValidator.reasonSuffix);
     return valid;
   }
 }
@@ -29,7 +27,7 @@ export class ArgentinaLegacyValidator extends GatedPlateValidator {
   static readonly reasonNumber = 'The number is three digits.';
 
   judge(entry: PlateEntry): PlateValidation {
-    if (!letters3.test(entry.group('series'))) return invalid(ArgentinaLegacyValidator.reasonSeries);
+    if (!isLetters(entry.group('series'), 3)) return invalid(ArgentinaLegacyValidator.reasonSeries);
     if (!isDigitsOfLength(entry.group('number'), 3)) return invalid(ArgentinaLegacyValidator.reasonNumber);
     return valid;
   }
@@ -48,7 +46,7 @@ export class ArgentinaTrailerValidator extends GatedPlateValidator {
 
   judge(entry: PlateEntry): PlateValidation {
     if (!isDigitsOfLength(entry.group('trailer'), 3)) return invalid(ArgentinaTrailerValidator.reasonTrailer);
-    if (!letters3.test(entry.group('series'))) return invalid(ArgentinaTrailerValidator.reasonSeries);
+    if (!isLetters(entry.group('series'), 3)) return invalid(ArgentinaTrailerValidator.reasonSeries);
     if (!isDigitsOfLength(entry.group('number'), 3)) return invalid(ArgentinaTrailerValidator.reasonNumber);
     return valid;
   }
@@ -70,7 +68,7 @@ export class ArgentinaMissionValidator extends GatedPlateValidator {
   judge(entry: PlateEntry): PlateValidation {
     if (!missionClass.includes(entry.group('prefix'))) return invalid('The category is D, C, M, I or A.');
     if (!isDigitsOfLength(entry.group('number'), 3)) return invalid(ArgentinaMissionValidator.reasonNumber);
-    if (!letters3.test(entry.group('suffix'))) return invalid(ArgentinaMissionValidator.reasonSuffix);
+    if (!isLetters(entry.group('suffix'), 3)) return invalid(ArgentinaMissionValidator.reasonSuffix);
     return valid;
   }
 }

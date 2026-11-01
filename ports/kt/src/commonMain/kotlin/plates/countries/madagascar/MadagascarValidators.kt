@@ -3,6 +3,7 @@ package plates.countries.madagascar
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.PlateValidator
+import plates.core.validators.isLetters
 import plates.core.validators.restrictionVerdict
 
 /** Advisory validator over whichever of `number`, `series` and `country` the spec has. Empty groups are not judged. */
@@ -22,7 +23,7 @@ class MadagascarValidator : PlateValidator {
                 return PlateValidation.invalid(REASON_DIPLOMATIC)
             }
         } else if (series.isNotEmpty()) {
-            if (!seriesRe.matches(series)) return PlateValidation.invalid(REASON_SERIES)
+            if (!isLetters(series, 1, 3)) return PlateValidation.invalid(REASON_SERIES)
             val province = if (series.startsWith("WW")) series.substring(series.length - 1) else series.substring(0, 1)
             if (series.length > 1 && province !in provinces) {
                 return PlateValidation.invalid(REASON_PROVINCE)
@@ -42,7 +43,6 @@ class MadagascarValidator : PlateValidator {
         const val REASON_DIPLOMATIC = "The series is CD, CMD, CMC or PE."
 
         private val numberRe = Regex("^[0-9]{1,5}$")
-        private val seriesRe = Regex("^[A-Z]{1,3}$")
         private val countryRe = Regex("^[0-9]{3}$")
     }
 }

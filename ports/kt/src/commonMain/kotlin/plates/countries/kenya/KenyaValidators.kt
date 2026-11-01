@@ -4,11 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
-private val threeLetters = Regex("^[A-Z]{3}$")
-private val oneLetter = Regex("^[A-Z]$")
-private val twoLetters = Regex("^[A-Z]{2}$")
 private val oneToThreeDigits = Regex("^[0-9]{1,3}$")
 
 private const val MISSION_NOT_FOUND = "COUNTRY NOT FOUND"
@@ -19,9 +17,9 @@ class KenyaValidator : GatedPlateValidator() {
     override val gateGroup = "suffix"
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!threeLetters.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 3)) return PlateValidation.invalid(REASON_LETTERS)
         if (!isDigitsOfLength(entry.group("digits"), 3)) return PlateValidation.invalid(REASON_DIGITS)
-        if (!oneLetter.matches(entry.group("suffix"))) return PlateValidation.invalid(REASON_SUFFIX)
+        if (!isLetters(entry.group("suffix"), 1)) return PlateValidation.invalid(REASON_SUFFIX)
         return PlateValidation.valid
     }
 
@@ -45,7 +43,7 @@ class KenyaDiplomaticValidator : GatedPlateValidator() {
         if (!oneToThreeDigits.matches(entry.group("mission"))) return PlateValidation.invalid(REASON_MISSION)
         if (entry.group("type").isEmpty()) return PlateValidation.invalid(REASON_TYPE)
         if (!oneToThreeDigits.matches(entry.group("digits"))) return PlateValidation.invalid(REASON_DIGITS)
-        if (!twoLetters.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 2)) return PlateValidation.invalid(REASON_LETTERS)
         return PlateValidation.valid
     }
 

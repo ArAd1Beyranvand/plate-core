@@ -4,10 +4,10 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
 private val personalised = Regex("^[A-Z0-9]{1,10}$")
-private val letters3 = Regex("^[A-Z]{3}$")
 
 /** Judges a Maltese plate by its groups. Reports, never bars a keystroke.
  *
@@ -31,7 +31,7 @@ class MaltaValidator : GatedPlateValidator() {
             else PlateValidation.invalid(REASON_TAXI)
         }
         if (letters.isNotEmpty()) {
-            return if (isDigitsOfLength(digits, 3) && letters3.matches(letters)) PlateValidation.valid
+            return if (isDigitsOfLength(digits, 3) && isLetters(letters, 3)) PlateValidation.valid
             else PlateValidation.invalid(REASON_PRIVATE)
         }
         return if (isDigitsOfLength(digits, 3) || isDigitsOfLength(digits, 4)) PlateValidation.valid

@@ -3,9 +3,9 @@ package plates.countries.ecuador
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.PlateValidator
+import plates.core.validators.isLetters
 import plates.core.validators.restrictionVerdict
 
-private val letters3 = Regex("^[A-Z]{3}$")
 private val number = Regex("^[0-9]{3,4}$")
 
 /** Judges an Ecuadorian plate field by field. Quiet until the number has something in it. */
@@ -17,7 +17,7 @@ class EcuadorValidator : PlateValidator {
         if (digits.isEmpty()) return PlateValidation.valid
         if (entry.spec.id == "ec.protocol") {
             if (letters !in protocolCodes) return PlateValidation.invalid(REASON_CODE)
-        } else if (!letters3.matches(letters)) {
+        } else if (!isLetters(letters, 3)) {
             return PlateValidation.invalid(REASON_LETTERS)
         } else if (letters.substring(0, 1) !in provinces) {
             return PlateValidation.invalid(REASON_PROVINCE)

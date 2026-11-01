@@ -4,8 +4,8 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigits
+import plates.core.validators.isLetters
 
-private val typeLetter = Regex("^[A-Z]$")
 
 /** Judges an `AnguillaPlates.private` value: a vehicle-type letter and one to four digits (`A 1234`). */
 class AnguillaValidator : GatedPlateValidator() {
@@ -20,7 +20,7 @@ class AnguillaValidator : GatedPlateValidator() {
         const val REASON_SERIAL = "The serial is one to four digits."
 
         fun validateFields(type: String, serial: String): PlateValidation {
-            if (!typeLetter.matches(type)) return PlateValidation.invalid(REASON_TYPE)
+            if (!isLetters(type, 1)) return PlateValidation.invalid(REASON_TYPE)
             if (!isDigits(serial) || serial.length > MAX_DIGITS) return PlateValidation.invalid(REASON_SERIAL)
             return PlateValidation.valid
         }

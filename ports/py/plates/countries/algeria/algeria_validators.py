@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation
+from plates.core.validators.plate_validator import GatedPlateValidator, PlateEntry, PlateValidation, is_digits
 
 
 class AlgeriaVehicleClasses:
@@ -119,9 +119,9 @@ class AlgeriaValidator(GatedPlateValidator):
         type: str,
         wilaya: str,
     ) -> PlateValidation:
-        if not (len(serial) == 5 and serial.isdigit()):
+        if not (len(serial) == 5 and is_digits(serial)):
             return PlateValidation.invalid(AlgeriaValidator.reason_serial)
-        if not (len(type) == 3 and type.isdigit()):
+        if not (len(type) == 3 and is_digits(type)):
             return PlateValidation.invalid(AlgeriaValidator.reason_type)
         if type[0] not in AlgeriaVehicleClasses.names:
             return PlateValidation.invalid(AlgeriaValidator.reason_class)
@@ -141,9 +141,9 @@ class AlgeriaDiplomaticValidator(GatedPlateValidator):
         mission = entry.group("mission")
         if (
             not serial
-            or not serial.isdigit()
-            or not (len(status) == 2 and status.isdigit())
-            or not (len(mission) == 2 and mission.isdigit())
+            or not is_digits(serial)
+            or not (len(status) == 2 and is_digits(status))
+            or not (len(mission) == 2 and is_digits(mission))
         ):
             return PlateValidation.invalid(AlgeriaDiplomaticValidator.reason_digits)
         return PlateValidation.valid()

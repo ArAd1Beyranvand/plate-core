@@ -4,8 +4,8 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
-private val twoOrThreeLetters = Regex("^[A-Z]{2,3}$")
 private val regionCodes = (1..11).map { it.toString().padStart(2, '0') }
 private val foreignClasses = listOf("H", "K", "M", "P")
 private val diplomaticClasses = listOf("C", "D", "T")
@@ -23,7 +23,7 @@ class KyrgyzstanValidator : GatedPlateValidator() {
     override fun judge(entry: PlateEntry): PlateValidation {
         if (entry.group("region") !in regionCodes) return PlateValidation.invalid(REASON_REGION)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
-        if (!twoOrThreeLetters.matches(entry.group("letters"))) return PlateValidation.invalid(REASON_LETTERS)
+        if (!isLetters(entry.group("letters"), 2, 3)) return PlateValidation.invalid(REASON_LETTERS)
         return PlateValidation.valid
     }
 

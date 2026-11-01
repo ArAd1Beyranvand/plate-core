@@ -4,9 +4,9 @@ import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.PlateValidator
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 import plates.core.validators.restrictionVerdict
 
-private val letters2 = Regex("^[A-Z]{2}$")
 
 /** Judges an Ivory Coast plate field by field; quiet until the last field has something in it. Reports, never bars a keystroke. */
 class IvoryCoastValidator : PlateValidator {
@@ -23,7 +23,7 @@ class IvoryCoastValidator : PlateValidator {
                     "ci.military" -> isDigitsOfLength(value, 5) to "The number is 5 digits."
                     else -> isDigitsOfLength(value, 3) to "The number is 3 digits."
                 }
-                "series" -> letters2.matches(value) to "The series is 2 letters."
+                "series" -> isLetters(value, 2) to "The series is 2 letters."
                 "region" -> isDigitsOfLength(value, 2) to "The region code is 2 digits."
                 else -> continue
             }

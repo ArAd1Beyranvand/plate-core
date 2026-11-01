@@ -4,9 +4,9 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII class, portable across JVM/JS/Wasm regex engines.
-private val letters3 = Regex("^[A-Z]{3}$")
 
 /**
  * Judges a Nauruan plate by its groups: `letters` (three) with `serial` (three digits) on the 2015 plate, `serial` alone
@@ -20,7 +20,7 @@ class NauruValidator : GatedPlateValidator() {
         val prefix = entry.group("prefix")
         val hasLetters = letters.isNotEmpty()
         val hasPrefix = prefix.isNotEmpty()
-        if (hasLetters && !letters3.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+        if (hasLetters && !isLetters(letters, 3)) return PlateValidation.invalid(REASON_LETTERS)
         if (hasPrefix && !isDigitsOfLength(prefix, 1)) return PlateValidation.invalid(REASON_PREFIX)
         val digits = if (hasLetters || hasPrefix) 3 else 4
         if (!isDigitsOfLength(entry.group("serial"), digits)) return PlateValidation.invalid(REASON_SERIAL)

@@ -1,6 +1,5 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, type PlateValidator, invalid, isDigits, isDigitsOfLength, restrictionVerdict, valid, isLetters } from '../../core/validators/plate_validator';
 
-const lettersRe = /^[A-Z]{1,3}$/;
 const serialRe = /^[A-Z0-9]{1,8}$/;
 
 /**
@@ -26,7 +25,7 @@ export class PalauValidator implements PlateValidator {
     const serial = entry.group('serial');
     if (digits === '' && serial === '') return valid;
     const letters = entry.group('letters');
-    if (letters !== '' && !lettersRe.test(letters)) return invalid(V.reasonLetters);
+    if (letters !== '' && !isLetters(letters, 1, 3)) return invalid(V.reasonLetters);
     const code = entry.group('code');
     if (code !== '' && !isDigitsOfLength(code, 2)) return invalid(V.reasonCode);
     if (digits !== '' && (!isDigits(digits) || digits.length > 5)) return invalid(V.reasonDigits);

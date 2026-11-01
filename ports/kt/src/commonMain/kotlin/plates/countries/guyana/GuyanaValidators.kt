@@ -3,8 +3,8 @@ package plates.countries.guyana
 import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
+import plates.core.validators.isLetters
 
-private val lettersRe = Regex("^[A-Z]{2,3}$")
 private val numberRe = Regex("^[1-9][0-9]{0,3}$")
 
 /** Judges a standard Guyanese registration: a series of two or three letters, then one to four digits without a leading zero. Reports, never bars a keystroke. */
@@ -22,7 +22,7 @@ class GuyanaValidator : GatedPlateValidator() {
         const val REASON_NUMBER = "The number is one to four digits, with no leading zero."
 
         fun validateFields(letters: String, number: String): PlateValidation {
-            if (!lettersRe.matches(letters)) return PlateValidation.invalid(REASON_LETTERS)
+            if (!isLetters(letters, 2, 3)) return PlateValidation.invalid(REASON_LETTERS)
             if (!numberRe.matches(number)) return PlateValidation.invalid(REASON_NUMBER)
             return PlateValidation.valid
         }

@@ -4,11 +4,11 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 private const val NOT_FOUND = "COUNTRY NOT FOUND"
 private val refusedMissions = listOf("007")
 private val regionCodes = (1..20).map { it.toString().padStart(2, '0') }
-private val classLetter = Regex("^[A-Z]$")
 private val missions = setOf(
     "001", "002", "003", "004", "005", "006", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017",
     "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "031", "032", "033", "034",
@@ -45,7 +45,7 @@ class KazakhstanDiplomaticValidator : GatedPlateValidator() {
     }
 
     override fun judge(entry: PlateEntry): PlateValidation {
-        if (!classLetter.matches(entry.group("class"))) return PlateValidation.invalid(REASON_CLASS)
+        if (!isLetters(entry.group("class"), 1)) return PlateValidation.invalid(REASON_CLASS)
         if (entry.group("mission") !in missions) return PlateValidation.invalid(NOT_FOUND)
         if (!isDigitsOfLength(entry.group("number"), 3)) return PlateValidation.invalid(REASON_NUMBER)
         return PlateValidation.valid

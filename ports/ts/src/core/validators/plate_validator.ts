@@ -35,6 +35,9 @@ export const isDigits = (value: string): boolean => /^[0-9]+$/.test(value);
 /** Length is in code units, which is safe because isDigits passes ASCII alone. */
 export const isDigitsOfLength = (value: string, length: number): boolean => value.length === length && isDigits(value);
 
+/** ASCII A-Z only, min..max long. */
+export const isLetters = (value: string, min: number, max = min): boolean => value.length >= min && value.length <= max && /^[A-Z]+$/.test(value);
+
 /** Judges a plate. It never prevents input. */
 export interface PlateValidator {
   validate(entry: PlateEntry): PlateValidation;

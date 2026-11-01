@@ -27,7 +27,7 @@ class DominicanRepublicLetteredValidator(GatedPlateValidator):
         letter, head, tail = entry.group("letter"), entry.group("head"), entry.group("tail")
         return (
             PlateValidation.valid()
-            if self._letter.match(letter) and is_digits_of_length(head, 2) and is_digits_of_length(tail, 4)
+            if self._letter.fullmatch(letter) and is_digits_of_length(head, 2) and is_digits_of_length(tail, 4)
             else PlateValidation.invalid(self.reason)
         )
 
@@ -41,6 +41,6 @@ class DominicanRepublicExemptValidator(GatedPlateValidator):
         letters, digits = entry.group("letters"), entry.group("digits")
         return (
             PlateValidation.valid()
-            if self._letter_pair.match(letters) and is_digits_of_length(digits, 5)
+            if self._letter_pair.fullmatch(letters) and is_digits_of_length(digits, 5)
             else PlateValidation.invalid(self.reason)
         )

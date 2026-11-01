@@ -4,11 +4,10 @@ import plates.core.validators.GatedPlateValidator
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
 import plates.core.validators.isDigitsOfLength
+import plates.core.validators.isLetters
 
 // H9: explicit ASCII classes, portable across JVM/JS/Wasm regex engines.
 private val classCode = Regex("^[0-9]{2}[0-9A-Z]?$")
-private val officeLatin = Regex("^[A-Z]{2,3}$")
-private val kanaLatin = Regex("^[A-Z]{1,2}$")
 private val serialRe = Regex("^(・・|・[0-9]|[0-9]{2})[0-9]{2}$")
 
 /** Judges a Japanese plate by its fields: car, two-wheeler, export (Roman letters) or diplomatic (five digits). Reports, never bars a keystroke. */
@@ -23,7 +22,7 @@ class JapanValidator : GatedPlateValidator() {
             return if (isDigitsOfLength(serial, 5)) PlateValidation.valid else PlateValidation.invalid(REASON_DIPLOMATIC)
         }
         if (office[0] in 'A'..'Z' || office[0] in 'a'..'z') { // the alphabet canonicalises case
-            return if (officeLatin.matches(office) && kanaLatin.matches(kana) && isDigitsOfLength(serial, 4)) {
+            return if (isLetters(office, 2, 3) && isLetters(kana, 1, 2) && isDigitsOfLength(serial, 4)) {
                 PlateValidation.valid
             } else {
                 PlateValidation.invalid(REASON_EXPORT)
