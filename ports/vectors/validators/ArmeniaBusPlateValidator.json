@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "0000",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "9999",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "000",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "00000",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus is \"S\" (city) or \"L\" (long-range)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus is \"S\" (city) or \"L\" (long-range)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.bus",
+        "validator": {
+          "class": "ArmeniaBusPlateValidator"
+        },
+        "values": [
+          "1414",
+          "s"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

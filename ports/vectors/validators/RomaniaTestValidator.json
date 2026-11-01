@@ -1,0 +1,1156 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "AA",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "ZZ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "A",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "AAA",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "aa",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The county code is one of the 42 codes."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group county = B",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "B",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = AB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "AB",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = AG",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "AG",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = AR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "AR",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BC",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BC",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BH",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BH",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BN",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BN",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BR",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BT",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BV",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = BZ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "BZ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = CJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "CJ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = CL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "CL",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = CS",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "CS",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = CT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "CT",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = CV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "CV",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = DB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "DB",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = DJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "DJ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = GJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "GJ",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = GL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "GL",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = GR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "GR",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = HD",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "HD",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = HR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "HR",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group county = IF",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "IF",
+          "613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = AB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = AG",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "AG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = AR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "AR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BC",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BH",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BN",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = BZ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "BZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = CJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "CJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = CL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "CL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = CS",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "CS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = CT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = CV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "CV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = DB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = DJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "DJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = GJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "GJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = GL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = GR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "GR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = HD",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "HD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = HR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "HR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    },
+    {
+      "name": "group number = IF",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.test",
+        "validator": {
+          "class": "RomaniaTestValidator"
+        },
+        "values": [
+          "TL",
+          "IF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, from 101."
+      }
+    }
+  ]
+}

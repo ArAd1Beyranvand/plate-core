@@ -1,0 +1,688 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "000",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "999",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "00",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "0000",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is 0001 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "0",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "group series = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "01",
+          "0787"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "group number = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.standard",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "0000",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is 0001 to 9999."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "9999",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "000",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "00000",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "group series = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "8921",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 to 999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "0",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    },
+    {
+      "name": "group number = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.square",
+        "validator": {
+          "class": "TunisiaValidator"
+        },
+        "values": [
+          "01",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The registration is four digits."
+      }
+    }
+  ]
+}

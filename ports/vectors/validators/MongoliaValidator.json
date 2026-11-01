@@ -1,0 +1,821 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "0000",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "9999",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "000",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "00000",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "АР",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АА",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "ЯЯ",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "А",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "ААА",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "AA",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "аа",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          "Я"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          "АА"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.private",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "1234",
+          "АР",
+          "а"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "0000",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "9999",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "000",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "00000",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "БН",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "АА",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "ЯЯ",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "А",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "ААА",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "AA",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "аа",
+          "Б"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The aimag suffix is not a known one."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "Я"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "АА"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mongolia_plate",
+        "spec": "mn.two_row",
+        "validator": {
+          "class": "MongoliaValidator"
+        },
+        "values": [
+          "5678",
+          "БН",
+          "а"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one Cyrillic letter."
+      }
+    }
+  ]
+}

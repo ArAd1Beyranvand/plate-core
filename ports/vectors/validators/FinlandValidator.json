@@ -1,0 +1,2038 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AAA",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÖÖÖ",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AA",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AAAA",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "aaa",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "0",
+          "184"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.private",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "BZM",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "Ö",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AA",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "Ж",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "a",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "0",
+          "6432"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.export",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AA",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÖÖ",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "A",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AAA",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "aa",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "0",
+          "939"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.motorcycle",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CU",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AAA",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÖÖÖ",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AA",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "AAAA",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "aaa",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The Åland number is up to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The Åland number is up to five digits."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "0",
+          "798"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The Åland number is up to five digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The Åland number is up to five digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ÅLG",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "FPW",
+          "61211"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "MÖS",
+          "72944"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "EXI",
+          "30458"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to three digits, not starting with 0."
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "F",
+          "89992"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "50022"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "random 50",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.aland",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "O",
+          "76992"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The export number is up to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CC",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "DD",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "C",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CCC",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "cc",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "group code = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "0",
+          "3901"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is C or CD."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "CD takes up to four digits, C up to five."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "CD",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "07890"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "random 30",
+      "input": {
+        "package": "finland_plate",
+        "spec": "fi.diplomatic",
+        "validator": {
+          "class": "FinlandValidator"
+        },
+        "values": [
+          "",
+          "19183"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two or three of A–Z, Å, Ä, Ö."
+      }
+    }
+  ]
+}

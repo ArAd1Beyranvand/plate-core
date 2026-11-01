@@ -1,0 +1,1363 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "aaa",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ABC",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "random 67",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "87"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "random 177",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "random 217",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.private",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "63"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "MALTA001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAAAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "99999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAAAAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.personalised",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "aaaaaaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "000",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "999",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "00",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "0000",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          "MM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "456",
+          "m"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate is TAXI, three digits and M or G."
+      }
+    },
+    {
+      "name": "random 97",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.taxi",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "5",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "789"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.bus",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "random 26",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.trailer",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A bus plate is BUS and three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAA",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AA",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "AAAA",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "aaa",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "malta_plate",
+        "spec": "mt.motorcycle",
+        "validator": {
+          "class": "MaltaValidator"
+        },
+        "values": [
+          "DEF",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three letters, three digits."
+      }
+    }
+  ]
+}

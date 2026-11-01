@@ -25,3 +25,4 @@ Resume from the first line without a commit hash. Format:
 - P8 · deferred: dot shorthands (no `prefer_dot_shorthands` lint in SDK 3.13, saves characters not lines); one canonical file layout and removal of ~30 re-export-only `*_alphabets.dart` (touches every package, needs your OK); noPanel → nullable panel (338 files)
 - P8 · note: country golden tests fail on this machine before and after (checked albania, comoros at HEAD~1); not caused by comment-only commits
 - P9 · plate_number_holder minimal/main.dart, newdesign/plate/live_plate.dart · todos: 10/10/10 · holder a41c5e2; ROADMAP "Holder spec" written
+- S1 · s1.export · plate_number_holder/test/port_export_test.dart + port_export_names.g.dart (tools/port_export_names.py) → ports/data (182 packages, 1172 specs, 272 alphabets, SCHEMA.md); check_s1 skips core_plate · uncommitted

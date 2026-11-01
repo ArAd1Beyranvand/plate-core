@@ -1,0 +1,441 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "Z",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "AA",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "a",
+          "001",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "000",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "999",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "00",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "0000",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "ЖЖЖ",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group mission = 007",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "007",
+          "023"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = 007",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.diplomatic",
+        "validator": {
+          "class": "KazakhstanDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "001",
+          "007"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

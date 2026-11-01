@@ -1,0 +1,2588 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "000",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "999",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "00",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "0000",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "ЖЖЖ",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "group prefix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "RB",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "RT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "R",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "CD",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "TR",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FD",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "KM",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "PU",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "SP",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MM",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "T",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MB",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "RB",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "RT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "R",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "CD",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "TR",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FA",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FD",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "KM",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "PU",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "SP",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MM",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "T",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PRK",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "PRK",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group suffix = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "RB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "RT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "TR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "KM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "PU"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "SP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.police",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "000",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "999",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "00",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "0000",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "ЖЖЖ",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "group prefix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "RB",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "RT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "R",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "CD",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "TR",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FA",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FD",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "FT",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "KM",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "PU",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "SP",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MM",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "T",
+          "123",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is MB."
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MB",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "RB",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "RT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "R",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "CD",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "TR",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FA",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FD",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "FT",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "KM",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "PU",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "SP",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "MM",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "T",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PRK",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "PRK",
+          "FG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group suffix = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "RB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "RT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "TR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "FT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "KM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "PU"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "SP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "MM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.policeTwoLine",
+        "validator": {
+          "class": "AlbaniaPoliceValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    }
+  ]
+}

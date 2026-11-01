@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is four letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "AAAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ZZZZ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "AAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is four letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "AAAAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is four letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is four letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "aaaa",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is four letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "paraguay_plate",
+        "spec": "py.mercosur",
+        "validator": {
+          "class": "ParaguayValidator"
+        },
+        "values": [
+          "ABCD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

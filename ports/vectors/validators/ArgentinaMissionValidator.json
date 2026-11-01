@@ -1,0 +1,403 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "A",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "DD",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is D, C, M, I or A."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "Ж",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is D, C, M, I or A."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "d",
+          "059",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is D, C, M, I or A."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "000",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "999",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "00",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "0000",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "ЖЖЖ",
+          "CPX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is three letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is three letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission",
+        "validator": {
+          "class": "ArgentinaMissionValidator"
+        },
+        "values": [
+          "D",
+          "059",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is three letters."
+      }
+    }
+  ]
+}

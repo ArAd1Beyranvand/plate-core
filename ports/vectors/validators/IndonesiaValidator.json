@@ -1,0 +1,6388 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AA",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "ZZ",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "A",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AAA",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "aa",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "0000",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "9999",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "000",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "00000",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖЖЖ",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "AAA",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "ZZZ",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "AA",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "AAAA",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is up to three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "ЖЖЖ",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "aaa",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "00",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "99",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "0",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "000",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "ЖЖ",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BL",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BB",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BK",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BA",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BP",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BH",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BD",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BG",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BN",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BE",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "F",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "T",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "E",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "D",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "Z",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "R",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "G",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "H",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "K",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AD",
+          "82",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BL",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BB",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BK",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BA",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BM",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BP",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BH",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BD",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BG",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BN",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "BE",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "B",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "F",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "T",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "E",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "D",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "Z",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "R",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "H",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "K",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "AA",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "AD",
+          "PX",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group suffix = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BL",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BB",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BK",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BA",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BM",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BP",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BH",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BD",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BG",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BN",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "BE",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "A",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "B",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "F",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "T",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "E",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "D",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "Z",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "R",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "G",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "H",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "K",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "AD",
+          "07",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BL",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BB",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BK",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BA",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BM",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BP",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BH",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BD",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BG",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BN",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "BE",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "A",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "B",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "F",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "T",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "E",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "D",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "Z",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "R",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "G",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "H",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "K",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "AA",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "AD",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group year = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BL"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "BE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "82",
+          "PX",
+          "07",
+          "AD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.car",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "E",
+          "0589",
+          "DQC",
+          "20",
+          "51"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AA",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "ZZ",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "A",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AAA",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "aa",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not an Indonesian area code."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "0000",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "9999",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "000",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "00000",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "ЖЖЖЖ",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AAA",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "ZZZ",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AA",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AAAA",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is up to three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "ЖЖЖ",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "aaa",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "00",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "99",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "0",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "000",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "ЖЖ",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BL",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BB",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BK",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BA",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BP",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BH",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BD",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BG",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BN",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BE",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "B",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "F",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "T",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "E",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "D",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "Z",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "R",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "G",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "H",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "K",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "AD",
+          "491",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BL",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BB",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BK",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BA",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BM",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BP",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BH",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BD",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BG",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BN",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "BE",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "A",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "B",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "F",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "T",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "E",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "D",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "Z",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "R",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "G",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "H",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "K",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "AA",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "AD",
+          "AIY",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group suffix = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BL",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BB",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BK",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BA",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BM",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BP",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BH",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BD",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BG",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BN",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "BE",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "A",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "B",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "F",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "T",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "E",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "D",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "Z",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "R",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "G",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "H",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "K",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AD",
+          "09",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BL",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BB",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BK",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BA",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BM",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BP",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BH",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BD",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BG",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BN",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "BE",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "A",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "B",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "F",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "T",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "E",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "D",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "Z",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "R",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "G",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "H",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "K",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "AA",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group month = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "AD",
+          "27"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry month is 01 to 12."
+      }
+    },
+    {
+      "name": "group year = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BL"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "BE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "BM",
+          "491",
+          "AIY",
+          "09",
+          "AD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 238",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.motorcycle",
+        "validator": {
+          "class": "IndonesiaValidator"
+        },
+        "values": [
+          "H",
+          "0106",
+          "KVE",
+          "43",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    }
+  ]
+}

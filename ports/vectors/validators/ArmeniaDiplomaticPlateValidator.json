@@ -1,0 +1,504 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "00",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "99",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "0",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "000",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "D",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is \"D\" (diplomat) or \"T\" (technician)."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "T",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "DD",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is \"D\" (diplomat) or \"T\" (technician)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "Ж",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is \"D\" (diplomat) or \"T\" (technician)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "d",
+          "864",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "000",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "999",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "00",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "0000",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "ЖЖЖ",
+          "ARM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial must be digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          "AM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          "AMAM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.diplomatic",
+        "validator": {
+          "class": "ArmeniaDiplomaticPlateValidator"
+        },
+        "values": [
+          "97",
+          "D",
+          "864",
+          "am"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

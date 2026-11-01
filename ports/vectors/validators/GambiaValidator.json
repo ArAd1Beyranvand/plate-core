@@ -1,0 +1,2512 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "aaa",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "group region = KM",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WCR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = BJL",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "BJL",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "KM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "WCR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "NBR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "LRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "CRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "URR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "WD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "NBD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "LRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "CRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.line",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "URD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "aaa",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "group region = BJL",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WCR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = BJL",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "BJL",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "KM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "WCR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "NBR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "LRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "CRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "URR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "WD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "NBD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "LRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "CRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.square",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "URD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "AAAA",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "aaa",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is not a known one."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "0123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "group region = KM",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "KM",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WCR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URR",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "WD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "NBD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "LRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "CRD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "URD",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = BJL",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "BJL",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "KM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WCR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "WCR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "NBR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "LRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "CRR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URR",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "URR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = WD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "WD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = NBD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "NBD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "LRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = CRD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "CRD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = URD",
+      "input": {
+        "package": "gambia_plate",
+        "spec": "gm.motorcycle",
+        "validator": {
+          "class": "GambiaValidator"
+        },
+        "values": [
+          "BJL",
+          "URD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    }
+  ]
+}

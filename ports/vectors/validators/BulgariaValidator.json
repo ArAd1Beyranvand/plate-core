@@ -1,0 +1,1790 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "AA",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "XX",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "A",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "AAA",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "aa",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "0000",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "9999",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "000",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "00000",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "ЖЖЖЖ",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group region = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EM",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "BA",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CP",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "XH",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CC",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CT",
+          "5096",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "EA",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "EM",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "BA",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "CP",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "XX",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "XH",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "C",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "CC",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "CT",
+          "MK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group series = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group series = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group series = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.private",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "5096",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EE",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "MM",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "E",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EEE",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "ee",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "9999",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "00000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "ЖЖЖЖ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group region = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EM",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "BA",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CP",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "XX",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "XH",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is not one of the table."
+      }
+    },
+    {
+      "name": "group region = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "C",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CC",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "CT",
+          "0082",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "EA",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "EM",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "BA",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "CP",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "XX",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "XH",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "C",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "CC",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group number = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "CT",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group series = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group series = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two of A B K M H P C T X."
+      }
+    },
+    {
+      "name": "group series = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.electric",
+        "validator": {
+          "class": "BulgariaValidator"
+        },
+        "values": [
+          "EA",
+          "0082",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

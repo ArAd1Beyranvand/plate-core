@@ -1,0 +1,724 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "000000",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "999999",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "00000",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "0000000",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is digits only."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is digits only."
+      }
+    },
+    {
+      "name": "group number = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "05",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group number = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "5",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "0",
+          "55"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group sideCode = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group sideCode = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.car",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "56841",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "000000",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "999999",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "00000",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "0000000",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is digits only."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is digits only."
+      }
+    },
+    {
+      "name": "group number = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "05",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group number = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "5",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "0",
+          "64"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is four to six digits."
+      }
+    },
+    {
+      "name": "group sideCode = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group sideCode = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.unified.moto",
+        "validator": {
+          "class": "YemenUnifiedValidator"
+        },
+        "values": [
+          "8424",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The side code is two digits."
+      }
+    }
+  ]
+}

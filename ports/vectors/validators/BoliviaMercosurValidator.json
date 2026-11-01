@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "AA",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "ZZ",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "A",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "AAA",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "aa",
+          "30983"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.mercosur",
+        "validator": {
+          "class": "BoliviaMercosurValidator"
+        },
+        "values": [
+          "TO",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    }
+  ]
+}

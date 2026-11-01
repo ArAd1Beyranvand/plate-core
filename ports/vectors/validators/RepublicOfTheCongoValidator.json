@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "000",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "999",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "00",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "0000",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AA",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "ZZ",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "A",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AAA",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "ЖЖ",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "aa",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is 1 to 14."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is 1 to 14."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is 1 to 14."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is 1 to 14."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "republic_of_the_congo_plate",
+        "spec": "cg.private",
+        "validator": {
+          "class": "RepublicOfTheCongoValidator"
+        },
+        "values": [
+          "123",
+          "AB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is 1 to 14."
+      }
+    }
+  ]
+}

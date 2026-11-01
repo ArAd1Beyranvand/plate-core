@@ -1,0 +1,840 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "ZZZ",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AAAA",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "aaa",
+          "12",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "00",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "99",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "0",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "000",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "ЖЖ",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MBA",
+          "12",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AAA",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "ZZZ",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AA",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "AAAA",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "aaa",
+          "56",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is M and two district letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "00",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "99",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "0",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "000",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "ЖЖ",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.legacy.one_row",
+        "validator": {
+          "class": "MozambiqueLegacyValidator"
+        },
+        "values": [
+          "MCD",
+          "56",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    }
+  ]
+}

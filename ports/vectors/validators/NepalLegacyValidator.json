@@ -1,0 +1,564 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a zone."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "मे",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "म",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "मेमे",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "Ж",
+          "12",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The lot is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "00",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "99",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "0",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "000",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The lot is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "ЖЖ",
+          "क",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The lot is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a class letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "य",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "कक",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "Ж",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "बा",
+          "12",
+          "क",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "",
+          "42",
+          "झ",
+          "3353"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a zone."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "",
+          "38",
+          "क",
+          "6561"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a zone."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "लु",
+          "84",
+          "",
+          "8125"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a class letter."
+      }
+    },
+    {
+      "name": "random 26",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy",
+        "validator": {
+          "class": "NepalLegacyValidator"
+        },
+        "values": [
+          "को",
+          "58",
+          "",
+          "7585"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a class letter."
+      }
+    }
+  ]
+}

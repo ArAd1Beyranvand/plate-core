@@ -1,0 +1,403 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "A",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "Z",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "AA",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "Ж",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "a",
+          "06",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "00",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "99",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "0",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "000",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "ЖЖ",
+          "2686"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "dominican_republic_plate",
+        "spec": "do.passenger1986",
+        "validator": {
+          "class": "DominicanRepublicLetteredValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is a letter, two digits and four digits."
+      }
+    }
+  ]
+}

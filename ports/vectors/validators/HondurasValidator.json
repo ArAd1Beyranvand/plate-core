@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "Z",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "Ж",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "a",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "honduras_plate",
+        "spec": "hn.private",
+        "validator": {
+          "class": "HondurasValidator"
+        },
+        "values": [
+          "H",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

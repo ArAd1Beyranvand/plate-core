@@ -1,0 +1,1543 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAA",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "YYY",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AA",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAAA",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "aaa",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "999",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "00",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "0000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "ЖЖЖ",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "452",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "A",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group prefix = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "MN",
+          "452",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group serial = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "A",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "DMN",
+          "MN",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.front",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "ADT",
+          "045",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAA",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "YYY",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AA",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAAA",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "aaa",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "999",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "00",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "0000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "ЖЖЖ",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "835",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "A",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group prefix = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "MN",
+          "835",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group serial = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "A",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "NMN",
+          "MN",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.rear",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AVU",
+          "111",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAA",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "YYY",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AA",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AAAA",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "aaa",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is a letter followed by MN."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "000",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "999",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "00",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "0000",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "ЖЖЖ",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "7",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "A",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group prefix = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "MN",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group serial = A",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "A",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = MN",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "BMN",
+          "MN",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "united_kingdom_plate",
+        "spec": "im.classic",
+        "validator": {
+          "class": "IsleOfManValidator"
+        },
+        "values": [
+          "AVA",
+          "0",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter is never A."
+      }
+    }
+  ]
+}

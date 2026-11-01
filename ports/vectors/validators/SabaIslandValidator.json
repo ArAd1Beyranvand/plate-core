@@ -1,0 +1,686 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Z",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "AA",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Ж",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "a",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "random 148",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.current",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 3,
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "S",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "A",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "Z",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "AA",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "Ж",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "a",
+          "163"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S, R or D."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "sab.classic1978",
+        "validator": {
+          "class": "SabaIslandValidator",
+          "args": {
+            "minDigits": 1,
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 3 digits."
+      }
+    }
+  ]
+}

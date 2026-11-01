@@ -1,0 +1,599 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "",
+          "458",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "FF",
+          "458",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "Ж",
+          "458",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "f",
+          "458",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "999",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "00",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "0000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "ЖЖЖ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.private",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "458",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "FF",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "f",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "fk.government",
+        "validator": {
+          "class": "FalklandIslandsValidator"
+        },
+        "values": [
+          "F",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    }
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AA",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "ZZ",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "A",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AAA",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "aa",
+          "759",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "000",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "999",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "00",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "0000",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "ЖЖЖ",
+          "LH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.standard",
+        "validator": {
+          "class": "ArgentinaStandardValidator"
+        },
+        "values": [
+          "AG",
+          "759",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters."
+      }
+    }
+  ]
+}

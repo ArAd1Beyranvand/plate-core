@@ -1,0 +1,679 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "ZZZ",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AA",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAAA",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "aaa",
+          "595"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.current",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "AAA",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "7827"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.legacy",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "9401"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "0",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "9",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "00",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "Ж",
+          "601"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nauru_plate",
+        "spec": "nr.classic",
+        "validator": {
+          "class": "NauruValidator"
+        },
+        "values": [
+          "2",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    }
+  ]
+}

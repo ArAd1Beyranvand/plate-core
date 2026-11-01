@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The plate starts with a type letter."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "Z",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "AA",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The plate starts with a type letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "Ж",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The plate starts with a type letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "a",
+          "908"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The plate starts with a type letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ai.private",
+        "validator": {
+          "class": "AnguillaValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to four digits."
+      }
+    }
+  ]
+}

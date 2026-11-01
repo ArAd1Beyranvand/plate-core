@@ -1,0 +1,2341 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "VV",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CC",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group region = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CD",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group digits = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "CC",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "CD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CMD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "CMD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group letters = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.standard",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "SK",
+          "1234",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "VV",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CC",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group region = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CD",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group digits = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "CC",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "CD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CMD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "CMD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group letters = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.legacy",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "BT",
+          "1234",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "VV",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CC",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group region = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CD",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is not one in use."
+      }
+    },
+    {
+      "name": "group digits = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "CC",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "CD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group digits = CMD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "CMD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group letters = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.two_row",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "KS",
+          "1234",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "00",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "99",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "0",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "000",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CCC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "MMM",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CCCC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "ЖЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "ccc",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is two or three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CC",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "group mission = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "CD",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is not listed."
+      }
+    },
+    {
+      "name": "group mission = 35",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "35",
+          "CMD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group type = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group type = 35",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "35",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is CC, CD or CMD."
+      }
+    },
+    {
+      "name": "group serial = CC",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is two or three digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is two or three digits."
+      }
+    },
+    {
+      "name": "group serial = CMD",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is two or three digits."
+      }
+    },
+    {
+      "name": "group serial = 35",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "92",
+          "CMD",
+          "35"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 137",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "35",
+          "",
+          "813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 195",
+      "input": {
+        "package": "north_macedonia_plate",
+        "spec": "mk.diplomatic",
+        "validator": {
+          "class": "NorthMacedoniaValidator"
+        },
+        "values": [
+          "35",
+          "CMM",
+          "870"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

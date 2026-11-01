@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "0",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The block is a digit from 1 to 7."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "9",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The block is a digit from 1 to 7."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "00",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The block is a digit from 1 to 7."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "Ж",
+          "203"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The block is a digit from 1 to 7."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "nf.private",
+        "validator": {
+          "class": "NorfolkIslandValidator"
+        },
+        "values": [
+          "3",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

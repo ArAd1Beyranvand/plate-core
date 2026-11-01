@@ -1,0 +1,1084 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "999",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AAAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "aaa",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "group register = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "E",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "group serial = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ABC",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "random 29",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "E5H",
+          "636"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "random 51",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "EW8",
+          "114"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "random 62",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.regular",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "EKJ",
+          "892"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "99",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "group register = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "E",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "group serial = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AB",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "EM",
+          "1728"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "random 18",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ES",
+          "2207"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "random 56",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.motorcycle",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "EZ",
+          "2660"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "E marks the special series; a regular register does not start with it."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ZZ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "A",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "AAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "aa",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    },
+    {
+      "name": "group register = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "E",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters or digits (AB1), two on a motorcycle, two letters on a special plate."
+      }
+    },
+    {
+      "name": "group serial = E",
+      "input": {
+        "package": "peru_plate",
+        "spec": "pe.special",
+        "validator": {
+          "class": "PeruValidator"
+        },
+        "values": [
+          "CD",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, four on a motorcycle."
+      }
+    }
+  ]
+}

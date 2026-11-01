@@ -1,0 +1,4906 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "BC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.private",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "BC",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "DE",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.mercosur",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "DE",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "FG",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "AA",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "ZZ",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "AAA",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖ",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "aa",
+          "1122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.taxi",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "B",
+          "FG",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "HJ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "AA",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "ZZ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "A",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "AAA",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "ЖЖ",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "aa",
+          "3344"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.school",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "C",
+          "HJ",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "ME",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AA",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ZZ",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "A",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AAA",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ЖЖ",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "aa",
+          "1096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.ambulance",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ME",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "RE",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AA",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ZZ",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "A",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AAA",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ЖЖ",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "aa",
+          "1058"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.remise",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "RE",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "MT",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AA",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ZZ",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "A",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "AAA",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "ЖЖ",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "aa",
+          "1002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.tourist",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "L",
+          "MT",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "KL",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "AA",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "ZZ",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "A",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "AAA",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "ЖЖ",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "aa",
+          "5566"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.truck",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "D",
+          "KL",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "MN",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "AA",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "ZZ",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "A",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "AAA",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "ЖЖ",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "aa",
+          "7788"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.rental",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "E",
+          "MN",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "RS",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.official",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "RS",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "TU",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.assembly",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "TU",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "S",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "AA",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "Ж",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "a",
+          "XY",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is three letters, the first a department code (A to S)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "uruguay_plate",
+        "spec": "uy.president",
+        "validator": {
+          "class": "UruguayValidator"
+        },
+        "values": [
+          "A",
+          "XY",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    }
+  ]
+}

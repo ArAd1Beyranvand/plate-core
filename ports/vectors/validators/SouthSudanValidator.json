@@ -1,0 +1,580 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "000",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "999",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "00",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "0000",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.private",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "560",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "000",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "999",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "00",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "0000",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "south_sudan_plate",
+        "spec": "ss.taxi",
+        "validator": {
+          "class": "SouthSudanValidator"
+        },
+        "values": [
+          "584",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    }
+  ]
+}

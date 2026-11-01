@@ -17,9 +17,11 @@ the rationale lives here once. Ids are stable: refine wording, never renumber.
   the SVG `viewBox` (the same `FittedBox > SizedBox > Stack > Positioned` model, in CSS); holder =
   Vite + vanilla TS. Kotlin: Kotlin Multiplatform, core in `commonMain` (no `java.*`), UI in Compose
   Multiplatform, holder runs on Desktop (JVM) first, Android second. Python ≥ 3.12: same goal as
-  the others — an input + display plate widget. Core + `render` in pure Python; UI = PySide6
-  (`QPainter` over the display list, `QLineEdit`s placed at slot boxes, animation on
-  `QVariantAnimation`); holder = a PySide6 window. An SVG painter comes free from the display list.
+  the others — an input + display plate widget, running in the browser under Pyodide (WEB_ARCH.md).
+  Core + `render` in pure Python (stdlib only); UI = `plates.ui`: SVG from the display list
+  (`svg.py`) plus `<input>`s placed at slot boxes (`dom.py`, the TS model), animation on
+  `requestAnimationFrame` through the same seam; no holder window — the gallery embeds it.
+  (Superseded: PySide6. Dart `TODO(py)` notes naming Qt keep their behaviour, on the DOM.)
 - **D3 · One source of truth for country data.** ~190 countries × 3 languages cannot be hand-ported.
   Plan: a Dart exporter walks every `PlateSpec`/`PlateAlphabet`/`PlateCountry`/`PlateTheme` and
   writes JSON; per-language codegen turns JSON into const-like source. Everything a spec holds
@@ -45,7 +47,7 @@ the rationale lives here once. Ids are stable: refine wording, never renumber.
   advance, focus-first-empty) and half Flutter focus/`TextEditingController`. The pure half is
   ported; focus is a per-platform adapter. `PlateInputSource`/`SlotBehavior` semantics map to:
   web `inputmode`/`virtualkeyboardpolicy`; Compose `KeyboardOptions` + `LocalSoftwareKeyboardController`
-  + key events; PySide6 hardware keys only (`keypadFirst` and IME modes may be N/A — say so).
+  + key events; Python: DOM keys through `plates.ui.dom`, like TS (`keypadFirst` and IME modes may be N/A — say so).
 - **D9 · Conformance vectors.** The Dart is the reference. A Dart tool will emit JSON test vectors
   (input sequence → values, `isCompleted`, `rejection`, validation reason, `text()`, section
   `layout()`, `PlatePartId.allOf`, stagger delays, later the display list). All three ports run the
@@ -80,15 +82,14 @@ the rationale lives here once. Ids are stable: refine wording, never renumber.
   JS vs Native differ). Annotate every `RegExp(` in validators.
 - **H10** `TextDirection`, `Alignment` (x,y ∈ [-1,1]), `Axis`, `EdgeInsets`, `Offset`, `Size`,
   `Rect`, `Color(0xAARRGGBB)` — tiny value types each port defines once in `model`; Color is ARGB
-  (CSS wants RGBA, Compose takes ARGB Long, Qt `QColor.fromRgba` ARGB).
+  (SVG/CSS want RGBA, so every port's SVG writer converts).
 - **H11** `Duration`/`Curve` (`Curves.easeInOutCubic` …) — ports need a curve table with
   cubic-bezier control points identical to Flutter's; durations as integer ms.
 - **H12** Text metrics: `fontSize = slotHeight * 0.72`, `height: 1.0`, strut, `TextPainter`
   measuring. Baselines differ per engine; parity is "within tolerance", not pixel-exact.
 - **H13** Path ops: `Path.combine(difference)` (rings, crescents), path-length measuring for the
   border/divider `draw` effect. SVG: `fill-rule="evenodd"` + `stroke-dasharray`/`getTotalLength`;
-  Compose: `PathOperation`/`PathMeasure`; Qt: `QPainterPath.subtracted`/`percentAtLength`; Pillow:
-  none — rasterise via `skia-python`/`cairo` or polygonise.
+  every port (TS, Kotlin js/wasm, Python on Pyodide) emits the same SVG, so the same trick applies.
 - **H14** `SchedulerBinding` post-frame notification hacks, `InheritedWidget` scopes,
   `RenderProxyBox`, `Material`/`ThemeData` selection theme — Flutter lifecycle artefacts. Ports drop
   them (`TODO(xx): drop — …`) or replace with an explicit context object.

@@ -1,0 +1,2572 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "A",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "Z",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "AA",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "Ж",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "a",
+          "01",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "00",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "99",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "0",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "000",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "ЖЖ",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "000",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "999",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "00",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "0000",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "ЖЖЖ",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "00",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "99",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "0",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "000",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "ЖЖ",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group mission = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "HC",
+          "001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is 01 to 19 (countries) or 50 to 64 (organisations)."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "HC",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "CMD",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group month = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "HC",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "group year = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.diplomatic",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "C",
+              "D",
+              "T"
+            ],
+            "numberLength": 3,
+            "hasMission": true,
+            "dated": true
+          }
+        },
+        "values": [
+          "D",
+          "01",
+          "001",
+          "05",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "AA",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "ZZ",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "A",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "AAA",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "aa",
+          "1001",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "0000",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "9999",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "000",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "00000",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "ЖЖЖЖ",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "00",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "99",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "0",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "000",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "ЖЖ",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "HC",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "CMD",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group month = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "HC",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01 to 12."
+      }
+    },
+    {
+      "name": "group year = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.honorary",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "HC"
+            ],
+            "numberLength": 4,
+            "hasMission": false,
+            "dated": true
+          }
+        },
+        "values": [
+          "HC",
+          "1001",
+          "05",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "AAA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "ZZZ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "AA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "AAAA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "aaa",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group class = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "HC",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is not one this plate uses."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.mission",
+        "validator": {
+          "class": "KyrgyzstanDiplomaticValidator",
+          "args": {
+            "classes": [
+              "CMD"
+            ],
+            "numberLength": 3,
+            "hasMission": false,
+            "dated": false
+          }
+        },
+        "values": [
+          "CMD",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong length."
+      }
+    }
+  ]
+}

@@ -1,0 +1,1544 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "0000",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "9999",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "000",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "00000",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "Q",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "V",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "HL",
+          "VF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group code = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.diplomatic",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": false
+          }
+        },
+        "values": [
+          "6187",
+          "HL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "0000",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "9999",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "000",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "00000",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "Q",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "V",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "HL",
+          "KO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group code = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7141",
+          "HL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "5837",
+          "HV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Consular codes leave out Q and V."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "5742",
+          "QU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Consular codes leave out Q and V."
+      }
+    },
+    {
+      "name": "random 10",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7184",
+          "KV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Consular codes leave out Q and V."
+      }
+    },
+    {
+      "name": "random 211",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.consular",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 4,
+            "consular": true
+          }
+        },
+        "values": [
+          "7007",
+          "HL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "000",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "999",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "00",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "0000",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "Q",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "V",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "HL",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group code = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country code is two letters."
+      }
+    },
+    {
+      "name": "group code = HL",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.un",
+        "validator": {
+          "class": "ItalyDiplomaticValidator",
+          "args": {
+            "digits": 3,
+            "consular": false
+          }
+        },
+        "values": [
+          "588",
+          "HL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

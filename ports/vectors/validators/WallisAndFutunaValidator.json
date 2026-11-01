@@ -1,0 +1,157 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "wf.private",
+        "validator": {
+          "class": "WallisAndFutunaValidator"
+        },
+        "values": [
+          "7039"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "ABC123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "ZZZZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A personalised plate is one to six letters or digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.personalised",
+        "validator": {
+          "class": "NewZealandPersonalisedValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A personalised plate is one to six letters or digits."
+      }
+    }
+  ]
+}

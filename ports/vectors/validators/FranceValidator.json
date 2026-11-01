@@ -1,0 +1,5997 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ZZ",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "A",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AAA",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "aa",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "000",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "999",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "00",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "0000",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AA",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ZZ",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "A",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AAA",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ЖЖ",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "aa",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "SS",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "WW",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "group prefix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "C",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "CD",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "K",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "SS",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "WW",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "C",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CD",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CMD",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "K",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "SS",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "WW",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "C",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "CD",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "K",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group department = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.private",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ZZ",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "A",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AAA",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "aa",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "000",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "999",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "00",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "0000",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "SS",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "WW",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "group prefix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "C",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "CD",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "K",
+          "229",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "SS",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "WW",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "C",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CD",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CMD",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "K",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.collection",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ZZ",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "A",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AAA",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "aa",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "000",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "999",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "00",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "0000",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AA",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ZZ",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "A",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "AAA",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "ЖЖ",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "aa",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "SS",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "WW",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "group prefix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "C",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "CD",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "K",
+          "229",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "SS",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "WW",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "C",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CD",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "CMD",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "K",
+          "DB",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "SS",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "WW",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "C",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "CD",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "K",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group department = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "group department = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "AA",
+          "229",
+          "DB",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département is two digits (01–95), 2A or 2B."
+      }
+    },
+    {
+      "name": "random 95",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.twoline",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": false
+          }
+        },
+        "values": [
+          "WW",
+          "060",
+          "NG",
+          "4A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "AA",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "ZZ",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "A",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "AAA",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "aa",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "000",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "999",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "00",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "0000",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "ЖЖЖ",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "AA",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "ZZ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "A",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "AAA",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "ЖЖ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "aa",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "00",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "99",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "0",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "000",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "ЖЖ",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "SS",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "C",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "CD",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "K",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "SS",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "WW",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "C",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "CD",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "CMD",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "K",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "SS",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "WW",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "C",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "CD",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "K",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group month = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "SS",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "WW",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "C",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "CD",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "K",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group year = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.transit",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "AA",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "ZZ",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "A",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "AAA",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "aa",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "000",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "999",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "00",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "0000",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "ЖЖЖ",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "AA",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "ZZ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "A",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "AAA",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "ЖЖ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "aa",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "00",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "99",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "0",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "000",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "ЖЖ",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "SS",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "C",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "CD",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate starts WW."
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "K",
+          "324",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "SS",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "WW",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "C",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "CD",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "CMD",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "K",
+          "TJ",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "SS",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "WW",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "C",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group suffix = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "CD",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "K",
+          "05",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group month = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "SS",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "WW",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "C",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "CD",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group month = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "K",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is 01–12."
+      }
+    },
+    {
+      "name": "group year = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    },
+    {
+      "name": "group year = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.temporary",
+        "validator": {
+          "class": "FranceValidator",
+          "args": {
+            "temporary": true
+          }
+        },
+        "values": [
+          "WW",
+          "324",
+          "TJ",
+          "05",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits."
+      }
+    }
+  ]
+}

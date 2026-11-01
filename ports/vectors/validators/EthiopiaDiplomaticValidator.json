@@ -1,0 +1,950 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "00",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "0",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "000",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ሀ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ፖ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ሀሀ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "Ж",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ሀ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ፖ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ሀሀ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "Ж",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0000",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "9999",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "000",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "00000",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "ЖЖЖЖ",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "A",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "Z",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "AA",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "Ж",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 4 lowercase",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "a",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "slot 5 lowercase",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "group mission = 84",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "84",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group series = 84",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "8",
+          "4",
+          "0123",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = 84",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "84",
+          "C",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group type = 84",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "04",
+          "ኩ",
+          "ዴ",
+          "0123",
+          "8",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is two letters."
+      }
+    },
+    {
+      "name": "random 106",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "84",
+          "ጡ",
+          "ቲ",
+          "6149",
+          "N",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 163",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.diplomatic",
+        "validator": {
+          "class": "EthiopiaDiplomaticValidator"
+        },
+        "values": [
+          "84",
+          "ቪ",
+          "",
+          "57",
+          "J",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two capitals."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "AA",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "ZZ",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "A",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two capitals."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "AAA",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two capitals."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two capitals."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "aa",
+          "9094"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are two capitals."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "new_zealand_plate",
+        "spec": "nz.legacy",
+        "validator": {
+          "class": "NewZealandLegacyValidator"
+        },
+        "values": [
+          "GG",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

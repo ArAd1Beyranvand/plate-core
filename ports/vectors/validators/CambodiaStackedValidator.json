@@ -1,0 +1,2614 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ZZ",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "A",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "aa",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "99",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "0",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖ",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group prefix = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "1",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "2",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "3",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "4",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "5",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "7",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "9",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group mission = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "2",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "3",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "4",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "5",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "7",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "9",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group mission = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "CD",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.diplomatic",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ZZZ",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "AAAA",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "aaa",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "000",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "999",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "00",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "0000",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "ЖЖЖ",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "0",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "9",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "00",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "Ж",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group prefix = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "1",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "2",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "3",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "4",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "5",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "7",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "9",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or ONG."
+      }
+    },
+    {
+      "name": "group prefix = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "123",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group org = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "1",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "2",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "3",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "4",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "5",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "7",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "9",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "CD",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group org = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "ONG",
+          "4",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group class = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "1",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "2",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "3",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "5",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "7",
+          "567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.non_governmental",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ONG",
+          "123",
+          "4",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "00",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "99",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "0",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "000",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group code = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "1",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "2",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "3",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "4",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "5",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "7",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "9",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group code = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "CD",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two or three digits."
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.international_motorcycle",
+        "validator": {
+          "class": "CambodiaStackedValidator"
+        },
+        "values": [
+          "12",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

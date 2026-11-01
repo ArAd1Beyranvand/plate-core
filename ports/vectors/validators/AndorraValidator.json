@@ -1,0 +1,711 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "A",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "Z",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "AA",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "Ж",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "a",
+          "3705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.standard",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "L",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0000",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "9999",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "000",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "00000",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "XI",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "IIII",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XXXX",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "III",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "IIIII",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "ЖЖЖЖ",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "iiii",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "0137",
+          "XI",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary plate is four digits, a month (I to XII) and a year."
+      }
+    },
+    {
+      "name": "random 245",
+      "input": {
+        "package": "andorra_plate",
+        "spec": "ad.temporary",
+        "validator": {
+          "class": "AndorraValidator"
+        },
+        "values": [
+          "9564",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    }
+  ]
+}

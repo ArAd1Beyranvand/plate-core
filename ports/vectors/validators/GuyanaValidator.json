@@ -1,0 +1,1042 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AAA",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AA",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AAAA",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "aaa",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group letters = P",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "P",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = H",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "H",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = B",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "B",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = G",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "G",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "C",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = T",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "T",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.singleLine",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PSS",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AAA",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AA",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "AAAA",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "aaa",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group letters = P",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "P",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = H",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "H",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = B",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "B",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = G",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "G",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "C",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group letters = T",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "T",
+          "9140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two or three letters."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.twoRow",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": [
+          "PCC",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, with no leading zero."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.president",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": []
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gy.primeMinister",
+        "validator": {
+          "class": "GuyanaValidator"
+        },
+        "values": []
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

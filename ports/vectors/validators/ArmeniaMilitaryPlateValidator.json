@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "0000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "9999",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "00000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          "MM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military plate is \"Մ\" (passenger) or \"Տ\" (transport)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A military plate is \"Մ\" (passenger) or \"Տ\" (transport)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.military",
+        "validator": {
+          "class": "ArmeniaMilitaryPlateValidator"
+        },
+        "values": [
+          "7897",
+          "m"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

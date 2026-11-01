@@ -1,0 +1,8584 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "00000",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "99999",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0000",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "000000",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Y",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "AA",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Ж",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "a",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "T",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0",
+          "T",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "0",
+          "72"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "1",
+          "",
+          "83"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "random 18",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.standard",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "87",
+          "",
+          "74"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "00000",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "99999",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0000",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "000000",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Y",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "AA",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Ж",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "a",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0",
+          "A",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "0",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 27",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "04051",
+          "",
+          "96"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "random 38",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.legacy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "58901",
+          "",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "00000",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "99999",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0000",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "000000",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Y",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "AA",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Ж",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "a",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "B",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0",
+          "B",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "0",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "85779",
+          "",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "random 14",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.car2",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "19531",
+          "",
+          "18"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "00000",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "99999",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0000",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "000000",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "A",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Y",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "AA",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "Ж",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "a",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "H",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 1 to 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "0",
+          "H",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "12345",
+          "0",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "47472",
+          "",
+          "97"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "random 18",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.moto",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 1,
+                "max": 5
+              },
+              {
+                "group": "region",
+                "min": 1,
+                "max": 2
+              }
+            ],
+            "requiresSeries": true
+          }
+        },
+        "values": [
+          "914",
+          "",
+          "84"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series letter is missing."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "362807"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "208566"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "957621"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.government.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "392262"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "487229"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "026502"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "355755"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.police.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "715474"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "315389"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "146938"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "270299"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.auxiliary.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "027091"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "354774"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "884456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "371950"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.protection.rows",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "570952"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "9999",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.trailer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "group": "region",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 5 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 5 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "02418"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.dealer",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 5,
+                "max": 5
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "37119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "134567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "992046"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.temporary",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "567576"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.diplomatic",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000",
+          "26"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country is 2 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "random 31",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.cooperation",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "group": "country",
+                "min": 2,
+                "max": 2
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "399",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "102345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 6 digits."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "515976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.army",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 6,
+                "max": 6
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "404602"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number cannot be all zeros."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 4 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "2834"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "morocco_plate",
+        "spec": "ma.navy",
+        "validator": {
+          "class": "MoroccoValidator",
+          "args": {
+            "fields": [
+              {
+                "group": "serial",
+                "min": 4,
+                "max": 4
+              }
+            ],
+            "requiresSeries": false
+          }
+        },
+        "values": [
+          "3780"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

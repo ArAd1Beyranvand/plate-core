@@ -1,0 +1,403 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "0000",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "9999",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "000",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "00000",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AA",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "ZZ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "A",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AAA",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "ЖЖ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "aa",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 00 to 12."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 00 to 12."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 00 to 12."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mauritania_plate",
+        "spec": "mr.standard",
+        "validator": {
+          "class": "MauritaniaPlateValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 00 to 12."
+      }
+    }
+  ]
+}

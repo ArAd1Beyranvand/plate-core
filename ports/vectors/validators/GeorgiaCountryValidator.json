@@ -1,0 +1,7621 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "440",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "000",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "999",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "00",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "0000",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.private",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AB",
+          "440",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "101",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "999",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "00",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "0000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "ЖЖЖ",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.trailer",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 1,
+                "max": 1
+              }
+            ]
+          }
+        },
+        "values": [
+          "GG",
+          "101",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "5891"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.temporary",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "GP",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZZZZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.vanity",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "text",
+                "kind": "alphanumeric",
+                "min": 1,
+                "max": 7
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "9999",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "04",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "00",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "99",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "0",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "000",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "ЖЖ",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.export",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "year",
+                "kind": "digits",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0092",
+          "04",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "9999",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "AT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.transit",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "5045",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAAA",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZZZ",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAAAA",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "aaaa",
+          "085"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.mission",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 4,
+                "max": 4
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "EUMM",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "217"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.military",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "999",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "AAA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "ZZZ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "AA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "AAAA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "ЖЖЖ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "aaa",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "group mission = 004",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "004",
+          "CMD",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group kind = 004",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "004",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "group serial = 004",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.diplomatic",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "mission",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "kind",
+                "kind": "letters",
+                "min": 1,
+                "max": 3
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "012",
+          "CMD",
+          "004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "001",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "000",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "999",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "00",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "0000",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "ЖЖЖ",
+          "KI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.squared",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "suffix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "TA",
+          "001",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "georgia_country_plate",
+        "spec": "ge.motorcycle",
+        "validator": {
+          "class": "GeorgiaCountryValidator",
+          "args": {
+            "rules": [
+              {
+                "key": "prefix",
+                "kind": "letters",
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "serial",
+                "kind": "digits",
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field is the wrong length or has a wrong character for this plate."
+      }
+    }
+  ]
+}

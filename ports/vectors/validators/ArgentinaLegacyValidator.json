@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "AAA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "ZZZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "AA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "AAAA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "aaa",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.legacy",
+        "validator": {
+          "class": "ArgentinaLegacyValidator"
+        },
+        "values": [
+          "NVZ",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

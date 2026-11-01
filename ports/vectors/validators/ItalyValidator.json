@@ -1,0 +1,1466 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AA",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZZ",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "A",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AAA",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "aa",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "000",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "999",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "00",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "0000",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "ЖЖЖ",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group prefix = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "Q",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group prefix = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "V",
+          "889",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "Q",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "V",
+          "KF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group suffix = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group suffix = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.private",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "CZ",
+          "889",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AA",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZZ",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "A",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AAA",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "aa",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "000",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "999",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "00",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "0000",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "ЖЖЖ",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group prefix = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "Q",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group prefix = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "V",
+          "198",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "Q",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "V",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group suffix = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group suffix = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.twoline",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZA",
+          "198",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AA",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ZZ",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "A",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "AAA",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "aa",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group prefix = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "Q",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group prefix = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "V",
+          "03813"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, Q, U)."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "italy_plate",
+        "spec": "it.motorcycle",
+        "validator": {
+          "class": "ItalyValidator"
+        },
+        "values": [
+          "BB",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, or five on a motorcycle."
+      }
+    }
+  ]
+}

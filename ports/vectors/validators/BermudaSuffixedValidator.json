@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "000",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "999",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "00",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "0000",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.suffixed",
+        "validator": {
+          "class": "BermudaSuffixedValidator"
+        },
+        "values": [
+          "123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    }
+  ]
+}

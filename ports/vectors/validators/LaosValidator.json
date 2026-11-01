@@ -1,0 +1,764 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "",
+          "ຍ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ກ",
+          "ຍ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ກກ",
+          "ຍ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "Ж",
+          "ຍ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ກ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຮ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ກກ",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "Ж",
+          "8118"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ຍ",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ປ",
+          "ຣ",
+          "1409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຜ",
+          "ຢ",
+          "6345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ກ",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຮ",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ກກ",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "Ж",
+          "ກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ຮ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກກ",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two consonants."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "Ж",
+          "4714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຂ",
+          "ກ",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ປ",
+          "ອ",
+          "4454"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "laos_plate",
+        "spec": "la.provincial_ev.vientiane_capital",
+        "validator": {
+          "class": "LaosValidator"
+        },
+        "values": [
+          "ຖ",
+          "ຣ",
+          "5546"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first consonant is not a vehicle-class letter."
+      }
+    }
+  ]
+}

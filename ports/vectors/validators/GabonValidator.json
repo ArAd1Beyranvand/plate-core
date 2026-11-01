@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "AA",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "ZZ",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "A",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "AAA",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "aa",
+          "444",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "999",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "00",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "0000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "ЖЖЖ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last group is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "gabon_plate",
+        "spec": "ga.private",
+        "validator": {
+          "class": "GabonValidator"
+        },
+        "values": [
+          "CC",
+          "444",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last group is 2 letters."
+      }
+    }
+  ]
+}

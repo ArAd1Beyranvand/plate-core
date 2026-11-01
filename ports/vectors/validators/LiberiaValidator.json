@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "000",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "999",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "00",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "0000",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "CD",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "AAA",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "ZZZ",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "AA",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "AAAA",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "ЖЖЖ",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "aaa",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is CD or CMD."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one or two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "liberia_plate",
+        "spec": "lr.diplomatic",
+        "validator": {
+          "class": "LiberiaValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one or two digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,3664 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ZZ",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AAA",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "aa",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "00",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "99",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "0",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "ЖЖ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.private",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "00",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "99",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "0",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "000",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "BE",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "AA",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "ZZ",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "A",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "AAA",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "ЖЖ",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "aa",
+          "81",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "00",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "99",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "0",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "000",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "ЖЖ",
+          "06",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "00",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "99",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "0",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "000",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.dated",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "41",
+          "BE",
+          "81",
+          "06",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "00",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "99",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "0",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "000",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "93",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "00",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "99",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "0",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "000",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "ЖЖ",
+          "FQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.legacy",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "72",
+          "93",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ZZ",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AAA",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "aa",
+          "84",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "00",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "99",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "0",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "000",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "ЖЖ",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.historic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "DL",
+          "84",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "99",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AAA",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "aa",
+          "23",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "00",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "99",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "0",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "000",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "ЖЖ",
+          "BC",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "AA",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "ZZ",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "A",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "AAA",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "ЖЖ",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "aa",
+          "05",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is three fields of two characters: letters AA, digits 00."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "00",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "99",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "0",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "000",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.us_forces",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A1",
+          "23",
+          "BC",
+          "05",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ribbon is a two-digit year and month."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "Z",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "Ж",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "a",
+          "2558"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.gnr",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "J",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A GNR plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AA",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ZZ",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "A",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "AAA",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "aa",
+          "186880"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.trailer",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "M",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer plate is one or two district letters and up to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "000",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "999",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "00",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "0000",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "CD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CC",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "DD",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "C",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CCC",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "ЖЖ",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "cc",
+          "530"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "madeira_plate",
+        "spec": "pt.diplomatic",
+        "validator": {
+          "class": "MadeiraValidator"
+        },
+        "values": [
+          "200",
+          "CD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is one to three digits, CD and three digits."
+      }
+    }
+  ]
+}

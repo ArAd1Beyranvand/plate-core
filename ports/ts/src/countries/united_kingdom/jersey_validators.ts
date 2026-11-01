@@ -1,0 +1,21 @@
+import { PlateValidator, type PlateEntry, type PlateValidation, invalid, valid } from '../../core/validators/plate_validator';
+
+/** Quiet until something is typed, then the serial must hold one to six
+ * digits after the printed `J`. */
+export class JerseyValidator implements PlateValidator {
+  validate(entry: PlateEntry): PlateValidation {
+    const refused = restrictionVerdict(entry);
+    if (refused != null) return refused;
+    const serial = entry.values.length === 0 ? null : entry.values[0] ?? '';
+    if (serial === '') return valid;
+    const slot = entry.spec.slotAt(0);
+    if (slot != null && !slot.isComplete(serial)) {
+      return invalid('The serial is incomplete.');
+    }
+    return valid;
+  }
+}
+
+function restrictionVerdict(entry: PlateEntry): PlateValidation | null {
+  return null;
+}

@@ -1,0 +1,2189 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "0",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "9",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "00",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "Ж",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "0000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "9999",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "00000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "ЖЖЖЖ",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "group region = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "3",
+          "4809",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "3",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group governorate = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "2",
+          "4809",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "0",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "9",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "00",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "Ж",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "0000",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "9999",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "000",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "00000",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "ЖЖЖЖ",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "group region = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "3",
+          "8578",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "3",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group governorate = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.car2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "4",
+          "8578",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "0",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "9",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "00",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "Ж",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "0000",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "9999",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "000",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "00000",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "ЖЖЖЖ",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "group region = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "3",
+          "6845",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "3",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group governorate = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "6845",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "0",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "9",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "00",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "Ж",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "0000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "9999",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "00000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "ЖЖЖЖ",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "group region = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "3",
+          "6898",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "3",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group governorate = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.moto2l",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "7",
+          "6898",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "0",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "9",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "00",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "Ж",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Region code must be one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "0000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "9999",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "00000",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "ЖЖЖЖ",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    },
+    {
+      "name": "group region = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "3",
+          "2697",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "3",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group governorate = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.wb.modern.trade",
+        "validator": {
+          "class": "PSWestBankModernValidator"
+        },
+        "values": [
+          "6",
+          "2697",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Governorate letter must be one of A-N (I and O excluded)."
+      }
+    }
+  ]
+}

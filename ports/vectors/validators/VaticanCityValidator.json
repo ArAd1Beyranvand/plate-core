@@ -1,0 +1,1414 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ZZ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "A",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "aa",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group number = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "CV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group number = SCV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.private",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "SCV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAA",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ZZZ",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AA",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAAA",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "aaa",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group prefix = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "00123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "CV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group number = SCV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.government",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "SCV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAA",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ZZZ",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AA",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAAA",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "aaa",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "ЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "456",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "group prefix = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "456",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "CV",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group number = SCV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.official",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "SCV",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ZZZ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "AAAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "aaa",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CV or SCV."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "SCV",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits."
+      }
+    },
+    {
+      "name": "group prefix = CV",
+      "input": {
+        "package": "vatican_city_plate",
+        "spec": "va.papal",
+        "validator": {
+          "class": "VaticanCityValidator"
+        },
+        "values": [
+          "CV",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

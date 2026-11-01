@@ -1,0 +1,706 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial fills every cell."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AAAAAA",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "999999",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AAAAA",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial fills every cell."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AAAAAAA",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial fills every cell."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "aaaaaa",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last letter names no state."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last letter names no state."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last letter names no state."
+      }
+    },
+    {
+      "name": "group serial = L",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "L",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial fills every cell."
+      }
+    },
+    {
+      "name": "group serial = D",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "D",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial fills every cell."
+      }
+    },
+    {
+      "name": "group serial = LLDDDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LLDDDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LLDLDD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LLDLDD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDDLLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDDLLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDDLDD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDDLDD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDDDLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDDDLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDDDDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDDDDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDLLDD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDLLDD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDDLDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDDLDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = LDLDLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "LDLDLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 0DLLDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "0DLLDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 1DLDLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "1DLDLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 2DLDDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "2DLDDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 3DLLDD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "3DLLDD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 4DDLDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "4DDLDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 5DDLLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "5DDLLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 6DDDLD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "6DDDLD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 7LDLDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "7LDLDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 8LDLDD",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "8LDLDD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group serial = 9LDDDL",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "9LDDDL",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters and digits are in no category's order."
+      }
+    },
+    {
+      "name": "group state = L",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group state = D",
+      "input": {
+        "package": "venezuela_plate",
+        "spec": "ve.car",
+        "validator": {
+          "class": "VenezuelaValidator"
+        },
+        "values": [
+          "AB174S",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

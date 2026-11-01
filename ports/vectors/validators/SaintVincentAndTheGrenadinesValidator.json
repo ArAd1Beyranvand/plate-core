@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "Z",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "a",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "saint_vincent_and_the_grenadines_plate",
+        "spec": "vc.private",
+        "validator": {
+          "class": "SaintVincentAndTheGrenadinesValidator"
+        },
+        "values": [
+          "P",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is one letter and four digits."
+      }
+    }
+  ]
+}

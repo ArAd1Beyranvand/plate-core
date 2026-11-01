@@ -1,0 +1,384 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "0",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "9",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "00",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "Ж",
+          "KH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown state code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "RS",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KHKH",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown state code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "Ж",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown state code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "kh",
+          "10346"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown state code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four or five digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "7",
+          "KH",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four or five digits."
+      }
+    },
+    {
+      "name": "random 29",
+      "input": {
+        "package": "sudan_plate",
+        "spec": "sd.2009",
+        "validator": {
+          "class": "SudanValidator"
+        },
+        "values": [
+          "8",
+          "G",
+          "126"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four or five digits."
+      }
+    }
+  ]
+}

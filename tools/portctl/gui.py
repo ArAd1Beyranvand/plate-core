@@ -108,15 +108,16 @@ class Window(QMainWindow):
         def button(text, fn, name=None, tip=''):
             b = QPushButton(text, objectName=name or '')
             b.clicked.connect(fn); b.setToolTip(tip); bar.addWidget(b); return b
-        button('▶ Start', self.engine.start, 'go', 'run tasks of the open phase')
+        button('▶ Start', lambda: self.engine.start(self.selected_phase()), 'go', 'run tasks of the open phase')
         button('⏸ Pause', self.engine.pause, tip='dispatch nothing new; running tasks finish')
-        button('⏭ Step', self.engine.step, tip='dispatch one task, then pause')
+        button('⏭ Step', lambda: self.engine.step(self.selected_phase()), tip='dispatch one task, then pause')
         button('✓ Approve gate', self.approve, 'go', 'approve the phase that waits')
         self.auto = QCheckBox('auto-approve')
         self.auto.setChecked(self.engine.auto_approve)
         self.auto.toggled.connect(self.engine.set_auto_approve)
         bar.addWidget(self.auto)
         bar.addSpacing(16)
+        button('▶ Run task', lambda: self.on_task(self.engine.run_now), 'go', 'start the selected task now, ignoring phase gates')
         button('↻ Retry', lambda: self.on_task(self.engine.retry))
         button('⤼ Skip', lambda: self.on_task(self.engine.skip), 'warn')
         button('■ Stop task', lambda: self.on_task(self.engine.kill), 'warn')
@@ -175,7 +176,7 @@ class Window(QMainWindow):
         self.attempts.verticalHeader().hide()
         self.attempts.itemSelectionChanged.connect(self.on_attempt)
         att = QSplitter(Qt.Vertical); att.addWidget(self.attempts); att.addWidget(self.output)
-        for w, name in ((self.build_handoffs(), 'Handoffs'), (self.live, 'Live'), (self.prompt, 'Prompt'), (att, 'Attempts'),
+        for w, name in ((self.build_handoffs(), 'Handoffs'), (self.build_all_prompts(), 'All prompts'), (self.live, 'Live'), (self.prompt, 'Prompt'), (att, 'Attempts'),
                         (self.oracle, 'Oracle'), (self.result, 'Task')):
             self.tabs.addTab(w, name)
         cv.addWidget(self.tabs, 1)
@@ -239,6 +240,33 @@ class Window(QMainWindow):
         self.handoff_ids = []
         return w
 
+    def build_all_prompts(self):
+        w = QSplitter(Qt.Horizontal)
+        self.alist = QListWidget()
+        self.alist.itemSelectionChanged.connect(self.on_all_prompt)
+        w.addWidget(self.alist)
+        right = QWidget(); v = QVBoxLayout(right); v.setContentsMargins(6, 0, 0, 0)
+        self.ahead = QLabel(); self.ahead.setTextFormat(Qt.RichText)
+        self.aprompt = mono(); self.aprompt.setLineWrapMode(QPlainTextEdit.NoWrap)
+        copy = QPushButton('⧉ Copy prompt', objectName='big')
+        copy.clicked.connect(lambda: QGuiApplication.clipboard().setText(self.aprompt.toPlainText()))
+        v.addWidget(self.ahead); v.addWidget(self.aprompt, 1); v.addWidget(copy)
+        w.addWidget(right); w.setSizes([300, 600])
+        for t in self.store.tasks("kind='claude'"):
+            it = QListWidgetItem(f'{t["id"]}\n   {t["title"] or ""}')
+            it.setData(Qt.UserRole, t['id']); self.alist.addItem(it)
+        return w
+
+    def on_all_prompt(self):
+        sel = self.alist.selectedItems()
+        t = sel and self.store.task(sel[0].data(Qt.UserRole))
+        if not t: return
+        try: prompt, m, e = self.engine.preview(t)
+        except Exception as ex: prompt, m, e = f'(cannot render: {ex})', '?', '?'
+        self.ahead.setText(f'<b>{html.escape(t["id"])}</b> · {m} · effort {e} · {t["status"]} · ~{len(prompt) // 4} tokens'
+                           f'<br><span style="color:{DIM}">preview: rendered now, so it may differ slightly when the task runs</span>')
+        self.aprompt.setPlainText(prompt)
+
     def refresh_handoffs(self):
         rows = self.store.tasks("status='awaiting'")
         ids = [t['id'] for t in rows]
@@ -297,6 +325,13 @@ class Window(QMainWindow):
     def approve(self):
         for ph in self.store.q("select id from phases where gate='waiting' order by ord"):
             self.engine.approve(ph['id']); return
+
+    def selected_phase(self):
+        sel = self.selected or ''
+        if sel.startswith('phase:'): return sel[6:]
+        if sel.startswith('task:'):
+            t = self.store.task(sel[5:])
+            return t and t['phase']
 
     def on_task(self, fn):
         if self.selected and self.selected.startswith('task:'): fn(self.selected[5:])
@@ -441,7 +476,7 @@ class Window(QMainWindow):
         eng = self.engine
         lanes = []
         manual = C.CLAUDE_MODE == 'manual'
-        for lane, size in (('python', 3), ('qwen', 1), ('claude', 1)):
+        for lane, size in (('python', 3), ('qwen', C.OLLAMA_PARALLEL), ('claude', 1)):
             ids = [t for t, l in list(eng.inflight.items()) if l == lane]
             if lane == 'claude' and manual:
                 lanes.append(f'<span style="color:{SOURCE[lane]}">■ claude</span> you · '

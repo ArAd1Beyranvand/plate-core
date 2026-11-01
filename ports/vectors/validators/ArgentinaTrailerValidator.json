@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "000",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "999",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "00",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The trailer number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "0000",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The trailer number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "NVZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The trailer number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "AAA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "ZZZ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "AA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "AAAA",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "ЖЖЖ",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "aaa",
+          "087"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.trailer",
+        "validator": {
+          "class": "ArgentinaTrailerValidator"
+        },
+        "values": [
+          "101",
+          "NVZ",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mover's number is three digits."
+      }
+    }
+  ]
+}

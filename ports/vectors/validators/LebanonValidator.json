@@ -1,0 +1,688 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "A",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "AA",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a Lebanese plate letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "Ж",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a Lebanese plate letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "a",
+          "147764"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "494875"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    },
+    {
+      "name": "random 21",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "923545"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "533416"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "random 95",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.oneLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "572879"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "A",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "AA",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a Lebanese plate letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "Ж",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a Lebanese plate letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "a",
+          "647076"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "062553"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "random 12",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "",
+          "527075"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a letter."
+      }
+    },
+    {
+      "name": "random 14",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "510413"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "lebanon_plate",
+        "spec": "lb.twoLine",
+        "validator": {
+          "class": "LebanonValidator"
+        },
+        "values": [
+          "MP",
+          "862189"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A parliament plate is numbered 1 to 128."
+      }
+    }
+  ]
+}

@@ -1,0 +1,752 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "0",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "9",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "00",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "Ж",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "ሀ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "ፖ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "ሀሀ",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "Ж",
+          "አ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "ሀ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "ፖ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "ሀሀ",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two Ge'ez letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "Ж",
+          "012346",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "000000",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "999999",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "00000",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "0000000",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "ЖЖЖЖЖЖ",
+          "A",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "Z",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "AA",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "Ж",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 4 lowercase",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "a",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    },
+    {
+      "name": "slot 5 lowercase",
+      "input": {
+        "package": "ethiopia_plate",
+        "spec": "et.regional",
+        "validator": {
+          "class": "EthiopiaRegionalValidator"
+        },
+        "values": [
+          "2",
+          "አ",
+          "አ",
+          "012346",
+          "A",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is two letters."
+      }
+    }
+  ]
+}

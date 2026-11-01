@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "AA",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "ZZ",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "A",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "AAA",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "aa",
+          "5049"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "malawi_plate",
+        "spec": "mw.private",
+        "validator": {
+          "class": "MalawiValidator"
+        },
+        "values": [
+          "BC",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,2237 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "HH",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "X",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XXX",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "xx",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "0000",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9999",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "000",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "00000",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "ЖЖЖЖ",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group region = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "EA",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "EM",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "BA",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CP",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XH",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "C",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CT",
+          "9043",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "EA",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "EM",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "BA",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "CP",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "XX",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "XH",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "C",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "CC",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "CT",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.foreigner",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "9043",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "TT",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "C",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CCC",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "cc",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "00",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "99",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "0",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "000",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "ЖЖ",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "00",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "99",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "0",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "000",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "ЖЖ",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group region = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "EA",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "EM",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "BA",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CP",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group region = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XX",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "XH",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CT",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = 22",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "22",
+          "77",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Foreigners are XX or XH; diplomats C, CC or CT."
+      }
+    },
+    {
+      "name": "group mission = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "EA",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "EM",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "BA",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "CP",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "XX",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "XH",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "C",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "CC",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "CT",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group mission = 22",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "22",
+          "11",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "EA",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "EM",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "BA",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "CP",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "XX",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "XH",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "C",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "CC",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "CT",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group number = 22",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "22",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits (a diplomat's two mission digits, then two) and a two-digit year."
+      }
+    },
+    {
+      "name": "group year = 22",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "CC",
+          "77",
+          "11",
+          "22"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 99",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "TT",
+          "22",
+          "56",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 140",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.diplomatic",
+        "validator": {
+          "class": "BulgariaStampedValidator"
+        },
+        "values": [
+          "TT",
+          "22",
+          "89",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

@@ -1,0 +1,403 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "000",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "999",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "00",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "0000",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is D."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "DD",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is D."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "Ж",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is D."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "d",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is D."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two digits."
+      }
+    },
+    {
+      "name": "group number = D",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "D",
+          "D",
+          "92"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group code = D",
+      "input": {
+        "package": "djibouti_plate",
+        "spec": "dj.standard",
+        "validator": {
+          "class": "DjiboutiValidator"
+        },
+        "values": [
+          "887",
+          "D",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is two digits."
+      }
+    }
+  ]
+}

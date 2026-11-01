@@ -1,0 +1,3207 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ZZZ",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAAA",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "aaa",
+          "12",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "99",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "ЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ABC",
+          "12",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "random 12",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "59",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 23",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.private",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "93",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAA",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ZZZ",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AA",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAAA",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "aaa",
+          "47",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "00",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "99",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "0",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "000",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "ЖЖ",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "EPR",
+          "47",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "random 49",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "28",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 62",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.american",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAA",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ZZZ",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AA",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAAA",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "aaa",
+          "94",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "00",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "99",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "0",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "000",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "ЖЖ",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "94",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "80",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 65",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.taxi",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "13",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAA",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ZZZ",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AA",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAAA",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "aaa",
+          "206"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "MLB",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "random 33",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "435"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 47",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.dealer",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "67"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AA",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ZZ",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "A",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two letters (no I, O, Q, V)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "AAA",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two letters (no I, O, Q, V)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two letters (no I, O, Q, V)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "aa",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two letters (no I, O, Q, V)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "999",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "00",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "0000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "ЖЖЖ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status letter is A to I."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "I"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status letter is A to I."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status letter is A to I."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "004",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status letter is A to I."
+      }
+    },
+    {
+      "name": "group code = CA",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "CA",
+          "004",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = CA",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "DL",
+          "CA",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "random 20",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "964",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 47",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "2",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 341",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.diplomatic",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "CA",
+          "439",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "00",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "99",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "0",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "000",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "00",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "99",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "0",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "000",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "ЖЖ",
+          "MLB",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "AAA",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "ZZZ",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "AA",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "AAAA",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "ЖЖЖ",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "aaa",
+          "426",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are three, none of I, Q, V, Å, Ä, Ö."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "000",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "999",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "00",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "0000",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "ЖЖЖ",
+          "2002",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and a digit or a letter (not O)."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "0000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "9999",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "00000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "ЖЖЖЖ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "25",
+          "09",
+          "MLB",
+          "426",
+          "2002",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 26",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "04",
+          "9",
+          "",
+          "661",
+          "2069",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 87",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.temporary",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "33",
+          "95",
+          "",
+          "704",
+          "5877",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "118076"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    },
+    {
+      "name": "random 10",
+      "input": {
+        "package": "sweden_plate",
+        "spec": "se.military",
+        "validator": {
+          "class": "SwedenValidator"
+        },
+        "values": [
+          "102"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four to six digits."
+      }
+    }
+  ]
+}

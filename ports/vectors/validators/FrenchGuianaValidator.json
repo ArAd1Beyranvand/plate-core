@@ -1,0 +1,584 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "999",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "00",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "CD",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AA",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ZZ",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "A",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AAA",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ЖЖ",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "aa",
+          "973"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "guyana_plate",
+        "spec": "gf.private",
+        "validator": {
+          "class": "FrenchGuianaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or characters."
+      }
+    }
+  ]
+}

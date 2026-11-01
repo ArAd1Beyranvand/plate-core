@@ -1,0 +1,2075 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "BB",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "SS",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "B",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "BBB",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "bb",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "000",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "999",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "00",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "0000",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "ЖЖЖ",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group region = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group region = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "898",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group a = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "P",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group a = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "CD",
+          "KP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group b = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group b = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.private",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "LJ",
+          "898",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "BB",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "SS",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "B",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "BBB",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "bb",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "AA",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "ZZ",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "A",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "AAA",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "ЖЖ",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "aa",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group region = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group region = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "LL",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group a = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "P",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group a = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "CD",
+          "251"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group b = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "group b = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "MB",
+          "LL",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is three digits and two letters, or two letters and three digits."
+      }
+    },
+    {
+      "name": "random 326",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.export",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "FG",
+          "472"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "06",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "PP",
+          "06",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "Ж",
+          "06",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "p",
+          "06",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "00",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "99",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "0",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "000",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "ЖЖ",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group a = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "P",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group a = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "CD",
+          "697"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group b = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group b = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.police",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "06",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CC",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "DD",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "C",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CCC",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "cc",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit code is two letters, e.g. LJ."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "99",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "0",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖ",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group region = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "P",
+          "08",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is P, two digits, three digits."
+      }
+    },
+    {
+      "name": "group a = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "P",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group a = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "CD",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group b = P",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    },
+    {
+      "name": "group b = CD",
+      "input": {
+        "package": "slovenia_plate",
+        "spec": "si.diplomatic",
+        "validator": {
+          "class": "SloveniaValidator"
+        },
+        "values": [
+          "CD",
+          "08",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is CD, two digits, two digits."
+      }
+    }
+  ]
+}

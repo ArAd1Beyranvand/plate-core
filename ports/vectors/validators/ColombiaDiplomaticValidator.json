@@ -1,0 +1,384 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "Z",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "AA",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "a",
+          "FR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "ZZ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "AAA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "aa",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A type letter and two country initials."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.cd",
+        "validator": {
+          "class": "ColombiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "FR",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

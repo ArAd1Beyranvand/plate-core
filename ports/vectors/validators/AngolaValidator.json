@@ -1,0 +1,1164 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "AA",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "ZZ",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "A",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "AAA",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "aa",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "00",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "99",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "0",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "000",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "ЖЖ",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "00",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "99",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "0",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "000",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "ЖЖ",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.standard",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "AA",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "ZZ",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "A",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "AAA",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "aa",
+          "42",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "00",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "99",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "0",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "000",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "ЖЖ",
+          "81",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "00",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "99",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "0",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "000",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "ЖЖ",
+          "MA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two pairs of digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "angola_plate",
+        "spec": "ao.stacked",
+        "validator": {
+          "class": "AngolaValidator"
+        },
+        "values": [
+          "LD",
+          "42",
+          "81",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    }
+  ]
+}

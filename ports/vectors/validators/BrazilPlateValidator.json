@@ -1,0 +1,2120 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "A",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Z",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "AA",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Ж",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "a",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "A",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "Z",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "AA",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "Ж",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "a",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "A",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "Z",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "AA",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "Ж",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "a",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "0",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "9",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "00",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "Ж",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "A",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "Z",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "AA",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "Ж",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "a",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "0",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "9",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "00",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "Ж",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "group series = A",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "A",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "0",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "A",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Z",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "AA",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Ж",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "a",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "A",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "Z",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "AA",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "Ж",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "a",
+          "P",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "A",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "Z",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "AA",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "Ж",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "a",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "0",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "9",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "00",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "Ж",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "A",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "Z",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "AA",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "Ж",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 4 lowercase",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "a",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "0",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "9",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "00",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "Ж",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 cleared",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 first",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 last",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 too long",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "slot 6 wrong script",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "5",
+          "F",
+          "7",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "group series = A",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "",
+          "5",
+          "F",
+          "7",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "A",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brazil_plate",
+        "spec": "br.mercosul.national",
+        "validator": {
+          "class": "BrazilPlateValidator"
+        },
+        "values": [
+          "Q",
+          "T",
+          "P",
+          "0",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is a digit, a letter and two digits."
+      }
+    }
+  ]
+}

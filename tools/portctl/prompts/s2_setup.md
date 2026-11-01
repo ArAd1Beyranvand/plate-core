@@ -3,10 +3,11 @@
 ## Task {{task}}: {{lang_name}} project scaffold
 
 Create `ports/{{lang}}/` following ROADMAP D2 for {{lang_name}}. Use the toolchain that is installed:
-Node 22 + npm, Java 21 (no global gradle: generate and commit a Gradle wrapper), and Python 3.10.12.
-D2 says Python ≥ 3.12, but tests must run here, so keep the Python code 3.10-compatible
-(`requires-python >= 3.10`).
+Node 22 + npm, Java 21 (no global gradle: generate and commit a Gradle wrapper), and Python 3.10.12
+on the host (Python itself ships to the browser as Pyodide, see `ports/py/web/check.mjs`).
 
+- The browser target WEB_ARCH.md chose for {{lang_name}} (e.g. Vite, Kotlin/Wasm or JS, Pyodide),
+  wired in now so later parts never use APIs that target lacks. Tests may still run on the host.
 - A test runner wired to `ports/vectors` (a helper that loads a vector file by relative path).
 - One smoke test that loads a vector file, so the oracle is green from the start.
 - Package layout matching the later parts: core (values, alphabet, layout, input, timing),

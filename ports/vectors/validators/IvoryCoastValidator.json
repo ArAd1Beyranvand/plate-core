@@ -1,0 +1,1411 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "0000",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "9999",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "000",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "00000",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "AB",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AA",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "ZZ",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "A",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AAA",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "ЖЖ",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "aa",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.private",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "1234",
+          "AB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "000",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "999",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "00",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "0000",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "IT",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "AA",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "ZZ",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "A",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "AAA",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "ЖЖ",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "aa",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.temporary",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "IT",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "000",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "999",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "00",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "0000",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "CD",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "AA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "ZZ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "A",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "AAA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "ЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "aa",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.diplomatic",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "123",
+          "CD",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 5 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "ivory_coast_plate",
+        "spec": "ci.military",
+        "validator": {
+          "class": "IvoryCoastValidator"
+        },
+        "values": [
+          "52559"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

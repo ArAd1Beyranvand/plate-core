@@ -1,0 +1,840 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "000",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "999",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "00",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "0000",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "CC",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "YY",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "C",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "CCC",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "cc",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.standard",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "000",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "999",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "00",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "0000",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "D",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is two digits and a half-year, 1 or 2."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "CC",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "YY",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "C",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "CCC",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "cc",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That is not a county code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "republic_of_ireland_plate",
+        "spec": "ie.electric",
+        "validator": {
+          "class": "RepublicOfIrelandValidator"
+        },
+        "values": [
+          "252",
+          "D",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to six digits."
+      }
+    }
+  ]
+}

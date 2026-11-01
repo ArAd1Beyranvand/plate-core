@@ -1,0 +1,2607 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "ZGZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.private",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "2008",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "BBD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.historic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7010",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "HRD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.taxi",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "6334",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "BBW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.trailer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "7286",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "BBS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.provisional",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1588",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "0000",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "9999",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "000",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "00000",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "BCD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "BBB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "BBBB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.dealer",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "1746",
+          "bbb"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "AAA",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "AA",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "AAAA",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "aaa",
+          "2342"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CME",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 66",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "4250"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "random 71",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.police",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "9187"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The counter is three consonants (no vowels, no Q)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "AA",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "TT",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "A",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "AAA",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "aa",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "999",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "0000",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "group code = 83",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "83",
+          "1",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD, CC, TA or OI."
+      }
+    },
+    {
+      "name": "group embassy = 83",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "83",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group embassy = 083",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "083",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = 83",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "83"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "group number = 083",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "CD",
+          "1",
+          "083"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "461",
+          "502"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 33",
+      "input": {
+        "package": "spain_plate",
+        "spec": "ce.diplomatic",
+        "validator": {
+          "class": "CeutaValidator"
+        },
+        "values": [
+          "",
+          "380",
+          "154"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

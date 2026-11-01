@@ -1,0 +1,5450 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZZ",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "255RY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters."
+      }
+    },
+    {
+      "name": "group serial = BDIOZ",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "BDIOZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "B, D, I, O and Z are not used in a series."
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "B, D, I, O and Z are not used in a series."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "WI",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Five characters, the first a digit after a two-letter code."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.private",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "NKZ",
+          "FJJUI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "B, D, I, O and Z are not used in a series."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "99",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aa",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "KAZIK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group serial = BDIOZ",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "BDIOZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.custom",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P0",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three to five characters: a letter first, letters before digits, at most two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZZ",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "08A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.classic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "SZ",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters and two or three characters, five in all."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "99",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aa",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "aaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "5889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.temporary",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "D6",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Four digits, or three and a letter."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "99",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aa",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "999",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "00",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "0000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "ЖЖЖ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "355",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter then a digit."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "P",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "B",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "group number = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "W",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "group suffix = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "group suffix = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.test",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "S1",
+          "355",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits, then the letter B."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "999",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "01P07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group serial = BDIOZ",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "BDIOZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P35",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and two digits, then two digits, P and two digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.professional",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "ELMN4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZZ",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "aaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "F55N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.motorcycle",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "CBY",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Two or three letters, then four."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "Z",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "Ж",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "a",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.reduced",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "C",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter, then three characters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZZ",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "aaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "E057"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.police",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HPP",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZZ",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAAA",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aaa",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "aaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "A105"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.border_guard",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "HWA",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ZZ",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AAA",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "aa",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "03271"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = BDIOZ",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "BDIOZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.military",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "UA",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "A",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "Z",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "AA",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "Ж",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "a",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "000",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a listed mission code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "999",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a listed mission code."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "00",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "0000",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "ЖЖЖ",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a listed mission code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits."
+      }
+    },
+    {
+      "name": "group voivodeship = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "P",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "group voivodeship = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "B",
+          "005",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "W is the only code issued."
+      }
+    },
+    {
+      "name": "group mission = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "P",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "B",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "W",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = 049",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "049",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 095",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "095",
+          "761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group serial = P",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits."
+      }
+    },
+    {
+      "name": "group serial = W",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Three digits."
+      }
+    },
+    {
+      "name": "group serial = 049",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "049"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 095",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "W",
+          "005",
+          "095"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "poland_plate",
+        "spec": "pl.diplomatic",
+        "validator": {
+          "class": "PolandValidator"
+        },
+        "values": [
+          "X",
+          "095",
+          "320"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

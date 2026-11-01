@@ -24,11 +24,19 @@ Two rules follow from the table:
 
 ```
 S1 export+vectors
+A0 web architecture (analysis + plan only; its gate is your review of WEB_ARCH.md)
+A1 retrofit: one task per port that already exists, aligning it with WEB_ARCH.md
 S2.ts model   S2.kt model   S2.py model
 S3.ts render+ui+keypad   S3.kt …   S3.py …
 S4.ts countries          S4.kt …   S4.py …
-S5.ts holder             S5.kt …   S5.py …
+W1 registry + embed protocol
+S5.ts embed+builds       S5.kt …   S5.py …
+W2 gallery iframe host   W3 Flutter per-country builds   W4 deploy + perf budget   W5 SEO
 ```
+
+The target (`claude/port/WEB_SPEC.md`): no per-language galleries. The Flutter gallery
+(`plate_number_holder`) stays the one site, and every country × language is an independent web build
+that the gallery lazy-loads into an iframe from a generated `components.json` registry.
 
 Phases run strictly in this order. Each ends with a **gate**: you approve in the GUI, or turn on
 auto-approve. A phase is done when all of its tasks are done or skipped.
@@ -52,7 +60,22 @@ auto-approve. A phase is done when all of its tasks are done or skipped.
 - **S4.<lang>** (claude ×1, python ×1, qwen ×N): Claude writes the codegen (JSON → source). Python runs it
   for all 182 packages. That covers the bulk of the country code with no LLM at all. Then every
   `[D4-code]` validator or resolver is a **unit**: Claude does the first two (the exemplars), qwen the rest.
-- **S5.<lang>** (claude ×1): the holder from `ROADMAP.md` "Holder spec".
+- **A0** (claude ×1): analyse the gallery and the ports and write `claude/port/WEB_ARCH.md` (decisions
+  W1…, registry, protocol, browser limits for Pyodide and Kotlin/Wasm, build/deploy, migration), plus
+  draft schema and protocol. No code. The python check confirms the sections exist. Approving the gate
+  approves the architecture. Later prompts treat W-decisions as binding.
+- **W1** (claude ×1): `ports/web/`, with the registry generator, schema, protocol vectors and a TS
+  reference client.
+- **S5.<lang>** (claude ×2): a one-country embed shell speaking the protocol (it replaces the old
+  holder), then `web_build`/`web_build_all` in `portctl.json`. `web_smoke` builds germany + india, checks
+  that neither carries the other and that the registry lists them.
+- **W2** (claude ×2): deferred `*_plate` imports in the gallery (W14), then iframe host + registry-driven language tabs in the gallery (flutter analyze/test).
+  **W3** (claude): every `*_plate` as its own Flutter web build. **W4** (claude): `tools/web/deploy.py`
+  and `perf_check.py` (the homepage loads no component, germany+python loads only germany/python). **W5** (claude): SEO text written naturally into the
+  gallery skeleton and every loading page, static per-route pages and `sitemap.xml` (`seo_check.py`).
+
+A Claude task's `verify` is `'all'` (the language oracle), `{'cmd': …}` (shell, repo root) or
+`{'fn': …}` (a python check in `executors.FUNCS`).
 
 ## The router (the dynamic part)
 
@@ -119,7 +142,10 @@ Suggested model and effort (`HINTS` in `config.py`, and `engine.hint()` for the 
 | s1 export, s1 vectors, s4 codegen | opus · high | everything downstream depends on them |
 | core alphabet / layout / input, render, ui | opus · high | hazards H21/H9/D7/D1: subtle and cross-cutting |
 | core values / timing, setup | sonnet · medium | mechanical |
-| keypad, holder | sonnet · high | sizeable but well specified |
+| keypad | sonnet · high | sizeable but well specified |
+| a0 architecture, w2 gallery host, w3 Flutter builds | opus · high | cross-cutting, and the user reviews it |
+| s5 embed: ts / kt, py | sonnet · high / opus · high | Kotlin/Wasm and Pyodide are the hard browser targets |
+| w1 protocol, w4 deploy / s5 build | sonnet · high / sonnet · medium | well specified by WEB_ARCH.md |
 | unit exemplar | opus · medium | sets the style that qwen copies 200+ times |
 | unit forced to Claude | haiku · medium | small, and the test decides |
 | fix list ≤ 6 items / more | haiku · medium / sonnet · medium | |

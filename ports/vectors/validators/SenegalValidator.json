@@ -1,0 +1,7772 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "group region = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DB",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "FK",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KL",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KE",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KD",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "LG",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "MT",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SL",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SE",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TC",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TH",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZG",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "DK",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "DB",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "FK",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "KA",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "KL",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "KE",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "KD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "LG",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "MT",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "SL",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "SE",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "TC",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "TH",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group number = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "ZG",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "group letters = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "DK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "FK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "KA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "KL"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "KE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "KD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "LG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "SL"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "SE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "TH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.old",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "1234",
+          "ZG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZZ",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "A",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AAA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "aa",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "999",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "00",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "0000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "AA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ZZ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "A",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "AAA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ЖЖ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "aa",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "AA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ZZ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "A",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "AAA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "aa",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group series = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DB",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "FK",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KL",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KE",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KD",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "LG",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "MT",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SL",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SE",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TC",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TH",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZG",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DB",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "FK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KA",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KD",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "LG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "MT",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TC",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TH",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ZG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group letters = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "DK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "DB",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "FK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KD",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "LG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "MT",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "SL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "SE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "TC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "TH",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ZG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DB",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "FK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "LG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "MT",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "SL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "SE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "TC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "TH",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ZG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group department = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "DK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "FK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "LG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "SL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "SE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "TH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.current",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "ZG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZZ",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "A",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AAA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "aa",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "999",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "00",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "0000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "AA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ZZ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "A",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "AAA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ЖЖ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "aa",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "AA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ZZ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "A",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "AAA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "aa",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group series = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DB",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "FK",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KA",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KL",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KE",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KD",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "LG",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "MT",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SL",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SE",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TC",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TH",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZG",
+          "012",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DB",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "FK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KA",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KD",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "LG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "MT",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TC",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TH",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ZG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group letters = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "DK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "DB",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "FK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "KD",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "LG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "MT",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "SL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "SE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "TC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "TH",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "ZG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DB",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "FK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "KD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "LG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "MT",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "SL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "SE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "TC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "TH",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "ZG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group department = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "DK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "FK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "KD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "LG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "SL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "SE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "TH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.truckRear",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "012",
+          "BC",
+          "DK",
+          "ZG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "999",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "00",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "0000",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ЖЖЖ",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "AA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "ZZ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "A",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "AAA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "ЖЖ",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "aa",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The closing series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "AA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "ZZ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "A",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "AAA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "aa",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown regional code."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group series = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DK",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "DB",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "FK",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KA",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KL",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KE",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "KD",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "LG",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "MT",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SL",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "SE",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TC",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "TH",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "ZG",
+          "123",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "DB",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "FK",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KA",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "KD",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "LG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "MT",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SL",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "SE",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TC",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "TH",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "ZG",
+          "BC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group letters = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "DK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "DB",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "FK",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "KA",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "KL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "KE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "KD",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "LG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "MT",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "SL",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "SE",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "TC",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "TH",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "ZG",
+          "DK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DB",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "FK",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "KA",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "KL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "KE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "KD",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "LG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "MT",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "SL",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "SE",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "TC",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "TH",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "ZG",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group department = DK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "DK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = DB",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = FK",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "FK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KA",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "KA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "KL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "KE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = KD",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "KD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = LG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "LG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = MT",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "MT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SL",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "SL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = SE",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "SE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TC",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = TH",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "TH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    },
+    {
+      "name": "group department = ZG",
+      "input": {
+        "package": "senegal_plate",
+        "spec": "sn.motorcycle",
+        "validator": {
+          "class": "SenegalValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BC",
+          "DK",
+          "ZG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is 2 digits."
+      }
+    }
+  ]
+}

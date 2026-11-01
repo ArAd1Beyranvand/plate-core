@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "",
+          "A",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "琼",
+          "A",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京京",
+          "A",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "Ж",
+          "A",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city letter is A–Z without I and O."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "Z",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "AA",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city letter is A–Z without I and O."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "Ж",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city letter is A–Z without I and O."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "a",
+          "F0236"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city letter is A–Z without I and O."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "超超超超超"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits or letters (no I, O), at most two of them letters; the last place may be 学 警 挂 港 澳 试 超."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits or letters (no I, O), at most two of them letters; the last place may be 学 警 挂 港 澳 试 超."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits or letters (no I, O), at most two of them letters; the last place may be 学 警 挂 港 澳 试 超."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.standard",
+        "validator": {
+          "class": "ChinaValidator"
+        },
+        "values": [
+          "京",
+          "A",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits or letters (no I, O), at most two of them letters; the last place may be 学 警 挂 港 澳 试 超."
+      }
+    }
+  ]
+}

@@ -1,0 +1,3104 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "SUDURPASHCHIM",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHIKOSHI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "Ж",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "koshi",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "55",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AAA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "ЖЖ",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "aa",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "EK",
+          "EF",
+          "5988"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "11",
+          "AL",
+          "7770"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "SUDURPASHCHIM",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHIKOSHI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "Ж",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "koshi",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "55",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AAA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "ЖЖ",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "aa",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "3D",
+          "UG",
+          "6958"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_front",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "14",
+          "GK",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "SUDURPASHCHIM",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHIKOSHI",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "Ж",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "koshi",
+          "G",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "55",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AAA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "ЖЖ",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "aa",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "G",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "5E",
+          "JC",
+          "3717"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.heavy_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "MT",
+          "1317"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "SUDURPASHCHIM",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHIKOSHI",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "Ж",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "koshi",
+          "B",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "55",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AAA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "ЖЖ",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "aa",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "B",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 10",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "AE",
+          "MA",
+          "0747"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "random 26",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.car_rear",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "II",
+          "RP",
+          "5050"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHI",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "SUDURPASHCHIM",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "KOSHIKOSHI",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "Ж",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "koshi",
+          "C",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "55",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "A",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "AAA",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "ЖЖ",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "aa",
+          "AB",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is a letter A to K, with a digit for a sub-class."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "ZZ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "A",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AAA",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "ЖЖ",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "aa",
+          "0123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "BAGMATI",
+          "C",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "random 23",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "35",
+          "DG",
+          "922"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.three_wheeler",
+        "validator": {
+          "class": "NepalValidator"
+        },
+        "values": [
+          "",
+          "15",
+          "WM",
+          "7717"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a province."
+      }
+    }
+  ]
+}

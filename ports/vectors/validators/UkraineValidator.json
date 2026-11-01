@@ -1,0 +1,7363 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "3047",
+          "XI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AC",
+          "",
+          "HI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "BC",
+          "",
+          "HE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 27",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "2176",
+          "CH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          "OA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "3913",
+          "KX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 45",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "MX",
+          "",
+          "XE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 65",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.private_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KO",
+          "",
+          "BC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "3844",
+          "HT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 54",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "OO",
+          "",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 59",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1802",
+          "IT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "KK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KT",
+          "",
+          "IK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "8855",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 12",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "6003",
+          "PC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 56",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.transport_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "IP",
+          "",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ПЕТРО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "۵۵۵۵۵"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.personalised",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "aaaaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "8145BC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "41BIB8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "CP5140"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "AAAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "T1",
+          "aaaaaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "I0OC5T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.temporary_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "A3698C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "0",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "000",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "9045"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "0",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "000",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1564"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "16",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "6804"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "random 12",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.police_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "0542"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "0",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "000",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "04",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "00",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "99",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "0",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "000",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "ЖЖ",
+          "E6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "04",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "44",
+          "IT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "36",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "random 63",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "71",
+          "",
+          "CB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 76",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "28",
+          "",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "0004"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1677"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.volunteers",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "3618"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "9",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "۵",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "a",
+          "036",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "000",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "999",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "00",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "0000",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "ЖЖЖ",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = 012",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "012",
+          "036"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group series = 012",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "D",
+          "036",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "J",
+          "",
+          "469"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is incomplete."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "Щ",
+          "",
+          "479"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is incomplete."
+      }
+    },
+    {
+      "name": "random 27",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "723",
+          "068"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 33",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.diplomatic",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "339",
+          "519"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "AA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "XX",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "A",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "AAA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖ",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "aa",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "KO",
+          "5629"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "7794"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "I",
+          "0382"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "PI",
+          "",
+          "9982"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "KA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "AA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "XX",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "A",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "AAA",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖ",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "aa",
+          "8608"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "KA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AM",
+          "",
+          "9761"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "ME",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          "9956"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 31",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.non_standard_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "CT",
+          "",
+          "1368"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mark is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1122",
+          "BO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "1798",
+          "PE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 14",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "IB",
+          "",
+          "IP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "KH",
+          "",
+          "MI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AA",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "XX",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "A",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AAA",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "aa",
+          "2015",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "0000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "9999",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "00000",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "ЖЖЖЖ",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "AK",
+          "2015",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "9961",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "9964",
+          "IB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 61",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "CT",
+          "",
+          "HI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 63",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.motorcycle_legacy",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "PC",
+          "",
+          "HA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "00",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "99",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "0",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "000",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "35",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "00",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "99",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "0",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "000",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "ЖЖ",
+          "A3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "02",
+          "35",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "55",
+          "0O"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "random 32",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "66",
+          "",
+          "H6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 40",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "",
+          "71",
+          "3E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "random 47",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ua.military_motorcycle",
+        "validator": {
+          "class": "UkraineValidator"
+        },
+        "values": [
+          "83",
+          "",
+          "4M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    }
+  ]
+}

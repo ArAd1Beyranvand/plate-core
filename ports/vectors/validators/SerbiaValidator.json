@@ -1,0 +1,5374 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group digits = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "OT",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group letters = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.private",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "1234",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "00000",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "99999",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "0000",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "000000",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "ЖЖЖЖЖ",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "TT",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "Ж",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "t",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "T",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "T",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "T",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "T",
+          "x"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "12345",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group digits = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "OT",
+          "T",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group letters = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.taxi",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "12345",
+          "O",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "OO",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "Ж",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "o",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "TT",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "Ж",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "t",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "O",
+          "T",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group b = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.oldtimer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "O",
+          "T",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "999",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "00",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ŽŽ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "group letters = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "123",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group digits = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "OT",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.trailer",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "99",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "0",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "ЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "12",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group a = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "OT",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "group b = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.agricultural",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "KG",
+          "12",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the series letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "00",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "99",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "0",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "000",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "ЖЖ",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group a = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "OT",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group b = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.moped",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "BG",
+          "12",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AAA",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "aa",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The area code is two letters, e.g. BG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "00",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "99",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "0",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "000",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "ЖЖ",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "OT",
+          "54",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group a = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "OT",
+          "321"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group b = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.motorcycle",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "NS",
+          "54",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "ПП",
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "Ж",
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "п",
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "000",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "999",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "00",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "0000",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "ЖЖЖ",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group a = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "OT",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group b = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.police",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "П",
+          "123",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "Z",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "a",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group digits = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "OT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "U",
+          "4574"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.military",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "O",
+          "8016"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "A",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "Ž",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "AA",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "Ж",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "a",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "Ž",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "AA",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "Ж",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "a",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "00",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "99",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "0",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "000",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "ЖЖ",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "P",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "AA",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "Ж",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "a",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "000",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "999",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "00",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "0000",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "ЖЖЖ",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "0",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "9",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "00",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "Ж",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 6 cleared",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 6 first",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 last",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 too long",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "slot 6 wrong script",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "6",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group region = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "O",
+          "T",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = 20",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "2",
+          "0",
+          "12",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "OT",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group code = 20",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "20",
+          "A",
+          "345",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group serial = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "OT",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group serial = 20",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "20",
+          "6",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group tail = OT",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "O",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Check the number of digits."
+      }
+    },
+    {
+      "name": "group tail = 20",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "12",
+          "A",
+          "345",
+          "2",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 192",
+      "input": {
+        "package": "serbia_plate",
+        "spec": "rs.diplomatic",
+        "validator": {
+          "class": "SerbiaValidator"
+        },
+        "values": [
+          "T",
+          "K",
+          "20",
+          "P",
+          "043",
+          "5",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

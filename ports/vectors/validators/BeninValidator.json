@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "benin_plate",
+        "spec": "bj.standard",
+        "validator": {
+          "class": "BeninValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    }
+  ]
+}

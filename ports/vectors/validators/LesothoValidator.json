@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "AA",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "ZZ",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "AAA",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "aa",
+          "1705"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "lesotho_plate",
+        "spec": "ls.private",
+        "validator": {
+          "class": "LesothoValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

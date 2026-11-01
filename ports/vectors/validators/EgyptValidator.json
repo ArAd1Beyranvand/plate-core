@@ -1,0 +1,2954 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "9999",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "00000",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.car",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "999",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "ABG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.cairo",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "letters",
+                3
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 2 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 2 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 2 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 2 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.giza",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "letters",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 2 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "999",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.diplomatic",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                3
+              ],
+              [
+                "code",
+                2
+              ]
+            ]
+          }
+        },
+        "values": [
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "0000",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "9999",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "00000",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "56",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "99",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "ЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 1 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 1 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 1 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.police",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "digits",
+                4
+              ],
+              [
+                "code",
+                2
+              ],
+              [
+                "letters",
+                1
+              ]
+            ]
+          }
+        },
+        "values": [
+          "1234",
+          "56",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 1 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "Y",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "a",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters are 3 of the 17 plate letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "egypt_plate",
+        "spec": "eg.motorcycle",
+        "validator": {
+          "class": "EgyptValidator",
+          "args": {
+            "lengths": [
+              [
+                "letters",
+                3
+              ],
+              [
+                "digits",
+                4
+              ]
+            ]
+          }
+        },
+        "values": [
+          "ABG",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The digits is 4 digits."
+      }
+    }
+  ]
+}

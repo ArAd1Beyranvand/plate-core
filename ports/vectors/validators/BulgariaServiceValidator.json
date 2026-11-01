@@ -1,0 +1,1828 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BB",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "PP",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "B",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BBB",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "bb",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "000",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "999",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "00",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "0000",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "ЖЖЖ",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group code = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "EA",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "EM",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group code = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "XX",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "XH",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "C",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CC",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CT",
+          "509",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group first = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "EA",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "EM",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "BA",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "CP",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "XX",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "XH",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "C",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "CC",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "CT",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.military",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "509",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BB",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "PP",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "B",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BBB",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "bb",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "00",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "99",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "0",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "000",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "ЖЖ",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group code = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "EA",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "EM",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "BA",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group code = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "XX",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "XH",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "C",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CC",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group code = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CT",
+          "59",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is BA (army) or CP (civil protection)."
+      }
+    },
+    {
+      "name": "group first = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "EA",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "EM",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "BA",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "CP",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "XX",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "XH",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "C",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "CC",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group first = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "CT",
+          "096"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = EA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "EA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = EM",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "EM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = BA",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CP",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "CP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = XX",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "XX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = XH",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "XH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = C",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CC",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    },
+    {
+      "name": "group second = CT",
+      "input": {
+        "package": "bulgaria_plate",
+        "spec": "bg.civil_protection",
+        "validator": {
+          "class": "BulgariaServiceValidator"
+        },
+        "values": [
+          "CP",
+          "59",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "BA takes 3 + 3 digits, CP 2 + 3."
+      }
+    }
+  ]
+}

@@ -1,0 +1,4158 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "00000",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "99999",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "0000",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "000000",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "000",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "999",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "00",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "0000",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "ЖЖЖ",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "1",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "2",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "3",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "4",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "5",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "6",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "7",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "8",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "9",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "01",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "02",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "03",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "04",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "05",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "06",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "07",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "08",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "09",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "10",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "11",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "12",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "13",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "14",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "15",
+          "116",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group type = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "1",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "2",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "3",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "4",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "5",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "6",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "7",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "8",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "9",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "01",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "02",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "03",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "04",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "05",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "06",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "07",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "08",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "09",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "10",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "11",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "12",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "13",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "14",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "15",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group wilaya = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "03"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "04"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "06"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "07"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "08"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "10"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "11"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "14"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "47475",
+          "116",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "44247",
+          "010",
+          "04"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.singleLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "46132",
+          "059",
+          "16"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "00000",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "99999",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "0000",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "000000",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "000",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "999",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "00",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "0000",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "ЖЖЖ",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "1",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "2",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "3",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "4",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "5",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "6",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "7",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "8",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "9",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "01",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "02",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "03",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "04",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "05",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "06",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "07",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "08",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "09",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "10",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "11",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "12",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "13",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "14",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group serial = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "15",
+          "907",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "group type = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "1",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "2",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "3",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "4",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "5",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "6",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "7",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "8",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "9",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "01",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "02",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "03",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "04",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "05",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "06",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "07",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "08",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "09",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "10",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "11",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "12",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "13",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "14",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group type = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "15",
+          "58"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The middle group is a class digit and two year digits."
+      }
+    },
+    {
+      "name": "group wilaya = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The wilaya code is 01 to 69."
+      }
+    },
+    {
+      "name": "group wilaya = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "03"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "04"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "06"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "07"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "08"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "10"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "11"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "14"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group wilaya = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "61532",
+          "907",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "92144",
+          "015",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.twoLine",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "39790",
+          "053",
+          "68"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle class is 1 to 9."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "061616472"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "000000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "999999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "00000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "0000000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 6",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 8",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 01",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 02",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 03",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "03"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 04",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "04"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 05",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 06",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "06"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 07",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "07"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 08",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "08"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 09",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "09"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 10",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "10"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 11",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "11"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 12",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 13",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 14",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "14"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 15",
+      "input": {
+        "package": "algeria_plate",
+        "spec": "dz.army",
+        "validator": {
+          "class": "AlgeriaValidator"
+        },
+        "values": [
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

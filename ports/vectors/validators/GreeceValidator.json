@@ -1,0 +1,1426 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AAA",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "XXX",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AA",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AAAA",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "aaa",
+          "6890"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Private numbers run from 1000 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ZZM",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NZB",
+          "0303"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Private numbers run from 1000 to 9999."
+      }
+    },
+    {
+      "name": "random 38",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.private",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "TIN",
+          "0024"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Private numbers run from 1000 to 9999."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "A",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AA",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "Ж",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "a",
+          "27527"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.trailer",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "E",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AAA",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "XXX",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AA",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AAAA",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "aaa",
+          "2613"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.government",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "OYT",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AA",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "XX",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "A",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AAA",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "aa",
+          "39604"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.police",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "NT",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "A",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "AA",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "Ж",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is letters from Α Β Ε Ζ Η Ι Κ Μ Ν Ο Ρ Τ Υ Χ."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "a",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "greece_plate",
+        "spec": "gr.afg",
+        "validator": {
+          "class": "GreeceValidator"
+        },
+        "values": [
+          "X",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has the wrong digit count."
+      }
+    }
+  ]
+}

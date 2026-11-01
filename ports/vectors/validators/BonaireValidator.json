@@ -1,0 +1,616 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "AA",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "ZZ",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "A",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "AAA",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "aa",
+          "5169"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "V",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.bonaire",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "SI",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "AA",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "ZZ",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "A",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "AAA",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "aa",
+          "630"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "MF",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.blue",
+        "validator": {
+          "class": "BonaireValidator"
+        },
+        "values": [
+          "DR",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three to five digits."
+      }
+    }
+  ]
+}

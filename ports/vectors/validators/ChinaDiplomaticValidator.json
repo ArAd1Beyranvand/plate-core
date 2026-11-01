@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "132",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "领",
+          "132",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使使",
+          "132",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "132",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "000",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "999",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "00",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "0000",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "ЖЖЖ",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is a three-digit mission code and a three-digit serial."
+      }
+    },
+    {
+      "name": "group mission = 157",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "157",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group serial = 157",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "使",
+          "132",
+          "157"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 89",
+      "input": {
+        "package": "china_plate",
+        "spec": "cn.diplomatic",
+        "validator": {
+          "class": "ChinaDiplomaticValidator"
+        },
+        "values": [
+          "领",
+          "157",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

@@ -1,0 +1,2142 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "0",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "9",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "00",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "Ж",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "Z",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "a",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group class = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "3",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "4",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "5",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "7",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "1",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "2",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "3",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "4",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "5",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "7",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "9",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "4",
+          "",
+          "9443"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "random 42",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "818"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "0",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "9",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "00",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "Ж",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group class = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "3",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "4",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "5",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "7",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "1",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "2",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "3",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "4",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "5",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "7",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "9",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "CD",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "AB",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.private_long.phnom_penh",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "3",
+          "",
+          "9276"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "0",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "9",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "00",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "Ж",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is not one of the article's vehicle classes."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group class = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "2",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "3",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "4",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "5",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "7",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 1",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 2",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 7",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = 9",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = CD",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "group serial = ONG",
+      "input": {
+        "package": "cambodia_plate",
+        "spec": "kh.police",
+        "validator": {
+          "class": "CambodiaValidator"
+        },
+        "values": [
+          "1",
+          "ONG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

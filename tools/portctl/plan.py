@@ -3,9 +3,44 @@ tasks at run time (TODO audits, country units) once the facts they need exist.""
 import json, re
 from pathlib import Path
 
-from config import ROOT, PORTS, LANGS
+from config import ROOT, PORTS, LANGS, DONE_THROUGH
 
 NAMES = {'ts': 'TypeScript', 'kt': 'Kotlin', 'py': 'Python'}
+WEB_LANG = {'ts': 'typescript', 'kt': 'kotlin', 'py': 'python'}   # registry keys and deploy folders (W2)
+# Injected into every Claude prompt of the language ({{lang_rules}} in _common.md).
+LANG_RULES = {
+    'ts': 'TypeScript runs in the browser: core and render framework-free, UI = SVG + DOM inputs '
+          '(`src/ui`). No `node:` imports under `src/`.',
+    'kt': 'Kotlin runs in the browser (W5): Kotlin Multiplatform with `jvm` for tests and BOTH `js(IR)` and '
+          '`wasmJs`; core and render in `commonMain` (no `java.*`), UI = SVG + DOM inputs over the display '
+          'list in a `webMain` set shared by js and wasmJs, like TS. No Compose. The page loads one build only: '
+          'Wasm when WasmGC validates, JS otherwise.',
+    'py': 'Python runs in the browser under Pyodide (CPython 3.13), and on the host for tests (3.10, so '
+          'keep 3.10 syntax). `plates/` is pure Python, stdlib only: no PySide6/Qt, threads, '
+          'subprocess, sockets or file I/O; data arrives as text. The UI is `plates.ui` (svg.py paints the '
+          'display list, plate_canvas.py is headless, dom.py binds to the page through injected '
+          '`document`/proxy fakes so it is host-testable); timers and animation go through that seam '
+          '(setTimeout/requestAnimationFrame). Dart `TODO(py)` notes that name Qt keep their behaviour, '
+          'on the DOM. `web_check` in portctl.json (Pyodide under node) must stay green.',
+}
+
+# Idioms small local models get wrong; injected into the unit prompt ({{idioms}}).
+UNIT_IDIOMS = {
+    'kt': ['Kotlin has no `late`/`static`: a Dart `static const` becomes a `const val` in a `companion object` '
+           '(strings and numbers only); a `static final RegExp` becomes `val` in the companion: `Regex("...")`.',
+           'Write plain Kotlin only: never invent helpers such as `WHEN_CALL`, `hasMatch`, `maxDigits(...)`. '
+           'Regex: `re.matches(s)` (whole string) or `re.containsMatchIn(s)`; Dart `hasMatch` = `containsMatchIn`.',
+           'Constructor fields stay constructor properties (`class X(val maxDigits: Int = 4)`); use them as '
+           '`maxDigits`/`this.maxDigits`, never call them.',
+           'Strings: Dart `$x`/`${x}` interpolation is identical in Kotlin. `a?.b` needs `?.` on nullable receivers.',
+           'Reuse the target stub shown below: keep its package, imports and class header, replace only the '
+           'TODO bodies. Extend the base class the Dart extends (`GatedPlateValidator`: override `gateGroup` and '
+           '`judge`, not `validate`). Use `PlateValidation.valid` (property, no parens) and '
+           '`PlateValidation.invalid(reason)`; helpers `isDigits`, `isDigitsOfLength` already exist in '
+           '`plates.core.validators`.'],
+    'ts': [],
+    'py': [],
+}
 
 # S2 is split along the Dart source so each Claude task has one testable slice.
 CORE_PARTS = [
@@ -31,15 +66,23 @@ UI_PARTS = [
      ['widgets/plate_canvas.dart', 'widgets/plate_view.dart', 'widgets/plate_slot_item.dart',
       'widgets/plate_selector.dart']),
     ('keypad', 'plate_keypad and the character picker',
-     ['../../plate_keypad/lib/src/plate_keypad.dart', '../../plate_keypad/lib/src/plate_character_picker.dart']),
+     ['plate_keypad/lib/src/plate_keypad.dart', 'plate_keypad/lib/src/plate_character_picker.dart']),
 ]
 
 
 def phases():
-    out = [('S1', 'export + vectors')]
-    for step, title in (('S2', 'model'), ('S3', 'render + ui + keypad'), ('S4', 'countries'), ('S5', 'holder')):
+    out = [('S1', 'export + vectors'), ('A0', 'web architecture: analysis + plan (your review)'),
+           ('A1', 'retrofit existing ports to WEB_ARCH.md')]
+    for step, title in (('S2', 'model'), ('S3', 'render + ui + keypad'), ('S4', 'countries')):
         out += [(f'{step}.{l}', f'{title} · {NAMES[l]}') for l in LANGS]
-    return out
+    out.append(('W1', 'registry + embed protocol'))
+    out += [(f'S5.{l}', f'embed shell + per-country builds · {NAMES[l]}') for l in LANGS]
+    return out + [('W2', 'deferred Dart packages + gallery iframe host'), ('W3', 'Flutter per-country builds'),
+                  ('W4', 'deploy + performance budget'), ('W5', 'SEO: skeleton, loading pages, sitemap')]
+
+
+# Tasks of an earlier plan, dropped at seed time unless already done.
+RETIRED = [f's5.{l}.holder' for l in LANGS]
 
 
 def claude(tid, phase, title, template, deps=(), lang='', verify=None, priority=0, **vars):
@@ -87,17 +130,53 @@ def static_tasks():
                      deps=[f's4.{l}.codegen'], lang=l),
               python(f's4.{l}.units', p, 'expand D4-code units', 'expand_units',
                      deps=[f's4.{l}.generate'], lang=l)]
+    t += [claude('a0.arch', 'A0', 'analyse gallery + ports, propose WEB_ARCH.md (no code)', 'a0_arch',
+                 verify={'fn': 'check_arch'}),
+          python('a1.expand', 'A1', 'one retrofit task per port that already exists', 'expand_retrofit'),
+          claude('w1.protocol', 'W1', 'registry generator, schema, protocol + vectors, TS reference client',
+                 'w1_protocol', verify={'cmd': 'python3 ports/web/registry.py --self-test'})]
     for l in LANGS:
-        t.append(claude(f's5.{l}.holder', f'S5.{l}', 'holder app (ROADMAP "Holder spec")', 's5_holder',
-                        lang=l, verify='all'))
+        p = f'S5.{l}'
+        t += [claude(f's5.{l}.embed', p, 'one-country embed shell speaking the protocol', 's5_embed',
+                     lang=l, verify='all'),
+              claude(f's5.{l}.build', p, 'web_build / web_build_all into deploy/', 's5_build',
+                     deps=[f's5.{l}.embed'], lang=l, verify={'fn': 'web_smoke'})]
+    flutter = 'cd plate_number_holder && flutter analyze --no-pub && flutter test --no-pub'
+    t += [claude('w2.deferred', 'W2', 'gallery loads each *_plate package only when needed (deferred)',
+                 'w2_deferred', verify={'cmd': flutter}),
+          claude('w2.host', 'W2', 'iframe host + registry-driven language tabs in the gallery', 'w2_host',
+                 deps=['w2.deferred'], verify={'cmd': flutter}),
+          claude('w3.flutter', 'W3', 'every *_plate as its own Flutter web build', 'w3_flutter',
+                 verify={'cmd': f'python3 ports/web/registry.py --check && {flutter}'}),
+          claude('w4.deploy', 'W4', 'deploy.py + perf_check.py', 'w4_deploy',
+                 verify={'cmd': 'python3 tools/web/perf_check.py'}),
+          claude('w5.seo', 'W5', 'SEO text in the HTML skeleton and loading pages, static route pages, sitemap',
+                 'w5_seo', deps=['w4.deploy'], verify={'cmd': 'python3 tools/web/seo_check.py'})]
     return t
 
 
 def seed(store):
     for i, (pid, title) in enumerate(phases()):
-        store.x('insert or ignore into phases(id, ord, title) values(?,?,?)', pid, i, title)
+        store.x('insert into phases(id, ord, title) values(?,?,?) '
+                'on conflict(id) do update set ord=excluded.ord, title=excluded.title', pid, i, title)
+    # Static tasks not yet done take the current payload (prompt vars, verify), so plan fixes reach them.
+    for t in static_tasks():
+        store.x("update tasks set payload=?, title=?, deps=? where id=? and status not in ('done', 'skipped')",
+                json.dumps(t['payload']), t['title'], json.dumps(t['deps']), t['id'])
+    for tid in RETIRED:
+        store.x("delete from tasks where id=? and status not in ('done', 'skipped')", tid)
     for t in static_tasks():
         store.add_task(t)
+    baseline(store)
+
+
+def baseline(store):
+    """Marks the claude tasks (and a1 retrofits) a language finished outside portctl as done."""
+    tasks = static_tasks()
+    for lang, last in DONE_THROUGH.items():
+        ids = [t['id'] for t in tasks if t['lang'] == lang and t['kind'] == 'claude' and t['phase'][:2] in ('S2', 'S3', 'S4')]
+        for tid in ids[:ids.index(last) + 1] + ([f'a1.{lang}.retrofit'] if lang != 'kt' else []):
+            store.x("update tasks set status='done', route='baseline' where id=? and status in ('pending', 'failed')", tid)
 
 
 # ---- facts the expanders read -------------------------------------------------------------

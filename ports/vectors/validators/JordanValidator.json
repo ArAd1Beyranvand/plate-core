@@ -1,0 +1,3388 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "21",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "0929"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.private",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "28005"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "34567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "50",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 23",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "35972"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 54",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.transport",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "95986"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "56789"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "70",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 23",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "42880"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 41",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.rental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "35189"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12233"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "71",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 10",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "75173"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 32",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.trailer",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "14754"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "87654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "69",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "92393"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.temporary",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "54636"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "46",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "3545"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.motorcycle",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "4000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "AA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ZZ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "A",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "AAA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "aa",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "PM",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 34",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "68847"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 80",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.governmental",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "10408"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "AA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ZZ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "A",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "AAA",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "aa",
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "58835"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.diplomatic",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "04424"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "14382"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 59",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.police",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "63557"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "95",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "68966"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.ambulance",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "96548"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "00",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "99",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "0",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "000",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "That code is not issued on this plate."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "96",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is digits only."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "86"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    },
+    {
+      "name": "random 31",
+      "input": {
+        "package": "jordan_plate",
+        "spec": "jo.gendarmerie",
+        "validator": {
+          "class": "JordanValidator"
+        },
+        "values": [
+          "",
+          "59261"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with a code."
+      }
+    }
+  ]
+}

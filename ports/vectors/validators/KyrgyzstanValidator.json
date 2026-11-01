@@ -1,0 +1,3025 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "999",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "0000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "ЖЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "HC",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "CMD",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.private",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "000",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "999",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "00",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "0000",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "ЖЖЖ",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "HC",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "CMD",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "000",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "999",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "00",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "0000",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "ЖЖЖ",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "923",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "HC",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "CMD",
+          "ARX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.eco",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "923",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "999",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "0000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "ЖЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "HC",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "CMD",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "000",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "999",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "00",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "0000",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "ЖЖЖ",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "012",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "HC",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "CMD",
+          "PT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.square_government",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "02",
+          "012",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "00",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "99",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "0",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "000",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "000",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "999",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "00",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "0000",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "ЖЖЖ",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in two or three letters."
+      }
+    },
+    {
+      "name": "group region = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "HC",
+          "123",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 11."
+      }
+    },
+    {
+      "name": "group number = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "HC",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CMD",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "CMD",
+          "DQ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group letters = HC",
+      "input": {
+        "package": "kyrgyzstan_plate",
+        "spec": "kg.motorcycle",
+        "validator": {
+          "class": "KyrgyzstanValidator"
+        },
+        "values": [
+          "01",
+          "123",
+          "HC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

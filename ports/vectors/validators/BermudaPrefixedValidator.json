@@ -1,0 +1,310 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "AAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "ZZZ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "AA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "AAAA",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "aaa",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "CL",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bm.prefixed",
+        "validator": {
+          "class": "BermudaPrefixedValidator"
+        },
+        "values": [
+          "JHI",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    }
+  ]
+}

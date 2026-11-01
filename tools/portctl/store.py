@@ -109,7 +109,7 @@ class Store:
         for r in rows:
             s = out.setdefault((r['family'], r['lang']), {'qwen_ok': 0, 'qwen_tried': 0, 'claude': 0, 'left': 0})
             if r['status'] in ('pending', 'running', 'awaiting'): s['left'] += 1
-            elif r['route'] == 'qwen':
+            elif r['route'] == 'qwen' and r['status'] != 'failed':   # crashes say nothing about qwen's quality
                 s['qwen_tried'] += 1; s['qwen_ok'] += r['status'] == 'done'
             elif r['route'] == 'escalated':
                 s['qwen_tried'] += 1

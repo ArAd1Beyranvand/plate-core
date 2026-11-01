@@ -1,0 +1,884 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0000",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "9999",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "000",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "00000",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "AA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "ZZ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "A",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "AAA",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "ЖЖ",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "aa",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group expiry = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "G",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "group expiry = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "DF",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "group expiry = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "T",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "group expiry = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "TP",
+          "DF",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The expiry is a month 01–12 and a year."
+      }
+    },
+    {
+      "name": "group prefix = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "G",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "T",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "group prefix = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "TP",
+          "1234",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "East Timor plates carry the code DF."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "G",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "DF",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "T",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "TP",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group suffix = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "DF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.indonesian",
+        "validator": {
+          "class": "TimorLesteIndonesianValidator"
+        },
+        "values": [
+          "0925",
+          "DF",
+          "1234",
+          "TP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

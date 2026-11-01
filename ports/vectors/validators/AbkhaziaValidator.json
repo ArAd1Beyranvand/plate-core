@@ -1,0 +1,897 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "А",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Х",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "АА",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Ж",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "а",
+          "315",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "000",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "999",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "00",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "0000",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "ЖЖЖ",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "АА"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "ХХ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "А"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "ААА"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "аа"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "CD",
+          "КО"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "group series = CD",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.private",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "Б",
+          "315",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "000",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "999",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "00",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "0000",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "CD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "T",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "CDCD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "Ж",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "cd",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group code = CD",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "CD",
+          "TD",
+          "072"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "russia_plate",
+        "spec": "ab.diplomatic",
+        "validator": {
+          "class": "AbkhaziaValidator"
+        },
+        "values": [
+          "526",
+          "TD",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

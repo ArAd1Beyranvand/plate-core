@@ -1,0 +1,940 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "999",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "0000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "123",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "000",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "999",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "00",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "0000",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "DEF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.private.two_row",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "456",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "000",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The organisation code is 200 to 399."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "999",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The organisation code is 200 to 399."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "00",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The organisation code is 200 to 399."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "0000",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The organisation code is 200 to 399."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The organisation code is 200 to 399."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "250",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The car number is three digits."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "104"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "random 207",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "random 307",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "82"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "random 394",
+      "input": {
+        "package": "tanzania_plate",
+        "spec": "tz.organisation",
+        "validator": {
+          "class": "TanzaniaValidator"
+        },
+        "values": [
+          "",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,3124 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "ZZ",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "aa",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "99",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "0",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖ",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "99",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "ЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "group prefix = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MB",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "RB",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "RT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "R",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "TR",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FD",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "KM",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "PU",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "SP",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MM",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "T",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "79",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group code = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MB",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "RB",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "RT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "R",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CD",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "TR",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FA",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FD",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "KM",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "PU",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SP",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MM",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "T",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "79",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MB",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "RB",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "RT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "R",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "CD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "TR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FA",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "KM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "PU",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "SP",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "T",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "79",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 27",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MS",
+          "79",
+          "18",
+          "I"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 39",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomatic",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "TO",
+          "79",
+          "33",
+          "J"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "AA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "ZZ",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "AAA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "aa",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "99",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "0",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖ",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "99",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "ЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The rank is one letter."
+      }
+    },
+    {
+      "name": "group prefix = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MB",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "RB",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "RT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "R",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "TR",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FA",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FD",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "FT",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "KM",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "PU",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "SP",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "MM",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "T",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group prefix = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "79",
+          "12",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is CD or TR."
+      }
+    },
+    {
+      "name": "group code = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MB",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "RB",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "RT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "R",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CD",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "TR",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FA",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FD",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FT",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "KM",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "PU",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SP",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MM",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "T",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is two digits."
+      }
+    },
+    {
+      "name": "group code = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "79",
+          "03",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MB",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "RB",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "RT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "R",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "CD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "TR",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FA",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FD",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "FT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "KM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "PU",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "SP",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "MM",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "T",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group number = 79",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "79",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "12",
+          "03",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 29",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "DL",
+          "79",
+          "23",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 278",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.diplomaticTwoLine",
+        "validator": {
+          "class": "AlbaniaDiplomaticValidator"
+        },
+        "values": [
+          "TS",
+          "79",
+          "64",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

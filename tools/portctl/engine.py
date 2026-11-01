@@ -12,7 +12,7 @@ from context import render, cited, compact_error, tokens
 DONE = ('done', 'skipped')
 OPEN = ('pending', 'running', 'awaiting')
 LANE_OF = {'python': 'python', 'claude': 'claude', 'fixlist': 'claude', 'repair': 'claude', 'question': 'qwen'}
-LANE_SIZE = {'python': 3, 'qwen': 1, 'claude': 1}
+LANE_SIZE = {'python': 3, 'qwen': C.OLLAMA_PARALLEL, 'claude': 1}
 
 
 class Engine:
@@ -21,6 +21,7 @@ class Engine:
         self.claude = X.Claude()
         self.running = False
         self.step_once = False
+        self.oracle_lock = threading.Lock()   # oracles compile the whole project: one candidate file at a time
         self.inflight = {}           # task id -> lane
         self.stops = set()           # task ids asked to stop
         self.last_route = {}         # task id -> reason, so a waiting unit logs once
@@ -41,11 +42,17 @@ class Engine:
 
     def set_auto_approve(self, on): self.store.put('auto_approve', bool(on))
 
-    def start(self): self.running, self.step_once = True, False; self.say(None, 'engine', '▶ started')
+    def start(self, pid=None):
+        self.focus = pid
+        self.running, self.step_once = True, False
+        self.say(None, 'engine', f'▶ started{" at " + pid if pid else ""}')
 
     def pause(self): self.running = False; self.say(None, 'engine', '⏸ paused (running tasks finish)')
 
-    def step(self): self.running, self.step_once = True, True; self.say(None, 'engine', '⏭ step')
+    def step(self, pid=None):
+        self.focus = pid
+        self.running, self.step_once = True, True
+        self.say(None, 'engine', '⏭ step')
 
     def approve(self, pid):
         self.store.x("update phases set gate='approved' where id=?", pid)
@@ -77,6 +84,18 @@ class Engine:
         self.store.set_task(tid, status='pending', result={**t['result'], 'stage': 'returned'})
         self.say(tid, 'claude', f'✓ marked done in Claude Code → verifying')
 
+    def run_now(self, tid):
+        """Start one task right away, ignoring phase gates and deps (and the Start/Pause state)."""
+        t = self.store.task(tid)
+        if not t or tid in self.inflight or t['kind'] not in LANE_OF: return
+        if t['status'] in ('failed', 'escalated', 'skipped'): self.store.set_task(tid, status='pending')
+        lane = LANE_OF[t['kind']]
+        if t['kind'] == 'unit': lane = self.route(t) or 'python'
+        if lane == 'batch': lane = 'claude'
+        if lane == 'claude' and C.CLAUDE_MODE == 'manual': lane = 'python'
+        self.say(tid, 'engine', '▶ started by hand')
+        self.dispatch(self.store.task(tid), lane)
+
     def kill(self, tid):
         lane = self.inflight.get(tid)
         self.stops.add(tid)
@@ -93,12 +112,33 @@ class Engine:
                 self.running = False
             time.sleep(0.5)
 
-    def current_phase(self):
-        for ph in self.store.q('select * from phases order by ord'):
-            if ph['gate'] == 'approved': continue
+    focus = None
+
+    def active_phases(self):
+        """Open phases of the first unfinished group. S2/S3/S4/S5 phases of the three languages are one
+        group, so a language waiting on a handoff or gate does not hold up the others."""
+        phases = self.store.q('select * from phases order by ord')
+        group = lambda p: p['id'].split('.')[0]
+        if self.focus:
+            ph = next((p for p in phases if p['id'] == self.focus), None)
+            ts = self.store.tasks('phase=?', self.focus)
+            if ph and ts and not all(t['status'] in DONE for t in ts):
+                if ph['gate'] != 'open':
+                    self.store.x("update phases set gate='open' where id=?", ph['id'])
+                return [ph['id']]
+            self.focus = None
+        active, grp = [], None
+        for ph in phases:
+            if grp and group(ph) != grp: break
+            if ph['gate'] == 'approved':
+                # Tasks added or reset after approval (e.g. re-queued audit questions) reopen the phase.
+                if not any(t['status'] == 'pending' for t in self.store.tasks('phase=?', ph['id'])): continue
+                self.say(None, 'gate', f'↺ {ph["id"]} has pending tasks again · reopened')
+                self.store.x("update phases set gate='open' where id=?", ph['id'])
             if ph['gate'] == 'closed':
                 self.store.x("update phases set gate='open' where id=?", ph['id'])
                 self.say(None, 'gate', f'▶ {ph["id"]} open · {ph["title"]}')
+            grp = group(ph)
             ts = self.store.tasks('phase=?', ph['id'])
             if ts and all(t['status'] in DONE for t in ts) and not any(t['id'] in self.inflight for t in ts):
                 if self.auto_approve:
@@ -106,15 +146,17 @@ class Engine:
                 if ph['gate'] != 'waiting':
                     self.store.x("update phases set gate='waiting' where id=?", ph['id'])
                     self.say(None, 'gate', f'⏳ {ph["id"]} complete — waiting for approval')
-                return None
-            return ph['id']
-        if self.running:
+                continue
+            active.append(ph['id'])
+        if not active and not grp and self.running:
             self.say(None, 'engine', '✓ every phase approved'); self.running = False
-        return None
+        return active
 
     def tick(self):
-        pid = self.current_phase()
-        if not pid: return
+        for pid in self.active_phases():
+            if self.tick_phase(pid): return
+
+    def tick_phase(self, pid):
         self.batch_escalations(pid)
         tasks = self.store.tasks('phase=? and status=?', pid, 'pending')
         status = {r['id']: r['status'] for r in self.store.q('select id, status from tasks')}
@@ -132,7 +174,7 @@ class Engine:
             self.dispatch(t, lane)
             if self.step_once:
                 self.running = self.step_once = False
-                return
+                return True
 
     def dispatch(self, t, lane):
         with self.lock: self.inflight[t['id']] = lane
@@ -189,17 +231,17 @@ class Engine:
         if ex == 0: return decide(None, f'waiting for the first {fam}·{lang} exemplar')
         prompt = self.unit_prompt(t)
         out = min(C.QWEN_MAX_OUTPUT, int(tokens(self.dart_source(t['payload']['dart'])) * 1.3) + 60)
-        rin, rout = self.rates(C.QWEN_SMALL)
+        rin, rout = self.rates(C.LADDER[0])
         est = tokens(prompt) / rin + out / rout
         if tokens(prompt) + out > C.QWEN_CTX:
             return decide('batch', f'{tokens(prompt)}+{out} tokens exceed num_ctx {C.QWEN_CTX}')
         if est > C.QWEN_MAX_SECONDS:
-            return decide('batch', f'estimated {est:.0f}s on {C.QWEN_SMALL} > {C.QWEN_MAX_SECONDS}s')
+            return decide('batch', f'estimated {est:.0f}s on {C.LADDER[0]} > {C.QWEN_MAX_SECONDS}s')
         s = self.store.family_stats().get((fam, lang), {})
         if s.get('qwen_tried', 0) >= C.FAMILY_MIN_SAMPLES and s['qwen_ok'] / s['qwen_tried'] < C.FAMILY_MIN_SUCCESS:
             return decide('batch', f'qwen {s["qwen_ok"]}/{s["qwen_tried"]} in {fam}·{lang} '
                                    f'< {C.FAMILY_MIN_SUCCESS:.0%}')
-        return decide('qwen', f'~{tokens(prompt)} tokens, est {est:.0f}s on {C.QWEN_SMALL}')
+        return decide('qwen', f'~{tokens(prompt)} tokens, est {est:.0f}s on {C.LADDER[0]}')
 
     def batch_escalations(self, pid):
         units = self.store.tasks("phase=? and kind='unit'", pid)
@@ -240,24 +282,28 @@ class Engine:
         todo = sorted(set(re.findall(rf'TODO\({lang}\):\s*(.*)', (C.ROOT / rel).read_text('utf8'))))
         ex = self.exemplar(t)
         target, _ = X.unit_paths(lang, rel)
-        return render('unit', lang_name=plan.NAMES[lang], lang=lang, dart_path=rel, dart=src,
+        stub = target.read_text('utf8') if target.exists() else ''
+        return render('unit', lang_name=plan.NAMES[lang], lang=lang, dart_path=rel, dart=src, stub=stub,
+                      idioms='\n'.join('- ' + x for x in plan.UNIT_IDIOMS.get(lang, [])) or '- (none)',
                       todos='\n'.join('- ' + x for x in todo) or '- (none)',
                       roadmap=cited(todo, skip=('D4', 'D9')),
                       ex_dart=self.dart_source(ex['dart']) if ex else '',
                       ex_target=ex['target'] if ex else '',
                       ex_path=ex['dart'] if ex else '', target_path=target.relative_to(C.PORTS / lang),
                       fence=C.EXT[lang] if lang != 'kt' else 'kotlin',
-                      retry=render('unit_retry', error=error, previous=previous) if error else '')
+                      retry=render('unit_retry', error=error, previous=previous, lang_name=plan.NAMES[lang]) if error else '')
 
     def claude_vars(self, t):
         lang = t['lang']
         v = dict(t['payload'].get('vars', {}))
         v.update(root=C.ROOT, ports=C.PORTS, lang=lang, lang_name=plan.NAMES.get(lang, ''),
-                 lang_dir=C.PORTS / lang if lang else '', task=t['id'], title=t['title'],
+                 lang_dir=C.PORTS / lang if lang else '', task=t['id'], lang_rules=plan.LANG_RULES.get(lang, ''), web_lang=plan.WEB_LANG.get(lang, ''), title=t['title'],
                  contract=json.dumps(plan.lang_contract(lang), indent=1) if lang else '')
         files = v.get('files')
         if files:
-            paths = [(C.ROOT / 'plate_core' / 'lib' / 'src' / f).resolve() for f in files]
+            # Bare names are under plate_core/lib/src; 'pkg/...' paths start at the repo root.
+            paths = [C.ROOT / f if (C.ROOT / f.split('/')[0]).is_dir() and '/' in f
+                     else C.ROOT / 'plate_core' / 'lib' / 'src' / f for f in files]
             v['files'] = '\n'.join(f'- {p.relative_to(C.ROOT)}' for p in paths)
             lines = []
             for p in paths:
@@ -281,7 +327,15 @@ class Engine:
         if template == 'unit_claude':
             return ('opus', 'medium') if t['route'] == 'exemplar' else ('haiku', 'medium')
         part = t['payload'].get('vars', {}).get('part')
-        return C.HINTS.get(f'{template}:{part}') or C.HINTS.get(template) or ('sonnet', 'medium')
+        return (C.HINTS.get(f'{template}:{part}') or C.HINTS.get(f'{template}:{t["lang"]}') or C.HINTS.get(template)
+                or ('sonnet', 'medium'))
+
+    def preview(self, t):
+        """(prompt, model, effort) of a phase task, whether or not the scheduler has reached it."""
+        r = t['result'] or {}
+        if r.get('prompt'): return r['prompt'], r.get('model', '?'), r.get('effort', '?')
+        model, effort = self.hint(t, t['payload']['template'])
+        return render(t['payload']['template'], **self.claude_vars(t)), model, effort
 
     def handoff(self, t, log, template, make_prompt, finish):
         """One Claude step. Manual: write the prompt for you and wait ('awaiting'); after you press
@@ -316,22 +370,37 @@ class Engine:
         if rnd > (C.MANUAL_ROUNDS if C.CLAUDE_MODE == 'manual' else 2):
             return 'failed', {'error': error}
         model = r.get('model') or self.hint(t, r.get('template', ''))[0]
-        fix = render('verify_fix', task=t['id'], title=t['title'], error=error, oracle=oracle,
+        where = f'`ports/{t["lang"]}`' if t['payload'].get('verify') in ('all', 'compile') else 'the repo root'
+        fix = render('verify_fix', task=t['id'], title=t['title'], error=error, oracle=oracle, where=where,
                      lang=t['lang'], lang_name=plan.NAMES.get(t['lang'], ''))
         log('engine', f'oracle red → fix prompt, round {rnd}')
         return 'pending', {**{k: v for k, v in r.items() if k in ('session', 'template', 'model')},
                            'round': rnd, 'next_prompt': fix, 'next_hint': (model, 'medium'), 'error': error}
 
     def finish_all(self, t, log):
-        """Done when the language's whole oracle is green (or when the task has no oracle)."""
+        """Done when the task's check is green: the language's whole oracle ('all'), a shell command
+        from the repo root ({'cmd'}), or a python check that raises on red ({'fn'}). No check: done."""
+        v = t['payload'].get('verify')
         if t['lang'] and not (C.PORTS / t['lang'] / 'portctl.json').exists():
             return self.again(t, log, f'ports/{t["lang"]}/portctl.json does not exist yet', '(the contract)')
-        if t['payload'].get('verify') != 'all': return 'done', {'summary': t['result'].get('summary', '')}
-        ok, out = X.oracle_all(t['lang'], log)
+        if not v: return 'done', {'summary': t['result'].get('summary', '')}
+        if v == 'compile':
+            what = X.contract(t['lang'])['compile']
+            ok, out = X.sh(what, C.PORTS / t['lang'], log, source='oracle')
+        elif v == 'all':
+            ok, out = X.oracle_all(t['lang'], log)
+            what = X.contract(t['lang'])['oracle_all']
+        elif 'cmd' in v:
+            ok, out = X.sh(v['cmd'], C.ROOT, log)
+            what = v['cmd']
+        else:
+            what = f'portctl check {v["fn"]}'
+            try: X.FUNCS[v['fn']](self, t, log); ok, out = True, 'ok'
+            except Exception as e: ok, out = False, str(e)
         self.store.add_attempt(task=t['id'], n=len(self.store.attempts(t['id'])) + 1, worker='oracle', model='',
                                prompt='', output='', oracle=out[-20000:], ok=int(ok))
         if ok: return 'done', {'summary': t['result'].get('summary', ''), 'rounds': t['result'].get('round', 0)}
-        return self.again(t, log, compact_error(out, 60), X.contract(t['lang'])['oracle_all'])
+        return self.again(t, log, compact_error(out, 60), what)
 
     def do_claude(self, t, log, lane):
         p = t['payload']
@@ -384,21 +453,28 @@ class Engine:
             if t['id'] in self.stops: break
             prompt = self.unit_prompt(t, error, previous)
             log('engine', f'rung {n + 1}/{len(C.LADDER)} · {model}')
-            out_tokens = min(C.QWEN_MAX_OUTPUT, int(tokens(self.dart_source(rel)) * 1.5) + 120)
+            out_tokens = min(C.QWEN_MAX_OUTPUT, int(tokens(self.dart_source(rel)) * 2) + 200)
             text, st = X.qwen(model, prompt, log, num_predict=out_tokens, stop=lambda: t['id'] in self.stops)
             self.note_rates(model, st)
-            code = X.code_block(text)
+            code = X.tidy(lang, X.code_block(text))
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(code, 'utf8')
-            ok, out = X.oracle_unit(lang, rel, log)
+            with self.oracle_lock:
+                target.write_text(code, 'utf8')
+                ok, out = X.oracle_unit(lang, rel, log)
+                if not ok and stub is not None: target.write_text(stub, 'utf8')
             self.store.add_attempt(task=t['id'], n=n + 1, worker='qwen', model=model, prompt=prompt, output=text,
                                    oracle=out[-20000:], ok=int(ok), seconds=st['seconds'], tok_in=st['tok_in'],
                                    tok_out=st['tok_out'])
             if ok: return 'done', {'model': model, 'rung': n + 1}
             error, previous = compact_error(out), code
+            if st.get('truncated'):
+                error = (f'Your output hit the {out_tokens}-token limit and was cut off mid-file. Write it shorter: '
+                         'no comments or docstrings the Dart lacks, no blank-line padding, keep tables one entry '
+                         'per line exactly as the Dart has them.\n' + error)
         # A broken unit would break every other unit's compile (Kotlin compiles the module), so the stub
         # goes back until Claude repairs it.
-        if stub is not None: target.write_text(stub, 'utf8')
+        with self.oracle_lock:
+            if stub is not None: target.write_text(stub, 'utf8')
         self.store.set_task(t['id'], route='escalated')
         return 'escalated', {'last_code': previous, 'error': error}
 
@@ -437,6 +513,7 @@ class Engine:
         blocks = []
         for uid in t['payload']['units']:
             u = self.store.task(uid)
+            if u['status'] == 'done': continue
             target, test = X.unit_paths(lang, u['payload']['dart'])
             r = u['result']
             b = (f'### {u["payload"]["dart"]}\n- target: {target.relative_to(C.ROOT)}\n'

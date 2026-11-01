@@ -1,0 +1,564 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "",
+          "GA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a city."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKADHAKA",
+          "GA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "Ж",
+          "GA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "dhaka",
+          "GA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a vehicle class letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "A",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "RA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "AA",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "Ж",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "a",
+          "11",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 11 to 99."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "00",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 11 to 99."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "99",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "0",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 11 to 99."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "000",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 11 to 99."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "ЖЖ",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 11 to 99."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 0001 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 0001 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 0001 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "GA",
+          "11",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 0001 to 9999."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "",
+          "GHA",
+          "96",
+          "3414"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a city."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "",
+          "PA",
+          "72",
+          "5723"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a city."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "",
+          "53",
+          "3732"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a vehicle class letter."
+      }
+    },
+    {
+      "name": "random 32",
+      "input": {
+        "package": "bangladesh_plate",
+        "spec": "bd.car",
+        "validator": {
+          "class": "BangladeshValidator"
+        },
+        "values": [
+          "DHAKA",
+          "",
+          "5",
+          "6059"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Choose a vehicle class letter."
+      }
+    }
+  ]
+}

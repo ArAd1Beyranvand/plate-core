@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter, such as P or C."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "Z",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter, such as P or C."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "Ж",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter, such as P or C."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "a",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter, such as P or C."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "999",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "0000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "ЖЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in three letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in three letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in three letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guatemala_plate",
+        "spec": "gt.private",
+        "validator": {
+          "class": "GuatemalaValidator"
+        },
+        "values": [
+          "P",
+          "123",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial ends in three letters."
+      }
+    }
+  ]
+}

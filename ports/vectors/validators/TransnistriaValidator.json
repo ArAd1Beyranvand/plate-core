@@ -1,0 +1,2582 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "A",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "Z",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "Ж",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "a",
+          "001",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "999",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "00",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "0000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "ЖЖЖ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "T",
+          "001",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.passenger",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "G",
+          "149",
+          "GJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AAA",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AAAA",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "aaa",
+          "043"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.neutral",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZJA",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "000",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "999",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "00",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "0000",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "BY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.army",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "381",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZZ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "A",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AAA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "aa",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.interior",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "MM",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.president",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "751"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZZ",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "A",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AAA",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "aa",
+          "001",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "999",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "0000",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖ",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.diplomatic",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "CD",
+          "001",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "A",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "Z",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "Ж",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "a",
+          "364"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "H",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.moped",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "M",
+          "887"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AA",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ZZ",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "A",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AAA",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "aa",
+          "C",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "A",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "Z",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "AA",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "Ж",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "a",
+          "001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "AC",
+          "C",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong length or letters."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "russia_plate",
+        "spec": "pmr.trailer",
+        "validator": {
+          "class": "TransnistriaValidator"
+        },
+        "values": [
+          "KQ",
+          "Q",
+          "996"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region letter is not in use."
+      }
+    }
+  ]
+}

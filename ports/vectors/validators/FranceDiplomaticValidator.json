@@ -1,0 +1,821 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "000",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "999",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "00",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "0000",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CCC",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "MMM",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CC",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CCCC",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "ЖЖЖ",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "ccc",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "SS",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "WW",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "C",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "CMD",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "K",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The embassy code is one to three digits."
+      }
+    },
+    {
+      "name": "group embassy = 59",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "59",
+          "CD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group status = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "SS",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "group status = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "WW",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "group status = 000",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "000",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "group status = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "C",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group status = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CMD",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group status = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "K",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group status = 59",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "59",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The status is C, CD, CMD or K."
+      }
+    },
+    {
+      "name": "group series = SS",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = WW",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "WW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = C",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = CD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = CMD",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "CMD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = K",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one to three digits."
+      }
+    },
+    {
+      "name": "group series = 59",
+      "input": {
+        "package": "france_plate",
+        "spec": "fr.diplomatic",
+        "validator": {
+          "class": "FranceDiplomaticValidator"
+        },
+        "values": [
+          "168",
+          "CD",
+          "59"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

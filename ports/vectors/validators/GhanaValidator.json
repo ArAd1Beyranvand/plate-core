@@ -1,0 +1,5518 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AA",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ZZ",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "A",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AAA",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "aa",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "0000",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "9999",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "000",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "00000",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "ЖЖЖЖ",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group region = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AC",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AE",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AK",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AP",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AW",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BA",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BR",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BW",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BT",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "CR",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "EN",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ER",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ES",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GB",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GC",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GE",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GG",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GH",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GL",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GM",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GN",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GT",
+          "3493",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AC",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AE",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AK",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AP",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AS",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "AW",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "BA",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "BR",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "BW",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "BT",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "CR",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "EN",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "ER",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "ES",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GB",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GC",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GE",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GG",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GH",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GL",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GM",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GN",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GT",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "GS",
+          "13"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group year = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "BR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "BW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "BT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "CR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "EN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "ER"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "ES"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.twoRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "3493",
+          "GS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AA",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ZZ",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "A",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AAA",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "aa",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "0000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "9999",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "00000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "ЖЖЖЖ",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group region = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AC",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AE",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AK",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AP",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AW",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BA",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BR",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BW",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "BT",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "CR",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "EN",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ER",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "ES",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GB",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GC",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GE",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GG",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GH",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GL",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GM",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GN",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GT",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "GS",
+          "5387",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AC",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AE",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AK",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AP",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AS",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "AW",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "BA",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "BR",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "BW",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "BT",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "CR",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "EN",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "ER",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "ES",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GB",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GC",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GE",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GG",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GH",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GL",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GM",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GN",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GT",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "GS",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group year = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "BR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "BW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "BT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "CR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "EN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "ER"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "ES"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.oneRow",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AS",
+          "5387",
+          "GS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "A",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "Z",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "AA",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "Ж",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "a",
+          "10",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with M."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "00",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "99",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "0",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "000",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "ЖЖ",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AA",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "ZZ",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "A",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AAA",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "ЖЖ",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "aa",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region code."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group year = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AC",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AE",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AK",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AP",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AS",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "AW",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "BA",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "BR",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "BW",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "BT",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "CR",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "EN",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "ER",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "ES",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GB",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GC",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GE",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GG",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GH",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GL",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GM",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GN",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GT",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group year = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "GS",
+          "AS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is 2 digits."
+      }
+    },
+    {
+      "name": "group region = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AC",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AE",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AK",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AP",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AW",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "BA",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "BR",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "BW",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "BT",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "CR",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "EN",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "ER",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "ES",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GB",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GC",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GE",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GG",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GH",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GL",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GM",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GN",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GT",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "GS",
+          "1620"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = AC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AK",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AP",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = AW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BA",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "BR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BW",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "BW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = BT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "BT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = CR",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "CR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = EN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "EN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ER",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "ER"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = ES",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "ES"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GB",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GC",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GE",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GG",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GH",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GL",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GM",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GN",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GT",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    },
+    {
+      "name": "group number = GS",
+      "input": {
+        "package": "ghana_plate",
+        "spec": "gh.motorcycle",
+        "validator": {
+          "class": "GhanaValidator"
+        },
+        "values": [
+          "M",
+          "10",
+          "AS",
+          "GS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 4 digits."
+      }
+    }
+  ]
+}

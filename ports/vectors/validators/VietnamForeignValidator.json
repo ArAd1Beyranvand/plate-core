@@ -1,0 +1,2644 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "00",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "99",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "0",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "000",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "000",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "999",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "00",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "0000",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "ЖЖЖ",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ZZ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "A",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AAA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "aa",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group mission = 336",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "336",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 337",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "337",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 338",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "338",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 339",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "339",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 340",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "340",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "00",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "99",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "0",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "000",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "QT",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "AA",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "ZZ",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "A",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "AAA",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "ЖЖ",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "aa",
+          "547",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "999",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "00",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "0000",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "ЖЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "547",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group mission = 336",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "336",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 337",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "337",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 338",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "338",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 339",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "339",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 340",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.cr",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "27",
+          "QT",
+          "340",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "00",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "99",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "0",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "000",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "441",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "000",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "999",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "00",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "0000",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "ЖЖЖ",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ZZ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "A",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AAA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "aa",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NN",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group mission = 336",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "336",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 337",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "337",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 338",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "338",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 339",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "339",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 340",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignLong.mk",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "340",
+          "NN",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "00",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "99",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "0",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "000",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "441",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "000",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "999",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "00",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "0000",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "ЖЖЖ",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission code is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ZZ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "A",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "AAA",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "ЖЖ",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "aa",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "441",
+          "NG",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits."
+      }
+    },
+    {
+      "name": "group mission = 336",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "336",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 337",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "337",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 338",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "338",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 339",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "339",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group mission = 340",
+      "input": {
+        "package": "vietnam_plate",
+        "spec": "vn.foreignShort.r",
+        "validator": {
+          "class": "VietnamForeignValidator"
+        },
+        "values": [
+          "80",
+          "340",
+          "NG",
+          "45"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

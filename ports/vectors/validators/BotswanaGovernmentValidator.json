@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "AA",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "ZZ",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "A",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "AAA",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "aa",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "B",
+          "123456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is BX."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "group serial = BX",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.government",
+        "validator": {
+          "class": "BotswanaGovernmentValidator"
+        },
+        "values": [
+          "BX",
+          "BX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    }
+  ]
+}

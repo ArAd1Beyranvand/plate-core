@@ -1,0 +1,928 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Z",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "AA",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Ж",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "a",
+          "1587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.private",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "A",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "Z",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "AA",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "Ж",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "a",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.government",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 3
+          }
+        },
+        "values": [
+          "G",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 3 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "A",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Z",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "AA",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "Ж",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "a",
+          "3589"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "antigua_and_barbuda_plate",
+        "spec": "ag.taxi",
+        "validator": {
+          "class": "AntiguaAndBarbudaValidator",
+          "args": {
+            "maxDigits": 4
+          }
+        },
+        "values": [
+          "H",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to 4 digits."
+      }
+    }
+  ]
+}

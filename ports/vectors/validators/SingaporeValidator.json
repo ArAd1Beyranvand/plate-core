@@ -1,0 +1,1942 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAA",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ZZZ",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AA",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAAA",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "aaa",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "0000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "9999",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "00000",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "ЖЖЖЖ",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "0",
+          "6",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "0",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "group check = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.line",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SNB",
+          "6",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAA",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ZZZ",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AA",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAAA",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "aaa",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "0000",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "9999",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "000",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "00000",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "ЖЖЖЖ",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "0",
+          "7558",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "0",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "group check = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "SV",
+          "7558",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.classic",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ANG",
+          "",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAA",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ZZZ",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AA",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAAA",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "aaa",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "0000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "9999",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "00000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "ЖЖЖЖ",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "0",
+          "853",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "0",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "group check = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "RU",
+          "853",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.restricted",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "WCF",
+          "4750",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAA",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ZZZ",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AA",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "AAAA",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "aaa",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "0000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "9999",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "00000",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "ЖЖЖЖ",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "0",
+          "502",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is one to three letters."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "0",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits, without leading zeros."
+      }
+    },
+    {
+      "name": "group check = 0",
+      "input": {
+        "package": "singapore_plate",
+        "spec": "sg.twoLine",
+        "validator": {
+          "class": "SingaporeValidator"
+        },
+        "values": [
+          "FW",
+          "502",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The checksum letter does not match the number."
+      }
+    }
+  ]
+}

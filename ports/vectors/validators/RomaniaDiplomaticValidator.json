@@ -1,0 +1,1790 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "AA",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "ZZ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "AAA",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "aa",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "999",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "0000",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖ",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group code = B",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "B",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = AB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "AB",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = AG",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "AG",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = AR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "AR",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BC",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BC",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BH",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BH",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BN",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BN",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BR",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BT",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BV",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = BZ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "BZ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = CJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CJ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = CL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CL",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = CS",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CS",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = CT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CT",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = CV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CV",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = DB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "DB",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = DJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "DJ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = GJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "GJ",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = GL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "GL",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = GR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "GR",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = HD",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "HD",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = HR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "HR",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group code = IF",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "IF",
+          "205",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD, TC or CO."
+      }
+    },
+    {
+      "name": "group mission = B",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "B",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = AB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AB",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = AG",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AG",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = AR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AR",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BC",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BC",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BH",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BH",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BN",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BN",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BR",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BT",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BV",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = BZ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BZ",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = CJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CJ",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = CL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CL",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = CS",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CS",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = CT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CT",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = CV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "CV",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = DB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "DB",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = DJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "DJ",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = GJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GJ",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = GL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GL",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = GR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GR",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = HD",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "HD",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = HR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "HR",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group mission = IF",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "IF",
+          "113"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = B",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = AB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = AG",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "AG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = AR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "AR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BC",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BH",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BN",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = BZ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "BZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = CJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "CJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = CL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "CL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = CS",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "CS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = CT",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "CT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = CV",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "CV"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = DB",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "DB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = DJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "DJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = GJ",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "GJ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = GL",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = GR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "GR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = HD",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "HD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = HR",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "HR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    },
+    {
+      "name": "group rank = IF",
+      "input": {
+        "package": "romania_plate",
+        "spec": "ro.diplomatic",
+        "validator": {
+          "class": "RomaniaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "205",
+          "IF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission and the rank are each three digits, from 101."
+      }
+    }
+  ]
+}

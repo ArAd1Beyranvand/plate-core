@@ -1,0 +1,6577 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZZ",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAAA",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "aaa",
+          "239"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.private",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "DCF",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAA",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ZZZ",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AA",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "AAAA",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "aaa",
+          "226"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.electric",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "letters",
+                "name": "series",
+                "letters": true,
+                "min": 3,
+                "max": 3
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "FGM",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "699"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "random 33",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.disabled",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "70"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 to 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "225846"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.motorcycle",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "794734"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.interprovincialBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "37"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityBus",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.taxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "random 14",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.cityTaxi",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 5
+              }
+            ]
+          }
+        },
+        "values": [
+          "06"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 to 5 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "457611"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.commercial",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "461338"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "561937"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 6 digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.lightLoadTruck",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 6,
+                "max": 6
+              }
+            ]
+          }
+        },
+        "values": [
+          "986592"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "0",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "9",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "Ж",
+          "2",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "0",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "9",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "00",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "Ж",
+          "427"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.diplomatic",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "3",
+          "2",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "0",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "9",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "Ж",
+          "3",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "0",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "9",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "00",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "Ж",
+          "289"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.internationalMission",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 3,
+                "max": 3
+              }
+            ]
+          }
+        },
+        "values": [
+          "2",
+          "3",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "0",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "9",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "Ж",
+          "2",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "0",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "9",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "00",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "Ж",
+          "4122"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.powerExecutive",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "code",
+                "name": "code",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "1",
+          "2",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 1 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "0",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "9",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 1 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "Ж",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 1 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.consular",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 1,
+                "max": 1
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              }
+            ]
+          }
+        },
+        "values": [
+          "4",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "00",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "99",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "0",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "000",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "6944"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first number is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.official",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "unit",
+                "name": "first number",
+                "letters": false,
+                "min": 2,
+                "max": 2
+              },
+              {
+                "key": "number",
+                "name": "second number",
+                "letters": false,
+                "min": 4,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "29",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The second number is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 2 to 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 2 to 4 digits."
+      }
+    },
+    {
+      "name": "random 61",
+      "input": {
+        "package": "costa_rica_plate",
+        "spec": "cr.historical",
+        "validator": {
+          "class": "CostaRicaValidator",
+          "args": {
+            "format": [
+              {
+                "key": "number",
+                "name": "number",
+                "letters": false,
+                "min": 2,
+                "max": 4
+              }
+            ]
+          }
+        },
+        "values": [
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 2 to 4 digits."
+      }
+    }
+  ]
+}

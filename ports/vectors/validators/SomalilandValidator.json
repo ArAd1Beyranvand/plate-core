@@ -1,0 +1,715 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAAA",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "99999",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAA",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAAAA",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "aaaaa",
+          "AW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          "TG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          "AWAW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown division code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown division code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A1234",
+          "aw"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown division code."
+      }
+    },
+    {
+      "name": "random 10",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.private",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "FHCTP",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AAAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.official",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "aaaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class letter A–E and four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "A",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "Z",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "AA",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "Ж",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "a",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "somalia_plate",
+        "spec": "xs.bilingual",
+        "validator": {
+          "class": "SomalilandValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A letter and one to three digits."
+      }
+    }
+  ]
+}

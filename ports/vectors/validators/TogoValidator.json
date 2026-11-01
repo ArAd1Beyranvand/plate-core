@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "0000",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9999",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "000",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "00000",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "AE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "togo_plate",
+        "spec": "tg.regular",
+        "validator": {
+          "class": "TogoValidator"
+        },
+        "values": [
+          "9867",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    }
+  ]
+}

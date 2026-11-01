@@ -1,0 +1,1293 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평양",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "링김",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평양평양",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "Ж",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "00",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "99",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "0",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "000",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "ЖЖ",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "4",
+          "68",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group class = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "4",
+          "366"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "group number = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "평남",
+          "68",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "자강",
+          "44",
+          "748"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Class codes never start with 4."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "자강",
+          "47",
+          "295"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Class codes never start with 4."
+      }
+    },
+    {
+      "name": "random 20",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.regional",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "황남",
+          "49",
+          "488"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Class codes never start with 4."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "00",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "99",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "0",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "000",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "4",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "group number = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.diplomatic",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "number"
+          }
+        },
+        "values": [
+          "07",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "865607"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.military",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "360"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 4",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kp.vip",
+        "validator": {
+          "class": "KPValidator",
+          "args": {
+            "gateGroup": "serial"
+          }
+        },
+        "values": [
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every position must be filled."
+      }
+    }
+  ]
+}

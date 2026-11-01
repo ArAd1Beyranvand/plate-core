@@ -1,0 +1,1353 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AAA",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "ZZZ",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AA",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AAAA",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "aaa",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "000",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "999",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "00",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "0000",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "ЖЖЖ",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region letter."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group series = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "H",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "L",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "M",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "S",
+          "884",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "H",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "L",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "M",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "S",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group suffix = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.front",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "JSD",
+          "884",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AAA",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "ZZZ",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AA",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "AAAA",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "aaa",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "000",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "999",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "00",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "0000",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "ЖЖЖ",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region letter."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group series = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "H",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "L",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "M",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group series = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "S",
+          "205",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is a letter then SD."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "H",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "L",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "M",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group number = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "S",
+          "AH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 digits."
+      }
+    },
+    {
+      "name": "group suffix = H",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = L",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = M",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "group suffix = S",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "HSD",
+          "205",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 2 letters."
+      }
+    },
+    {
+      "name": "random 165",
+      "input": {
+        "package": "eswatini_plate",
+        "spec": "sz.rear",
+        "validator": {
+          "class": "EswatiniValidator"
+        },
+        "values": [
+          "TSD",
+          "490",
+          "VI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Unknown region letter."
+      }
+    }
+  ]
+}

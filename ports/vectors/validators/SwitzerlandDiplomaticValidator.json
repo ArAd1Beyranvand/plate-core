@@ -1,0 +1,4024 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "GE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CDCD",
+          "GE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "GE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "cd",
+          "GE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AA",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ZZ",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "A",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AAA",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖ",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "aa",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "000",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "999",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "00",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "0000",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "ЖЖЖ",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group canton = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AG",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AI",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AR",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BL",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BS",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "FR",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GL",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GR",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "JU",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "LU",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "NE",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "NW",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "OW",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SG",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SH",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SO",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "SZ",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "TG",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "TI",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "UR",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "VD",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "VS",
+          "29",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "AG",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "AI",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "AR",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "BE",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "BL",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "BS",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "FR",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "GE",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "GL",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "GR",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "JU",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "LU",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "NE",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "NW",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "OW",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "SG",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "SH",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "SO",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "SZ",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "TG",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "TI",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "UR",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "VD",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "VS",
+          "201"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "AG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "AI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "AR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "BE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "BL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "FR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "GE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "GR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "JU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "LU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "NE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "NW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "OW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "SH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "SO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "SZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "TG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "TI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "UR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "VD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "GE",
+          "29",
+          "VS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "random 124",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "MN",
+          "971",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 394",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "WF",
+          "114",
+          "07"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 398",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.diplomatic",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "DV",
+          "553",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "ZH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CCCC",
+          "ZH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "ZH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "cc",
+          "ZH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "AA",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZZ",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "A",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "AAA",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ЖЖ",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "aa",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The canton is a Swiss canton code."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "000",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "999",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "00",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "0000",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "ЖЖЖ",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group canton = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "AG",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "AI",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "AR",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "BE",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "BL",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "BS",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "FR",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = GE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "GE",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "GL",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "GR",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "JU",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "LU",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "NE",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "NW",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "OW",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "SG",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "SH",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "SO",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "SZ",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "TG",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "TI",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "UR",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "VD",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group canton = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "VS",
+          "8",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "AG",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "AI",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "AR",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "BE",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "BL",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "BS",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "FR",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "GE",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "GL",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "GR",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "JU",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "LU",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "NE",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "NW",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "OW",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "SG",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "SH",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "SO",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "SZ",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "TG",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "TI",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "UR",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "VD",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group serial = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "VS",
+          "38"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "AG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "AI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = AR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "AR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "BE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "BL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = BS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "BS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = FR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "FR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "GE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GL",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "GL"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = GR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "GR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = JU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "JU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = LU",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "LU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = NE",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "NE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = NW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "NW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = OW",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "OW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "SG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SH",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "SH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SO",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "SO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = SZ",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "SZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = TG",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "TG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = TI",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "TI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = UR",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "UR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = VD",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "VD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "group code = VS",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZH",
+          "8",
+          "VS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is one to three digits."
+      }
+    },
+    {
+      "name": "random 39",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "IQ",
+          "754",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 241",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "ZD",
+          "665",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "random 294",
+      "input": {
+        "package": "switzerland_plate",
+        "spec": "ch.consular",
+        "validator": {
+          "class": "SwitzerlandDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "FV",
+          "980",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

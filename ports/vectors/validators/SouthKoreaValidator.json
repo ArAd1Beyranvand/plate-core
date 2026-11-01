@@ -1,0 +1,2128 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "000",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "999",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "00",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "0000",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "호",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가가",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "Ж",
+          "3456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.private",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "12",
+          "가",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "강원",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "충북",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "강원강원",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "Ж",
+          "31",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "00",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "99",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "0",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "000",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "ЖЖ",
+          "가",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "아",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "배",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "아아",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.commercial",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "서울",
+          "31",
+          "가",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "000",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "999",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "00",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "0000",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "육",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "국",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "공",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "국국",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "Ж",
+          "4104"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.military",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "38",
+          "육",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "000",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "999",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "00",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "0000",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "456"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.diplomatic",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is two groups of three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "0",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "9",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "00",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "Ж",
+          "6047"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.us_forces",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "1",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A US Forces plate is one digit and four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "000",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "999",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "00",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "0000",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "호",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class number is out of range."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "가",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "가가",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "Ж",
+          "1336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "north_korea_plate",
+        "spec": "kr.neon",
+        "validator": {
+          "class": "SouthKoreaValidator"
+        },
+        "values": [
+          "177",
+          "호",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Every field must be filled."
+      }
+    }
+  ]
+}

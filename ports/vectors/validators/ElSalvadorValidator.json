@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "Z",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "AA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "Ж",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "a",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The class is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "el_salvador_plate",
+        "spec": "sv.private",
+        "validator": {
+          "class": "ElSalvadorValidator"
+        },
+        "values": [
+          "P",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

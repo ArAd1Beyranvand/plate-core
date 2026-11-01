@@ -1,0 +1,441 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "ZZZ",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAAA",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "aaa",
+          "123",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "000",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "999",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "00",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "0000",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "ЖЖЖ",
+          "MP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mozambique_plate",
+        "spec": "mz.private",
+        "validator": {
+          "class": "MozambiqueValidator"
+        },
+        "values": [
+          "AAB",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province is CA, GZ, IB, MC, MP, MN, NP, NS, SF, TT or ZB."
+      }
+    }
+  ]
+}

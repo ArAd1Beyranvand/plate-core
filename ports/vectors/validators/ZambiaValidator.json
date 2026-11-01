@@ -1,0 +1,422 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "AAA",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "AA",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is three letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "AAAA",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "aaa",
+          "4077",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "0000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "9999",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "00000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "ЖЖЖЖ",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "zambia_plate",
+        "spec": "zm.private",
+        "validator": {
+          "class": "ZambiaValidator"
+        },
+        "values": [
+          "ADD",
+          "4077",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one letter."
+      }
+    }
+  ]
+}

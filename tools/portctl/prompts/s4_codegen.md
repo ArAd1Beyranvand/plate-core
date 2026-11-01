@@ -4,7 +4,9 @@
 
 Write a generator in `ports/{{lang}}/` that reads `ports/data/` (see `ports/data/SCHEMA.md`) and emits
 the source for all country packages: specs, alphabets, themes, tabulated `[D4-table]` resolvers,
-assets references, and an index. Set `codegen` in `portctl.json` to the command that runs it.
+assets references, and an index. Follow WEB_ARCH.md: each country is its own module and
+entry point, and the index only maps ids to lazy imports, so a one-country build pulls in no other
+country. Set `codegen` in `portctl.json` to the command that runs it.
 
 For every `[D4-code]` unit (a Dart file such as `albania_plate/lib/src/albania_validators.dart`)
 the generator must:

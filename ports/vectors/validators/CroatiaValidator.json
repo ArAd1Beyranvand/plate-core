@@ -1,0 +1,2440 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AA",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "A",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AAA",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "aa",
+          "543",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "0000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "9999",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "00000",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "ЖЖЖЖ",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.private",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZG",
+          "543",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AA",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "A",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AAA",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "aa",
+          "EROSS",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The word is four to five letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "AAAAA",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "99999",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The word is four to five letters."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "AAAA",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "AAAAAA",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The word is four to five letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "ЖЖЖЖЖ",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The word is four to five letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "aaaaa",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The word is four to five letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one or two digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.customized",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ZD",
+          "EROSS",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is one or two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AA",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "A",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AAA",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "aa",
+          "881",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "0000",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "9999",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "000",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "00000",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "ЖЖЖЖ",
+          "EB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.classic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "KA",
+          "881",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AA",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ŽŽ",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "A",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "AAA",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "aa",
+          "401",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The city code is two letters, e.g. ZG."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "0000",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "9999",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "000",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "00000",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "ЖЖЖЖ",
+          "NR"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.oversize",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ST",
+          "401",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "000",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "999",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "00",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "0000",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.police",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "010",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Police is three digits, three digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "000",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "999",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "00",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "0000",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "Z",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "AA",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "Ж",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "a",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Diplomatic is three digits, a letter, three digits."
+      }
+    },
+    {
+      "name": "group mission = 071",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "071",
+          "A",
+          "002"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group serial = 071",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "023",
+          "A",
+          "071"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 365",
+      "input": {
+        "package": "croatia_plate",
+        "spec": "hr.diplomatic",
+        "validator": {
+          "class": "CroatiaValidator"
+        },
+        "values": [
+          "071",
+          "B",
+          "021"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    }
+  ]
+}

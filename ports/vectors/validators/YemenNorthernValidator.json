@@ -1,0 +1,796 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "00",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "99",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "0",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "000",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is digits only."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is digits only."
+      }
+    },
+    {
+      "name": "group governorate = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "05",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group governorate = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "5",
+          "95714"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "19",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "13",
+          "047803"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.car",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          "881406"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "00",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "99",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "0",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is 1 to 22."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "000",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is digits only."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is digits only."
+      }
+    },
+    {
+      "name": "group governorate = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "05",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group governorate = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "5",
+          "567451"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 05",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "05"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "group serial = 5",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "7",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four to six digits."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "",
+          "892903"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The governorate code is one or two digits."
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "yemen_plate",
+        "spec": "ye.northern.moto",
+        "validator": {
+          "class": "YemenNorthernValidator"
+        },
+        "values": [
+          "20",
+          "074629"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is not padded with leading zeros."
+      }
+    }
+  ]
+}

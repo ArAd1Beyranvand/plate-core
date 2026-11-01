@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "00",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "99",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "0",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "000",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0884"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "colombia_plate",
+        "spec": "co.police",
+        "validator": {
+          "class": "ColombiaPoliceValidator"
+        },
+        "values": [
+          "03",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is two digits and four digits."
+      }
+    }
+  ]
+}

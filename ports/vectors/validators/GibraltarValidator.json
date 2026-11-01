@@ -1,0 +1,3552 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "T",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GG",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "Ж",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "g",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "00000",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "99999",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0000",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A four-digit serial runs 1000 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "000000",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "ЖЖЖЖЖ",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "6442",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "G",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "GT",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6442",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "769",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "92",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "30367",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 76",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "68519",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 85",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 92",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0757",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A four-digit serial runs 1000 to 9999."
+      }
+    },
+    {
+      "name": "random 321",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.private",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "T",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GG",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "Ж",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "g",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "00000",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "99999",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0000",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "000000",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "ЖЖЖЖЖ",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "A",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "Z",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "AA",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "Ж",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "a",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is incomplete."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "00",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "99",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "0",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is incomplete."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "000",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "ЖЖ",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is incomplete."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is incomplete."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "6065",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "G",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "GT",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0",
+          "E",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "G",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "0",
+          "10",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "G",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The month is incomplete."
+      }
+    },
+    {
+      "name": "group month = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "GT",
+          "19"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The year is incomplete."
+      }
+    },
+    {
+      "name": "group year = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "6065",
+          "E",
+          "10",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "92506",
+          "",
+          "54",
+          "39"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "80745",
+          "O",
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 58",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "14184",
+          "",
+          "32",
+          "35"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 64",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "35375",
+          "",
+          "28",
+          "89"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 69",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "Q",
+          "34",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 113",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.temporary",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "",
+          "O",
+          "86",
+          "61"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GG",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "TT",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GGG",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "gg",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "G",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "GT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "1234",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "4693",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 118",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "3084",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is incomplete."
+      }
+    },
+    {
+      "name": "random 252",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.trailer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "T",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GG",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "Ж",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "g",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is G or GT."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "76385"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.numbered",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "AAA",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "ZZZ",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "AA",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "AAAA",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "aaa",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters is incomplete."
+      }
+    },
+    {
+      "name": "group letters = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters is incomplete."
+      }
+    },
+    {
+      "name": "group letters = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "190"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letters is incomplete."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "DLR",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 75",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "YYZ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "random 76",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.dealer",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "UDB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is incomplete."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "00",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "99",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "0",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first is incomplete."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "000",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "AA",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "ZZ",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "A",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "AAA",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "ЖЖ",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "aa",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last is incomplete."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group first = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "G",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first is incomplete."
+      }
+    },
+    {
+      "name": "group first = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "GT",
+          "RN",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group unit = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "G",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "group unit = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "GT",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group unit = 0",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "0",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The unit is incomplete."
+      }
+    },
+    {
+      "name": "group last = G",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The last is incomplete."
+      }
+    },
+    {
+      "name": "group last = GT",
+      "input": {
+        "package": "spain_plate",
+        "spec": "gi.forces",
+        "validator": {
+          "class": "GibraltarValidator"
+        },
+        "values": [
+          "44",
+          "RN",
+          "GT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

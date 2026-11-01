@@ -1,0 +1,598 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "AA",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "ZZ",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "A",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "AAA",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "aa",
+          "587"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FQ",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.general",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "FG",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "A",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "Z",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "AA",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "Ж",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "a",
+          "0845"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "E",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "random 23",
+      "input": {
+        "package": "fiji_plate",
+        "spec": "fj.legacy",
+        "validator": {
+          "class": "FijiValidator"
+        },
+        "values": [
+          "Z",
+          "71"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,580 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "A",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "Z",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "AA",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "Ж",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "a",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.statia",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "A",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "Z",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "AA",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "Ж",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "a",
+          "191"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.sint_eustatius.bicentennial",
+        "validator": {
+          "class": "SintEustatiusValidator"
+        },
+        "values": [
+          "E",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    }
+  ]
+}

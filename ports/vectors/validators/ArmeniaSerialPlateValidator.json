@@ -1,0 +1,164 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "525"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "am.un",
+        "validator": {
+          "class": "ArmeniaSerialPlateValidator",
+          "args": {
+            "length": 3
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial must be digits."
+      }
+    }
+  ]
+}

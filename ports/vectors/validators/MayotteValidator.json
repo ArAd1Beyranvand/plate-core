@@ -1,0 +1,684 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "AA",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "ZZ",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "A",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "AAA",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "aa",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "000",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "999",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "00",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "0000",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "ЖЖЖ",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "AA",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "ZZ",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "A",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "AAA",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "ЖЖ",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "aa",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    },
+    {
+      "name": "group prefix = SS",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "SS",
+          "683",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group number = 976",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "976",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = SS",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "SS",
+          "HR",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits, 001–999."
+      }
+    },
+    {
+      "name": "group suffix = SS",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "SS",
+          "976"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is two letters (no I, O, U or SS)."
+      }
+    },
+    {
+      "name": "group department = SS",
+      "input": {
+        "package": "comoros_plate",
+        "spec": "yt.private",
+        "validator": {
+          "class": "MayotteValidator"
+        },
+        "values": [
+          "CE",
+          "683",
+          "HR",
+          "SS"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The département code is 976."
+      }
+    }
+  ]
+}

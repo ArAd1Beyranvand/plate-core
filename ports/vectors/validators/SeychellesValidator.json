@@ -1,0 +1,834 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "A",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "Z",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "AA",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "Ж",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "a",
+          "11111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.standard",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "A",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "Z",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "AA",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "Ж",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "a",
+          "11111",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "00000",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "99999",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "0000",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "000000",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "ЖЖЖЖЖ",
+          "HV",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to five digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "AA",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "ZZ",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "A",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "AAA",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "ЖЖ",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "aa",
+          "1111"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "seychelles_plate",
+        "spec": "sc.high_visibility",
+        "validator": {
+          "class": "SeychellesValidator"
+        },
+        "values": [
+          "S",
+          "11111",
+          "HV",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

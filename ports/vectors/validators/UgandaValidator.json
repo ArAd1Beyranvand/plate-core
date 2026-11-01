@@ -1,0 +1,310 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "AA",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "ZZ",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "A",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "AAA",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "aa",
+          "2938"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four or five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "UP",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four or five digits."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "uganda_plate",
+        "spec": "ug.police",
+        "validator": {
+          "class": "UgandaValidator"
+        },
+        "values": [
+          "XW",
+          "06"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four or five digits."
+      }
+    }
+  ]
+}

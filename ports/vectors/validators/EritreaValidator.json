@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The disc holds one digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "0",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "9",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "00",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The disc holds one digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "Ж",
+          "88649"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The disc holds one digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "eritrea_plate",
+        "spec": "er.standard",
+        "validator": {
+          "class": "EritreaValidator"
+        },
+        "values": [
+          "2",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    }
+  ]
+}

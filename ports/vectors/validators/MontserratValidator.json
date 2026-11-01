@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is one letter."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "A",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "Z",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "AA",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "Ж",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is one letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "a",
+          "1667"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The type is one letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "ms.private",
+        "validator": {
+          "class": "MontserratValidator"
+        },
+        "values": [
+          "M",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is one to four digits."
+      }
+    }
+  ]
+}

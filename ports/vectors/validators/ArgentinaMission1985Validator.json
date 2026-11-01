@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "PA",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CDCD",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is CD, CC, ME, OI or PA."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "Ж",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is CD, CC, ME, OI or PA."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "cd",
+          "0607"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The category is CD, CC, ME, OI or PA."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "argentina_plate",
+        "spec": "ar.mission1985",
+        "validator": {
+          "class": "ArgentinaMission1985Validator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

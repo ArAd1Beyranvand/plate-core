@@ -232,6 +232,7 @@ class App(tk.Tk):
         for p in self.pkgs:
             self.opts[p] = {s: s != "publish" for s in STEPS}
         self.check_mode = tk.StringVar(value="both")
+        self.need_full = tk.BooleanVar(value=False)
         self.filter_var = tk.StringVar()
         self.filter_var.trace_add("write", lambda *_: self.fill())
         self.build()
@@ -249,6 +250,8 @@ class App(tk.Tk):
         ttk.Label(top, text="Check mode:").pack(side="left", padx=(12, 2))
         ttk.Combobox(top, textvariable=self.check_mode, values=CHECK_MODES, width=8,
                      state="readonly").pack(side="left")
+        ttk.Checkbutton(top, text="Publish only at full points",
+                        variable=self.need_full).pack(side="left", padx=(12, 0))
         ttk.Button(top, text="Refresh git status", command=self.refresh_git).pack(side="left", padx=12)
         ttk.Label(top, text="Proxy:").pack(side="left", padx=(12, 2))
         self.proxy = tk.StringVar(value=default_proxy())
@@ -375,12 +378,23 @@ class App(tk.Tk):
         self.save_state()
         self.status.configure(text="Batch marks cleared.")
 
+    def is_settled(self, p):
+        """Published and pushed, with no uncommitted, unpushed or post-publish changes."""
+        st = self.state_data.get(p, {})
+        pub, last = st.get("last_publish"), st.get("last_commit")
+        return bool(pub and st.get("last_push") and last and last <= pub
+                    and st.get("dirty") is False and st.get("unpushed") == 0)
+
     def start(self, limit):
         todo = [p for p in self.pkgs if any(self.opts[p].values())]
         nogit = [p for p in todo if not (ROOT / p / ".git").exists()]
         todo = [p for p in todo if p not in nogit]
         if nogit:
             self.q.put(("log", f"Skipping {len(nogit)} package(s) without git: {', '.join(nogit)}"))
+        settled = [p for p in todo if self.is_settled(p)]
+        todo = [p for p in todo if p not in settled]
+        if settled:
+            self.q.put(("log", f"Skipping {len(settled)} published, pushed, unchanged package(s)"))
         if limit:
             todo = [p for p in todo if not self.state_data.get(p, {}).get("batch_done")][:limit]
         if not todo:
@@ -392,6 +406,7 @@ class App(tk.Tk):
                 "(irreversible). Continue?"):
             return
         self.proxy_value = self.proxy.get().strip()
+        self.need_full_value = self.need_full.get()
         self.stop_flag.clear()
         self.run_btn.configure(state="disabled")
         self.batch_btn.configure(state="disabled")
@@ -582,12 +597,13 @@ class App(tk.Tk):
                 log("CHECK FAILED (publish skipped)")
                 return False
         if o["publish"]:
-            if mode not in ("pana", "both") or not o["check"]:
-                self.run_pana(path, log, st)
-            g, _, t = st.get('points', '0/0').partition('/')
-            if t in ('', '0') or g != t:
-                log(f"PUBLISH SKIPPED: pub points {st.get('points')}, need full score")
-                return False
+            if self.need_full_value:
+                if mode not in ("pana", "both") or not o["check"]:
+                    self.run_pana(path, log, st)
+                g, _, t = st.get('points', '0/0').partition('/')
+                if t in ('', '0') or g != t:
+                    log(f"PUBLISH SKIPPED: pub points {st.get('points')}, need full score")
+                    return False
             rc, out = run(["flutter", "pub", "publish", "--force"], path, log)
             if rc and re.search(r"version \S+ of package \S+ already exists", out, re.I):
                 v = self.bump_version(path, log)

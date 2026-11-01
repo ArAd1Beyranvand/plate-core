@@ -1,0 +1,3836 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "AB",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ZZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "aaa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AB",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ZZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "aaa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "G",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ZZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "aaa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.temporary.strip",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "G",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "00",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "99",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "0",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "000",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "A",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "AAA",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "ZZZ",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "AA",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "AAAA",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "ЖЖЖ",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "aaa",
+          "01234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": false
+          }
+        },
+        "values": [
+          "16",
+          "A",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "AA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AAA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "ZZZ",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AAAA",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "ЖЖЖ",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "aaa",
+          "012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.plain",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "06",
+          "AA",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "0001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.governor",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0019"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "009"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.parliament.labelled",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "123"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.sample",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "00",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "99",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "0",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "000",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "UF",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Province code must be 01 to 81"
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AA",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ZZ",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "A",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "AAA",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "ЖЖ",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "aa",
+          "2409"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters exclude Ç Ş İ Ö Ü Ğ Q W X"
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters and figures number at most six"
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "tr.motorcycle",
+        "validator": {
+          "class": "TurkeyPlateValidator",
+          "args": {
+            "limitSix": true
+          }
+        },
+        "values": [
+          "34",
+          "UF",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be figures"
+      }
+    }
+  ]
+}

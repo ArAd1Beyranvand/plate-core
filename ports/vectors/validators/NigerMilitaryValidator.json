@@ -1,0 +1,157 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is five digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.military",
+        "validator": {
+          "class": "NigerMilitaryValidator"
+        },
+        "values": [
+          "09652"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

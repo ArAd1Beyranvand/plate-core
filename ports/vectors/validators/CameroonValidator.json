@@ -1,0 +1,1106 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "AA",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "ZZ",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "A",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "AAA",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "aa",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "00",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "ЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "group region = AD",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "AD",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CE",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "CE",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = EN",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "EN",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = ES",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "ES",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NO",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "NO",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = NW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "NW",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = OU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "OU",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "SU",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = SW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "SW",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group region = CM",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "CM",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "group region = D",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "D",
+          "128",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is one of the ten region codes."
+      }
+    },
+    {
+      "name": "group number = AD",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "AD",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = CE",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "CE",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = EN",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "EN",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = ES",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "ES",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = LT",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "LT",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = NO",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "NO",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = NW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "NW",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = OU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "OU",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = SU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "SU",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = SW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "SW",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = CM",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "CM",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group number = D",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "D",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "group series = AD",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "AD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CE",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "CE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = EN",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "EN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = ES",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "ES"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = LT",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "LT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = NO",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "NO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = NW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "NW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = OU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "OU"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SU",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "SU"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SW",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "SW"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = CM",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "CM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = D",
+      "input": {
+        "package": "cameroon_plate",
+        "spec": "cm.private",
+        "validator": {
+          "class": "CameroonValidator"
+        },
+        "values": [
+          "LT",
+          "128",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

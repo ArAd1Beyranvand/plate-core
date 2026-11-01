@@ -1,0 +1,988 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "00",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "99",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "0",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "000",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "G",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "DF",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "T",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "TP",
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "DF"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.private",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "12",
+          "TP"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "00",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "99",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "0",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "000",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "999",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "00",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "0000",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "ЖЖЖ",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    },
+    {
+      "name": "group first = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "G",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "DF",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "T",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group first = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "TP",
+          "890",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = G",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "G",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = DF",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "DF",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "T",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group second = TP",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "TP",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits, NN·NNN."
+      }
+    },
+    {
+      "name": "group suffix = T",
+      "input": {
+        "package": "timor_leste_plate",
+        "spec": "tl.government",
+        "validator": {
+          "class": "TimorLesteValidator"
+        },
+        "values": [
+          "67",
+          "890",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A government plate ends in G."
+      }
+    }
+  ]
+}

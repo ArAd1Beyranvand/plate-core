@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is four letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "AAAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "ZZZZ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "AAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is four letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "AAAAA",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is four letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is four letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "aaaa",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is four letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one digit."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "vanuatu_plate",
+        "spec": "vu.diplomatic",
+        "validator": {
+          "class": "VanuatuDiplomaticValidator"
+        },
+        "values": [
+          "CORP",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one digit."
+      }
+    }
+  ]
+}

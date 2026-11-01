@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "000000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "999999",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "00000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "0000000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖЖ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is six digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is one of A–Z without I, O, U."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is one of A–Z without I, O, U."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is one of A–Z without I, O, U."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "polynesia_plate",
+        "spec": "pf.regular",
+        "validator": {
+          "class": "FrenchPolynesiaValidator"
+        },
+        "values": [
+          "233051",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The letter is one of A–Z without I, O, U."
+      }
+    }
+  ]
+}

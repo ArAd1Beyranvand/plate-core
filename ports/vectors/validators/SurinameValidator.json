@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters, the first one P."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "suriname_plate",
+        "spec": "sr.private",
+        "validator": {
+          "class": "SurinameValidator"
+        },
+        "values": [
+          "PA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

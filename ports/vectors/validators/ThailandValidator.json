@@ -1,0 +1,1459 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "ข",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ซ",
+          "ข",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "กก",
+          "ข",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "Ж",
+          "ข",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ก",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ซ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "กก",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.standard.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ข",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ซ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "กก",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.trade.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ก",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ซ",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "กก",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "Ж",
+          "ค",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ก",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ซ",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "กก",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "Ж",
+          "ง",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ก",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ซ",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "กก",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "Ж",
+          "5678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is Thai consonants."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.motorcycle.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ข",
+          "ค",
+          "ง",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "00",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "99",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "0",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "000",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The province code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "00",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "99",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "0",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "000",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "ЖЖ",
+          "4567"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "thailand_plate",
+        "spec": "th.truck.bangkok",
+        "validator": {
+          "class": "ThailandValidator"
+        },
+        "values": [
+          "10",
+          "23",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

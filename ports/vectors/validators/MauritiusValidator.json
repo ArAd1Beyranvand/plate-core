@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "AA",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "ZZ",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "A",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "AAA",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "aa",
+          "3345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mauritius_plate",
+        "spec": "mu.government",
+        "validator": {
+          "class": "MauritiusValidator"
+        },
+        "values": [
+          "GM",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

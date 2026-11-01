@@ -1,0 +1,822 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "group serial = TC",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.modern",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "75033"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "group serial = TC",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.prefixed",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TI",
+          "91041"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "AAA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "aa",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "group serial = TC",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "TC",
+          "TC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "tc.self_drive",
+        "validator": {
+          "class": "TurksAndCaicosIslandsValidator"
+        },
+        "values": [
+          "",
+          "58119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

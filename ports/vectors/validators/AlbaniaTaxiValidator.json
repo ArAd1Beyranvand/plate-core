@@ -1,0 +1,2056 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "999",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "00",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "group series = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "RB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "RT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "R",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group series = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "CD",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "TR",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FD",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "KM",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "PU",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "SP",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MM",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "T",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MB",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "RB",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "RT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "R",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "CD",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "TR",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FA",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FD",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "KM",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "PU",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "SP",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MM",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "T",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PRK",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "PRK",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxi",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "999",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "00",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    },
+    {
+      "name": "group series = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "RB",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "RT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "R",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group series = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "CD",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "TR",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FA",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FD",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "FT",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "KM",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "PU",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "SP",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "MM",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group series = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "T",
+          "123",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is two letters."
+      }
+    },
+    {
+      "name": "group number = MB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MB",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RB",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "RB",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = RT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "RT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "R",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = CD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "CD",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = TR",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "TR",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FA",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FA",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FD",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FD",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = FT",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "FT",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = KM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "KM",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PU",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "PU",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = SP",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "SP",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = MM",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "MM",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "T",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group number = PRK",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "PRK",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group suffix = R",
+      "input": {
+        "package": "albania_plate",
+        "spec": "al.taxiTwoLine",
+        "validator": {
+          "class": "AlbaniaTaxiValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A taxi plate ends in T."
+      }
+    }
+  ]
+}

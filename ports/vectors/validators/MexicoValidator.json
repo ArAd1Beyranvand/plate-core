@@ -1,0 +1,4888 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AAA",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "ZZZ",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AA",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AAAA",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "aaa",
+          "41",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "00",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "99",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "0",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "000",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "ЖЖ",
+          "02",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "00",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "99",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "0",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "000",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "ЖЖ",
+          "BAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          "VERACRUZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          "BAJA CALIFORNIABAJA CALIFORNIA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dd-dd"
+          }
+        },
+        "values": [
+          "AHD",
+          "41",
+          "02",
+          "baja california"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "AA",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "ZZ",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "A",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "AAA",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "aa",
+          "86",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "00",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "99",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "0",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "000",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "ЖЖ",
+          "000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "999",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "00",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "0000",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "ЖЖЖ",
+          "COAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          "ZACATECAS"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          "COAHUILACOAHUILA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aa",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dd-ddd"
+          }
+        },
+        "values": [
+          "EN",
+          "86",
+          "000",
+          "coahuila"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AAA",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZZZ",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AA",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AAAA",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "aaa",
+          "677",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "000",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "999",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "00",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "0000",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "ЖЖЖ",
+          "A",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "Z",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "AA",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "Ж",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "a",
+          "NUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          "QUINTANA ROO"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          "NUEVO LEÓNNUEVO LEÓN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.state_aaa_a",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "SYY",
+          "677",
+          "A",
+          "nuevo león"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AAA",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZZZ",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AA",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "AAAA",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "aaa",
+          "609",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "ЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.yuc",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-ddd-a"
+          }
+        },
+        "values": [
+          "ZCT",
+          "609",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "AA",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "ZZ",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "A",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "AAA",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "aa",
+          "6228",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.sin",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aa-dddd-a"
+          }
+        },
+        "values": [
+          "TR",
+          "6228",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 letter."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "00",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "99",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "0",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "000",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "62",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "00",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "99",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "0",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "000",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "ЖЖ",
+          "AVB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.bcs",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "dd-dd-aaa"
+          }
+        },
+        "values": [
+          "42",
+          "62",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 3 letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "000",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "999",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "00",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "0000",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "PNK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "477",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 3 letters."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "722",
+          "YIY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters I, O and Q are not used."
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "112",
+          "OKE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters I, O and Q are not used."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.cdmx",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aaa"
+          }
+        },
+        "values": [
+          "742",
+          "GMO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Letters I, O and Q are not used."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "000",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "999",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "00",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "0000",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "RB",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "AA",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "ZZ",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "A",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "AAA",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "ЖЖ",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "aa",
+          "5"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 digit."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.spf",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "ddd-aa-d"
+          }
+        },
+        "values": [
+          "847",
+          "RB",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 1 digit."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 1 digit."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "0",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "9",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "00",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 1 digit."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "Ж",
+          "NE",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 1 digit."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "AA",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "ZZ",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "A",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "AAA",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "ЖЖ",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "aa",
+          "88"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.antique",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "d-aa-dd"
+          }
+        },
+        "values": [
+          "3",
+          "NE",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 3 is 2 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "AAA",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "ZZZ",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "AA",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "AAAA",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "aaa",
+          "8377"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 1 is 3 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mexico_plate",
+        "spec": "mx.1992",
+        "validator": {
+          "class": "MexicoValidator",
+          "args": {
+            "format": "aaa-dddd"
+          }
+        },
+        "values": [
+          "SLC",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Field 2 is 4 digits."
+      }
+    }
+  ]
+}

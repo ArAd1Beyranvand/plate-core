@@ -1,0 +1,256 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "Z",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "AA",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "Ж",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "a",
+          "1234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle plate starts with a letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "syria_plate",
+        "spec": "sy.aanes.motorcycle.qamishli",
+        "validator": {
+          "class": "AanesMotorcycleValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is four digits."
+      }
+    }
+  ]
+}

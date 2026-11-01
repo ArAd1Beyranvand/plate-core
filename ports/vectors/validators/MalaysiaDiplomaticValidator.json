@@ -1,0 +1,650 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "00",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "0",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "000",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "00",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "99",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "0",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "000",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "ЖЖ",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "PA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "DCDC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "dc"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    },
+    {
+      "name": "group country = S",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "S",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group country = Q",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "Q",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group country = DC",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "DC",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group country = CC",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group country = UN",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "UN",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group country = PA",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "PA",
+          "64",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = S",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "S",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = Q",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "Q",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = DC",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "DC",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = CC",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "CC",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = UN",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "UN",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group serial = PA",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "PA",
+          "DC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are two digits."
+      }
+    },
+    {
+      "name": "group mission = 0",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    },
+    {
+      "name": "group mission = S",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    },
+    {
+      "name": "group mission = Q",
+      "input": {
+        "package": "malaysia_plate",
+        "spec": "my.diplomatic",
+        "validator": {
+          "class": "MalaysiaDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "64",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is DC, CC, UN or PA."
+      }
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "AAA",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "ZZZ",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "AA",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "AAAA",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "aaa",
+          "123C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters starting with R."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "AAAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "RAB",
+          "aaaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits and a letter."
+      }
+    },
+    {
+      "name": "random 60",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "QWV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 67",
+      "input": {
+        "package": "rwanda_plate",
+        "spec": "rw.plate",
+        "validator": {
+          "class": "RwandaValidator"
+        },
+        "values": [
+          "YOK",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

@@ -1,0 +1,2923 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CC",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CDCD",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "Ж",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "cd",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "000",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "999",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "00",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "0000",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "ЖЖЖ",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "000",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "999",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "00",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "0000",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "ЖЖЖ",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "00",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "99",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "0",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "000",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "ЖЖ",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group mission = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "A",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "B",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "F",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "T",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "E",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "D",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "Z",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "R",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "G",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "H",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group mission = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "K",
+          "19",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CD or CC."
+      }
+    },
+    {
+      "name": "group country = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BL",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BB",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BK",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BA",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BM",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BP",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BH",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BD",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BG",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BN",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "BE",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "A",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "B",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "F",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "T",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "E",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "D",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "Z",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "R",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "G",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "H",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "K",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AA",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group country = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "AD",
+          "001",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BL",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BB",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BK",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BA",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BM",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BP",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BH",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BD",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BG",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BN",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "BE",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "A",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "B",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "F",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "T",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "E",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "D",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "Z",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "R",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "G",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "H",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "K",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "AA",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group serial = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "AD",
+          "08",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Both numbers are digits."
+      }
+    },
+    {
+      "name": "group month = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BL",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BB",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BK",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BA",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BM",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BP",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BH",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BD",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BG",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BN",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "BE",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "A",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "B",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "F",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "T",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "E",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "D",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "Z",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "R",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "G",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "H",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "K",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "AA",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group month = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "AD",
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BL",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BL"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BB",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BK",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BM",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BM"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BP",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BH",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BH"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BG",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BG"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BN",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = BE",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "BE"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = A",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = B",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = F",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = T",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = E",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = D",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = Z",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = R",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = G",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = H",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = K",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AA",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group year = AD",
+      "input": {
+        "package": "indonesia_plate",
+        "spec": "id.diplomatic",
+        "validator": {
+          "class": "IndonesiaDiplomaticValidator"
+        },
+        "values": [
+          "CD",
+          "19",
+          "001",
+          "08",
+          "AD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

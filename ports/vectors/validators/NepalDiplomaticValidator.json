@@ -1,0 +1,274 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country number is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "00",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "99",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "0",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "000",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country number is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "23"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The country number is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 or 2 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "nepal_plate",
+        "spec": "np.legacy_diplomatic",
+        "validator": {
+          "class": "NepalDiplomaticValidator"
+        },
+        "values": [
+          "01",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1 or 2 digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "ZZ",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AAA",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "aa",
+          "123",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 001 to 999."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "999",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "00",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 001 to 999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 001 to 999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖ",
+          "CD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 001 to 999."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefecture is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefecture is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefecture is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefecture is 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "central_african_republic_plate",
+        "spec": "cf.private",
+        "validator": {
+          "class": "CentralAfricanRepublicValidator"
+        },
+        "values": [
+          "AB",
+          "123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefecture is 2 letters."
+      }
+    }
+  ]
+}

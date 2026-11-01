@@ -1,0 +1,498 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "A",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "Z",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "AA",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "Ж",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "a",
+          "123",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is B."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "999",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "00",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "0000",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "ЖЖЖ",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "group serial = B",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "B",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group serial = BX",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "BX",
+          "ABC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "group suffix = B",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    },
+    {
+      "name": "group suffix = BX",
+      "input": {
+        "package": "botswana_plate",
+        "spec": "bw.civil",
+        "validator": {
+          "class": "BotswanaValidator"
+        },
+        "values": [
+          "B",
+          "123",
+          "BX"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is three letters, never Q."
+      }
+    }
+  ]
+}

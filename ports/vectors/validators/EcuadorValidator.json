@@ -1,0 +1,2344 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "AAA",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "ZZZ",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "AA",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "AAAA",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "aaa",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group letters = A",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "A",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = B",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "B",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = U",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "U",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "C",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = X",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "X",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = H",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "H",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = O",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "O",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = E",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "E",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = W",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "W",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = G",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "G",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = I",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "I",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = L",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "L",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = R",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "R",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = M",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "M",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = V",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "V",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = N",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "N",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = S",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "S",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = P",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "P",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = Q",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Q",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = K",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "K",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = T",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "T",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = Z",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Z",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = Y",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Y",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group letters = J",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "J",
+          "0234"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with three letters."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = U",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "U"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = X",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = O",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "O"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = W",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = I",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "I"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = L",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = M",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = N",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = S",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Z",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Y",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = J",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "EBA",
+          "J"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "FUQ",
+          "5631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter names a province."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "FWK",
+          "9083"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter names a province."
+      }
+    },
+    {
+      "name": "random 36",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.standard",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "DNJ",
+          "9001"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The first letter names a province."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "AA",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "ZZ",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "A",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "AAA",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "aa",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group letters = B",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "B",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = U",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "U",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = C",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "C",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = X",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "X",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = H",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "H",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = O",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "O",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = E",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "E",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = W",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "W",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = G",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "G",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = I",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "I",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = L",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "L",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = R",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "R",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = M",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "M",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = V",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "V",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = N",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "N",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = S",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "S",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = P",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "P",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = Q",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Q",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = K",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "K",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = T",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "T",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = Z",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Z",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = Y",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "Y",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group letters = J",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "J",
+          "0012"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The code is CC, CD, OI, AT or IT."
+      }
+    },
+    {
+      "name": "group number = A",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = U",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "U"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = C",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = X",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = H",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "H"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = O",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "O"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = E",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "E"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = W",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "W"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = G",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "G"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = I",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "I"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = L",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = R",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = M",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "M"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = V",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "V"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = N",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "N"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = S",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "S"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Q",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "Q"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = T",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Z",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = Y",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    },
+    {
+      "name": "group number = J",
+      "input": {
+        "package": "ecuador_plate",
+        "spec": "ec.protocol",
+        "validator": {
+          "class": "EcuadorValidator"
+        },
+        "values": [
+          "CC",
+          "J"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 3 or 4 digits."
+      }
+    }
+  ]
+}

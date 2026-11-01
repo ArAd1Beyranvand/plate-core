@@ -1,0 +1,972 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "000",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "999",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "00",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "0000",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "ABC",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "AAA",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ZZZ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "AA",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "AAAA",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ЖЖЖ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "aaa",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 3
+          }
+        },
+        "values": [
+          "017",
+          "ABC",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "000",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "999",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "00",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "0000",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "ЖЖЖ",
+          "AB",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AA",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "ZZ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "A",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AAA",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "ЖЖ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "aa",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial has the wrong number of letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "iranshahr_plate",
+        "spec": "kz.non_private",
+        "validator": {
+          "class": "KazakhstanValidator",
+          "args": {
+            "letters": 2
+          }
+        },
+        "values": [
+          "050",
+          "AB",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 20."
+      }
+    }
+  ]
+}

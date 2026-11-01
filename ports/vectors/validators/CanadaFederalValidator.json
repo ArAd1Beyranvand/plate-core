@@ -1,0 +1,174 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "78759"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A federal plate has five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A federal plate has five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A federal plate has five digits."
+      }
+    },
+    {
+      "name": "group number = IOQU",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "IOQU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A federal plate has five digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.federal",
+        "validator": {
+          "class": "CanadaFederalValidator"
+        },
+        "values": [
+          "40700"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

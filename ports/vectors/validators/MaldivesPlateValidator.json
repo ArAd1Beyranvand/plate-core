@@ -1,0 +1,1060 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "Z",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "AA",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "Ж",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "a",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "Z",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "AA",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "Ж",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "a",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "0",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "9",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "00",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "Ж",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Not a vehicle category code in the published table."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "Z",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "AA",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "Ж",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "a",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "0000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "9999",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "00000",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "ЖЖЖЖ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "D"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "PP"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 lowercase",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "3665",
+          "p"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group category = A0",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "0",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group category = B2",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "2",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group category = C0",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "C",
+          "0",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group category = C1",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "C",
+          "1",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group category = C2",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "C",
+          "2",
+          "A",
+          "3665",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = A0",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "A0",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = A1",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "A1",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = B0",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "B0",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = B1",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "B1",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = B2",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "B2",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = C0",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "C0",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = C1",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "C1",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    },
+    {
+      "name": "group serial = C2",
+      "input": {
+        "package": "maldives_plate",
+        "spec": "mv.standard",
+        "validator": {
+          "class": "MaldivesPlateValidator"
+        },
+        "values": [
+          "A",
+          "B",
+          "1",
+          "A",
+          "C2",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is 1–4 digits."
+      }
+    }
+  ]
+}

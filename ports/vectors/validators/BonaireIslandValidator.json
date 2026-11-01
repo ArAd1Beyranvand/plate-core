@@ -1,0 +1,664 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "A",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "Z",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "AA",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "Ж",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "a",
+          "30"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is E."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.statia",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "E",
+            "minDigits": 1
+          }
+        },
+        "values": [
+          "E",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "A",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "Z",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "AA",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "Ж",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "a",
+          "240"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is S."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "caribbean_plate",
+        "spec": "bq.saba",
+        "validator": {
+          "class": "BonaireIslandValidator",
+          "args": {
+            "island": "S",
+            "minDigits": 3
+          }
+        },
+        "values": [
+          "S",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is up to four digits."
+      }
+    }
+  ]
+}

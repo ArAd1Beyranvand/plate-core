@@ -1,0 +1,644 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "000",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "999",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "00",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "0000",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The mission is one to three digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Pick CD or UN."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "UN",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CDCD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "Ж",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "cd",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "000",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "999",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "00",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "0000",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "ЖЖЖ",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is one to three digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "group mission = 24",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "24",
+          "CD",
+          "1",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "COUNTRY NOT FOUND"
+      }
+    },
+    {
+      "name": "group digits = 24",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "24",
+          "AK"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = 24",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "1",
+          "CD",
+          "1",
+          "24"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The register is two letters."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "277",
+          "",
+          "207",
+          "WN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Pick CD or UN."
+      }
+    },
+    {
+      "name": "random 47",
+      "input": {
+        "package": "kenya_plate",
+        "spec": "ke.diplomatic",
+        "validator": {
+          "class": "KenyaDiplomaticValidator"
+        },
+        "values": [
+          "132",
+          "",
+          "14",
+          "IH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Pick CD or UN."
+      }
+    }
+  ]
+}

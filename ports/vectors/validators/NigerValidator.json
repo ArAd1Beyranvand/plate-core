@@ -1,0 +1,726 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "",
+          "H",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "H",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "11",
+          "H",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "Ж",
+          "H",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "A",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "Z",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "AA",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "Ж",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "a",
+          "7654"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.private",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "H",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "",
+          "E",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "8",
+          "E",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "11",
+          "E",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "Ж",
+          "E",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is a digit from 1 to 8."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "A",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "Z",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "AA",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "Ж",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "a",
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "niger_plate",
+        "spec": "ne.2005.commercial",
+        "validator": {
+          "class": "NigerValidator"
+        },
+        "values": [
+          "1",
+          "E",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    }
+  ]
+}

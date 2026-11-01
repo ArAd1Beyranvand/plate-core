@@ -1,6 +1,6 @@
 """The three workers: shell/python functions, ollama (qwen) and `claude -p`. Every one streams what it
 does through `log(source, text)` so the GUI shows it as it happens."""
-import json, os, re, signal, subprocess, time, urllib.request
+import json, os, re, signal, subprocess, threading, time, urllib.request
 from pathlib import Path
 
 import config as C
@@ -96,7 +96,8 @@ def check_s1(eng, task, log):
         for f in files:
             try: json.loads(f.read_text('utf8'))
             except Exception as e: bad.append(f'{f.relative_to(C.ROOT)}: {e}')
-    for pkg in sorted(p.name for p in C.ROOT.glob('*_plate') if (p / 'pubspec.yaml').exists()):
+    # core_plate is a deprecated stub ("published by mistake"), not a country package.
+    for pkg in sorted(p.name for p in C.ROOT.glob('*_plate') if (p / 'pubspec.yaml').exists() and p.name != 'core_plate'):
         if not (C.PORTS / 'data' / 'countries' / f'{pkg}.json').exists(): bad.append(f'no data for {pkg}')
     for cls, rel in validator_classes().items():
         f = C.PORTS / 'vectors' / 'validators' / f'{cls}.json'
@@ -130,7 +131,7 @@ def snake(s):
     return re.sub(r'(?<!^)(?=[A-Z])', '_', s).lower()
 
 
-def find_target(lang, name, span=60):
+def find_target(lang, name, span=60, stem=None):
     """The target-language code around the first definition of `name` (or its snake_case form)."""
     if not name: return None
     names = [re.escape(n) for n in {name, snake(name), name[:1].lower() + name[1:]}]
@@ -146,6 +147,10 @@ def find_target(lang, name, span=60):
         for i, l in enumerate(lines):
             if any(p.search(l) for p in pats):
                 return str(f.relative_to(C.PORTS.parent)), '\n'.join(lines[max(0, i - 3):i + span])
+    # Dart widgets are often ported under another name (class -> function); the same-named file still holds it.
+    for f in [g for n in ({stem, ''.join(w.capitalize() for w in stem.split('_'))} if stem else ()) for g in sorted(root.rglob(f'{n}.{C.EXT[lang]}'))]:
+        if any(p in f.parts for p in ('node_modules', 'build', '.gradle', '__pycache__', 'test', 'tests')): continue
+        return str(f.relative_to(C.PORTS.parent)), '\n'.join(f.read_text('utf8', errors='replace').split('\n')[:150])
     return None
 
 
@@ -156,10 +161,11 @@ def expand_audit(eng, task, log, files):
     base = C.ROOT / 'plate_core' / 'lib' / 'src'
     qids = []
     for rel in files:
-        path = (base / rel).resolve()
+        # Bare names are under plate_core/lib/src; 'pkg/...' paths start at the repo root.
+        path = (C.ROOT / rel if '/' in rel and (C.ROOT / rel.split('/')[0]).is_dir() else base / rel).resolve()
         for line, text, decl in plan.todos(path, lang):
             name = decl_name(decl)
-            hit = find_target(lang, name)
+            hit = find_target(lang, name, stem=path.stem)
             qid = f'{task["id"]}.q.{path.stem}.{line + 1}'
             dart_lines = path.read_text('utf8').split('\n')
             eng.store.add_task({
@@ -172,7 +178,7 @@ def expand_audit(eng, task, log, files):
             qids.append(qid)
     eng.store.add_task({'id': f'{task["id"]}.fixlist', 'phase': phase, 'lang': lang, 'kind': 'fixlist',
                         'title': 'fix every "no" from the TODO audit', 'deps': qids, 'priority': -1,
-                        'payload': {'template': 'fixlist', 'verify': 'all'}})
+                        'payload': {'template': 'fixlist', 'verify': 'compile'}})
     log('python', f'+ {len(qids)} audit questions, 1 fix-list task')
     return {'questions': len(qids)}
 
@@ -209,17 +215,108 @@ def verify_all(eng, task, log):
     return {'ok': True}
 
 
-FUNCS = {f.__name__: f for f in (run_s1, check_s1, run_codegen, expand_audit, expand_units, verify_all)}
+ARCH_SECTIONS = ('Current gallery', 'Reuse', 'Decisions', 'Registry', 'Protocol', 'Browser limits',
+                 'Build and deploy', 'Migration', 'Open questions')
+
+
+def check_arch(eng, task, log):
+    """A0: WEB_ARCH.md has every section and W-decisions, and the two drafts exist."""
+    f = C.ROOT / 'claude' / 'port' / 'WEB_ARCH.md'
+    if not f.exists(): raise RuntimeError(f'{f.relative_to(C.ROOT)} does not exist')
+    s = f.read_text(encoding='utf8')
+    missing = [h for h in ARCH_SECTIONS if not re.search(rf'^## {h}\b', s, re.M)]
+    if missing: raise RuntimeError(f'WEB_ARCH.md lacks sections: {", ".join(missing)}')
+    if not re.search(r'\*\*W1\b', s): raise RuntimeError('WEB_ARCH.md has no **W1** decision')
+    for d in ('components.schema.json', 'protocol.md'):
+        if not (C.ROOT / 'claude' / 'port' / 'web' / d).exists(): raise RuntimeError(f'claude/port/web/{d} missing')
+    json.loads((C.ROOT / 'claude' / 'port' / 'web' / 'components.schema.json').read_text())
+    n = len(re.findall(r'\*\*W\d+', s))
+    log('python', f'WEB_ARCH.md: {n} decisions')
+    return {}
+
+
+def web_smoke(eng, task, log, countries=('germany', 'india')):
+    """S5 build: two countries build on their own, neither carries the other, the registry lists both."""
+    lang, c = task['lang'], contract(task['lang'])
+    for k in ('web_build', 'web_build_all', 'web_out'):
+        if not c.get(k): raise RuntimeError(f'portctl.json has no "{k}"')
+    for country in countries:
+        ok, out = sh(c['web_build'].replace('{country}', country), C.PORTS / lang, log, timeout=1800)
+        if not ok: raise RuntimeError(compact_error(out))
+    out_dir = C.ROOT / c['web_out'] / 'components'
+    for country in countries:
+        d = out_dir / country / plan.WEB_LANG[lang]
+        if not (d / 'index.html').exists(): raise RuntimeError(f'{d.relative_to(C.ROOT)}/index.html missing')
+        for other in countries:
+            if other == country: continue
+            hits = [f.name for f in d.rglob('*') if f.is_file() and f.stat().st_size < 50_000_000
+                    and other.encode() in f.read_bytes().lower()]
+            if hits: raise RuntimeError(f'{country}/{lang} contains "{other}": {", ".join(hits[:5])}')
+        log('python', f'{country}/{lang}: {sum(f.stat().st_size for f in d.rglob("*") if f.is_file()) // 1024} KiB')
+    ok, out = sh('python3 ports/web/registry.py && python3 ports/web/registry.py --check', C.ROOT, log)
+    if not ok: raise RuntimeError(compact_error(out))
+    return {}
+
+
+def expand_retrofit(eng, task, log):
+    """A1: a Claude task per port that existed before WEB_ARCH.md, to bring it in line."""
+    ids = []
+    for lang in C.LANGS:
+        if not (C.PORTS / lang / 'portctl.json').exists(): continue
+        tid = f'a1.{lang}.retrofit'
+        eng.store.add_task(plan.claude(tid, 'A1', f'align existing {plan.NAMES[lang]} port with WEB_ARCH.md',
+                                       'a1_retrofit', lang=lang, verify='all'))
+        ids.append(tid)
+    log('python', f'+ retrofit: {", ".join(ids) or "none (no port exists yet)"}')
+    return {'tasks': ids}
+
+
+FUNCS = {f.__name__: f for f in (expand_retrofit, run_s1, check_s1, run_codegen, expand_audit, expand_units, verify_all,
+                                 check_arch, web_smoke)}
 
 
 # ---- ollama ---------------------------------------------------------------------------------
+
+_server = None
+_server_lock = threading.Lock()
+
+
+def ensure_ollama(log, model):
+    """Starts portctl's own `ollama serve` (OLLAMA_NUM_PARALLEL slots) if nothing answers on C.OLLAMA."""
+    def up():
+        try: urllib.request.urlopen(C.OLLAMA + '/api/version', timeout=2); return True
+        except OSError: return False
+    with _server_lock: _start(up, log)
+    return C.OLLAMA if model in _models(C.OLLAMA) else C.OLLAMA_SYSTEM
+
+
+def _models(url):
+    try: return {m['name'] for m in json.load(urllib.request.urlopen(url + '/api/tags', timeout=5))['models']}
+    except OSError: return set()
+
+
+def _start(up, log):
+    global _server
+    if up(): return
+    host = C.OLLAMA.split('//')[1]
+    env = {**os.environ, 'OLLAMA_HOST': host, 'OLLAMA_NUM_PARALLEL': str(C.OLLAMA_PARALLEL),
+           'OLLAMA_MAX_LOADED_MODELS': '2'}
+    _server = subprocess.Popen(['ollama', 'serve'], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+                               start_new_session=True)
+    log('python', f'started ollama on {host} with {C.OLLAMA_PARALLEL} parallel slots')
+    for _ in range(40):
+        if up(): return
+        time.sleep(0.5)
+    raise RuntimeError('ollama did not start')
+
 
 def qwen(model, prompt, log, num_predict=C.QWEN_MAX_OUTPUT, stop=lambda: False, system=None):
     """Streams one /api/generate. Returns (text, stats) with measured rates in tok/s."""
     body = {'model': model, 'prompt': prompt, 'stream': True, 'think': False,
             'options': {'num_ctx': C.QWEN_CTX, 'num_predict': num_predict, 'temperature': 0.1}}
     if system: body['system'] = system
-    req = urllib.request.Request(C.OLLAMA + '/api/generate', json.dumps(body).encode(),
+    url = ensure_ollama(log, model)
+    req = urllib.request.Request(url + '/api/generate', json.dumps(body).encode(),
                                  {'Content-Type': 'application/json'})
     text, buf, last, start, first = [], '', time.time(), time.time(), None
     final = {}
@@ -242,7 +339,7 @@ def qwen(model, prompt, log, num_predict=C.QWEN_MAX_OUTPUT, stop=lambda: False, 
     if buf: log('qwen.out', buf)
     ns = 1e9
     st = {'tok_in': final.get('prompt_eval_count', 0), 'tok_out': final.get('eval_count', 0),
-          'seconds': time.time() - start}
+          'seconds': time.time() - start, 'truncated': final.get('done_reason') == 'length'}
     st['rate_in'] = st['tok_in'] / (final.get('prompt_eval_duration', 0) / ns or 1e9)
     st['rate_out'] = st['tok_out'] / (final.get('eval_duration', 0) / ns or 1e9)
     log('qwen', f'■ {st["tok_in"]} in @ {st["rate_in"]:.1f}/s · {st["tok_out"]} out @ {st["rate_out"]:.1f}/s · '
@@ -254,6 +351,13 @@ def code_block(text):
     """The longest fenced block of a model answer, or the whole answer if it has none."""
     blocks = re.findall(r'```[\w+-]*\n(.*?)```', text, re.S)
     return (max(blocks, key=len) if blocks else text).strip() + '\n'
+
+
+def tidy(lang, code):
+    """Mechanical slips qwen repeats: Dart raw strings and `extends` on an interface."""
+    if lang != 'ts': return code
+    code = re.sub(r"\br(['\"])([^'\"\n]*)\1", lambda m: 'String.raw`' + m.group(2) + '`', code)
+    return re.sub(r'\bextends PlateValidator\b', 'implements PlateValidator', code)
 
 
 # ---- claude ---------------------------------------------------------------------------------

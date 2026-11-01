@@ -1,0 +1,365 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "Z",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "AA",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "Ж",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "a",
+          "0412",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The prefix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "burundi_plate",
+        "spec": "bi.standard",
+        "validator": {
+          "class": "BurundiValidator"
+        },
+        "values": [
+          "A",
+          "0412",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The suffix is 1 letter."
+      }
+    }
+  ]
+}

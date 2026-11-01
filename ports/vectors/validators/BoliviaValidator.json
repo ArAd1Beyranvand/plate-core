@@ -1,0 +1,1676 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0000",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "9999",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "000",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "00000",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "PHD",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "AAA",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "ZZZ",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "AA",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "AAAA",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "ЖЖЖ",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "aaa",
+          "L"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "1852",
+          "PHD",
+          "c"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "000",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "999",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "00",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0000",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "SOE",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "AAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "ZZZ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "AA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "AAAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "ЖЖЖ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "aaa",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta3.priv",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "354",
+          "SOE",
+          "c"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0000",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "9999",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "000",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "00000",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "HDW",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "AAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "ZZZ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "AA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "AAAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "ЖЖЖ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "aaa",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.pub",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0790",
+          "HDW",
+          "c"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "0000",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "9999",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "000",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "00000",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "IIU",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is three or four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "AAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "ZZZ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "AA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "AAAA",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "ЖЖЖ",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "aaa",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is three letters."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "C"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "T"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "CC"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "bolivia_plate",
+        "spec": "bo.pta4.gov",
+        "validator": {
+          "class": "BoliviaValidator"
+        },
+        "values": [
+          "4649",
+          "IIU",
+          "c"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The department is one of C H B L O N P S T."
+      }
+    }
+  ]
+}

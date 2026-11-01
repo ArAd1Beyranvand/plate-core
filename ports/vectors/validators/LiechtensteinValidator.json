@@ -1,0 +1,7701 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "28916"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "34279"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "47713"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "13098"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "47924"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "24633"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "12345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "36292"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "33609"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "45841"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "2345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A standard number is 1–20 (official) or 2000–50000."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "30145"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "25520"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1,
+                20
+              ],
+              [
+                2000,
+                50000
+              ]
+            ],
+            "reason": "A standard number is 1–20 (official) or 2000–50000."
+          }
+        },
+        "values": [
+          "44587"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "65100"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A trailer number is 65100–70000."
+      }
+    },
+    {
+      "name": "random 57",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "67517"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 80",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "69061"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 106",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                65100,
+                70000
+              ]
+            ],
+            "reason": "A trailer number is 65100–70000."
+          }
+        },
+        "values": [
+          "65822"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "50123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                50000,
+                50299
+              ]
+            ],
+            "reason": "A short-term number is 50000–50299."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A short-term number is 50000–50299."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "1943"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "336"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 56",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "1602"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 58",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "28"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "345"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "326"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 30",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "86"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 55",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "83"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "5012"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+      }
+    },
+    {
+      "name": "random 20",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "51"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "44"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                21,
+                2000
+              ],
+              [
+                5000,
+                9999
+              ]
+            ],
+            "reason": "A special-vehicle number is 21–2000, or from 5000 for a trailer."
+          }
+        },
+        "values": [
+          "5813"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "7123"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A light motorcycle number is 7000–7999."
+      }
+    },
+    {
+      "name": "random 111",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "7505"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 187",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                7000,
+                7999
+              ]
+            ],
+            "reason": "A light motorcycle number is 7000–7999."
+          }
+        },
+        "values": [
+          "7578"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "00",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "99",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "0",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "000",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "ЖЖ",
+          "013"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "0",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A moped number is 80000–89999."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.moped",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                80000,
+                89999
+              ]
+            ],
+            "reason": "A moped number is 80000–89999."
+          }
+        },
+        "values": [
+          "87",
+          "479"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "101"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "263"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "127"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "232"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "102"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer number is 101–300."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "247"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "207"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                101,
+                300
+              ]
+            ],
+            "reason": "A dealer number is 101–300."
+          }
+        },
+        "values": [
+          "273"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "507"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle dealer number is from 501."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle dealer number is from 501."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle dealer number is from 501."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle dealer number is from 501."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A motorcycle dealer number is from 501."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "735"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 8",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.dealer.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                501,
+                999
+              ]
+            ],
+            "reason": "A motorcycle dealer number is from 501."
+          }
+        },
+        "values": [
+          "650"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "00000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "99999",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "000000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "random 37",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "11"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "00000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "99999",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "000000",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "92999",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0",
+          "12"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "random 59",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "78"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "00000",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "99999",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0000",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "000000",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "ЖЖЖЖЖ",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "95008",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "0",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary number is 90000–92999 or 95000–95099."
+      }
+    },
+    {
+      "name": "random 18",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                90000,
+                92999
+              ],
+              [
+                95000,
+                95099
+              ]
+            ],
+            "reason": "A temporary number is 90000–92999 or 95000–95099."
+          }
+        },
+        "values": [
+          "",
+          "33"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "0000",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "9999",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "000",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "00000",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "1843",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "0",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A temporary motorcycle number is from 1801."
+      }
+    },
+    {
+      "name": "random 18",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.temporary.motorcycle",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                1801,
+                1999
+              ]
+            ],
+            "reason": "A temporary motorcycle number is from 1801."
+          }
+        },
+        "values": [
+          "",
+          "15"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "612"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "799"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "643"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 31",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.front",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "768"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "612"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "random 20",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "685"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 28",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "718"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 34",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.long",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "686"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "655"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "group serial = 0",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A customs number is from 600 (cars) or 700."
+      }
+    },
+    {
+      "name": "random 1",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "672"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 3",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "600"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 24",
+      "input": {
+        "package": "liechtenstein_plate",
+        "spec": "li.customs.square",
+        "validator": {
+          "class": "LiechtensteinValidator",
+          "args": {
+            "ranges": [
+              [
+                600,
+                799
+              ]
+            ],
+            "reason": "A customs number is from 600 (cars) or 700."
+          }
+        },
+        "values": [
+          "768"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

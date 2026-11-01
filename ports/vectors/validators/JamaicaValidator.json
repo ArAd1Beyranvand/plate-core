@@ -1,0 +1,292 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "0000",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "9999",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "000",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "00000",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "ЖЖЖЖ",
+          "Y"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The serial is four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "jamaica_plate",
+        "spec": "jm.private",
+        "validator": {
+          "class": "JamaicaValidator"
+        },
+        "values": [
+          "5269",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is one or two letters."
+      }
+    }
+  ]
+}

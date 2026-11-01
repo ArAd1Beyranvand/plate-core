@@ -1,0 +1,346 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ministry code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "00",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "99",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "0",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ministry code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "000",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ministry code is two digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The ministry code is two digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is one to six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle number is one to six digits."
+      }
+    },
+    {
+      "name": "group ministry = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "01",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = 0000",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = 01",
+      "input": {
+        "package": "tunisia_plate",
+        "spec": "tn.government",
+        "validator": {
+          "class": "TunisiaGovernmentValidator"
+        },
+        "values": [
+          "67",
+          "01"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

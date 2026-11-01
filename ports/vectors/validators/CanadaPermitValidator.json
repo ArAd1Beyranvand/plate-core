@@ -1,0 +1,328 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "Z",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "AA",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit starts with one letter."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "Ж",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "a",
+          "086511"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit has six digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "999999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit has six digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "0000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit has six digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "ЖЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit has six digits."
+      }
+    },
+    {
+      "name": "group number = IOQU",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "A",
+          "IOQU"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A permit has six digits."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "U",
+          "761889"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I, O, Q and U are not used in serials."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "I",
+          "688810"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I, O, Q and U are not used in serials."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "canada_plate",
+        "spec": "ca.permit",
+        "validator": {
+          "class": "CanadaPermitValidator"
+        },
+        "values": [
+          "U",
+          "952631"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I, O, Q and U are not used in serials."
+      }
+    }
+  ]
+}

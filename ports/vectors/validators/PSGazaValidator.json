@@ -1,0 +1,1524 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "3446",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "33",
+          "3446",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "Ж",
+          "3446",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "0000",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9999",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "000",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "00000",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "ЖЖЖЖ",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group usage = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3446",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "9306",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "33",
+          "9306",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "Ж",
+          "9306",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "0000",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9999",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "000",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "00000",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "ЖЖЖЖ",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group usage = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2012.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9306",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "9815",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "33",
+          "9815",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "Ж",
+          "9815",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "0000",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9999",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "000",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "00000",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "ЖЖЖЖ",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3",
+          "56"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group usage = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.2021.car2l",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9815",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "",
+          "5904",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "33",
+          "5904",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "Ж",
+          "5904",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A Gaza plate always begins with 3."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "0000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "9999",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "00000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "ЖЖЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    },
+    {
+      "name": "group serial = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "3",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Serial must be four digits."
+      }
+    },
+    {
+      "name": "group usage = 3",
+      "input": {
+        "package": "palestine_plate",
+        "spec": "ps.gz.moto",
+        "validator": {
+          "class": "PSGazaValidator"
+        },
+        "values": [
+          "3",
+          "5904",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Usage code is not a legal Gaza class (00-29 or 40-59)."
+      }
+    }
+  ]
+}

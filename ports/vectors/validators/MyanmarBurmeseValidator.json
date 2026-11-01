@@ -1,0 +1,1084 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "0",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "အ",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "00",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "Ж",
+          "2",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "0",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "အ",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "00",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "Ж",
+          "3",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "0",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "အ",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "00",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The top row is three characters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "Ж",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group letters = AYY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "A",
+          "Y",
+          "Y",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = BGO",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "B",
+          "G",
+          "O",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = CHN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "C",
+          "H",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KYH",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "K",
+          "Y",
+          "H",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KCN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "K",
+          "C",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = KYN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "K",
+          "Y",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MGY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "M",
+          "G",
+          "Y",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MDY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "M",
+          "D",
+          "Y",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = MON",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = NPW",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "N",
+          "P",
+          "W",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = RKE",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "R",
+          "K",
+          "E",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SGG",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "S",
+          "G",
+          "G",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = SHN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "S",
+          "H",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = TNI",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "T",
+          "N",
+          "I",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group letters = YGN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "Y",
+          "G",
+          "N",
+          "45678"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group serial = AYY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "AYY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = BGO",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "BGO"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = CHN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "CHN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = KYH",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "KYH"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = KCN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "KCN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = KYN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "KYN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = MGY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "MGY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = MDY",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "MDY"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = MON",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "MON"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = NPW",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "NPW"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = RKE",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "RKE"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = SGG",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "SGG"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = SHN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "SHN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = TNI",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "TNI"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    },
+    {
+      "name": "group serial = YGN",
+      "input": {
+        "package": "myanmar_plate",
+        "spec": "mm.burmese",
+        "validator": {
+          "class": "MyanmarBurmeseValidator"
+        },
+        "values": [
+          "1",
+          "2",
+          "3",
+          "YGN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is five numerals."
+      }
+    }
+  ]
+}

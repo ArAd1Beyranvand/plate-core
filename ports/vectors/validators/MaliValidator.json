@@ -1,0 +1,441 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AA",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "ZZ",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "A",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AAA",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "aa",
+          "1234",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "9999",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "00000",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖЖ",
+          "MD"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Format is 2 letters, 4 digits, 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "mali_plate",
+        "spec": "ml.standard",
+        "validator": {
+          "class": "MaliValidator"
+        },
+        "values": [
+          "AB",
+          "1234",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    }
+  ]
+}

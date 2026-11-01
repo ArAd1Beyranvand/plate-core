@@ -1,0 +1,2512 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "9999",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "00000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖЖ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 2 letters."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "9999",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "00000",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "ЖЖЖЖ",
+          "02"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.standard_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AB",
+          "0123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 01 to 08."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "9999",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "00000",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "ЖЖЖЖ",
+          "AB"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.legacy_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "9999",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "00000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "ЖЖЖЖ",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AA",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ZZ",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "A",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "AAA",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "aa",
+          "0123",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region code is 2 letters (RC is Conakry)."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "9999",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "00000",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "ЖЖЖЖ",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "guinea_plate",
+        "spec": "gn.taxi_square",
+        "validator": {
+          "class": "GuineaValidator"
+        },
+        "values": [
+          "RC",
+          "0123",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 or 2 letters."
+      }
+    }
+  ]
+}

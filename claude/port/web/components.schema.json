@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "plate component registry (components/index.json)",
+  "type": "object",
+  "required": ["version", "components"],
+  "properties": {
+    "version": { "const": 1 },
+    "generated": { "type": "string", "format": "date-time" },
+    "components": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "additionalProperties": {
+        "type": "object",
+        "propertyNames": { "enum": ["flutter", "typescript", "kotlin", "python"] },
+        "additionalProperties": {
+          "type": "object",
+          "required": ["url", "hash"],
+          "properties": {
+            "url": { "type": "string", "pattern": "^/components/[a-z0-9-]+/[a-z]+/$" },
+            "hash": { "type": "string", "minLength": 6 },
+            "size": { "type": "integer", "description": "bytes of the country's own assets, runtime excluded" }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "shards": {
+      "type": "object",
+      "description": "country -> URL of a per-country registry, for when one file grows too large",
+      "additionalProperties": { "type": "string" }
+    }
+  },
+  "additionalProperties": false
+}

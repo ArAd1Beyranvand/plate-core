@@ -1,0 +1,4048 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "山梨",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧尾張小牧",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "Ж",
+          "500",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "000",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "ZZZ",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "00",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "0000",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "ЖЖЖ",
+          "さ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "わ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "ささ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "Ж",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "00",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "・・",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "0",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "ЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "多摩",
+          "500",
+          "さ",
+          "46",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松戸",
+          "JTM",
+          "",
+          "・1",
+          "39"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 7",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "上越",
+          "RRI",
+          "",
+          "68",
+          "17"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "0PC",
+          "や",
+          "74",
+          "21"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 27",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "B9B",
+          "ゆ",
+          "43",
+          "40"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "山梨",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧尾張小牧",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "Ж",
+          "500",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "000",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "ZZZ",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "00",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "0000",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "ЖЖЖ",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "を",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "ああ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "Ж",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "00",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "・・",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "0",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "ЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "京都",
+          "500",
+          "あ",
+          "46",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "UGU",
+          "を",
+          "34",
+          "90"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 4",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "7OM",
+          "う",
+          "・3",
+          "94"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 11",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "滋賀",
+          "ATQ",
+          "",
+          "68",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 17",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "世田谷",
+          "TZZ",
+          "",
+          "・3",
+          "20"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "山梨",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧尾張小牧",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "Ж",
+          "580",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "000",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "ZZZ",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "00",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "0000",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "ЖЖЖ",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "を",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "ああ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "Ж",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "00",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "・・",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "0",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "ЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "580",
+          "あ",
+          "46",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "random 15",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "WZD",
+          "か",
+          "",
+          "95"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 21",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "WBQ",
+          "の",
+          "85",
+          "77"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 25",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "広島",
+          "6EN",
+          "",
+          "00",
+          "53"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 42",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_private",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "佐賀",
+          "6GZ",
+          "",
+          "31",
+          "66"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "山梨",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧尾張小牧",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "Ж",
+          "480",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "000",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "ZZZ",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "00",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "0000",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "ЖЖЖ",
+          "り",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A class code is two digits, then a digit or a letter."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "れ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "りり",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "Ж",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "00",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "・・",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "0",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "ЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "鹿児島",
+          "480",
+          "り",
+          "46",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "random 2",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "北見",
+          "L1O",
+          "",
+          "0・",
+          "47"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "とちぎ",
+          "OR6",
+          "",
+          "71",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 21",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "WJC",
+          "れ",
+          "81",
+          "87"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 45",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.kei_commercial",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "5Z9",
+          "り",
+          "38",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "山梨",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "尾張小牧尾張小牧",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "Ж",
+          "あ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "を",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "ああ",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "Ж",
+          "46",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "00",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "・・",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "0",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "000",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "ЖЖ",
+          "49"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "松本",
+          "あ",
+          "46",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A serial is four places; leading zeros are printed as dots."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "あ",
+          "1",
+          "34"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 12",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "ね",
+          "82",
+          "33"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 49",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "青森",
+          "",
+          "18",
+          "17"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "random 55",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.motorcycle",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "香川",
+          "",
+          "44",
+          "89"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate is an office, a class code, a hiragana and a four-place serial."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "13401"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.diplomatic",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "39792"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "AAA",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "ZZZ",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "AA",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "AAAA",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "aaa",
+          "HA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "AA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "ZZ",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "A",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "AAA",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "ЖЖ",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "aa",
+          "3219"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "9999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "STO",
+          "HA",
+          "ЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "An export plate is two or three letters, one or two letters and four digits."
+      }
+    },
+    {
+      "name": "random 6",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "BB",
+          "9502"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    },
+    {
+      "name": "random 20",
+      "input": {
+        "package": "japan_plate",
+        "spec": "jp.export",
+        "validator": {
+          "class": "JapanValidator"
+        },
+        "values": [
+          "",
+          "WL",
+          "6779"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A diplomatic plate is five digits."
+      }
+    }
+  ]
+}

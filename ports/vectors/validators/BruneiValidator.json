@@ -1,0 +1,4719 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Z",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "AA",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Ж",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "a",
+          "A",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Z",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "AA",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Ж",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "a",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "0",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "9",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "00",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "Ж",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "5",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "5",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "B",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "K",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "P",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "0",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "random 38",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "7",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 72",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "random 149",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "7",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 245",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "2",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "random 288",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 375",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.22",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "O",
+          "2",
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "A",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Z",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "AA",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Ж",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "a",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "Z",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "AA",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "Ж",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "a",
+          "A",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "Z",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "AA",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "Ж",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "a",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "0",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "9",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "00",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "Ж",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "0",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "9",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "00",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "Ж",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "0",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "9",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "00",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "Ж",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 6 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 6 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "1",
+          "2",
+          "3",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group prefix = MOD",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "group prefix = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "",
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group number = MOD",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "M",
+          "O",
+          "D",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "B",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "K",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "P",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "A",
+          "A",
+          "0",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "X",
+          "B",
+          "",
+          "1",
+          "5",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "random 69",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "I",
+          "O",
+          "",
+          "6",
+          "8",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 110",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "G",
+          "0",
+          "9",
+          "7",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "random 133",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "1",
+          "9",
+          "",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 194",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Y",
+          "D",
+          "2",
+          "0",
+          "3",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "random 202",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "T",
+          "I",
+          "1",
+          "1",
+          "3",
+          "7"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 275",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "W",
+          "O",
+          "",
+          "6",
+          "0",
+          "4"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 284",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "W",
+          "3",
+          "4",
+          "9",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "A",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Z",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "AA",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Ж",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "a",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "A",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "Z",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "AA",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "Ж",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "a",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "A",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "Z",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "AA",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "Ж",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "a",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "0",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "9",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "00",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "Ж",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "0",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "00",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "Ж",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "0",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "9",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "00",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "Ж",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 6 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "0",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "9",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 6 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "00",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 6 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "Ж",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 7 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 7 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 7 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 7 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 7 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Only a MOD plate has a branch letter."
+      }
+    },
+    {
+      "name": "group prefix = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "group prefix = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "",
+          "1",
+          "9",
+          "2",
+          "5",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group number = MOD",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "M",
+          "O",
+          "D",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "B",
+          "",
+          "",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "K",
+          "",
+          "",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "P",
+          "",
+          "",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "0",
+          "",
+          "",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "group suffix = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "B"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "P"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group suffix = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "M",
+          "O",
+          "D",
+          "1",
+          "9",
+          "2",
+          "5",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "random 5",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "H",
+          "O",
+          "0",
+          "8",
+          "4",
+          "2",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 9",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "Q",
+          "L",
+          "7",
+          "0",
+          "7",
+          "7",
+          "K"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Only a MOD plate has a branch letter."
+      }
+    },
+    {
+      "name": "random 21",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "F",
+          "6",
+          "",
+          "6",
+          "6",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "Only a MOD plate has a branch letter."
+      }
+    },
+    {
+      "name": "random 46",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "S",
+          "I",
+          "1",
+          "9",
+          "5",
+          "5",
+          "I"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 67",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "R",
+          "A",
+          "5",
+          "7",
+          "7",
+          "1",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "random 80",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Y",
+          "U",
+          "4",
+          "5",
+          "0",
+          "0",
+          "J"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "random 134",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "W",
+          "J",
+          "3",
+          "1",
+          "1",
+          "2",
+          "R"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "random 141",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "I",
+          "H",
+          "",
+          "",
+          "6",
+          "1",
+          "F"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "I and O are not issued on Brunei plates."
+      }
+    },
+    {
+      "name": "random 217",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.34s",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "",
+          "6",
+          "6",
+          "7",
+          "0",
+          "X"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "A",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Z",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "AA",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "Ж",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "a",
+          "P",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "A",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Z",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "AA",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "Ж",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "a",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A K series runs from KA to KP."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "0",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "9",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "00",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "Ж",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "0",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "9",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "00",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "Ж",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "9",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 4 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "00",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 4 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "Ж",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 cleared",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 first",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 last",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          "9"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 5 too long",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "slot 5 wrong script",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "4",
+          "7",
+          "0",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group prefix = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "B",
+          "",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group prefix = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "P",
+          "",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group prefix = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "0",
+          "",
+          "4",
+          "7",
+          "0",
+          "8"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with B or K, or is MOD."
+      }
+    },
+    {
+      "name": "group number = MOD",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "M",
+          "O",
+          "D",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = B",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "B",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = K",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "K",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = P",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "P",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 1 to 9999."
+      }
+    },
+    {
+      "name": "group number = 0",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "P",
+          "0",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    },
+    {
+      "name": "random 16",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          "0",
+          "9",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 22",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "K",
+          "9",
+          "0",
+          "8",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "random 75",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "7",
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 77",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "K",
+          "",
+          "6",
+          "6",
+          "6",
+          "3"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "There is no plate with the single letter K."
+      }
+    },
+    {
+      "name": "random 82",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "",
+          "0",
+          "6",
+          "8",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A plate starts with letters."
+      }
+    },
+    {
+      "name": "random 136",
+      "input": {
+        "package": "brunei_plate",
+        "spec": "bn.single.24",
+        "validator": {
+          "class": "BruneiValidator"
+        },
+        "values": [
+          "",
+          "B",
+          "0",
+          "1",
+          "3",
+          "6"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number has no leading zero."
+      }
+    }
+  ]
+}

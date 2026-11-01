@@ -1,0 +1,2783 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "0",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "9",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "00",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "Ж",
+          "ABC",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AAA",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZZZ",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AA",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AAAA",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ЖЖЖ",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "aaa",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group letters = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZZ",
+          "003"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.private",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ABC",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "0",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "9",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "00",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "Ж",
+          "ZAV",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AAA",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZZZ",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer plate (first letter Z) has a second letter from A to Y."
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AA",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "AAAA",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ЖЖЖ",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "aaa",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group letters = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZZ",
+          "257"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "1",
+          "ZAV",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "random 96",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "5",
+          "ZZI",
+          "665"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer plate (first letter Z) has a second letter from A to Y."
+      }
+    },
+    {
+      "name": "random 332",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.plain",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "5",
+          "ZZD",
+          "756"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A dealer plate (first letter Z) has a second letter from A to Y."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AA",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ZZ",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "A",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AAA",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "aa",
+          "16",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "00",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "99",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "0",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "000",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "ЖЖ",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "ZZZ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "AAAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "aaa"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "group number = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "ZZ",
+          "DRN"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group letters = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.temporary",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "XA",
+          "16",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "999",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "00",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "0000",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ЖЖЖ",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group series = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ZZ",
+          "200"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.vintage",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AA",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ZZ",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "A",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AAA",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "aa",
+          "119"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.diplomatic",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AT",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "2"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "99"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "0"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group number = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.royal",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "26287"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "00000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "99999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "000000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ЖЖЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "random 0",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.military",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "25532"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "A",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "9",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "AA",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "Ж",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "a",
+          "AXJ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AAA",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "ZZZ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AA",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AAAA",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "ЖЖЖ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "aaa",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "000"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "999"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "00"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "0000"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "ЖЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    },
+    {
+      "name": "group letters = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "ZZ",
+          "464"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "group serial = ZZ",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "M",
+          "AXJ",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field has the wrong number of symbols."
+      }
+    },
+    {
+      "name": "random 13",
+      "input": {
+        "package": "belgium_plate",
+        "spec": "be.motorcycle",
+        "validator": {
+          "class": "BelgiumValidator"
+        },
+        "values": [
+          "2",
+          "SLD",
+          "808"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "A field mixes letters and digits."
+      }
+    }
+  ]
+}

@@ -1,0 +1,1164 @@
+{
+  "cases": [
+    {
+      "name": "sample",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "00",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "99",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "0",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "000",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "A",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "Z",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "AA",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "Ж",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "a",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "0000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "9999",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "00000",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "ЖЖЖЖ",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          "Z"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          "Ж"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "1234",
+          "a"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "group region = TT",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "TT",
+          "V",
+          "1234",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "group number = TT",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.private",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "23",
+          "V",
+          "TT",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "sample",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "empty",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "",
+          "",
+          "",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "unset",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 0 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "00",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "99",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 partial",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "0",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "000",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 0 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "ЖЖ",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "slot 1 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "A",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "Z",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 1 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "AA",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "Ж",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 1 lowercase",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "a",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The vehicle type is 1 letter (B, C, M, P, S, T, V)."
+      }
+    },
+    {
+      "name": "slot 2 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0000",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "9999",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 2 partial",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "000",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "00000",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 2 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "ЖЖЖЖ",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    },
+    {
+      "name": "slot 3 cleared",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          ""
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 first",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "AA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 last",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "ZZ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 partial",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "A"
+        ]
+      },
+      "expect": {
+        "valid": true,
+        "reason": null
+      }
+    },
+    {
+      "name": "slot 3 too long",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "AAA"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 wrong script",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "ЖЖ"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "slot 3 lowercase",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "0329",
+          "aa"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The series is 1 letter, or TT on a temporary plate."
+      }
+    },
+    {
+      "name": "group region = TT",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "TT",
+          "C",
+          "0329",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The region is 01 to 23."
+      }
+    },
+    {
+      "name": "group number = TT",
+      "input": {
+        "package": "chad_plate",
+        "spec": "td.temporary",
+        "validator": {
+          "class": "ChadValidator"
+        },
+        "values": [
+          "09",
+          "C",
+          "TT",
+          "TT"
+        ]
+      },
+      "expect": {
+        "valid": false,
+        "reason": "The number is 4 digits."
+      }
+    }
+  ]
+}
