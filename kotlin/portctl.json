@@ -1,0 +1,12 @@
+{
+  "oracle_all": "./gradlew -q --console=plain jvmTest -Pstubs=skip jsBrowserDistribution wasmJsBrowserDistribution && node web/check.mjs",
+  "oracle_unit": "./gradlew -q --console=plain jvmTest --tests \"*.$(basename {unit_test} .kt)\"",
+  "compile": "./gradlew -q --console=plain compileKotlinJvm compileKotlinJs compileKotlinWasmJs",
+  "codegen": "node codegen/gen.mjs",
+  "unit_path": "src/commonMain/kotlin/plates/countries/{country}/{Stem}.kt",
+  "unit_test_path": "src/jvmTest/kotlin/plates/countries/{country}/{Stem}Test.kt",
+  "web_check": "./gradlew -q --console=plain jsBrowserDistribution wasmJsBrowserDistribution && node web/check.mjs",
+  "web_build": "./gradlew -q --console=plain webBuild -Pcountry={country}",
+  "web_out": "deploy",
+  "web_build_all": "node web/build.mjs"
+}
