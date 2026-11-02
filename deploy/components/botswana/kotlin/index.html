@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Botswana license plates · Kotlin</title>
+<meta name="description" content="Botswana license plates in Kotlin. The library draws 2 plate formats for Botswana, among them Private, Public service and Government. Type a registration and see it drawn live.">
+<link rel="canonical" href="https://platexample.ir/plates/botswana/kotlin">
+<style>
+  body{margin:0;padding:8px;font:16px system-ui,sans-serif;color:#202124;background:transparent}
+  [data-theme=dark] body{color:#e8eaed}
+  #splash{display:flex;flex-direction:column;gap:4px;padding:16px}
+  #splash h1{font-size:18px;margin:0}
+  #splash p{margin:0;color:#5f6368}
+</style>
+</head>
+<body>
+<div id="splash"><h1>Botswana license plates in Kotlin</h1><p>The library draws 2 plate formats for Botswana, among them Private, Public service and Government. A typical registration reads B123ABC. This page runs the Kotlin port: type a registration and watch the plate take shape and get checked as you go.</p><p id="splash-status">Starting Kotlin…</p></div>
+<div id="app"></div>
+<script>
+// One build only (W5): Wasm when WasmGC validates, JS IR otherwise. `?build=js|wasm` forces one (tests).
+// A classic script, not import(): webpack's runtime finds its asset path through document.currentScript.
+var gc = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0]);
+var forced = new URLSearchParams(location.search).get('build');
+var wasm = forced ? forced === 'wasm' : WebAssembly.validate(gc);
+var tag = document.createElement('script');
+tag.src = wasm ? './wasm-d324b01498/plates.js' : './js-e605c9d15e/plates.js';
+tag.onerror = function () {
+  document.getElementById('splash-status').textContent = 'Could not start Kotlin.';
+  parent.postMessage({ ns: 'plate-embed', v: 1, type: 'error', payload: { code: 'load_failed', message: 'could not load ' + tag.src, fatal: true } }, '' || location.origin);
+};
+document.body.appendChild(tag);
+</script>
+</body>
+</html>

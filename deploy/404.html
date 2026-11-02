@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    The deep-link fallback.
+
+    This app uses path URLs (no `#`), so `platexample.ir/discover/iran/private-car`
+    is a real request the host sees before Flutter boots. A static host — GitHub
+    Pages, which is what serves this — has no file at that path and answers 404.
+    Pages serves this document for any such miss, and because it boots the same
+    app as index.html, Flutter then reads the original URL out of the address
+    bar and routes to it. Without this file every URL but `/` 404s on reload or
+    when pasted, while in-app navigation works, since that never leaves the
+    page.
+
+    Keep this in sync with index.html. The one deliberate difference is the base
+    href below: `flutter build web` substitutes `$FLUTTER_BASE_HREF` only in
+    files named `index.html`, so writing the placeholder here would ship it
+    literally. This site is served from the domain root, hence "/". A build with
+    a different --base-href needs this line changed to match.
+  -->
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="plate_number_holder">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>plate_number_holder</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
