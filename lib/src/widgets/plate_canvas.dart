@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui' show lerpDouble;
 import 'package:flutter/scheduler.dart';
 
 import 'package:flutter/material.dart';
@@ -565,7 +566,7 @@ class _Face extends StatelessWidget {
   final List<SlotBehavior> behaviors;
   final PlateMode mode;
 
-  /// Zero unless the face colour tweens to the next spec's.
+  /// Zero unless the face (colours, border width, radius) tweens to the next spec's.
   final Duration morphDuration;
   final _Ghost? ghost;
 
@@ -585,15 +586,13 @@ class _Face extends StatelessWidget {
     return Stack(
       fit: .passthrough,
       children: [
-        TweenAnimationBuilder<Color?>(
-          tween: ColorTween(end: theme.plateBackground),
+        TweenAnimationBuilder<PlateTheme>(
+          tween: _ThemeTween(end: theme),
           duration: morphDuration,
           curve: Curves.easeInOut,
           builder: (context, face, _) => _PlateArtwork(
             spec: spec,
-            theme: face == theme.plateBackground
-                ? theme
-                : theme.copyWith(plateBackground: face),
+            theme: face,
             country: country,
             controller: controller,
           ),
@@ -921,7 +920,7 @@ class _LiveryState extends State<_Livery> {
   );
 }
 
-// TODO(ts): [H15] lerpTheme(a, b, t) in core over the six colours; vector it.
+// TODO(ts): [H15] lerpTheme(a, b, t) in core over the six colours and two ratios; vector it.
 // TODO(kt): [H15] same with lerp(Color).
 // TODO(py): [H15] same.
 class _ThemeTween extends Tween<PlateTheme> {
@@ -937,6 +936,8 @@ class _ThemeTween extends Tween<PlateTheme> {
       dividerColor: Color.lerp(a.dividerColor, b.dividerColor, t),
       activeColor: Color.lerp(a.activeColor, b.activeColor, t),
       inactiveColor: Color.lerp(a.inactiveColor, b.inactiveColor, t),
+      borderWidthRatio: lerpDouble(a.borderWidthRatio, b.borderWidthRatio, t),
+      plateRadiusRatio: lerpDouble(a.plateRadiusRatio, b.plateRadiusRatio, t),
     );
   }
 }

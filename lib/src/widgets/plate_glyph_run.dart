@@ -125,26 +125,19 @@ class _PlateGlyphRunState extends State<PlateGlyphRun>
       ],
     );
     if (widget.placeholder.isEmpty) return run;
-    // A sample the typed text follows stays under it, each character landing
-    // on its faint twin; anything else fades it out.
-    final underlay = widget.placeholder.startsWith(widget.text);
+    // The sample stays under the typed text, each character landing on its
+    // faint twin whether or not it matches.
     return Stack(
-      alignment: underlay
-          ? AlignmentDirectional.centerStart
-          : AlignmentDirectional.center,
+      alignment: AlignmentDirectional.centerStart,
       textDirection: widget.textDirection,
       children: [
-        AnimatedOpacity(
-          opacity: widget.text.isEmpty || underlay ? 1 : 0,
-          duration: PlateGlyphRun.leave,
-          child: Text(
-            widget.placeholder,
-            maxLines: 1,
-            softWrap: false,
-            textDirection: widget.textDirection,
-            style: widget.placeholderStyle ?? widget.style,
-            strutStyle: _strutOf(widget.style),
-          ),
+        Text(
+          widget.placeholder,
+          maxLines: 1,
+          softWrap: false,
+          textDirection: widget.textDirection,
+          style: widget.placeholderStyle ?? widget.style,
+          strutStyle: _strutOf(widget.style),
         ),
         run,
       ],
