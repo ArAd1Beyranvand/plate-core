@@ -3,13 +3,13 @@ import 'dart:ui';
 import '../model/plate_asset.dart';
 import '../model/plate_shape.dart';
 
-// TODO(ts): [H19] export const EuropeanStars = {band, flag} as const.
-// TODO(kt): [H19] object EuropeanStars.
-// TODO(py): [H19] module-level BAND, FLAG.
 /// The EU's twelve gold stars, drawn rather than shipped, for every EU country
 /// package to share.
 abstract final class EuropeanStars {
   static const Color _gold = Color(0xFFFFCC00);
+
+  /// The EU's reflex blue, the band's field.
+  static const Color blue = Color(0xFF003399);
 
   /// Just the ring, on no field, for a panel that is already blue. Proportions
   /// of the band printed on an EU plate (46 x 70.4).
@@ -19,7 +19,7 @@ abstract final class EuropeanStars {
 
   /// The EU flag: 3:2, blue, ring of twelve stars at its centre.
   static const PlateDrawing flag = PlateDrawing(900, 600, <PlateShape>[
-    PlateRectShape(0, 0, 900, 600, Color(0xFF003399)),
+    PlateRectShape(0, 0, 900, 600, blue),
     PlateStarRingShape(450, 300, 200, 37.5, 12, _gold),
   ]);
 }

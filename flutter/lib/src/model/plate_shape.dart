@@ -3,9 +3,6 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 
-// TODO(ts): [H18][D1] union by kind; toPath moves to render and emits an SVG path string.
-// TODO(kt): [H18][D1] sealed interface in model; path building lives in render, not on the shape.
-// TODO(py): [H18][D1] dataclasses + match in render; no Qt types in model.
 /// One filled shape of a [PlateDrawing], in the drawing's own coordinate
 /// space. Shapes paint in list order, so a later one covers an earlier one.
 @immutable
@@ -26,10 +23,7 @@ class PlateRectShape extends PlateShape {
     super.color,
   );
 
-  final double left;
-  final double top;
-  final double width;
-  final double height;
+  final double left, top, width, height;
 
   @override
   Path toPath() => Path()..addRect(Rect.fromLTWH(left, top, width, height));
@@ -38,9 +32,6 @@ class PlateRectShape extends PlateShape {
 class PlatePolygonShape extends PlateShape {
   const PlatePolygonShape(this.points, super.color);
 
-  // TODO(ts): [H10] points as [x, y] pairs; flatten in the JSON export.
-  // TODO(kt): [H10] own Point(x, y) in commonMain, not Compose Offset.
-  // TODO(py): [H10] tuple[float, float].
   final List<Offset> points;
 
   @override
@@ -50,42 +41,26 @@ class PlatePolygonShape extends PlateShape {
 class PlateCircleShape extends PlateShape {
   const PlateCircleShape(this.cx, this.cy, this.radius, super.color);
 
-  final double cx;
-  final double cy;
-  final double radius;
+  final double cx, cy, radius;
 
   @override
-  Path toPath() =>
-      Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius));
+  Path toPath() => _circle(cx, cy, radius);
 }
 
-// TODO(ts): [H13] two circles in one path with fill-rule="evenodd" equals the difference here.
-// TODO(kt): [H13] Path.combine(PathOperation.Difference) or PathFillType.EvenOdd.
-// TODO(py): [H13] QPainterPath.subtracted, or OddEvenFill with both ellipses.
 /// The outline of a circle: a band [width] wide centred on [radius].
 class PlateRingShape extends PlateShape {
   const PlateRingShape(this.cx, this.cy, this.radius, this.width, super.color);
 
-  final double cx;
-  final double cy;
-  final double radius;
-  final double width;
+  final double cx, cy, radius, width;
 
   @override
   Path toPath() => Path.combine(
     PathOperation.difference,
-    Path()..addOval(
-      Rect.fromCircle(center: Offset(cx, cy), radius: radius + width / 2),
-    ),
-    Path()..addOval(
-      Rect.fromCircle(center: Offset(cx, cy), radius: radius - width / 2),
-    ),
+    _circle(cx, cy, radius + width / 2),
+    _circle(cx, cy, radius - width / 2),
   );
 }
 
-// TODO(ts): [H13] evenodd is wrong when the bite pokes outside the disc: clip-path or real difference.
-// TODO(kt): [H13] PathOperation.Difference (evenodd would paint the bite outside the disc).
-// TODO(py): [H13] QPainterPath.subtracted.
 /// A circle with a second circle taken out of it: a crescent. The bite is
 /// [biteRadius] wide and sits [biteDx] to the right of the disc's centre (left
 /// when negative).
@@ -99,19 +74,13 @@ class PlateCrescentShape extends PlateShape {
     super.color,
   );
 
-  final double cx;
-  final double cy;
-  final double radius;
-  final double biteDx;
-  final double biteRadius;
+  final double cx, cy, radius, biteDx, biteRadius;
 
   @override
   Path toPath() => Path.combine(
     PathOperation.difference,
-    Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius)),
-    Path()..addOval(
-      Rect.fromCircle(center: Offset(cx + biteDx, cy), radius: biteRadius),
-    ),
+    _circle(cx, cy, radius),
+    _circle(cx + biteDx, cy, biteRadius),
   );
 }
 
@@ -133,22 +102,11 @@ class PlateStarShape extends PlateShape {
   /// line.
   static const double pentagramRatio = 0.3819660112501051;
 
-  final double cx;
-  final double cy;
-  final double radius;
+  final double cx, cy, radius, innerRatio, rotation;
   final int points;
-  final double innerRatio;
-  final double rotation;
 
   @override
-  Path toPath() => _starPath(
-    cx: cx,
-    cy: cy,
-    radius: radius,
-    points: points,
-    innerRatio: innerRatio,
-    rotation: rotation,
-  );
+  Path toPath() => _star(cx, cy, radius, points, innerRatio, rotation);
 }
 
 /// [count] equal stars on a circle of [ringRadius], the first straight above
@@ -165,43 +123,33 @@ class PlateStarRingShape extends PlateShape {
     this.innerRatio = PlateStarShape.pentagramRatio,
   });
 
-  final double cx;
-  final double cy;
-  final double ringRadius;
-  final double starRadius;
-  final int count;
-  final int points;
-  final double innerRatio;
+  final double cx, cy, ringRadius, starRadius, innerRatio;
+  final int count, points;
 
   @override
   Path toPath() {
     final path = Path();
     for (var i = 0; i < count; i++) {
       final angle = 2 * math.pi * i / count;
-      path.addPath(
-        _starPath(
-          cx: cx + ringRadius * math.sin(angle),
-          cy: cy - ringRadius * math.cos(angle),
-          radius: starRadius,
-          points: points,
-          innerRatio: innerRatio,
-          rotation: 0,
-        ),
-        Offset.zero,
-      );
+      final x = cx + ringRadius * math.sin(angle);
+      final y = cy - ringRadius * math.cos(angle);
+      path.addPath(_star(x, y, starRadius, points, innerRatio, 0), Offset.zero);
     }
     return path;
   }
 }
 
-Path _starPath({
-  required double cx,
-  required double cy,
-  required double radius,
-  required int points,
-  required double innerRatio,
-  required double rotation,
-}) {
+Path _circle(double cx, double cy, double radius) =>
+    Path()..addOval(Rect.fromCircle(center: Offset(cx, cy), radius: radius));
+
+Path _star(
+  double cx,
+  double cy,
+  double radius,
+  int points,
+  double innerRatio,
+  double rotation,
+) {
   final path = Path();
   final turn = rotation * math.pi / 180;
   for (var i = 0; i < points * 2; i++) {

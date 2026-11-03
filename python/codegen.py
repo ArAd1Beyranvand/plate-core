@@ -9,7 +9,8 @@ import json
 import keyword
 import re
 from pathlib import Path
-from pprint import pformat
+
+from compact import compact_country
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
@@ -24,213 +25,19 @@ def snake(k: str) -> str:
     return re.sub(r"[A-Z]", lambda m: "_" + m.group().lower(), k)
 
 
-def col(c) -> str:
-    return "None" if c is None else f"0x{c:08X}"
-
-
-def tup(items) -> str:
-    items = list(items)
-    return "(" + ", ".join(items) + ("," if len(items) == 1 else "") + ")"
-
-
-def kw(**args) -> str:
-    return ", ".join(f"{k}={v}" for k, v in args.items() if v is not None)
-
-
-class Emitter:
-    """Source for one country: `use` records the names to import from the core."""
-
-    IMPORTS = {
-        "plate_alphabet": ("AlphabetInput", "PlateAlphabet", "TextDirection"),
-        "plate_asset": ("PlateDrawing", "RasterPlateAsset", "SvgPlateAsset"),
-        "plate_box": ("PlateBox",),
-        "plate_country": ("PlateCountry",),
-        "plate_restriction": ("PlateRestriction",),
-        "plate_shape": ("PlateCircleShape", "PlateCrescentShape", "PlatePolygonShape", "PlateRectShape",
-                        "PlateRingShape", "PlateStarRingShape", "PlateStarShape"),
-        "plate_spec": ("Axis", "ColorFill", "Insets", "Leaf", "PlateBand", "PlateDecal", "PlateFog", "PlateLabel",
-                       "PlateMirror", "PlatePanel", "PlatePart", "PlateRule", "PlateSlot", "PlateSpec",
-                       "PlateTextGroup", "Role", "Split", "StripesFill"),
-    }
-
-    def __init__(self, d: dict, alphabets: dict, units: dict):
-        self.d, self.alphabets, self.units = d, alphabets, units
-        self.used: set[str] = set()
-        self.names: dict[str, str] = {}  # ref / resolver key -> variable name
-        self.tables: list[str] = []  # `_rN = label_table(...)` definitions
-
-    def n(self, name: str) -> str:
-        self.used.add(name)
-        return name
-
-    def box(self, b) -> str:
-        return f"{self.n('PlateBox')}({', '.join(map(repr, b))})"
-
-    def shape(self, s) -> str | None:
-        return s and repr(f"{s['fillRule']}:{s['svg']}")
-
-    def fill(self, f) -> str:
-        k = f["kind"]
-        if k == "color":
-            return f"{self.n('ColorFill')}({col(f['color'])})"
-        if k == "stripes":
-            fog = f["fog"]
-            fog = fog and f"{self.n('PlateFog')}({tuple(fog['center'])}, {tuple(fog['radii'])}, {fog['opacity']!r}, {fog['plateau']!r})"
-            return (f"{self.n('StripesFill')}({tup(map(self.fill, f['stripes']))}, {tuple(f['stops'])!r}, "
-                    f"{f['angle'] or 0!r}{', ' + fog if fog else ''})")
-        return f"{self.n('Role')}.{k.upper()}"
-
-    def section(self, s) -> str:
-        if s["kind"] == "fill":
-            return f"{self.n('Leaf')}({self.fill(s['fill'])}{', ' + self.shape(s['shape']) if s['shape'] else ''})"
-        axis = "HORIZONTAL" if s["kind"] == "columns" else "VERTICAL"
-        parts = [f"{self.n('PlatePart')}({self.section(p['section'])}, {p['end']!r}, {p['divider']!r})"
-                 for p in s["parts"]]
-        return f"{self.n('Split')}({self.n('Axis')}.{axis}, {tup(parts)})"
-
-    def shape_of(self, s) -> str:
-        k, c = s["kind"], col(s["color"])
-        a = {
-            "rect": lambda: ("PlateRectShape", [s["left"], s["top"], s["width"], s["height"], c]),
-            "polygon": lambda: ("PlatePolygonShape", [repr(tuple(map(tuple, s["points"]))), c]),
-            "circle": lambda: ("PlateCircleShape", [s["cx"], s["cy"], s["radius"], c]),
-            "ring": lambda: ("PlateRingShape", [s["cx"], s["cy"], s["radius"], s["width"], c]),
-            "crescent": lambda: ("PlateCrescentShape", [s["cx"], s["cy"], s["radius"], s["biteDx"], s["biteRadius"], c]),
-            "star": lambda: ("PlateStarShape", [s["cx"], s["cy"], s["radius"], c, s["points"], s["innerRatio"], s["rotation"]]),
-            "starRing": lambda: ("PlateStarRingShape", [s["cx"], s["cy"], s["ringRadius"], s["starRadius"], s["count"], c,
-                                                        s["points"], s["innerRatio"]]),
-        }[k]
-        name, args = a()
-        return f"{self.n(name)}({', '.join(map(str, args))})"
-
-    def graphic(self, g) -> str | None:
-        if g is None:
-            return None
-        if g["kind"] == "drawing":
-            shapes = tup(map(self.shape_of, g["shapes"]))
-            return f"{self.n('PlateDrawing')}({g['width']!r}, {g['height']!r}, {shapes})"
-        cls = "SvgPlateAsset" if g["kind"] == "svg" else "RasterPlateAsset"
-        return f"{self.n(cls)}({g['path']!r}, {g['package']!r})"
-
-    def alphabet(self, ref: str) -> str:
-        a = self.alphabets[ref]
-        extra = kw(glyphs=repr(dict(a["glyphs"])) if a["glyphs"] else None,
-                   direction=f"{self.n('TextDirection')}.RTL" if a["direction"] == "rtl" else None,
-                   placeholder=repr(a["placeholder"]) if a["placeholder"] != "?" else None)
-        return (f"{self.n('PlateAlphabet')}.of({a['id']!r}, {a['characters']!r}, "
-                f"{self.n('AlphabetInput')}.{a['input'].upper()}, {a['isNumeric']!r}{', ' + extra if extra else ''})")
-
-    def country(self, c) -> str:
-        args = [repr(c["code"]), repr(tuple(c["captionLines"])), col(c["panelColor"]), col(c["panelTextColor"])]
-        extra = kw(heading_lines=repr(tuple(c["headingLines"])) if c["headingLines"] else None,
-                   flag_aspect_ratio=repr(c["flagAspectRatio"]), flag=self.graphic(c["flag"]),
-                   flag_border_color=col(c["flagBorderColor"]) if c["flagBorderColor"] is not None else None)
-        return f"{self.n('PlateCountry')}({', '.join(args)}, {extra})"
-
-    def theme(self, t) -> str:
-        v = [col(t["plateBackground"]), col(t["plateBorder"]), col(t["ink"]), col(t["dividerColor"]),
-             repr(t["borderWidthRatio"]), repr(t["plateRadiusRatio"]), col(t["activeColor"]),
-             col(t["inactiveColor"]), col(t["alertColor"])]
-        return f"PlateTheme({', '.join(v)})"
-
-    def resolver(self, key: str) -> str | None:
-        """The expression for a resolver: a table built from rows, or the hand-ported unit function."""
-        if key is None:
-            return None
-        if key in self.names:
-            return self.names[key]
-        r = self.d["resolvers"][key]
-        if r["kind"] == "code":
-            cls, member = key.split(".")
-            return f"{cls}.{snake(member)}"
-        fn = "label_table" if r["signature"] == "label" else "theme_table"
-        if fn == "theme_table":
-            rows = {tuple(k): {snake(f): v for f, v in (val or {}).items()} for k, val in r["table"]}
-        else:
-            rows = {tuple(k): val for k, val in r["table"]}
-        default = r["default"] if fn == "label_table" else {snake(f): v for f, v in (r["default"] or {}).items()}
-        self.used.add("@" + fn)
-        if fn == "theme_table":
-            default = default or None
-        self.names[key] = f"_r{len(self.tables)}"  # once per module: specs share tables (Germany's districts)
-        self.tables.append(f"{self.names[key]} = {fn}({tuple(r['reads'])!r}, {r['cut']!r}, {default!r}, {rows!r})")
-        return self.names[key]
-
-    def spec(self, s) -> str:
-        p = s["panel"]
-        panel = None
-        if not s["noPanel"]:
-            panel = (f"{self.n('PlatePanel')}({self.box(p['box'])}, {p['flagScale']!r}, {p['captionScale']!r}, "
-                     f"{self.n('Insets') + repr(tuple(p['padding'])) if p['padding'] else None}, "
-                     f"{self.n('Axis')}.{p['direction'].upper()}, {self.shape(p['shape'])})")
-        slots = [f"{self.n('PlateSlot')}({self.names[x['alphabet']]}, {self.box(x['box'])}, {col(x['color'])}, "
-                 f"{x['length']!r}, {x['minLength']!r}, {x['spacing']!r})" for x in s["slots"]]
-        bands = [f"{self.n('PlateBand')}({self.box(b['box'])}, {col(b['color'])}, "
-                 f"{b['topCornerRadius'] or 0!r}, {b['bottomCornerRadius'] or 0!r})" for b in s["bands"]]
-        rules = [f"{self.n('PlateRule')}({self.box(r['box'])})" for r in s["rules"]]
-        labels = [f"{self.n('PlateLabel')}({l['text']!r}, {self.box(l['box'])}, {l['glyphHeight']!r}, "
-                  f"{col(l['color'])}, {l['rotated']!r}, {l['lineHeight']!r}, {l['fontFamily']!r}, "
-                  f"{l['fontPackage']!r}, {self.resolver(l['resolve'])})" for l in s["labels"]]
-        decals = [f"{self.n('PlateDecal')}({self.box(x['box'])}, {self.graphic(x['image'])}, {self.graphic(x['drawing'])})"
-                  for x in s["decals"]]
-        mirrors = [f"{self.n('PlateMirror')}({m['source']!r}, {self.box(m['box'])}, {m['glyphHeight']!r}, "
-                   f"{self.names[m['alphabet']] if m['alphabet'] else None}, {m['editable']!r})" for m in s["mirrors"]]
-        groups = [f"{self.n('PlateTextGroup')}({tuple(g['indices'])!r}, {g['prefix']!r}, {g['key']!r})"
-                  for g in s["textGroups"]]
-        restr = [f"{self.n('PlateRestriction')}({r['group']!r}, {tuple(r['values'])!r}, {r['reason']!r})"
-                 for r in s["restrictions"]]
-        args = {
-            "id": repr(s["id"]), "country": self.names[s["country"]], "canvas_width": repr(s["canvasWidth"]),
-            "canvas_height": repr(s["canvasHeight"]), "panel": str(panel),
-            "slots": tup(slots), "background": self.section(s["background"]),
-            "bands": tup(bands) if bands else None, "rules": tup(rules) if rules else None,
-            "labels": tup(labels) if labels else None, "decals": tup(decals) if decals else None,
-            "mirrors": tup(mirrors) if mirrors else None,
-            "text_direction": f"{self.n('TextDirection')}.RTL" if s["textDirection"] == "rtl" else None,
-            "border_width_ratio_override": repr(s["borderWidthRatioOverride"]) if s["borderWidthRatioOverride"] is not None else None,
-            "ink_override": col(s["inkOverride"]) if s["inkOverride"] is not None else None,
-            "text_groups": tup(groups) if groups else None, "restrictions": tup(restr) if restr else None,
-            "resolve_theme": self.resolver(s["resolveTheme"]), "resolve_region": self.resolver(s["resolveRegion"]),
-        }
-        return f"    {self.n('PlateSpec')}(\n" + "".join(f"        {k}={v},\n" for k, v in args.items() if v is not None) + "    )"
-
-    def module(self, src: str, country: str) -> str:
-        d = self.d
-        body = []
-        for i, ref in enumerate(d["alphabets"]):
-            self.names[ref] = f"_a{i}"
-        for i, ref in enumerate(d["countries"]):
-            self.names[ref] = f"_c{i}"
-        body += [f"{self.names[r]} = {self.alphabet(r)}" for r in d["alphabets"]]
-        body += [f"{self.names[r]} = {self.country(c)}" for r, c in d["countries"].items()]
-        body += ["", "COUNTRIES = {" + ", ".join(f"{r!r}: {self.names[r]}" for r in d["countries"]) + "}"]
-        body += ["THEMES = {"] + [f"    {r!r}: {self.theme(t)}," for r, t in d["themes"].items()] + ["}"]
-        specs = [self.spec(s) + "," for s in d["specs"]]
-        body += [""] * bool(self.tables) + self.tables
-        body += ["", "SPECS = {s.id: s for s in ("] + specs + [")}"]
-        code_render = sorted(s["id"] for s in d["specs"] if any(
-            r and d["resolvers"][r]["kind"] == "code" for r in [s["resolveTheme"], s["resolveRegion"],
-                                                                *(l["resolve"] for l in s["labels"])]))
-        validators = [v["name"] for v in d["validators"]]
-        body += ["", f"CODE_RENDER = frozenset({code_render!r})  # specs with a hand-ported label or theme resolver"]
-        body += ["VALIDATORS = {" + ", ".join(f"{v!r}: {v}" for v in validators) + "}"]
-        gallery = [{k: g[k] for k in ("id", "label", "spec", "theme", "country", "validator", "sampleValues")}
-                   for g in d["gallery"]]
-        body += ["GALLERY = " + pformat(gallery, width=110, sort_dicts=False)]
-        imports = []
-        if any("PlateTheme" in b for b in body):
-            imports.append("from plates.core.theme.plate_theme import PlateTheme")
-        for mod, names in self.IMPORTS.items():
-            use = [x for x in names if x in self.used]
-            if use:
-                imports.append(f"from plates.core.model.{mod} import {', '.join(use)}")
-        tables = sorted(x[1:] for x in self.used if x.startswith("@"))
-        if tables:
-            imports.append(f"from plates.countries.tables import {', '.join(tables)}")
-        for stem, unit in self.units.items():
-            imports.append(f"from .{stem} import {', '.join(unit['names'])}")
-        return (HEADER.format(src=src) + "from __future__ import annotations\n\n" + "\n".join(imports) + "\n\n"
-                + "\n".join(body) + "\n")
+def data_module(d: dict, alphabets: dict, units: dict, src: str) -> str:
+    """The country's `data` module: its compact data, built into specs by `plates.countries.load` on import."""
+    slim = {"package": d["package"], "alphabets": {r: {k: v for k, v in alphabets[r].items() if k != "names"} for r in d["alphabets"]},
+            **{k: d[k] for k in ("countries", "themes", "specs", "resolvers", "assets", "gallery")}}
+    text = json.dumps(compact_country(slim), separators=(",", ":"), ensure_ascii=False)
+    text = repr(text) if "'''" in text else f"r'''{text}'''"
+    code = {k: f"{k.split('.')[0]}.{snake(k.split('.')[1])}" for k, r in d["resolvers"].items() if r["kind"] == "code"}
+    imports = [f"from .{stem} import {', '.join(u['names'])}" for stem, u in units.items()]
+    validators = ", ".join(f"{v['name']!r}: {v['name']}" for v in d["validators"])
+    return (HEADER.format(src=src) + "from plates.countries.load import load_country\n" + "\n".join(imports) + "\n\n"
+            + f"COUNTRIES, THEMES, SPECS, CODE_RENDER, GALLERY = load_country({text}, "
+            + "{" + ", ".join(f"{k!r}: {v}" for k, v in code.items()) + "})\n"
+            + f"VALIDATORS = {{{validators}}}\n")
 
 
 def gate_group(dart: str, cls: str) -> str | None:
@@ -331,7 +138,7 @@ def main() -> None:
         tdir.mkdir(exist_ok=True, parents=True)
         (cdir / "__init__.py").write_text(f'"""{country}: `data` holds the generated specs, the other modules the hand-ported units."""\n', encoding="utf8")
         (tdir / "__init__.py").write_text("", encoding="utf8")
-        (cdir / "data.py").write_text(Emitter(d, alphabets, units).module(f"countries/{f.name}", country), encoding="utf8")
+        (cdir / "data.py").write_text(data_module(d, alphabets, units, f"countries/{f.name}"), encoding="utf8")
         for stem, unit in units.items():
             if not (cdir / f"{stem}.py").exists():
                 (cdir / f"{stem}.py").write_text(unit_source(unit), encoding="utf8")

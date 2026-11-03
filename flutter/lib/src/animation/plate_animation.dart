@@ -63,9 +63,6 @@ enum PlatePartKind {
   mirror,
 }
 
-// TODO(ts): [D9] structural key: use `${kind}:${index}` strings as Map keys; allOf(spec) is a vector.
-// TODO(kt): [D9] data class PlatePartId(kind, index) — structural equality is right here.
-// TODO(py): [D9] frozen dataclass (hashable); allOf is a vector.
 /// A stable address for one part of a plate: its [kind] and, for a kind a
 /// spec has several of, its [index] in the spec's own list.
 @immutable
@@ -137,9 +134,6 @@ class PlatePartId {
   };
 }
 
-// TODO(ts): derive from layout(); never count leaves by a second walk.
-// TODO(kt): same.
-// TODO(py): same.
 /// How many leaves [section] has — the [PlatePartKind.region] count.
 int plateRegionCount(PlateSection section) =>
     section.layout(Rect.zero).leaves.length;
@@ -168,9 +162,6 @@ enum PlatePartEffect {
   draw,
 }
 
-// TODO(ts): [H11] duration/delay as integer ms; curve as a name from the shared cubic-bezier table.
-// TODO(kt): [H11] Long ms; curve -> CubicBezierEasing with Flutter's control points, not Compose presets.
-// TODO(py): [H11] int ms; QEasingCurve.BezierSpline with the same points (InOutCubic differs).
 /// The timing and look of one part's transitions.
 @immutable
 class PlateMotion {
@@ -192,9 +183,6 @@ class PlateMotion {
   /// Added before every transition of the part; a cue's own delay adds to it.
   final Duration delay;
 
-  // TODO(ts): [H10] {x, y} in [-1, 1]; centre is (0, 0), not (0.5, 0.5).
-  // TODO(kt): [H10] own Alignment(x, y) in [-1,1]; Compose BiasAlignment matches, Alignment.Center does too.
-  // TODO(py): [H10] tuple (x, y) in [-1, 1].
   /// Where a directional effect starts. For a divider or rule only the sign
   /// along its axis counts: negative is its left/top end, positive its
   /// right/bottom end.
@@ -243,9 +231,6 @@ class PlateAnimationStyle {
   final Map<PlatePartKind, PlateMotion> byKind;
   final Map<PlatePartId, PlateMotion> overrides;
 
-  // TODO(ts): [D9] the table is data: export it with the curves by name.
-  // TODO(kt): [D9] same.
-  // TODO(py): [D9] same.
   static const Map<PlatePartKind, PlateMotion> defaults = {
     .background: PlateMotion(effect: .wipe, origin: .center),
     .region: PlateMotion(effect: .wipe),
@@ -297,9 +282,6 @@ class PlatePartCue {
   final bool instant;
 }
 
-// TODO(ts): [D7] a store of cues keyed by part id; parts subscribe to their own key only.
-// TODO(kt): [D7] MutableStateFlow<PlatePartCue> per id in a map; fallback cue for ids not seen yet.
-// TODO(py): [D7] Observable per id; QVariantAnimation per mounted part in the ui layer.
 /// Drives the phases of a plate's parts, all at once or one at a time. Hand
 /// it to [PlateCanvas.animation] (or put it above any plate with a
 /// [PlateAnimationScope]).
@@ -399,9 +381,6 @@ class PlateAnimationController extends ChangeNotifier {
   }
 }
 
-// TODO(ts): [H19][D9] plain function staggerSequence(spec, {stepMs, reverse}); vector the delays.
-// TODO(kt): [H19] object PlateStagger.
-// TODO(py): [H19] module function stagger_sequence.
 /// Delay maps for [PlateAnimationController.cueAll]: a plate composing
 /// itself part by part.
 abstract final class PlateStagger {
@@ -434,9 +413,6 @@ Duration plateCueLength(
   return longest;
 }
 
-// TODO(ts): [H4] keep is a callback; specs never export it, the holder passes it in code.
-// TODO(kt): [H4] keep: ((PlatePartId, PlateSpec, PlateSpec) -> Boolean?)?.
-// TODO(py): [H4] keep: Callable | None.
 /// What a [PlateCanvas] does when its spec changes: the old plate goes out
 /// part by part, then the new one comes in, except the parts [keeps] — those
 /// swap in place with no transition.
@@ -498,9 +474,6 @@ class PlateSpecTransition {
         PlatePartId.allOf(to).contains(id);
   }
 
-  // TODO(ts): [H1][D9] shape identity becomes path-string equality once clippers are data; vector it.
-  // TODO(kt): [H1] compare path strings, not lambdas.
-  // TODO(py): [H1] compare path strings.
   /// True when [from] and [to] would paint [id] identically, as far as the
   /// specs say: same canvas, and the part's own data equal. Covers the panel
   /// (block, flag, caption), background regions and dividers, bands, rules,
@@ -604,9 +577,6 @@ class PlateSpecTransition {
       a.height == b.height;
 }
 
-// TODO(ts): [H14] drop — pass the controller to render/painter.
-// TODO(kt): [H14] CompositionLocal LocalPlateAnimation.
-// TODO(py): [H14] drop — constructor argument.
 /// Puts a [PlateAnimationController] above the plate parts beneath it. With
 /// none, every part is settled and costs nothing beyond its wrapper.
 class PlateAnimationScope extends InheritedWidget {

@@ -57,9 +57,6 @@ Widget _host(PlateController controller, PlateInputSource source) =>
       ),
     );
 
-// TODO(ts): [D8] focus moving to a host field; DOM focus test.
-// TODO(kt): [D8] FocusRequester test.
-// TODO(py): [D8] QWidget focus test.
 void main() {
   for (final (PlateInputSource source, int? afterTap)
       in <(PlateInputSource, int?)>[

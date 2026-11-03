@@ -28,9 +28,6 @@ final PlateSpec _spec = PlateSpec(
   ],
 );
 
-// TODO(ts): [D8] IME connection open/closed is platform behaviour; manual test on mobile web.
-// TODO(kt): [D8] check no InputConnection while the keypad shows.
-// TODO(py): drop — Qt has no soft keyboard split.
 void main() {
   testWidgets('a tap opens the keyboard; a keypad key closes the connection', (
     tester,
@@ -79,7 +76,6 @@ void main() {
         id: 'zz.letters',
         characters: ['ب', 'ج'],
         input: AlphabetInput.chosen,
-        isNumeric: false,
       );
       final PlateSpec spec = PlateSpec(
         id: 'zz.keypadfirst.chosen',

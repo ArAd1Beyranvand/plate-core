@@ -3,15 +3,9 @@ import 'package:flutter/widgets.dart';
 import '../model/plate_alphabet.dart';
 import '../model/plate_spec.dart';
 
-// TODO(ts): drop — default arg; a missing chooser means no sheet.
-// TODO(kt): drop — nullable lambda.
-// TODO(py): drop — None.
 /// No-op character chooser for display mode.
 Future<String?> noCharacterChooser(PlateAlphabet alphabet) async => null;
 
-// TODO(ts): [D1] ui only; spaceEvenly row of slot elements.
-// TODO(kt): [D1] Row(Arrangement.SpaceEvenly).
-// TODO(py): [D1] QHBoxLayout with stretch between items.
 /// Text rendering of a plate: groups rendered through their alphabets.
 class PlateTextRow extends StatelessWidget {
   const PlateTextRow({

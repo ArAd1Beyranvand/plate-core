@@ -29,9 +29,6 @@ class PlateDivider extends StatelessWidget {
   );
 }
 
-// TODO(ts): [D1] reveal math (span along the long axis) is pure: put it beside plateRevealRect, vector it.
-// TODO(kt): same; painter stays in ui.
-// TODO(py): same.
 /// Paints one divider line into [rect] (the whole canvas when null), clipped
 /// to [clip] when given. Shared by [PlateDivider] and the frame's own
 /// background dividers.

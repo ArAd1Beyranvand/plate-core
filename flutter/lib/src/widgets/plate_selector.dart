@@ -2,9 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import '../input/plate_controller.dart';
 
-// TODO(ts): [D1] ui only: a <select>-like chooser; generic over the option value.
-// TODO(kt): [D1] ExposedDropdownMenuBox.
-// TODO(py): [D1] QComboBox with userData.
 /// Rebuilds [builder] only when [selector]'s result changes.
 class PlateSelector<T> extends StatefulWidget {
   const PlateSelector({

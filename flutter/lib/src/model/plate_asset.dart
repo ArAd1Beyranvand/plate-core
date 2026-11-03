@@ -2,9 +2,6 @@ import 'package:flutter/foundation.dart';
 
 import 'plate_shape.dart';
 
-// TODO(ts): [H18] union PlateDrawing | PlateAsset tagged by kind: "drawing" | "svg" | "raster".
-// TODO(kt): [H18] sealed interface; same kind tags in the JSON export.
-// TODO(py): [H18] Union type + match on class; kind tag only in the JSON.
 /// Anything a flag slot can show: a file a package ships, or a [PlateDrawing]
 /// made of const shapes.
 @immutable
@@ -22,14 +19,10 @@ sealed class PlateGraphic {
 class PlateDrawing extends PlateGraphic {
   const PlateDrawing(this.width, this.height, this.shapes);
 
-  final double width;
-  final double height;
+  final double width, height;
   final List<PlateShape> shapes;
 }
 
-// TODO(ts): [H20][D5] resolve package+path to a URL through the countries package subpath exports.
-// TODO(kt): [H20][D5] Compose resources per countries module; SVG flags become drawings (D6).
-// TODO(py): [H20][D5] importlib.resources.files(f"plates.countries.{package}") / path.
 /// An image a country package ships, addressed by the package that owns it.
 @immutable
 sealed class PlateAsset extends PlateGraphic {

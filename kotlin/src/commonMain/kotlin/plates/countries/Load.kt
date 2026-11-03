@@ -63,7 +63,7 @@ class CountryCode(
     val validators: Map<String, () -> PlateValidator> = emptyMap(),
 )
 
-/** One `ports/data/countries/<package>.json`, with `alphabets` inlined as ref → alphabet. */
+/** One `ports/data/countries/<package>.json`, with `alphabets` inlined as ref → alphabet; `expandCountry` builds it. */
 class LoadedCountry(
     val pkg: String,
     /** By spec id; ids are unique within a package only. */
@@ -92,14 +92,30 @@ fun alphabetOf(a: JsonObject) = PlateAlphabet.listed(
     placeholder = a["placeholder"]!!.str()!!,
 )
 
+/** The row a table holds for [key] (the strings of the groups it reads), or null: rows as listed, grouped by value, or
+ * `trie` (the prefixes whose every key shares a value, then the exact keys that differ; the longest prefix wins). */
+private fun rowOf(r: JsonObject): (List<String>) -> JsonElement? {
+    val enc = r["enc"]?.jsonObject
+    val trie = enc?.get("trie")?.jsonObject
+    if (trie != null) {
+        fun rows(k: String) = trie[k]!!.jsonArray.associate { it.jsonArray[0].str()!! to it.jsonArray[1] }
+        val exact = rows("exact")
+        val prefix = rows("prefix")
+        return { key -> key[0].let { s -> exact[s] ?: (s.length downTo 0).firstNotNullOfOrNull { prefix[s.take(it)] } } }
+    }
+    val rows = (enc?.get("groups")?.jsonArray?.flatMap { g -> g.jsonArray[1].jsonArray.map { k -> k.jsonArray.map { it.str()!! } to g.jsonArray[0] } }
+        ?: r["table"]!!.jsonArray.map { row -> row.jsonArray[0].jsonArray.map { it.str()!! } to row.jsonArray[1] }).toMap()
+    return { key -> rows[key] }
+}
+
 /** A `[D4-table]` resolver: the row keyed by the groups it reads (cut to n code points), else the default. */
 fun tableResolver(r: JsonObject): ((String) -> String) -> JsonElement? {
-    val rows = r["table"]!!.jsonArray.associate { row -> row.jsonArray[0].jsonArray.map { it.str() } to row.jsonArray[1] }
+    val row = rowOf(r)
     val cut = r["cut"]!!.jsonObject
     val reads = r["reads"]!!.jsonArray.map { it.str()!! }
     return { group ->
         val key = reads.map { g -> cut[g]?.let { splitRunes(group(g)).take(it.jsonPrimitive.int).joinToString("") } ?: group(g) }
-        (if (key in rows) rows[key] else r["default"])?.takeUnless { it.isNull }
+        (row(key) ?: r["default"])?.takeUnless { it.isNull }
     }
 }
 
@@ -178,9 +194,12 @@ private fun sectionOf(s: JsonObject): PlateSection = when (s["kind"]!!.str()) {
     )
 }
 
-/** Builds every spec of [json]. A code resolver missing from [code] is left out (the core port cannot run it). */
-fun loadCountry(json: String, code: CountryCode = CountryCode()): LoadedCountry {
-    val d = Json.parseToJsonElement(json).jsonObject
+/** Builds every spec of [json], a country's compact data. */
+fun loadCountry(json: String, code: CountryCode = CountryCode()): LoadedCountry =
+    load(expandCountry(Json.parseToJsonElement(json).jsonObject), code)
+
+/** Builds every spec of [d], a country's verbose data. A code resolver missing from [code] is left out (the core port cannot run it). */
+fun load(d: JsonObject, code: CountryCode = CountryCode()): LoadedCountry {
     val resolvers = d["resolvers"]!!.jsonObject
     val alphabets = d["alphabets"]!!.jsonObject.mapValues { alphabetOf(it.value.jsonObject) }
     val countries = d["countries"]!!.jsonObject.mapValues { countryOf(it.value.jsonObject) }

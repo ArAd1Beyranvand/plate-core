@@ -17,8 +17,6 @@ const _letters = PlateAlphabet.latinUppercase;
 const _iranian = PlateAlphabet(
   id: 'zz.iranian',
   characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  input: AlphabetInput.typed,
-  isNumeric: false,
   glyphs: {'1': '١', '2': '٢', '3': '٣', '4': '٤'},
 );
 
@@ -28,7 +26,6 @@ const _dash = PlateAlphabet(
   id: 'zz.dash',
   characters: ['-'],
   input: AlphabetInput.chosen,
-  isNumeric: false,
 );
 
 PlateSpec _spec({

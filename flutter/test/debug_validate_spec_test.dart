@@ -17,8 +17,6 @@ const _digits = PlateAlphabet.latinDigits;
 const _iranianDigits = PlateAlphabet(
   id: 'zz.iranian',
   characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  input: AlphabetInput.typed,
-  isNumeric: false,
   glyphs: {
     '0': '٠',
     '1': '١',
@@ -140,15 +138,9 @@ void main() {
       const a = PlateAlphabet(
         id: 'zz.dup',
         characters: ['0', '1'],
-        input: AlphabetInput.typed,
         isNumeric: true,
       );
-      const b = PlateAlphabet(
-        id: 'zz.dup',
-        characters: ['A', 'B'],
-        input: AlphabetInput.typed,
-        isNumeric: false,
-      );
+      const b = PlateAlphabet(id: 'zz.dup', characters: ['A', 'B']);
       final spec = _spec(
         slots: const [
           PlateSlot(alphabet: a, box: PlateBox(20, 5, 20, 30)),
@@ -162,13 +154,11 @@ void main() {
       const a = PlateAlphabet(
         id: 'zz.a',
         characters: ['0', '1'],
-        input: AlphabetInput.typed,
         isNumeric: true,
       );
       const b = PlateAlphabet(
         id: 'zz.b',
         characters: ['0', '1'],
-        input: AlphabetInput.typed,
         isNumeric: true,
       );
       final spec = _spec(
@@ -210,7 +200,6 @@ void main() {
         const clash = PlateAlphabet(
           id: 'zz.clash',
           characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-          input: AlphabetInput.typed,
           isNumeric: true,
         );
         final spec = _spec(mirrors: [_mirrorAt(alphabet: clash)]);

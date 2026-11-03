@@ -7,7 +7,7 @@ import { PlateCountry } from '../core/values/plate_country';
 import { PlateRestriction } from '../core/values/plate_restriction';
 import { type PlateFill, type PlateLabelResolver, type PlateSection, PlateSlot, PlateSpec, type PlateThemeResolver } from '../core/values/plate_spec';
 
-/** One `ports/data/countries/<package>.json`, with `alphabets` inlined as ref → alphabet. */
+/** One `ports/data/countries/<package>.json`, with `alphabets` inlined as ref → alphabet; `expandCountry` builds it. */
 export interface CountryData {
   readonly package: string;
   readonly alphabets: Record<string, any>;
@@ -42,12 +42,30 @@ export const alphabetOf = (a: any): PlateAlphabet =>
 
 export const countryOf = (c: any): PlateCountry => new PlateCountry({ ...c, flag: c.flag ?? undefined, flagBorderColor: c.flagBorderColor ?? undefined });
 
+/** The row a table holds for `key` (the strings of the groups it reads), or undefined: `rows` as listed, grouped by
+ * value, or `trie` (the prefixes whose every key shares a value, then the exact keys that differ). */
+function rowOf(r: any): (key: string[]) => unknown {
+  const { trie, groups } = r.enc ?? {};
+  if (trie) {
+    const exact = new Map<string, unknown>(trie.exact);
+    const prefix = new Map<string, unknown>(trie.prefix);
+    return ([s]) => {
+      if (exact.has(s!)) return exact.get(s!);
+      for (let n = s!.length; n >= 0; n--) if (prefix.has(s!.slice(0, n))) return prefix.get(s!.slice(0, n));
+      return undefined;
+    };
+  }
+  const rows: [string[], unknown][] = groups ? groups.flatMap(([v, keys]: [unknown, string[][]]) => keys.map((k) => [k, v])) : r.table;
+  const byKey = new Map(rows.map(([k, v]) => [JSON.stringify(k), v]));
+  return (key) => byKey.get(JSON.stringify(key));
+}
+
 /** A `[D4-table]` resolver: the row keyed by the groups it reads (cut to n code points), else the default. */
 export function tableResolver<T>(r: any): (group: (key: string) => string) => T {
-  const rows = new Map<string, T>(r.table.map(([k, v]: [string[], T]) => [JSON.stringify(k), v]));
+  const row = rowOf(r);
   return (group) => {
-    const key = JSON.stringify(r.reads.map((g: string) => (g in r.cut ? Array.from(group(g)).slice(0, r.cut[g]).join('') : group(g))));
-    return rows.has(key) ? rows.get(key)! : r.default;
+    const v = row(r.reads.map((g: string) => (g in r.cut ? Array.from(group(g)).slice(0, r.cut[g]).join('') : group(g))));
+    return (v === undefined ? r.default : v) as T;
   };
 }
 

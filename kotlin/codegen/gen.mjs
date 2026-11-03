@@ -2,6 +2,7 @@
 // [D4-code] stubs and their tests. Run from ports/kt: node codegen/gen.mjs. Units that exist are never overwritten; tests always are.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
+import { compactCountry } from './compact.mjs';
 
 const kt = join(import.meta.dirname, '..');
 const repo = join(kt, '../..');
@@ -190,13 +191,14 @@ for (const u of units.values()) {
   if (u.validators.length || u.resolvers.length) write(join(test, country, `${u.Stem}Test.kt`), unitTest(u, country, resolvers));
 }
 
-/** JSON as Kotlin string literals; a JVM string constant holds at most 65535 bytes of modified UTF-8. */
+/** JSON as Kotlin raw string literals (only `$` needs care); a JVM string constant holds at most 65535 bytes of modified UTF-8. */
+const raw = (s) => (s.includes('"""') ? str(s) : `"""${s.replace(/\$/g, () => "${'$'}")}"""`);
 function literal(json) {
   const parts = [];
   for (let i = 0; i < json.length;) {
     let j = Math.min(i + 16000, json.length);
     if (j < json.length && /[\ud800-\udbff]/.test(json[j - 1])) j--;
-    parts.push(str(json.slice(i, j)));
+    parts.push(raw(json.slice(i, j)));
     i = j;
   }
   return parts.length === 1 ? parts[0] : `arrayOf(\n${parts.map((p) => `    ${p},\n`).join('')}).joinToString("")`;
@@ -207,7 +209,7 @@ for (const [pkg, d] of datas) {
   const dir = join(main, country);
   const from = header(`ports/data/countries/${pkg}.json`);
   const slim = { package: pkg, alphabets: Object.fromEntries(d.alphabets.map((r) => [r, (({ names, ...a }) => a)(alphabets[r])])), countries: d.countries, themes: d.themes, specs: d.specs, resolvers: d.resolvers, assets: d.assets, gallery: d.gallery };
-  write(join(dir, 'Data.kt'), `${from}package plates.countries.${country}\n\ninternal fun json(): String = ${literal(JSON.stringify(slim))}\n`);
+  write(join(dir, 'Data.kt'), `${from}package plates.countries.${country}\n\ninternal fun json(): String = ${literal(JSON.stringify(compactCountry(slim)))}\n`);
 
   const mine = [...units.values()].filter((u) => u.pkg === pkg);
   const unitOwners = new Set(mine.flatMap((u) => u.resolvers.map((n) => n.split('.')[0])));

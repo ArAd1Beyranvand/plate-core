@@ -7,8 +7,6 @@ void main() {
       id: 't',
       include: 'A-E Ä MP 0-1',
       exclude: 'C 1',
-      input: AlphabetInput.typed,
-      isNumeric: false,
     );
     expect(a.characters, ['A', 'B', 'D', 'E', 'Ä', 'MP', '0']);
     expect(a.accepts('d'), isTrue);

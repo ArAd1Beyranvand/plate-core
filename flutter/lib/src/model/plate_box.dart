@@ -5,11 +5,18 @@ import 'package:flutter/widgets.dart';
 @immutable
 class PlateBox {
   const PlateBox(this.left, this.top, this.width, this.height);
+
+  /// The box from its left, top, right and bottom edges.
+  const PlateBox.fromLTRB(this.left, this.top, double right, double bottom)
+    : width = right - left,
+      height = bottom - top;
+
+  /// The [width] × [height] box centred on ([cx], [cy]).
+  const PlateBox.centered(double cx, double cy, this.width, this.height)
+    : left = cx - width / 2,
+      top = cy - height / 2;
   final double left, top, width, height;
   double get right => left + width;
   double get bottom => top + height;
-  // TODO(ts): [H10] model Rect is a plain {left, top, right, bottom} type defined once.
-  // TODO(kt): [H10] own Rect in commonMain; convert to Compose Rect in ui only.
-  // TODO(py): [H10] own NamedTuple Rect; QRectF only in the ui layer.
   Rect get rect => Rect.fromLTWH(left, top, width, height);
 }

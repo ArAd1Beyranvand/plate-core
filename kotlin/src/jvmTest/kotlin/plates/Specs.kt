@@ -1,12 +1,13 @@
 package plates
 
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import plates.core.values.PlateSpec
 import plates.countries.countryJson
-import plates.countries.loadCountry
+import plates.countries.load
 
 /** A spec from ports/data, with what the input tests need; [codeRegion] marks a region resolver only code can run. */
 class LoadedSpec(val spec: PlateSpec<Any>, val codeRegion: Boolean)
@@ -15,7 +16,7 @@ private val packages = HashMap<String, Map<String, LoadedSpec>>()
 
 @Suppress("UNCHECKED_CAST")
 fun specOf(pkg: String, id: String): LoadedSpec = packages.getOrPut(pkg) {
-    val country = loadCountry(countryJson(pkg))
+    val country = load(Json.parseToJsonElement(countryJson(pkg)).jsonObject)
     val resolvers = country.data["resolvers"]!!.jsonObject
     country.data["specs"]!!.jsonArray.associate { e ->
         val s = e.jsonObject

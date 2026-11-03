@@ -57,9 +57,6 @@ Future<String?> _noChooser(PlateAlphabet _) async => null;
 Widget _host(Widget child) => MaterialApp(home: Scaffold(body: child));
 
 void main() {
-  // TODO(ts): ui test: override reaches the panel and leaves the machine alone.
-  // TODO(kt): ui test: same; check the controller is not recreated.
-  // TODO(py): ui test: same.
   group('PlateCanvas.country', () {
     testWidgets('paints the spec country when no override is passed', (
       tester,

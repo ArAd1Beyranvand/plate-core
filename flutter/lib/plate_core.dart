@@ -41,6 +41,7 @@ export 'src/widgets/country_panel.dart';
 export 'src/widgets/plate_canvas.dart';
 export 'src/widgets/plate_divider.dart' show PlateDivider, DividerOrigin;
 export 'src/widgets/plate_drawing_view.dart';
+export 'src/widgets/plate_example_app.dart';
 export 'src/widgets/plate_flag.dart';
 export 'src/widgets/plate_selector.dart';
 export 'src/widgets/plate_text_row.dart';

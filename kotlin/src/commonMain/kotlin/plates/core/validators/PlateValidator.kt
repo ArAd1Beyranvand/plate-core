@@ -1,5 +1,7 @@
 package plates.core.validators
 
+import plates.core.validators.PlateCheck
+import plates.core.validators.RuledPlateValidator
 import plates.core.values.PlateSpec
 import plates.core.values.PlateTextGroup
 
@@ -47,4 +49,23 @@ abstract class GatedPlateValidator : PlateValidator {
 
     override fun validate(entry: PlateEntry) =
         restrictionVerdict(entry) ?: if (entry.group(gateGroup).isEmpty()) PlateValidation.valid else judge(entry)
+}
+
+/** One field rule of a [RuledPlateValidator]: the group named [group] must match [pattern] whole, or the plate is invalid
+ * for [reason]. An [optional] group may also be empty. Keep classes explicit (`[0-9]`, not `\d`) so only ASCII passes. */
+class PlateCheck(val group: String, pattern: String, val reason: String, private val optional: Boolean = false) {
+    private val re = Regex(pattern)
+
+    fun passes(value: String) = (optional && value.isEmpty()) || re.matches(value)
+}
+
+/** A gated validator that is a list of [checks], judged in order; the first to fail gives the verdict. The gate is [gate],
+ * else the last check's group. */
+abstract class RuledPlateValidator(private val gate: String? = null) : GatedPlateValidator() {
+    abstract val checks: List<PlateCheck>
+
+    override val gateGroup get() = gate ?: checks.last().group
+
+    override fun judge(entry: PlateEntry) =
+        checks.firstOrNull { !it.passes(entry.group(it.group)) }?.let { PlateValidation.invalid(it.reason) } ?: PlateValidation.valid
 }

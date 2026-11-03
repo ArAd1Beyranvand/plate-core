@@ -6,3 +6,19 @@
 | [`kotlin/`](kotlin) | Kotlin port |
 | [`typescript/`](typescript) | TypeScript port |
 | [`python/`](python) | Python port |
+
+## Country data in the ports
+
+Each country's specs, themes, countries, lookup tables and gallery are generated from `ports/data` JSON, then
+embedded in the port as **compact data (v2)**: every object is a tuple of its kind's fields with the trailing defaults
+left off, alphabets are ranges, a one-ink theme is four numbers, text groups are carried by the slots, and a lookup
+table over one key is a prefix trie. The runtime expands it back to the shape the loader has always read.
+
+| | Writes the data | Reads it back |
+| --- | --- | --- |
+| Kotlin | `kotlin/codegen/compact.mjs` | `Expand.kt` |
+| TypeScript | `typescript/codegen/compact.mjs` | `src/countries/expand.ts` |
+| Python | `python/compact.py` | `plates/countries/expand.py` |
+
+The field table (`KINDS`) is written out in `compact.mjs`, `expand.ts`, `Expand.kt` and `expand.py` (`compact.py` reuses
+the last) and must stay identical; the two `compact.mjs` are one file and `compact.py` writes the same bytes. Floats are rounded to four decimals (plate units are millimetres).

@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+import '../drawings/european_stars.dart';
 import 'plate_asset.dart';
 
-// TODO(ts): [H3] equality by code only.
-// TODO(kt): [H3] equals/hashCode on code; not a data class.
-// TODO(py): [H3] eq=False dataclass, __eq__/__hash__ on code.
 /// The country chrome of a plate: flag, caption and panel colours. Concrete
 /// constants live in each country's own package.
 ///
@@ -15,7 +13,7 @@ import 'plate_asset.dart';
 class PlateCountry {
   const PlateCountry({
     required this.code,
-    required this.captionLines,
+    this.captionLines = const <String>[],
     required this.panelColor,
     required this.panelTextColor,
     this.headingLines = const <String>[],
@@ -23,6 +21,18 @@ class PlateCountry {
     this.flag,
     this.flagBorderColor,
   });
+
+  /// A country whose block is the EU band: [EuropeanStars.band] on EU blue,
+  /// any wording in white.
+  const PlateCountry.euroband({
+    required this.code,
+    this.captionLines = const <String>[],
+    this.headingLines = const <String>[],
+    this.panelColor = EuropeanStars.blue,
+    this.panelTextColor = const Color(0xFFFFFFFF),
+  }) : flag = EuropeanStars.band,
+       flagAspectRatio = 46 / 70.4,
+       flagBorderColor = null;
 
   /// ISO 3166-1 alpha-2, lower-case. The sole basis of [operator ==].
   final String code;
@@ -35,9 +45,6 @@ class PlateCountry {
   /// text. [CountryPanel] splits the room the flag leaves between the two.
   final List<String> headingLines;
 
-  // TODO(ts): [H10] colours stay 0xAARRGGBB numbers in model; convert to rgba() in the painter.
-  // TODO(kt): [H10] ARGB Long in model; Color(argb) in Compose.
-  // TODO(py): [H10] ARGB int; QColor.fromRgba in ui.
   final Color panelColor;
 
   /// Null prints the wording in the theme's ink, for a block printed straight

@@ -46,4 +46,4 @@ def test_countries_import_only_the_core_and_their_own_units():
             for line in f.read_text(encoding="utf8").splitlines():
                 if line.startswith(("import ", "from ")) and "plates" in line:
                     mod = line.split()[1]
-                    assert mod.startswith((".", "plates.core.", "plates.countries.tables")), (f, line)
+                    assert mod.startswith((".", "plates.core.", "plates.countries.load")), (f, line)

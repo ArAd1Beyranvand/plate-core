@@ -14,8 +14,6 @@ const _digits = PlateAlphabet.latinDigits;
 const _iranianDigits = PlateAlphabet(
   id: 'zz.iranian',
   characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  input: AlphabetInput.typed,
-  isNumeric: false,
   glyphs: {
     '0': '٠',
     '1': '١',
@@ -55,9 +53,6 @@ Future<void> _pump(WidgetTester tester, Widget child) => tester.pumpWidget(
   Directionality(textDirection: TextDirection.ltr, child: child),
 );
 
-// TODO(ts): [D1] group order and prefix are vectorable; colour default is a ui test.
-// TODO(kt): same.
-// TODO(py): same.
 void main() {
   testWidgets(
     'empty group renders nothing; filled group renders through glyphs',

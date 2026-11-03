@@ -6,9 +6,6 @@ import '../model/slot_behavior.dart';
 import '../model/plate_spec.dart';
 import 'plate_input_controller.dart';
 
-// TODO(ts): [D8] split: pure machine (active, submit, backspace, advance, firstEmpty) + DOM focus adapter.
-// TODO(kt): [D8] pure machine in commonMain; FocusRequester list and TextFieldState in Compose.
-// TODO(py): [D8] pure machine; QLineEdit focus + keyPressEvent adapter. No IME modes (PySide6).
 /// Focus nodes and text controllers for one plate. Reads values through
 /// [readValues] and writes through [commit], so it is independent of host
 /// state. Bound to its [spec]: a spec change builds a new machine.
@@ -61,9 +58,6 @@ class PlateInputMachine implements PlateInputTarget {
   /// Fired when [systemKeyboard] flips.
   final VoidCallback? onSystemKeyboardChanged;
 
-  // TODO(ts): [D8] keypadFirst: set inputmode="text" on tap, back to "none" on a keypad key.
-  // TODO(kt): [D8] keypadFirst: LocalSoftwareKeyboardController.show()/hide().
-  // TODO(py): [D8] drop — no soft keyboard on desktop.
   /// Under [PlateInputSource.keypadFirst], whether typed slots use the platform
   /// keyboard rather than the keypad.
   final ValueNotifier<bool> systemKeyboard = ValueNotifier(false);
@@ -85,9 +79,6 @@ class PlateInputMachine implements PlateInputTarget {
   ValueChanged<int>? onSheetRequested;
 
   // Dense list by slot position. Null controllers are chosen-alphabet slots.
-  // TODO(ts): [D8] the adapter owns HTMLInputElements; the machine only knows indices.
-  // TODO(kt): [D8] FocusRequester per slot lives in Compose, not in the machine.
-  // TODO(py): [D8] QLineEdit per slot lives in the widget.
   final List<FocusNode> _focusNodes = [];
   final List<TextEditingController?> _controllers = [];
 
@@ -159,9 +150,6 @@ class PlateInputMachine implements PlateInputTarget {
     String? value,
   ) => _setText(_mirrorControllers[mirrorIndex], value, alphabet.renderAll);
 
-  // TODO(ts): [D8] set input.value and setSelectionRange(end) only when the text differs.
-  // TODO(kt): [D8] TextFieldValue(text, TextRange(text.length)).
-  // TODO(py): [D8] setText + end(False); blockSignals while syncing.
   static void _setText(
     TextEditingController? field,
     String? stored,
@@ -188,9 +176,6 @@ class PlateInputMachine implements PlateInputTarget {
     }
   }
 
-  // TODO(ts): [D9] pure: (values, active, char) -> (values, active); refusal never advances.
-  // TODO(kt): [D9] same.
-  // TODO(py): [D9] same.
   @override
   void submitCharacter(String c) {
     // A keypad key means the keypad is wanted, not the platform keyboard.
@@ -205,9 +190,6 @@ class PlateInputMachine implements PlateInputTarget {
     if (slot.isFull(next)) advanceFrom(index);
   }
 
-  // TODO(ts): [H7][D9] drop the last code point (Array.from(s).slice(0, -1)); vector the two-press rule.
-  // TODO(kt): [H7] drop the last code point, not the last Char.
-  // TODO(py): [D9] s[:-1].
   @override
   void backspaceCharacter() {
     _setSystemKeyboard(false);

@@ -20,8 +20,6 @@ const _digits = PlateAlphabet.latinDigits;
 const _iranianDigits = PlateAlphabet(
   id: 'zz.iranian',
   characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  input: AlphabetInput.typed,
-  isNumeric: false,
   glyphs: {
     '0': '٠',
     '1': '١',

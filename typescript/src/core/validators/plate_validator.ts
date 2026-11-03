@@ -59,3 +59,37 @@ export abstract class GatedPlateValidator implements PlateValidator {
     return restrictionVerdict(entry) ?? (entry.group(this.gateGroup) === '' ? valid : this.judge(entry));
   }
 }
+
+/** One field rule of a `RuledPlateValidator`: the group named `group` must match `pattern` whole, or the plate is invalid
+ * for `reason`. An `optional` group may also be empty. Keep classes explicit (`[0-9]`, not `\d`) so only ASCII passes. */
+export class PlateCheck {
+  private readonly re: RegExp;
+
+  constructor(
+    readonly group: string,
+    pattern: string,
+    readonly reason: string,
+    private readonly optional = false,
+  ) {
+    this.re = new RegExp(`^(?:${pattern})$`);
+  }
+
+  passes(value: string): boolean {
+    return (this.optional && value === '') || this.re.test(value);
+  }
+}
+
+/** A gated validator that is a list of `checks`, judged in order; the first to fail gives the verdict. The gate is the
+ * last check's group unless a subclass says otherwise. */
+export abstract class RuledPlateValidator extends GatedPlateValidator {
+  abstract readonly checks: readonly PlateCheck[];
+
+  get gateGroup(): string {
+    return this.checks[this.checks.length - 1]!.group;
+  }
+
+  judge(entry: PlateEntry): PlateValidation {
+    const failed = this.checks.find((c) => !c.passes(entry.group(c.group)));
+    return failed ? invalid(failed.reason) : valid;
+  }
+}

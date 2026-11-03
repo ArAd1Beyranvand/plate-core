@@ -7,9 +7,6 @@ import '../model/plate_spec.dart';
 import '../theme/plate_theme.dart';
 import 'plate_flag.dart';
 
-// TODO(ts): [D1] layout of flag/code/wording is fixed-canvas: compute rects in core, draw in ui.
-// TODO(kt): [D1] same; Compose Box with absolute offsets.
-// TODO(py): [D1] same; QPainter, no layouts.
 /// The coloured block of a plate: flag and caption, laid out LTR whatever the
 /// plate's direction. Everything country-specific comes from [PlateCountry].
 class CountryPanel extends StatelessWidget {
@@ -188,9 +185,6 @@ class _BlockPainter extends CustomPainter {
       !identical(old.frame, frame) || old.color != color;
 }
 
-// TODO(ts): [D1] pure geometry; move to core with a vector.
-// TODO(kt): same.
-// TODO(py): same.
 Size _flagSize({
   required PlatePanel panel,
   required PlateCountry country,
@@ -215,9 +209,6 @@ Size _flagSize({
   return Size(flagW, flagH);
 }
 
-// TODO(ts): [H12] scale-down fit needs measureText; [D6] font must be the bundled one.
-// TODO(kt): [H12] TextMeasurer; autosize by binary search.
-// TODO(py): [H12] QFontMetricsF; shrink the font to fit.
 /// One band of wording (heading or caption), scaled to available space.
 class _PanelWording extends StatelessWidget {
   const _PanelWording({

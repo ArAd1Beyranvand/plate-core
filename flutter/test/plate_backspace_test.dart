@@ -22,7 +22,6 @@ const _letters = PlateAlphabet(
   id: 'zz.letters',
   characters: ['A', 'B'],
   input: AlphabetInput.chosen,
-  isNumeric: false,
 );
 
 /// Three typed digit slots.
@@ -81,9 +80,6 @@ List<String> _values(PlateController controller) => [
 /// Which slot the canvas reports as focused.
 int? _activeIndex(PlateController controller) => controller.activeIndex;
 
-// TODO(ts): [D8] key-event routing through focused fields; keep the machine half as vectors, this as ui.
-// TODO(kt): [D8] same; ui tests send KeyEvents.
-// TODO(py): [D8] same; QTest.keyClick.
 void main() {
   for (final source in <PlateInputSource>[
     PlateInputSource.system,

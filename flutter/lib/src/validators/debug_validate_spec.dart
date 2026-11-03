@@ -4,9 +4,6 @@ import '../model/plate_alphabet.dart';
 import '../model/plate_box.dart';
 import '../model/plate_spec.dart';
 
-// TODO(ts): [H23] drop — call specProblems in tests and behind a debug flag.
-// TODO(kt): [H23] drop — check(specProblems(spec).isEmpty()) in tests.
-// TODO(py): [H23] drop — asserts vanish under -O.
 /// Debug-only consistency check over [specProblems]: asserts there are none.
 /// Always returns true; call it inside `assert(...)`.
 bool debugValidateSpec(PlateSpec spec) {
@@ -15,9 +12,6 @@ bool debugValidateSpec(PlateSpec spec) {
   return true;
 }
 
-// TODO(ts): [H23][D9] port this, not the assert wrapper; message texts are part of the vectors.
-// TODO(kt): [H23][D9] same; return List<String>.
-// TODO(py): [H23][D9] same; return list[str].
 /// Everything wrong with [spec], empty for a sound one: every rect fits the
 /// canvas, every mirror echoes a real slot, registers are evenly pitched, and
 /// alphabet ids key content one-to-one.
@@ -132,7 +126,7 @@ List<String> specProblems(PlateSpec spec) {
 
   for (final r in spec.restrictions) {
     check(
-      spec.textGroups.any((g) => g.key == r.group),
+      spec.effectiveTextGroups.any((g) => g.key == r.group),
       'Restriction "${r.reason}" in spec "${spec.id}" watches group '
       '"${r.group}", which no text group carries — it would never fire.',
     );

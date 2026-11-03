@@ -16,7 +16,6 @@ const _country = PlateCountry(
 const _persian = PlateAlphabet(
   id: 'zz.persian',
   characters: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-  input: AlphabetInput.typed,
   isNumeric: true,
   glyphs: {
     '0': '۰',
@@ -59,7 +58,6 @@ void main() {
         id: 'zz.shared',
         characters: ['P', 'D'],
         input: AlphabetInput.chosen,
-        isNumeric: false,
         glyphs: {'P': 'ش', 'D': 'ش'},
       );
       expect(shared.canonical('ش'), 'P');
@@ -91,9 +89,6 @@ void main() {
     });
   });
 
-  // TODO(ts): ui test: typing a national numeral through the canvas; port as a DOM test.
-  // TODO(kt): ui test: compose UI test.
-  // TODO(py): ui test: pytest-qt.
   testWidgets(
     'an editable mirror shares one value with its source slot in two scripts',
     (tester) async {

@@ -2,6 +2,7 @@
 // Run from ports/ts: node codegen/gen.mjs. Units that exist are never overwritten; tests always are.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
+import { compactCountry } from './compact.mjs';
 
 const ts = join(import.meta.dirname, '..');
 const repo = join(ts, '../..');
@@ -83,7 +84,8 @@ for (const [pkg, d] of datas) {
   const country = countryOf(pkg);
   const dir = join(ts, `src/countries/${country}`);
   const slim = { package: pkg, alphabets: Object.fromEntries(d.alphabets.map((r) => [r, (({ names, ...a }) => a)(alphabets[r])])), countries: d.countries, themes: d.themes, specs: d.specs, resolvers: d.resolvers, assets: d.assets, gallery: d.gallery };
-  write(join(dir, 'data.ts'), `${header(`ports/data/countries/${pkg}.json`)}import type { CountryData } from '../load';\n\nexport const data: CountryData = JSON.parse(${JSON.stringify(JSON.stringify(slim))});\n`);
+  const json = JSON.stringify(compactCountry(slim)).replace(/[\\']/g, '\\$&');
+  write(join(dir, 'data.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { expandCountry } from '../expand';\n\nexport const data = expandCountry(JSON.parse('${json}'));\n`);
 
   const named = Object.entries(d.themes).flatMap(([ref, t], i) => t.names.filter((n) => /^[A-Z]\w*\.\w+$/.test(n)).map((n) => [...n.split('.'), i, ref]));
   const owners = Map.groupBy(named, ([o]) => o);
