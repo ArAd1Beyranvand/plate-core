@@ -227,8 +227,8 @@ class App(tk.Tk):
         self.points_lock = threading.Lock()
         self.stop_flag = threading.Event()
         self.worker = None
-        self.pkgs = sorted(p.parent.name for p in ROOT.glob("*/pubspec.yaml")
-                           if p.parent.name not in EXCLUDED)
+        self.pkgs = sorted(p.parent.parent.name for p in ROOT.glob("*/flutter/pubspec.yaml")
+                           if p.parent.parent.name not in EXCLUDED)
         for p in self.pkgs:
             self.opts[p] = {s: s != "publish" for s in STEPS}
         self.check_mode = tk.StringVar(value="both")
@@ -498,7 +498,7 @@ class App(tk.Tk):
             lines.append(clip(sec.get("summary", ""), 600))
         log(lines[0])
         st['points'] = f'{granted}/{total}'
-        self.log_points(Path(path).name, granted, total)
+        self.log_points(Path(path).parent.name, granted, total)
         return rc, "\n".join(lines)
 
     def bump_version(self, path, log):
@@ -553,15 +553,17 @@ class App(tk.Tk):
 
     def step_all(self, p, path, o, mode, st, log):
         st.pop('points', None)
-        if not (path / ".git").exists():
+        repo = path
+        path = repo / "flutter"
+        if not (repo / ".git").exists():
             log("no git repo, skipping package")
             return True
         if o["commit"]:
-            rc, out = run(["git", "status", "--short"], path, log)
+            rc, out = run(["git", "status", "--short"], repo, log)
             if out:
-                rc, _ = run(["git", "add", "-A"], path, log)
+                rc, _ = run(["git", "add", "-A"], repo, log)
                 if rc == 0:
-                    rc, _ = run(["git", "commit", "-qm", f"Update {p}"], path, log)
+                    rc, _ = run(["git", "commit", "-qm", f"Update {p}"], repo, log)
                 if rc:
                     log("COMMIT FAILED")
                     return False
@@ -569,12 +571,12 @@ class App(tk.Tk):
             else:
                 log("nothing to commit")
         if o["push"]:
-            if not self.ensure_remote(p, path, log):
+            if not self.ensure_remote(p, repo, log):
                 log("NO GITHUB REMOTE")
                 return False
             # -u sets the upstream on a first push and is harmless afterwards.
-            _, br = run(["git", "branch", "--show-current"], path, log)
-            rc, out = run(["git", "push", "-u", "origin", br or "HEAD"], path, log)
+            _, br = run(["git", "branch", "--show-current"], repo, log)
+            rc, out = run(["git", "push", "-u", "origin", br or "HEAD"], repo, log)
             if rc:
                 if "imeout" in out or "imed out" in out:
                     log("HINT: GitHub over IPv6 times out; prefer IPv4 system-wide (gai.conf)")
@@ -608,11 +610,11 @@ class App(tk.Tk):
             if rc and re.search(r"version \S+ of package \S+ already exists", out, re.I):
                 v = self.bump_version(path, log)
                 if v:
-                    run(["git", "add", "-A"], path, log)
-                    run(["git", "commit", "-qm", f"Bump version to {v}"], path, log)
+                    run(["git", "add", "-A"], repo, log)
+                    run(["git", "commit", "-qm", f"Bump version to {v}"], repo, log)
                     if o["push"]:
-                        _, br = run(["git", "branch", "--show-current"], path, log)
-                        run(["git", "push", "origin", br or "HEAD"], path, log)
+                        _, br = run(["git", "branch", "--show-current"], repo, log)
+                        run(["git", "push", "origin", br or "HEAD"], repo, log)
                     rc, out = run(["flutter", "pub", "publish", "--force"], path, log)
             if rc:
                 log("PUBLISH FAILED")

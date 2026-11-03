@@ -57,8 +57,8 @@ def stamp(i: dict, eng: str) -> str:
     h = hashlib.sha256(eng.encode())
     files = [*SHELL.iterdir(), i["src"], *(GALLERY / r for r in REUSED)]
     for p in i["pkgs"]:
-        files += [f for f in (ROOT / p).rglob("*")
-                  if f.is_file() and not {"build", ".dart_tool"} & set(f.relative_to(ROOT / p).parts)]
+        files += [f for f in (ROOT / p / "flutter").rglob("*")
+                  if f.is_file() and not {"build", ".dart_tool"} & set(f.relative_to(ROOT / p / "flutter").parts)]
     for f in sorted(files):
         h.update(f.name.encode() + f.read_bytes())
     return h.hexdigest()[:16]
@@ -87,7 +87,7 @@ def build(slug: str, eng: str, force: bool) -> None:
     shutil.copytree(GALLERY / "assets/fonts", app / "assets/fonts",
                     ignore=shutil.ignore_patterns("MaterialIcons*"))
     fill = {"slug": slug, "root": str(ROOT), "engine": eng, **seo.esc(seo.slots(slug, "flutter")),
-            "deps": "\n".join(f"  {p}:\n    path: {ROOT / p}" for p in i["pkgs"])}
+            "deps": "\n".join(f"  {p}:\n    path: {ROOT / p / 'flutter'}" for p in i["pkgs"])}
 
     def render(t: str) -> str:
         return re.sub(r"\{\{(\w+)\}\}", lambda m: fill.get(m[1], m[0]), t)

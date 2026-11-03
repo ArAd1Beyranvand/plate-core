@@ -28,6 +28,7 @@ class _EmbedAppState extends State<EmbedApp> {
   late final List<GalleryEntry> _entries = widget.source.entries;
   late final EmbedBridge _bridge = EmbedBridge(_onMessage);
   final GlobalKey _body = GlobalKey();
+  final PlateAnimationController _anim = PlateAnimationController();
   late GalleryEntry _entry = _entries.first;
   late PlateController _plate = _controllerFor(_entry);
   ThemeMode _mode = ThemeMode.light;
@@ -38,6 +39,10 @@ class _EmbedAppState extends State<EmbedApp> {
   @override
   void initState() {
     super.initState();
+    // The plate starts gone and staggers in once the host has initialised it.
+    for (final PlatePartId id in PlatePartId.allOf(_entry.spec)) {
+      _anim.hide(id);
+    }
     _bridge.post('hello', <String, Object?>{
       'lang': 'flutter',
       'country': widget.slug,
@@ -74,6 +79,7 @@ class _EmbedAppState extends State<EmbedApp> {
         _ready = true;
         WidgetsBinding.instance.addPostFrameCallback((_) {
           _bridge.removeSplash();
+          _anim.comeInAll(delays: PlateStagger.sequence(_entry.spec));
           _measure(force: true);
         });
       case 'action':
@@ -91,6 +97,10 @@ class _EmbedAppState extends State<EmbedApp> {
             setState(() => _mode = a['theme'] == 'dark' ? ThemeMode.dark : ThemeMode.light);
           case 'focus':
             _plate.focusFirstEmpty();
+          case 'leave':
+            _anim.goOutAll(
+              delays: PlateStagger.sequence(_entry.spec, reverse: true),
+            );
         }
     }
   }
@@ -172,6 +182,7 @@ class _EmbedAppState extends State<EmbedApp> {
                   child: LivePlate(
                     key: ValueKey<GalleryEntry>(_entry),
                     controller: _plate,
+                    animation: _anim,
                     validName: _entry.label,
                     theme: _entry.themeFor(_plate.values),
                     country: _entry.country,
