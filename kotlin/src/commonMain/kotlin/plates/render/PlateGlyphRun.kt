@@ -39,33 +39,47 @@ fun glyphUnits(text: String, direction: TextDirection): List<String> = when {
     else -> splitGraphemes(text)
 }
 
+private data class GlyphRun(val units: List<String>, val style: TextStyle, val widths: List<Double>, val skip: Int)
+
 /**
  * [H12] PlateGlyphRun settled: one text op per unit, laid out along [box] from its start edge,
- * scaled down to fit and centred vertically at line height 1.
+ * scaled down to fit and centred vertically at line height 1. A [caret] colour paints the insertion
+ * point at the end of the typed text, where the run is.
  */
 fun paintGlyphRun(
     c: DisplayList, text: String, box: Rect, style: TextStyle, direction: TextDirection,
-    placeholder: Pair<String, Color>? = null,
+    placeholder: Pair<String, Color>? = null, caret: Color? = null,
 ) {
+    val rtl = direction == TextDirection.rtl
+    // The characters already typed hide their twins; a whole right-to-left run is split at that point.
+    val n = if (rtl) text.length else glyphUnits(text, direction).size
     val runs = listOfNotNull(
-        placeholder?.takeIf { it.first.isNotEmpty() }?.let { it.first to style.copy(color = it.second) },
-        text to style,
-    ).map { (t, st) -> Triple(glyphUnits(t, direction), st, glyphUnits(t, direction).map { measureText(it, st) }) }
-        .filter { it.first.isNotEmpty() }
-    if (runs.isEmpty()) return
-    val total = runs.maxOf { it.third.sum() }
-    val k = min(1.0, min(box.width / total, box.height / style.fontSize))
+        placeholder?.takeIf { it.first.isNotEmpty() }?.let { Triple(it.first, style.copy(color = it.second), true) },
+        Triple(text, style, false),
+    ).map { (t, st, ghost) ->
+        val units = if (ghost && rtl) listOf(t.take(n), t.drop(n)).filter { it.isNotEmpty() } else glyphUnits(t, direction)
+        GlyphRun(units, st, units.map { measureText(it, st) }, if (!ghost) 0 else if (rtl) (if (n > 0) 1 else 0) else n)
+    }.filter { it.units.isNotEmpty() }
+    if (runs.isEmpty() && caret == null) return
+    val total = runs.maxOfOrNull { it.widths.sum() } ?: 0.0
+    val k = min(1.0, min(if (total > 0) box.width / total else 1.0, box.height / style.fontSize))
     val ltr = direction == TextDirection.ltr
     c.save()
     c.translate(box.left + (box.width - total * k) / 2, box.top + (box.height - style.fontSize * k) / 2)
     c.scale(k)
-    for ((units, st, widths) in runs) {
+    for ((units, st, widths, skip) in runs) {
         var x = if (ltr) 0.0 else total
         for ((i, unit) in units.withIndex()) {
             if (!ltr) x -= widths[i]
-            c.text(unit, Rect.fromLTWH(x, 0.0, widths[i], style.fontSize), TextAlign.start, direction, st)
+            if (i >= skip) c.text(unit, Rect.fromLTWH(x, 0.0, widths[i], style.fontSize), TextAlign.start, direction, st)
             if (ltr) x += widths[i]
         }
+    }
+    if (caret != null) {
+        val typed = runs.firstOrNull { it.skip == 0 && it.style === style }?.widths?.sum() ?: 0.0
+        val x = if (ltr) typed else total - typed
+        val f = style.fontSize
+        c.rect(Rect.fromLTRB(x, f * 0.1, x + f * 0.05, f * 0.9), Paint(caret))
     }
     c.restore()
 }

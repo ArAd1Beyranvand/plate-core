@@ -50,6 +50,10 @@ class DomPlate:
         self.art = document.createElement("div")
         self.host.appendChild(self.art)
         spec = canvas.spec
+        # The inputs' percentages are of the plate's own box, not the host, whose height is pinned while a swap plays.
+        self.layer = document.createElement("div")
+        self.layer.style.cssText = f"position:absolute;left:0;top:0;width:100%;aspect-ratio:{spec.canvas_width} / {spec.canvas_height}"
+        self.host.appendChild(self.layer)
         self.inputs = {}
         for s in canvas.slot_inputs():
             e = document.createElement("input")
@@ -62,15 +66,14 @@ class DomPlate:
             st.fontSize = f"{72 * s.box.height / spec.canvas_width}cqw"
             st.fontWeight = "700"
             slot = spec.slots[s.index]
-            theme = canvas.theme or PlateTheme.standard()
             # Transparent text: the glyphs, placeholder and underline are painted under it, in the slot's script.
-            st.color, st.caretColor, st.outline = "transparent", css(theme.active_color), "none"
+            st.color, st.caretColor, st.outline = "transparent", "transparent", "none"
             e.className = "plate-slot"
             e.maxLength = slot.length
             if s.behavior in (SlotBehavior.KEYPAD_FIRST_FIELD, SlotBehavior.EXTERNAL_FIELD):
                 e.inputMode = "none"  # [D8] the keypad types; the system keyboard stays down
             self._listen(e, s.index, proxy)
-            self.host.appendChild(e)
+            self.layer.appendChild(e)
             self.inputs[s.index] = e
         self.host.style.containerType = "inline-size"
         canvas.on_render = lambda ops: self.paint()

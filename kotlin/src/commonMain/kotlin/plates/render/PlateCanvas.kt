@@ -170,7 +170,7 @@ fun renderPlate(
         val r = s.box.rect
         val inset = s.box.height * 0.14
         val hint = hintAt?.invoke(i) ?: s.alphabet.placeholder
-        paintGlyphRun(c, shown, Rect.fromLTRB(r.left, r.top + inset, r.right, r.bottom - inset), style, s.alphabet.direction, hint to t.inactiveColor)
+        paintGlyphRun(c, shown, Rect.fromLTRB(r.left, r.top + inset, r.right, r.bottom - inset), style, s.alphabet.direction, hint to t.inactiveColor, if (activeIndex == i) t.activeColor else null)
         c.rect(Rect.fromLTWH(r.left, r.bottom - 1, r.width, 1.0), Paint(if (!v.isNullOrEmpty() || activeIndex == i) t.activeColor else t.inactiveColor))
     }
     if (rejection != null) {

@@ -165,7 +165,7 @@ export function renderPlate(o: RenderInput): DisplayOp[] {
     // glyphStyle's 0.72 of the box, centred, as the field's content padding leaves it.
     const r = s.box.rect, inset = s.box.height * 0.14;
     const hint = o.hintAt?.(i) ?? s.alphabet.placeholder;
-    paintGlyphRun(c, v ? s.render(v) : '', { ...r, top: r.top + inset, bottom: r.bottom - inset }, style, s.alphabet.direction, { text: hint, color: theme.inactiveColor });
+    paintGlyphRun(c, v ? s.render(v) : '', { ...r, top: r.top + inset, bottom: r.bottom - inset }, style, s.alphabet.direction, { text: hint, color: theme.inactiveColor }, o.activeIndex === i ? theme.activeColor : undefined);
     const lit = !!v || o.activeIndex === i;
     c.rect({ left: r.left, top: r.bottom - 1, right: r.right, bottom: r.bottom }, { color: lit ? theme.activeColor : theme.inactiveColor });
   });

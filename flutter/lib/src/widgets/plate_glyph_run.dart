@@ -125,18 +125,37 @@ class _PlateGlyphRunState extends State<PlateGlyphRun>
       ],
     );
     if (widget.placeholder.isEmpty) return run;
-    // The sample stays under the typed text, each character landing on its
-    // faint twin whether or not it matches.
+    // The sample continues after the typed text: the characters already typed
+    // keep their place in the layout but hide their twins.
+    final style = widget.placeholderStyle ?? widget.style;
+    final typed = widget.textDirection == .ltr
+        ? widget.text.characters.length
+        : widget.text.length;
+    final chars = widget.placeholder.characters;
+    final hidden = widget.textDirection == .ltr
+        ? chars.take(typed).toString()
+        : widget.placeholder.substring(
+            0,
+            typed.clamp(0, widget.placeholder.length),
+          );
     return Stack(
       alignment: AlignmentDirectional.centerStart,
       textDirection: widget.textDirection,
       children: [
-        Text(
-          widget.placeholder,
+        Text.rich(
+          TextSpan(
+            children: [
+              TextSpan(
+                text: hidden,
+                style: const TextStyle(color: Color(0x00000000)),
+              ),
+              TextSpan(text: widget.placeholder.substring(hidden.length)),
+            ],
+          ),
           maxLines: 1,
           softWrap: false,
           textDirection: widget.textDirection,
-          style: widget.placeholderStyle ?? widget.style,
+          style: style,
           strutStyle: _strutOf(widget.style),
         ),
         run,

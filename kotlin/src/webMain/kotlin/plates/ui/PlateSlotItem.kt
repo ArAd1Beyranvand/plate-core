@@ -30,7 +30,7 @@ fun slotInputElement(slot: SlotInput, value: String, canvasWidth: Double, canvas
         outline = "none"
         color = "transparent"
         textAlign = "center"
-        setProperty("caret-color", activeColor)
+        setProperty("caret-color", "transparent")
     }
     return input
 }

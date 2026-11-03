@@ -18,8 +18,6 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.HTMLOptionElement
-import org.w3c.dom.HTMLSelectElement
 import org.w3c.dom.events.KeyboardEvent
 import plates.core.alphabet.PlateAlphabet
 import plates.core.input.PlateController
@@ -79,8 +77,9 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
         Entry(s("id")!!, s("label")!!, s("spec")!!, s("theme"), s("country"), s("validator"), (o["sampleValues"] as? JsonArray)?.map { v -> v.jsonPrimitive.contentOrNull })
     }
     private fun el(tag: String, css: String = "") = (document.createElement(tag) as HTMLElement).also { it.style.cssText = css }
-    private val select = el("select", "font:15px system-ui;margin-bottom:8px") as HTMLSelectElement
     private val stage = el("div", "position:relative;width:100%")
+    // The inputs' percentages are of the plate's own box, not the stage, whose height is pinned while a swap plays.
+    private val layer = el("div", "position:absolute;left:0;top:0;width:100%")
     private val art = el("div")
     private val keypadBox = el("div", "margin-top:8px")
     private val verdict = el("p", "font:14px system-ui;margin:8px 0 0")
@@ -99,13 +98,9 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
 
     init {
         verdict.setAttribute("role", "status")
-        select.setAttribute("aria-label", "Plate type")
-        entries.forEach { e ->
-            select.appendChild((document.createElement("option") as HTMLOptionElement).also { it.value = e.id; it.textContent = e.label })
-        }
         stage.appendChild(art)
-        listOf(select, stage, keypadBox, verdict).forEach(root::appendChild)
-        select.onchange = { build(select.value, animate = "swap"); emit(true) }
+        stage.appendChild(layer)
+        listOf(stage, keypadBox, verdict).forEach(root::appendChild)
         build(null, null, "intro")
     }
 
@@ -197,8 +192,8 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
         )
         machine = m
         controller.attach(m)
-        select.value = next.id
         inputs.values.forEach { it.remove() }
+        layer.style.setProperty("aspect-ratio", "${spec.canvasWidth} / ${spec.canvasHeight}")
         inputs = c.slotInputs().associate { slot ->
             val input = slotInputElement(slot, "", spec.canvasWidth, spec.canvasHeight, "#1a73e8")
             input.onfocus = { m.focusChanged(slot.index); null }
@@ -213,7 +208,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
                 if ((e as KeyboardEvent).key == "Backspace" && input.value.isEmpty()) { e.preventDefault(); m.backspaceCharacter() }
                 null
             }
-            stage.appendChild(input)
+            layer.appendChild(input)
             slot.index to input
         }
         keypadBox.innerHTML = ""

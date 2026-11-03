@@ -2,7 +2,7 @@ import type { SlotInput } from './plate_canvas';
 
 /**
  * [D8] A native <input> over one slot box: transparent text (the glyph run is painted under it),
- * caret from [activeColor]; keypad behaviours get inputmode=none. Boxes are spec units × [scale].
+ * the caret is painted with the glyphs; keypad behaviours get inputmode=none. Boxes are spec units × [scale].
  */
 export function slotInputElement(slot: SlotInput, o: { value: string; scale: number; activeColor: string }): HTMLInputElement {
   const el = document.createElement('input');
@@ -24,7 +24,7 @@ export function slotInputElement(slot: SlotInput, o: { value: string; scale: num
     padding: '0',
     outline: 'none',
     color: 'transparent',
-    caretColor: o.activeColor,
+    caretColor: 'transparent',
     textAlign: 'center',
   });
   return el;

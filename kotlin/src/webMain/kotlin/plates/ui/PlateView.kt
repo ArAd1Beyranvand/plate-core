@@ -23,6 +23,10 @@ fun mountPlate(host: HTMLElement, canvas: PlateCanvas, scope: CoroutineScope = M
     host.style.position = "relative"
     val face = document.createElement("div") as HTMLElement
     host.appendChild(face)
+    // The inputs' percentages are of the plate's own box, not the host, whose height is pinned while a swap plays.
+    val layer = document.createElement("div") as HTMLElement
+    layer.style.cssText = "position:absolute;left:0;top:0;width:100%;aspect-ratio:${canvas.spec.canvasWidth} / ${canvas.spec.canvasHeight}"
+    host.appendChild(layer)
     var inputs = emptyList<HTMLInputElement>()
     var slots = emptyList<SlotInput>()
     var ticking = false
@@ -35,7 +39,7 @@ fun mountPlate(host: HTMLElement, canvas: PlateCanvas, scope: CoroutineScope = M
             inputs = next.map { s ->
                 slotInputElement(s, "", canvas.spec.canvasWidth, canvas.spec.canvasHeight).also { input ->
                     input.oninput = { canvas.controller.setAt(s.index, input.value.ifEmpty { null }) }
-                    host.appendChild(input)
+                    layer.appendChild(input)
                 }
             }
         }

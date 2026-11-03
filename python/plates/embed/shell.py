@@ -1,4 +1,4 @@
-"""[W6] The embed shell for one country: spec selector, plate, keypad and verdict line, speaking the
+"""[W6] The embed shell for one country: plate, keypad and verdict line, speaking the
 plate-embed protocol (ports/py/web/boot.js starts it; ports/ts/web/shell.ts is the TS twin).
 
 Only `plates.countries.<country>.data` is imported, by name. `env` is the page seam (browser.py)."""
@@ -61,17 +61,10 @@ class Shell:
         el.addEventListener(kind, h)
 
     def _build_page(self) -> None:
-        self.select = self._el("select", "font:15px system-ui;margin-bottom:8px")
-        self.select.setAttribute("aria-label", "Plate type")
-        for e in self.entries:
-            o = self.doc.createElement("option")
-            o.value, o.textContent = e["id"], e["label"]
-            self.select.appendChild(o)
         self.stage, self.keypad_box = self._el("div", "position:relative;width:100%"), self._el("div", "margin-top:8px")
         self.verdict = self._el("p", "font:14px system-ui;margin:8px 0 0")
         self.verdict.setAttribute("role", "status")
-        self._on(self.select, "change", lambda _e=None: (self.build(self.select.value, None, "swap"), self._emit()))
-        for e in (self.select, self.stage, self.keypad_box, self.verdict):
+        for e in (self.stage, self.keypad_box, self.verdict):
             self.env.root.appendChild(e)
         self.picker = PlateCharacterPicker(self.doc, self.env.proxy)
 
@@ -122,7 +115,6 @@ class Shell:
             self._on(e, "focus", lambda _e=None, i=i: m.handle_focus_change(i), self._tmp)
             self._on(e, "input", lambda _e=None, i=i: self._typed(i), self._tmp)
             self._on(e, "keydown", lambda ev, e=e: self._key(ev, e), self._tmp)
-        self.select.value = entry["id"]
         self._keypad = self._pad = None
         if self.show_keypad:
             self._keypad = PlateKeypad(self._alphabet(True) or LATIN_DIGITS, self._alphabet(False) or NO_LETTERS,

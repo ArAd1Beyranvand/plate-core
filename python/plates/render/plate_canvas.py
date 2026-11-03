@@ -172,7 +172,8 @@ def render_plate(spec: PlateSpec, values: list[str | None], theme: PlateTheme | 
         r, inset = s.box.rect, s.box.height * 0.14
         hint = (hint_at(i) if hint_at else None) or s.alphabet.placeholder
         paint_glyph_run(c, s.render(v) if v else "", Rect(r.left, r.top + inset, r.width, r.height - 2 * inset), style,
-                        s.alphabet.direction, (hint, theme.inactive_color))
+                        s.alphabet.direction, (hint, theme.inactive_color),
+                        theme.active_color if active_index == i else None)
         lit = bool(v) or active_index == i
         c.rect(Rect(r.left, r.bottom - 1, r.width, 1), {"color": theme.active_color if lit else theme.inactive_color})
     if rejection:
