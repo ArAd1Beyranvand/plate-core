@@ -1,6 +1,7 @@
 """[D1][H14] One SVG tree for the whole plate: a display list painted as nested groups (ts/src/ui/svg.ts)."""
 from __future__ import annotations
 
+import itertools
 from typing import Callable
 
 AssetResolver = Callable[[str, str], str]
@@ -57,6 +58,9 @@ def _box(tag: str, m: str, b, extra: str = "") -> str:
     return f'<{tag}{m} x="{_n(b[0])}" y="{_n(b[1])}" width="{_n(b[2])}" height="{_n(b[3])}"{extra}/>'
 
 
+_serial = itertools.count()
+
+
 def ops_to_svg(ops: list[dict], resolve_asset: AssetResolver = lambda p, a: f"packages/{p}/{a}") -> str:
     """The display list as the inside of an `<svg>`. Clips stay open to the matching restore, as on a
     canvas; `resolve_asset` turns a package asset into a URL the host serves."""
@@ -64,10 +68,12 @@ def ops_to_svg(ops: list[dict], resolve_asset: AssetResolver = lambda p, a: f"pa
     out: list[str] = []
     opened = [0]
     count = [0]
+    # Ids are document-wide: a second plate on the page (a spec swap's ghost) must not resolve to this one's clips.
+    k = next(_serial)
 
     def new_id() -> str:
         count[0] += 1
-        return f"p{count[0] - 1}"
+        return f"p{k}_{count[0] - 1}"
 
     def clip(shape: str) -> None:
         c = new_id()

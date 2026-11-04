@@ -11,6 +11,7 @@ import plates.core.timing.PlateAnimationController
 import plates.core.timing.PlatePartId
 import plates.core.timing.PlateSpecTransition
 import plates.core.timing.PlateStagger
+import plates.core.timing.plateCueLength
 import plates.render.plateTheme
 import plates.render.planSpecTransition
 import plates.ui.PlateCanvas
@@ -32,17 +33,21 @@ fun leave(c: PlateCanvas, anim: PlateAnimationController) = anim.goOutAll(PlateS
 
 /**
  * [D1][D9] A spec change as the canvas plays it: [from] takes itself apart in a ghost over [stage]
- * while [next] waits to come in after it, the face fading between their colours and the box
- * growing to the next plate's height. Returns what ends it early.
+ * while [next] waits to come in after it, the face fading between their colours and tweening
+ * between their sizes, the ghost drawn at that same size. [repaint] draws [next] once the kept parts settle. Returns what ends it early.
  */
-fun swapSpec(scope: CoroutineScope, stage: HTMLElement, art: HTMLElement, from: Outgoing, next: PlateCanvas, anim: PlateAnimationController): () -> Unit {
+fun swapSpec(scope: CoroutineScope, stage: HTMLElement, from: Outgoing, next: PlateCanvas, anim: PlateAnimationController, repaint: () -> Unit): () -> Unit {
     val old = from.canvas
     val plan = planSpecTransition(specTransition, anim.style, old.spec, next.spec, from.values, next.values)
     val ms = plan.outLengthMs
     anim.comeInAll(plan.inDelays)
     plan.hidden.forEach(anim::hide)
     plan.morphed.forEach(anim::settle)
-    next.morphFrom(plateTheme(old.spec, old.theme, from.values), ms.toDouble())
+    // Same spec in a new livery (two entries sharing one spec): nothing goes out, but the face still tweens,
+    // over what taking the whole plate apart would take (Flutter's _morphTheme).
+    val morphMs = if (old.spec.id != next.spec.id) ms
+    else PlateStagger.sequence(next.spec, specTransition.stepMs, reverse = true).let { plateCueLength(anim.style, it.keys, it) }
+    next.morphFrom(plateTheme(old.spec, old.theme, from.values), old.size(), morphMs.toDouble())
 
     val ghostAnim = PlateAnimationController(anim.style)
     ghostAnim.goOutAll(plan.outDelays)
@@ -53,7 +58,7 @@ fun swapSpec(scope: CoroutineScope, stage: HTMLElement, art: HTMLElement, from: 
     controller.hints.value = from.hints
     val ghost = PlateCanvas(
         old.spec, controller, theme = old.theme, country = old.country, mode = old.mode, inputSource = old.inputSource,
-        animation = ghostAnim, now = ::pageNow,
+        animation = ghostAnim, now = ::pageNow, sizeOf = next::size,
     )
     val el = document.createElement("div") as HTMLElement
     el.setAttribute("aria-hidden", "true")
@@ -67,25 +72,17 @@ fun swapSpec(scope: CoroutineScope, stage: HTMLElement, art: HTMLElement, from: 
     stage.appendChild(el)
     paintGhost()
 
-    if (ms > 0) {
-        stage.style.height = "${stage.offsetHeight}px"
-        stage.offsetHeight // flush, so the next height transitions from this one
-        window.requestAnimationFrame {
-            stage.style.transition = "height ${ms}ms ease-in-out"
-            stage.style.height = "${art.offsetHeight}px"
-        }
-    }
     fun end() {
         if (ended) return
         ended = true
         el.remove()
-        stage.style.transition = ""
-        stage.style.height = ""
     }
     val timer = scope.launch {
         delay(ms)
         end()
         plan.kept.forEach(anim::settle)
+        // A cue alone repaints nothing; with no out stagger (a theme-only change) nothing else is moving to.
+        repaint()
     }
-    return { timer.cancel(); end(); anim.settleAll() }
+    return { timer.cancel(); end(); anim.settleAll(); repaint() }
 }

@@ -1,7 +1,8 @@
 import { PlateController } from '../core/input/plate_controller';
 import {
-  PlateAnimationController, type PlateSpecTransition, partId, staggerSequence,
+  PlateAnimationController, type PlateSpecTransition, partId, plateCueLength, staggerSequence,
 } from '../core/timing/plate_animation';
+import type { PlateSpec } from '../core/values/plate_spec';
 import { plateTheme } from '../render/plate_canvas';
 import { planSpecTransition } from '../render/spec_transition';
 import { PlateCanvas } from './plate_canvas';
@@ -24,9 +25,19 @@ export function introduce(next: PlateCanvas, anim: PlateAnimationController): vo
 }
 
 /**
+ * Same spec in a new livery (two entries sharing one spec): nothing goes out, but the face still tweens,
+ * over what taking the whole plate apart would take (Flutter's _morphTheme).
+ */
+function morphMs(from: PlateSpec, to: PlateSpec, outMs: number, anim: PlateAnimationController): number {
+  if (from.id !== to.id) return outMs;
+  const delays = staggerSequence(to, { stepMs: specTransition.stepMs, reverse: true });
+  return plateCueLength(anim.style, delays.keys(), delays);
+}
+
+/**
  * [D1][D9] A spec change as the canvas plays it: [from] takes itself apart in a ghost over [host]
- * while [next] waits to come in after it, the face fading between their colours and the box
- * growing to the next plate's height. Returns what ends it early.
+ * while [next] waits to come in after it, the face fading between their colours and tweening
+ * between their sizes, the ghost drawn at that same size. Returns what ends it early.
  */
 export function swapSpec(host: HTMLElement, from: Outgoing, next: PlateCanvas, anim: PlateAnimationController): () => void {
   const old = from.canvas.options;
@@ -35,7 +46,7 @@ export function swapSpec(host: HTMLElement, from: Outgoing, next: PlateCanvas, a
   anim.comeInAll(new Map([...plan.inDelays]));
   plan.hidden.forEach((id) => anim.hide(id));
   plan.morphed.forEach((id) => anim.settle(id));
-  next.morphFrom(plateTheme(from.canvas.spec, old.theme, from.values), ms);
+  next.morphFrom(plateTheme(from.canvas.spec, old.theme, from.values), from.canvas.size(), morphMs(from.canvas.spec, next.spec, ms, anim));
 
   const ghostAnim = new PlateAnimationController(anim.style);
   ghostAnim.goOutAll(plan.outDelays);
@@ -48,7 +59,7 @@ export function swapSpec(host: HTMLElement, from: Outgoing, next: PlateCanvas, a
   controller.hints.value = from.hints;
   const ghost = new PlateCanvas({
     spec: from.canvas.spec, controller, theme: old.theme, country: old.country, mode: old.mode, inputSource: old.inputSource,
-    animation: ghostAnim, onRender: () => paintGhost(),
+    animation: ghostAnim, onRender: () => paintGhost(), size: () => next.size(),
   });
   const paintGhost = () => {
     el.innerHTML = ghost.svg();
@@ -58,29 +69,22 @@ export function swapSpec(host: HTMLElement, from: Outgoing, next: PlateCanvas, a
   paintGhost();
   ghost.update({});
 
-  const from0 = host.offsetHeight;
-  if (ms > 0) {
-    host.style.height = `${from0}px`;
-    void host.offsetHeight; // flush, so the next height transitions from this one
-    requestAnimationFrame(() => {
-      host.style.transition = `height ${ms}ms ease-in-out`;
-      host.style.height = `${(host.firstElementChild as HTMLElement).offsetHeight}px`;
-    });
-  }
   const end = () => {
     clearTimeout(timer);
     ghost.dispose();
     controller.dispose();
     ghostAnim.dispose();
     el.remove();
-    host.style.transition = host.style.height = '';
   };
   const timer = setTimeout(() => {
     end();
     plan.kept.forEach((id) => anim.settle(id));
+    // A cue alone repaints nothing; with no out stagger (a theme-only change) nothing else is moving to.
+    next.update({});
   }, ms);
   return () => {
     end();
     anim.settleAll();
+    next.update({});
   };
 }

@@ -24,14 +24,18 @@ function fill(p: Paint, defs: string[], id: () => string): string {
   return ` fill="${css(p.color)}"`;
 }
 
+let svgSerial = 0;
+
 /**
  * The display list as the inside of an `<svg>`. Clips stay open to the matching restore,
  * as on a canvas; [resolveAsset] turns a package asset into a URL the host serves.
  */
 export function opsToSvg(ops: readonly DisplayOp[], resolveAsset: (pkg: string, path: string) => string = (p, a) => `packages/${p}/${a}`): string {
   const defs: string[] = [];
+  // Ids are document-wide: a second plate on the page (a spec swap's ghost) must not resolve to this one's clips.
+  const k = (svgSerial++).toString(36);
   let n = 0;
-  const id = () => `p${n++}`;
+  const id = () => `p${k}_${n++}`;
   const out: string[] = [];
   const open: number[] = [0];
   const clip = (shape: string) => {

@@ -1,3 +1,7 @@
+## 0.12.2
+
+- Version bump; 0.12.1 was already published.
+
 ## Unreleased
 
 - Removed `PlateNumber` and `PlateController.plateNumber`: nothing used them;

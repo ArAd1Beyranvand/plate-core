@@ -99,6 +99,7 @@ class PlateKeypad(options: PlateKeypadOptions, val hooks: PlateKeypadHooks = Pla
     private var keys = emptyList<Key>()
     private var raf = false
     private var gridId = ""
+    private var disposed = false
 
     init {
         el.style.cssText = "padding:8px;border-radius:12px;box-sizing:border-box;overflow:hidden"
@@ -118,6 +119,7 @@ class PlateKeypad(options: PlateKeypadOptions, val hooks: PlateKeypadHooks = Pla
     }
 
     fun dispose() {
+        disposed = true
         keys.forEach { it.dispose() }
         keys = emptyList()
     }
@@ -142,9 +144,9 @@ class PlateKeypad(options: PlateKeypadOptions, val hooks: PlateKeypadHooks = Pla
 
     /** Starts the frame loop if it is not running. */
     fun wake() {
-        if (raf) return
+        if (raf || disposed) return
         raf = true
-        window.requestAnimationFrame { raf = false; tick() }
+        window.requestAnimationFrame { raf = false; if (!disposed) tick() }
     }
 
     fun tick() {

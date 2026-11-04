@@ -43,11 +43,15 @@ private fun rectAttrs(m: Matrix, r: plates.core.values.Rect) = "${tf(m)} x=\"${r
  * The display list as the inside of an `<svg>`. Clips stay open to the matching restore,
  * as on a canvas; [resolveAsset] turns a package asset into a URL the host serves.
  */
+private var svgSerial = 0
+
 fun opsToSvg(ops: List<DisplayOp>, resolveAsset: (String, String) -> String = { p, a -> "packages/$p/$a" }): String {
     val defs = StringBuilder()
     val out = StringBuilder()
+    // Ids are document-wide: a second plate on the page (a spec swap's ghost) must not resolve to this one's clips.
+    val k = (svgSerial++).toString(36)
     var n = 0
-    fun id() = "p${n++}"
+    fun id() = "p${k}_${n++}"
     val open = mutableListOf(0)
     fun clip(shape: String) {
         val c = id()

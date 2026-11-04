@@ -80,7 +80,7 @@ tasks.register("webBuild") {
         rootDir.resolve("../data/countries/${country}_plate.json").takeIf { it.isFile }?.let { data ->
             Regex("\"package\"\\s*:\\s*\"([^\"]+)\"\\s*,\\s*\"path\"\\s*:\\s*\"([^\"]+)\"").findAll(data.readText()).forEach { m ->
                 val (pkg, path) = m.destructured
-                rootDir.resolve("../../$pkg/$path").takeIf { it.isFile }?.copyTo(File(target, "packages/$pkg/$path"), overwrite = true)
+                rootDir.resolve("../../$pkg/flutter/$path").takeIf { it.isFile }?.copyTo(File(target, "packages/$pkg/$path"), overwrite = true)
             }
         }
         fun seo(key: String) = ProcessBuilder("python3", rootDir.resolve("../web/seo.py").path, country, "kotlin", "--key", key)

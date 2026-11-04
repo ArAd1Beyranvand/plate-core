@@ -78,7 +78,7 @@ class Shell:
         old, silent = self.controller, self._quiet
         self._end_swap()
         self._end_swap = lambda: None
-        prev = outgoing(self.canvas, self.stage.offsetHeight) if self.canvas else None
+        prev = outgoing(self.canvas) if self.canvas else None
         entry = self._entry_of(id)
         spec = self.data.SPECS[entry["spec"]]
         self._teardown()

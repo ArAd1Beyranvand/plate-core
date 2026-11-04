@@ -78,7 +78,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
     }
     private fun el(tag: String, css: String = "") = (document.createElement(tag) as HTMLElement).also { it.style.cssText = css }
     private val stage = el("div", "position:relative;width:100%")
-    // The inputs' percentages are of the plate's own box, not the stage, whose height is pinned while a swap plays.
+    // The inputs' percentages are of the plate's own box at rest, not the stage the ghost shares.
     private val layer = el("div", "position:absolute;left:0;top:0;width:100%")
     private val art = el("div")
     private val keypadBox = el("div", "margin-top:8px")
@@ -220,7 +220,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
             }),
         ).also { keypadBox.appendChild(it.el) } else null
         when {
-            prev != null && animate == "swap" -> endSwap = swapSpec(scope, stage, art, prev, c, anim)
+            prev != null && animate == "swap" -> endSwap = swapSpec(scope, stage, prev, c, anim, ::paint)
             animate != null -> introduce(c, anim)
             else -> anim.settleAll()
         }

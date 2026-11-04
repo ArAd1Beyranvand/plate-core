@@ -30,6 +30,8 @@ export interface PlateCanvasOptions {
   readonly animation?: PlateAnimationController;
   /** Input mode: the focused slot. */
   readonly activeIndex?: number | null;
+  /** The size to draw at this frame, when another canvas owns it (a spec swap's ghost). */
+  readonly size?: () => readonly [number, number];
 }
 
 const liveryKeys = ['plateBackground', 'plateBorder', 'ink', 'dividerColor', 'activeColor', 'inactiveColor'] as const;
@@ -59,6 +61,7 @@ export class PlateCanvas {
   private readonly clock?: PartClock;
   private tween?: { from: PlateTheme; to: PlateTheme; at: number; ms: number };
   private morph?: { from: PlateTheme; ms: number };
+  private resize?: { from: readonly [number, number]; at: number; ms: number };
   private readonly labels = new Map<number, StaggeredText>();
 
   constructor(private o: PlateCanvasOptions) {
@@ -77,9 +80,22 @@ export class PlateCanvas {
     return this.o;
   }
 
-  /** The face starts as [from] and fades to its own colours over [ms]; call before the first render. */
-  morphFrom(from: PlateTheme, ms: number): void {
+  /**
+   * The face starts as [from] at [size] and tweens to its own colours and size over [ms]: the frame
+   * stretches to the size between, the content contain-fits in it. Call before the first render.
+   */
+  morphFrom(from: PlateTheme, size: readonly [number, number], ms: number): void {
     this.morph = { from, ms };
+    this.resize = { from: size, at: performance.now(), ms };
+  }
+
+  /** The size the plate is drawn at now, in spec units. */
+  size(): readonly [number, number] {
+    const { canvasWidth: w, canvasHeight: h } = this.spec;
+    const r = this.resize, now = performance.now();
+    if (!r || r.ms <= 0 || now - r.at >= r.ms) return [w, h];
+    const t = curveTransform('easeInOut', (now - r.at) / r.ms);
+    return [r.from[0] + (w - r.from[0]) * t, r.from[1] + (h - r.from[1]) * t];
   }
 
   /** [H15] The resolved theme now: a change of livery fades from where the last one had got to. */
@@ -97,8 +113,8 @@ export class PlateCanvas {
   }
 
   private get fading(): boolean {
-    const tw = this.tween;
-    return !!tw && performance.now() - tw.at < tw.ms;
+    const tw = this.tween, r = this.resize, now = performance.now();
+    return (!!tw && now - tw.at < tw.ms) || (!!r && now - r.at < r.ms);
   }
 
   get spec(): PlateSpec {
@@ -139,6 +155,7 @@ export class PlateCanvas {
       rejection: c.rejection.value,
       hintAt: (i) => c.hintAt(i),
       activeIndex: this.o.activeIndex,
+      size: this.o.size?.() ?? this.size(),
     });
   }
 
@@ -152,8 +169,9 @@ export class PlateCanvas {
   }
 
   svg(resolveAsset?: (pkg: string, path: string) => string): string {
-    const { canvasWidth: w, canvasHeight: h } = this.spec;
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">${opsToSvg(this.displayList(), resolveAsset)}</svg>`;
+    const ops = this.displayList();
+    const [w, h] = this.o.size?.() ?? this.size();
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}">${opsToSvg(ops, resolveAsset)}</svg>`;
   }
 
   /** [H14] One render per burst of changes, after the writes that caused it. */

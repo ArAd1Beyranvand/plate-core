@@ -42,6 +42,8 @@ class PlateCanvas(
     now: () -> Double = { 0.0 },
     /** The slot being edited, whose underline lights. */
     var activeIndex: Int? = null,
+    /** The size to draw at this frame, when another canvas owns it (a spec swap's ghost). */
+    private val sizeOf: (() -> Pair<Double, Double>)? = null,
 ) {
     private val time = now
     val controller = controller ?: PlateController(spec, values)
@@ -58,10 +60,31 @@ class PlateCanvas(
     private val labels = HashMap<Int, StaggeredText>()
     private val livery = { t: PlateTheme -> listOf(t.plateBackground, t.plateBorder, t.ink, t.dividerColor, t.activeColor, t.inactiveColor) }
 
-    private val fading get() = tween?.let { time() - it.at < it.ms } == true
+    private class Resize(val start: Pair<Double, Double>, val at: Double, val ms: Double)
 
-    /** The face starts as [start] and fades to its own colours over [ms]; call before the first paint. */
-    fun morphFrom(start: PlateTheme, ms: Double) { morph = start to ms }
+    private var resize: Resize? = null
+
+    private val fading get() = tween?.let { time() - it.at < it.ms } == true || resize?.let { time() - it.at < it.ms } == true
+
+    /**
+     * The face starts as [start] at [size] and tweens to its own colours and size over [ms]: the frame
+     * stretches to the size between, the content contain-fits in it. Call before the first paint.
+     */
+    fun morphFrom(start: PlateTheme, size: Pair<Double, Double>, ms: Double) {
+        morph = start to ms
+        resize = Resize(size, time(), ms)
+    }
+
+    /** The size the plate is drawn at now, in spec units. */
+    fun size(): Pair<Double, Double> {
+        val w = spec.canvasWidth
+        val h = spec.canvasHeight
+        val r = resize
+        val t = time()
+        if (r == null || r.ms <= 0 || t - r.at >= r.ms) return w to h
+        val k = PlateCurves.easeInOut.transform((t - r.at) / r.ms)
+        return (r.start.first + (w - r.start.first) * k) to (r.start.second + (h - r.start.second) * k)
+    }
 
     /** [H15] The resolved theme now: a change of livery fades from where the last one had got to. */
     fun resolvedTheme(): PlateTheme {
@@ -93,6 +116,7 @@ class PlateCanvas(
         spec, values, theme, country ?: spec.country, frames ?: clock?.frames() ?: settledFrames(), mode, inputSource,
         controller.isCompleted, controller.rejection.value,
         hintAt = { controller.hintAt(it) }, activeIndex = activeIndex, resolvedTheme = resolvedTheme(), labelText = ::labelText,
+        size = sizeOf?.invoke() ?: size(),
     )
 
     /** In input mode, the slots the display list leaves for native inputs. */
@@ -104,9 +128,11 @@ class PlateCanvas(
         }
     }
 
-    fun svg(resolveAsset: (String, String) -> String = { p, a -> "packages/$p/$a" }) =
-        "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 ${spec.canvasWidth.fmt()} ${spec.canvasHeight.fmt()}\">" +
-            opsToSvg(displayList(), resolveAsset) + "</svg>"
+    fun svg(resolveAsset: (String, String) -> String = { p, a -> "packages/$p/$a" }): String {
+        val ops = displayList()
+        val (w, h) = sizeOf?.invoke() ?: size()
+        return "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 ${w.fmt()} ${h.fmt()}\">" + opsToSvg(ops, resolveAsset) + "</svg>"
+    }
 }
 
 private fun Double.fmt() = if (this == toLong().toDouble()) toLong().toString() else toString()

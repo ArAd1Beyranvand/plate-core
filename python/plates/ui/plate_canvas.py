@@ -111,11 +111,15 @@ class PlateCanvas:
                  input_source: PlateInputSource = PlateInputSource.HARDWARE_KEYBOARD,
                  frames: Frames | None = None, on_render: Callable[[list[dict]], None] | None = None,
                  animation: PlateAnimationController | None = None, clock: Clock | None = None,
-                 schedule: Schedule | None = None, active_index: int | None = None):
+                 schedule: Schedule | None = None, active_index: int | None = None,
+                 size_of: Callable[[], tuple[float, float]] | None = None):
         self.controller, self.theme, self.country = controller, theme, country
         self.active_index, self.clock, self.schedule = active_index, clock, schedule
         self._tween: _Tween | None = None
         self._morph: tuple[PlateTheme, float] | None = None
+        # The size to draw at, when another canvas owns it (a spec swap's ghost).
+        self._size_of = size_of
+        self._resize: tuple[tuple[float, float], float, float] | None = None
         self._fading = False
         self._labels: dict[int, StaggeredText] = {}
         self._label_wake = False
@@ -133,9 +137,24 @@ class PlateCanvas:
     def spec(self):
         return self.controller.spec
 
-    def morph_from(self, start: PlateTheme, ms: float) -> None:
-        """The face starts as `start` and fades to its own colours over `ms`; call before the first render."""
+    def morph_from(self, start: PlateTheme, size: tuple[float, float], ms: float) -> None:
+        """The face starts as `start` at `size` and tweens to its own colours and size over `ms`: the frame
+        stretches to the size between, the content contain-fits in it. Restarts the face's tween if it rendered already."""
         self._morph = (start, ms)
+        self._tween = None
+        self._resize = (size, self.clock() if self.clock else 0, ms)
+
+    def size(self) -> tuple[float, float]:
+        """The size the plate is drawn at now, in spec units."""
+        w, h = self.spec.canvas_width, self.spec.canvas_height
+        r = self._resize
+        if r is None or not self.clock or r[2] <= 0 or self.clock() - r[1] >= r[2]:
+            return w, h
+        k = CURVES["easeInOut"].transform((self.clock() - r[1]) / r[2])
+        return r[0][0] + (w - r[0][0]) * k, r[0][1] + (h - r[0][1]) * k
+
+    def _view_size(self) -> tuple[float, float]:
+        return self._size_of() if self._size_of else self.size()
 
     def _theme(self) -> PlateTheme:
         """[H15] The resolved theme now: a change of livery fades from where the last one had got to."""
@@ -149,7 +168,8 @@ class PlateCanvas:
             self._tween = _Tween(*(self._morph[0], target, now, self._morph[1]) if self._morph else (target, target, now, 0))
         elif any(getattr(tw.end, k) != getattr(target, k) for k in _LIVERY):
             self._tween = _Tween(self._theme_at(now), target, now, LIVERY_MS if c.spec.resolve_theme else 0)
-        if now - self._tween.at < self._tween.ms and not self._fading:
+        resizing = self._resize is not None and now - self._resize[1] < self._resize[2]
+        if (now - self._tween.at < self._tween.ms or resizing) and not self._fading:
             self._fading = True
             self.schedule(self._fade)
         return self._theme_at(now)
@@ -182,7 +202,8 @@ class PlateCanvas:
         c = self.controller
         return render_plate(c.spec, c.values, self.theme, self.country, self.frames, self.mode,
                             self.input_source, c.is_completed, c.rejection.value, hint_at=c.hint_at,
-                            active_index=self.active_index, resolved_theme=self._theme(), label_text=self._label_text)
+                            active_index=self.active_index, resolved_theme=self._theme(), label_text=self._label_text,
+                            size=self._view_size())
 
     def slot_inputs(self) -> list[SlotInput]:
         """In input mode, the slots the display list leaves for native inputs."""
@@ -196,8 +217,9 @@ class PlateCanvas:
         return out
 
     def svg(self, resolve_asset: AssetResolver | None = None) -> str:
-        w, h = self.spec.canvas_width, self.spec.canvas_height
-        body = ops_to_svg(self.display_list(), resolve_asset) if resolve_asset else ops_to_svg(self.display_list())
+        ops = self.display_list()
+        w, h = self._view_size()
+        body = ops_to_svg(ops, resolve_asset) if resolve_asset else ops_to_svg(ops)
         return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w:g} {h:g}">{body}</svg>'
 
     def _changed(self, *_) -> None:

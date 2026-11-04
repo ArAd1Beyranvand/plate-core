@@ -1,6 +1,6 @@
 """[D1][D9] A spec change as the canvas plays it (ts/src/ui/spec_swap.ts): the old plate takes itself apart in
 a ghost over the stage while the new one waits to come in after it, the face fading between their colours
-and the box growing to the next plate's height."""
+and tweening between their sizes, the ghost drawn at that same size."""
 from __future__ import annotations
 
 from typing import Callable, NamedTuple
@@ -23,7 +23,6 @@ class Outgoing(NamedTuple):
     canvas: PlateCanvas
     values: list
     hints: list | None
-    height: float
 
 
 class SwapPlan(NamedTuple):
@@ -45,9 +44,9 @@ def plan_spec_transition(t, style, frm, to, from_values, to_values) -> SwapPlan:
                     {id for id in all_of(frm) if keeps(id)}, {id for id in all_of(to) if keeps(id)}, morphed, ms)
 
 
-def outgoing(canvas: PlateCanvas, height: float) -> Outgoing:
+def outgoing(canvas: PlateCanvas) -> Outgoing:
     c = canvas.controller
-    return Outgoing(canvas, list(c.values), c.hints.value, height)
+    return Outgoing(canvas, list(c.values), c.hints.value)
 
 
 def introduce(canvas: PlateCanvas, anim: PlateAnimationController) -> None:
@@ -65,7 +64,11 @@ def swap_spec(env, host, prev: Outgoing, nxt: PlateCanvas, anim: PlateAnimationC
         anim.hide(id)
     for id in plan.morphed:
         anim.settle(id)
-    nxt.morph_from(plate_theme(spec, old.theme, prev.values), ms)
+    # Same spec in a new livery (two entries sharing one spec): nothing goes out, but the face still tweens,
+    # over what taking the whole plate apart would take (Flutter's _morphTheme).
+    whole = stagger_sequence(nxt.spec, SPEC_TRANSITION.step, True)
+    morph_ms = ms if spec.id != nxt.spec.id else plate_cue_length(anim.style, whole, whole)
+    nxt.morph_from(plate_theme(spec, old.theme, prev.values), old.size(), morph_ms)
 
     ghost_anim = PlateAnimationController(anim.style)
     ghost_anim.go_out_all(plan.out_delays)
@@ -80,16 +83,10 @@ def swap_spec(env, host, prev: Outgoing, nxt: PlateCanvas, anim: PlateAnimationC
     controller = PlateController(spec, prev.values)
     controller.hints.value = prev.hints
     ghost = PlateCanvas(controller, old.theme, old.country, old.mode, old.input_source,
-                        on_render=lambda ops: paint(), animation=ghost_anim, clock=env.now, schedule=env.schedule)
+                        on_render=lambda ops: paint(), animation=ghost_anim, clock=env.now, schedule=env.schedule, size_of=nxt.size)
     paint = lambda: setattr(el, "innerHTML", ghost.svg())  # noqa: E731
     host.appendChild(el)
     paint()
-
-    if ms > 0:
-        host.style.height = f"{prev.height}px"
-        host.offsetHeight  # noqa: B018 - flush, so the next height transitions from this one
-        host.style.transition = f"height {ms}ms ease-in-out"
-        host.style.height = f"{host.firstElementChild.offsetHeight}px"
 
     timer = None
 
@@ -98,7 +95,6 @@ def swap_spec(env, host, prev: Outgoing, nxt: PlateCanvas, anim: PlateAnimationC
         ghost.dispose()
         controller.dispose()
         el.remove()
-        host.style.transition = host.style.height = ""
 
     def done() -> None:
         end()
