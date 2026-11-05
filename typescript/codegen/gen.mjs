@@ -48,14 +48,14 @@ function validatorStub(classes) {
     const ctor = args ? `  constructor(_o: ${args}) {}\n\n` : '';
     return `export class ${c} implements PlateValidator {\n${ctor}  validate(_entry: PlateEntry): PlateValidation {\n    throw new Error('not ported');\n  }\n}\n`;
   });
-  return `import type { PlateEntry, PlateValidation, PlateValidator } from '../../core/validators/plate_validator';\n\n${body.join('\n')}`;
+  return `import type { PlateEntry, PlateValidation, PlateValidator } from 'plate_core/core/validators/plate_validator';\n\n${body.join('\n')}`;
 }
 
 function resolverStub(names, resolvers) {
   const owners = Map.groupBy(names, (n) => n.split('.')[0]);
   const sig = { theme: '(_base: PlateTheme, _group: (key: string) => string): PlateTheme', label: '(_group: (key: string) => string): string | null' };
   const body = [...owners].map(([o, ns]) => `export const ${o} = {\n${ns.map((n) => `  ${n.split('.')[1]}${sig[resolvers[n].signature]} {\n    throw new Error('not ported');\n  },\n`).join('')}};\n`);
-  const theme = names.some((n) => resolvers[n].signature === 'theme') ? `import type { PlateTheme } from '../../core/theme/plate_theme';\n\n` : '';
+  const theme = names.some((n) => resolvers[n].signature === 'theme') ? `import type { PlateTheme } from 'plate_core/core/theme/plate_theme';\n\n` : '';
   return theme + body.join('\n');
 }
 
@@ -85,14 +85,14 @@ for (const [pkg, d] of datas) {
   const dir = join(ts, `src/countries/${country}`);
   const slim = { package: pkg, alphabets: Object.fromEntries(d.alphabets.map((r) => [r, (({ names, ...a }) => a)(alphabets[r])])), countries: d.countries, themes: d.themes, specs: d.specs, resolvers: d.resolvers, assets: d.assets, gallery: d.gallery };
   const json = JSON.stringify(compactCountry(slim)).replace(/[\\']/g, '\\$&');
-  write(join(dir, 'data.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { expandCountry } from '../expand';\n\nexport const data = expandCountry(JSON.parse('${json}'));\n`);
+  write(join(dir, 'data.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { expandCountry } from 'plate_core/countries/expand';\n\nexport const data = expandCountry(JSON.parse('${json}'));\n`);
 
   const named = Object.entries(d.themes).flatMap(([ref, t], i) => t.names.filter((n) => /^[A-Z]\w*\.\w+$/.test(n)).map((n) => [...n.split('.'), i, ref]));
   const owners = Map.groupBy(named, ([o]) => o);
   if (owners.size) {
     const refs = [...new Set(named.map(([, , i, ref]) => `const t${i} = themeOf(data.themes[${JSON.stringify(ref)}]);`))];
     const objs = [...owners].map(([o, fs]) => `export const ${o} = {\n${fs.map(([, f, i]) => `  ${f}: t${i},\n`).join('')}} as const;\n`);
-    write(join(dir, 'themes.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { themeOf } from '../load';\nimport { data } from './data';\n\n${refs.join('\n')}\n\n${objs.join('\n')}`);
+    write(join(dir, 'themes.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { themeOf } from 'plate_core/countries/load';\nimport { data } from './data';\n\n${refs.join('\n')}\n\n${objs.join('\n')}`);
   }
 
   const mine = [...units.values()].filter((u) => u.pkg === pkg);
@@ -104,7 +104,7 @@ for (const [pkg, d] of datas) {
   const vs = mine.flatMap((u) => u.validators.filter((c) => noArgs.has(c) && !argsType(c)));
   const rs = mine.flatMap((u) => u.resolvers).map((n) => `${JSON.stringify(n)}: ${n}`);
   const code = [rs.length && `resolvers: { ${rs.join(', ')} }`, vs.length && `validators: { ${vs.join(', ')} }`].filter(Boolean).join(', ');
-  write(join(dir, 'index.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { loadCountry } from '../load';\nimport { data } from './data';\n${imports.join('')}\nexport default loadCountry(data${code ? `, { ${code} }` : ''});\n`);
+  write(join(dir, 'index.ts'), `${header(`ports/data/countries/${pkg}.json`)}import { loadCountry } from 'plate_core/countries/load';\nimport { data } from './data';\n${imports.join('')}\nexport default loadCountry(data${code ? `, { ${code} }` : ''});\n`);
 }
 
 const lazy = [...datas.keys()].map((p) => `  ${JSON.stringify(countryOf(p))}: () => import('./${countryOf(p)}/index').then((m) => m.default),\n`);

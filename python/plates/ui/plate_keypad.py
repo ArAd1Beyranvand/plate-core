@@ -10,7 +10,7 @@ from ..core.timing.plate_animation import CURVES
 from ..render.plate_keypad import (
     DIGIT_LABELS, KEY_STAGGER, KEYPAD_SLIDE, NO_LETTERS, ROWS, SWAP_AT, KeyFace, PlateKeypadTheme,
     grid_for, grid_height, height_at, is_highlight, key_enabled, key_face, key_height, key_report,
-    key_text, lerp_face, reveal,
+    entrance, key_text, lerp_face, reveal,
 )
 from .svg import css
 
@@ -110,6 +110,8 @@ class PlateKeypad:
         self._from = self._to = show_letters
         self._from_height: float | None = None
         self._start: float | None = None
+        self._entered: float | None = None
+        self._coming = True
         self.keys: list[PlateKey] = []
         self._build(show_letters)
 
@@ -125,7 +127,21 @@ class PlateKeypad:
 
     @property
     def animating(self) -> bool:
-        return self._start is not None and self.t < 1.0
+        return self._start is not None and self.t < 1.0 or self._entering
+
+    @property
+    def _entering(self) -> bool:
+        return self._entered is not None and self.clock() - self._entered < KEYPAD_SLIDE
+
+    def hide(self) -> None:
+        """Every key gone at once, waiting for enter()."""
+        self._entered, self._coming = float("-inf"), False
+        self._changed()
+
+    def enter(self, coming: bool = True) -> None:
+        """Staggers every key in, or out with `coming` false; out, the pad stays empty until the next call."""
+        self._entered, self._coming = self.clock(), coming
+        self._tick()
 
     def _grid_height(self, letters: bool) -> float:
         return grid_height(grid_for(self.letter_alphabet).rows if letters else len(ROWS), self.compact)
@@ -140,8 +156,19 @@ class PlateKeypad:
     def letters(self) -> bool:
         return self._from if self.t < SWAP_AT else self._to
 
+    @property
+    def pad_presence(self) -> float:
+        """How present the pad itself is: it fades with its keys when it comes in or goes out."""
+        if self._entered is None:
+            return 1.0
+        p = min(1.0, max(0.0, (self.clock() - self._entered) / KEYPAD_SLIDE))
+        return p if self._coming else 1.0 - p
+
     def reveal(self, key: PlateKey) -> float:
-        return reveal(self.t, key.index, key.count)
+        v = reveal(self.t, key.index, key.count)
+        if self._entered is None:
+            return v
+        return v * entrance(self.clock() - self._entered, key.index, key.count, self._coming)
 
     def _build(self, letters: bool) -> None:
         for k in self.keys:
@@ -179,7 +206,7 @@ class PlateKeypad:
         self._changed()
         if self.animating:
             self.schedule(self._tick)
-        else:
+        elif not (self._start is not None and self.t < 1.0):
             self._start = None
 
     def _changed(self) -> None:
@@ -232,6 +259,7 @@ class DomKeypad:
         pad = self.pad
         if getattr(self, "_built", None) != (pad.built_letters, id(pad.keys)):
             self._rebuild()
+        self.host.style.opacity = str(pad.pad_presence)
         for key, b in zip(pad.keys, self.buttons):
             f, v = key.face(), pad.reveal(key)
             b.style.background, b.style.color, b.style.border = css(f.fill), css(f.ink), f"1px solid {css(f.border)}"

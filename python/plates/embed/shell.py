@@ -17,7 +17,7 @@ from ..ui.dom import DomPlate
 from ..ui.plate_canvas import PlateCanvas
 from ..ui.plate_character_picker import PlateCharacterPicker
 from ..ui.plate_keypad import DomKeypad, PlateKeypad
-from ..ui.spec_swap import introduce, outgoing, swap_spec
+from ..ui.spec_swap import SPEC_TRANSITION, introduce, outgoing, swap_spec
 from .protocol import Client
 
 VERSION = "1.0.0"
@@ -35,6 +35,7 @@ class Shell:
         self._pending: dict | None = None
         self._booted = self._quiet = False
         self.show_keypad = True
+        self.plate_only = False  # the gallery's detail card: the plate alone, showing each type's sample
         self._last = None
         self._off = self._plate = self._keypad = self._pad = self.controller = self.machine = self.canvas = None
         self._handlers: list = []
@@ -46,9 +47,14 @@ class Shell:
             self.client.hello()
         self._build_page()
         self._booted = True
+        self._held = None
         self._init(self._pending or {"keypad": True, "theme": "light"})
-        self.client.ready([{"id": e["id"], "label": e["label"]} for e in self.entries], self.entry["id"])
         env.remove_splash()
+        self.client.ready([{"id": e["id"], "label": e["label"]} for e in self.entries], self.entry["id"])
+        # The first frames after boot are slow enough to skip most of a time-based intro: it starts once they are past.
+        if self._held:
+            env.set_timeout(self._held, 150)
+        self._held = False
 
     def _el(self, tag: str, css: str = ""):
         e = self.doc.createElement(tag)
@@ -82,6 +88,8 @@ class Shell:
         entry = self._entry_of(id)
         spec = self.data.SPECS[entry["spec"]]
         self._teardown()
+        if values is None and self.plate_only:
+            values = entry.get("sampleValues")
         if values is None and old is not None:
             c = PlateController(old.spec, old.values)
             c.adopt_spec(spec)
@@ -104,13 +112,18 @@ class Shell:
         country = self.data.COUNTRIES.get(entry["country"]) if entry["country"] else None
         self.canvas = PlateCanvas(c, t, country, input_source=source, animation=self.anim, clock=self.env.now,
                                   schedule=self.env.schedule)
-        self._plate = DomPlate(self.stage, self.canvas, self.doc, self.env.proxy)
+        # Cued before it mounts: mounting paints, and a first paint at the new size would flash for a frame.
         if prev and animate == "swap":
             self._end_swap = swap_spec(self.env, self.stage, prev, self.canvas, self.anim)
+        elif animate and getattr(self, "_held", False) is None:
+            for id in stagger_sequence(spec, SPEC_TRANSITION.step):
+                self.anim.hide(id)
+            self._held = lambda canvas=self.canvas: canvas is self.canvas and introduce(canvas, self.anim)
         elif animate:
             introduce(self.canvas, self.anim)
         else:
             self.anim.settle_all()
+        self._plate = DomPlate(self.stage, self.canvas, self.doc, self.env.proxy)
         for i, e in self._plate.inputs.items():
             self._on(e, "focus", lambda _e=None, i=i: m.handle_focus_change(i), self._tmp)
             self._on(e, "input", lambda _e=None, i=i: self._typed(i), self._tmp)
@@ -122,6 +135,11 @@ class Shell:
                                        on_key=self._pressed, clock=self.env.now, schedule=self.env.schedule,
                                        set_timeout=self.env.set_timeout, clear_timeout=self.env.clear_timeout)
             self._pad = DomKeypad(self.keypad_box, self._keypad, self.doc, self.env.proxy)
+            if animate == "intro" and getattr(self, "_held", None):
+                self._keypad.hide()
+                self._held = lambda intro=self._held, pad=self._keypad: (intro(), pad.enter())
+            elif animate == "intro":
+                self._keypad.enter()
         self._off = c.subscribe(self._changed)
         self._quiet = True
         self._changed()
@@ -219,7 +237,12 @@ class Shell:
         if not self._booted:
             self._pending = p
             return
-        self.show_keypad = p["keypad"]
+        self.plate_only = p.get("plateOnly") is True
+        self.show_keypad = p["keypad"] and not self.plate_only
+        self.verdict.hidden = self.keypad_box.hidden = self.plate_only
+        self.doc.documentElement.style.overflow = "hidden"
+        if self.plate_only:
+            self.doc.body.style.padding = "0"
         self.env.set_theme(p["theme"])
         self._quiet = True
         self.build(p.get("spec"), p.get("values"), "intro")
@@ -241,6 +264,8 @@ class Shell:
             elif name == "leave":
                 self._end_swap()
                 self.anim.go_out_all(stagger_sequence(self.canvas.spec, reverse=True))
+                if self._keypad:
+                    self._keypad.enter(False)
             elif name == "setTheme":
                 self.env.set_theme(args["theme"])
         except (KeyError, ValueError, TypeError) as e:

@@ -41,6 +41,14 @@ fun reveal(t: Double, index: Int, count: Int): Double {
     return if (leaving) 1.0 - PlateCurves.easeInCubic.transform(p) else PlateCurves.easeOutCubic.transform(p)
 }
 
+/** How present key [index] of [count] is [elapsed] ms into the pad coming in or going out: keys
+ *  stagger over the first half of [kPlateKeypadSlide], in reading order coming in and reversed going out. */
+fun entrance(elapsed: Double, index: Int, count: Int, coming: Boolean): Double {
+    val at = if (count <= 1) 0.0 else (if (coming) index else count - 1 - index).toDouble() / (count - 1) * 0.5
+    val p = clamp01((elapsed / kPlateKeypadSlide - at) / 0.5)
+    return if (coming) PlateCurves.easeOutCubic.transform(p) else 1.0 - PlateCurves.easeInCubic.transform(p)
+}
+
 /** Pad height at [t] while resizing from [from] to [to]. */
 fun heightAt(t: Double, from: Double, to: Double) =
     from + (to - from) * PlateCurves.easeInOutCubic.transform(clamp01((t - resizeStart) / (resizeEnd - resizeStart)))

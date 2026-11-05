@@ -78,6 +78,14 @@ def reveal(t: float, index: int, count: int) -> float:
     return 1.0 - CURVES["easeInCubic"].transform(p) if leaving else CURVES["easeOutCubic"].transform(p)
 
 
+def entrance(elapsed: float, index: int, count: int, coming: bool) -> float:
+    """How present key `index` of `count` is `elapsed` ms into the pad coming in or going out: keys stagger
+    over the first half of KEYPAD_SLIDE, in reading order coming in and reversed going out."""
+    at = 0.0 if count <= 1 else (index if coming else count - 1 - index) / (count - 1) * 0.5
+    p = min(1.0, max(0.0, (elapsed / KEYPAD_SLIDE - at) / 0.5))
+    return CURVES["easeOutCubic"].transform(p) if coming else 1.0 - CURVES["easeInCubic"].transform(p)
+
+
 def key_report(label: str, digits: PlateAlphabet | None) -> str:
     """What a key reports: its label as the alphabet displays it; backspace is its own key."""
     if label == "⌫":

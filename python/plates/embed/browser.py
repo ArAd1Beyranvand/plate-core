@@ -33,10 +33,10 @@ class BrowserEnv:
         self.bridge.listen(self.proxy(received))
 
     def height(self) -> float:
-        return self.document.documentElement.scrollHeight
+        return self.document.body.offsetHeight
 
     def on_resize(self, fn) -> None:
-        self.js.ResizeObserver.new(self.proxy(lambda *_: fn())).observe(self.document.documentElement)
+        self.js.ResizeObserver.new(self.proxy(lambda *_: fn())).observe(self.document.body)
 
     def set_theme(self, theme: str) -> None:
         root = self.document.documentElement

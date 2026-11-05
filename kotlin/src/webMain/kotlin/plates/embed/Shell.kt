@@ -12,6 +12,7 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
@@ -60,8 +61,8 @@ fun startShell(country: String, galleryOrigin: String?, load: () -> LoadedCountr
             val s = Shell((document.getElementById("app") ?: document.body!!) as HTMLElement, load(), host)
             shell = s
             pending?.let(s::init)
-            host.ready(s.specs(), s.spec())
             document.getElementById("splash")?.remove()
+            host.ready(s.specs(), s.spec())
             while (true) { host.reportHeight(); delay(250) }
         } catch (e: Throwable) {
             host.error("load_failed", e.toString(), true)
@@ -89,6 +90,8 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
     private var machine: PlateInputMachine? = null
     private var keypad: PlateKeypad? = null
     private var showKeypad = true
+    // [plateOnly] The gallery's detail card: the plate alone, showing each type's sample.
+    private var plateOnly = false
     private var inputs = emptyMap<Int, HTMLInputElement>()
     private var watch: Job? = null
     private var last: State? = null
@@ -128,7 +131,13 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
     }
 
     fun init(p: JsonObject) {
-        showKeypad = p["keypad"]!!.jsonPrimitive.boolean
+        plateOnly = p["plateOnly"]?.jsonPrimitive?.booleanOrNull == true
+        showKeypad = p["keypad"]!!.jsonPrimitive.boolean && !plateOnly
+        verdict.hidden = plateOnly
+        keypadBox.hidden = plateOnly
+        (document.documentElement as HTMLElement).style.overflowX = "hidden"
+        (document.documentElement as HTMLElement).style.overflowY = "hidden"
+        if (plateOnly) document.body!!.style.padding = "0"
         theme(p["theme"]!!.jsonPrimitive.content)
         build(p["spec"]?.jsonPrimitive?.content ?: entry.id, p["values"]?.jsonArray?.map { it.jsonPrimitive.contentOrNull }, "intro")
     }
@@ -141,7 +150,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
                 "clear" -> canvas!!.controller.clear()
                 "focus" -> machine!!.focusFirstEmptySlot()
                 "setTheme" -> theme(args["theme"]!!.jsonPrimitive.content)
-                "leave" -> { endSwap(); leave(canvas!!, anim); paint() }
+                "leave" -> { endSwap(); leave(canvas!!, anim); keypad?.enter(false); paint() }
             }
         } catch (e: Throwable) {
             host.error("bad_action", e.message ?: e.toString())
@@ -174,7 +183,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
         val old = canvas
         val next = entryOf(id)
         val spec = loaded.specs.getValue(next.spec)
-        val carry = values ?: old?.let { migrate(it.spec, spec, it.values, PlateValuePreservation.byGroupKey) }
+        val carry = values ?: next.sampleValues?.takeIf { plateOnly } ?: old?.let { migrate(it.spec, spec, it.values, PlateValuePreservation.byGroupKey) }
         entry = next
         val controller = PlateController(spec, carry, next.validator?.let { loaded.validators[it]?.invoke() })
         val source = if (showKeypad) PlateInputSource.packageKeypad else PlateInputSource.system
@@ -219,6 +228,7 @@ private class Shell(root: HTMLElement, private val loaded: LoadedCountry, privat
                 if (k == kPlateBackspaceKey) controller.backspace() else controller.submit(k)
             }),
         ).also { keypadBox.appendChild(it.el) } else null
+        if (animate == "intro") keypad?.enter()
         when {
             prev != null && animate == "swap" -> endSwap = swapSpec(scope, stage, prev, c, anim, ::paint)
             animate != null -> introduce(c, anim)

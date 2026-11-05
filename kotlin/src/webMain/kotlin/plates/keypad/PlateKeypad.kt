@@ -142,6 +142,13 @@ class PlateKeypad(options: PlateKeypadOptions, val hooks: PlateKeypadHooks = Pla
         } else cells.forEachIndexed { i, c -> keys[i].setCell(c) }
     }
 
+    /** Staggers every key in, or out with [coming] false; out, the pad stays empty until the next call. */
+    fun enter(coming: Boolean = true) {
+        model.enter(now(), coming)
+        paint(now())
+        wake()
+    }
+
     /** Starts the frame loop if it is not running. */
     fun wake() {
         if (raf || disposed) return
@@ -157,6 +164,7 @@ class PlateKeypad(options: PlateKeypadOptions, val hooks: PlateKeypadHooks = Pla
 
     private fun paint(now: Double): Boolean {
         el.style.setProperty("background", cssColor(model.theme.surface))
+        el.style.setProperty("opacity", model.padPresence(now).toString())
         grid.style.setProperty("height", if (model.animating(now)) "${model.heightAt(now)}px" else "")
         var running = model.animating(now)
         keys.forEachIndexed { i, k -> if (k.paint(now, model.presence(now, i, keys.size))) running = true }

@@ -4,7 +4,14 @@ import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 plugins {
     kotlin("multiplatform") version "2.2.20"
     kotlin("plugin.serialization") version "2.2.20"
+    id("com.vanniktech.maven.publish") version "0.34.0"
 }
+
+group = "io.github.arad1beyranvand"
+version = "0.1.0"
+
+// `-PcoreOnly` builds the library for publishing: no country module and no generated entry point, so the country packages can depend on it.
+val coreOnly = providers.gradleProperty("coreOnly").isPresent
 
 // The country is picked at build time (W7): `-Pcountry=germany` generates the one entry point that links it.
 val country = providers.gradleProperty("country").getOrElse("germany")
@@ -29,12 +36,12 @@ kotlin {
     jvm()
     js(IR) {
         browser()
-        binaries.executable()
+        if (!coreOnly) binaries.executable()
     }
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
-        binaries.executable()
+        if (!coreOnly) binaries.executable()
     }
 
     sourceSets {
@@ -42,7 +49,12 @@ kotlin {
             implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
         }
-        webMain { kotlin.srcDir(entryDir) }
+        if (coreOnly) {
+            commonMain { kotlin.exclude("plates/countries/*/**", "plates/countries/Countries.kt") }
+            webMain { kotlin.exclude("plates/embed/**") }
+        } else {
+            webMain { kotlin.srcDir(entryDir) }
+        }
         webMain.dependencies {
             implementation("org.jetbrains.kotlinx:kotlinx-browser:0.5.0")
         }
@@ -90,5 +102,19 @@ tasks.register("webBuild") {
             "h1" to seo("h1"), "text" to seo("text"), "origin" to galleryOrigin, "js" to hashed.getValue("js"), "wasm" to hashed.getValue("wasm"),
         )
         File(target, "index.html").writeText(template.asFile.readText().replace(Regex("\\{\\{(\\w+)\\}\\}")) { slots.getValue(it.groupValues[1]) })
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
+    if (providers.gradleProperty("signingInMemoryKey").isPresent || providers.gradleProperty("signing.keyId").isPresent) signAllPublications()  // dry runs have no key
+    coordinates("io.github.arad1beyranvand", "plate_core", "0.1.0")
+    pom {
+        name.set("plate_core")
+        description.set("Licence plate specs, themes, validators and renderers; country packages build on it.")
+        url.set("https://github.com/ArAd1Beyranvand/plate-core")
+        licenses { license { name.set("MIT License"); url.set("https://opensource.org/licenses/MIT") } }
+        developers { developer { id.set("arad1beyranvand"); name.set("ArAd Beyranvand") } }
+        scm { url.set("https://github.com/ArAd1Beyranvand/plate-core"); connection.set("scm:git:https://github.com/ArAd1Beyranvand/plate-core.git") }
     }
 }

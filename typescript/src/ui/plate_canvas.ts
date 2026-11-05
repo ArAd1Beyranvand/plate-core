@@ -9,7 +9,7 @@ import type { DisplayOp } from '../render/display_list';
 import { lerpTheme, plateTheme, renderPlate } from '../render/plate_canvas';
 import type { Frames } from '../render/plate_frame';
 import { StaggeredText } from '../render/plate_text_row';
-import { PartClock } from './part_clock';
+import { PartClock, frameNow } from './part_clock';
 import { opsToSvg } from './svg';
 import { type PlateAnimationController, curveTransform } from '../core/timing/plate_animation';
 
@@ -86,13 +86,13 @@ export class PlateCanvas {
    */
   morphFrom(from: PlateTheme, size: readonly [number, number], ms: number): void {
     this.morph = { from, ms };
-    this.resize = { from: size, at: performance.now(), ms };
+    this.resize = { from: size, at: frameNow(), ms };
   }
 
   /** The size the plate is drawn at now, in spec units. */
   size(): readonly [number, number] {
     const { canvasWidth: w, canvasHeight: h } = this.spec;
-    const r = this.resize, now = performance.now();
+    const r = this.resize, now = frameNow();
     if (!r || r.ms <= 0 || now - r.at >= r.ms) return [w, h];
     const t = curveTransform('easeInOut', (now - r.at) / r.ms);
     return [r.from[0] + (w - r.from[0]) * t, r.from[1] + (h - r.from[1]) * t];
@@ -100,7 +100,7 @@ export class PlateCanvas {
 
   /** [H15] The resolved theme now: a change of livery fades from where the last one had got to. */
   private theme(): PlateTheme {
-    const c = this.controller, target = plateTheme(c.spec, this.o.theme, c.values), now = performance.now();
+    const c = this.controller, target = plateTheme(c.spec, this.o.theme, c.values), now = frameNow();
     let tw = this.tween;
     if (!tw) tw = this.tween = { from: this.morph?.from ?? target, to: target, at: now, ms: this.morph?.ms ?? 0 };
     else if (!sameLivery(tw.to, target)) tw = this.tween = { from: this.themeAt(now), to: target, at: now, ms: c.spec.resolveTheme ? liveryMs : 0 };
@@ -113,7 +113,7 @@ export class PlateCanvas {
   }
 
   private get fading(): boolean {
-    const tw = this.tween, r = this.resize, now = performance.now();
+    const tw = this.tween, r = this.resize, now = frameNow();
     return (!!tw && now - tw.at < tw.ms) || (!!r && now - r.at < r.ms);
   }
 
@@ -145,7 +145,7 @@ export class PlateCanvas {
       labelText: (i, value) => {
         let t = this.labels.get(i);
         if (!t) this.labels.set(i, (t = new StaggeredText(value)));
-        return t.frame(value, performance.now());
+        return t.frame(value, frameNow());
       },
       country: this.o.country,
       frames: this.frames ?? this.clock?.frames(),

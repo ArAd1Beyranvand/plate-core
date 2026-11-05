@@ -158,6 +158,13 @@ export class PlateKeypad {
     } else cells.forEach((c, i) => this.keys[i].setCell(c));
   }
 
+  /** Staggers every key in, or out with [coming] false; out, the pad stays empty until the next call. */
+  enter(coming = true): void {
+    this.model.enter(this.now(), coming);
+    this.paint(this.now());
+    this.wake();
+  }
+
   /** Starts the frame loop if it is not running. */
   wake(): void {
     if (this.raf) return;
@@ -177,6 +184,7 @@ export class PlateKeypad {
 
   private paint(now: number): boolean {
     this.el.style.background = cssColor(this.model.theme.surface);
+    this.el.style.opacity = String(this.model.padPresence(now));
     const h = this.model.heightAt(now);
     this.grid.style.height = this.model.animating(now) ? `${h}px` : '';
     let running = this.model.animating(now);

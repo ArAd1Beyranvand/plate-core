@@ -34,6 +34,14 @@ export function reveal(t: number, index: number, count: number): number {
   return leaving ? 1 - curveTransform('easeInCubic', p) : curveTransform('easeOutCubic', p);
 }
 
+/** How present key [index] of [count] is [elapsed] ms into the pad coming in or going out: keys
+ * stagger over the first half of [kPlateKeypadSlide], in reading order coming in and reversed going out. */
+export function entrance(elapsed: number, index: number, count: number, coming: boolean): number {
+  const at = count <= 1 ? 0 : ((coming ? index : count - 1 - index) / (count - 1)) * 0.5;
+  const p = clamp01((elapsed / kPlateKeypadSlide - at) / 0.5);
+  return coming ? curveTransform('easeOutCubic', p) : 1 - curveTransform('easeInCubic', p);
+}
+
 /** Pad height at [t] while resizing from [from] to [to]. */
 export function heightAt(t: number, from: number, to: number): number {
   return from + (to - from) * curveTransform('easeInOutCubic', clamp01((t - resizeStart) / (resizeEnd - resizeStart)));

@@ -20,6 +20,8 @@ class KeypadModel(var options: PlateKeypadOptions) {
     private var toLetters = options.showLetters
     private var fromHeight: Double? = null
     private var startedAt = Double.NEGATIVE_INFINITY
+    private var enteredAt = Double.NEGATIVE_INFINITY
+    private var coming = true
 
     val theme get() = options.theme
     val compact get() = options.compact
@@ -29,7 +31,13 @@ class KeypadModel(var options: PlateKeypadOptions) {
     /** Animation position 0..1 at [now]. */
     fun t(now: Double) = ((now - startedAt) / kPlateKeypadSlide).coerceIn(0.0, 1.0)
 
-    fun animating(now: Double) = t(now) < 1.0
+    fun animating(now: Double) = t(now) < 1.0 || now - enteredAt < kPlateKeypadSlide
+
+    /** Starts the whole pad staggering in ([coming]) or out from [now]. */
+    fun enter(now: Double, coming: Boolean) {
+        enteredAt = now
+        this.coming = coming
+    }
 
     /** Applies new options; a showLetters flip starts or reverses a switch. */
     fun update(o: PlateKeypadOptions, now: Double) {
@@ -58,7 +66,13 @@ class KeypadModel(var options: PlateKeypadOptions) {
 
     fun grid(letters: Boolean) = if (letters) gridFor(letterAlphabet) else digitGrid
 
-    fun presence(now: Double, index: Int, count: Int) = reveal(t(now), index, count)
+    /** How present the pad itself is: it fades with its keys when it comes in or goes out. */
+    fun padPresence(now: Double): Double {
+        val p = ((now - enteredAt) / kPlateKeypadSlide).coerceIn(0.0, 1.0)
+        return if (coming) p else 1 - p
+    }
+
+    fun presence(now: Double, index: Int, count: Int) = reveal(t(now), index, count) * entrance(now - enteredAt, index, count, coming)
 
     /** Alphabet that renders and reports keys of a grid: digits report in their script, letters verbatim. */
     fun digitsOf(letters: Boolean) = if (letters) null else options.digitAlphabet

@@ -11,8 +11,13 @@ import kotlinx.coroutines.launch
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
 
-/** The page clock for [PlateCanvas]'s `now`, so animations run in real time. */
-fun pageNow(): Double = window.performance.now()
+/**
+ * The page clock for [PlateCanvas]'s `now`: the current frame's time, so every canvas painting this
+ * frame reads the same instant and a ghost never sits a frame apart from the plate under it.
+ */
+fun pageNow(): Double = frameTime() ?: window.performance.now()
+
+private fun frameTime(): Double? = js("document.timeline && document.timeline.currentTime")
 
 /**
  * [D2][D7] Mounts [canvas] in [host]: the SVG from the display list, and one native `<input>`

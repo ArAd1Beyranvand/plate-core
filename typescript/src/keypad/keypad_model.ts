@@ -1,7 +1,7 @@
 import type { PlateAlphabet } from '../core/alphabet/plate_alphabet';
 import {
   type KeyGrid, type PlateKeypadTheme, defaultKeypadTheme, digitLabels, digitRows, faceText, gridFor, gridHeight, heightAt,
-  kPlateKeypadSlide, keyEnabled as keyAccepts, noLetters, reportedKey, reveal, swapAt,
+  entrance, kPlateKeypadSlide, keyEnabled as keyAccepts, noLetters, reportedKey, reveal, swapAt,
 } from './keypad_motion';
 
 export interface PlateKeypadOptions {
@@ -28,6 +28,8 @@ export class KeypadModel {
   private toLetters: boolean;
   private fromHeight: number | null = null;
   private startedAt = -Infinity;
+  private enteredAt = -Infinity;
+  private coming = true;
 
   constructor(o: PlateKeypadOptions) {
     this.o = o;
@@ -52,7 +54,13 @@ export class KeypadModel {
     return Math.min(1, Math.max(0, (now - this.startedAt) / kPlateKeypadSlide));
   }
   animating(now: number): boolean {
-    return this.t(now) < 1;
+    return this.t(now) < 1 || now - this.enteredAt < kPlateKeypadSlide;
+  }
+
+  /** Starts the whole pad staggering in ([coming]) or out from [now]. */
+  enter(now: number, coming: boolean): void {
+    this.enteredAt = now;
+    this.coming = coming;
   }
 
   /** Applies new options; a showLetters flip starts or reverses a switch. */
@@ -90,8 +98,14 @@ export class KeypadModel {
     return letters ? gridFor(this.letterAlphabet) : { id: 'digits', cells: digitLabels, columns: digitRows[0].length, rows: digitRows.length };
   }
 
+  /** How present the pad itself is: it fades with its keys when it comes in or goes out. */
+  padPresence(now: number): number {
+    const p = Math.min(1, Math.max(0, (now - this.enteredAt) / kPlateKeypadSlide));
+    return this.coming ? p : 1 - p;
+  }
+
   presence(now: number, index: number, count: number): number {
-    return reveal(this.t(now), index, count);
+    return reveal(this.t(now), index, count) * entrance(now - this.enteredAt, index, count, this.coming);
   }
 
   /** Alphabet that renders and reports keys of a grid: digits report in their script, letters verbatim. */

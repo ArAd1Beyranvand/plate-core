@@ -54,7 +54,7 @@ class Host(
         window.parent.postMessage(JsJson.parse(message.toString()), host ?: galleryOrigin)
     }
 
-    private fun height() = document.documentElement!!.scrollHeight
+    private fun height() = document.body!!.offsetHeight
 
     fun hello() = send("hello", buildJsonObject { put("lang", lang); put("country", country); put("version", version) })
 

@@ -3,13 +3,19 @@ import { partProgress } from '../core/timing/plate_part_animator';
 import type { Frames } from '../render/plate_frame';
 
 /**
+ * The current frame's time: every canvas painting this frame reads the same instant, so a ghost
+ * and the plate under it never sit a frame apart. Off the page, the wall clock.
+ */
+export const frameNow = (): number => (typeof document === 'undefined' ? null : (document.timeline?.currentTime as number | null)) ?? performance.now();
+
+/**
  * [H11] The animation driver: remembers when each part's cue arrived and turns
  * (cue, elapsed) into frames through the core timing model. The UI ticks it per animation frame.
  */
 export class PartClock {
   private readonly started = new Map<PlatePartId, { cue: PlatePartCue; at: number }>();
 
-  constructor(private readonly animation: PlateAnimationController, private readonly now: () => number = () => performance.now()) {}
+  constructor(private readonly animation: PlateAnimationController, private readonly now: () => number = frameNow) {}
 
   frames(): Frames {
     const t = this.now();

@@ -19,10 +19,12 @@ def browser():
 
 
 def browser_timing():
-    """(clock, schedule) for PlateCanvas's animator: performance.now and requestAnimationFrame."""
+    """(clock, schedule) for PlateCanvas's animator: the current frame's time, so a ghost and the plate under
+    it read the same instant, and requestAnimationFrame."""
     import js  # noqa: PLC0415
     from pyodide.ffi import create_once_callable  # noqa: PLC0415
-    return js.performance.now, lambda fn: js.requestAnimationFrame(create_once_callable(lambda _t: fn()))
+    timeline = js.document.timeline
+    return lambda: timeline.currentTime or js.performance.now(), lambda fn: js.requestAnimationFrame(create_once_callable(lambda _t: fn()))
 
 
 def canvas_measurer(document):
