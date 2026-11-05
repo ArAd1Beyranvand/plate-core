@@ -16,7 +16,6 @@ abstract final class AlgeriaCountry {
 
   static const PlateCountry algeria = PlateCountry(
     code: 'dz',
-    captionLines: <String>[],
     panelColor: AlgeriaColors.flagGreen,
     panelTextColor: AlgeriaColors.white,
     flagAspectRatio: 3 / 2,

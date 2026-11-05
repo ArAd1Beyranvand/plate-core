@@ -21,6 +21,4 @@ abstract final class RiyadhColors {
 
   /// The hologram sticker on the strip, as the artwork renders it (censored).
   static const Color hologram = Color(0xFF898F9E);
-
-  static const Color inactive = Color(0xFFB0B0B0);
 }

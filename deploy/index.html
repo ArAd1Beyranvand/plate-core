@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
+  <!-- Replaced by `flutter build --base-href`; must start and end with "/". -->
   <base href="/">
 
   <meta charset="UTF-8">
@@ -21,99 +9,487 @@
        viewport swaps mid-load and the splash jumps. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Browse license plates from more than 150 countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
+  <meta name="description" content="Browse license plates from all countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
   <link rel="canonical" href="https://platexample.ir/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="platexample">
-  <meta property="og:title" content="License plates of the world · platexample">
-  <meta property="og:description" content="Browse license plates from more than 150 countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
+  <meta property="og:title" content="License plates of all countries · platexample">
+  <meta property="og:description" content="Browse license plates from all countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
   <meta property="og:url" content="https://platexample.ir/">
   <meta property="og:image" content="https://platexample.ir/icons/Icon-512.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="License plates of the world · platexample">
-  <meta name="twitter:description" content="Browse license plates from more than 150 countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
-  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"platexample","url":"https://platexample.ir/","description":"Browse license plates from more than 150 countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python."},{"@type":"ItemList","name":"Countries","itemListElement":[{"@type":"ListItem","position":1,"url":"https://platexample.ir/plates/germany","name":"Germany"},{"@type":"ListItem","position":2,"url":"https://platexample.ir/plates/india","name":"India"},{"@type":"ListItem","position":3,"url":"https://platexample.ir/plates/iran","name":"Iran"}]}]}</script>
+  <meta name="twitter:title" content="License plates of all countries · platexample">
+  <meta name="twitter:description" content="Browse license plates from all countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python.">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"platexample","url":"https://platexample.ir/","description":"Browse license plates from all countries: see how each format is laid out, type a registration and watch it drawn and checked live in Flutter, TypeScript, Kotlin or Python."},{"@type":"ItemList","name":"Countries","itemListElement":[{"@type":"ListItem","position":1,"url":"https://platexample.ir/plates/germany","name":"Germany"},{"@type":"ListItem","position":2,"url":"https://platexample.ir/plates/india","name":"India"},{"@type":"ListItem","position":3,"url":"https://platexample.ir/plates/iran","name":"Iran"}]}]}</script>
 
-  <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="plate_number_holder">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>License plates of the world · platexample</title>
+  <title>License plates of all countries · platexample</title>
   <link rel="manifest" href="manifest.json">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;700&display=swap">
+  <!-- The gallery's own fonts, so the splash and the first frame share a face. -->
+  <link rel="preload" href="assets/assets/fonts/Archivo-latin.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/assets/fonts/Vazirmatn-arabic.ttf" as="font" type="font/ttf" crossorigin>
   <style>
-    html, body { margin: 0; height: 100%; background: #050607; }
+    @font-face { font-family: Archivo; src: url(assets/assets/fonts/Archivo-latin.ttf) format("truetype"); font-weight: 100 900; font-stretch: 62% 125%; font-display: block; }
+    @font-face { font-family: Vazirmatn; src: url(assets/assets/fonts/Vazirmatn-arabic.ttf) format("truetype"); font-weight: 100 900; font-display: block; unicode-range: U+0600-06FF, U+FB50-FDFF, U+FE70-FEFF; }
+    @font-face { font-family: Martian; src: url(assets/assets/fonts/MartianMono-latin.ttf) format("truetype"); font-weight: 100 800; font-display: block; }
+
+    /* Everything that moves animates transform or opacity only, so it keeps
+       running on the compositor while the engine parses and compiles. */
+    :root { --ink: #050607; --teal: #2dd4c4; --fg: #eef0f3; --mute: #8a9099; }
+    html, body { margin: 0; height: 100%; background: var(--ink); }
     #splash {
-      position: fixed; inset: 0; z-index: 9999;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px;
-      background: #050607; font-family: Inter, system-ui, sans-serif;
-      transition: opacity 0.5s ease, visibility 0.5s;
+      position: fixed; inset: 0; z-index: 9999; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(14px, 2.6vh, 28px);
+      padding: 72px 0 48px; box-sizing: border-box;
+      background: var(--ink); color: var(--fg); font-family: Archivo, system-ui, sans-serif;
+      transition: opacity .7s ease, visibility .7s;
     }
     #splash.splash-hidden { opacity: 0; visibility: hidden; }
-    @keyframes fillA { 0%,12% { opacity: 0; transform: translateY(6px) } 20%,85% { opacity: 1; transform: none } 100% { opacity: 0 } }
-    @keyframes qA { 0%,12% { opacity: 1 } 20%,85% { opacity: 0 } 100% { opacity: 1 } }
-    @keyframes bar { 0% { transform: scaleX(0) } 85% { transform: scaleX(1) } 100% { transform: scaleX(1); opacity: 0 } }
-    @keyframes caret { 50% { opacity: 0 } }
-    .s { position: relative; display: flex; flex-direction: column; align-items: center; }
-    .s .q { color: #c9ccd3; animation: qA 3.2s infinite; }
-    .s .d { position: absolute; top: 0; color: #0b0d10; animation: fillA 3.2s infinite; }
-    .s .u { height: 2px; background: #d9dce2; align-self: stretch; margin-top: 4px; }
+    /* Held back until the fonts are in, so nothing re-flows once shown. */
+    #splash > :not(.sky) { opacity: 0; transition: opacity .8s ease; }
+    #splash.ready > :not(.sky) { opacity: 1; }
+
+    /* --- Atmosphere ------------------------------------------------------ */
+    .sky, .sky > * { position: absolute; pointer-events: none; }
+    .sky { inset: 0; overflow: hidden; }
+    .halo { left: 50%; top: 38%; width: 90vmax; height: 60vmax; margin: -30vmax 0 0 -45vmax; opacity: 0; }
+    .floor {
+      left: -50%; right: -50%; bottom: -10%; height: 62%; overflow: hidden;
+      transform: perspective(420px) rotateX(72deg); transform-origin: 50% 100%;
+      -webkit-mask: linear-gradient(to top, #000, transparent 85%); mask: linear-gradient(to top, #000, transparent 85%);
+    }
+    .floor i {
+      position: absolute; left: 0; right: 0; top: -72px; bottom: 0; will-change: transform;
+      background:
+        repeating-linear-gradient(90deg, rgba(45,212,196,.16) 0 1px, transparent 1px 72px),
+        repeating-linear-gradient(0deg, rgba(45,212,196,.12) 0 1px, transparent 1px 72px);
+      animation: drive 3.6s linear infinite;
+    }
+    .beam {
+      top: -30%; bottom: -30%; left: 0; width: 34vw; will-change: transform;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.045), transparent);
+      transform: translateX(-60vw) rotate(18deg); animation: sweep 11s cubic-bezier(.645,.045,.355,1) infinite;
+    }
+    .vignette { inset: 0; background: radial-gradient(ellipse at 50% 42%, transparent 40%, rgba(0,0,0,.75) 100%); }
+    @keyframes drive { to { transform: translateY(72px); } }
+    @keyframes sweep { 0%, 30% { transform: translateX(-60vw) rotate(18deg); } 75%, 100% { transform: translateX(120vw) rotate(18deg); } }
+
+    /* --- Chrome ---------------------------------------------------------- */
+    .mark, .boot { position: absolute; display: flex; align-items: center; gap: 10px; }
+    .mark { top: 26px; left: 32px; font-weight: 700; font-size: 15px; letter-spacing: .01em; }
+    .mark i { width: 26px; height: 12px; border: 2px solid var(--fg); border-radius: 3px; display: flex; }
+    .mark i::before { content: ""; width: 30%; background: var(--teal); }
+    .mark b { width: 2px; height: 15px; background: var(--teal); animation: caret 1s steps(1) infinite; }
+    .boot { top: 28px; right: 32px; font: 500 10.5px/1 Martian, ui-monospace, monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--mute); }
+    .boot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 12px var(--teal); animation: pulse 1.4s ease-in-out infinite; }
+    @keyframes caret { 50% { opacity: 0; } }
+    @keyframes pulse { 50% { opacity: .25; transform: scale(.7); } }
+
+    /* --- Stage ----------------------------------------------------------- */
+    .stage { position: relative; width: min(640px, 88vw); height: min(300px, 47vw); display: flex; align-items: center; justify-content: center; perspective: 1200px; flex: none; margin-bottom: 18px; }
+    .tilt { animation: float 9s ease-in-out infinite; will-change: transform; }
+    @keyframes float { 0%, 100% { transform: rotateX(7deg) rotateY(-5deg) translateY(0); } 50% { transform: rotateX(3deg) rotateY(5deg) translateY(-8px); } }
+    .plate { position: relative; }
+    .plate .shadow { position: absolute; inset: 6% 3% -4%; border-radius: 14px; box-shadow: 0 30px 60px rgba(0,0,0,.75); }
+    .plate .face { position: absolute; inset: 0; overflow: hidden; }
+    .plate .l, .plate .w { position: absolute; will-change: transform, opacity; }
+    .plate .full { inset: 0; }
+    .plate .w { overflow: hidden; }
+    .plate svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .plate .caret { opacity: 0; transform-origin: 0 0; }
+    .plate .glint { position: absolute; top: -50%; bottom: -50%; width: 45%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent); transform: translateX(-140%) skewX(-18deg); will-change: transform; }
+
+    /* --- Caption under the plate ----------------------------------------- */
+    .meta { display: flex; align-items: baseline; gap: 18px; height: 34px; margin-top: 6px; }
+    .idx { font: 500 11px Martian, ui-monospace, monospace; color: var(--teal); letter-spacing: .2em; }
+    .name { font-weight: 800; font-stretch: 112%; font-size: 26px; letter-spacing: .14em; text-transform: uppercase; display: flex; }
+    .native { font: 700 22px Vazirmatn, sans-serif; color: var(--mute); }
+    .sub { font: 500 10.5px Martian, ui-monospace, monospace; color: var(--mute); letter-spacing: .2em; text-transform: uppercase; }
+    .ch { display: inline-block; white-space: pre; }
+
+    .check { display: grid; height: 26px; }
+    .check > span { grid-area: 1 / 1; justify-self: center; display: flex; align-items: center; gap: 10px; padding: 0 12px; border-radius: 99px; border: 1px solid #1e2328; font: 500 11px Martian, ui-monospace, monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); opacity: 0; white-space: nowrap; }
+    .check .typing::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; animation: pulse .7s ease-in-out infinite; }
+    .check .valid { color: var(--teal); border-color: rgba(45,212,196,.4); background: rgba(45,212,196,.07); }
+    .check .reg { direction: ltr; unicode-bidi: bidi-override; color: var(--fg); letter-spacing: .06em; font-family: Vazirmatn, Martian, monospace; font-size: 13px; text-transform: none; }
+
+    .track { display: flex; gap: 6px; width: 180px; }
+    .track i { flex: 1; height: 2px; background: #161a1e; border-radius: 2px; overflow: hidden; }
+    .track b { display: block; height: 100%; background: var(--teal); transform: scaleX(0); transform-origin: left; }
+
+    /* --- Words ----------------------------------------------------------- */
+    #preboot { max-width: 640px; width: 88vw; color: #c9ccd3; font-size: 14px; line-height: 1.6; text-align: center; }
+    #preboot p { margin: 0 0 10px; } #preboot p b { color: var(--fg); }
+    #preboot nav a { color: var(--teal); text-underline-offset: 3px; }
+    .hero { margin: 0 0 14px; line-height: .86; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .hero .kick { font: 500 11.5px Martian, ui-monospace, monospace; letter-spacing: .42em; text-transform: uppercase; color: var(--teal); }
+    .hero .all { font-weight: 900; font-stretch: 125%; font-size: clamp(40px, 9.4vw, 128px); letter-spacing: -.045em; white-space: nowrap; color: #fff; }
+    /* Per letter, so each is its own layer and keeps its gradient while it moves. */
+    .hero .all .ch { background: linear-gradient(180deg, #fff 35%, #8f98a3); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero .all .ch:nth-child(-n+3) { background-image: linear-gradient(180deg, #8ff3ea 20%, #1b9e92); }
+
+    @media (max-height: 760px) { .stage { height: min(220px, 47vw); } #preboot p { display: none; } }
     @media (prefers-reduced-motion: reduce) {
-      .s .q, .s .d, .splash-bar, .splash-caret { animation: none; }
-      .s .q { opacity: 0; }
+      .floor i, .beam, .tilt, .mark b, .boot::before, .check .typing::before { animation: none; }
     }
   </style>
 </head>
 <body>
   <div id="splash" role="status">
-    <div dir="ltr" aria-hidden="true" style="display:flex;width:min(560px,86vw);aspect-ratio:4.6/1;background:#fff;border-radius:10px;box-shadow:0 0 0 4px #0d1013,0 0 0 5px #1c2126;overflow:hidden">
-      <div style="width:13%;background:#1f3fa8;display:flex;flex-direction:column;justify-content:flex-start;gap:8%;padding:6% 2%;box-sizing:border-box">
-        <div style="aspect-ratio:7/4;background:url(assets/packages/iran_plate/assets/flags/Flag_of_Iran.svg) center/100% 100% no-repeat"></div>
-        <div style="color:#fff;font-weight:700;font-size:clamp(10px,2.4vw,15px);line-height:1">I.R.<br>IRAN</div>
-      </div>
-      <div style="flex:1;display:flex;align-items:center;justify-content:space-around;padding:0 3%;font-family:Vazirmatn,sans-serif;font-weight:500;font-size:clamp(28px,8vw,56px);line-height:1.1;border-right:3px solid #0b0d10">
-        <div class="s"><span class="q">?</span><span class="d" style="animation-delay:0s">۱۲</span><div class="u" style="width:2.2em"></div></div>
-        <div class="s"><span class="q" style="animation-delay:.25s">؟</span><span class="d" style="animation-delay:.25s">ب</span><div class="u" style="width:1.1em"></div></div>
-        <div class="s"><span class="q" style="animation-delay:.5s">?</span><span class="d" style="animation-delay:.5s">۳۴۵</span><div class="u" style="width:3em"></div></div>
-      </div>
-      <div style="width:22%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Vazirmatn,sans-serif">
-        <div style="font-size:clamp(12px,3vw,22px);color:#0b0d10">ایران</div>
-        <div class="s" style="font-size:clamp(22px,6vw,42px);line-height:1.1"><span class="q" style="animation-delay:.75s">?</span><span class="d" style="animation-delay:.75s">۶۷</span><div class="u" style="width:1.8em"></div></div>
-      </div>
-    </div>
-    <div style="width:160px;height:2px;background:#14181c;border-radius:2px;overflow:hidden"><div class="splash-bar" style="height:100%;background:#2dd4c4;transform-origin:left;animation:bar 3.2s infinite"></div></div>
-    <div style="display:flex;align-items:center;gap:10px;color:#e8eaee;font-weight:600;font-size:15px">
-      <div style="width:26px;height:12px;border:2px solid #e8eaee;border-radius:3px;display:flex"><div style="width:30%;background:#2dd4c4"></div></div>
-      platexample<span class="splash-caret" style="width:2px;height:15px;background:#2dd4c4;animation:caret 1s steps(1) infinite"></span>
-    </div>
-    <main id="preboot" style="max-width:560px;width:86vw;color:#c9ccd3;font-size:14px;line-height:1.5;text-align:center">
-      <h1 style="margin:0 0 6px;font-size:18px;color:#e8eaee">License plates of the world</h1>
-      <p style="margin:0 0 8px">platexample shows how license plates are laid out in more than 150 countries. Pick a country, type a registration and watch the plate being drawn and checked as you type. Each country works in Flutter, TypeScript, Kotlin and Python.</p>
-      <nav><a href="/plates/germany" style="color:#2dd4c4">Germany</a> · <a href="/plates/india" style="color:#2dd4c4">India</a> · <a href="/plates/iran" style="color:#2dd4c4">Iran</a> · <a href="/plates/japan" style="color:#2dd4c4">Japan</a> · <a href="/plates/france" style="color:#2dd4c4">France</a></nav>
+    <div class="sky" aria-hidden="true"><div class="floor"><i></i></div><div class="beam"></div><div class="vignette"></div></div>
+    <div class="mark" aria-hidden="true"><i></i>platexample<b></b></div>
+    <div class="boot">Starting the gallery</div>
+
+    <div class="stage" aria-hidden="true"><div class="tilt" id="tilt"></div></div>
+    <div class="meta" aria-hidden="true"><span class="idx" id="idx"></span><span class="name" id="name"></span><span class="native" id="native"></span><span class="sub" id="sub"></span></div>
+    <div class="check" aria-hidden="true"><span class="typing" id="typing">Checking</span><span class="valid" id="valid">✓ Valid <span class="reg" id="reg"></span></span></div>
+    <div class="track" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i></div>
+
+    <main id="preboot">
+      <h1 class="hero"><span class="kick">License plates of</span><span class="all">ALL COUNTRIES</span></h1>
+      <p>platexample shows how license plates are laid out in <b>all countries</b>. Pick a country, type a registration and watch the plate being drawn and checked as you type. Each country works in Flutter, TypeScript, Kotlin and Python.</p>
     </main>
   </div>
 
-  <!--
-    You can customize the "flutter_bootstrap.js" script.
-    This is useful to provide a custom configuration to the Flutter loader
-    or to give the user feedback during the initialization process.
-
-    For more details:
-    * https://docs.flutter.dev/platform-integration/web/initialization
-  -->
   <script>
-    window.addEventListener('flutter-first-frame', function () {
-      var l = document.getElementById('splash');
-      if (!l) return;
-      l.classList.add('splash-hidden');
-      setTimeout(function () { l.remove(); }, 600);
+  // A pocket copy of plate_core's PlateAnimationController (typescript/src/core/timing/plate_animation.ts):
+  // the parts of a real spec come in staggered in painting order, are filled, then go out in reverse.
+  // Each plate's whole run is scheduled up front as Web Animations on transform and opacity, so the
+  // engine's long startup tasks cannot stall it.
+  (function () {
+    var splash = document.getElementById('splash');
+    var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var NS = 'http://www.w3.org/2000/svg';
+    var FA = 'Vazirmatn, sans-serif', LA = 'Archivo, system-ui, sans-serif';
+    var EASE = 'cubic-bezier(.645,.045,.355,1)', OUT_BACK = 'cubic-bezier(.175,.885,.32,1.275)', OUT_CUBIC = 'cubic-bezier(.215,.61,.355,1)';
+
+    // defaultMotions (effect, ms), slowed: the splash is a showcase, not an edit.
+    var SLOW = 2.8, IN_STEP = 230, OUT_STEP = 150, TYPE_MS = 110, HOLD_MS = 2400;
+    var MOTION = {
+      background: 420, region: 420, divider: 420, border: 900, panel: 420, flag: 420, caption: 420,
+      rule: 420, label: 420, mirror: 420, slot: 420
+    };
+
+    var PLATES = [
+      { // iran_plate: IranPlates.civil
+        name: 'Iran', native: 'ایران', sub: 'Civil', halo: '#1f3fa8',
+        w: 520, h: 110, r: 9, field: '#ffffff', ink: '#0b0d10', ghost: 'rgba(11,13,16,.2)', border: 3.4,
+        regions: [{ box: [0, 0, 56.4, 110], fill: '#1f3fa8' }],
+        dividers: [[404, 0, 5, 110]],
+        panel: { box: [0, 0, 56.4, 110], flag: { href: 'assets/packages/iran_plate/assets/flags/Flag_of_Iran.svg', box: [7, 22, 42.4, 24.2] },
+                 caption: { lines: ['I.R.', 'IRAN'], x: 8, y: [70, 86], size: 15, color: '#fff', anchor: 'start', font: LA, weight: 800 } },
+        labels: [{ text: 'ایران', box: [412, 13, 103, 25.6], size: 25, font: FA, weight: 500 }],
+        slots: [
+          { box: [65, 17, 102, 76], cells: 2, value: '۱۲', size: 70, font: FA },
+          { box: [172, 17, 61, 76], cells: 1, value: 'ب', size: 66, font: FA },
+          { box: [238, 17, 157, 76], cells: 3, value: '۳۴۵', size: 70, font: FA },
+          { box: [428, 40, 70, 52], cells: 2, value: '۶۷', size: 50, font: FA }
+        ],
+        reg: '۱۲ ب ۳۴۵ · ۶۷'
+      },
+      { // yemen_plate: YemenNorthernPlates.car, private
+        name: 'Yemen', native: 'اليمن', sub: 'North · 1993', halo: '#1f5fa8',
+        w: 540, h: 288, r: 20, field: '#1f5fa8', ink: '#111111', ghost: 'rgba(17,17,17,.3)', border: 10,
+        dividers: [[0, 83, 540, 7], [133, 90, 7, 198]],
+        panel: { box: [0, 6, 540, 62], caption: { lines: ['الیمن - خصوصي'], x: 270, y: [42], size: 50, color: '#111', anchor: 'middle', font: FA, weight: 700 } },
+        slots: [
+          { box: [24, 95, 88, 89], cells: 2, value: '١٣', size: 92, font: FA, weight: 700 },
+          { box: [140, 95, 390, 89], cells: 6, value: '٤٥٢٧١', size: 92, font: FA, weight: 700 }
+        ],
+        mirrors: [
+          { source: 0, box: [24, 175, 88, 104], cells: 2, value: '13', size: 76, font: LA, weight: 700 },
+          { source: 1, box: [140, 175, 390, 104], cells: 6, value: '45271', size: 76, font: LA, weight: 700 }
+        ],
+        reg: '١٣ ٤٥٢٧١ · 13 45271'
+      },
+      { // palestine_plate: PSWestBankPlates.modernCar
+        name: 'Palestine', native: 'فلسطين', sub: 'West Bank · 2018', halo: '#3c875d',
+        w: 520, h: 110, r: 8, field: '#ffffff', ink: '#3c875d', ghost: 'rgba(155,193,171,.55)', border: 3,
+        rules: [[441, 8, 5, 94], [452, 51, 46, 5]],
+        panel: { box: [452, 8, 46, 94], caption: { lines: ['ف', 'P'], x: 475, y: [31, 82], size: 32, color: '#3c875d', anchor: 'middle', font: FA, weight: 700 } },
+        labels: [{ text: '-', box: [71.4, 36.6, 32.2, 36.8], size: 64, font: LA, weight: 600 }, { text: '-', box: [344.4, 36.6, 32.2, 36.8], size: 64, font: LA, weight: 600 }],
+        slots: [
+          { box: [19.5, 9, 55, 92], cells: 1, value: '7', size: 104, font: LA, weight: 600, stretch: 62 },
+          { box: [109.5, 9, 232, 92], cells: 4, value: '1234', size: 104, font: LA, weight: 600, stretch: 62 },
+          { box: [375.5, 9, 55, 92], cells: 1, value: 'H', size: 104, font: LA, weight: 600, stretch: 62 }
+        ],
+        reg: '7-1234-H'
+      }
+    ];
+
+    function el(tag, attrs, parent) {
+      var e = document.createElementNS(NS, tag);
+      for (var k in attrs) e.setAttribute(k, attrs[k]);
+      if (parent) parent.appendChild(e);
+      return e;
+    }
+    function div(cls, parent) { var d = document.createElement('div'); d.className = cls; parent.appendChild(d); return d; }
+    function pct(v, of) { return (v / of * 100) + '%'; }
+    function text(parent, s, x, y, size, o) {
+      var t = el('text', { x: x, y: y, 'font-size': size, 'text-anchor': o.anchor || 'middle', 'dominant-baseline': 'central',
+        'font-family': o.font, 'font-weight': o.weight || 500, fill: o.color || 'none' }, parent);
+      if (o.stretch) t.style.fontStretch = o.stretch + '%';
+      if (o.stroke) { t.setAttribute('stroke', o.stroke); t.setAttribute('stroke-width', 1.4); }
+      t.textContent = s;
+      return t;
+    }
+    // Glyph centres: the value's cells sit centred on the slot's own pitch.
+    function cells(s) {
+      var pitch = s.box[2] / s.cells, chars = Array.from(s.value), x0 = s.box[0] + (s.box[2] - pitch * chars.length) / 2;
+      return chars.map(function (c, i) { return { c: c, x: x0 + pitch * (i + .5), y: s.box[1] + s.box[3] / 2, pitch: pitch }; });
+    }
+
+    // A part is a list of tracks: [node, gone, settled, start fraction, length fraction, easing].
+    function build(p) {
+      var W = p.w, H = p.h, parts = [], glyphs = [];
+      var root = document.createElement('div');
+      root.className = 'plate';
+      var scale = Math.min(640 / W, 300 / H, 1.25);
+      root.style.width = 'min(' + Math.round(W * scale) + 'px, ' + (88 * W * scale / 640).toFixed(1) + 'vw)';
+      root.style.aspectRatio = W + ' / ' + H;
+      var shadow = div('shadow', root);
+      var face = div('face', root);
+      face.style.borderRadius = pct(p.r, W) + ' / ' + pct(p.r, H);
+
+      function canvas(parent) { return el('svg', { viewBox: '0 0 ' + W + ' ' + H, preserveAspectRatio: 'none' }, parent); }
+      function part(kind, tracks) { parts.push({ kind: kind, dur: MOTION[kind] * SLOW, tracks: tracks }); }
+      function full(parent) { var l = div('l full', parent || face); return { l: l, svg: canvas(l) }; }
+
+      // Wipe: a window over [b] slides in from the origin side while its content slides
+      // back the same distance, so the content holds still and only the edge moves.
+      function wipe(b, ox, oy, parent) {
+        var w = div('w', parent || face);
+        w.style.left = pct(b[0], W); w.style.top = pct(b[1], H); w.style.width = pct(b[2], W); w.style.height = pct(b[3], H);
+        var inner = div('l', w);
+        inner.style.left = pct(-b[0], b[2]); inner.style.top = pct(-b[1], b[3]); inner.style.width = pct(W, b[2]); inner.style.height = pct(H, b[3]);
+        var gone = [{ transform: 'translate(' + ox * 100 + '%,' + oy * 100 + '%)' },
+                    { transform: 'translate(' + (-ox * b[2] / W * 100) + '%,' + (-oy * b[3] / H * 100) + '%)' }];
+        return { svg: canvas(inner), tracks: [[w, gone[0], { transform: 'none' }], [inner, gone[1], { transform: 'none' }]] };
+      }
+      function wipePart(kind, b, ox, oy, pad) {
+        pad = pad || 0;
+        var x = wipe([b[0] - pad, b[1] - pad, b[2] + pad * 2, b[3] + pad * 2], ox, oy);
+        part(kind, x.tracks);
+        return x.svg;
+      }
+      // A line draws along its own length.
+      function drawPart(kind, r) {
+        var s = wipePart(kind, r, r[2] > r[3] ? -1 : 0, r[2] > r[3] ? 0 : -1);
+        el('rect', { x: r[0], y: r[1], width: r[2], height: r[3], fill: p.ink }, s);
+      }
+
+      var bg = full();
+      el('rect', { x: 0, y: 0, width: W, height: H, fill: p.field }, bg.svg);
+      part('background', [[bg.l, { transform: 'scale(.04, .2)', opacity: 0 }, { transform: 'none', opacity: 1 }],
+                          [shadow, { opacity: 0 }, { opacity: 1 }]]);
+      (p.regions || []).forEach(function (r) {
+        el('rect', { x: r.box[0], y: r.box[1], width: r.box[2], height: r.box[3], fill: r.fill }, wipePart('region', r.box, -1, 0));
+      });
+      (p.dividers || []).forEach(function (d) { drawPart('divider', d); });
+
+      // The border runs clockwise from the top-left: four strips, each its own wipe in turn.
+      var bw = p.border, t = Math.max(p.r, bw) + bw, perimeter = 2 * (W + H), at = 0, tracks = [];
+      [[[0, 0, W, t], -1, 0, W], [[W - t, 0, t, H], 0, -1, H], [[0, H - t, W, t], 1, 0, W], [[0, 0, t, H], 0, 1, H]].forEach(function (e) {
+        var x = wipe(e[0], e[1], e[2], root);
+        el('rect', { x: bw / 2, y: bw / 2, width: W - bw, height: H - bw, rx: Math.max(0, p.r - bw / 2), fill: 'none', stroke: p.ink, 'stroke-width': bw }, x.svg);
+        x.tracks.forEach(function (k) { tracks.push(k.concat([at / perimeter, e[3] / perimeter, 'linear'])); });
+        at += e[3];
+      });
+      part('border', tracks);
+
+      if (p.panel) {
+        var pb = p.panel.box;
+        if (p.panel.flag) {
+          var f = p.panel.flag;
+          el('rect', { x: pb[0], y: pb[1], width: pb[2], height: pb[3], fill: p.regions ? p.regions[0].fill : 'none' }, wipePart('panel', pb, -1, 0));
+          el('image', { href: f.href, x: f.box[0], y: f.box[1], width: f.box[2], height: f.box[3], preserveAspectRatio: 'none' }, wipePart('flag', f.box, -1, 0));
+        }
+        var c = p.panel.caption, cs = wipePart('caption', pb, 0, -1, 4);
+        c.lines.forEach(function (line, i) { text(cs, line, c.x, c.y[i], c.size, c); });
+      }
+      (p.rules || []).forEach(function (r) { drawPart('rule', r); });
+      (p.labels || []).forEach(function (l) {
+        text(wipePart('label', l.box, -1, 0, 6), l.text, l.box[0] + l.box[2] / 2, l.box[1] + l.box[3] / 2, l.size, { font: l.font, weight: l.weight, color: p.ink });
+      });
+
+      // Slots and mirrors fade up from below, as outlines; the typed glyph is its own layer on top.
+      var typed = 0;
+      function slots(kind, list) {
+        (list || []).forEach(function (s, si) {
+          var g = full(), drop = s.box[3] / H * 40;
+          part(kind, [[g.l, { opacity: 0, transform: 'translateY(' + drop + '%)' }, { opacity: 1, transform: 'none' }]]);
+          var pi = parts.length - 1;
+          cells(s).forEach(function (k, ci) {
+            text(g.svg, k.c, k.x, k.y, s.size, { font: s.font, weight: s.weight, stretch: s.stretch, stroke: p.ghost });
+            var solid = full();
+            text(solid.svg, k.c, k.x, k.y, s.size, { font: s.font, weight: s.weight, stretch: s.stretch, color: p.ink });
+            solid.l.style.transformOrigin = pct(k.x, W) + ' ' + pct(k.y, H);
+            var gl = { l: solid.l, k: k, s: s, part: pi, drop: drop };
+            if (kind === 'slot') gl.order = typed++;
+            else gl.source = [s.source, ci];
+            gl.key = (kind === 'slot' ? si : s.source) + ':' + ci;
+            glyphs.push(gl);
+          });
+        });
+      }
+      slots('mirror', p.mirrors);
+      slots('slot', p.slots);
+      // A mirror glyph lands with its source.
+      var order = {};
+      glyphs.forEach(function (g) { if (g.order !== undefined) order[g.key] = g.order; });
+      glyphs.forEach(function (g) { if (g.order === undefined) g.order = order[g.key]; });
+
+      // One plate unit tall, three wide; translate is in its own size, so units map straight across.
+      var caret = div('l caret', face);
+      caret.style.left = caret.style.top = '0';
+      caret.style.width = pct(3, W); caret.style.height = pct(1, H); caret.style.background = '#2dd4c4';
+      var glint = div('glint', face);
+      return { root: root, parts: parts, glyphs: glyphs, typed: typed, caret: caret, glint: glint, plate: p };
+    }
+
+    function letters(node, s) {
+      node.textContent = '';
+      return Array.from(s).map(function (c) {
+        var span = document.createElement('span');
+        span.className = 'ch'; span.textContent = c;
+        node.appendChild(span);
+        return span;
+      });
+    }
+
+    var tilt = document.getElementById('tilt'), sky = document.querySelector('.sky');
+    var nameEl = document.getElementById('name'), idx = document.getElementById('idx'), native = document.getElementById('native'), sub = document.getElementById('sub');
+    var typing = document.getElementById('typing'), valid = document.getElementById('valid'), reg = document.getElementById('reg');
+    var bars = document.querySelectorAll('.track b'), barRuns = [];
+
+    function play(b, i) {
+      var p = b.plate, n = b.parts.length, inEnd = 0, outEnd = 0, lives = [];
+      function a(node, kf, delay, duration, easing, fill) {
+        return node.animate(kf, { delay: delay, duration: duration, easing: easing || EASE, fill: fill || 'both' });
+      }
+      // One animation per element for its whole life. Chrome won't composite a second
+      // animation on a property that already has one, and would run both on the main thread.
+      function life(node, gone, shown, inAt, inDur, inEase, outAt, outDur, outEase, left) {
+        lives.push(function (T) {
+          node.animate([
+            Object.assign({ offset: 0 }, gone),
+            Object.assign({ offset: inAt / T, easing: inEase || EASE }, gone),
+            Object.assign({ offset: (inAt + inDur) / T }, shown),
+            Object.assign({ offset: outAt / T, easing: outEase || EASE }, shown),
+            Object.assign({ offset: Math.min(1, (outAt + outDur) / T) }, left || gone),
+            Object.assign({ offset: 1 }, left || gone)
+          ], { duration: T, fill: 'forwards' });
+        });
+      }
+
+      // Parts: in IN_STEP apart in painting order, out OUT_STEP apart in reverse.
+      b.parts.forEach(function (q, k) { inEnd = Math.max(inEnd, k * IN_STEP + q.dur); });
+      var fill = inEnd + 300, typeEnd = fill + b.typed * TYPE_MS, checked = typeEnd + 140, out = checked + HOLD_MS;
+      b.parts.forEach(function (q, k) {
+        var din = k * IN_STEP, dout = out + (n - 1 - k) * OUT_STEP;
+        q.tracks.forEach(function (t) {
+          var o = (t[3] || 0) * q.dur, d = (t[4] || 1) * q.dur;
+          life(t[0], t[1], t[2], din + o, d, t[5], dout + o, d, t[5]);
+        });
+        outEnd = Math.max(outEnd, dout + q.dur);
+      });
+      // A glyph types in on its own beat and leaves with its slot.
+      b.glyphs.forEach(function (g) {
+        var q = b.parts[g.part];
+        life(g.l, { opacity: 0, transform: 'translateY(' + g.drop * .45 + '%) scale(.82)' }, { opacity: 1, transform: 'none' },
+             fill + g.order * TYPE_MS + 40, 220, OUT_BACK, out + (n - 1 - g.part) * OUT_STEP, q.dur * .6, EASE, { opacity: 0, transform: 'none' });
+      });
+
+      var stops = b.glyphs.filter(function (g) { return g.s.source === undefined; }).sort(function (x, y) { return x.order - y.order; });
+      var span = b.typed * TYPE_MS + 60;
+      var kf = stops.map(function (g) {
+        var h = g.s.box[3] * .78;
+        return { offset: g.order * TYPE_MS / span, opacity: 1, easing: 'steps(1, end)',
+                 transform: 'translate(' + (g.k.x + g.k.pitch * .42) / 3 * 100 + '%,' + (g.k.y - h / 2) * 100 + '%) scale(1,' + h + ')' };
+      });
+      kf.push({ offset: 1, opacity: 0, transform: kf[kf.length - 1].transform });
+      b.caret.animate(kf, { delay: fill, duration: span });
+      a(b.glint, [{ transform: 'translateX(-140%) skewX(-18deg)' }, { transform: 'translateX(260%) skewX(-18deg)' }], checked, 1600, EASE, 'none');
+
+      // The page around the plate keeps the same clock.
+      var halo = div('halo', sky);
+      halo.style.background = 'radial-gradient(closest-side, ' + p.halo + ', transparent 70%)';
+      life(halo, { opacity: 0 }, { opacity: .32 }, 0, 1800, EASE, out, 1800);
+
+      // These outlive the plate; drop the last plate's animations before adding new ones.
+      [idx, native, sub, typing, valid].forEach(function (e) { e.getAnimations().forEach(function (r) { r.cancel(); }); });
+      idx.textContent = '0' + (i + 1) + ' / 0' + PLATES.length;
+      native.textContent = p.native; sub.textContent = p.sub;
+      var chars = letters(nameEl, p.name), m = chars.length;
+      chars.forEach(function (c, k) {
+        life(c, { opacity: 0, transform: 'translateY(70%)' }, { opacity: 1, transform: 'none' }, 200 + 70 * k, 900, OUT_CUBIC,
+             out + 45 * (m - 1 - k), 600, EASE, { opacity: 0, transform: 'translateY(-60%)' });
+      });
+      [idx, native, sub].forEach(function (e, k) { life(e, { opacity: 0 }, { opacity: 1 }, 400 + 120 * k, 900, EASE, out, 600); });
+
+      reg.textContent = p.reg;
+      life(typing, { opacity: 0 }, { opacity: 1 }, fill, 250, EASE, checked, 200);
+      life(valid, { opacity: 0, transform: 'scale(.92)' }, { opacity: 1, transform: 'none' }, checked, 360, OUT_BACK, out, 500, EASE, { opacity: 0, transform: 'none' });
+
+      var total = Math.max(outEnd, out + 1800) + 400;
+      lives.forEach(function (start) { start(total); });
+      setTimeout(function () { halo.remove(); }, total + 100);
+
+      if (i === 0) { barRuns.forEach(function (r) { r.cancel(); }); barRuns = []; }
+      barRuns.push(a(bars[i], [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], 0, total, 'linear', 'forwards'));
+      return total;
+    }
+
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
+    async function loop() {
+      for (var i = 0; splash.isConnected; i = (i + 1) % PLATES.length) {
+        var b = build(PLATES[i]);
+        tilt.replaceChildren(b.root);
+        await wait(play(b, i));
+      }
+    }
+
+    function still() {
+      var p = PLATES[0];
+      tilt.appendChild(build(p).root);
+      idx.textContent = '01 / 0' + PLATES.length; letters(nameEl, p.name); native.textContent = p.native; sub.textContent = p.sub;
+      reg.textContent = p.reg; valid.style.opacity = 1;
+      var halo = div('halo', sky);
+      halo.style.background = 'radial-gradient(closest-side, ' + p.halo + ', transparent 70%)';
+      halo.style.opacity = .32;
+    }
+
+    var hero = document.querySelector('.hero .all'), heroChars = hero ? letters(hero, hero.textContent) : [];
+
+    // Fonts first: a swap after the first frame re-flows the headline and the plate mid-flight.
+    var fonts = document.fonts ? Promise.all([
+      document.fonts.load('900 40px Archivo'), document.fonts.load('700 20px Vazirmatn', 'بی۱'), document.fonts.load('500 10px Martian')
+    ]) : Promise.resolve();
+    Promise.race([fonts, wait(1500)]).catch(function () {}).then(function () {
+      if (!splash.isConnected) return;
+      splash.classList.add('ready');
+      if (reduced) return still();
+      heroChars.forEach(function (c, k) {
+        c.animate([{ opacity: 0, transform: 'translateY(40%)' }, { opacity: 1, transform: 'none' }],
+                  { delay: 300 + 55 * k, duration: 900, easing: OUT_CUBIC, fill: 'both' });
+      });
+      loop();
     });
+  })();
+
+  window.addEventListener('flutter-first-frame', function () {
+    var l = document.getElementById('splash');
+    if (!l) return;
+    l.classList.add('splash-hidden');
+    setTimeout(function () { l.remove(); }, 800);
+  });
   </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>

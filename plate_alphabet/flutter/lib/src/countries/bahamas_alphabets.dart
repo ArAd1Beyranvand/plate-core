@@ -11,7 +11,5 @@ abstract final class BahamasAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'bs.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -11,7 +11,5 @@ abstract final class TimorLesteAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tl.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

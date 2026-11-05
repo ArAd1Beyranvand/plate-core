@@ -10,7 +10,5 @@ abstract final class MaliAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ml.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

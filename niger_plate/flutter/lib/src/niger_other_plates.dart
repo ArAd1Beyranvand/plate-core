@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -10,9 +8,7 @@ import 'niger_country.dart';
 /// the private plate's digit height, frame and canvas. Each plate is one row
 /// of cells (digit, fixed word or gap), each some number of pitches wide.
 abstract final class _Layout {
-  static const double width = 520;
-  static const double height = 110;
-  static const double pitch = 54;
+  static const double width = 520, height = 110, pitch = 54;
 
   /// Smaller than the digits so a three-letter word fits its three cells.
   static const double wordGlyph = 84;
@@ -28,8 +24,7 @@ class _Cell {
   const _Cell.gap(this.span) : kind = _Kind.gap, text = '', group = '';
 
   final _Kind kind;
-  final String group;
-  final String text;
+  final String group, text;
   final double span;
 }
 
@@ -123,11 +118,13 @@ abstract final class NigerOtherPlates {
       if (run == null) return;
       groups.putIfAbsent(run!, () => <int>[]).add(slots.length);
       slots.add(
-        PlateSlot(
-          alphabet: NigerAlphabets.digits,
-          box: PlateBox(runLeft, 0, runCount * _Layout.pitch, _Layout.height),
-          length: runCount,
-          spacing: max(0, _Layout.pitch - 0.6 * 0.72 * _Layout.height),
+        plateRun(
+          NigerAlphabets.digits,
+          runCount,
+          left: runLeft,
+          top: 0,
+          pitch: _Layout.pitch,
+          height: _Layout.height,
         ),
       );
       run = null;
@@ -183,8 +180,7 @@ abstract final class NigerOtherPlates {
     );
   }
 
-  static final PlateSpec state = _build(_state);
-  static final PlateSpec military = _build(_military);
+  static final PlateSpec state = _build(_state), military = _build(_military);
   static final PlateSpec diplomaticChief = _build(_chief);
   static final PlateSpec diplomaticStaff = _build(_staff);
 }

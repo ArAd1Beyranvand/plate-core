@@ -5,9 +5,6 @@
 /// are from photographs.
 library;
 
-// TODO(py): [D5] one module `plates.countries.venezuela`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/venezuela`; tree-shakable.
-// TODO(kt): [D5] package `countries.venezuela` in the countries module.
 export 'src/venezuela_alphabets.dart';
 export 'src/venezuela_colors.dart';
 export 'src/venezuela_country.dart';

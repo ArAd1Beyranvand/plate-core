@@ -2,16 +2,10 @@ import 'package:plate_core/plate_core.dart';
 
 import 'yemen_governorates.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a System A (2026 unified) plate, gated on the side code so it stays
 /// quiet until the number is entered. The side code is checked for shape only.
 class YemenUnifiedValidator extends GatedPlateValidator {
-  const YemenUnifiedValidator();
-
-  @override
-  String get gateGroup => 'sideCode';
+  const YemenUnifiedValidator() : super('sideCode');
 
   static const String reasonNumberNotNumeric =
       'The vehicle number is digits only.';
@@ -24,8 +18,7 @@ class YemenUnifiedValidator extends GatedPlateValidator {
 
   static const String reasonSideCodeLength = 'The side code is two digits.';
 
-  static const int minNumberLength = 4;
-  static const int maxNumberLength = 6;
+  static const int minNumberLength = 4, maxNumberLength = 6;
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -60,10 +53,7 @@ class YemenUnifiedValidator extends GatedPlateValidator {
 /// than [YemenUnifiedValidator] because this grammar is documented: governorate
 /// 1..22, serial never zero-padded.
 class YemenNorthernValidator extends GatedPlateValidator {
-  const YemenNorthernValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const YemenNorthernValidator() : super('serial');
 
   static const String reasonGovernorateNotNumeric =
       'The governorate code is digits only.';
@@ -81,8 +71,7 @@ class YemenNorthernValidator extends GatedPlateValidator {
   static const String reasonSerialLeadingZero =
       'The serial is not padded with leading zeros.';
 
-  static const int minSerialLength = 4;
-  static const int maxSerialLength = 6;
+  static const int minSerialLength = 4, maxSerialLength = 6;
 
   @override
   PlateValidation judge(PlateEntry entry) => validateFields(
@@ -124,18 +113,14 @@ class YemenNorthernValidator extends GatedPlateValidator {
 /// Shabwah and Marib, Aden's and Taiz's. Gated on the serial. The artwork shows
 /// three to five digits; nothing more of the grammar is published.
 class YemenSouthernValidator extends GatedPlateValidator {
-  const YemenSouthernValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const YemenSouthernValidator() : super('serial');
 
   static const String reasonSerialNotNumeric = 'The number is digits only.';
 
   static const String reasonSerialLength =
       'The number is three to five digits.';
 
-  static const int minSerialLength = 3;
-  static const int maxSerialLength = 5;
+  static const int minSerialLength = 3, maxSerialLength = 5;
 
   @override
   PlateValidation judge(PlateEntry entry) =>

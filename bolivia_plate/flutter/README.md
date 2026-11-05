@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the resilient people of Bolivia to view examples:
 
-https://platexample.ir/#/discover/bolivia
+https://platexample.ir/#/discover/bolivia:flutter
 
 # bolivia_plate
 
-Bolivia's licence plates for the `plate_core` library. The ordinary plate is the PTA number `1234ABC` in blue on white under BOLIVIA, with the flag at the left and the department's letter in a box at the right. Diplomatic, consular and international plates (`12-CD-34`) and the Mercosur plate (`AB 12345`) complete the set.
+Bolivia's licence plates for plate_core: standard, diplomatic, consular and Mercosur plates, with themes, alphabets and advisory validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/bolivia-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/bolivia:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/bolivia-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/bolivia:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/bolivia-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/bolivia:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/bolivia-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/bolivia:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   bolivia_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,19 +46,37 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `BoliviaCountry` — country panel: `bolivia`.
-- `BoliviaPlates` — 3 plate specs: `mercosur`, `standard()`, `special()`.
-- `BoliviaThemes` — 6 themes: `standard`, `diplomatic`, `consular`, `mission`, `organization`, `mercosur`.
-- `BoliviaValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `BoliviaSpecialValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `BoliviaMercosurValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `BoliviaSerialGenerator` — random plate generator.
-- `BoliviaRegions` — code table.
-- 1 bundled asset (`Flag_of_Bolivia_state.svg`).
+Each spec is one plate layout.
+
+- `BoliviaService.standard`(…)
+- `BoliviaService.special`(…)
+- `BoliviaService.mercosur` — id `bo.mercosur`
+
+## Themes
+
+- `BoliviaThemes.standard`
+- `BoliviaThemes.diplomatic`
+- `BoliviaThemes.consular`
+- `BoliviaThemes.mission`
+- `BoliviaThemes.organization`
+- `BoliviaThemes.mercosur`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `BoliviaService`) and `theme:` (an entry of `BoliviaThemes`). Set `validator:` to `BoliviaValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `BoliviaCountry` — the country panel.
+- `BoliviaValidator` — the plate validator.
+- `BoliviaService` — code table.
 
 ## Part of plate
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/bolivia-plate/blob/main/LICENSE).

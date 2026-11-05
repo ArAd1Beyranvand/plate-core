@@ -21,7 +21,5 @@ abstract final class SyriaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'sy.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -11,7 +11,6 @@ import 'cuba_colors.dart';
 abstract final class CubaCountry {
   static const PlateCountry cuba = PlateCountry(
     code: 'cu',
-    captionLines: <String>[],
     panelColor: CubaColors.band,
     panelTextColor: CubaColors.bandInk,
   );

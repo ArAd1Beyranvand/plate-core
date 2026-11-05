@@ -16,6 +16,5 @@ abstract final class ThailandAlphabets {
     include:
         'ก ข ค ง จ ฉ ช ฌ ฏ ฐ ณ ด ต ถ ท ธ น บ ป ผ พ ฟ ภ ม ย ร ล ว ศ ษ ส ห ฬ อ ฮ ญ ฒ ฆ ซ',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

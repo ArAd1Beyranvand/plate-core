@@ -9,7 +9,5 @@ abstract final class NewZealandAlphabets {
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'new_zealand.alphanumeric',
     include: '0-9 A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

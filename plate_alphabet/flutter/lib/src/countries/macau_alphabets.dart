@@ -15,7 +15,5 @@ abstract final class MacauAlphabets {
     id: 'mo.mainland',
     include: '0-9 A-Z',
     exclude: 'I O',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

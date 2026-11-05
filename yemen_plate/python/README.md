@@ -1,0 +1,93 @@
+FREE PALESTINE 🇵🇸🇮🇷 پاینده ایران
+
+GO VEGAN 🌱
+
+==================================
+
+From the mighty people of Iran to the noble people of Yemen to view examples:
+
+https://platexample.ir/#/discover/yemen:python
+
+# yemen_plate
+
+Yemen's licence plates for the plate_core library — the 2026 unified specs, the 1993 northern specs, the alphabets, the usage themes and the advisory validators.
+
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/yemen:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/yemen:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/yemen:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/yemen:typescript) |
+
+## Quick start
+
+### Install (Python)
+
+Copy `python/plates/countries/yemen/` into `plate_core/python/plates/countries/`.
+
+Then run the tests from `plate_core/python/`: `pytest`.
+
+### Use
+
+```python
+from plates.countries.yemen.data import SPECS, THEMES
+
+spec = SPECS["ye.northern.car"]
+theme = THEMES["YemenThemes.unified"]
+print(spec.id)
+```
+
+## Specs
+
+The specs are the same in every language (they come from shared data).
+
+- `ye.northern.car`
+- `ye.riyadh.us`
+- `ye.riyadh.us.diplomatic`
+- `ye.riyadh.eu`
+- `ye.riyadh.eu.diplomatic`
+- `ye.aden.520x110`
+- `ye.aden.335x170`
+- `ye.taiz.temporary`
+- `ye.hadhramaut.car.s5`
+- `ye.hadhramaut.temporary.s4`
+- `ye.hadhramaut.police.s3`
+- `ye.hadhramaut.moto.s4`
+- `ye.mahrah.car.s4`
+- `ye.mahrah.moto.s4`
+- `ye.shabwah.car.s4`
+- `ye.shabwah.temporary.s4`
+- `ye.shabwah.police.s3`
+- `ye.shabwah.moto.s3`
+- `ye.marib.car.s4`
+- `ye.marib.moto.s4`
+- `ye.unified.car`
+- `ye.unified.moto`
+- `ye.northern.moto`
+
+## Themes
+
+- `YemenThemes.unified`
+- `YemenThemes.northernPrivate`
+- `YemenThemes.northernForHire`
+- `YemenThemes.northernTransport`
+- `YemenThemes.northernGovernment`
+- `YemenThemes.northernMilitaryClassic`
+- `YemenThemes.northernMilitaryModern`
+- `YemenThemes.southern`
+- `YemenThemes.aden`
+- `YemenThemes.taizPrivate`
+- `YemenThemes.taizCommercial`
+- `RiyadhThemes.standard`
+
+## Change it
+
+- Pick a spec: use another key of `SPECS`.
+- Pick a theme: use another key of `THEMES`.
+- Validators: `VALIDATORS` maps the names `YemenUnifiedValidator`, `YemenNorthernValidator`, `YemenSouthernValidator`, `RiyadhValidator` to classes.
+
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/yemen-plate/blob/main/LICENSE).

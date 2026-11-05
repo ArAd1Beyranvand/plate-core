@@ -12,8 +12,6 @@ abstract final class IsleOfManAlphabets {
     id: 'im.letters',
     include: 'A-Z',
     exclude: 'I Q S Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The trailing serial letter: the plain set less `O`.
@@ -21,7 +19,5 @@ abstract final class IsleOfManAlphabets {
     id: 'im.suffix',
     include: 'A-Z',
     exclude: 'I O Q S Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

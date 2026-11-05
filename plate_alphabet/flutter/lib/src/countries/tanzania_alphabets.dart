@@ -8,7 +8,5 @@ abstract final class TanzaniaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tz.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

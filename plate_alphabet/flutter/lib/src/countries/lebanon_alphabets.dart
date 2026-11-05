@@ -17,6 +17,5 @@ abstract final class LebanonAlphabets {
     id: 'lb.letters',
     include: 'A B Y G N O S T K Z J R M C D P MP',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

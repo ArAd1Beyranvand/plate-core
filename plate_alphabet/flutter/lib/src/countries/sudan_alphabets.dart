@@ -22,12 +22,8 @@ abstract final class SudanAlphabets {
     id: 'sd.state.latin',
     include: 'KH G RS',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
-  // TODO(py): [H7] glyph 'RS' holds U+200C (ZWNJ) between ب and ح; keep it in the export, text shaping depends on it.
-  // TODO(ts): [H7] glyph holds U+200C; JSON export must emit \u200c, and don't trim() glyphs.
-  // TODO(kt): [H7] glyph holds U+200C; keep it as \u200C in generated sources, and don't trim() glyphs.
   /// [stateLatin] as the upper row prints it. Red Sea is two letters, spaced
   /// apart as on the photographed plate (`٨ ب ح` over `8RS`) — unjoined by a
   /// zero-width non-joiner, since any space pushes ب into the class digit.
@@ -35,7 +31,6 @@ abstract final class SudanAlphabets {
     id: 'sd.state.arabic',
     include: 'KH G RS',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: <String, String>{'KH': 'خ', 'G': 'ج', 'RS': 'ب\u200Cح'},

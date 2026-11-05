@@ -11,7 +11,5 @@ abstract final class TrinidadAndTobagoAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tt.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

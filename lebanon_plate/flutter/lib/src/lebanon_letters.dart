@@ -46,8 +46,7 @@ enum LebanonLetter {
   });
 
   final String character;
-  final String? town;
-  final String? governorate;
+  final String? town, governorate;
   final String description;
   final bool inUse;
 

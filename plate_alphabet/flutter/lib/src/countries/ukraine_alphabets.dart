@@ -13,8 +13,6 @@ abstract final class UkraineAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ua.letters',
     include: 'A-C E H I K M O P T X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Temporary and military fields mix those letters with digits (`T1`,
@@ -22,8 +20,6 @@ abstract final class UkraineAlphabets {
   static const PlateAlphabet mixed = PlateAlphabet.pattern(
     id: 'ua.mixed',
     include: 'A-C E H I K M O P T X 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// An individualised plate takes Cyrillic or Latin letters, and digits.
@@ -31,7 +27,5 @@ abstract final class UkraineAlphabets {
     id: 'ua.personalised',
     include:
         'A-Z А Б В Г Ґ Д Е Є Ж З И І Ї Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ь Ю Я 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

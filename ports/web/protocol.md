@@ -12,7 +12,7 @@ own origin).
 | # | dir | type | payload | when |
 |---|---|---|---|---|
 | 1 | C→H | `hello` | `{lang, country, version}` | once on boot, before the runtime is ready |
-| 2 | H→C | `init` | `{spec?: string, values?: (string\|null)[], theme: "light"\|"dark", locale: string, keypad: boolean}` | reply to hello |
+| 2 | H→C | `init` | `{spec?: string, values?: (string\|null)[], theme: "light"\|"dark", locale: string, keypad: boolean, plateOnly?: boolean}` | reply to hello; `plateOnly`: the plate alone (no keypad, verdict or page padding), each type showing its sample values |
 | 3 | C→H | `ready` | `{specs: {id, label}[], spec: string, height: number}` | first paint done |
 | 4 | C→H | `resize` | `{height: number}` | document height changed (CSS px) |
 | 5 | C→H | `change` | `{spec, values, text, complete: boolean, valid: boolean\|null}` | any edit or spec switch |

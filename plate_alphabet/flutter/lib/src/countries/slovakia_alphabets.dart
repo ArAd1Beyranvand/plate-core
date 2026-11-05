@@ -11,15 +11,11 @@ abstract final class SlovakiaAlphabets {
     id: 'sk.letters',
     include: 'A-Z',
     exclude: 'Q W',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// A personalised plate takes any capital letter or digit.
   static const PlateAlphabet personalised = PlateAlphabet.pattern(
     id: 'sk.personalised',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

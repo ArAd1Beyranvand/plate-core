@@ -1,0 +1,14 @@
+import { chromium } from '/home/aradbeyranvand/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs';
+const base = process.argv[2];
+const b = await chromium.launch({ executablePath: '/opt/google/chrome/chrome', args: ['--enable-gpu', '--ignore-gpu-blocklist'] });
+const p = await b.newPage({ viewport: { width: 1400, height: 900 } });
+const reqs = []; p.on('request', (r) => { const u = r.url(); if (/pyodide\.mjs|plates\.zip|boot\.js|index\.html\?v/.test(u)) reqs.push(u.split('/').slice(-3).join('/')); });
+p.on('console', (m) => console.log('console', m.type(), m.text().slice(0, 200)));
+await p.goto(`${base}/#/plates/iran`); await p.waitForTimeout(5000);
+console.log('Chrome', await p.evaluate(() => navigator.userAgent.match(/Chrome\/[\d.]+/)[0]), 'moveBefore', await p.evaluate(() => 'moveBefore' in Element.prototype));
+const hash = (h) => p.evaluate((h) => { location.hash = h; }, h);
+await hash('#/plates/iran?language=python'); await p.waitForTimeout(12000); console.log('after py 1', reqs.splice(0));
+await hash('#/plates/iran'); await p.waitForTimeout(4000);
+console.log('parked', await p.evaluate(() => [...document.querySelectorAll('iframe')].map((f) => `${f.src.split('/').slice(-3).join('/')} display=${f.style.display} connected=${f.isConnected} parent=${f.parentElement?.style.cssText.slice(0, 40)}`)));
+await hash('#/plates/iran?language=python'); await p.waitForTimeout(6000); console.log('after py 2', reqs.splice(0)); await p.screenshot({ path: 'py2.png' });
+await b.close();

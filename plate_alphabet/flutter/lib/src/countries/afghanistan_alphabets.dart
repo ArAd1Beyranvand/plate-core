@@ -28,7 +28,6 @@ abstract final class AfghanistanAlphabets {
     id: 'af.class',
     include: 'P D T B L M R',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     glyphs: <String, String>{
       'P': 'ش', // private
@@ -48,7 +47,6 @@ abstract final class AfghanistanAlphabets {
     id: 'af.classLatin',
     include: 'P D T B L M R',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     glyphs: <String, String>{'P': 'PRV', 'D': 'DUPL', 'R': 'TRC'},
   );
 
@@ -59,7 +57,6 @@ abstract final class AfghanistanAlphabets {
     id: 'af.intlCategory',
     characters: <String>['B', 'T', 'C'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     glyphs: <String, String>{'B': 'BUS', 'T': 'TAXI', 'C': 'CARGO'},
   );
 }

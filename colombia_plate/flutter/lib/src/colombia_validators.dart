@@ -2,12 +2,6 @@ import 'package:plate_core/plate_core.dart';
 
 import 'colombia_plates.dart';
 
-// TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-// TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-// TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `ColombiaPlates.standard` value. Reports, never bars a keystroke.
 ///
 /// Checks what the article states for each series: how many letters and
@@ -52,10 +46,7 @@ class ColombiaValidator extends GatedPlateValidator {
 
 /// Judges a `ColombiaPlates.police` value: two digits, then four.
 class ColombiaPoliceValidator extends GatedPlateValidator {
-  const ColombiaPoliceValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const ColombiaPoliceValidator() : super('number');
 
   static const String reason = 'The number is two digits and four digits.';
 
@@ -70,17 +61,11 @@ class ColombiaPoliceValidator extends GatedPlateValidator {
 /// Judges a `ColombiaPlates.diplomatic` value: a type letter, the mission's
 /// two-letter country initials, three digits.
 class ColombiaDiplomaticValidator extends GatedPlateValidator {
-  const ColombiaDiplomaticValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const ColombiaDiplomaticValidator() : super('number');
 
   static const String reasonLetters = 'A type letter and two country initials.';
   static const String reasonNumber = 'The number is three digits.';
 
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _typeLetter = RegExp(r'^[A-Z]$');
   static final RegExp _countryInitials = RegExp(r'^[A-Z]{2}$');
 

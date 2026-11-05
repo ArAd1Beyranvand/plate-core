@@ -18,7 +18,6 @@ abstract final class PSAlphabets {
     id: 'ps.districtDigits',
     include: '1-9',
     exclude: '2',
-    input: AlphabetInput.typed,
     isNumeric: true,
   );
 
@@ -30,7 +29,6 @@ abstract final class PSAlphabets {
     include: 'A-N',
     exclude: 'I',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// Gaza plate prefix: literal `3` only. `chosen` not `typed` for display-only

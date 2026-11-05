@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from 'plate_core/core/validators/plate_validator';
 
 /** The plate letters: the towns' and the special series. */
 const letters: readonly string[] = ['A', 'B', 'Y', 'G', 'N', 'O', 'S', 'T', 'K', 'Z', 'J', 'R', 'M', 'C', 'D', 'P', 'MP'];

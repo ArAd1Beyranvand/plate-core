@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -35,9 +33,7 @@ import 'indonesia_services.dart';
 /// closes only with a condensed face in the host's theme.
 abstract final class _Layout {
   // Car, 460×135.
-  static const double carWidth = 460;
-  static const double carHeight = 135;
-  static const double carSlotTop = 2;
+  static const double carWidth = 460, carHeight = 135, carSlotTop = 2;
   static const double carSlotHeight = 92;
 
   /// One pitch for letters and digits: the measured 46.2 / 45.5 / 47.3 are
@@ -45,95 +41,70 @@ abstract final class _Layout {
   static const double carPitch = 46;
 
   /// Extra space between groups: centre-to-centre 58.5 and 61.9 less a pitch.
-  static const double carGap = 14;
-  static const double carBandTop = 90;
+  static const double carGap = 14, carBandTop = 90;
 
   // Expiry row, shared by car and diplomatic.
   static const double expiryTop = 89;
 
   /// 22.3 mm of ink over the ~0.53 ink ratio.
-  static const double expiryHeight = 42;
-  static const double expiryPitch = 15.3;
-  static const double carMonthLeft = 182.6;
-  static const double carYearLeft = 240.8;
+  static const double expiryHeight = 42, expiryPitch = 15.3;
+  static const double carMonthLeft = 182.6, carYearLeft = 240.8;
   static const double carDotCentre = 227.9;
 
   // Motorcycle, 275×115.
-  static const double motoWidth = 275;
-  static const double motoHeight = 115;
-  static const double motoSlotTop = 2;
-  static const double motoSlotHeight = 65;
-  static const double motoPitch = 24.6;
+  static const double motoWidth = 275, motoHeight = 115, motoSlotTop = 2;
+  static const double motoSlotHeight = 65, motoPitch = 24.6;
   static const double motoGapNumber = 7.3;
 
   /// The number→suffix gap is wider than the prefix→number one in the
   /// artwork (45.3 centre to centre against 31.8).
-  static const double motoGapSuffix = 20.4;
-  static const double motoBandTop = 67;
+  static const double motoGapSuffix = 20.4, motoBandTop = 67;
   static const double motoExpiryTop = 63;
 
   /// 25.1 mm of ink over the ~0.53 ink ratio.
-  static const double motoExpiryHeight = 48;
-  static const double motoExpiryPitch = 16.2;
-  static const double motoMonthLeft = 174.1;
-  static const double motoYearLeft = 226.1;
+  static const double motoExpiryHeight = 48, motoExpiryPitch = 16.2;
+  static const double motoMonthLeft = 174.1, motoYearLeft = 226.1;
   static const double motoDotCentre = 216.4;
 
   // Diplomatic.
-  static const double dipSlotTop = 2;
-  static const double dipSlotHeight = 90;
-  static const double missionLeft = 14.6;
-  static const double missionWidth = 82;
-  static const double dipPitch = 38.8;
+  static const double dipSlotTop = 2, dipSlotHeight = 90, missionLeft = 14.6;
+  static const double missionWidth = 82, dipPitch = 38.8;
 
   /// Right edge of each three-digit group's last cell.
-  static const double dipCountryRight = 277.8;
-  static const double dipSerialRight = 443.8;
+  static const double dipCountryRight = 277.8, dipSerialRight = 443.8;
 
   /// The dot is 3 mm of ink.
-  static const double dotGlyph = 14;
-  static const double dotWidth = 10;
+  static const double dotGlyph = 14, dotWidth = 10;
 
   // Military and police, 460×138. See `IndonesiaPlates.military`.
-  static const double serviceHeight = 138;
-  static const double servicePitch = 37;
+  static const double serviceHeight = 138, servicePitch = 37;
 
   /// Last digit centre to first suffix centre is ~71 on every plate: a
   /// pitch for the dash and this much more.
-  static const double dashGap = 34;
-  static const double dashWidth = 30;
+  static const double dashGap = 34, dashWidth = 30;
 
   /// The serial is 62.8 mm of ink centred at y 90.3 (Army); 94 is as tall as
   /// the plate allows about that centre.
-  static const double milSlotTop = 44;
-  static const double milSlotHeight = 94;
+  static const double milSlotTop = 44, milSlotHeight = 94;
 
   /// The mark: Army star y 19.9–56.3, Navy anchor y 14.7–57.3, both ~40 wide
   /// and centred over the serial.
-  static const double markTop = 16;
-  static const double markWidth = 42;
-  static const double markHeight = 41;
+  static const double markTop = 16, markWidth = 42, markHeight = 41;
 
   /// The crest sits inside its square with this much clear on every side.
   static const double emblemMargin = 6;
 
-  static const double policePitch = 35.5;
-  static const double policeRim = 6.5;
-  static const double policeDividerCentre = 136.4;
-  static const double policeDividerWidth = 6.4;
+  static const double policePitch = 35.5, policeRim = 6.5;
+  static const double policeDividerCentre = 136.4, policeDividerWidth = 6.4;
 
   /// Horizontal divider y 61.1–65.0.
-  static const double policeRuleCentre = 63;
-  static const double policeRuleWidth = 4;
+  static const double policeRuleCentre = 63, policeRuleWidth = 4;
 
   /// Region numeral ink y 15.3–55.7: a 71 mm slot from the top.
-  static const double regionTop = 0;
-  static const double regionHeight = 71;
-  static const double regionWidth = 160;
+  static const double regionTop = 0, regionHeight = 71, regionWidth = 160;
 
   /// Serial ink y 75.6–124.7 (49 mm, centre 100); 76 mm reaches the bottom.
-  static const double policeSlotTop = 62;
-  static const double policeSlotHeight = 76;
+  static const double policeSlotTop = 62, policeSlotHeight = 76;
 }
 
 /// The 2023-series geometries.
@@ -201,15 +172,7 @@ abstract final class IndonesiaPlates {
 
   static final PlateSpec police = _policeSpec();
 
-  /// Letter spacing that puts characters at [pitch] instead of the font's
-  /// advance.
-  static double _spacing(double pitch, double height) =>
-      max(0, pitch - 0.6 * 0.72 * height);
-
   static PlateDecal _asset(String file, PlateBox box) => PlateDecal(
-    // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-    // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-    // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
     image: AssetImage('assets/$file', package: 'indonesia_plate'),
     box: box,
   );
@@ -238,38 +201,23 @@ abstract final class IndonesiaPlates {
     required double pitch,
     int first = 0,
   }) {
-    const int digits = 5;
-    final double left = centre - ((digits + 2) * pitch + _Layout.dashGap) / 2;
-    final double numberRight = left + digits * pitch;
-    final double suffixLeft = numberRight + _Layout.dashGap;
-    final double dashCentre = (numberRight + suffixLeft) / 2;
-    final double spacing = _spacing(pitch, height);
-    return (
-      slots: <PlateSlot>[
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.digits,
-          box: PlateBox(left, top, digits * pitch, height),
-          length: digits,
-          minLength: 4,
-          spacing: spacing,
-        ),
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.digits,
-          box: PlateBox(suffixLeft, top, 2 * pitch, height),
-          length: 2,
-          spacing: spacing,
-        ),
+    const double air = (_Layout.dashGap - _Layout.dashWidth) / 2;
+    final PlateRowLayout row = plateRow(
+      const <PlateRowItem>[
+        PlateRowRun(IndonesiaAlphabets.digits, 5, minLength: 4),
+        PlateRowGap(air),
+        PlateRowText('-', _Layout.dashWidth),
+        PlateRowGap(air),
+        PlateRowRun(IndonesiaAlphabets.digits, 2),
       ],
-      dash: PlateLabel(
-        text: '-',
-        box: PlateBox(
-          dashCentre - _Layout.dashWidth / 2,
-          top,
-          _Layout.dashWidth,
-          height,
-        ),
-        glyphHeight: height,
-      ),
+      centre: centre,
+      top: top,
+      height: height,
+      pitch: pitch,
+    );
+    return (
+      slots: row.slots,
+      dash: row.labels.single,
       groups: <PlateTextGroup>[
         PlateTextGroup(<int>[first], key: 'number'),
         PlateTextGroup(<int>[first + 1], key: 'suffix'),
@@ -403,11 +351,13 @@ abstract final class IndonesiaPlates {
   }) => (
     slots: <PlateSlot>[
       for (final double left in <double>[monthLeft, yearLeft])
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.digits,
-          box: PlateBox(left, top, 2 * pitch, height),
-          length: 2,
-          spacing: _spacing(pitch, height),
+        plateRun(
+          IndonesiaAlphabets.digits,
+          2,
+          left: left,
+          top: top,
+          pitch: pitch,
+          height: height,
           color: color,
         ),
     ],
@@ -444,13 +394,6 @@ abstract final class IndonesiaPlates {
         ? _Layout.motoSlotHeight
         : _Layout.carSlotHeight;
 
-    // Each field is sized for its longest run: 1–2 letters, 1–4 digits and
-    // 1–3 letters.
-    final double content = 9 * pitch + gapNumber + gapSuffix;
-    final double left = (width - content) / 2;
-    final double numberLeft = left + 2 * pitch + gapNumber;
-    final double suffixLeft = numberLeft + 4 * pitch + gapSuffix;
-
     final expiry = motorcycle
         ? _expiry(
             monthLeft: _Layout.motoMonthLeft,
@@ -480,24 +423,36 @@ abstract final class IndonesiaPlates {
         motorcycle ? _Layout.motoBandTop : _Layout.carBandTop,
       ),
       slots: <PlateSlot>[
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.letters,
-          box: PlateBox(left, top, 2 * pitch, slotHeight),
-          length: 2,
-          minLength: 1,
-        ),
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.digits,
-          box: PlateBox(numberLeft, top, 4 * pitch, slotHeight),
-          length: 4,
-          minLength: 1,
-        ),
-        PlateSlot(
-          alphabet: IndonesiaAlphabets.letters,
-          box: PlateBox(suffixLeft, top, 3 * pitch, slotHeight),
-          length: 3,
-          minLength: 1,
-        ),
+        // Each field is sized for its longest run: 1–2 letters, 1–4 digits
+        // and 1–3 letters.
+        ...plateRow(
+          <PlateRowItem>[
+            const PlateRowRun(
+              IndonesiaAlphabets.letters,
+              2,
+              minLength: 1,
+              spacing: 0,
+            ),
+            PlateRowGap(gapNumber),
+            const PlateRowRun(
+              IndonesiaAlphabets.digits,
+              4,
+              minLength: 1,
+              spacing: 0,
+            ),
+            PlateRowGap(gapSuffix),
+            const PlateRowRun(
+              IndonesiaAlphabets.letters,
+              3,
+              minLength: 1,
+              spacing: 0,
+            ),
+          ],
+          centre: width / 2,
+          top: top,
+          height: slotHeight,
+          pitch: pitch,
+        ).slots,
         ...expiry.slots,
       ],
       labels: <PlateLabel>[expiry.dot],

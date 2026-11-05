@@ -15,14 +15,10 @@ abstract final class TaiwanAlphabets {
     id: 'tw.letters',
     include: 'A-Z',
     exclude: 'I O',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'tw.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

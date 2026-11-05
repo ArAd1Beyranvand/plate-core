@@ -2,19 +2,13 @@ import 'package:plate_core/plate_core.dart';
 
 import 'cuba_alphabets.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a 2013 Cuban plate value. Reports, never bars a keystroke.
 ///
 /// Quiet until the first serial group has a digit. Checks the letter is an
 /// issued series and the serial is the full digit count of the spec — six on
 /// a car (`serial` + `serial2`), five on a motorcycle (`serial`).
 class CubaValidator extends GatedPlateValidator {
-  const CubaValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const CubaValidator() : super('serial');
 
   static const String reasonLetterMissing = 'A plate starts with a letter.';
   static const String reasonLetterUnissued =

@@ -17,14 +17,12 @@ abstract final class DjiboutiAlphabets {
     id: 'dj.letter.latin',
     characters: <String>['D'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letterArabic = PlateAlphabet(
     id: 'dj.letter.arabic',
     characters: <String>['D'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: <String, String>{'D': 'ج'},

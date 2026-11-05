@@ -23,9 +23,6 @@ abstract final class IndonesiaAreaCodes {
   };
 }
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a registration on an `IndonesiaPlates.car` or `motorcycle` spec.
 /// Reports, never bars a keystroke.
 ///
@@ -33,10 +30,7 @@ abstract final class IndonesiaAreaCodes {
 /// runs 1–9999 with no leading zero; the suffix is at most three letters; the
 /// expiry month is 01–12. Does not check which suffixes a region issues.
 class IndonesiaValidator extends GatedPlateValidator {
-  const IndonesiaValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const IndonesiaValidator() : super('number');
 
   static const String reasonArea = 'Not an Indonesian area code.';
   static const String reasonNumber = 'The number is 1 to 9999.';
@@ -83,10 +77,7 @@ class IndonesiaValidator extends GatedPlateValidator {
 /// Judges an `IndonesiaPlates.diplomatic` value: `CD` or `CC`, the mission's
 /// number and the vehicle's.
 class IndonesiaDiplomaticValidator extends GatedPlateValidator {
-  const IndonesiaDiplomaticValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const IndonesiaDiplomaticValidator() : super('serial');
 
   static const String reasonMission = 'The code is CD or CC.';
   static const String reasonDigits = 'Both numbers are digits.';
@@ -107,10 +98,7 @@ class IndonesiaDiplomaticValidator extends GatedPlateValidator {
 /// with no leading zero, a two-digit suffix and, on a police plate, a region
 /// numeral the alphabet lists.
 class IndonesiaServiceValidator extends GatedPlateValidator {
-  const IndonesiaServiceValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const IndonesiaServiceValidator() : super('number');
 
   static const String reasonNumber = 'The number is 1 to 99999.';
   static const String reasonSuffix = 'The suffix is two digits.';

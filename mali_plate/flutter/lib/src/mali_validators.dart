@@ -1,14 +1,8 @@
 import 'package:plate_core/plate_core.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Advisory validator for the `XX #### XX` format.
 class MaliValidator extends GatedPlateValidator {
-  const MaliValidator();
-
-  @override
-  String get gateGroup => 'suffix';
+  const MaliValidator() : super('suffix');
 
   static const String reasonFormat =
       'Format is 2 letters, 4 digits, 2 letters.';

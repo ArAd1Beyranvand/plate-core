@@ -9,8 +9,6 @@ abstract final class VenezuelaAlphabets {
   static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 've.serial',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The state each last letter stands for, as the plate prints it: upper
@@ -49,8 +47,6 @@ abstract final class VenezuelaAlphabets {
     id: 've.state',
     include: 'A-Y',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// [state] rendered as the name it stands for — the alphabet the caption
@@ -59,8 +55,6 @@ abstract final class VenezuelaAlphabets {
     id: 've.stateName',
     include: 'A-Y',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
     glyphs: stateNames,
   );
 }

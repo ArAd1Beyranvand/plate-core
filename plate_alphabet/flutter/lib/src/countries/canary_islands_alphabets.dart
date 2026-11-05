@@ -15,7 +15,6 @@ abstract final class CanaryIslandsAlphabets {
     id: 'ic.towedClass',
     characters: <String>['R', 'P'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   static const PlateAlphabet digits = PlateAlphabet.latinDigits;
@@ -24,15 +23,11 @@ abstract final class CanaryIslandsAlphabets {
     id: 'ic.letters',
     include: 'B-Z',
     exclude: 'E I O Q U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'ic.diplomatic.letters',
     include: 'A C D I O T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The one-to-three letter code of a state or police plate (`CME`, `ET`).

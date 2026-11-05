@@ -47,17 +47,11 @@ import 'colombia_country.dart';
 /// for it), the antique plate's car graphic, the diplomatic plate's crest,
 /// QR code, hologram and printed control number.
 abstract final class _Layout {
-  static const double width = 330;
-  static const double height = 165;
-  static const double centre = width / 2;
+  static const double width = 330, height = 165, centre = width / 2;
 
   // The shared `ABC·123` design.
-  static const double pitch = 47.6;
-  static const double gap = 23.6;
-  static const double serialTop = 24;
-  static const double serialHeight = 110;
-  static const double roundelY = 78.5;
-  static const double roundelGlyph = 28;
+  static const double pitch = 47.6, gap = 23.6, serialTop = 24;
+  static const double serialHeight = 110, roundelY = 78.5, roundelGlyph = 28;
   static const PlateBox caption = PlateBox(15, 125, 300, 40);
   static const double captionGlyph = 29;
 
@@ -70,14 +64,12 @@ abstract final class _Layout {
   static const List<double> holeY = <double>[17.2, 150.8];
 
   // Antique.
-  static const double stripLeftEnd = 86;
-  static const double stripRightStart = 244;
+  static const double stripLeftEnd = 86, stripRightStart = 244;
   static const PlateBox heading = PlateBox(60, 4, 210, 30);
   static const double headingGlyph = 24;
 
   // Police.
-  static const double policePitch = 45.7;
-  static const double policeGap = 36;
+  static const double policePitch = 45.7, policeGap = 36;
   static const PlateBox policeDash = PlateBox(113.1, 76.3, 23.2, 8.2);
   static const PlateBox policeTop = PlateBox(92, 6, 150, 30);
   static const double policeTopGlyph = 19;
@@ -87,18 +79,11 @@ abstract final class _Layout {
   // Diplomatic corps.
   static const double band = 38;
   static const PlateBox dipCaption = PlateBox(85, 2, 170, 40);
-  static const double dipCaptionGlyph = 35;
-  static const double dipCell = 44.9;
-  static const double dipSerialTop = 27;
-  static const double dipSerialHeight = 110;
-  static const double dipTypeCentre = 34.3;
-  static const double dipCountryLeft = 99.9 - 47.3 / 2;
-  static const double dipCountryPitch = 47.3;
-  static const double dipNumberLeft = 208.5 - 44.9 / 2;
-  static const double dipNumberPitch = 44.9;
-  static const double dashY = 124.9;
-  static const double dashThickness = 1.2;
-  static const double dashLeft = 16;
+  static const double dipCaptionGlyph = 35, dipCell = 44.9, dipSerialTop = 27;
+  static const double dipSerialHeight = 110, dipTypeCentre = 34.3;
+  static const double dipCountryLeft = 99.9 - 47.3 / 2, dipCountryPitch = 47.3;
+  static const double dipNumberLeft = 208.5 - 44.9 / 2, dipNumberPitch = 44.9;
+  static const double dashY = 124.9, dashThickness = 1.2, dashLeft = 16;
   static const double dashRight = 314;
   static const int dashCount = 16;
   static const double dashLength = 12;
@@ -108,12 +93,7 @@ final List<PlateBand> _holes = <PlateBand>[
   for (final double x in _Layout.holeX)
     for (final double y in _Layout.holeY)
       PlateBand(
-        box: PlateBox(
-          x - _Layout.holeSize / 2,
-          y - _Layout.holeSize / 2,
-          _Layout.holeSize,
-          _Layout.holeSize,
-        ),
+        box: PlateBox.centered(x, y, _Layout.holeSize, _Layout.holeSize),
         color: ColombiaColors.hole,
         topCornerRadius: _Layout.holeSize / 2,
         bottomCornerRadius: _Layout.holeSize / 2,
@@ -137,13 +117,10 @@ class ColombiaSeries {
     this.antique = false,
   });
 
-  final String id;
-  final String english;
-  final String spanish;
+  final String id, english, spanish;
 
   /// Letters in the series, [fixed] included.
-  final int letters;
-  final int digits;
+  final int letters, digits;
 
   /// `123·ABC`, the mototaxi order.
   final bool digitsFirst;
@@ -246,43 +223,34 @@ class ColombiaSeries {
 const PlatePanel _noPanel = PlatePanel(box: PlateBox(0, 0, 0, _Layout.height));
 
 abstract final class ColombiaPlates {
-  static PlateSlot _field(
-    PlateAlphabet alphabet,
-    int count,
-    double left,
-    double pitch,
-    double top,
-    double height,
-  ) => PlateSlot(
-    alphabet: alphabet,
-    box: PlateBox(left, top, count * pitch, height),
-    length: count,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
-  );
+  static const double _top = _Layout.serialTop, _height = _Layout.serialHeight;
 
-  /// The `ABC·123` plate: the serial split by the ministry roundel, the
-  /// municipality (or `COLOMBIA`) under it.
-  ///
-  /// Slots: the first group then the second, left to right. The series'
-  /// fixed letters are checked by the validator.
   static PlateSpec standard({
     ColombiaSeries series = ColombiaSeries.private,
     String city = 'BOGOTA D.C.',
   }) {
     final String caption = series.caption ?? city;
-    final int cells = series.letters + series.digits;
     final int split = series.digitsFirst ? series.digits : series.letters;
-    final double left =
-        _Layout.centre - (cells * _Layout.pitch + _Layout.gap) / 2;
-    final double splitX = left + split * _Layout.pitch;
-    final double secondLeft = splitX + _Layout.gap;
-
-    final PlateAlphabet firstAlphabet = series.digitsFirst
-        ? ColombiaAlphabets.digits
-        : ColombiaAlphabets.letters;
-    final PlateAlphabet secondAlphabet = series.digitsFirst
-        ? ColombiaAlphabets.letters
-        : ColombiaAlphabets.digits;
+    final (PlateAlphabet first, PlateAlphabet second) = series.digitsFirst
+        ? (ColombiaAlphabets.digits, ColombiaAlphabets.letters)
+        : (ColombiaAlphabets.letters, ColombiaAlphabets.digits);
+    final PlateRowLayout row = plateRow(
+      <PlateRowItem>[
+        PlateRowRun(first, split),
+        const PlateRowText.styled(
+          '◉',
+          _Layout.gap,
+          top: _Layout.roundelY - _Layout.gap / 2,
+          height: _Layout.gap,
+          glyphHeight: _Layout.roundelGlyph,
+        ),
+        PlateRowRun(second, series.letters + series.digits - split),
+      ],
+      centre: _Layout.centre,
+      top: _top,
+      height: _height,
+      pitch: _Layout.pitch,
+    );
 
     return PlateSpec(
       id: 'co.${series.id}',
@@ -303,16 +271,7 @@ abstract final class ColombiaPlates {
           : PlateSection.plain,
       bands: _holes,
       labels: <PlateLabel>[
-        PlateLabel(
-          text: '◉',
-          box: PlateBox(
-            splitX,
-            _Layout.roundelY - _Layout.gap / 2,
-            _Layout.gap,
-            _Layout.gap,
-          ),
-          glyphHeight: _Layout.roundelGlyph,
-        ),
+        ...row.labels,
         PlateLabel(
           text: caption,
           box: _Layout.caption,
@@ -328,24 +287,7 @@ abstract final class ColombiaPlates {
             color: ColombiaColors.antiqueBlue,
           ),
       ],
-      slots: <PlateSlot>[
-        _field(
-          firstAlphabet,
-          split,
-          left,
-          _Layout.pitch,
-          _Layout.serialTop,
-          _Layout.serialHeight,
-        ),
-        _field(
-          secondAlphabet,
-          cells - split,
-          secondLeft,
-          _Layout.pitch,
-          _Layout.serialTop,
-          _Layout.serialHeight,
-        ),
-      ],
+      slots: row.slots,
       textGroups: <PlateTextGroup>[
         PlateTextGroup(const <int>[
           0,
@@ -359,60 +301,43 @@ abstract final class ColombiaPlates {
     );
   }
 
-  /// The National Police plate, `60-0007`, between `COLOMBIA` and
-  /// `POLICIA NACIONAL`. Slots: the two digits, then the four.
-  static final PlateSpec police = () {
-    final double left =
-        _Layout.centre - (6 * _Layout.policePitch + _Layout.policeGap) / 2;
-    final double split = left + 2 * _Layout.policePitch;
-    return PlateSpec(
-      id: 'co.police',
-      country: ColombiaCountry.colombia,
-      canvasWidth: _Layout.width,
-      canvasHeight: _Layout.height,
-      noPanel: true,
-      panel: _noPanel,
-      rules: const <PlateRule>[PlateRule(box: _Layout.policeDash)],
-      labels: const <PlateLabel>[
-        PlateLabel(
-          text: 'COLOMBIA',
-          box: _Layout.policeTop,
-          glyphHeight: _Layout.policeTopGlyph,
-        ),
-        PlateLabel(
-          text: 'POLICIA NACIONAL',
-          box: _Layout.policeBottom,
-          glyphHeight: _Layout.policeBottomGlyph,
-        ),
+  static final PlateSpec police = PlateSpec(
+    id: 'co.police',
+    country: ColombiaCountry.colombia,
+    canvasWidth: _Layout.width,
+    canvasHeight: _Layout.height,
+    noPanel: true,
+    panel: _noPanel,
+    rules: const <PlateRule>[PlateRule(box: _Layout.policeDash)],
+    labels: const <PlateLabel>[
+      PlateLabel(
+        text: 'COLOMBIA',
+        box: _Layout.policeTop,
+        glyphHeight: _Layout.policeTopGlyph,
+      ),
+      PlateLabel(
+        text: 'POLICIA NACIONAL',
+        box: _Layout.policeBottom,
+        glyphHeight: _Layout.policeBottomGlyph,
+      ),
+    ],
+    slots: plateRow(
+      const <PlateRowItem>[
+        PlateRowRun(ColombiaAlphabets.digits, 2),
+        PlateRowRun(ColombiaAlphabets.digits, 4),
       ],
-      slots: <PlateSlot>[
-        _field(
-          ColombiaAlphabets.digits,
-          2,
-          left,
-          _Layout.policePitch,
-          _Layout.serialTop,
-          _Layout.serialHeight,
-        ),
-        _field(
-          ColombiaAlphabets.digits,
-          4,
-          split + _Layout.policeGap,
-          _Layout.policePitch,
-          _Layout.serialTop,
-          _Layout.serialHeight,
-        ),
-      ],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'unit'),
-        PlateTextGroup(<int>[1], prefix: '-', key: 'number'),
-      ],
-    );
-  }();
+      centre: _Layout.centre,
+      top: _top,
+      height: _height,
+      pitch: _Layout.policePitch,
+      gap: _Layout.policeGap,
+    ).slots,
+    textGroups: const <PlateTextGroup>[
+      PlateTextGroup(<int>[0], key: 'unit'),
+      PlateTextGroup(<int>[1], prefix: '-', key: 'number'),
+    ],
+  );
 
-  /// The diplomatic-corps plate, `A FR 000`, under the blue `COLOMBIA`
-  /// band: the mission type, the country's initials and the number.
-  /// Slots: the type, the two initials, the three digits.
   static final PlateSpec diplomatic = PlateSpec(
     id: 'co.cd',
     country: ColombiaCountry.colombia,
@@ -427,22 +352,16 @@ abstract final class ColombiaPlates {
       ),
       PlatePart(PlateSection.plain),
     ]),
-    rules: <PlateRule>[
-      for (int i = 0; i < _Layout.dashCount; i++)
-        PlateRule(
-          box: PlateBox(
-            _Layout.dashLeft +
-                i *
-                    (_Layout.dashRight -
-                        _Layout.dashLeft -
-                        _Layout.dashLength) /
-                    (_Layout.dashCount - 1),
-            _Layout.dashY,
-            _Layout.dashLength,
-            _Layout.dashThickness,
-          ),
-        ),
-    ],
+    rules: plateStipple(
+      count: _Layout.dashCount,
+      left: _Layout.dashLeft,
+      top: _Layout.dashY,
+      width: _Layout.dashLength,
+      height: _Layout.dashThickness,
+      stepX:
+          (_Layout.dashRight - _Layout.dashLeft - _Layout.dashLength) /
+          (_Layout.dashCount - 1),
+    ),
     labels: const <PlateLabel>[
       PlateLabel(
         text: 'COLOMBIA',
@@ -452,30 +371,34 @@ abstract final class ColombiaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      _field(
-        ColombiaAlphabets.letters,
-        1,
-        _Layout.dipTypeCentre - _Layout.dipCell / 2,
-        _Layout.dipCell,
-        _Layout.dipSerialTop,
-        _Layout.dipSerialHeight,
-      ),
-      _field(
-        ColombiaAlphabets.letters,
-        2,
-        _Layout.dipCountryLeft,
-        _Layout.dipCountryPitch,
-        _Layout.dipSerialTop,
-        _Layout.dipSerialHeight,
-      ),
-      _field(
-        ColombiaAlphabets.digits,
-        3,
-        _Layout.dipNumberLeft,
-        _Layout.dipNumberPitch,
-        _Layout.dipSerialTop,
-        _Layout.dipSerialHeight,
-      ),
+      for (final (PlateAlphabet a, int n, double left, double pitch) in [
+        (
+          ColombiaAlphabets.letters,
+          1,
+          _Layout.dipTypeCentre - _Layout.dipCell / 2,
+          _Layout.dipCell,
+        ),
+        (
+          ColombiaAlphabets.letters,
+          2,
+          _Layout.dipCountryLeft,
+          _Layout.dipCountryPitch,
+        ),
+        (
+          ColombiaAlphabets.digits,
+          3,
+          _Layout.dipNumberLeft,
+          _Layout.dipNumberPitch,
+        ),
+      ])
+        plateRun(
+          a,
+          n,
+          left: left,
+          pitch: pitch,
+          top: _Layout.dipSerialTop,
+          height: _Layout.dipSerialHeight,
+        ),
     ],
     textGroups: const <PlateTextGroup>[
       PlateTextGroup(<int>[0], key: 'type'),

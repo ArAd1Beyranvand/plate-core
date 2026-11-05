@@ -17,8 +17,6 @@ abstract final class NepalAlphabets {
   static const PlateAlphabet vehicleClass = PlateAlphabet.pattern(
     id: 'np.class',
     include: 'A-K 1-5',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The seven provinces, upper case as printed above the number. A symbol is
@@ -27,7 +25,6 @@ abstract final class NepalAlphabets {
     id: 'np.province',
     include: 'KOSHI MADHESH BAGMATI GANDAKI LUMBINI KARNALI SUDURPASHCHIM',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '—',
   );
 
@@ -39,14 +36,10 @@ abstract final class NepalAlphabets {
   static const PlateAlphabet devanagariDigits = PlateAlphabet.pattern(
     id: 'np.devanagari.digits',
     include: '0-9',
-    input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: _devanagariNumerals,
   );
 
-  // TODO(py): [H7] entries like 'मे' are consonant+matra clusters; split the include string on spaces only, never per code point.
-  // TODO(ts): [H7] same: split on ' ' only; Array.from would detach the matra. [D6-font] bundle Devanagari.
-  // TODO(kt): [H7] same: split on ' ' only; codePoints() would detach the matra. [D6-font] bundle Devanagari.
   /// The zone codes of the 1983–2019 plates: Mechi, Kosi, Sagarmatha,
   /// Janakpur, Bagmati, Narayani, Gandaki, Lumbini, Dhawalagiri, Rapti, Bheri,
   /// Karnali, Seti, Mahakali.
@@ -54,7 +47,6 @@ abstract final class NepalAlphabets {
     id: 'np.zone',
     include: 'मे को स ज बा ना ग लु ध रा भे क से म',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '—',
   );
 
@@ -64,7 +56,6 @@ abstract final class NepalAlphabets {
     id: 'np.legacy.class',
     include: 'क ख ग घ च ज झ ञ प फ ब य',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '—',
   );
 }

@@ -21,23 +21,17 @@ abstract final class CroatiaAlphabets {
     id: 'hr.region.letters',
     include: 'A-C Č D-S Š T-V Z Ž',
     exclude: 'F H Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'hr.letters',
     include: 'A-Z',
     exclude: 'Q W X Y',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// A customized plate's chosen word: any Latin capital or digit.
   static const PlateAlphabet custom = PlateAlphabet.pattern(
     id: 'hr.custom',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

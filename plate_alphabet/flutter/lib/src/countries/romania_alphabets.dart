@@ -12,8 +12,6 @@ abstract final class RomaniaAlphabets {
     id: 'ro.letters',
     include: 'A-Z',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// A municipality's name on a local-administration plate: capitals with the
@@ -25,7 +23,5 @@ abstract final class RomaniaAlphabets {
       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
       'Ă', 'Â', 'Î', 'Ș', 'Ț', ' ', '-',
     ],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

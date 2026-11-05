@@ -16,14 +16,11 @@ abstract final class UzbekistanAlphabets {
     id: 'uz.foreignClass',
     characters: <String>['H', 'M'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The `D` (diplomat) or `T` (technical staff) a diplomatic plate opens with.
   static const PlateAlphabet diplomaticStatus = PlateAlphabet(
     id: 'uz.diplomaticStatus',
     characters: <String>['D', 'T'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -16,7 +16,6 @@ abstract final class MyanmarAlphabets {
     id: 'mm.prefix',
     include: '0-9 A-Z',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The make and model line: capitals, digits, space and hyphen.
@@ -28,7 +27,6 @@ abstract final class MyanmarAlphabets {
       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     ],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   static const Map<String, String> _burmeseNumerals = <String, String>{
@@ -39,7 +37,6 @@ abstract final class MyanmarAlphabets {
   static const PlateAlphabet burmeseDigits = PlateAlphabet.pattern(
     id: 'mm.burmese.digits',
     include: '0-9',
-    input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: _burmeseNumerals,
   );
@@ -49,7 +46,6 @@ abstract final class MyanmarAlphabets {
     include:
         'က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// A cell that is a numeral or a consonant (`၂၃ ယ`).
@@ -58,7 +54,6 @@ abstract final class MyanmarAlphabets {
     include:
         '0-9 က ခ ဂ ဃ င စ ဆ ဇ ဈ ည ဋ ဌ ဍ ဎ ဏ တ ထ ဒ ဓ န ပ ဖ ဗ ဘ မ ယ ရ လ ဝ သ ဟ ဠ အ',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     glyphs: _burmeseNumerals,
   );
 }

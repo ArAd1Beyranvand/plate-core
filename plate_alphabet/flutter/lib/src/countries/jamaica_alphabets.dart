@@ -11,7 +11,5 @@ abstract final class JamaicaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'jm.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

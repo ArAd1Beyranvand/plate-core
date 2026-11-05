@@ -12,8 +12,6 @@ abstract final class CubaAlphabets {
     id: 'cu.letters',
     include: 'A-Y',
     exclude: 'I O Q S W',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The letters that mean something. Every other letter is an unassigned

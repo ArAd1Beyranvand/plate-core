@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:plate_core/plate_core.dart';
+import 'package:plate_core/testing.dart';
 import 'package:venezuela_plate/venezuela_plate.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -31,33 +31,14 @@ void main() {
       value.substring(0, 6),
       value.substring(6),
     ]);
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 520,
-              height: 520 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: VenezuelaPlates.theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: VenezuelaPlates.theme,
-                  country: VenezuelaCountry.venezuela,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: VenezuelaPlates.theme,
+      country: VenezuelaCountry.venezuela,
+      stage: Size(520, 520 * spec.canvasHeight / spec.canvasWidth),
     );
-    await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   testWidgets(

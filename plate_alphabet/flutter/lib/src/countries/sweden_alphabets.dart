@@ -13,8 +13,6 @@ abstract final class SwedenAlphabets {
     id: 'se.letters',
     include: 'A-Z',
     exclude: 'I Q V',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The last character of a registration: a digit, or (from 2019) a letter
@@ -23,8 +21,6 @@ abstract final class SwedenAlphabets {
     id: 'se.last',
     include: '0-9 A-Z',
     exclude: 'I O Q V',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// A diplomatic mission code: two letters, none of I, O, Q, V.
@@ -32,8 +28,6 @@ abstract final class SwedenAlphabets {
     id: 'se.mission',
     include: 'A-Z',
     exclude: 'I O Q V',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The diplomatic status letter, ambassador (A) to international
@@ -41,7 +35,5 @@ abstract final class SwedenAlphabets {
   static const PlateAlphabet status = PlateAlphabet.pattern(
     id: 'se.status',
     include: 'A-I',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

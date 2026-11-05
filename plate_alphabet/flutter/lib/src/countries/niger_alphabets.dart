@@ -10,7 +10,6 @@ abstract final class NigerAlphabets {
   static const PlateAlphabet region = PlateAlphabet.pattern(
     id: 'ne.region',
     include: '1-8',
-    input: AlphabetInput.typed,
     isNumeric: true,
   );
 

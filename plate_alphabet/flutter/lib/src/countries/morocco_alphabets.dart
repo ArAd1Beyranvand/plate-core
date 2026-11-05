@@ -16,7 +16,6 @@ abstract final class MoroccoAlphabets {
     id: 'ma.series',
     include: 'A B D H E T Y',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: <String, String>{

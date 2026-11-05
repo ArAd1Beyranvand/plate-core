@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -19,12 +17,8 @@ import 'malaysia_regions.dart';
 /// Arial Bold. The serial reads ~70% of reference height.
 abstract final class _Layout {
   // Single row.
-  static const double height = 98;
-  static const double slotTop = 2;
-  static const double slotHeight = 94;
-  static const double leftMargin = 46;
-  static const double rightMargin = 42;
-  static const double letterPitch = 41;
+  static const double height = 98, slotTop = 2, slotHeight = 94;
+  static const double leftMargin = 46, rightMargin = 42, letterPitch = 41;
   static const double digitPitch = 40;
 
   /// Cell-to-cell gap between prefix and number: the ink gap less the air
@@ -35,33 +29,23 @@ abstract final class _Layout {
   static const double suffixGap = 35;
 
   // Two row.
-  static const double twoRowWidth = 247;
-  static const double twoRowHeight = 173;
-  static const double row1Top = 4;
-  static const double row2Top = 88;
-  static const double rowHeight = 82;
+  static const double twoRowWidth = 247, twoRowHeight = 173, row1Top = 4;
+  static const double row2Top = 88, rowHeight = 82;
 
   // Diplomatic NN-NN-XX.
-  static const double dipWidth = 236;
-  static const double dipLeft = 10;
-  static const double dipPitch = 31;
+  static const double dipWidth = 236, dipLeft = 10, dipPitch = 31;
   static const double hyphenWidth = 14;
 
   /// A label is not shrunk to its box; this prints a ~9 mm dash.
   static const double hyphenGlyph = 30;
 
   // JPJePlate.
-  static const double evWidth = 520;
-  static const double evHeight = 110;
-  static const double evGreenEnd = 46.1;
+  static const double evWidth = 520, evHeight = 110, evGreenEnd = 46.1;
   static const double evStripEnd = 56.5;
 
   /// The serial's span; a shorter serial is centred in it.
-  static const double evSerialLeft = 66;
-  static const double evSerialRight = 493;
-  static const double evSlotTop = 4;
-  static const double evSlotHeight = 104;
-  static const double evLetterPitch = 50.4;
+  static const double evSerialLeft = 66, evSerialRight = 493, evSlotTop = 4;
+  static const double evSlotHeight = 104, evLetterPitch = 50.4;
   static const double evDigitPitch = 54.4;
 
   /// The measured ink gap less each glyph's air in its cell.
@@ -78,8 +62,7 @@ abstract final class _Layout {
 /// Text groups are `prefix`, `number` and, when present, `suffix` (diplomatic:
 /// `country`, `serial`, `mission`).
 abstract final class MalaysiaPlates {
-  static const int maxPrefix = 3;
-  static const int maxDigits = 4;
+  static const int maxPrefix = 3, maxDigits = 4;
 
   static final Map<String, PlateSpec> _cache = <String, PlateSpec>{};
 
@@ -94,214 +77,153 @@ abstract final class MalaysiaPlates {
   static PlateSpec ev({bool suffix = false}) =>
       _cache['ev$suffix'] ??= _evSpec(suffix);
 
-  static List<PlateTextGroup> _groups(bool suffix) => <PlateTextGroup>[
-    const PlateTextGroup(<int>[0], key: 'prefix'),
-    const PlateTextGroup(<int>[1], key: 'number'),
-    if (suffix) const PlateTextGroup(<int>[2], key: 'suffix'),
+  /// Prefix, number and, with [suffix], the suffix letter, as one row.
+  static List<PlateRowItem> _serial(
+    bool suffix, {
+    double letterPitch = _Layout.letterPitch,
+    double digitPitch = _Layout.digitPitch,
+    double gap = _Layout.wordGap,
+    double suffixGap = _Layout.suffixGap,
+  }) => <PlateRowItem>[
+    ..._prefix(letterPitch),
+    PlateRowGap(gap),
+    ..._number(suffix, letterPitch, digitPitch, suffixGap),
   ];
 
-  /// One slot of up to [count] cells at [pitch] from [left].
-  static PlateSlot _field(
-    PlateAlphabet alphabet,
-    int count,
-    double pitch,
-    double left,
-    double top,
-    double height, {
-    int minLength = 1,
-  }) => PlateSlot(
-    alphabet: alphabet,
-    box: PlateBox(left, top, count * pitch, height),
-    length: count,
-    minLength: minLength,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
-  );
+  static List<PlateRowItem> _prefix(double letterPitch) => <PlateRowItem>[
+    PlateRowRun(
+      MalaysiaAlphabets.letters,
+      maxPrefix,
+      pitch: letterPitch,
+      minLength: 1,
+      group: 'prefix',
+    ),
+  ];
 
-  /// Prefix, number and an optional suffix in one row from [left].
-  static List<PlateSlot> _row(
-    bool suffix, {
-    required double left,
-    required double top,
-    required double height,
-    required double letterPitch,
-    required double digitPitch,
-    required double gap,
-    required double suffixGap,
-  }) {
-    final double numberLeft = left + maxPrefix * letterPitch + gap;
-    final double numberRight = numberLeft + maxDigits * digitPitch;
-    return <PlateSlot>[
-      _field(
-        MalaysiaAlphabets.letters,
-        maxPrefix,
-        letterPitch,
-        left,
-        top,
-        height,
-      ),
-      _field(
-        MalaysiaAlphabets.digits,
-        maxDigits,
-        digitPitch,
-        numberLeft,
-        top,
-        height,
-      ),
-      if (suffix)
-        _field(
-          MalaysiaAlphabets.letters,
-          1,
-          letterPitch,
-          numberRight + suffixGap,
-          top,
-          height,
-        ),
-    ];
-  }
-
-  static double _rowWidth(
+  static List<PlateRowItem> _number(
     bool suffix,
     double letterPitch,
     double digitPitch,
-    double gap,
     double suffixGap,
-  ) =>
-      maxPrefix * letterPitch +
-      gap +
-      maxDigits * digitPitch +
-      (suffix ? suffixGap + letterPitch : 0);
+  ) => <PlateRowItem>[
+    PlateRowRun(
+      MalaysiaAlphabets.digits,
+      maxDigits,
+      pitch: digitPitch,
+      minLength: 1,
+      group: 'number',
+    ),
+    if (suffix) ...<PlateRowItem>[
+      PlateRowGap(suffixGap),
+      PlateRowRun(
+        MalaysiaAlphabets.letters,
+        1,
+        pitch: letterPitch,
+        minLength: 1,
+        group: 'suffix',
+      ),
+    ],
+  ];
 
   static String _id(String form, bool suffix) =>
       'my.$form.${suffix ? 'suffix' : 'plain'}';
 
   static PlateSpec _singleRowSpec(bool suffix) {
-    final double content = _rowWidth(
-      suffix,
-      _Layout.letterPitch,
-      _Layout.digitPitch,
-      _Layout.wordGap,
-      _Layout.suffixGap,
-    );
+    final List<PlateRowItem> items = _serial(suffix);
     return _plain(
       id: _id('single', suffix),
-      width: _Layout.leftMargin + content + _Layout.rightMargin,
+      width:
+          _Layout.leftMargin +
+          plateRowWidth(items, pitch: _Layout.letterPitch) +
+          _Layout.rightMargin,
       height: _Layout.height,
-      slots: _row(
-        suffix,
+      slots: plateRow(
+        items,
         left: _Layout.leftMargin,
         top: _Layout.slotTop,
         height: _Layout.slotHeight,
-        letterPitch: _Layout.letterPitch,
-        digitPitch: _Layout.digitPitch,
-        gap: _Layout.wordGap,
-        suffixGap: _Layout.suffixGap,
-      ),
-      groups: _groups(suffix),
+        pitch: _Layout.letterPitch,
+      ).slots,
       resolveRegion: MalaysiaRegions.captionOf,
     );
   }
 
-  /// Prefix centred on the top row; number and suffix centred on the bottom.
   static PlateSpec _twoRowSpec(bool suffix) {
-    final double prefixWidth = maxPrefix * _Layout.letterPitch;
-    final double lowerWidth =
-        maxDigits * _Layout.digitPitch +
-        (suffix ? _Layout.wordGap + _Layout.letterPitch : 0);
-    final double lowerLeft = (_Layout.twoRowWidth - lowerWidth) / 2;
-    final double numberRight = lowerLeft + maxDigits * _Layout.digitPitch;
+    List<PlateSlot> row(List<PlateRowItem> items, double top) => plateRow(
+      items,
+      centre: _Layout.twoRowWidth / 2,
+      top: top,
+      height: _Layout.rowHeight,
+      pitch: _Layout.letterPitch,
+    ).slots;
     return _plain(
       id: _id('twoRow', suffix),
       width: _Layout.twoRowWidth,
       height: _Layout.twoRowHeight,
       slots: <PlateSlot>[
-        _field(
-          MalaysiaAlphabets.letters,
-          maxPrefix,
-          _Layout.letterPitch,
-          (_Layout.twoRowWidth - prefixWidth) / 2,
-          _Layout.row1Top,
-          _Layout.rowHeight,
-        ),
-        _field(
-          MalaysiaAlphabets.digits,
-          maxDigits,
-          _Layout.digitPitch,
-          lowerLeft,
-          _Layout.row2Top,
-          _Layout.rowHeight,
-        ),
-        if (suffix)
-          _field(
-            MalaysiaAlphabets.letters,
-            1,
+        ...row(_prefix(_Layout.letterPitch), _Layout.row1Top),
+        ...row(
+          _number(
+            suffix,
             _Layout.letterPitch,
-            numberRight + _Layout.wordGap,
-            _Layout.row2Top,
-            _Layout.rowHeight,
+            _Layout.digitPitch,
+            _Layout.wordGap,
           ),
+          _Layout.row2Top,
+        ),
       ],
-      groups: _groups(suffix),
       resolveRegion: MalaysiaRegions.captionOf,
     );
   }
 
-  static PlateSpec _evSpec(bool suffix) {
-    final double content = _rowWidth(
-      suffix,
-      _Layout.evLetterPitch,
-      _Layout.evDigitPitch,
-      _Layout.evGap,
-      _Layout.evGap,
-    );
-    final double span = _Layout.evSerialRight - _Layout.evSerialLeft;
-    return PlateSpec(
-      id: _id('ev', suffix),
-      country: MalaysiaCountry.malaysia,
-      canvasWidth: _Layout.evWidth,
-      canvasHeight: _Layout.evHeight,
-      // The padding pins the flag to the top of the strip; the panel would
-      // centre a caption in the space below, so MAL is a label instead.
-      panel: const PlatePanel(
-        box: PlateBox(0, 0, _Layout.evGreenEnd, _Layout.evHeight),
-        padding: EdgeInsets.fromLTRB(4.6, 13, 4.7, 76),
+  static PlateSpec _evSpec(bool suffix) => PlateSpec(
+    id: _id('ev', suffix),
+    country: MalaysiaCountry.malaysia,
+    canvasWidth: _Layout.evWidth,
+    canvasHeight: _Layout.evHeight,
+    // The padding pins the flag to the top of the strip; the panel would
+    // centre a caption in the space below, so MAL is a label instead.
+    panel: const PlatePanel(
+      box: PlateBox(0, 0, _Layout.evGreenEnd, _Layout.evHeight),
+      padding: EdgeInsets.fromLTRB(4.6, 13, 4.7, 76),
+    ),
+    labels: const <PlateLabel>[
+      PlateLabel(
+        text: 'MAL',
+        box: PlateBox(4.6, 80, 36.8, 16),
+        glyphHeight: 21.5,
+        color: MalaysiaColors.darkInk,
       ),
-      labels: const <PlateLabel>[
-        PlateLabel(
-          text: 'MAL',
-          box: PlateBox(4.6, 80, 36.8, 16),
-          glyphHeight: 21.5,
-          color: MalaysiaColors.darkInk,
-        ),
-      ],
-      background: const PlateSection.columns(<PlatePart>[
-        PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.evGreenEnd),
-        PlatePart(
-          PlateSection.fill(PlateFill.color(MalaysiaColors.evSecureStrip)),
-          end: _Layout.evStripEnd,
-        ),
-        PlatePart(PlateSection.plain),
-      ]),
-      slots: _row(
+    ],
+    background: const PlateSection.columns(<PlatePart>[
+      PlatePart(PlateSection.fill(PlateFill.panel), end: _Layout.evGreenEnd),
+      PlatePart(
+        PlateSection.fill(PlateFill.color(MalaysiaColors.evSecureStrip)),
+        end: _Layout.evStripEnd,
+      ),
+      PlatePart(PlateSection.plain),
+    ]),
+    slots: plateRow(
+      _serial(
         suffix,
-        left: _Layout.evSerialLeft + (span - content) / 2,
-        top: _Layout.evSlotTop,
-        height: _Layout.evSlotHeight,
         letterPitch: _Layout.evLetterPitch,
         digitPitch: _Layout.evDigitPitch,
         gap: _Layout.evGap,
         suffixGap: _Layout.evGap,
       ),
-      textGroups: _groups(suffix),
-      resolveRegion: MalaysiaRegions.captionOf,
-    );
-  }
+      centre: (_Layout.evSerialLeft + _Layout.evSerialRight) / 2,
+      top: _Layout.evSlotTop,
+      height: _Layout.evSlotHeight,
+      pitch: _Layout.evLetterPitch,
+    ).slots,
+    resolveRegion: MalaysiaRegions.captionOf,
+  );
 
   static PlateSpec _plain({
     required String id,
     required double width,
     required double height,
     required List<PlateSlot> slots,
-    required List<PlateTextGroup> groups,
     List<PlateLabel> labels = const <PlateLabel>[],
     PlateLabelResolver? resolveRegion,
   }) => PlateSpec(
@@ -313,67 +235,40 @@ abstract final class MalaysiaPlates {
     panel: PlatePanel(box: PlateBox(0, 0, 0, height)),
     slots: slots,
     labels: labels,
-    textGroups: groups,
     resolveRegion: resolveRegion,
   );
 
-  static PlateBox _hyphen(double left) =>
-      PlateBox(left, _Layout.slotTop, _Layout.hyphenWidth, _Layout.slotHeight);
-
-  /// `NN-NN-XX`: country number, vehicle number and mission code. The code is
-  /// one chosen slot two cells wide: `DC` is one value, two glyphs.
   static final PlateSpec diplomatic = () {
-    const double l = _Layout.dipLeft;
-    const double p = _Layout.dipPitch;
-    const double h = _Layout.hyphenWidth;
-    const double serialLeft = l + 2 * p + h;
-    const double missionLeft = serialLeft + 2 * p + h;
+    const PlateRowText hyphen = PlateRowText.styled(
+      '-',
+      _Layout.hyphenWidth,
+      glyphHeight: _Layout.hyphenGlyph,
+    );
+    final PlateRowLayout row = plateRow(
+      const <PlateRowItem>[
+        PlateRowRun(MalaysiaAlphabets.digits, 2, group: 'country'),
+        hyphen,
+        PlateRowRun(MalaysiaAlphabets.digits, 2, group: 'serial'),
+        hyphen,
+        PlateRowRun(
+          MalaysiaAlphabets.missionCodes,
+          1,
+          pitch: 2 * _Layout.dipPitch,
+          spacing: 0,
+          group: 'mission',
+        ),
+      ],
+      left: _Layout.dipLeft,
+      top: _Layout.slotTop,
+      height: _Layout.slotHeight,
+      pitch: _Layout.dipPitch,
+    );
     return _plain(
       id: 'my.diplomatic',
       width: _Layout.dipWidth,
       height: _Layout.height,
-      slots: <PlateSlot>[
-        _field(
-          MalaysiaAlphabets.digits,
-          2,
-          p,
-          l,
-          _Layout.slotTop,
-          _Layout.slotHeight,
-          minLength: 2,
-        ),
-        _field(
-          MalaysiaAlphabets.digits,
-          2,
-          p,
-          serialLeft,
-          _Layout.slotTop,
-          _Layout.slotHeight,
-          minLength: 2,
-        ),
-        const PlateSlot(
-          alphabet: MalaysiaAlphabets.missionCodes,
-          box: PlateBox(
-            missionLeft,
-            _Layout.slotTop,
-            2 * _Layout.dipPitch,
-            _Layout.slotHeight,
-          ),
-        ),
-      ],
-      labels: <PlateLabel>[
-        for (final double left in <double>[l + 2 * p, serialLeft + 2 * p])
-          PlateLabel(
-            text: '-',
-            box: _hyphen(left),
-            glyphHeight: _Layout.hyphenGlyph,
-          ),
-      ],
-      groups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'country'),
-        PlateTextGroup(<int>[1], key: 'serial'),
-        PlateTextGroup(<int>[2], key: 'mission'),
-      ],
+      slots: row.slots,
+      labels: row.labels,
     );
   }();
 }

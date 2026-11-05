@@ -12,7 +12,5 @@ abstract final class GreeceAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'gr.letters',
     include: 'A B E Z H I K M-P T Y X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

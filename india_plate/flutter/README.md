@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the vibrant people of India to view examples:
 
-https://platexample.ir/#/discover/india
+https://platexample.ir/#/discover/india:flutter
 
 # india_plate
 
-India's licence plates for the `plate_core` library. One 500×120 layout for every current format; the colour class (private, transport, rental, electric, diplomatic, ...) is a theme, never a spec.
+India's licence plates for the plate_core library — the HSRP car plate in every colour class, with the Bharat, vintage, armed-forces, diplomatic, temporary and trade formats.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/india-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/india:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/india-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/india:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/india-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/india:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/india-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/india:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   india_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,15 +46,43 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `IndiaCountry` — country panel: `india`.
-- `IndiaPlates` — 8 plate specs: `private`, `standard`, `bharat`, `vintage`, `military`, `diplomatic`, `temporary`, `trade`.
-- `IndiaThemes` — 11 themes: `private`, `transport`, `rental`, `electric`, `electricTransport`, `diplomatic`, `consular`, `military`, `militaryPolice`, `temporary` and 1 more.
-- `IndiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+Each spec is one plate layout.
+
+- `IndiaPlates.private`
+- `IndiaPlates.standard`
+- `IndiaPlates.bharat`
+- `IndiaPlates.vintage`
+- `IndiaPlates.military`
+- `IndiaPlates.diplomatic`
+- `IndiaPlates.temporary`
+- `IndiaPlates.trade`
+
+## Themes
+
+- `IndiaThemes.private`
+- `IndiaThemes.transport`
+- `IndiaThemes.rental`
+- `IndiaThemes.electric`
+- `IndiaThemes.electricTransport`
+- `IndiaThemes.diplomatic`
+- `IndiaThemes.consular`
+- `IndiaThemes.military`
+- `IndiaThemes.militaryPolice`
+- `IndiaThemes.temporary`
+- `IndiaThemes.trade`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `IndiaPlates`) and `theme:` (an entry of `IndiaThemes`). Set `validator:` to `IndiaValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `IndiaCountry` — the country panel.
+- `IndiaValidator` — the plate validator.
 - `IndiaMissions` — code table.
 - `IndiaRegions` — code table.
-- 1 bundled asset (`in_ashoka_chakra.png`).
 
 ## Plates
 
@@ -62,3 +101,6 @@ IND, and the two-wheeler and commercial-vehicle plate sizes.
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/india-plate/blob/main/LICENSE).

@@ -22,7 +22,5 @@ abstract final class IraqAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'iq.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

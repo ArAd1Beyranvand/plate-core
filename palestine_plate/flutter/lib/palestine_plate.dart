@@ -11,9 +11,6 @@
 /// ```
 library;
 
-// TODO(py): [D5] one module `plates.countries.palestine`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/palestine`; tree-shakable.
-// TODO(kt): [D5] package `countries.palestine` in the countries module.
 export 'src/gaza_plates.dart';
 export 'src/palestine_alphabets.dart';
 export 'src/palestine_colors.dart';

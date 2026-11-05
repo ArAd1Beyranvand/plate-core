@@ -8,7 +8,5 @@ abstract final class AscensionIslandAlphabets {
   static const PlateAlphabet prefix = PlateAlphabet(
     id: 'ac.prefix',
     characters: <String>['A'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

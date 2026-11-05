@@ -13,21 +13,15 @@ abstract final class FranceAlphabets {
     id: 'fr.letters',
     include: 'A-Z',
     exclude: 'I O U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet department = PlateAlphabet.pattern(
     id: 'fr.department',
     include: '0-9 A B',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet status = PlateAlphabet.pattern(
     id: 'fr.status',
     include: 'C D K M',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

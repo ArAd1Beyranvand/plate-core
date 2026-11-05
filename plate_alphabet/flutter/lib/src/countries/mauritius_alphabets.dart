@@ -8,7 +8,5 @@ abstract final class MauritiusAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'mu.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

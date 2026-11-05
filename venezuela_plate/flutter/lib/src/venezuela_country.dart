@@ -8,7 +8,6 @@ import 'venezuela_colors.dart';
 abstract final class VenezuelaCountry {
   static const PlateCountry venezuela = PlateCountry(
     code: 've',
-    captionLines: <String>[],
     panelColor: VenezuelaColors.blue,
     panelTextColor: VenezuelaColors.field,
   );

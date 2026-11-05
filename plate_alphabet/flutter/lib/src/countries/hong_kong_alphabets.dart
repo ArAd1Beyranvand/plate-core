@@ -14,7 +14,5 @@ abstract final class HongKongAlphabets {
   static const PlateAlphabet mixed = PlateAlphabet.pattern(
     id: 'hk.mixed',
     include: '0-9 A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -24,7 +24,7 @@ var gc = new Uint8Array([0,97,115,109,1,0,0,0,1,5,1,95,1,120,0]);
 var forced = new URLSearchParams(location.search).get('build');
 var wasm = forced ? forced === 'wasm' : WebAssembly.validate(gc);
 var tag = document.createElement('script');
-tag.src = wasm ? './wasm-7c5ba93462/plates.js' : './js-2de6b73b0d/plates.js';
+tag.src = wasm ? './wasm-2f11635900/plates.js' : './js-b1ecaad878/plates.js';
 tag.onerror = function () {
   document.getElementById('splash-status').textContent = 'Could not start Kotlin.';
   parent.postMessage({ ns: 'plate-embed', v: 1, type: 'error', payload: { code: 'load_failed', message: 'could not load ' + tag.src, fatal: true } }, '' || location.origin);

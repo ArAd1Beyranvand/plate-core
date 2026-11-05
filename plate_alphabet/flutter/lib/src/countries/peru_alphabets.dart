@@ -12,7 +12,5 @@ abstract final class PeruAlphabets {
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'pe.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

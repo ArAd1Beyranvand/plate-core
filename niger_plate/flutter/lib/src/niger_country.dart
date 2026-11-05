@@ -16,19 +16,14 @@ abstract final class NigerCountry {
 
   static const PlateCountry private = PlateCountry(
     code: 'ne',
-    captionLines: <String>[],
     panelColor: NigerColors.privateWhite,
     panelTextColor: NigerColors.black,
     flagAspectRatio: 45.8 / 37.4,
-    // TODO(py): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
-    // TODO(ts): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
-    // TODO(kt): [H20][D6] flag asset by package + path; convert to PlateDrawing at export time.
     flag: SvgPlateAsset('assets/maps/niger_map.svg', package: 'niger_plate'),
   );
 
   static const PlateCountry commercial = PlateCountry(
     code: 'ne',
-    captionLines: <String>[],
     panelColor: NigerColors.commercialOrange,
     panelTextColor: NigerColors.black,
     flagAspectRatio: 52.0 / 39.7,
@@ -40,14 +35,12 @@ abstract final class NigerCountry {
 
   static const PlateCountry plain = PlateCountry(
     code: 'ne',
-    captionLines: <String>[],
     panelColor: NigerColors.privateWhite,
     panelTextColor: NigerColors.black,
   );
 
   static const PlateCountry military = PlateCountry(
     code: 'ne',
-    captionLines: <String>[],
     panelColor: NigerColors.militaryBlack,
     panelTextColor: NigerColors.militaryWhite,
     flagAspectRatio: 7 / 6,

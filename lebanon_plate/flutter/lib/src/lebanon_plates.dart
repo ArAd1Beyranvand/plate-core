@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -17,8 +15,7 @@ abstract final class LebanonPlates {
   static const double _borderRatio = 0.022; // CALIBRATE
   static const int standardDigits = 6;
 
-  static const double _oneLineWidth = 1040;
-  static const double _oneLineHeight = 220;
+  static const double _oneLineWidth = 1040, _oneLineHeight = 220;
 
   static const PlatePanel _oneLinePanel = PlatePanel(
     box: PlateBox(0, 0, 126, _oneLineHeight),
@@ -49,8 +46,7 @@ abstract final class LebanonPlates {
     box: PlateBox(160, 34, 110, 152),
   );
 
-  static const double _twoLineWidth = 520;
-  static const double _twoLineHeight = 288;
+  static const double _twoLineWidth = 520, _twoLineHeight = 288;
 
   static const PlatePanel _twoLinePanel = PlatePanel(
     box: PlateBox(0, 0, _twoLineWidth, 88),
@@ -86,7 +82,7 @@ abstract final class LebanonPlates {
     box: box,
     length: standardDigits,
     minLength: 1,
-    spacing: max(0, pitch - 0.6 * 0.72 * box.height),
+    spacing: plateRunSpacing(pitch, box.height),
   );
 
   static const List<PlateTextGroup> _groups = <PlateTextGroup>[

@@ -7,7 +7,6 @@ import 'india_colors.dart';
 abstract final class IndiaCountry {
   static const PlateCountry india = PlateCountry(
     code: 'in',
-    captionLines: <String>[],
     panelColor: IndiaColors.white,
     panelTextColor: IndiaColors.black,
   );

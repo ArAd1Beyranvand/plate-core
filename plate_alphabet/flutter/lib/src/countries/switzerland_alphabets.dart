@@ -17,16 +17,12 @@ abstract final class SwitzerlandAlphabets {
   static const PlateAlphabet dealerMark = PlateAlphabet(
     id: 'ch.dealer_mark',
     characters: <String>['U'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The `Z` after a duty-unpaid plate's control mark.
   static const PlateAlphabet customsMark = PlateAlphabet(
     id: 'ch.customs_mark',
     characters: <String>['Z'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The white prefix on the blue band of a diplomatic plate.
@@ -34,7 +30,6 @@ abstract final class SwitzerlandAlphabets {
     id: 'ch.diplomatic_cd',
     characters: <String>['CD'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The white prefix on the green band of a consular plate. The article also
@@ -44,6 +39,5 @@ abstract final class SwitzerlandAlphabets {
     id: 'ch.diplomatic_cc',
     characters: <String>['CC'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

@@ -36,33 +36,25 @@ import '../common/yemen_country.dart';
 /// - Police "HP 123" is five characters across 321 units; at the reference
 ///   height a bold sans needs 470, so the row is ~66% of reference height.
 abstract final class _Layout {
-  static const double carWidth = 508;
-  static const double motoWidth = 271;
-  static const double height = 276;
+  static const double carWidth = 508, motoWidth = 271, height = 276;
 
-  static const double divider = 5;
-  static const double stripEnd = 126.5;
-  static const double tempStripEnd = 381.5;
+  static const double divider = 5, stripEnd = 126.5, tempStripEnd = 381.5;
   static const double rowEnd = 111.5;
 
   /// Strip letter: ink centre (63, 132).
-  static const double letterCx = 63;
-  static const double letterCy = 132;
+  static const double letterCx = 63, letterCy = 132;
 
   /// Name: ink centre y 58 on every governorate; x 306 on the car, 138 on the
   /// motorcycle, 195 left of the temporary strip.
-  static const double nameCy = 58;
-  static const double nameGlyph = 78;
+  static const double nameCy = 58, nameGlyph = 78;
 
   /// Serial: ink centre y 191. The box is the tallest centred one that stays
   /// on the canvas.
-  static const double serialCy = 191;
-  static const double serialHeight = 170;
+  static const double serialCy = 191, serialHeight = 170;
   static const double serialTop = serialCy - serialHeight / 2;
 
   /// Usable serial run right of the strip, between divider and frame.
-  static const double serialLeft = 136;
-  static const double serialRight = 496;
+  static const double serialLeft = 136, serialRight = 496;
 
   /// A bold sans digit's advance at [serialHeight]: 0.696 em × 0.72 × 170.
   static const double digitPitch = 85;
@@ -225,7 +217,7 @@ abstract final class YemenGovernoratePlates {
     double? lineHeight,
   }) => PlateLabel(
     text: text,
-    box: PlateBox(cx - width / 2, cy - height / 2, width, height),
+    box: PlateBox.centered(cx, cy, width, height),
     glyphHeight: glyph,
     lineHeight: lineHeight,
   );

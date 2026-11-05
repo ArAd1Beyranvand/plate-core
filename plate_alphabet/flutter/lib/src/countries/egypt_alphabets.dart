@@ -16,7 +16,6 @@ abstract final class EgyptAlphabets {
     id: 'eg.letters',
     include: 'A B G D R S C T E F K-N H W Y',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: <String, String>{

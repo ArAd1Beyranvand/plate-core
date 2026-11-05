@@ -20,16 +20,12 @@ abstract final class NorthMacedoniaAlphabets {
     id: 'mk.region.letters',
     include: 'A-V',
     exclude: 'C F J L Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet regionCyrillic = PlateAlphabet.pattern(
     id: 'mk.region.cyrillic',
     include: 'A-V',
     exclude: 'C F J L Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
     glyphs: _regionGlyphs,
   );
 
@@ -39,16 +35,12 @@ abstract final class NorthMacedoniaAlphabets {
     id: 'mk.letters',
     include: 'A-Z',
     exclude: 'Q W X Y',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet lettersCyrillic = PlateAlphabet.pattern(
     id: 'mk.letters.cyrillic',
     include: 'A-Z',
     exclude: 'Q W X Y',
-    input: AlphabetInput.typed,
-    isNumeric: false,
     glyphs: <String, String>{
       'A': 'А', 'B': 'Б', 'C': 'Ц', 'D': 'Д', 'E': 'Е', 'F': 'Ф', 'G': 'Г', //
       'H': 'Х', 'I': 'И', 'J': 'Ј', 'K': 'К', 'L': 'Л', 'M': 'М', 'N': 'Н', //
@@ -62,7 +54,5 @@ abstract final class NorthMacedoniaAlphabets {
   static const PlateAlphabet diplomaticLetters = PlateAlphabet(
     id: 'mk.diplomatic.letters',
     characters: <String>['C', 'D', 'M'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

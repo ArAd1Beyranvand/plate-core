@@ -11,8 +11,6 @@ abstract final class RepublicOfIrelandAlphabets {
   static const PlateAlphabet countyLetters = PlateAlphabet.pattern(
     id: 'ie.county.letters',
     include: 'C-E G H K-O R-T W-Y',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Code to the Irish-language county name printed above the number, upper

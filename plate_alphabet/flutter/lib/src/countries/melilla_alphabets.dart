@@ -16,15 +16,11 @@ abstract final class MelillaAlphabets {
     id: 'me.letters',
     include: 'B-Z',
     exclude: 'E I O Q U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'me.diplomatic.letters',
     include: 'A C D I O T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The one-to-three letter code of a state or police plate (`CME`, `ET`).

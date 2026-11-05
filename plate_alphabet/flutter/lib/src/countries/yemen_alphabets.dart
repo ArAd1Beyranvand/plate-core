@@ -17,7 +17,6 @@ abstract final class YemenAlphabets {
   static const PlateAlphabet governorateTens = PlateAlphabet(
     id: 'ye.govTens',
     characters: <String>['0', '1', '2'],
-    input: AlphabetInput.typed,
     isNumeric: true,
   );
 
@@ -33,7 +32,6 @@ abstract final class YemenAlphabets {
   static const PlateAlphabet iranianGovernorateTens = PlateAlphabet(
     id: 'ye.iranianGovTens',
     characters: <String>['0', '1', '2'],
-    input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: <String, String>{'0': '٠', '1': '١', '2': '٢'},
   );

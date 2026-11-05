@@ -10,7 +10,5 @@ abstract final class GeorgiaCountryAlphabets {
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'georgia.alphanumeric',
     include: '0-9 A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -12,21 +12,15 @@ abstract final class PortugalAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'pt.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet mixed = PlateAlphabet.pattern(
     id: 'pt.mixed',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticCode = PlateAlphabet(
     id: 'pt.diplomatic.code',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

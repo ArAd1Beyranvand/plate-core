@@ -1,0 +1,31 @@
+import { chromium } from '/home/aradbeyranvand/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs';
+const base = process.argv[2]; const country = process.argv[3] ?? 'iran';
+const b = await chromium.launch({ executablePath: '/opt/google/chrome/chrome', args: ['--enable-gpu', '--ignore-gpu-blocklist'] });
+const p = await b.newPage({ viewport: { width: 1400, height: 900 } });
+const cdp = await p.context().newCDPSession(p);
+await p.goto(`${base}/#/plates/${country}`); await p.waitForTimeout(6000);
+const frames = (ms) => p.evaluate((ms) => new Promise((res) => { const t = []; let last = performance.now(); const end = last + ms;
+  const f = (n) => { t.push(n - last); last = n; n < end ? requestAnimationFrame(f) : res(t); }; requestAnimationFrame(f); }), ms);
+const stats = (n, t) => { const s = [...t].sort((a, b) => a - b); const q = (x) => s[Math.floor(s.length * x)]?.toFixed(1);
+  console.log(n.padEnd(22), 'frames', String(t.length).padStart(3), 'p50', q(.5), 'p90', q(.9), 'max', s.at(-1)?.toFixed(0), '>50ms', t.filter((x) => x > 50).length); };
+const go = async (lang, label, prof) => {
+  if (prof) { await cdp.send('Profiler.enable'); await cdp.send('Profiler.setSamplingInterval', { interval: 200 }); await cdp.send('Profiler.start'); }
+  const f = frames(3500);
+  await p.evaluate((h) => { location.hash = h; }, `#/plates/${country}${lang ? '?language=' + lang : ''}`);
+  stats(label, await f);
+  if (prof) return (await cdp.send('Profiler.stop')).profile;
+  await p.waitForTimeout(3000);
+};
+await go('typescript', 'flutter->ts (1st)');
+await go('', 'ts->flutter');
+await go('python', 'flutter->py (1st)');
+await p.waitForTimeout(8000);
+await go('', 'py->flutter');
+await go('typescript', 'flutter->ts (2nd)');
+const prof = await go('', 'ts->flutter (prof)', true);
+await go('python', 'flutter->py (2nd)');
+const byId = new Map(prof.nodes.map((n) => [n.id, n])); const parent = new Map(); prof.nodes.forEach((n) => (n.children ?? []).forEach((c) => parent.set(c, n.id)));
+const incl = new Map(); const dt = prof.timeDeltas;
+prof.samples.forEach((id, i) => { const seen = new Set(); for (let x = id; x; x = parent.get(x)) { const n = byId.get(x); const k = `${n.callFrame.functionName || '(anon)'} ${n.callFrame.url.split('/').pop()}:${n.callFrame.lineNumber}`; if (seen.has(k)) continue; seen.add(k); incl.set(k, (incl.get(k) ?? 0) + (dt[i] ?? 0)); } });
+[...incl.entries()].sort((a, b) => b[1] - a[1]).slice(0, +(process.env.N ?? 45)).forEach(([k, v]) => console.log((v / 1000).toFixed(0).padStart(6), k));
+await b.close();

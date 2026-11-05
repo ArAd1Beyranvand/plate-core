@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the noble people of Yemen to view examples:
 
-https://platexample.ir/#/discover/yemen
+https://platexample.ir/#/discover/yemen:flutter
 
 # yemen_plate
 
-Yemen's licence plates for `plate_core`. Two plate systems are current side by side: A, the 2026 unified white plate with a light-blue side panel, and B, the 1993 northern format of stacked registers coloured by usage. The south issues its own (Aden, Taiz, and the coloured-strip plates of Hadhramaut, Al Mahrah, Shabwah and Marib), as does Riyadh.
+Yemen's licence plates for the plate_core library — the 2026 unified specs, the 1993 northern specs, the alphabets, the usage themes and the advisory validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/yemen:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/yemen:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/yemen:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/yemen-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/yemen:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   yemen_plate: ^0.3.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -34,19 +45,28 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `YemenNorthernPlates` — 2 plate specs: `car`, `moto`.
-- `RiyadhPlates` — 4 plate specs: `us`, `diplomatic`, `eu`, `euDiplomatic`.
-- `YemenAdenPlates` — 2 plate specs: `oneLine`, `twoLine`.
-- `YemenTaizPlates` — 1 plate spec: `temporary`.
-- `YemenGovernoratePlates` — 16 plate specs: `hadhramaut`, `hadhramautTemporary`, `hadhramautPolice`, `hadhramautMotorcycle`, `alMahrah`, `alMahrahMotorcycle`, `shabwah`, `shabwahTemporary`, `shabwahPolice`, `shabwahMotorcycle`, `marib`, `maribMotorcycle`, `car()`, `temporary()` and 2 more.
-- `YemenUnifiedPlates` — 2 plate specs: `car`, `moto`.
-- 2 bundled assets (`aden_lighthouse.png`, `emblem.svg`).
+Each spec is one plate layout.
 
-Each also ships its `…Country` panel, `…Themes` and, where one exists, an advisory `…Validator`.
+- none listed
+
+## Themes
+
+- none listed
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `None`) and `theme:` (an entry of `None`).
+
+## Also included
+
+- none
 
 ## Part of plate
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/yemen-plate/blob/main/LICENSE).

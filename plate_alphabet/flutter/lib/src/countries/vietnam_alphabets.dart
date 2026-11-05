@@ -17,22 +17,16 @@ abstract final class VietnamAlphabets {
     id: 'vn.series',
     include: 'A-D Đ E-Z',
     exclude: 'I J O Q W',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet seriesOrDigit = PlateAlphabet.pattern(
     id: 'vn.seriesOrDigit',
     include: 'A-D Đ E-Z 0-9',
     exclude: 'I J O Q W',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'vn.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -11,14 +11,10 @@ abstract final class BelgiumAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'be.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'be.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

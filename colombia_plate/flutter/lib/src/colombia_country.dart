@@ -7,7 +7,6 @@ import 'colombia_colors.dart';
 abstract final class ColombiaCountry {
   static const PlateCountry colombia = PlateCountry(
     code: 'co',
-    captionLines: <String>[],
     panelColor: ColombiaColors.privateYellow,
     panelTextColor: ColombiaColors.privateBlack,
   );

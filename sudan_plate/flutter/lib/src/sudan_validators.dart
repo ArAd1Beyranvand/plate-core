@@ -2,18 +2,12 @@ import 'package:plate_core/plate_core.dart';
 
 import 'sudan_alphabets.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `SudanPlates` value. Reports, never bars a keystroke.
 ///
 /// A single class digit (its meaning is undocumented and is not the usage), a
 /// state code, and a serial of four or five digits.
 class SudanValidator extends GatedPlateValidator {
-  const SudanValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const SudanValidator() : super('serial');
 
   static const String reasonClass = 'The class is one digit.';
   static const String reasonState = 'Unknown state code.';

@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the brave people of Tunisia to view examples:
 
-https://platexample.ir/#/discover/tunisia
+https://platexample.ir/#/discover/tunisia:flutter
 
 # tunisia_plate
 
-Tunisia's licence plates for the `plate_core` library. The ordinary plate is `NNN تونس NNNN` — series, the word "Tunisia", registration — on one line or, at the rear, on two. Rental, government, diplomatic, military and temporary plates complete the set.
+Tunisia's licence plates for plate_core: one- and two-line, rental, government, diplomatic, military and temporary plates, with themes, alphabets and validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/tunisia-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/tunisia:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/tunisia-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/tunisia:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/tunisia-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/tunisia:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/tunisia-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/tunisia:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   tunisia_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,16 +46,33 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `TunisiaCountry` — country panel: `tunisia`.
-- `TunisiaPlates` — 6 plate specs: `standard`, `square`, `government`, `military`, `diplomatic()`, `temporary()`.
-- `TunisiaThemes` — 5 themes: `standard`, `rental`, `government`, `diplomatic`, `military`.
-- `TunisiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `TunisiaGovernmentValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `TunisiaDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `TunisiaSerialValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `TunisiaSerialGenerator` — random plate generator.
+Each spec is one plate layout.
+
+- `TunisiaMission.standard`
+- `TunisiaMission.square`
+- `TunisiaMission.government`
+- `TunisiaMission.diplomatic`(…)
+- `TunisiaMission.temporary`(…)
+- `TunisiaMission.military`
+
+## Themes
+
+- `TunisiaThemes.standard`
+- `TunisiaThemes.rental`
+- `TunisiaThemes.government`
+- `TunisiaThemes.diplomatic`
+- `TunisiaThemes.military`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `TunisiaMission`) and `theme:` (an entry of `TunisiaThemes`). Set `validator:` to `TunisiaValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `TunisiaCountry` — the country panel.
+- `TunisiaValidator` — the plate validator.
 
 ## Plates
 
@@ -64,3 +92,6 @@ military photo. Screw holes are not printed.
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/tunisia-plate/blob/main/LICENSE).

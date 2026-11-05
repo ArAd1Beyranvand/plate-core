@@ -12,7 +12,5 @@ abstract final class FalklandIslandsAlphabets {
   static const PlateAlphabet prefix = PlateAlphabet(
     id: 'fk.prefix',
     characters: <String>['F'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

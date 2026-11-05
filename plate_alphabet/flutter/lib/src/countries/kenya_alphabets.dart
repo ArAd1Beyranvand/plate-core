@@ -14,6 +14,5 @@ abstract final class KenyaAlphabets {
     id: 'ke.diplomatic.type',
     characters: <String>['CD', 'UN'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

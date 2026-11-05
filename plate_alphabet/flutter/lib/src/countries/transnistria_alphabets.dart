@@ -8,7 +8,5 @@ abstract final class TransnistriaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'pmr.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

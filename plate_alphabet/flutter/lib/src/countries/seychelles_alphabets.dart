@@ -8,7 +8,5 @@ abstract final class SeychellesAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'sc.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

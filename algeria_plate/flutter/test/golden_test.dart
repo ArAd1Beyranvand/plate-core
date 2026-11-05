@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:plate_core/plate_core.dart';
-import 'package:flutter/material.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:algeria_plate/algeria_plate.dart';
@@ -33,38 +33,15 @@ void main() {
       spec,
       values.split(' '),
     );
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 520,
-              height: 520 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: AlgeriaCountry.algeria,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: theme,
+      country: AlgeriaCountry.algeria,
+      stage: Size(520, 520 * spec.canvasHeight / spec.canvasWidth),
+      decodeDelay: const Duration(milliseconds: 50),
     );
-    // The army roundel is decoded off the real event loop, which fake time
-    // does not advance; runAsync gives it a real slice of time.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
-    );
-    await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   testWidgets('front, 02865 114 11', (tester) async {

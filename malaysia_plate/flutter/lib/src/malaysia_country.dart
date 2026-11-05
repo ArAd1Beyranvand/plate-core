@@ -30,7 +30,6 @@ abstract final class MalaysiaCountry {
   static const PlateCountry malaysia = PlateCountry(
     code: 'my',
     // MAL is a label on the JPJePlate spec.
-    captionLines: <String>[],
     panelColor: MalaysiaColors.evGreen,
     panelTextColor: MalaysiaColors.darkInk,
     flagAspectRatio: 2,

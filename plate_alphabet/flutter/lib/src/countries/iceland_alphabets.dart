@@ -12,36 +12,26 @@ abstract final class IcelandAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'is.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The three-character field: `123` or `C12`.
   static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 'is.serial',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticPrefix = PlateAlphabet(
     id: 'is.diplomatic.prefix',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet dealerPrefix = PlateAlphabet(
     id: 'is.dealer.prefix',
     characters: <String>['R', 'N'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet vanity = PlateAlphabet.pattern(
     id: 'is.vanity',
     include: 'A-Z Á Ð É Í Ó Ú Ý Þ Æ Ö 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

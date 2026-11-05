@@ -15,7 +15,5 @@ abstract final class KazakhstanAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'kz.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

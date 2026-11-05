@@ -16,14 +16,10 @@ abstract final class SpainAlphabets {
     id: 'es.letters',
     include: 'B-Z',
     exclude: 'E I O Q U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'es.diplomatic.letters',
     include: 'A C D I O T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

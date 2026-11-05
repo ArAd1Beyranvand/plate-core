@@ -6,9 +6,6 @@
 /// liveries.
 library;
 
-// TODO(py): [D5] one module `plates.countries.sudan`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/sudan`; tree-shakable.
-// TODO(kt): [D5] package `countries.sudan` in the countries module.
 export 'src/sudan_alphabets.dart';
 export 'src/sudan_colors.dart';
 export 'src/sudan_country.dart';

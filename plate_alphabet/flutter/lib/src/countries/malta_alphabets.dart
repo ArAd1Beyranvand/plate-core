@@ -14,15 +14,11 @@ abstract final class MaltaAlphabets {
   static const PlateAlphabet personalised = PlateAlphabet.pattern(
     id: 'mt.personalised',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The `M` or `G` that ends a taxi plate.
   static const PlateAlphabet island = PlateAlphabet(
     id: 'mt.island',
     characters: <String>['M', 'G'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -7,9 +7,6 @@
 /// and police plates are a fourth and fifth geometry, measured off photographs.
 library;
 
-// TODO(py): [D5] one module `plates.countries.indonesia`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/indonesia`; tree-shakable.
-// TODO(kt): [D5] package `countries.indonesia` in the countries module.
 export 'src/indonesia_alphabets.dart';
 export 'src/indonesia_colors.dart';
 export 'src/indonesia_country.dart';

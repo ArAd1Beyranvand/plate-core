@@ -7,7 +7,6 @@ import 'indonesia_colors.dart';
 abstract final class IndonesiaCountry {
   static const PlateCountry indonesia = PlateCountry(
     code: 'id',
-    captionLines: <String>[],
     panelColor: IndonesiaColors.governmentRed,
     panelTextColor: IndonesiaColors.white,
     flagAspectRatio: 3 / 2,

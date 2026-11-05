@@ -12,8 +12,6 @@ abstract final class NetherlandsAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'nl.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The letters ordinary registrations are drawn from.

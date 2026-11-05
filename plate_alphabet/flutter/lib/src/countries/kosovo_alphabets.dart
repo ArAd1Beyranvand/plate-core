@@ -13,7 +13,5 @@ abstract final class KosovoAlphabets {
   static const PlateAlphabet mixed = PlateAlphabet.pattern(
     id: 'xk.mixed',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

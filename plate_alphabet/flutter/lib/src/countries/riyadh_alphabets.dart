@@ -24,15 +24,12 @@ abstract final class RiyadhAlphabets {
     id: 'ye.riyadh.symbol',
     characters: <String>['●', '▲', '▼', '◀'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The Latin row of the letters.
   static const PlateAlphabet lettersLatin = PlateAlphabet.pattern(
     id: 'ye.riyadh.letters.latin',
     include: 'A B J D R S X T E G K L Z N H U V',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The Arabic row of the letters.
@@ -40,7 +37,6 @@ abstract final class RiyadhAlphabets {
     id: 'ye.riyadh.letters.arabic',
     include: 'A B J D R S X T E G K L Z N H U V',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: <String, String>{

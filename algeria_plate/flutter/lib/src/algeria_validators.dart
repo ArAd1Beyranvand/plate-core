@@ -44,9 +44,6 @@ abstract final class AlgeriaWilayas {
   };
 }
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a civil Algerian registration on `AlgeriaPlates.singleLine` or
 /// `twoLine`. Reports, never bars a keystroke.
 ///
@@ -55,10 +52,7 @@ abstract final class AlgeriaWilayas {
 /// a wilaya code in [AlgeriaWilayas.names]. Pre-1990s serials of up to three
 /// digits are not modelled.
 class AlgeriaValidator extends GatedPlateValidator {
-  const AlgeriaValidator();
-
-  @override
-  String get gateGroup => 'wilaya';
+  const AlgeriaValidator() : super('wilaya');
 
   static const String reasonSerial = 'The serial is five digits.';
   static const String reasonClass = 'The vehicle class is 1 to 9.';
@@ -97,10 +91,7 @@ class AlgeriaValidator extends GatedPlateValidator {
 /// Judges an `AlgeriaPlates.diplomatic` value: up to three digits of serial,
 /// then two two-digit codes. The article lists no code ranges.
 class AlgeriaDiplomaticValidator extends GatedPlateValidator {
-  const AlgeriaDiplomaticValidator();
-
-  @override
-  String get gateGroup => 'mission';
+  const AlgeriaDiplomaticValidator() : super('mission');
 
   static const String reasonDigits =
       'A diplomatic plate is a serial and two two-digit codes.';

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -14,8 +12,7 @@ import 'india_regions.dart';
 /// colour-class artwork is drawn at 4.65:1 rather than 4.17:1, so each of its
 /// plates (850×183 px) is normalised to 500×120 and x is read proportionally.
 abstract final class _Layout {
-  static const double width = 500;
-  static const double height = 120;
+  static const double width = 500, height = 120;
 
   /// Ten cells at a 41.4 stride (ink lefts 48.2, 89.4, 131.2, 172.9, ...),
   /// the same on all five plates.
@@ -24,8 +21,7 @@ abstract final class _Layout {
   /// Ink centre of the ten-cell row: x 48.2..450.6 → 249.4 on the plain
   /// plates; x 71.8..474.1 → 273 on the private plate, pushed right by the
   /// chakra badge.
-  static const double centre = 250;
-  static const double badgedCentre = 273;
+  static const double centre = 250, badgedCentre = 273;
 
   /// The widest a row may run when a format has too many cells for [pitch]:
   /// 20..480 clears the frame (5.6) and the corner arcs.
@@ -121,12 +117,14 @@ PlateSpec _plate(
         PlateTextGroup(<int>[slots.length], prefix: prefix, key: run.key),
       );
       slots.add(
-        PlateSlot(
-          alphabet: run.alphabet!,
-          box: PlateBox(left, top, run.count * pitch, height),
-          length: run.count,
+        plateRun(
+          run.alphabet!,
+          run.count,
+          left: left,
+          top: top,
+          pitch: pitch,
+          height: height,
           minLength: run.min,
-          spacing: max(0, pitch - 0.6 * 0.72 * height),
         ),
       );
       prefix = '';
@@ -144,9 +142,6 @@ PlateSpec _plate(
     decals: <PlateDecal>[
       if (badge)
         const PlateDecal(
-          // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-          // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-          // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
           image: AssetImage(
             'assets/in_ashoka_chakra.png',
             package: 'india_plate',

@@ -15,8 +15,7 @@ import 'cuba_themes.dart';
 /// to 200×140. Figures are the mean across photographs.
 abstract final class _Layout {
   // ── Car, 420 × 110 ──────────────────────────────────────────────────────
-  static const double carWidth = 420;
-  static const double carHeight = 110;
+  static const double carWidth = 420, carHeight = 110;
 
   /// The CUBA strip's inboard edge: the blue ends at 56.2 on K 000 807, the
   /// white strip's rule sits at 55.0 on D 004 027.
@@ -28,8 +27,7 @@ abstract final class _Layout {
   /// Serial ink is 77 mm tall (76.6 and 77.0) at y 20.5..97.5. Reaching it
   /// would need a ~140 mm slot on a 110 mm plate, so the slots take the full
   /// height and the ink lands at ~75% of reference. See README.
-  static const double carSlotTop = 0;
-  static const double carSlotHeight = carHeight;
+  static const double carSlotTop = 0, carSlotHeight = carHeight;
 
   /// Cell stride: 46.5 and 47.1 within the two triples. Cells are flush.
   static const double carPitch = 46.8;
@@ -44,21 +42,17 @@ abstract final class _Layout {
   /// at (31, 55). glyphHeight = 12.8 / 0.525 (0.72 × DejaVu's cap height); the
   /// line height opens the 0.72 × 24 = 17.3 font size out to the 19 pitch.
   static const PlateBox carCaption = PlateBox(8, 10, 46, 90);
-  static const double carCaptionGlyph = 24;
-  static const double carCaptionLine = 1.1;
+  static const double carCaptionGlyph = 24, carCaptionLine = 1.1;
 
   // ── Motorcycle, 200 × 140 ───────────────────────────────────────────────
-  static const double motoWidth = 200;
-  static const double motoHeight = 140;
+  static const double motoWidth = 200, motoHeight = 140;
 
   /// The same ~3.3 mm frame as the car, on a taller plate.
   static const double motoBorderRatio = 3.3 / motoHeight;
 
   /// The CUBA box: a rule down from the top edge at x 42.1, meeting a rule in
   /// from the left edge at y 62.5. Both ~0.5 mm. Neither crosses the other.
-  static const double motoBoxRight = 42.1;
-  static const double motoBoxBottom = 62.5;
-  static const double motoRule = 0.6;
+  static const double motoBoxRight = 42.1, motoBoxBottom = 62.5, motoRule = 0.6;
 
   /// P is 49.8 tall at y 11.8..61.6, centred on x 100; the digits are 49.6 at
   /// y 77.1..126.7. ~95 mm slots would be needed for both rows, so each row
@@ -66,14 +60,12 @@ abstract final class _Layout {
   static const double motoRowHeight = motoHeight / 2;
 
   /// Digit centres 29.2, 63.8, 99.1, 134.2, 169.7: a 35.1 stride.
-  static const double motoPitch = 35.1;
-  static const double motoLetterLeft = 100 - motoPitch / 2;
+  static const double motoPitch = 35.1, motoLetterLeft = 100 - motoPitch / 2;
   static const double motoDigitsLeft = 29.2 - motoPitch / 2;
 
   /// CUBA: caps 7.0 at a 10.7 pitch, centred at (24.5, 35.1).
   static const PlateBox motoCaption = PlateBox(8, 8, 33, 54.2);
-  static const double motoCaptionGlyph = 13.3;
-  static const double motoCaptionLine = 1.11;
+  static const double motoCaptionGlyph = 13.3, motoCaptionLine = 1.11;
 }
 
 /// The 2013 plates: [car] (natural persons), [carLegalEntity] and

@@ -13,8 +13,7 @@ import '../common/yemen_country.dart';
 /// unmeasured, with the car's ratios. Digits are shorter than the photograph
 /// (0.46 against 0.557 of the height) because Roboto is wider than FE-Schrift.
 abstract final class YemenUnifiedPlates {
-  static const double _carWidth = 1024;
-  static const double _carHeight = 292;
+  static const double _carWidth = 1024, _carHeight = 292;
   static const double _motoWidth = 289; // CALIBRATE: no photo
   static const double _motoHeight = 288; // CALIBRATE: no photo
   static const double _borderRatio = 0.035; // CALIBRATE: matches theme ratio

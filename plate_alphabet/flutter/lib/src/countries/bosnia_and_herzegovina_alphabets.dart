@@ -11,8 +11,6 @@ abstract final class BosniaAndHerzegovinaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ba.letters',
     include: 'A E J K M O T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The `A` (taxi) or `T` (temporary) after the fixed `T`.
@@ -20,14 +18,11 @@ abstract final class BosniaAndHerzegovinaAlphabets {
     id: 'ba.shortTermClass',
     characters: <String>['A', 'T'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// First character of a serial: a digit or one of [letters].
   static const PlateAlphabet first = PlateAlphabet.pattern(
     id: 'ba.first',
     include: 'A E J K M O T 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

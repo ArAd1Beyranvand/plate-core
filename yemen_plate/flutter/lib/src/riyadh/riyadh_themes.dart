@@ -8,7 +8,6 @@ abstract final class RiyadhThemes {
   static const PlateTheme standard = PlateTheme.monochrome(
     field: RiyadhColors.white,
     ink: RiyadhColors.ink,
-    inactive: RiyadhColors.inactive,
     borderWidthRatio: 0.041,
     plateRadiusRatio: 0.08,
   );

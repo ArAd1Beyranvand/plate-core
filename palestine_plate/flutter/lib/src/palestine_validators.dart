@@ -3,16 +3,10 @@ import 'package:plate_core/plate_core.dart';
 import 'palestine_governorates.dart';
 import 'palestine_usage.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Modern West Bank plate validator (D·DDDD·L). Quiet until the governorate is
 /// filled, so incomplete entry does not flash red.
 class PSWestBankModernValidator extends GatedPlateValidator {
-  const PSWestBankModernValidator();
-
-  @override
-  String get gateGroup => 'governorate';
+  const PSWestBankModernValidator() : super('governorate');
 
   static const String invalidRegion = 'Region code must be one digit.';
   static const String invalidSerial = 'Serial must be four digits.';
@@ -61,10 +55,7 @@ class PSWestBankModernValidator extends GatedPlateValidator {
 /// Legacy West Bank plate validator (D·DDDD·DD). Quiet until the usage code is
 /// filled.
 class PSWestBankLegacyValidator extends GatedPlateValidator {
-  const PSWestBankLegacyValidator();
-
-  @override
-  String get gateGroup => 'usage';
+  const PSWestBankLegacyValidator() : super('usage');
 
   static const String invalidDistrictCode =
       'District code must be 1 or 3-9 (0 and 2 are never issued).';
@@ -102,10 +93,7 @@ class PSWestBankLegacyValidator extends GatedPlateValidator {
 
 /// Gaza plate validator (3·DDDD·DD). Quiet until the usage code is filled.
 class PSGazaValidator extends GatedPlateValidator {
-  const PSGazaValidator();
-
-  @override
-  String get gateGroup => 'usage';
+  const PSGazaValidator() : super('usage');
 
   static const String gazaPrefixNotThree = 'A Gaza plate always begins with 3.';
 

@@ -14,8 +14,6 @@ abstract final class MalaysiaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'my.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The two-letter code ending a diplomatic plate: diplomatic corps,
@@ -24,6 +22,5 @@ abstract final class MalaysiaAlphabets {
     id: 'my.missionCodes',
     include: 'DC CC UN PA',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

@@ -13,8 +13,6 @@ abstract final class AbkhaziaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ab.letters',
     include: 'А Б В Е К М Н О Р С Т У Х',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The status letters of a diplomatic plate, picked as a unit. Assumed to be
@@ -23,7 +21,6 @@ abstract final class AbkhaziaAlphabets {
     id: 'ab.diplomatic_status',
     characters: <String>['CD', 'D', 'T'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: 'CD',
   );
 }

@@ -12,8 +12,6 @@ abstract final class PolandAlphabets {
     id: 'pl.letters',
     include: 'A-Z',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Letters and digits, for a field that mixes them (a series, a temporary
@@ -22,7 +20,5 @@ abstract final class PolandAlphabets {
     id: 'pl.alphanumeric',
     include: 'A-Z 0-9',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

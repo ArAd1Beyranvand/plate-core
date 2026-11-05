@@ -10,7 +10,5 @@ abstract final class RepublicOfTheCongoAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cg.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -9,7 +9,5 @@ abstract final class AntiguaAndBarbudaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ag.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

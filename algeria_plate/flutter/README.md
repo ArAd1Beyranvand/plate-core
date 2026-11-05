@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the brave people of Algeria to view examples:
 
-https://platexample.ir/#/discover/algeria
+https://platexample.ir/#/discover/algeria:flutter
 
 # algeria_plate
 
-Algeria's licence plates for the `plate_core` library. Every Algerian plate is digits only: `NNNNN NNN NN` — serial, vehicle class and year of manufacture, wilaya. One single-line geometry carries the white front and yellow rear liveries; a two-line geometry, the diplomatic `NNN-NN-NN` plate and the army plate complete the set.
+Algeria's licence plates for plate_core: single-line and two-line plates, diplomatic and army plates, with themes, alphabets and an advisory validator.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/algeria-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/algeria:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/algeria-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/algeria:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/algeria-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/algeria:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/algeria-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/algeria:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   algeria_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,16 +46,31 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `AlgeriaCountry` — country panel: `algeria`.
-- `AlgeriaPlates` — 4 plate specs: `singleLine`, `twoLine`, `diplomatic`, `army`.
-- `AlgeriaThemes` — 4 themes: `front`, `rear`, `diplomatic`, `army`.
-- `AlgeriaValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `AlgeriaDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `AlgeriaSerialGenerator` — random plate generator.
+Each spec is one plate layout.
+
+- `AlgeriaPlates.singleLine`
+- `AlgeriaPlates.twoLine` — id `dz.twoLine`
+- `AlgeriaPlates.diplomatic`
+- `AlgeriaPlates.army` — id `dz.army`
+
+## Themes
+
+- `AlgeriaThemes.front`
+- `AlgeriaThemes.rear`
+- `AlgeriaThemes.diplomatic`
+- `AlgeriaThemes.army`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `AlgeriaPlates`) and `theme:` (an entry of `AlgeriaThemes`). Set `validator:` to `AlgeriaVehicleClasses()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `AlgeriaCountry` — the country panel.
+- `AlgeriaVehicleClasses` — the plate validator.
 - `AlgeriaRegions` — code table.
-- 1 bundled asset (`dz_roundel.png`).
 
 ## Plates
 
@@ -63,3 +89,6 @@ put five digits on a 140 mm row.
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/algeria-plate/blob/main/LICENSE).

@@ -10,8 +10,6 @@ abstract final class TajikistanAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tj.letters',
     include: 'A-E H J K M O P T X-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Diplomatic class: `CD` corps, `CMD` head of mission, `D`, `T` and `S` for
@@ -21,6 +19,5 @@ abstract final class TajikistanAlphabets {
     id: 'tj.diplomaticClass',
     include: 'CD CMD D T S',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

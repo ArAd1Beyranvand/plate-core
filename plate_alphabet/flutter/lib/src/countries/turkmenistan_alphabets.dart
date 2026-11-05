@@ -15,7 +15,5 @@ abstract final class TurkmenistanAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'tm.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

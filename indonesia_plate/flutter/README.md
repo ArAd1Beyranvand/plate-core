@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the friendly people of Indonesia to view examples:
 
-https://platexample.ir/#/discover/indonesia
+https://platexample.ir/#/discover/indonesia:flutter
 
 # indonesia_plate
 
-Indonesia's licence plates for the `plate_core` library. Three geometries from the 2023 series: the 460×135 car plate, the 275×115 motorcycle plate and the diplomatic `CD` plate. Private, public, government and free-trade-zone plates are the same geometry on another theme; an electric vehicle adds a blue band behind the expiry row. The armed forces' and police plates are a fourth and fifth geometry, measured off photographs.
+Indonesia's licence plates for plate_core: car, motorcycle, diplomatic, armed-forces and police plates, with usage and EV liveries and advisory validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/indonesia-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/indonesia:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/indonesia-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/indonesia:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/indonesia-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/indonesia:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/indonesia-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/indonesia:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   indonesia_plate: ^0.2.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,15 +46,42 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `IndonesiaCountry` — country panel: `indonesia`.
-- `IndonesiaPlates` — 5 plate specs: `car`, `motorcycle`, `diplomatic`, `police`, `military()`.
-- `IndonesiaThemes` — 15 themes: `private`, `public`, `government`, `freeTradeZone`, `privateEv`, `publicEv`, `governmentEv`, `freeTradeZoneEv`, `diplomatic`, `diplomaticEv` and 5 more.
-- `IndonesiaValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `IndonesiaDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `IndonesiaServiceValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `IndonesiaSerialGenerator` — random plate generator.
+Each spec is one plate layout.
+
+- `IndonesiaPlates.car`
+- `IndonesiaPlates.motorcycle`
+- `IndonesiaPlates.diplomatic`
+- `IndonesiaPlates.military`(…)
+- `IndonesiaPlates.police`
+
+## Themes
+
+- `IndonesiaThemes.private`
+- `IndonesiaThemes.public`
+- `IndonesiaThemes.government`
+- `IndonesiaThemes.freeTradeZone`
+- `IndonesiaThemes.privateEv`
+- `IndonesiaThemes.publicEv`
+- `IndonesiaThemes.governmentEv`
+- `IndonesiaThemes.freeTradeZoneEv`
+- `IndonesiaThemes.diplomatic`
+- `IndonesiaThemes.diplomaticEv`
+- `IndonesiaThemes.army`
+- `IndonesiaThemes.navy`
+- `IndonesiaThemes.airForce`
+- `IndonesiaThemes.armedForces`
+- `IndonesiaThemes.police`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `IndonesiaPlates`) and `theme:` (an entry of `IndonesiaThemes`). Set `validator:` to `IndonesiaAreaCodes()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `IndonesiaCountry` — the country panel.
+- `IndonesiaAreaCodes` — the plate validator.
 - `IndonesiaRegions` — code table.
 
 ## Plates
@@ -92,3 +130,6 @@ the civilian width is kept and the height is the median measured aspect
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/indonesia-plate/blob/main/LICENSE).

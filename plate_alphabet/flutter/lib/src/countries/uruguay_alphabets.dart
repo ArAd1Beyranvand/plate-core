@@ -13,7 +13,5 @@ abstract final class UruguayAlphabets {
   static const PlateAlphabet department = PlateAlphabet.pattern(
     id: 'uy.department',
     include: 'A-S',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

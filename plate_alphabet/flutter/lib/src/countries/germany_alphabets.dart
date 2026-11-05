@@ -11,7 +11,5 @@ class GermanAlphabets {
   static const PlateAlphabet districtLetters = PlateAlphabet.pattern(
     id: 'de.district',
     include: 'A-Z Ä Ö Ü',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

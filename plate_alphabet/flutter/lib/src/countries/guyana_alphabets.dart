@@ -10,7 +10,5 @@ abstract final class GuyanaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'gy.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

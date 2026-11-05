@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, valid } from 'plate_core/core/validators/plate_validator';
 
 /** Judges a Riyadh plate: three letters from the seventeen issued and one to
  * four digits. The combinations banned since 2009 are not checked; only

@@ -132,8 +132,7 @@ abstract final class _Layout {
   /// `rowEnd` is the horizontal rule between the rows; the verticals are the
   /// column edges, thickness `colRule`.
   static const double rowEnd = 79.2, rowRule = 2.1;
-  static const double euRowEnd = 56.3, euRowRule = 2.5;
-  static const double colRule = 2.6;
+  static const double euRowEnd = 56.3, euRowRule = 2.5, colRule = 2.6;
   static const double usDigitsEnd = 171, usStripStart = 291.5;
   static const double euDigitsEnd = 249.6, euStripEnd = 332.7;
 }

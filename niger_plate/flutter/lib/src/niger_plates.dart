@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -23,13 +21,10 @@ import 'niger_regions.dart';
 /// 72.6 of cap ink would need a 140-tall box; the box is the canvas height
 /// instead and the digits come out ~79% of the reference.
 abstract final class _Layout {
-  static const double width = 520;
-  static const double height = 110;
+  static const double width = 520, height = 110;
 
-  static const double digitHeight = height;
-  static const double regionLeft = 16.25;
-  static const double regionPitch = 54.5;
-  static const double serialPitch = 53.9;
+  static const double digitHeight = height, regionLeft = 16.25;
+  static const double regionPitch = 54.5, serialPitch = 53.9;
   static const double serialLeft = 204.1;
   static const int serialDigits = 4;
 }
@@ -111,6 +106,7 @@ abstract final class NigerPlates {
           _Layout.regionPitch,
           _Layout.digitHeight,
         ),
+        group: 'region',
       ),
       const PlateSlot(
         alphabet: NigerAlphabets.series,
@@ -120,23 +116,17 @@ abstract final class NigerPlates {
           _Layout.regionPitch,
           _Layout.digitHeight,
         ),
+        group: 'series',
       ),
-      PlateSlot(
-        alphabet: NigerAlphabets.digits,
-        box: PlateBox(
-          _Layout.serialLeft,
-          0,
-          _Layout.serialPitch * _Layout.serialDigits,
-          _Layout.digitHeight,
-        ),
-        length: _Layout.serialDigits,
-        spacing: max(0, _Layout.serialPitch - 0.6 * 0.72 * _Layout.digitHeight),
+      plateRun(
+        NigerAlphabets.digits,
+        _Layout.serialDigits,
+        left: _Layout.serialLeft,
+        top: 0,
+        pitch: _Layout.serialPitch,
+        height: _Layout.digitHeight,
+        group: 'serial',
       ),
-    ],
-    textGroups: <PlateTextGroup>[
-      const PlateTextGroup(<int>[0], key: 'region'),
-      const PlateTextGroup(<int>[1], key: 'series'),
-      const PlateTextGroup(<int>[2], key: 'serial'),
     ],
     resolveRegion: NigerRegions.captionOf,
   );

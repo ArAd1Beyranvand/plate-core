@@ -13,7 +13,5 @@ abstract final class SingaporeAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'sg.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

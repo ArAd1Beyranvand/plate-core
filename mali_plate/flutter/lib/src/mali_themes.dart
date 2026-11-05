@@ -5,8 +5,7 @@ import 'mali_colors.dart';
 
 /// Black on white.
 abstract final class MaliThemes {
-  static const double _borderWidthRatio = 0.04;
-  static const double _radiusRatio = 0.12;
+  static const double _borderWidthRatio = 0.04, _radiusRatio = 0.12;
 
   static const PlateTheme standard = PlateTheme.monochrome(
     field: MaliColors.white,

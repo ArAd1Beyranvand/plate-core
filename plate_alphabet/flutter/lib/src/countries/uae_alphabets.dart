@@ -15,7 +15,5 @@ abstract final class UaeAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ae.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

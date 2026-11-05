@@ -16,7 +16,5 @@ abstract final class TurkeyAlphabets {
     id: 'tr.letters',
     include: 'A-Z',
     exclude: 'Q W X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -114,7 +114,8 @@ def build_gallery(force: bool) -> None:
         if e.name not in ("components", "shared", "_headers"):
             shutil.rmtree(e) if e.is_dir() else e.unlink()
     for e in built.iterdir():
-        if e.name == "canvaskit":
+        # web/components and web/shared link into deploy/ for the dev server; the build copies them back.
+        if e.name in ("canvaskit", "components", "shared"):
             continue
         shutil.copytree(e, DEPLOY / e.name) if e.is_dir() else shutil.copy(e, DEPLOY / e.name)
     boot = DEPLOY / "flutter_bootstrap.js"

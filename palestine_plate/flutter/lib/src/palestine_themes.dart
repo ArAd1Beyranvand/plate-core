@@ -5,8 +5,7 @@ import 'palestine_usage.dart';
 
 abstract final class PSThemes {
   /// Measured from `pics/reference_plate.png`.
-  static const double _borderWidthRatio = 0.027;
-  static const double _plateRadiusRatio = 0.10;
+  static const double _borderWidthRatio = 0.027, _plateRadiusRatio = 0.10;
 
   // --- West Bank -----------------------------------------------------------
 

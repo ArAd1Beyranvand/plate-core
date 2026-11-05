@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, PlateCheck, type PlateEntry, type PlateValidation, RuledPlateValidator, invalid, isDigits, isDigitsOfLength, valid } from 'plate_core/core/validators/plate_validator';
 
 /**
  * Judges a `BoliviaPlates.standard` value. Reports, never bars a keystroke.
@@ -42,15 +42,9 @@ export class BoliviaSpecialValidator extends GatedPlateValidator {
 }
 
 /** Judges a `BoliviaPlates.mercosur` value: two letters and five digits. */
-export class BoliviaMercosurValidator extends GatedPlateValidator {
-  readonly gateGroup = 'number';
-
-  static readonly reasonLetters = 'The series is two letters.';
-  static readonly reasonNumber = 'The number is five digits.';
-
-  judge(entry: PlateEntry): PlateValidation {
-    if (!/^[A-Z]{2}$/.test(entry.group('letters'))) return invalid(BoliviaMercosurValidator.reasonLetters);
-    if (!isDigitsOfLength(entry.group('number'), 5)) return invalid(BoliviaMercosurValidator.reasonNumber);
-    return valid;
-  }
+export class BoliviaMercosurValidator extends RuledPlateValidator {
+  readonly checks = [
+    new PlateCheck('letters', '[A-Z]{2}', 'The series is two letters.'),
+    new PlateCheck('number', '[0-9]{5}', 'The number is five digits.'),
+  ];
 }

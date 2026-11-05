@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:plate_core/plate_core.dart';
-import 'package:flutter/material.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:niger_plate/niger_plate.dart';
@@ -67,33 +67,14 @@ void main() {
       tester.view.physicalSize = const Size(1200, 300);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Center(
-              child: SizedBox(
-                width: 2 * spec.canvasWidth,
-                height: 2 * spec.canvasHeight,
-                child: PlateThemeScope(
-                  theme: theme,
-                  child: PlateView(
-                    controller: controller,
-                    theme: theme,
-                    country: spec.country,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+      await pumpPlateGolden(
+        tester,
+        controller,
+        'goldens/$name.png',
+        theme: theme,
+        country: spec.country,
+        stage: Size(2 * spec.canvasWidth, 2 * spec.canvasHeight),
       );
-      await tester.pumpAndSettle();
-      await expectLater(
-        find.byType(PlateView),
-        matchesGoldenFile('goldens/$name.png'),
-      );
-      await tester.pumpWidget(const SizedBox.shrink());
-      controller.dispose();
     });
   }
 

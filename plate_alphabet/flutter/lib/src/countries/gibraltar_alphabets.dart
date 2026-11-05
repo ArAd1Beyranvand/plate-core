@@ -13,7 +13,5 @@ abstract final class GibraltarAlphabets {
   static const PlateAlphabet prefix = PlateAlphabet(
     id: 'gi.prefix',
     characters: <String>['G', 'T'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

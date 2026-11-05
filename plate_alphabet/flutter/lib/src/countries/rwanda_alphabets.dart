@@ -9,7 +9,5 @@ abstract final class RwandaAlphabets {
   static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 'rw.serial',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

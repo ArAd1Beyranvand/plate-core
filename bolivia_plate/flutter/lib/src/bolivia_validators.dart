@@ -2,23 +2,14 @@ import 'package:plate_core/plate_core.dart';
 
 import 'bolivia_alphabets.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `BoliviaPlates.standard` value. Reports, never bars a keystroke.
 ///
 /// Checks what the article states: the PTA number is three or four digits
 /// and three letters (`0XX AAA` on older vehicles to `64XX AAA` by December
 /// 2024), and the box holds one of the nine department letters.
 class BoliviaValidator extends GatedPlateValidator {
-  const BoliviaValidator();
+  const BoliviaValidator() : super('letters');
 
-  @override
-  String get gateGroup => 'letters';
-
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
   static final RegExp _letters = RegExp(r'^[A-Z]{3}$');
 
   static const String reasonNumber = 'The number is three or four digits.';
@@ -54,10 +45,7 @@ class BoliviaValidator extends GatedPlateValidator {
 /// Judges a `BoliviaPlates.special` value: two two-digit numbers, the
 /// mission's country and the vehicle's rank.
 class BoliviaSpecialValidator extends GatedPlateValidator {
-  const BoliviaSpecialValidator();
-
-  @override
-  String get gateGroup => 'rank';
+  const BoliviaSpecialValidator() : super('rank');
 
   static const String reasonDigits = 'Both numbers are two digits.';
 
@@ -70,28 +58,15 @@ class BoliviaSpecialValidator extends GatedPlateValidator {
 }
 
 /// Judges a `BoliviaPlates.mercosur` value: two letters and five digits.
-class BoliviaMercosurValidator extends GatedPlateValidator {
+class BoliviaMercosurValidator extends RuledPlateValidator {
   const BoliviaMercosurValidator();
-
-  @override
-  String get gateGroup => 'number';
-
-  // TODO(py): [H9] Python re: \d/\w match Unicode; keep explicit [0-9]/[A-Z] classes (or re.ASCII).
-  // TODO(ts): [H9] same flavour as Dart; port as is, cover accept/reject in the vectors (D9).
-  // TODO(kt): [H9] Regex engine differs per target (JVM/JS/Native): keep to portable syntax.
-  static final RegExp _letters = RegExp(r'^[A-Z]{2}$');
 
   static const String reasonLetters = 'The series is two letters.';
   static const String reasonNumber = 'The number is five digits.';
 
   @override
-  PlateValidation judge(PlateEntry entry) {
-    if (!_letters.hasMatch(entry.group('letters'))) {
-      return const PlateValidation.invalid(reasonLetters);
-    }
-    if (!isDigitsOfLength(entry.group('number'), 5)) {
-      return const PlateValidation.invalid(reasonNumber);
-    }
-    return const PlateValidation.valid();
-  }
+  List<PlateCheck> get checks => const <PlateCheck>[
+    PlateCheck('letters', r'[A-Z]{2}', reasonLetters),
+    PlateCheck('number', r'[0-9]{5}', reasonNumber),
+  ];
 }

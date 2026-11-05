@@ -15,7 +15,6 @@ abstract final class TunisiaCountry {
 
   static const PlateCountry tunisia = PlateCountry(
     code: 'tn',
-    captionLines: <String>[],
     panelColor: TunisiaColors.flagRed,
     panelTextColor: TunisiaColors.white,
     flagAspectRatio: 3 / 2,

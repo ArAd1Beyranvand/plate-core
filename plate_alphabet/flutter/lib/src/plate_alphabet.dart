@@ -1,9 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
-// TODO(py): [H19] module-level constants, one per alphabet; same for the other holder classes below.
-// TODO(ts): [H19] export const PlateAlphabetDigits = {...} as const; the D3 export carries the expanded characters.
-// TODO(kt): [H19] object PlateAlphabetDigits; pattern alphabets expand per instance (H5, H22).
 /// Digit alphabets shared by all plate packages. Each stores ASCII `0-9` and
 /// differs only in rendering, so country packages reference these instead of
 /// restating the ten glyphs.
@@ -11,14 +8,10 @@ abstract final class PlateAlphabetDigits {
   /// ASCII `0-9`, rendered as itself.
   static const PlateAlphabet english = PlateAlphabet.latinDigits;
 
-  // TODO(py): [H21] glyphs is an ordered dict; canonical() folds to the first key. [D6-font] Persian digits need a bundled font.
-  // TODO(ts): [H21] glyphs must be a Map, not an object: '0'..'9' are integer-like keys and get reordered. [D6-font] bundle Persian digits.
-  // TODO(kt): [H21] use mapOf/LinkedHashMap, never HashMap, for glyphs. [D6-font] bundle a font with Persian digits.
   /// ASCII `0-9` rendered as Persian numerals `۰..۹`.
   static const PlateAlphabet iranian = PlateAlphabet.pattern(
     id: 'alphabet.fa.digits',
     include: '0-9',
-    input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: <String, String>{
       '0': '۰',
@@ -39,7 +32,6 @@ abstract final class PlateAlphabetDigits {
   static const PlateAlphabet iranshahr = PlateAlphabet.pattern(
     id: 'alphabet.iranshahr.digits',
     include: '0-9',
-    input: AlphabetInput.typed,
     isNumeric: true,
     glyphs: <String, String>{
       '0': '٠',
@@ -64,7 +56,6 @@ abstract final class PlateAlphabetLetters {
     include:
         'ا ب پ ت ث ج چ ح خ د ذ ر ز ژ س ش ص ض ط ظ ع غ ف ق ک گ ل م ن و ه ة ی',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -75,7 +66,6 @@ abstract final class PlateAlphabetLetters {
     id: 'alphabet.latin.all',
     include: 'A-Z Ä Ö Ü MP',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '?',
   );
 }
@@ -86,8 +76,6 @@ abstract final class PlateAlphabetLatin {
   static const PlateAlphabet typed = PlateAlphabet.pattern(
     id: 'alphabet.latin.typed',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }
 
@@ -97,8 +85,6 @@ abstract final class PlateAlphabetBelarus {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'by.letters',
     include: 'A B E I K M H O P C T X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Region digit: 1–7 regions and Minsk, 8 overflow series, 0 Ministry of
@@ -106,7 +92,6 @@ abstract final class PlateAlphabetBelarus {
   static const PlateAlphabet region = PlateAlphabet.pattern(
     id: 'by.region',
     include: '0-8',
-    input: AlphabetInput.typed,
     isNumeric: true,
   );
 
@@ -114,24 +99,18 @@ abstract final class PlateAlphabetBelarus {
   static const PlateAlphabet electric = PlateAlphabet(
     id: 'by.electric',
     characters: <String>['E'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// First letter of a diplomatic plate: always `C`.
   static const PlateAlphabet diplomaticFirst = PlateAlphabet(
     id: 'by.diplomatic.first',
     characters: <String>['C'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Second letter: `D` for diplomatic corps, `C` for consular.
   static const PlateAlphabet diplomaticSecond = PlateAlphabet(
     id: 'by.diplomatic.second',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }
 
@@ -139,14 +118,10 @@ abstract final class PlateAlphabetBelarus {
 /// regions, then the seven South Korean provinces still coded; 링김 is an
 /// observed 1990s code absent from any list.
 abstract final class PlateAlphabetKorea {
-  // TODO(py): [H7] each entry is two Hangul syllables (precomposed, 1 code point each). [D6-font] bundle a Hangul font.
-  // TODO(ts): [H7] precomposed syllables, safe for Array.from; keep NFC in the export. [D6-font] bundle Hangul.
-  // TODO(kt): [H7] precomposed syllables, safe for codePoints(); keep NFC in generated sources. [D6-font] bundle Hangul.
   static const PlateAlphabet northRegions = PlateAlphabet.pattern(
     id: 'kp.region',
     include: '평양 라선 평남 평북 자강 황남 황북 강원 함남 함북 량강 남포 개성 충남 충북 경기 경남 경북 전남 전북 링김',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }
 
@@ -159,15 +134,11 @@ abstract final class PlateAlphabetNamibia {
     id: 'na.region',
     include: 'A-W',
     exclude: 'F I Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// A personalised plate's characters: up to seven letters or digits.
   static const PlateAlphabet personalised = PlateAlphabet.pattern(
     id: 'na.personalised',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

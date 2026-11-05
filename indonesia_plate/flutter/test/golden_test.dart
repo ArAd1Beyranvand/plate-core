@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:plate_core/plate_core.dart';
-import 'package:flutter/material.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:indonesia_plate/indonesia_plate.dart';
@@ -34,39 +34,15 @@ void main() {
       spec,
       values.split(' '),
     );
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 520,
-              height: 520 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: IndonesiaCountry.indonesia,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: theme,
+      country: IndonesiaCountry.indonesia,
+      stage: Size(520, 520 * spec.canvasHeight / spec.canvasWidth),
+      decodeDelay: const Duration(milliseconds: 100),
     );
-    await tester.pumpAndSettle();
-    // The crest and mark decals decode off the real event loop, which fake
-    // time does not advance; runAsync gives them a real slice of time.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 100)),
-    );
-    await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   testWidgets('private car', (tester) async {

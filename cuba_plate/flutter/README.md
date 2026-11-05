@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the brave people of Cuba to view examples:
 
-https://platexample.ir/#/discover/cuba
+https://platexample.ir/#/discover/cuba:flutter
 
 # cuba_plate
 
-Cuba's 2013 licence plates for the `plate_core` library. Three specs, one theme: a car for natural persons (white CUBA strip), a car for legal entities (blue strip), and a motorcycle.
+Cuba's licence plates for plate_core: the 2013 car plate (natural-person and legal-entity strips) and motorcycle plate, with alphabet and advisory validator.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/cuba-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/cuba:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/cuba-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/cuba:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/cuba-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/cuba:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/cuba-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/cuba:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   cuba_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -35,13 +46,26 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `CubaCountry` — country panel: `cuba`.
-- `CubaPlates` — 3 plate specs: `car`, `carLegalEntity`, `motorcycle`.
-- `CubaPlates` — 1 theme: `theme`.
-- `CubaThemes` — 1 theme: `standard`.
-- `CubaValidator` — advisory validator; flags the frame, never blocks a keystroke.
+Each spec is one plate layout.
+
+- `CubaPlates.car` — id `cu.car`
+- `CubaPlates.carLegalEntity` — id `cu.carLegalEntity`
+- `CubaPlates.motorcycle` — id `cu.motorcycle`
+
+## Themes
+
+- `CubaThemes.standard`
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `CubaPlates`) and `theme:` (an entry of `CubaThemes`). Set `validator:` to `CubaValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `CubaCountry` — the country panel.
+- `CubaValidator` — the plate validator.
 
 ## Plates
 
@@ -58,3 +82,6 @@ it; the small laser-printed control number top right.
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/cuba-plate/blob/main/LICENSE).

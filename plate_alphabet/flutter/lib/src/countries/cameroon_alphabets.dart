@@ -8,7 +8,5 @@ abstract final class CameroonAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cm.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

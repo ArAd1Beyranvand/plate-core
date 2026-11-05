@@ -11,8 +11,6 @@ abstract final class RussiaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ru.letters',
     include: 'A B E K M H O P C T Y X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The letters of a diplomatic plate, picked as a unit: `CD` ambassador,
@@ -21,7 +19,6 @@ abstract final class RussiaAlphabets {
     id: 'ru.diplomatic_status',
     characters: <String>['CD', 'D', 'T'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: 'CD',
   );
 }

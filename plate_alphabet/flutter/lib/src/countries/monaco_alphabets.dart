@@ -13,7 +13,5 @@ abstract final class MonacoAlphabets {
   static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 'mc.serial',
     include: '0-9 A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

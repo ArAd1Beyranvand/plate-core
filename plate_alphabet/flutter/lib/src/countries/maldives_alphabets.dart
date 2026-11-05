@@ -15,13 +15,10 @@ abstract final class MaldivesAlphabets {
     id: 'mv.type',
     characters: <String>['P', 'C', 'G', 'S', 'T', 'D'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'mv.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

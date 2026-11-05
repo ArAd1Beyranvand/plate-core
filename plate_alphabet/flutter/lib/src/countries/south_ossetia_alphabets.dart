@@ -11,7 +11,5 @@ abstract final class SouthOssetiaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'so.letters',
     include: 'A B E K M H O P C T Y X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

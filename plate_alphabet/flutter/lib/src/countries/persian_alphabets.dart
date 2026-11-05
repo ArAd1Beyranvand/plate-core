@@ -20,7 +20,6 @@ abstract final class PersianAlphabets {
     id: 'fa.privateLetters',
     include: 'ب ج د س ص ط ق ل م ن و ه ی',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -32,7 +31,6 @@ abstract final class PersianAlphabets {
     id: 'fa.civilLetters',
     include: 'ب ج د س ص ط ق ل م ن و ه ی ت ع ک الف گ پ ث ش ز ف ژ D S',
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
     glyphs: {'ژ': '♿︎'},
@@ -45,7 +43,6 @@ abstract final class PersianAlphabets {
     id: 'fa.disabledSymbol',
     characters: ['ژ'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '♿︎',
     glyphs: {'ژ': '♿︎'},
@@ -59,7 +56,6 @@ abstract final class PersianAlphabets {
     id: 'fa.taxiLetter',
     characters: ['ت'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -69,7 +65,6 @@ abstract final class PersianAlphabets {
     id: 'fa.publicLetter',
     characters: ['ع'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -79,21 +74,16 @@ abstract final class PersianAlphabets {
     id: 'fa.agriculturalLetter',
     characters: ['ک'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
 
-  // TODO(py): [H7] one slot value of three code points (الف); restriction counts values, not len(). RTL: H10.
-  // TODO(ts): [H7] value length is 3 code units but one slot; never use .length to decide fullness.
-  // TODO(kt): [H7] value length is 3 chars but one slot; never use length to decide fullness.
   /// `الف`, how a government plate prints its letter: three code points, one
   /// plate position.
   static const PlateAlphabet governmentLetter = PlateAlphabet(
     id: 'fa.governmentLetter',
     characters: ['الف'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -103,7 +93,6 @@ abstract final class PersianAlphabets {
     id: 'fa.policeLetter',
     characters: ['پ'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -113,7 +102,6 @@ abstract final class PersianAlphabets {
     id: 'fa.irgcLetter',
     characters: ['ث'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -123,7 +111,6 @@ abstract final class PersianAlphabets {
     id: 'fa.armyLetter',
     characters: ['ش'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -133,7 +120,6 @@ abstract final class PersianAlphabets {
     id: 'fa.defenceLetter',
     characters: ['ز'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -143,7 +129,6 @@ abstract final class PersianAlphabets {
     id: 'fa.generalStaffLetter',
     characters: ['ف'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -153,7 +138,6 @@ abstract final class PersianAlphabets {
     id: 'fa.temporaryLetter',
     characters: ['گ'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     direction: TextDirection.rtl,
     placeholder: '؟',
   );
@@ -163,7 +147,6 @@ abstract final class PersianAlphabets {
     id: 'fa.politicalLetter',
     characters: ['D'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '?',
   );
 
@@ -172,7 +155,6 @@ abstract final class PersianAlphabets {
     id: 'fa.serviceLetter',
     characters: ['S'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '?',
   );
 }

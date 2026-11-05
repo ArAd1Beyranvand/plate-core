@@ -54,14 +54,14 @@ export function connect(info: { lang: string; country: string; version: string }
   });
   let last = -1;
   const report = () => {
-    const height = Math.ceil(document.documentElement.scrollHeight);
+    const height = Math.ceil(document.body.offsetHeight);
     if (height !== last && host !== null) { last = height; send("resize", { height }); }
   };
-  new ResizeObserver(report).observe(document.documentElement);
+  new ResizeObserver(report).observe(document.body);
   return {
     hello: () => send("hello", info),
     ready: (specs: { id: string; label: string }[], spec: string) =>
-      send("ready", { specs, spec, height: Math.ceil(document.documentElement.scrollHeight) }),
+      send("ready", { specs, spec, height: Math.ceil(document.body.offsetHeight) }),
     progress: (stage: string, fraction: number | null) => send("progress", { stage, fraction }),
     change: (p: { spec: string; values: (string | null)[]; text: string; complete: boolean; valid: boolean | null }) => send("change", p),
     error: (code: string, message: string, fatal = false) => send("error", { code, message, fatal }),

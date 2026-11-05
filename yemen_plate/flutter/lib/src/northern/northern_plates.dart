@@ -25,8 +25,7 @@ import 'northern_regions.dart';
 abstract final class YemenNorthernPlates {
   // The car is 540 x 288, measured from an issued blue private plate; comments
   // give the measured fraction of the plate, code the units.
-  static const double _carWidth = 540;
-  static const double _height = 288;
+  static const double _carWidth = 540, _height = 288;
   static const double _motoWidth = 289; // CALIBRATE: no photo available
   static const double _borderRatio = 0.035; // CALIBRATE: matches theme ratio
 
@@ -77,8 +76,7 @@ abstract final class YemenNorthernPlates {
   // The Latin echo row (y 0.697 .. 0.882, cap 53 units). Its box is deeper than
   // the cap to avoid clipping. Each mirror takes its source's x and width and is
   // editable, so the value reads in two scripts.
-  static const double _echoTop = 175;
-  static const double _echoHeight = 104;
+  static const double _echoTop = 175, _echoHeight = 104;
 
   static const List<PlateMirror> _carMirrors = <PlateMirror>[
     PlateMirror(

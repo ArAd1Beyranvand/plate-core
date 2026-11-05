@@ -15,7 +15,5 @@ abstract final class UnitedKingdomAlphabets {
   static const PlateAlphabet diplomaticClass = PlateAlphabet(
     id: 'gb.diplomaticClass',
     characters: <String>['D', 'X'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -5,9 +5,6 @@
 /// white; colours marked `// CALIBRATE` are from photographs.
 library;
 
-// TODO(py): [D5] one module `plates.countries.cuba`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/cuba`; tree-shakable.
-// TODO(kt): [D5] package `countries.cuba` in the countries module.
 export 'src/cuba_alphabets.dart';
 export 'src/cuba_colors.dart';
 export 'src/cuba_country.dart';

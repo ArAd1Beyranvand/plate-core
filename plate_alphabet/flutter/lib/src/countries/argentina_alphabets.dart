@@ -15,7 +15,6 @@ abstract final class ArgentinaAlphabets {
     id: 'ar.missionClass',
     characters: <String>['D', 'C', 'M', 'I', 'A'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The category code of a 1985 foreign-mission plate, printed as two letters.
@@ -23,7 +22,6 @@ abstract final class ArgentinaAlphabets {
     id: 'ar.mission1985Class',
     characters: <String>['CD', 'CC', 'ME', 'OI', 'PA'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     glyphs: <String, String>{
       'CD': 'C  D',
       'CC': 'C  C',

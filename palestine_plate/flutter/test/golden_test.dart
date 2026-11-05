@@ -1,4 +1,5 @@
 import 'package:plate_core/plate_core.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:palestine_plate/palestine_plate.dart';
@@ -21,38 +22,14 @@ void main() {
   }) async {
     final controller = PlateController.fromValues(spec, values);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 520,
-              height: 520 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: country,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: theme,
+      country: country,
+      stage: Size(520, 520 * spec.canvasHeight / spec.canvasWidth),
     );
-    await tester.pumpAndSettle();
-
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-
-    // Unmount the tree before disposing: _PlateCanvasState.dispose() calls
-    // controller.detach(), which notifies listeners, so the controller must
-    // still be live when the element tree tears down.
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   group('West Bank goldens', () {

@@ -12,7 +12,5 @@ abstract final class BotswanaAlphabets {
     id: 'bw.letters',
     include: 'A-Z',
     exclude: 'Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

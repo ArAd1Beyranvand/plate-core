@@ -10,14 +10,10 @@ abstract final class AustriaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'at.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet personalised = PlateAlphabet.pattern(
     id: 'at.personalised',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

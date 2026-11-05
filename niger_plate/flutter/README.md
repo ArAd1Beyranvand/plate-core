@@ -6,13 +6,24 @@ GO VEGAN 🌱
 
 From the mighty people of Iran to the resilient people of Niger to view examples:
 
-https://platexample.ir/#/discover/niger
+https://platexample.ir/#/discover/niger:flutter
 
 # niger_plate
 
-Niger's licence plates for the `plate_core` library. The 2005 series: a region digit and series letter, a hologram mark, a four-digit serial, and the country's map over `RN` at the right. Private (black on white, black map) and commercial (black on orange, map in the national colours).
+Niger's licence plates for plate_core: the 2005 series in private and commercial liveries, with themes, alphabets and advisory validators.
 
-## Install
+## Languages
+
+| Language | Folder | Example |
+| --- | --- | --- |
+| Flutter / Dart | [`flutter/`](https://github.com/ArAd1Beyranvand/niger-plate/tree/main/flutter) | [platexample](https://platexample.ir/#/discover/niger:flutter) |
+| Kotlin | [`kotlin/`](https://github.com/ArAd1Beyranvand/niger-plate/tree/main/kotlin) | [platexample](https://platexample.ir/#/discover/niger:kotlin) |
+| Python | [`python/`](https://github.com/ArAd1Beyranvand/niger-plate/tree/main/python) | [platexample](https://platexample.ir/#/discover/niger:python) |
+| TypeScript | [`typescript/`](https://github.com/ArAd1Beyranvand/niger-plate/tree/main/typescript) | [platexample](https://platexample.ir/#/discover/niger:typescript) |
+
+## Quick start
+
+### Install
 
 ```yaml
 dependencies:
@@ -20,7 +31,7 @@ dependencies:
   niger_plate: ^0.1.0
 ```
 
-## Use
+### Use
 
 ```dart
 import 'package:plate_core/plate_core.dart';
@@ -32,21 +43,40 @@ PlateCanvas(
 );
 ```
 
-## Contains
+## Specs
 
-- `NigerCountry` — country panels: `private`, `commercial`, `plain`, `military`.
-- `NigerOtherPlates` — 4 plate specs: `state`, `military`, `diplomaticChief`, `diplomaticStaff`.
-- `NigerPlates` — 2 plate specs: `privateSpec`, `commercialSpec`.
-- `NigerThemes` — 5 themes: `private`, `commercial`, `stateTransport`, `military`, `diplomatic`.
-- `NigerValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `NigerStateValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `NigerMilitaryValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `NigerDiplomaticValidator` — advisory validator; flags the frame, never blocks a keystroke.
-- `NigerSerialGenerator` — random plate generator.
-- `NigerRegions` — code table.
-- 2 bundled assets (`niger_map.svg`, `niger_map_flag.svg`).
+Each spec is one plate layout.
+
+- `NigerOtherPlates.state`
+- `NigerOtherPlates.military`
+- `NigerOtherPlates.diplomaticChief`
+- `NigerOtherPlates.diplomaticStaff`
+- `NigerOtherPlates.privateSpec`
+- `NigerOtherPlates.commercialSpec`
+
+## Themes
+
+- `NigerThemes.private`
+- `NigerThemes.commercial`
+- `NigerThemes.stateTransport`
+- `NigerThemes.military`
+- `NigerThemes.diplomatic`
+- `NigerThemes.forUsage`(…)
+
+## Change it
+
+`PlateCanvas` takes `spec:` (an entry of `NigerOtherPlates`) and `theme:` (an entry of `NigerThemes`). Set `validator:` to `NigerValidator()` and `autoValidate: true` to show validation hints.
+
+## Also included
+
+- `NigerCountry` — the country panel.
+- `NigerValidator` — the plate validator.
+- `NigerOtherRegions` — code table.
 
 ## Part of plate
 
 Painted by [`plate_core`](https://pub.dev/packages/plate_core); alphabets shared through [`plate_alphabet`](https://pub.dev/packages/plate_alphabet); optional character picker in [`plate_keypad`](https://pub.dev/packages/plate_keypad).
 
+## License
+
+See [LICENSE](https://github.com/ArAd1Beyranvand/niger-plate/blob/main/LICENSE).

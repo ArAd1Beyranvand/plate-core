@@ -14,34 +14,26 @@ import 'sudan_country.dart';
 /// written here. Heights are tuned for Vazirmatn and capped so no box reaches
 /// into the row below.
 abstract final class _Layout {
-  static const double width = 320;
-  static const double height = 160;
+  static const double width = 320, height = 160;
 
-  static const double ruleY = 42.1;
-  static const double ruleThickness = 3.0;
-  static const double hologramLeft = 112.8;
+  static const double ruleY = 42.1, ruleThickness = 3.0, hologramLeft = 112.8;
   static const double hologramRight = 122.4;
 
-  static const double nameTop = 6;
-  static const double arabicNameTop = 3.2;
-  static const double nameHeight = 33;
-  static const double latinNameGlyph = 32.4;
-  static const double arabicNameGlyph = 34;
+  static const double nameTop = 6, arabicNameTop = 3.2, nameHeight = 33;
+  static const double latinNameGlyph = 32.4, arabicNameGlyph = 34;
 
   // Each input box is its own band: a field draws its outline along its
   // bottom edge, so a box reaching into the row below strikes through it.
 
   // Boxes sit 1.5 further out than the artwork's centres because wider
   // glyphs (٨, ب ح) would touch.
-  static const double codeTop = 45;
-  static const double codeHeight = 60;
+  static const double codeTop = 45, codeHeight = 60;
   static const PlateBox classBox = PlateBox(5.5, codeTop, 36, codeHeight);
   static const PlateBox stateBox = PlateBox(44.5, codeTop, 61, codeHeight);
 
   // Latin state codes are wider than the Arabic letter, so the echo overhangs
   // its column.
-  static const double codeEchoTop = 105;
-  static const double codeEchoGlyph = 52;
+  static const double codeEchoTop = 105, codeEchoGlyph = 52;
   static const PlateBox classEchoBox = PlateBox(
     7,
     codeEchoTop,
@@ -55,13 +47,10 @@ abstract final class _Layout {
     codeEchoGlyph,
   );
 
-  static const double serialLeft = 132;
-  static const double serialRight = 306;
-  static const double serialTop = 45;
+  static const double serialLeft = 132, serialRight = 306, serialTop = 45;
   static const double serialHeight = 72;
 
-  static const double serialEchoTop = 118;
-  static const double serialEchoGlyph = 34;
+  static const double serialEchoTop = 118, serialEchoGlyph = 34;
 }
 
 /// The 2009 bilingual plate; every livery is this design, themed by

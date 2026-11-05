@@ -16,6 +16,5 @@ abstract final class LaosAlphabets {
     id: 'la.letters',
     include: 'ກ ຂ ຄ ງ ຈ ສ ຊ ຍ ດ ຕ ຖ ທ ນ ບ ປ ຜ ຝ ພ ຟ ມ ຢ ຣ ລ ວ ຫ ອ ຮ',
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 }

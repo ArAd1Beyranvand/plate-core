@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, valid } from 'plate_core/core/validators/plate_validator';
 
 /** The series letters: A-Y without I, O, Q, S and W; the alphabet folds case, so lowercase passes. */
 const issuedLetter = /^[ABCDEFGHJKLMNPRTUVXY]$/i;

@@ -24,14 +24,10 @@ import 'tunisia_country.dart';
 /// Cells are fixed: the plates are lettered by hand on a proportional face
 /// (the `1` is half a cell) and a `PlateSlot` is a fixed cell.
 abstract final class _Layout {
-  static const double width = 520;
-  static const double height = 110;
-  static const double centre = width / 2;
+  static const double width = 520, height = 110, centre = width / 2;
 
   // Ordinary one-line plate.
-  static const double pitch = 45.6;
-  static const double slotTop = 3;
-  static const double slotHeight = 107;
+  static const double pitch = 45.6, slotTop = 3, slotHeight = 107;
 
   /// تونس is boxed at its ink width; the gaps put its centre 92.8 after the
   /// last series centre and 94.5 before the first number centre.
@@ -40,9 +36,7 @@ abstract final class _Layout {
   static const double tunisGapAfter = 94.5 - pitch / 2 - tunisWidth / 2;
 
   // Two-line plate, 275×200.
-  static const double squareWidth = 275;
-  static const double squareHeight = 200;
-  static const double squarePitch = 44.6;
+  static const double squareWidth = 275, squareHeight = 200, squarePitch = 44.6;
   static const double squareSlotHeight = 100;
   static const double squareRow1Top = 54.2 - squareSlotHeight / 2;
   static const double squareRow2Top = 143 - squareSlotHeight / 2;
@@ -52,38 +46,27 @@ abstract final class _Layout {
   static const double squareRim = 7 / squareHeight;
 
   // Government.
-  static const double govPitch = 46.1;
-  static const double govSlotTop = 1;
-  static const double govSlotHeight = 106;
-  static const double govDashWidth = 28.5;
-  static const double govDashThickness = 11.8;
+  static const double govPitch = 46.1, govSlotTop = 1, govSlotHeight = 106;
+  static const double govDashWidth = 28.5, govDashThickness = 11.8;
   static const double govDashY = 60;
   static const double govGapBefore = 67.4 - govPitch / 2 - govDashWidth / 2;
   static const double govGapAfter = 61.1 - govPitch / 2 - govDashWidth / 2;
 
   // Military.
-  static const double milCentre = 320.3;
-  static const double milSlotTop = 4;
-  static const double milSlotHeight = 106;
+  static const double milCentre = 320.3, milSlotTop = 4, milSlotHeight = 106;
   static const PlateBox milFlag = PlateBox(57.1, 20.3, 79.7, 67.8);
 
   // Diplomatic.
-  static const double dipPitch = 44;
-  static const double dipSlotTop = 0;
-  static const double dipSlotHeight = 104;
-  static const double dipLatinWidth = 75.1;
-  static const double dipArabicWidth = 125;
+  static const double dipPitch = 44, dipSlotTop = 0, dipSlotHeight = 104;
+  static const double dipLatinWidth = 75.1, dipArabicWidth = 125;
 
   /// Gaps between runs, from the measured ink edges.
-  static const double dipGap1 = 131.6 - 113.0;
-  static const double dipGap2 = 229.7 - 206.7;
+  static const double dipGap1 = 131.6 - 113.0, dipGap2 = 229.7 - 206.7;
   static const double dipGap3 = 393.8 - 354.7;
 
   // Temporary and dealer.
-  static const double tmpPitch = 39;
-  static const double tmpDashWidth = 20.5;
-  static const double tmpDashThickness = 11.9;
-  static const double tmpDashY = 56.5;
+  static const double tmpPitch = 39, tmpDashWidth = 20.5;
+  static const double tmpDashThickness = 11.9, tmpDashY = 56.5;
   static const double tmpCaptionWidth = 102;
   static const double tmpGapBefore = 65.7 - tmpPitch / 2 - tmpDashWidth / 2;
   static const double tmpGapAfter =
@@ -99,15 +82,11 @@ abstract final class _Layout {
   static const double tunisGlyph = 92;
 
   /// Smaller on the square, where a three-digit series leaves no room.
-  static const double squareTunisGlyph = 76;
-  static const double tmpCaptionGlyph = 80;
+  static const double squareTunisGlyph = 76, tmpCaptionGlyph = 80;
 
   /// Label box centres, fitted so the ink centres land on the measured ones.
-  static const double tunisY = 50;
-  static const double squareTunisY = 138;
-  static const double dipLatinY = 55.4;
-  static const double dipArabicY = 41;
-  static const double tmpCaptionY = 53;
+  static const double tunisY = 50, squareTunisY = 138, dipLatinY = 55.4;
+  static const double dipArabicY = 41, tmpCaptionY = 53;
 }
 
 /// One stretch of a centred row, left to right: digit cells, a fixed word, a
@@ -152,12 +131,8 @@ final class _Run {
   final String? key;
   final int count;
   final int? minLength;
-  final String? text;
-  final String? font;
-  final double width;
-  final double glyph;
-  final double thickness;
-  final double y;
+  final String? text, font;
+  final double width, glyph, thickness, y;
 }
 
 typedef _Row = ({
@@ -179,11 +154,8 @@ class TunisiaMission {
     required this.arabicGlyph,
   });
 
-  final String id;
-  final String latin;
-  final String arabic;
-  final double latinGlyph;
-  final double arabicGlyph;
+  final String id, latin, arabic;
+  final double latinGlyph, arabicGlyph;
 
   /// Corps diplomatique, `CD س د`. Measured.
   static const TunisiaMission corps = TunisiaMission(
@@ -226,8 +198,7 @@ class TunisiaMission {
 class TunisiaSuffix {
   const TunisiaSuffix({required this.id, required this.arabic});
 
-  final String id;
-  final String arabic;
+  final String id, arabic;
 
   static const TunisiaSuffix suspended = TunisiaSuffix(
     id: 'rs',
@@ -312,9 +283,7 @@ abstract final class TunisiaPlates {
             box: PlateBox(x, top, r.count * pitch, height),
             length: r.count,
             minLength: r.minLength,
-            spacing: r.minLength == null
-                ? max(0, pitch - 0.6 * 0.72 * height)
-                : 0,
+            spacing: r.minLength == null ? plateRunSpacing(pitch, height) : 0,
           ),
         );
         groups.add(PlateTextGroup(<int>[index], key: r.key));

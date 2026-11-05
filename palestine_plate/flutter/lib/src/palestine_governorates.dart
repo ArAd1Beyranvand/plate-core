@@ -20,9 +20,7 @@ enum PSGovernorate {
 
   const PSGovernorate(this.letter, this.arabicName, this.englishName);
 
-  final String letter;
-  final String arabicName;
-  final String englishName;
+  final String letter, arabicName, englishName;
 
   static const List<String> letters = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', //

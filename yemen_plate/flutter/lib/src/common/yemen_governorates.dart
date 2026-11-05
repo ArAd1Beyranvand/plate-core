@@ -34,8 +34,7 @@ enum YemenGovernorate {
   });
 
   final int code;
-  final String englishName;
-  final String arabicName;
+  final String englishName, arabicName;
 
   /// Whether the governorate lies where the 1993 northern format is current.
   /// Advisory and coarse, never enforced: control of Taiz, Al Jawf, Hadhramaut

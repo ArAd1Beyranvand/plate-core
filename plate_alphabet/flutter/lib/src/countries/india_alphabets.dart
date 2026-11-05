@@ -10,8 +10,6 @@ abstract final class IndiaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'in.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// RTO series letters, and the Bharat, vintage and temporary suffixes: I and
@@ -20,8 +18,6 @@ abstract final class IndiaAlphabets {
     id: 'in.series',
     include: 'A-Z',
     exclude: 'I O',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The two-letter state and union-territory codes in current use, and the

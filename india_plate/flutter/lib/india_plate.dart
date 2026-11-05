@@ -4,9 +4,6 @@
 /// transport, rental, electric, diplomatic, ...) is a theme, never a spec.
 library;
 
-// TODO(py): [D5] one module `plates.countries.india`; assets via importlib.resources.
-// TODO(ts): [D5] one subpath export `./countries/india`; tree-shakable.
-// TODO(kt): [D5] package `countries.india` in the countries module.
 export 'src/india_alphabets.dart';
 export 'src/india_colors.dart';
 export 'src/india_country.dart';

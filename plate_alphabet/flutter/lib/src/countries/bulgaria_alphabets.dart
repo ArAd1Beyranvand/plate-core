@@ -21,47 +21,35 @@ abstract final class BulgariaAlphabets {
   static const PlateAlphabet region = PlateAlphabet.pattern(
     id: 'bg.region',
     include: 'A B E K M H O P C T Y X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The nine letters of the series after the digits.
   static const PlateAlphabet series = PlateAlphabet.pattern(
     id: 'bg.series',
     include: 'A B K M H P C T X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// `EA` (electric car) or `EM` (electric motorcycle).
   static const PlateAlphabet electric = PlateAlphabet(
     id: 'bg.electric',
     characters: <String>['E', 'A', 'M'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// `BA` on a military plate, `CP` on a civil-protection plate.
   static const PlateAlphabet service = PlateAlphabet.pattern(
     id: 'bg.service',
     include: 'B A C P',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// `XX`, or `XH` since 2019, on a foreigner's plate.
   static const PlateAlphabet foreign = PlateAlphabet(
     id: 'bg.foreign',
     characters: <String>['X', 'H'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// `C`, `CC` or `CT` on a diplomatic plate.
   static const PlateAlphabet diplomatic = PlateAlphabet(
     id: 'bg.diplomatic',
     characters: <String>['C', 'T'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

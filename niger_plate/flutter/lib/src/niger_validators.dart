@@ -2,16 +2,10 @@ import 'package:plate_core/plate_core.dart';
 
 import 'niger_alphabets.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// Judges a `NigerPlates` value: region digit 1–8, one series letter, a
 /// four-digit serial.
 class NigerValidator extends GatedPlateValidator {
-  const NigerValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const NigerValidator() : super('serial');
 
   static const String reasonRegion = 'The region is a digit from 1 to 8.';
   static const String reasonSeries = 'The series is one letter.';
@@ -44,10 +38,7 @@ class NigerValidator extends GatedPlateValidator {
 
 /// `12345ARN6`: five digits, the fixed `ARN`, and a region digit.
 class NigerStateValidator extends GatedPlateValidator {
-  const NigerStateValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const NigerStateValidator() : super('serial');
 
   @override
   PlateValidation judge(PlateEntry entry) {
@@ -62,10 +53,7 @@ class NigerStateValidator extends GatedPlateValidator {
 }
 
 class NigerMilitaryValidator extends GatedPlateValidator {
-  const NigerMilitaryValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const NigerMilitaryValidator() : super('serial');
 
   @override
   PlateValidation judge(PlateEntry entry) =>
@@ -77,10 +65,7 @@ class NigerMilitaryValidator extends GatedPlateValidator {
 /// `123CMD RN` and `123CD4 RN`: a three-digit country code, and for staff a
 /// further digit the article calls the room.
 class NigerDiplomaticValidator extends GatedPlateValidator {
-  const NigerDiplomaticValidator();
-
-  @override
-  String get gateGroup => 'code';
+  const NigerDiplomaticValidator() : super('code');
 
   @override
   PlateValidation judge(PlateEntry entry) {

@@ -20,14 +20,12 @@ class IndonesiaService {
     this.mark,
   });
 
-  final String id;
-  final String name;
+  final String id, name;
 
   final double rim;
 
   /// The x of the yellow upright between the crest square and the field.
-  final double dividerCentre;
-  final double dividerWidth;
+  final double dividerCentre, dividerWidth;
 
   /// File name of the mark over the serial, in this package's `assets/`;
   /// null for none.

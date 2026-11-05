@@ -17,23 +17,17 @@ abstract final class MontenegroAlphabets {
   static const PlateAlphabet municipality = PlateAlphabet(
     id: 'me.municipality',
     characters: <String>[..._latin, 'Š', 'Ž'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'me.letters',
     include: 'A-Z',
     exclude: 'I O',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'me.diplomatic.letters',
     include: 'A C E M P',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The moped plate's four-character serial mixes letters and digits.
@@ -41,7 +35,5 @@ abstract final class MontenegroAlphabets {
     id: 'me.mixed',
     include: 'A-Z 0-9',
     exclude: 'I O',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

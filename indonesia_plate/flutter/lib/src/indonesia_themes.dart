@@ -15,8 +15,7 @@ import 'indonesia_colors.dart';
 /// outer sliver of field is lost. Corner radius ~8 mm at the rim's outer edge
 /// on both sizes; 0.06 of height gives 8.1 (car) and 6.9 (motorcycle).
 abstract final class IndonesiaThemes {
-  static const double _borderWidthRatio = 0.022;
-  static const double _plateRadiusRatio = 0.06;
+  static const double _borderWidthRatio = 0.022, _plateRadiusRatio = 0.06;
 
   static PlateTheme _livery({
     required Color field,

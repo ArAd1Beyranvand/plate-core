@@ -7,7 +7,5 @@ abstract final class MoldovaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'md.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -29,7 +29,5 @@ abstract final class KyrgyzstanAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'kg.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

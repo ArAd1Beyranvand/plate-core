@@ -11,7 +11,5 @@ abstract final class PakistanAlphabets {
     id: 'pk.letters',
     include: 'A-Z',
     exclude: 'I O U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

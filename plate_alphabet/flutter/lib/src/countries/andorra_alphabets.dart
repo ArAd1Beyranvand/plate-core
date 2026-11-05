@@ -13,7 +13,5 @@ abstract final class AndorraAlphabets {
   static const PlateAlphabet romanMonth = PlateAlphabet(
     id: 'ad.romanMonth',
     characters: <String>['I', 'V', 'X'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

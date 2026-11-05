@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, valid } from 'plate_core/core/validators/plate_validator';
 
 /** Advisory validator for the `XX #### XX` format. */
 export class MaliValidator extends GatedPlateValidator {

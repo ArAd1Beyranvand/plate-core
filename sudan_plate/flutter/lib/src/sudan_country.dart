@@ -6,7 +6,6 @@ import 'sudan_colors.dart';
 abstract final class SudanCountry {
   static const PlateCountry sudan = PlateCountry(
     code: 'sd',
-    captionLines: <String>[],
     panelColor: SudanColors.hologram,
     panelTextColor: SudanColors.privateBlack,
   );

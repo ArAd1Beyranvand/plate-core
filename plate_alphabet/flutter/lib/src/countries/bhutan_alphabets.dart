@@ -12,7 +12,6 @@ abstract final class BhutanAlphabets {
   static const PlateAlphabet area = PlateAlphabet.pattern(
     id: 'alphabet.bt.area',
     include: '1-5',
-    input: AlphabetInput.typed,
     isNumeric: true,
   );
 }

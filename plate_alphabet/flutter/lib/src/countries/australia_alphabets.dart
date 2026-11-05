@@ -14,7 +14,5 @@ abstract final class AustraliaAlphabets {
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'au.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

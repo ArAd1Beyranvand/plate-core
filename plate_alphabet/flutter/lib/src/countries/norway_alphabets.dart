@@ -12,14 +12,10 @@ abstract final class NorwayAlphabets {
     id: 'no.letters',
     include: 'A-Z',
     exclude: 'G I M O Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet(
     id: 'no.diplomatic.letters',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

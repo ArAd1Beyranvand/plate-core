@@ -12,8 +12,6 @@ abstract final class ChileAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cl.letters',
     include: 'B-D F-H J-L P R-T V-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet anyLetters = PlateAlphabet.latinUppercase;
@@ -21,7 +19,5 @@ abstract final class ChileAlphabets {
   static const PlateAlphabet diplomaticLetters = PlateAlphabet.pattern(
     id: 'cl.diplomatic.letters',
     include: 'A C D H I O P T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

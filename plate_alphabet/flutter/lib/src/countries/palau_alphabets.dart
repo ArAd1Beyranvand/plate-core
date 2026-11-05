@@ -11,7 +11,5 @@ abstract final class PalauAlphabets {
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'pw.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

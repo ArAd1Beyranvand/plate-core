@@ -1,4 +1,4 @@
-import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from '../../core/validators/plate_validator';
+import { GatedPlateValidator, type PlateEntry, type PlateValidation, invalid, isDigits, isDigitsOfLength, valid } from 'plate_core/core/validators/plate_validator';
 
 /** Wilaya codes 01–69: the original 48, those issued since 2022, and those accepted from 2027. */
 const wilayas: ReadonlySet<string> = new Set(Array.from({ length: 69 }, (_, i) => String(i + 1).padStart(2, '0')));

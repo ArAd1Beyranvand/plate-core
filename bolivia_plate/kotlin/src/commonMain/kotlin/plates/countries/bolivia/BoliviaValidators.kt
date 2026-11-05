@@ -1,8 +1,10 @@
 package plates.countries.bolivia
 
 import plates.core.validators.GatedPlateValidator
+import plates.core.validators.PlateCheck
 import plates.core.validators.PlateEntry
 import plates.core.validators.PlateValidation
+import plates.core.validators.RuledPlateValidator
 import plates.core.validators.isDigits
 import plates.core.validators.isDigitsOfLength
 import plates.core.validators.isLetters
@@ -50,17 +52,9 @@ class BoliviaSpecialValidator : GatedPlateValidator() {
 }
 
 /** Judges a `BoliviaPlates.mercosur` value: two letters and five digits. */
-class BoliviaMercosurValidator : GatedPlateValidator() {
-    override val gateGroup = "number"
-
-    override fun judge(entry: PlateEntry): PlateValidation {
-        if (!isLetters(entry.group("letters"), 2)) return PlateValidation.invalid(REASON_LETTERS)
-        if (!isDigitsOfLength(entry.group("number"), 5)) return PlateValidation.invalid(REASON_NUMBER)
-        return PlateValidation.valid
-    }
-
-    companion object {
-        const val REASON_LETTERS = "The series is two letters."
-        const val REASON_NUMBER = "The number is five digits."
-    }
+class BoliviaMercosurValidator : RuledPlateValidator() {
+    override val checks = listOf(
+        PlateCheck("letters", "[A-Z]{2}", "The series is two letters."),
+        PlateCheck("number", "[0-9]{5}", "The number is five digits."),
+    )
 }

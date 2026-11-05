@@ -9,7 +9,5 @@ abstract final class SaintHelenaAlphabets {
   static const PlateAlphabet government = PlateAlphabet(
     id: 'sh.government',
     characters: <String>['S', 'H', 'G'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

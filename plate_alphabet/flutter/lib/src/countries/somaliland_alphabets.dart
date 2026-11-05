@@ -22,15 +22,12 @@ abstract final class SomalilandAlphabets {
   static const PlateAlphabet serial = PlateAlphabet.pattern(
     id: 'xs.serial',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet region = PlateAlphabet(
     id: 'xs.region',
     characters: regionCodes,
     input: AlphabetInput.chosen,
-    isNumeric: false,
     placeholder: '??',
   );
 }

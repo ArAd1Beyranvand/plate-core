@@ -10,7 +10,5 @@ abstract final class DemocraticRepublicOfTheCongoAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cd.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

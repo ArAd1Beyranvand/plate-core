@@ -12,7 +12,6 @@ abstract final class YemenCountry {
   /// The side panel without a caption; [unifiedFor] picks the captioned ones.
   static const PlateCountry unified = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: YemenColors.unifiedSidePanel,
     panelTextColor: YemenColors.unifiedInk,
     flag: null,
@@ -101,7 +100,6 @@ abstract final class YemenCountry {
   /// White ink, no usage word (see [YemenUsage.government]).
   static const PlateCountry northernGovernment = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: _transparent,
     panelTextColor: YemenColors.lightInk,
     flag: null,
@@ -110,7 +108,6 @@ abstract final class YemenCountry {
   /// White ink, no usage word.
   static const PlateCountry northernMilitaryClassic = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: _transparent,
     panelTextColor: YemenColors.lightInk,
     flag: null,
@@ -119,7 +116,6 @@ abstract final class YemenCountry {
   /// Red ink, no usage word; told from [northernMilitaryClassic] by the theme.
   static const PlateCountry northernMilitaryModern = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: _transparent,
     panelTextColor: YemenColors.militaryRed,
     flag: null,
@@ -140,7 +136,6 @@ abstract final class YemenCountry {
   /// Private: blue strip.
   static const PlateCountry southernPrivate = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: YemenColors.southernBlue,
     panelTextColor: YemenColors.southernInk,
   );
@@ -148,7 +143,6 @@ abstract final class YemenCountry {
   /// Taxis and buses: yellow strip. Also Marib's motorcycle band.
   static const PlateCountry southernForHire = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: YemenColors.southernYellow,
     panelTextColor: YemenColors.southernInk,
   );
@@ -156,7 +150,6 @@ abstract final class YemenCountry {
   /// Trucks and vans: red strip.
   static const PlateCountry southernCommercial = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: YemenColors.southernRed,
     panelTextColor: YemenColors.southernInk,
   );
@@ -164,7 +157,6 @@ abstract final class YemenCountry {
   /// Government: green strip.
   static const PlateCountry southernGovernment = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: YemenColors.southernGreen,
     panelTextColor: YemenColors.southernInk,
   );
@@ -187,7 +179,6 @@ abstract final class YemenCountry {
   /// Aden and Taiz print no country block.
   static const PlateCountry plain = PlateCountry(
     code: 'ye',
-    captionLines: <String>[],
     panelColor: _transparent,
     panelTextColor: YemenColors.southernInk,
   );

@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:plate_core/plate_core.dart';
-import 'package:flutter/material.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:india_plate/india_plate.dart';
@@ -32,38 +32,15 @@ void main() {
       spec,
       value.split(' ').map<String?>((v) => v.isEmpty ? null : v).toList(),
     );
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 760,
-              height: 760 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: IndiaCountry.india,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: theme,
+      country: IndiaCountry.india,
+      stage: Size(760, 760 * spec.canvasHeight / spec.canvasWidth),
+      decodeDelay: const Duration(milliseconds: 50),
     );
-    // The chakra decal decodes off the real event loop, which fake time does
-    // not advance; give it a real slice of time before the golden is taken.
-    await tester.runAsync(
-      () => Future<void>.delayed(const Duration(milliseconds: 50)),
-    );
-    await tester.pumpAndSettle();
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   final cases = <(String, PlateSpec, PlateTheme, String)>[

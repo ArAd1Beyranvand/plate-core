@@ -18,8 +18,6 @@ abstract final class ArmeniaAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'am.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Diplomatic class: `D` for a diplomat, `T` for a technician. A separate
@@ -28,7 +26,6 @@ abstract final class ArmeniaAlphabets {
     id: 'am.diplomaticClass',
     characters: <String>['D', 'T'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// The country code a diplomatic plate ends with: `AM`, or `ARM` on newer
@@ -37,7 +34,6 @@ abstract final class ArmeniaAlphabets {
     id: 'am.diplomaticCountry',
     characters: <String>['AM', 'ARM'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// Bus class: `S` city bus, `L` long-range coach.
@@ -45,7 +41,6 @@ abstract final class ArmeniaAlphabets {
     id: 'am.busClass',
     characters: <String>['S', 'L'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
   );
 
   /// Ministry of Defence class, stored as ASCII `M` and `T` and rendered `Մ`
@@ -54,7 +49,6 @@ abstract final class ArmeniaAlphabets {
     id: 'am.militaryClass',
     characters: <String>['M', 'T'],
     input: AlphabetInput.chosen,
-    isNumeric: false,
     glyphs: <String, String>{
       'M': 'Մ', // մարդատար — passenger
       'T': 'Տ', // տրանսպորտ — transport

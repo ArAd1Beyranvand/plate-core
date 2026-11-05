@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
 
@@ -34,23 +32,15 @@ import 'algeria_regions.dart';
 /// cells; `spacing` brings the font's advance up to the measured pitch. The
 /// regulation's narrow 20 mm `1` is not modelled.
 abstract final class _Layout {
-  static const double width = 520;
-  static const double height = 110;
-  static const double slotTop = 2;
-  static const double slotHeight = 104;
-  static const double left = 14;
-  static const double pitch = 45.6;
-  static const double groupGap = 18;
+  static const double width = 520, height = 110, slotTop = 2, slotHeight = 104;
+  static const double left = 14, pitch = 45.6, groupGap = 18;
 
   // Two-line, 275×200, from the article's regulation text alone — no image.
   // Digits 30 wide with 10 between them: pitch 40. Two 75 mm rows with equal
   // air around them centre at 54.2 and 145.8. The group gap is the
   // single-line one scaled to the pitch.
-  static const double twoWidth = 275;
-  static const double twoHeight = 200;
-  static const double twoPitch = 40;
-  static const double twoGap = 16;
-  static const double twoSlotHeight = 92;
+  static const double twoWidth = 275, twoHeight = 200, twoPitch = 40;
+  static const double twoGap = 16, twoSlotHeight = 92;
   static const double twoRow1Top = 54.2 - twoSlotHeight / 2;
   static const double twoRow2Top = 145.8 - twoSlotHeight / 2;
 
@@ -62,12 +52,8 @@ abstract final class _Layout {
   static const double hyphenGlyph = 58;
 
   // Army.
-  static const double armyLeft = 108.2;
-  static const double armyPitch = 42.8;
-  static const double armySlotTop = 3;
-  static const double roundelLeft = 46.7;
-  static const double roundelTop = 31;
-  static const double roundelSize = 58;
+  static const double armyLeft = 108.2, armyPitch = 42.8, armySlotTop = 3;
+  static const double roundelLeft = 46.7, roundelTop = 31, roundelSize = 58;
 }
 
 /// Algeria's plate geometries. Front and rear singleLine plates share a spec;
@@ -81,103 +67,79 @@ abstract final class _Layout {
 /// digits with "the rest the same", i.e. 10 mm between them, which cannot
 /// put five digits on a 140 mm row.
 abstract final class AlgeriaPlates {
-  static const List<PlateTextGroup> _civilGroups = <PlateTextGroup>[
-    PlateTextGroup(<int>[0], key: 'serial'),
-    PlateTextGroup(<int>[1], key: 'type'),
-    PlateTextGroup(<int>[2], key: 'wilaya'),
+  static const PlateAlphabet _digits = AlgeriaAlphabets.digits;
+
+  /// Serial, vehicle type and wilaya, for the civil plates.
+  static const List<PlateRowRun> _serial = [
+    PlateRowRun(_digits, 5, group: 'serial'),
+  ];
+  static const List<PlateRowRun> _typeWilaya = [
+    PlateRowRun(_digits, 3, group: 'type'),
+    PlateRowRun(_digits, 2, group: 'wilaya'),
   ];
 
-  /// [count] digits over [count] cells of [pitch]; spacing is what remains of
-  /// the pitch after a digit's ~0.6 em advance at 0.72 of [height].
-  static PlateSlot _field(
-    int count, {
-    required double left,
-    required double top,
-    required double pitch,
-    required double height,
-    int? minLength,
-  }) => PlateSlot(
-    alphabet: AlgeriaAlphabets.digits,
-    box: PlateBox(left, top, count * pitch, height),
-    length: count,
-    minLength: minLength,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  static final PlateSpec singleLine = PlateSpec(
+    id: 'dz.singleLine',
+    country: AlgeriaCountry.algeria,
+    canvasWidth: _Layout.width,
+    canvasHeight: _Layout.height,
+    noPanel: true,
+    panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
+    slots: plateRow(
+      [..._serial, ..._typeWilaya],
+      left: _Layout.left,
+      top: _Layout.slotTop,
+      height: _Layout.slotHeight,
+      pitch: _Layout.pitch,
+      gap: _Layout.groupGap,
+    ).slots,
+    resolveRegion: AlgeriaRegions.captionOf,
   );
 
-  static final PlateSpec singleLine = () {
-    const double p = _Layout.pitch;
-    const double typeLeft = _Layout.left + 5 * p + _Layout.groupGap;
-    const double wilayaLeft = typeLeft + 3 * p + _Layout.groupGap;
-    PlateSlot group(int n, double left, {int? minLength}) => _field(
-      n,
-      minLength: minLength,
-      left: left,
-      top: _Layout.slotTop,
-      pitch: p,
-      height: _Layout.slotHeight,
-    );
-    return PlateSpec(
-      id: 'dz.singleLine',
-      country: AlgeriaCountry.algeria,
-      canvasWidth: _Layout.width,
-      canvasHeight: _Layout.height,
-      noPanel: true,
-      panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[
-        group(5, _Layout.left),
-        group(3, typeLeft),
-        group(2, wilayaLeft),
-      ],
-      textGroups: _civilGroups,
-      resolveRegion: AlgeriaRegions.captionOf,
-    );
-  }();
-
   static final PlateSpec twoLine = () {
-    const double p = _Layout.twoPitch;
-    const double w = _Layout.twoWidth;
-    const double lowerLeft = (w - (5 * p + _Layout.twoGap)) / 2;
-    PlateSlot group(int n, double left, double top) => _field(
-      n,
-      left: left,
+    PlateRowLayout row(List<PlateRowItem> items, double top) => plateRow(
+      items,
+      centre: _Layout.twoWidth / 2,
       top: top,
-      pitch: p,
       height: _Layout.twoSlotHeight,
+      pitch: _Layout.twoPitch,
+      gap: _Layout.twoGap,
     );
     return PlateSpec(
       id: 'dz.twoLine',
       country: AlgeriaCountry.algeria,
-      canvasWidth: w,
+      canvasWidth: _Layout.twoWidth,
       canvasHeight: _Layout.twoHeight,
       // The theme's rim ratio is of a 110 mm height; keep the rim 4.3 mm.
       borderWidthRatioOverride: 4.3 / _Layout.twoHeight,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.twoHeight)),
-      slots: <PlateSlot>[
-        group(5, (w - 5 * p) / 2, _Layout.twoRow1Top),
-        group(3, lowerLeft, _Layout.twoRow2Top),
-        group(2, lowerLeft + 3 * p + _Layout.twoGap, _Layout.twoRow2Top),
+      slots: [
+        ...row(_serial, _Layout.twoRow1Top).slots,
+        ...row(_typeWilaya, _Layout.twoRow2Top).slots,
       ],
-      textGroups: _civilGroups,
       resolveRegion: AlgeriaRegions.captionOf,
     );
   }();
 
-  /// `NNN-NN-NN`: the vehicle's number, whether it serves a diplomat or the
-  /// embassy's staff, and the embassy (27 Italy, 37 Norway).
   static final PlateSpec diplomatic = () {
-    const double p = _Layout.pitch;
-    const double h = _Layout.hyphenWidth;
-    const double left = (_Layout.width - (7 * p + 2 * h)) / 2;
-    const double statusLeft = left + 3 * p + h;
-    const double missionLeft = statusLeft + 2 * p + h;
-    PlateSlot group(int n, double left, {int? minLength}) => _field(
-      n,
-      minLength: minLength,
-      left: left,
+    const hyphen = PlateRowText.styled(
+      '-',
+      _Layout.hyphenWidth,
+      glyphHeight: _Layout.hyphenGlyph,
+    );
+    final row = plateRow(
+      const [
+        PlateRowRun(_digits, 3, group: 'serial', minLength: 1),
+        hyphen,
+        PlateRowRun(_digits, 2, group: 'status'),
+        hyphen,
+        PlateRowRun(_digits, 2, group: 'mission'),
+      ],
+      centre: _Layout.width / 2,
       top: _Layout.slotTop,
-      pitch: p,
       height: _Layout.slotHeight,
+      pitch: _Layout.pitch,
     );
     return PlateSpec(
       id: 'dz.diplomatic',
@@ -186,34 +148,11 @@ abstract final class AlgeriaPlates {
       canvasHeight: _Layout.height,
       noPanel: true,
       panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-      slots: <PlateSlot>[
-        group(3, left, minLength: 1),
-        group(2, statusLeft),
-        group(2, missionLeft),
-      ],
-      labels: <PlateLabel>[_hyphen(left + 3 * p), _hyphen(statusLeft + 2 * p)],
-      textGroups: const <PlateTextGroup>[
-        PlateTextGroup(<int>[0], key: 'serial'),
-        PlateTextGroup(<int>[1], key: 'status'),
-        PlateTextGroup(<int>[2], key: 'mission'),
-      ],
+      slots: row.slots,
+      labels: row.labels,
     );
   }();
 
-  static PlateLabel _hyphen(double left) => PlateLabel(
-    text: '-',
-    box: PlateBox(
-      left,
-      _Layout.slotTop,
-      _Layout.hyphenWidth,
-      _Layout.slotHeight,
-    ),
-    glyphHeight: _Layout.hyphenGlyph,
-  );
-
-  /// Nine digits at an even pitch. The article documents no army format, so
-  /// this is the one plate on the page. Its outline — the bottom corners are
-  /// cut away under the flag — is drawn as the plain rectangle.
   static final PlateSpec army = PlateSpec(
     id: 'dz.army',
     country: AlgeriaCountry.algeria,
@@ -221,20 +160,19 @@ abstract final class AlgeriaPlates {
     canvasHeight: _Layout.height,
     noPanel: true,
     panel: const PlatePanel(box: PlateBox(0, 0, 0, _Layout.height)),
-    slots: <PlateSlot>[
-      _field(
+    slots: [
+      plateRun(
+        _digits,
         9,
         left: _Layout.armyLeft,
         top: _Layout.armySlotTop,
         pitch: _Layout.armyPitch,
         height: _Layout.slotHeight,
+        group: 'serial',
       ),
     ],
     decals: const <PlateDecal>[
       PlateDecal(
-        // TODO(py): [H2][D6] ImageProvider: reference the raster as package + path; importlib.resources.
-        // TODO(ts): [H2][D6] ImageProvider: reference the raster as package + path; import as asset URL.
-        // TODO(kt): [H2][D6] ImageProvider: reference the raster as package + path; Res/compose resources.
         image: AssetImage('assets/dz_roundel.png', package: 'algeria_plate'),
         box: PlateBox(
           _Layout.roundelLeft,
@@ -243,9 +181,6 @@ abstract final class AlgeriaPlates {
           _Layout.roundelSize,
         ),
       ),
-    ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'serial'),
     ],
   );
 }

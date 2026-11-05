@@ -10,14 +10,10 @@ abstract final class FinlandAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'fi.letters',
     include: 'A-Z Å Ä Ö',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet diplomaticLetters = PlateAlphabet(
     id: 'fi.diplomatic.letters',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

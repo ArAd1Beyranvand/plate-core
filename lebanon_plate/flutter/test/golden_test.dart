@@ -1,4 +1,5 @@
 import 'package:plate_core/plate_core.dart';
+import 'package:plate_core/testing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:lebanon_plate/lebanon_plate.dart';
@@ -23,35 +24,14 @@ void main() {
     final theme = LebanonThemes.forUsage(usage);
     final controller = PlateController.fromValues(spec, values);
 
-    await tester.pumpWidget(
-      MaterialApp(
-        home: Scaffold(
-          body: Center(
-            child: SizedBox(
-              width: 520,
-              height: 520 * spec.canvasHeight / spec.canvasWidth,
-              child: PlateThemeScope(
-                theme: theme,
-                child: PlateView(
-                  controller: controller,
-                  theme: theme,
-                  country: LebanonCountry.forUsage(usage),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    await pumpPlateGolden(
+      tester,
+      controller,
+      'goldens/$name.png',
+      theme: theme,
+      country: LebanonCountry.forUsage(usage),
+      stage: Size(520, 520 * spec.canvasHeight / spec.canvasWidth),
     );
-    await tester.pumpAndSettle();
-
-    await expectLater(
-      find.byType(PlateView),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-
-    await tester.pumpWidget(const SizedBox.shrink());
-    controller.dispose();
   }
 
   const List<String?> beirut = <String?>['B', '123456'];

@@ -13,7 +13,5 @@ abstract final class BoliviaAlphabets {
   static const PlateAlphabet departments = PlateAlphabet.pattern(
     id: 'bo.department',
     include: 'C H B L O N P S T',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

@@ -11,7 +11,5 @@ abstract final class ItalyAlphabets {
     id: 'it.letters',
     include: 'A-Z',
     exclude: 'I O Q U',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

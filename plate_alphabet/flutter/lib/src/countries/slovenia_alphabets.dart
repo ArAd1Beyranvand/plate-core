@@ -19,31 +19,23 @@ abstract final class SloveniaAlphabets {
     id: 'si.region.letters',
     include: 'B-S',
     exclude: 'D F H I Q',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'si.letters',
     include: 'A-Z',
     exclude: 'Q W X Y',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The single `P` of a police plate.
   static const PlateAlphabet policeLetter = PlateAlphabet(
     id: 'si.police.letter',
     characters: <String>['P'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// The `CD` of a diplomatic plate.
   static const PlateAlphabet diplomaticLetters = PlateAlphabet(
     id: 'si.diplomatic.letters',
     characters: <String>['C', 'D'],
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

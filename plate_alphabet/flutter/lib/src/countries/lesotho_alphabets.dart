@@ -8,7 +8,5 @@ abstract final class LesothoAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'ls.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

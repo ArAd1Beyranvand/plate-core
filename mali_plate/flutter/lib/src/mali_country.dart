@@ -7,7 +7,6 @@ abstract final class MaliCountry {
 
   static const PlateCountry mali = PlateCountry(
     code: 'ml',
-    captionLines: <String>[],
     panelColor: _transparent,
     panelTextColor: _transparent,
     flagAspectRatio: 2,

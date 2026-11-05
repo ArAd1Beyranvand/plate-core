@@ -15,8 +15,7 @@ import 'venezuela_themes.dart';
 /// AA064ST Trujillo, AE328KG Carabobo), each perspective-corrected so the outer
 /// edge of its frame maps to 300×150. Figures are the mean across photographs.
 abstract final class _Layout {
-  static const double width = 300;
-  static const double height = 150;
+  static const double width = 300, height = 150;
 
   /// The flag's boundaries where they cross x = 150: white/yellow 49.1 (Lara);
   /// yellow/blue 84.0, 82.6, 85.8; blue/red 119.4, 116.7, 120.1.
@@ -46,10 +45,8 @@ abstract final class _Layout {
   /// width is what limits the glyph. An editable cell does not scale its text
   /// down, so the slot is the height whose bold cap fits the 38.9 cell —
   /// 0.72 x 80 = 57.6 font, ~37 wide. Ink lands ~41 tall (~55%). See README.
-  static const double pitch = 38.9;
-  static const double serialLeft = 150 - 3.5 * pitch;
-  static const double slotTop = 74.2 - slotHeight / 2;
-  static const double slotHeight = 80;
+  static const double pitch = 38.9, serialLeft = 150 - 3.5 * pitch;
+  static const double slotTop = 74.2 - slotHeight / 2, slotHeight = 80;
 
   /// REPUBLICA BOLIVARIANA DE VENEZUELA: caps 11.8 (Lara) and 13.8
   /// (Trujillo) tall at y 16.8..28.5, x 31.2..272.8 — centred (151.5, 22.6),
@@ -108,16 +105,14 @@ abstract final class VenezuelaPlates {
       ),
     ],
     slots: <PlateSlot>[
-      PlateSlot(
-        alphabet: VenezuelaAlphabets.serial,
-        box: PlateBox(
-          _Layout.serialLeft,
-          _Layout.slotTop,
-          6 * _Layout.pitch,
-          _Layout.slotHeight,
-        ),
-        length: 6,
-        spacing: math.max(0, _Layout.pitch - 0.6 * 0.72 * _Layout.slotHeight),
+      plateRun(
+        VenezuelaAlphabets.serial,
+        6,
+        left: _Layout.serialLeft,
+        top: _Layout.slotTop,
+        pitch: _Layout.pitch,
+        height: _Layout.slotHeight,
+        group: 'serial',
       ),
       PlateSlot(
         alphabet: VenezuelaAlphabets.state,
@@ -127,6 +122,7 @@ abstract final class VenezuelaPlates {
           _Layout.pitch,
           _Layout.slotHeight,
         ),
+        group: 'state',
       ),
     ],
     mirrors: const <PlateMirror>[
@@ -136,10 +132,6 @@ abstract final class VenezuelaPlates {
         glyphHeight: _Layout.stateGlyph,
         alphabet: VenezuelaAlphabets.stateName,
       ),
-    ],
-    textGroups: const <PlateTextGroup>[
-      PlateTextGroup(<int>[0], key: 'serial'),
-      PlateTextGroup(<int>[1], key: 'state'),
     ],
   );
 

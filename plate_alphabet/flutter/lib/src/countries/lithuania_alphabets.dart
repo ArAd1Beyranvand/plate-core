@@ -11,7 +11,5 @@ abstract final class LithuaniaAlphabets {
     id: 'lt.letters',
     include: 'A-Z',
     exclude: 'Q W X',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

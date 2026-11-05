@@ -1,16 +1,10 @@
 import 'package:plate_core/plate_core.dart';
 
-// TODO(py): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(ts): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
-// TODO(kt): [D4-code] hand-port; reason strings are the contract, keep them byte-identical.
 /// An ordinary registration on `TunisiaPlates.standard` or `square`: a series
 /// of up to three digits with no leading zero (older series stay on the
 /// road), then a registration of 0001-9999. Reports, never bars a keystroke.
 class TunisiaValidator extends GatedPlateValidator {
-  const TunisiaValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const TunisiaValidator() : super('number');
 
   static const String reasonSeries = 'The series is 1 to 999.';
   static const String reasonNumber = 'The registration is four digits.';
@@ -44,10 +38,7 @@ class TunisiaValidator extends GatedPlateValidator {
 
 /// A two-digit ministry code and the vehicle's number.
 class TunisiaGovernmentValidator extends GatedPlateValidator {
-  const TunisiaGovernmentValidator();
-
-  @override
-  String get gateGroup => 'number';
+  const TunisiaGovernmentValidator() : super('number');
 
   static const String reasonMinistry = 'The ministry code is two digits.';
   static const String reasonNumber = 'The vehicle number is one to six digits.';
@@ -68,12 +59,9 @@ class TunisiaGovernmentValidator extends GatedPlateValidator {
 /// Two two-digit numbers. An ambassador's `CMD` plate always ends `01`; pass
 /// [chief] for that spec.
 class TunisiaDiplomaticValidator extends GatedPlateValidator {
-  const TunisiaDiplomaticValidator({this.chief = false});
+  const TunisiaDiplomaticValidator({this.chief = false}) : super('serial');
 
   final bool chief;
-
-  @override
-  String get gateGroup => 'serial';
 
   static const String reasonDigits = 'Both numbers are two digits.';
   static const String reasonChief = "A head of mission's plate ends 01.";
@@ -94,10 +82,7 @@ class TunisiaDiplomaticValidator extends GatedPlateValidator {
 
 /// The five-digit serial of a military or temporary plate.
 class TunisiaSerialValidator extends GatedPlateValidator {
-  const TunisiaSerialValidator();
-
-  @override
-  String get gateGroup => 'serial';
+  const TunisiaSerialValidator() : super('serial');
 
   static const String reasonSerial = 'The serial is five digits.';
 

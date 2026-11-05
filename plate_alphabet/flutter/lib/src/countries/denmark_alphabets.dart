@@ -10,7 +10,5 @@ abstract final class DenmarkAlphabets {
   static const PlateAlphabet vanity = PlateAlphabet.pattern(
     id: 'dk.vanity',
     include: 'A-Z Æ Ø Å 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

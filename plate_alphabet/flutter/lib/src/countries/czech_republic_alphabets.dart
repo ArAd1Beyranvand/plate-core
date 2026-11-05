@@ -11,15 +11,11 @@ abstract final class CzechRepublicAlphabets {
   static const PlateAlphabet letters = PlateAlphabet.pattern(
     id: 'cz.letters',
     include: 'A-Z',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 
   /// Fields that mix both, such as `1A2`, `B174` and personalised plates.
   static const PlateAlphabet alphanumeric = PlateAlphabet.pattern(
     id: 'cz.alphanumeric',
     include: 'A-Z 0-9',
-    input: AlphabetInput.typed,
-    isNumeric: false,
   );
 }

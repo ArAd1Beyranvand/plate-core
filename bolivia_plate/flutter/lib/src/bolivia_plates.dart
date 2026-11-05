@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:plate_alphabet/plate_alphabet.dart';
 import 'package:flutter/widgets.dart';
 import 'package:plate_core/plate_core.dart';
@@ -43,9 +41,7 @@ import 'bolivia_regions.dart';
 /// six-digit control number under the department letter, and the Mercosur
 /// emblem.
 abstract final class _Layout {
-  static const double width = 300;
-  static const double height = 152;
-  static const double centre = width / 2;
+  static const double width = 300, height = 152, centre = width / 2;
 
   // Shared by the PTA and diplomatic plates.
   static const PlateBox caption = PlateBox(70, 14, 160, 30);
@@ -66,38 +62,29 @@ abstract final class _Layout {
 
   /// Centred on the `L`'s ink (y 27.9); 19.9 mm of ink / 0.55.
   static const PlateBox department = PlateBox(248, 9.9, 41.7, 36);
-  static const double pitch = 37;
-  static const double serialTop = 39.3;
-  static const double serialHeight = 110;
+  static const double pitch = 37, serialTop = 39.3, serialHeight = 110;
 
   // Diplomatic.
-  static const double dipPitch = 43;
-  static const double dipLeft = 33.9 - dipPitch / 2;
-  static const double dipRight = 266 + dipPitch / 2;
-  static const double dipSerialTop = 40.5;
+  static const double dipPitch = 43, dipLeft = 33.9 - dipPitch / 2;
+  static const double dipRight = 266 + dipPitch / 2, dipSerialTop = 40.5;
   static const double dipSerialHeight = 110;
 
   /// The code's box, between the two digit pairs, centred on the `CD` ink
   /// (x 147.9, y 95.5).
   static const PlateBox dipCode = PlateBox(105, 65.5, 85.8, 60);
-  static const double dipCodeGlyph = 70;
-  static const double dotSize = 2.6;
+  static const double dipCodeGlyph = 70, dotSize = 2.6;
   static const double dotY = 98.5 - dotSize / 2;
   static const List<double> dotX = <double>[101.2, 197];
   static const PlateBox dipFlag = PlateBox(248.3, 16.2, 34.2, 23.4);
 
   // Mercosur, 400×130.
-  static const double mWidth = 400;
-  static const double mHeight = 130;
-  static const double mBand = 34.5;
+  static const double mWidth = 400, mHeight = 130, mBand = 34.5;
   static const PlateBox mCaption = PlateBox(150, 6, 105, 26);
   static const double mCaptionGlyph = 24;
   static const PlateBox mFlag = PlateBox(361, 9.9, 33.3, 22.2);
-  static const double mLetterPitch = 46.6;
-  static const double mDigitPitch = 47.3;
+  static const double mLetterPitch = 46.6, mDigitPitch = 47.3;
   static const double mLettersLeft = 44.2 - mLetterPitch / 2;
-  static const double mDigitsLeft = 170.8 - mDigitPitch / 2;
-  static const double mSerialTop = 32.4;
+  static const double mDigitsLeft = 170.8 - mDigitPitch / 2, mSerialTop = 32.4;
   static const double mSerialHeight = 90;
 }
 
@@ -167,10 +154,7 @@ class BoliviaMission {
     required this.spanish,
   });
 
-  final String id;
-  final String code;
-  final String english;
-  final String spanish;
+  final String id, code, english, spanish;
 
   static const BoliviaMission consular = BoliviaMission(
     id: 'cc',
@@ -213,11 +197,13 @@ abstract final class BoliviaPlates {
     double pitch,
     double top,
     double height,
-  ) => PlateSlot(
-    alphabet: alphabet,
-    box: PlateBox(left, top, count * pitch, height),
-    length: count,
-    spacing: max(0, pitch - 0.6 * 0.72 * height),
+  ) => plateRun(
+    alphabet,
+    count,
+    left: left,
+    top: top,
+    pitch: pitch,
+    height: height,
   );
 
   /// The PTA plate, `1234ABC`; three-digit numbers stay centred.
