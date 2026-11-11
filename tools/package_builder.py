@@ -7,14 +7,14 @@ A country is rebuilt only when its sources, or the shared core of that language,
 successful build here (fingerprints in tools/package_builder_state.json) or its output is missing.
 Flutter is not built here: the website build does it.
 """
-import hashlib, json, os, re, sys
+import hashlib, json, os, re, subprocess, sys
 from pathlib import Path
 
-from PySide6.QtCore import QObject, QProcess, Qt, QThread, Signal
+from PySide6.QtCore import QObject, QProcess, QProcessEnvironment, Qt, QThread, Signal
 from PySide6.QtGui import QColor, QFont
 from PySide6.QtWidgets import (QApplication, QCheckBox, QFrame, QHBoxLayout, QLabel, QLineEdit, QMainWindow,
                                QPlainTextEdit, QProgressBar, QPushButton, QTableWidget, QTableWidgetItem,
-                               QVBoxLayout, QWidget, QHeaderView)
+                               QVBoxLayout, QWidget, QHeaderView, QSpinBox)
 
 ROOT = Path(__file__).resolve().parents[1]
 CORE = ROOT / "plate_core"
@@ -48,6 +48,10 @@ LANGS = [
           lambda c: CORE / "python/plates/countries" / c, lambda c: [CORE / "data/countries" / f"{c}_plate.json"],
           "python"),
 ]
+
+
+# Per-asset webpack/yarn chatter that drowns the one line per country the log is for.
+NOISE = re.compile(r"\s*(\./kotlin/|asset |runtime modules|cacheable modules|webpack \d|warning (Waiting for the other yarn|Ignored scripts))")
 
 
 def files_in(path, prune=None):
@@ -157,7 +161,7 @@ class Window(QMainWindow):
         super().__init__()
         self.setWindowTitle("Package Builder")
         self.resize(1180, 820)
-        self.status, self.fps, self.queue, self.proc, self.running = {}, {}, [], None, None
+        self.status, self.fps, self.queue, self.pending, self.procs = {}, {}, [], [], set()
         root = QWidget()
         root.setObjectName("root")
         self.setCentralWidget(root)
@@ -203,6 +207,10 @@ class Window(QMainWindow):
 
         foot = QHBoxLayout()
         self.force = QCheckBox("Force rebuild (ignore up-to-date)")
+        self.jobs = QSpinBox()
+        self.jobs.setRange(1, os.cpu_count() or 4)
+        self.jobs.setValue(min(3, max(1, (os.cpu_count() or 4) // 4)))
+        self.jobs.setPrefix("Parallel jobs: ")
         self.summary = QLabel("")
         self.summary.setObjectName("hint")
         self.go, self.stop = QPushButton("Build"), QPushButton("Cancel")
@@ -212,7 +220,7 @@ class Window(QMainWindow):
         self.stop.setEnabled(False)
         self.rescan = QPushButton("Rescan")
         self.rescan.clicked.connect(self.scan)
-        for w in (self.force, self.summary):
+        for w in (self.force, self.jobs, self.summary):
             foot.addWidget(w)
         foot.addStretch(1)
         for w in (self.rescan, self.stop, self.go):
@@ -289,7 +297,7 @@ class Window(QMainWindow):
         jobs = self.plan()
         n = sum(len(cs) for _, cs in jobs)
         self.summary.setText(f"{n} build{'s' * (n != 1)} queued" if n else "Nothing to build — everything selected is up to date")
-        self.go.setEnabled(bool(n) and self.proc is None)
+        self.go.setEnabled(bool(n) and not self.procs)
 
     # --- building -------------------------------------------------------------------------------
     def build(self):
@@ -301,38 +309,53 @@ class Window(QMainWindow):
         self.log.clear()
         self.stop.setEnabled(True)
         self.go.setEnabled(False)
+        self.pending = self.tasks()
         self.next_job()
 
-    def next_job(self):
-        if not self.queue:
-            return self.finish()
-        lang, cs = self.queue.pop(0)
-        self.running = (lang, cs, set())
-        if self.force.isChecked():
-            for c in cs:
-                for s in lang["stamps"]:
-                    (CORE / s.format(c=c)).unlink(missing_ok=True)
-        cmd = lang["cmd"](cs)
-        self.say(f"\n▶ {lang['label']}: {len(cs)} countr{'ies' if len(cs) != 1 else 'y'}\n$ {' '.join(cmd[:3])}{' …' if len(cmd) > 3 else ''}\n")
-        self.proc = QProcess(self)
-        self.proc.setWorkingDirectory(str(lang["cwd"]))
-        self.proc.setProcessChannelMode(QProcess.MergedChannels)
-        self.proc.readyReadStandardOutput.connect(self.read)
-        self.proc.finished.connect(self.job_done)
-        self.proc.errorOccurred.connect(lambda e: self.say(f"✖ could not start: {e}\n") if e == QProcess.FailedToStart else None)
-        self.proc.start(cmd[0], cmd[1:])
+    def tasks(self):
+        """Plan -> processes. TypeScript is split into one chunk per job; Kotlin links `jobs` countries at once inside
+        its own build.mjs (PLATE_KT_JOBS); Python rewrites its shared archive on every run, so it stays one process."""
+        n, out = self.jobs.value(), []
+        for lang, cs in self.queue:
+            if lang["key"] == "ts":
+                out += [(lang, cs[i::n], {}) for i in range(min(n, len(cs)))]
+            else:
+                out.append((lang, cs, {"PLATE_KT_JOBS": str(n)} if lang["key"] == "kt" else {}))
+        return sorted(out, key=lambda t: t[0]["key"] != "kt")
 
-    def read(self):
-        text = bytes(self.proc.readAllStandardOutput()).decode(errors="replace")
-        self.say(text)
-        lang, cs, ok = self.running
+    def next_job(self):
+        while self.pending and len(self.procs) < self.jobs.value() + 1:
+            lang, cs, env = self.pending.pop(0)
+            if self.force.isChecked():
+                for c in cs:
+                    for s in lang["stamps"]:
+                        (CORE / s.format(c=c)).unlink(missing_ok=True)
+            cmd = lang["cmd"](cs)
+            self.say(f"\n▶ {lang['label']}: {len(cs)} countr{'ies' if len(cs) != 1 else 'y'}\n$ {' '.join(cmd[:3])}{' …' if len(cmd) > 3 else ''}\n")
+            proc, ok = QProcess(self), set()
+            e = QProcessEnvironment.systemEnvironment()
+            for k, v in env.items():
+                e.insert(k, v)
+            proc.setProcessEnvironment(e)
+            proc.setWorkingDirectory(str(lang["cwd"]))
+            proc.setProcessChannelMode(QProcess.MergedChannels)
+            proc.readyReadStandardOutput.connect(lambda proc=proc, cs=cs, ok=ok: self.read(proc, cs, ok))
+            proc.finished.connect(lambda code, _s, proc=proc, lang=lang, cs=cs, ok=ok: self.job_done(proc, lang, cs, ok, code))
+            proc.errorOccurred.connect(lambda err: self.say(f"✖ could not start: {err}\n") if err == QProcess.FailedToStart else None)
+            self.procs.add(proc)
+            proc.start(cmd[0], cmd[1:])
+        if not self.pending and not self.procs:
+            self.finish()
+
+    def read(self, proc, cs, ok):
+        text = bytes(proc.readAllStandardOutput()).decode(errors="replace")
+        self.say("".join(l for l in text.splitlines(True) if not NOISE.match(l)))
         for m in re.finditer(r"^(\w+): (?:built|up to date)", text, re.M):
             if m[1] in cs and m[1] not in ok:
                 ok.add(m[1])
                 self.tick()
 
-    def job_done(self, code, _status):
-        lang, cs, ok = self.running
+    def job_done(self, proc, lang, cs, ok, code):
         if code == 0:
             for c in cs:
                 if c not in ok:
@@ -342,12 +365,10 @@ class Window(QMainWindow):
         saved.setdefault(lang["key"], {}).update({c: self.fps[lang["key"]][c] for c in ok})
         STATE.write_text(json.dumps(saved, indent=1))
         self.say(f"{'✔' if code == 0 else '✖'} {lang['label']} {'done' if code == 0 else f'failed (exit {code}); {len(ok)} of {len(cs)} recorded'}\n")
-        self.proc = None
-        if code == 0:
-            self.next_job()
-        else:
-            self.queue.clear()
-            self.finish()
+        self.procs.discard(proc)
+        if code != 0:
+            self.pending.clear()
+        self.next_job()
 
     def tick(self):
         self.done_count += 1
@@ -355,13 +376,15 @@ class Window(QMainWindow):
 
     def finish(self):
         self.stop.setEnabled(False)
-        self.say("\nFinished.\n")
+        # The site reads components/index.json for each component's hash; without a fresh one it serves stale builds.
+        done = subprocess.run([sys.executable, str(CORE / "web/registry.py"), "--deploy", str(ROOT / "deploy")], capture_output=True, text=True)
+        self.say(f"\n{(done.stdout or done.stderr).strip()}\nFinished.\n")
         self.scan()
 
     def cancel(self):
-        self.queue.clear()
-        if self.proc:
-            self.proc.kill()
+        self.pending.clear()
+        for p in list(self.procs):
+            p.kill()
 
     def say(self, text):
         self.log.moveCursor(self.log.textCursor().MoveOperation.End)

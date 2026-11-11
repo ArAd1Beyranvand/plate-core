@@ -5,7 +5,7 @@ const p = await b.newPage({ viewport: { width: 1400, height: 900 } });
 p.on('console', (m) => { if (m.type() === 'error') console.log('console:', m.text()); });
 const cdp = await p.context().newCDPSession(p);
 await p.goto(url);
-await p.waitForTimeout(6000);
+await p.waitForTimeout(+(process.env.W ?? 10000));
 // frame stats while idle, then while scrolling
 const frames = (ms) => p.evaluate((ms) => new Promise((res) => {
   const t = []; let last = performance.now(); const end = last + ms;
